@@ -1,21 +1,31 @@
 # MERN Stack Project
 
-## Company Schema:
+## Express.js Backend:
 
-The schema contains a **lot** of TODO's, because I'm still figuring out how to structure the database and this shows my thought process the most without having to rewrite all TODO's this early in the process.
+### Company Schema:
 
-- [x] Copy paste Company Schema from companyModel.js to README.md.
+The schema contains a **lot** of TODO's, because I'm still figuring out how to structure the database and this shows my thought process about my ideas and how I want to implement them. I hope you find this interesting and if you have any suggestions, or want to help me realize this huge project I'm planning to develop, please contact me at **thompoppins@gmail.com**.\
 
-```
+- [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
+- [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
+- [x] Finish basic Book schema and model. For faster functional development and testing purposes.
+- [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
+- [ ] Set up GET, POST, PUT and DELETE Book server routes.
+- [ ] Link Backend To
+- [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
+- [ ] Make planning and prioritize things TODO first.
+- [ ] Finish company `required:` values to correct Boolean value.
+- [ ] Set up company scheme.
+- [ ] Set up company model.
+- [ ] Set up GET, POST, PUT and DELETE Company server routes.
+
+```javascript
+import mongoose from "mongoose";
 
 /**
- * Company Schema:
- * Create a new company schema for our database.
- * The schema defines the shape of documents in a collection.
- * In this case, a company will have a name property of type String.
- * The name property is required, which means that every company document must have a name.
- * Same goes for the author and publishYear properties, only the publishYear property is of type Number.
- * timestamps: true adds createdAt and updatedAt properties to the company document.
+ * @file This file defines the CompanySchema. It also creates a model from that schema.
+ * @description The schema defines the shape of documents in a collection.
+ * `{ timestamps: true }` in the schema adds createdAt and updatedAt properties to the company document.
  * createdAt is the date and time when the company document was created.
  * updatedAt is the date and time when the company document was last updated.
  * These properties are useful for debugging purposes.
@@ -26,21 +36,24 @@ The schema contains a **lot** of TODO's, because I'm still figuring out how to s
  * The timestamps option is not required, but it is useful.
  * @typedef {Object} CompanySchema
  * @property {string} name - The name of the company.
- * @property {Array} owners - An array of owner objects with an userId.
- * @property {Array} addresses - An array of address objects with an addressId.
- * @property {number} startedInYear - The year the company was started.
- * @property {boolean} stillActive - Is the company active at THIS moment?
- * @property {string} slogan - Company slogan.
- * @property {string} description - Short description of the company.
- * @property {string} industry - The industry the company is in. (The type of field it is operational in.)
+ * @property {country} - The country of the company billing address.
+ * @property {Object} addressFormat - The address format of the company. For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: null }, because there are not regional address format differences in the Netherlands.
+ * @property {Object} address - The address of the company. For example: { street: "Kerkstraat", number: "1", postalCode: "1234AB", city: "Amsterdam", region: "Noord-Holland", country: "NL" }
+ * @property {string} city - The city of the company.
+ * @property {string} country - The country of the company.
+ * @property {string} email - The email of the company.
+ * @property {string} phone - The phone number of the company.
+ * @property {string} owner - The owner of the company.
+ * @property {Date} createdAt - The date and time when the company document was created.
+ * @property {Date} updatedAt - The date and time when the company document was last updated.
+ * @property {string} slogan - The slogan of the company.
+ * @property {string} description - The description of the company.
+ * @property {string} industry - The industry of the company.
  * @property {boolean} isPublic - Is the company public or private at THIS moment?
- * @property {Array} reviews - An array of review objects with an reviewId.
- * @property {number} rating - Rating of the company. Will be calculated based on the reviews property "ratings". This will only show on the profile page when some (10 or more) reviews with ratings are present. (reviews.length > 10 maybe)
- * @property {Object} linkedCustomers - Users that want to be affiliated with the company so they can profit of special company's benefits in exchange for a review/rating or something else.
  * @property {boolean} isPremium - Is the company a bronze, silver, gold or platinum premium company? Does it pay for extra features? True or false.
- * @property {string} premiumKind - "premiumKind" is "bronze", "silver", "gold", "platinum" or "astronomical"?
- * @property {boolean} isVendor - Is this company a vendor itself? True or false.
- * @property {Array} associatedVendors - An array of vendor objects with an vendorId (and userId?).
+ * @property {string} premiumPackage - "bronze", "silver", "gold", "platinum" or "astronomical"?
+ *
+ * @property {boolean} isVendor - Is the company a vendor itself? True or false.
  */
 const companySchema = new mongoose.Schema(
   {
@@ -49,11 +62,50 @@ const companySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    // Country of the company billing address. For example: "NL" for the Netherlands.
+    country: {
+      type: String,
+      required: true,
+    },
+    // "addressFormat" will be used to format the address in the correct way for the country and regional address format.
+    // TODO: Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
+    // For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: null }, because there are not regional address format differences in the Netherlands.
+    addressFormat: {
+      type: Object,
+      required: true,
+    },
+    // Registered address of the company.
+    // For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
+    address: {
+      type: Object,
+      required: true,
+    },
+    // Adress to send invoices to.
+    // For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
+    billingAddress: {
+      type: Object,
+      required: true,
+    },
+
     // TODO: Create a new schema and model for user and one for owner.
     // TODO: Save the name , email, phone, and role properties in a new user model. (to be created)
-    // TODO: Users will be linked to a company, based on an userId in the owner model.
+    // TODO: Owners  will be linked to a company, based on an ownerId in the owner model.
     // TODO: "owners" array should contain owner objects with an userId.
     owners: {
+      type: Array,
+      required: true,
+    },
+    // TODO: Create a new schema and model for admin users.
+    // TODO: Admin users will be linked to a company, based on an adminUserId in the adminUser model.
+    // TODO: "admins" array should contain admin objects with an adminUserId. (For example: { adminUserId = "1234", role = "owner" })
+    companyAdmins: {
+      type: Array,
+      required: true,
+    },
+    // TODO: Create a new schema and model for roles.
+    // TODO: Roles will be linked to a company (or project), based on an roleId in the role model.
+    // `roles` is an array of role objects with an roleId and role. For example: [{ roleId = "0", role = "admin" }, { roleId = "1", role = "owner" }, { roleId = "2", role = "employee" }, { roleId = "3", role = "vendor"}].
+    roles: {
       type: Array,
       required: true,
     },
@@ -64,22 +116,6 @@ const companySchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
-    // Country of the company billing address.
-    country: {
-      type: String,
-      required: true,
-    },
-    // "addressFormat" will be used to format the address in the correct way for the country.
-    addressFormat: {
-      type: String,
-      required: true,
-    },
-    // Billing address of the company.
-    address: {
-      type: String,
-      required: true,
-    },
-    // Object of smaller configurable payment details like VAT number, IBAN, BIC, and more.
 
     // Format of which payment options and details are required for the country or region.
     // `businessConfigFormat` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the required payment details for that country or region.
@@ -121,7 +157,14 @@ const companySchema = new mongoose.Schema(
     //     }
     // }
     // TODO: Find out how to validate if the correct business and payment details are being used and the REAL "owner" is the only one authorized to change these details.
+    // Object of smaller configurable payment details like VAT number, IBAN, BIC, kvkNumber etc.
     businessConfigFormat: {
+      type: Object,
+      required: true,
+    },
+    // `paymentDetails` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the payment details for that country or region.
+    // for example: { vatNumber: "NL123456789B01", iban: "NL12ABNA0123456789", creditCard: { number: "", securityCode: "" }, bic: "ABNANL2A", kvkNumber: "12345678", btwNumber: "NL123456789B01", taxNumber: "123456789", taxOffice: "Belastingdienst", taxOfficeAddress: "Parnassusweg 5", taxOfficePostalCode: "1077 DC", taxOfficeCity: "Amsterdam", taxOfficeCountry: "NL", taxOfficePhone: "0800-0543", taxOfficeEmail: ""}
+    paymentDetails: {
       type: Object,
       required: true,
     },
@@ -259,6 +302,7 @@ const companySchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    // TODO: GOOD IDEA: Maybe it is possible to save the agenda data in a separate agenda model and schema, and link the agenda to the company, project or user. (one-to-one relationship) And think about how to link the agenda  to `company`, `project`` and even `user` schemes and models.
     agenda: {
       type: Array,
       required: true,
@@ -271,7 +315,7 @@ const companySchema = new mongoose.Schema(
     // TODO: Make it possible for companies associated to projects to share revenue per service or product.
     // TODO: Make it possible to configure revenue sharing per product, per service based on from which profile page the product or service was ordered.
     // TODO: Make it possible to share revenue based on which company performs the service.
-    linkedProjects: {
+    projects: {
       type: Object,
       required: true,
     },
@@ -280,4 +324,9 @@ const companySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Company model:
+// Create a new model using the companySchema.
+// A model is a class with which we construct documents.
+// In this case, a company will be a document in our MongoDB database.
+export const Company = mongoose.model("Company", companySchema);
 ```
