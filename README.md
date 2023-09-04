@@ -199,4 +199,5 @@ const companySchema = new mongoose.Schema(
   // enable timestamps
   { timestamps: true }
 );
+
 ```
