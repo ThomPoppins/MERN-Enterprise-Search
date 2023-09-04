@@ -1,20 +1,31 @@
 # MERN Stack Project
 
-## Company Schema:
+## Express.js Backend:
 
-The schema contains a **lot** of TODO's, because I'm still figuring out how to structure the database and this shows my thought process the most without having to rewrite all TODO's this early in the process.
+### Company Schema:
 
-- [x] Copy paste Company Schema from companyModel.js to README.md.
+The schema contains a **lot** of TODO's, because I'm still figuring out how to structure the database and this shows my thought process about my ideas and how I want to implement them. I hope you find this interesting and if you have any suggestions, or want to help me realize this huge project I'm planning to develop, please contact me at **thompoppins@gmail.com**.\
 
-```
+- [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
+- [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
+- [x] Finish basic Book schema and model. For faster functional development and testing purposes.
+- [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
+- [x] Set up company scheme.
+- [x] Set up company model.
+- [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
+- [ ] Set up GET, POST, PUT and DELETE Book server routes.
+- [ ] Link Backend To
+- [ ] Make planning and prioritize things TODO first.
+- [ ] Finish company `required:` values to correct Boolean value.
+- [ ] Set up GET, POST, PUT and DELETE Company server routes.
+
+```javascript
+import mongoose from "mongoose";
+
 /**
- * Company Schema:
- * Create a new company schema for our database.
- * The schema defines the shape of documents in a collection.
- * In this case, a company will have a name property of type String.
- * The name property is required, which means that every company document must have a name.
- * Same goes for the author and publishYear properties, only the publishYear property is of type Number.
- * timestamps: true adds createdAt and updatedAt properties to the company document.
+ * @file This file defines the CompanySchema. It also creates a model from that schema.
+ * @description The schema defines the shape of documents in a collection.
+ * `{ timestamps: true }` in the schema adds createdAt and updatedAt properties to the company document.
  * createdAt is the date and time when the company document was created.
  * updatedAt is the date and time when the company document was last updated.
  * These properties are useful for debugging purposes.
@@ -25,23 +36,25 @@ The schema contains a **lot** of TODO's, because I'm still figuring out how to s
  * The timestamps option is not required, but it is useful.
  * @typedef {Object} CompanySchema
  * @property {string} name - The name of the company.
- * @property {Array} owners - An array of owner objects with an userId.
- * @property {Array} addresses - An array of address objects with an addressId.
- * @property {number} startedInYear - The year the company was started.
- * @property {boolean} stillActive - Is the company active at THIS moment?
- * @property {string} slogan - Company slogan.
- * @property {string} description - Short description of the company.
- * @property {string} industry - The industry the company is in. (The type of field it is operational in.)
+ * @property {country} - The country of the company billing address.
+ * @property {Object} addressFormat - The address format of the company. For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: null }, because there are not regional address format differences in the Netherlands.
+ * @property {Object} address - The address of the company. For example: { street: "Kerkstraat", number: "1", postalCode: "1234AB", city: "Amsterdam", region: "Noord-Holland", country: "NL" }
+ * @property {string} city - The city of the company.
+ * @property {string} country - The country of the company.
+ * @property {string} email - The email of the company.
+ * @property {string} phone - The phone number of the company.
+ * @property {string} owner - The owner of the company.
+ * @property {Date} createdAt - The date and time when the company document was created.
+ * @property {Date} updatedAt - The date and time when the company document was last updated.
+ * @property {string} slogan - The slogan of the company.
+ * @property {string} description - The description of the company.
+ * @property {string} industry - The industry of the company.
  * @property {boolean} isPublic - Is the company public or private at THIS moment?
- * @property {Array} reviews - An array of review objects with an reviewId.
- * @property {number} rating - Rating of the company. Will be calculated based on the reviews property "ratings". This will only show on the profile page when some (10 or more) reviews with ratings are present. (reviews.length > 10 maybe)
- * @property {Object} linkedCustomers - Users that want to be affiliated with the company so they can profit of special company's benefits in exchange for a review/rating or something else.
  * @property {boolean} isPremium - Is the company a bronze, silver, gold or platinum premium company? Does it pay for extra features? True or false.
- * @property {string} premiumKind - "premiumKind" is "bronze", "silver", "gold", "platinum" or "astronomical"?
- * @property {boolean} isVendor - Is this company a vendor itself? True or false.
- * @property {Array} associatedVendors - An array of vendor objects with an vendorId (and userId?).
+ * @property {string} premiumPackage - "bronze", "silver", "gold", "platinum" or "astronomical"?
+ *
+ * @property {boolean} isVendor - Is the company a vendor itself? True or false.
  */
-
 const companySchema = new mongoose.Schema(
   {
     // TODO: Investigate the usefulness of generating an id myself.
@@ -49,19 +62,110 @@ const companySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    // Country of the company billing address. For example: "NL" for the Netherlands.
+    country: {
+      type: String,
+      required: true,
+    },
+    // "addressFormat" will be used to format the address in the correct way for the country and regional address format.
+    // TODO: Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
+    // For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: null }, because there are not regional address format differences in the Netherlands.
+    addressFormat: {
+      type: Object,
+      required: true,
+    },
+    // Registered address of the company.
+    // For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
+    address: {
+      type: Object,
+      required: true,
+    },
+    // Adress to send invoices to.
+    // For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
+    billingAddress: {
+      type: Object,
+      required: true,
+    },
+
     // TODO: Create a new schema and model for user and one for owner.
     // TODO: Save the name , email, phone, and role properties in a new user model. (to be created)
-    // TODO: Users will be linked to a company, based on an userId in the owner model.
+    // TODO: Owners  will be linked to a company, based on an ownerId in the owner model.
     // TODO: "owners" array should contain owner objects with an userId.
     owners: {
       type: Array,
       required: true,
     },
-    // TODO: Create a new schema and model for address.
-    // TODO: Addresses will be linked to a company, based on an addressId in the address model.
-    // TODO: "addresses" array should contain address objects with an addressId.
-    addresses: {
+    // TODO: Create a new schema and model for admin users.
+    // TODO: Admin users will be linked to a company, based on an adminUserId in the adminUser model.
+    // TODO: "admins" array should contain admin objects with an adminUserId. (For example: { adminUserId = "1234", role = "owner" })
+    companyAdmins: {
       type: Array,
+      required: true,
+    },
+    // TODO: Create a new schema and model for roles.
+    // TODO: Roles will be linked to a company (or project), based on an roleId in the role model.
+    // `roles` is an array of role objects with an roleId and role. For example: [{ roleId = "0", role = "admin" }, { roleId = "1", role = "owner" }, { roleId = "2", role = "employee" }, { roleId = "3", role = "vendor"}].
+    roles: {
+      type: Array,
+      required: true,
+    },
+    // TODO: Create a new schema and model for address.
+    // TODO: Locations will be linked to a company, based on an addressId in the address model.
+    // TODO: "locations" array should contain address objects with all address fields an addressId.
+    locations: {
+      type: Array,
+      required: true,
+    },
+
+    // Format of which payment options and details are required for the country or region.
+    // `businessConfigFormat` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the required payment details for that country or region.
+    // The required payment details will be booleans, true or false.
+    // The required payment details will be used to validate the payment details of a company.
+    // TODO: Find out how to validate correct business and payment details.
+    // TODO: Inform myself about the required payment details for each country or region. (First the Netherlands, then, maybe the rest of the world.)
+    // `businessConfigFormat` Object example (way to):
+    // {
+    //   "NL": {
+    //     "vatNumber": true,
+    //     "iban": true,
+    //     "bic": true,
+    //     "kvkNumber": true,
+    //     "btwNumber": true,
+    //     "taxNumber": true,
+    //     "taxOffice": true,
+    //     "taxOfficeAddress": true,
+    //     "taxOfficePostalCode": true,
+    //     "taxOfficeCity": true,
+    //     "taxOfficeCountry": true,
+    //     "taxOfficePhone": true,
+    //     "taxOfficeEmail": true,
+    //     "taxOfficeWebsite": true,
+    //     "taxOfficeContactPerson": true,
+    //     "taxOfficeContactPersonPhone": true,
+    //     "taxOfficeContactPersonEmail": true,
+    //     "taxOfficeContactPersonWebsite": true,
+    //     "taxOfficeContactPersonAddress": true,
+    //     "taxOfficeContactPersonPostalCode": true,
+    //     "taxOfficeContactPersonCity": true,
+    //     "taxOfficeContactPersonCountry": true,
+    //     "taxOfficeContactPersonRole": true,
+    //     "taxOfficeContactPersonDepartment": true,
+    //     "taxOfficeContactPersonFax": true,
+    //     "taxOfficeContactPersonMobile": true,
+    //     "taxOfficeContactPersonGender": true,
+    //     "taxOfficeContactPersonBirthDate": true,
+    //     }
+    // }
+    // TODO: Find out how to validate if the correct business and payment details are being used and the REAL "owner" is the only one authorized to change these details.
+    // Object of smaller configurable payment details like VAT number, IBAN, BIC, kvkNumber etc.
+    businessConfigFormat: {
+      type: Object,
+      required: true,
+    },
+    // `paymentDetails` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the payment details for that country or region.
+    // for example: { vatNumber: "NL123456789B01", iban: "NL12ABNA0123456789", creditCard: { number: "", securityCode: "" }, bic: "ABNANL2A", kvkNumber: "12345678", btwNumber: "NL123456789B01", taxNumber: "123456789", taxOffice: "Belastingdienst", taxOfficeAddress: "Parnassusweg 5", taxOfficePostalCode: "1077 DC", taxOfficeCity: "Amsterdam", taxOfficeCountry: "NL", taxOfficePhone: "0800-0543", taxOfficeEmail: ""}
+    paymentDetails: {
+      type: Object,
       required: true,
     },
     // The year the company was started.
@@ -69,7 +173,7 @@ const companySchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    // Is the company active at THIS moment?
+    // Is the company active at THIS moment? True or false.
     stillActive: {
       type: Boolean,
       required: true,
@@ -174,16 +278,36 @@ const companySchema = new mongoose.Schema(
     // TODO: Make it possible for users to contact a company for about a service with chat and video call (maybe chat and video calls should be a premium features, decide about this later).
     // TODO: A appointment can be made with a company, with the advantage that the service delivered to the customer can be linked to a story on the company/project profile page. The customer, employee, vendor, product, service, and more can be linked to the story and leave their part of the message, this way a customer (user) can maybe have a beneficial price in return for a review with rating.
     // TODO: Think about how to make appointments with companies, how the agenda model and schema should look like, and how to link appointments to stories.
-    linkedServices: {
-      type: Object,
+    // TODO: IMPORTANT! Find out how to use a "junction table" to link companies and projects to services. (many-to-many relationship)
+    // "services" is an array of service objects with an serviceId.
+    services: {
+      type: Array,
       required: true,
     },
-    // TODO: Create a new schema and model for appointments. Appointments will be linked to a company or project, based on an appointmentId in the appointment model. (and maybe userId's? or employeeId's)
-    // TODO: Make it possible for employees to respond on service contact chat/video call requests, and make appointments with customers. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
+    // TODO: Create a new schema and model for `appointment`. An appointment will be linked to a company or project, based on an appointmentId in the appointment model. Employees, users, vendors, products, a service and more can be linked to an appointment.
     appointments: {
       type: Array,
       required: true,
     },
+    // TODO: Make it possible for employees to respond on service contact chat/video call requests, and make appointments with customers. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
+    // TODO: Create message schema and model. Messages will be linked to a company, based on an messageId in the message model. This model should contain the message text, timestamp, and more. Messages will be linked to a company, based on an messageId in the message model. This is a one-to-many relationship, between company and messages OR project and messages. It should not be hard to switch between the `company messenger inbox` and the `project messenger inbox`.
+    // TODO: Create messenger functionality and use encryption for the privacy and security of the messages. Never store the encryption key in the database, only encrypt and decrypt the messages in the frontend. (Use a library for this)
+    // q: Which library should I use for encryption of personal chat messages?
+    // a: https://www.npmjs.com/package/crypto-js
+    // TODO: Make it possible for normal users to send messages to a company, project or employee. Make it possible for employees to respond to messages from users.
+    // TODO: Make it possible for vendors to send messages to a company, project or employee. (Employees have to be authorized by the company (main) owner to connect with vendors). Make it possible for (authorized) employees, owners and companies to respond to messages from vendors.
+    // TODO: Build a sharable functionality (a link to each functionality, agreement, project, product, revenue agreement, appointment or whatever) in all features where it is possible to communicate about between 2 related users. Make it possible to share a link from one to another if both users (companies, owners, (authorized) employees, project associates or whichever other user that is associated to each other in that specific "thing" they use, share (or possibly CAN share), or whatever way they (can) relate to each other for EVERY possible functionality and feature I can think of to be USEFUL and NOT too distracting from ANY more important things (functionalities or features).
+    // `messages` is an array of message objects with an messageId, corresponding userId, timestamp, and more.
+    messages: {
+      type: Array,
+      required: true,
+    },
+    // TODO: GOOD IDEA: Maybe it is possible to save the agenda data in a separate agenda model and schema, and link the agenda to the company, project or user. (one-to-one relationship) And think about how to link the agenda  to `company`, `project`` and even `user` schemes and models.
+    agenda: {
+      type: Array,
+      required: true,
+    },
+
     // TODO: Create a new schema and model for projects. Projects will be linked to a company, based on an projectId in the project model. (and maybe userId's? or employeeId's)
     // TODO: Make it possible to create and design a project profile page, with a storyline of stories linked to companies, employees, associated customers, reviews, ratings and more. Authorize employees to change project settings. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
     // TODO: Create functionalities for companies to automatically share costs for premium features, based on a percentage all associated companies have to agree on for this to work.
@@ -191,7 +315,7 @@ const companySchema = new mongoose.Schema(
     // TODO: Make it possible for companies associated to projects to share revenue per service or product.
     // TODO: Make it possible to configure revenue sharing per product, per service based on from which profile page the product or service was ordered.
     // TODO: Make it possible to share revenue based on which company performs the service.
-    linkedProjects: {
+    projects: {
       type: Object,
       required: true,
     },
@@ -200,4 +324,9 @@ const companySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Company model:
+// Create a new model using the companySchema.
+// A model is a class with which we construct documents.
+// In this case, a company will be a document in our MongoDB database.
+export const Company = mongoose.model("Company", companySchema);
 ```
