@@ -1,6 +1,10 @@
 # MERN Stack Project
 
-## Company schema and model:
+## Company Schema:
+
+The schema contains a **lot** of TODO's, because I'm still figuring out how to structure the database and this shows my thought process the most without having to rewrite all TODO's this early in the process.
+
+- [x] Copy paste company schema from companyModel.js to README.md.
 
 ```
 /**
@@ -195,10 +199,4 @@ const companySchema = new mongoose.Schema(
   // enable timestamps
   { timestamps: true }
 );
-
-// Company model from company schema:
-// Create a new model using the companySchema.
-// A model is a class with which we construct documents.
-// In this case, a company will be a document in our MongoDB database.
-export const Company = mongoose.model("Company", companySchema);
 ```

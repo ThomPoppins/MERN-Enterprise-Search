@@ -34,7 +34,6 @@ import mongoose from "mongoose";
  * @property {boolean} isVendor - Is this company a vendor itself? True or false.
  * @property {Array} associatedVendors - An array of vendor objects with an vendorId (and userId?).
  */
-
 const companySchema = new mongoose.Schema(
   {
     // TODO: Investigate the usefulness of generating an id myself.
