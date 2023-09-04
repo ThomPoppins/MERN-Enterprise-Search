@@ -9,14 +9,14 @@ The schema contains a **lot** of TODO's, because I'm still figuring out how to s
 - [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
 - [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
 - [x] Finish basic Book schema and model. For faster functional development and testing purposes.
+- [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
+- [x] Set up company scheme.
+- [x] Set up company model.
 - [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
 - [ ] Set up GET, POST, PUT and DELETE Book server routes.
 - [ ] Link Backend To
-- [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
 - [ ] Make planning and prioritize things TODO first.
 - [ ] Finish company `required:` values to correct Boolean value.
-- [ ] Set up company scheme.
-- [ ] Set up company model.
 - [ ] Set up GET, POST, PUT and DELETE Company server routes.
 
 ```javascript
