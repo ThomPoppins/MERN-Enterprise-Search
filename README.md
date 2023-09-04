@@ -4,7 +4,7 @@
 
 The schema contains a **lot** of TODO's, because I'm still figuring out how to structure the database and this shows my thought process the most without having to rewrite all TODO's this early in the process.
 
-- [x] Copy paste company schema from companyModel.js to README.md.
+- [x] Copy paste Company Schema from companyModel.js to README.md.
 
 ```
 /**
