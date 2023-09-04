@@ -7,6 +7,7 @@ The schema contains a **lot** of TODO's, because I'm still figuring out how to s
 - [x] Copy paste Company Schema from companyModel.js to README.md.
 
 ```
+
 /**
  * Company Schema:
  * Create a new company schema for our database.
@@ -41,7 +42,6 @@ The schema contains a **lot** of TODO's, because I'm still figuring out how to s
  * @property {boolean} isVendor - Is this company a vendor itself? True or false.
  * @property {Array} associatedVendors - An array of vendor objects with an vendorId (and userId?).
  */
-
 const companySchema = new mongoose.Schema(
   {
     // TODO: Investigate the usefulness of generating an id myself.
@@ -58,10 +58,71 @@ const companySchema = new mongoose.Schema(
       required: true,
     },
     // TODO: Create a new schema and model for address.
-    // TODO: Addresses will be linked to a company, based on an addressId in the address model.
-    // TODO: "addresses" array should contain address objects with an addressId.
-    addresses: {
+    // TODO: Locations will be linked to a company, based on an addressId in the address model.
+    // TODO: "locations" array should contain address objects with all address fields an addressId.
+    locations: {
       type: Array,
+      required: true,
+    },
+    // Country of the company billing address.
+    country: {
+      type: String,
+      required: true,
+    },
+    // "addressFormat" will be used to format the address in the correct way for the country.
+    addressFormat: {
+      type: String,
+      required: true,
+    },
+    // Billing address of the company.
+    address: {
+      type: String,
+      required: true,
+    },
+    // Object of smaller configurable payment details like VAT number, IBAN, BIC, and more.
+
+    // Format of which payment options and details are required for the country or region.
+    // `businessConfigFormat` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the required payment details for that country or region.
+    // The required payment details will be booleans, true or false.
+    // The required payment details will be used to validate the payment details of a company.
+    // TODO: Find out how to validate correct business and payment details.
+    // TODO: Inform myself about the required payment details for each country or region. (First the Netherlands, then, maybe the rest of the world.)
+    // `businessConfigFormat` Object example (way to):
+    // {
+    //   "NL": {
+    //     "vatNumber": true,
+    //     "iban": true,
+    //     "bic": true,
+    //     "kvkNumber": true,
+    //     "btwNumber": true,
+    //     "taxNumber": true,
+    //     "taxOffice": true,
+    //     "taxOfficeAddress": true,
+    //     "taxOfficePostalCode": true,
+    //     "taxOfficeCity": true,
+    //     "taxOfficeCountry": true,
+    //     "taxOfficePhone": true,
+    //     "taxOfficeEmail": true,
+    //     "taxOfficeWebsite": true,
+    //     "taxOfficeContactPerson": true,
+    //     "taxOfficeContactPersonPhone": true,
+    //     "taxOfficeContactPersonEmail": true,
+    //     "taxOfficeContactPersonWebsite": true,
+    //     "taxOfficeContactPersonAddress": true,
+    //     "taxOfficeContactPersonPostalCode": true,
+    //     "taxOfficeContactPersonCity": true,
+    //     "taxOfficeContactPersonCountry": true,
+    //     "taxOfficeContactPersonRole": true,
+    //     "taxOfficeContactPersonDepartment": true,
+    //     "taxOfficeContactPersonFax": true,
+    //     "taxOfficeContactPersonMobile": true,
+    //     "taxOfficeContactPersonGender": true,
+    //     "taxOfficeContactPersonBirthDate": true,
+    //     }
+    // }
+    // TODO: Find out how to validate if the correct business and payment details are being used and the REAL "owner" is the only one authorized to change these details.
+    businessConfigFormat: {
+      type: Object,
       required: true,
     },
     // The year the company was started.
@@ -69,7 +130,7 @@ const companySchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    // Is the company active at THIS moment?
+    // Is the company active at THIS moment? True or false.
     stillActive: {
       type: Boolean,
       required: true,
@@ -174,16 +235,35 @@ const companySchema = new mongoose.Schema(
     // TODO: Make it possible for users to contact a company for about a service with chat and video call (maybe chat and video calls should be a premium features, decide about this later).
     // TODO: A appointment can be made with a company, with the advantage that the service delivered to the customer can be linked to a story on the company/project profile page. The customer, employee, vendor, product, service, and more can be linked to the story and leave their part of the message, this way a customer (user) can maybe have a beneficial price in return for a review with rating.
     // TODO: Think about how to make appointments with companies, how the agenda model and schema should look like, and how to link appointments to stories.
-    linkedServices: {
-      type: Object,
+    // TODO: IMPORTANT! Find out how to use a "junction table" to link companies and projects to services. (many-to-many relationship)
+    // "services" is an array of service objects with an serviceId.
+    services: {
+      type: Array,
       required: true,
     },
-    // TODO: Create a new schema and model for appointments. Appointments will be linked to a company or project, based on an appointmentId in the appointment model. (and maybe userId's? or employeeId's)
-    // TODO: Make it possible for employees to respond on service contact chat/video call requests, and make appointments with customers. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
+    // TODO: Create a new schema and model for `appointment`. An appointment will be linked to a company or project, based on an appointmentId in the appointment model. Employees, users, vendors, products, a service and more can be linked to an appointment.
     appointments: {
       type: Array,
       required: true,
     },
+    // TODO: Make it possible for employees to respond on service contact chat/video call requests, and make appointments with customers. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
+    // TODO: Create message schema and model. Messages will be linked to a company, based on an messageId in the message model. This model should contain the message text, timestamp, and more. Messages will be linked to a company, based on an messageId in the message model. This is a one-to-many relationship, between company and messages OR project and messages. It should not be hard to switch between the `company messenger inbox` and the `project messenger inbox`.
+    // TODO: Create messenger functionality and use encryption for the privacy and security of the messages. Never store the encryption key in the database, only encrypt and decrypt the messages in the frontend. (Use a library for this)
+    // q: Which library should I use for encryption of personal chat messages?
+    // a: https://www.npmjs.com/package/crypto-js
+    // TODO: Make it possible for normal users to send messages to a company, project or employee. Make it possible for employees to respond to messages from users.
+    // TODO: Make it possible for vendors to send messages to a company, project or employee. (Employees have to be authorized by the company (main) owner to connect with vendors). Make it possible for (authorized) employees, owners and companies to respond to messages from vendors.
+    // TODO: Build a sharable functionality (a link to each functionality, agreement, project, product, revenue agreement, appointment or whatever) in all features where it is possible to communicate about between 2 related users. Make it possible to share a link from one to another if both users (companies, owners, (authorized) employees, project associates or whichever other user that is associated to each other in that specific "thing" they use, share (or possibly CAN share), or whatever way they (can) relate to each other for EVERY possible functionality and feature I can think of to be USEFUL and NOT too distracting from ANY more important things (functionalities or features).
+    // `messages` is an array of message objects with an messageId, corresponding userId, timestamp, and more.
+    messages: {
+      type: Array,
+      required: true,
+    },
+    agenda: {
+      type: Array,
+      required: true,
+    },
+
     // TODO: Create a new schema and model for projects. Projects will be linked to a company, based on an projectId in the project model. (and maybe userId's? or employeeId's)
     // TODO: Make it possible to create and design a project profile page, with a storyline of stories linked to companies, employees, associated customers, reviews, ratings and more. Authorize employees to change project settings. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
     // TODO: Create functionalities for companies to automatically share costs for premium features, based on a percentage all associated companies have to agree on for this to work.
