@@ -1,20 +1,40 @@
 import mongoose from "mongoose";
 
-// Company Schema:
-// Create a new company schema for our database.
-// The schema defines the shape of documents in a collection.
-// In this case, a company will have a name property of type String.
-// The name property is required, which means that every company document must have a name.
-// Same goes for the author and publishYear properties, only the publishYear property is of type Number.
-// timestamps: true adds createdAt and updatedAt properties to the company document.
-// createdAt is the date and time when the company document was created.
-// updatedAt is the date and time when the company document was last updated.
-// These properties are useful for debugging purposes.
-// For example, if a company document was created a long time ago and it has not been updated since,
-// then it is probably safe to delete it.
-// If a company document was created a long time ago and it has been updated recently,
-// then it is probably still in use and should not be deleted.
-// The timestamps option is not required, but it is useful.
+/**
+ * Company Schema:
+ * Create a new company schema for our database.
+ * The schema defines the shape of documents in a collection.
+ * In this case, a company will have a name property of type String.
+ * The name property is required, which means that every company document must have a name.
+ * Same goes for the author and publishYear properties, only the publishYear property is of type Number.
+ * timestamps: true adds createdAt and updatedAt properties to the company document.
+ * createdAt is the date and time when the company document was created.
+ * updatedAt is the date and time when the company document was last updated.
+ * These properties are useful for debugging purposes.
+ * For example, if a company document was created a long time ago and it has not been updated since,
+ * then it is probably safe to delete it.
+ * If a company document was created a long time ago and it has been updated recently,
+ * then it is probably still in use and should not be deleted.
+ * The timestamps option is not required, but it is useful.
+ * @typedef {Object} CompanySchema
+ * @property {string} name - The name of the company.
+ * @property {Array} owners - An array of owner objects with an userId.
+ * @property {Array} addresses - An array of address objects with an addressId.
+ * @property {number} startedInYear - The year the company was started.
+ * @property {boolean} stillActive - Is the company active at THIS moment?
+ * @property {string} slogan - Company slogan.
+ * @property {string} description - Short description of the company.
+ * @property {string} industry - The industry the company is in. (The type of field it is operational in.)
+ * @property {boolean} isPublic - Is the company public or private at THIS moment?
+ * @property {Array} reviews - An array of review objects with an reviewId.
+ * @property {number} rating - Rating of the company. Will be calculated based on the reviews property "ratings". This will only show on the profile page when some (10 or more) reviews with ratings are present. (reviews.length > 10 maybe)
+ * @property {Object} linkedCustomers - Users that want to be affiliated with the company so they can profit of special company's benefits in exchange for a review/rating or something else.
+ * @property {boolean} isPremium - Is the company a bronze, silver, gold or platinum premium company? Does it pay for extra features? True or false.
+ * @property {string} premiumKind - "premiumKind" is "bronze", "silver", "gold", "platinum" or "astronomical"?
+ * @property {boolean} isVendor - Is this company a vendor itself? True or false.
+ * @property {Array} associatedVendors - An array of vendor objects with an vendorId (and userId?).
+ */
+
 const companySchema = new mongoose.Schema(
   {
     // TODO: Investigate the usefulness of generating an id myself.
@@ -173,7 +193,7 @@ const companySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Company model from company schema:
+// Company model:
 // Create a new model using the companySchema.
 // A model is a class with which we construct documents.
 // In this case, a company will be a document in our MongoDB database.

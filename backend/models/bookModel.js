@@ -14,6 +14,15 @@ import mongoose from "mongoose";
 // If a book document was created a long time ago and it has been updated recently,
 // then it is probably still in use and should not be deleted.
 // The timestamps option is not required, but it is useful.
+// TODO: Delete this schema once it is no longer needed.
+/**
+ * @typedef {Object} Book
+ * @property {string} title - The title of the book.
+ * @property {string} author - The author of the book.
+ * @property {number} publishYear - The year the book was published.
+ * @property {Date} createdAt - The date and time when the book document was created.
+ * @property {Date} updatedAt - The date and time when the book document was last updated.
+ */
 const bookSchema = new mongoose.Schema(
   {
     title: {
