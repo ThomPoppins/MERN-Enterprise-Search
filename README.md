@@ -12,6 +12,7 @@ The schema contains a **lot** of TODO's, because I'm still figuring out how to s
 - [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
 - [x] Set up company scheme.
 - [x] Set up company model.
+- [ ] Actualize, complete and correct Company scheme documentation.
 - [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
 - [ ] Set up GET, POST, PUT and DELETE Book server routes.
 - [ ] Link Backend To
