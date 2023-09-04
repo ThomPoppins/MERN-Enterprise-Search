@@ -3,7 +3,9 @@ import { PORT } from "./config.js";
 
 const app = express();
 
-app.get();
+app.get("/", (request, response) => {
+  response.status(200).send("Welcome to my Express.js backend server!");
+});
 
 app.listen(PORT, () => {
   console.log(`App is listening to port ${PORT}`);
