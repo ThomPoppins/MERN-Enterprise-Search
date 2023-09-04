@@ -11,6 +11,19 @@ app.get("/", (request, response) => {
 });
 
 // TODO: Create a route to save a new company document in the database.
+app.post("/companies", async (request, response) => {
+  try {
+    if (
+      !request.body.name ||
+      !request.body.addresses ||
+      !request.body.city ||
+      !request.body.country ||
+      !request.body.email ||
+      !request.body.phone ||
+      !request.body.owner
+    ) {
+      console.log("name, address, city, country, email, phone, and owner.");
+    }
 
 // Route to save a new Book
 app.post("/books", async (request, response) => {
