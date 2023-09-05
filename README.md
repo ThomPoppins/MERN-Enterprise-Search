@@ -1,11 +1,5 @@
 # MERN Stack Project
 
-## Express.js Backend:
-
-### Company Schema:
-
-The schema contains a **lot** of TODO's, because I'm still figuring out how to structure the database and this shows my thought process about my ideas and how I want to implement them. I hope you find this interesting and if you have any suggestions, or want to help me realize this huge project I'm planning to develop, please contact me at **thompoppins@gmail.com**.\
-
 - [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
 - [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
 - [x] Finish basic Book schema and model. For faster functional development and testing purposes.
@@ -15,12 +9,21 @@ The schema contains a **lot** of TODO's, because I'm still figuring out how to s
 - [ ] Actualize, complete and correct Company scheme documentation.
 - [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
 - [ ] Set up GET, POST, PUT and DELETE Book server routes.
-- [ ] Link Backend To
-- [ ] Make planning and prioritize things TODO first.
-- [ ] Finish company `required:` values to correct Boolean value.
-- [ ] Set up GET, POST, PUT and DELETE Company server routes.
+- [ ] [MERNSTACK-51] Create Jira tickets for all TODO's.
+- [ ] [MERNSTACK-53] Set up GET, POST, PUT and DELETE Company server routes.
+- [ ] [MERNSTACK-55] Create User model.
+- [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
+- [ ] [MERNSTACK-59] Create one-to-many relationship between Owner and Company in the Owner schema. This will allow to associate each Owner document with multiple Company documents.
+- [ ] [MERNSTACK-56] Create login and register functionality. Hash user password on register and compare hashed password on login. (see backend devdocs folder)
+- [ ] [MERNSTACK-60] Create `user` authentication and authorization functionality using JSON Web Token authorization. (see backend devdocs folder)
+- [ ] [MERNSTACK-58] When user is logged in, create a form to register a company and make user owner (+ admin).
+- [ ] [MERNSTACK-61] Create `junction` table for many-to-many relationship between `owners` and `companies`. (see backend devdocs folder)
+- [ ] [MERNSTACK-62] Create `junction` table between `Company` and `Project`. This table will be used because of the many-to-many relationship and additional properties that are needed to link a company to a project. (see backend devdocs folder)
+- [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers)
+- [ ] After user login, display link that will `navigate` (?with `useNavigate()`?) user to `my-companies` where companies will be listed and with a company register form. (see frontend devdocs folder)
+- [ ] [MERNSTACK-64] In the frontend, create a route to `/my-companies` where `user` companies will be listed.
 
-## Everything to do:
+## Everything else I know I need to do:
 
 > **Note**: All TODO's are linked to Jira tickets, so that I can keep track of everything I have to do.
 
@@ -119,3 +122,5 @@ The schema contains a **lot** of TODO's, because I'm still figuring out how to s
       └─ line 21: [ ] Set up GET, POST, PUT and DELETE Company server routes.
 
 ```
+
+## Express.js Backend:
