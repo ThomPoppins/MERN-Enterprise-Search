@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+// TODO: [MERNSTACK-51] Finish putting all TODO's into Jira tickets.
+
 /**
  * @file This file defines the CompanySchema. It also creates a model from that schema.
  * @description The schema defines the shape of documents in a collection.
@@ -21,11 +23,11 @@ import mongoose from "mongoose";
  * @property {String} addressFormat - The address format of the company based on local requirements.
  * @property {String} address - The registered address of the company.
  * @property {String} email - The email address of the company.
- * TODO: Actualize, complete and correct this documentation on top of schema.
+ * TODO: [MERNSTACK-12] Actualize, complete and correct this documentation on top of schema.
  */
 const companySchema = new mongoose.Schema(
   {
-    // TODO: MERN-4 Investigate the usefulness of generating an id myself.
+    // TODO: [MERNSTACK-4] Investigate the usefulness of generating an id myself.
     name: {
       type: String,
       required: true,
@@ -56,7 +58,7 @@ const companySchema = new mongoose.Schema(
       required: true,
     },
     // "addressFormat" will be used to format the address in the correct way for the country and regional address format.
-    // TODO: KAN-2 Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
+    // TODO: [MERNSTACK-13] Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
     // For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: null }, because there are not regional address format differences in the Netherlands.
     addressFormat: {
       type: Object,
@@ -75,31 +77,31 @@ const companySchema = new mongoose.Schema(
       required: true,
     },
 
-    // TODO: Create a new schema and model for user and one for owner.
-    // TODO: Save the name , email, phone, and role properties in a new user model. (to be created)
-    // TODO: Owners  will be linked to a company, based on an ownerId in the owner model.
-    // TODO: "owners" array should contain owner objects with an userId.
+    // TODO: [MERNSTACK-14] Create a new schema and model for user and one for owner.
+    // TODO: [MERNSTACK-15] Save the name , email, phone, and role related to the company as properties in a new user model. (to be created)
+    // TODO: [MERNSTACK-16] Owners  will be linked to a company, based on an ownerId in the owner model.
+    // TODO: [MERNSTACK-17] "owners" array should contain owner objects with an userId.
     owners: {
       type: Array,
       required: true,
     },
-    // TODO: Create a new schema and model for admin users.
-    // TODO: Admin users will be linked to a company, based on an adminUserId in the adminUser model.
-    // TODO: "admins" array should contain admin objects with an adminUserId. (For example: { adminUserId = "1234", role = "owner" })
+    // TODO: [MERNSTACK-18] Create a new schema and model for admin users.
+    // TODO: [MERNSTACK-19] Admin users will be linked to a company, based on an adminUserId in the adminUser model.
+    // TODO: [MERNSTACK-20] `admins` array should contain admin objects with an adminUserId. (For example: { adminUserId = "1234", role = "owner" })
     companyAdmins: {
       type: Array,
       required: true,
     },
-    // TODO: Create a new schema and model for roles.
-    // TODO: MERN-5 Roles will be linked to a company (or project), based on an roleId in the role model.
+    // TODO: [MERNSTACK-21] Create a new schema and model for roles.
+    // TODO: [MERNSTACK-22] Roles will be linked to a company (or project), based on an roleId in the role model.
     // `roles` is an array of role objects with an roleId and role. For example: [{ roleId = "0", role = "admin" }, { roleId = "1", role = "owner" }, { roleId = "2", role = "employee" }, { roleId = "3", role = "vendor"}].
     roles: {
       type: Array,
       required: true,
     },
-    // TODO: Create a new schema and model for address.
-    // TODO: Locations will be linked to a company, based on an addressId in the address model.
-    // TODO: "locations" array should contain address objects with all address fields an addressId.
+    // TODO: [MERNSTACK-23] Create a new schema and model for address.
+    // TODO: [MERNSTACK-24] Locations will be linked to a company, based on an addressId in the address model.
+    // TODO: [MERNSTACK-25] "locations" array should contain address objects with all address fields an addressId.
     locations: {
       type: Array,
       required: true,
@@ -109,8 +111,8 @@ const companySchema = new mongoose.Schema(
     // `businessConfigFormat` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the required payment details for that country or region.
     // The required payment details will be booleans, true or false.
     // The required payment details will be used to validate the payment details of a company.
-    // TODO: Find out how to validate correct business and payment details.
-    // TODO: Inform myself about the required payment details for each country or region. (First the Netherlands, then, maybe the rest of the world.)
+    // TODO: [MERNSTACK-26] Find out how to validate correct business and payment details.
+    // TODO: [MERNSTACK-27] Inform myself about the required payment details for each country or region. (First the Netherlands, then, maybe the rest of the world.)
     // `businessConfigFormat` Object example (way to):
     // {
     //   "NL": {
@@ -144,7 +146,7 @@ const companySchema = new mongoose.Schema(
     //     "taxOfficeContactPersonBirthDate": true,
     //     }
     // }
-    // TODO: Find out how to validate if the correct business and payment details are being used and the REAL "owner" is the only one authorized to change these details.
+    // TODO: [MERNSTACK-28] Find out how to validate if the correct business and payment details are being used and the REAL "owner" is the only one authorized to change these details.
     // Object of smaller configurable payment details like VAT number, IBAN, BIC, kvkNumber etc.
     businessConfigFormat: {
       type: Object,
@@ -166,24 +168,30 @@ const companySchema = new mongoose.Schema(
       type: Boolean,
       required: true,
     },
+    // TODO: [MERNSTACK-29] Create a new schema and model for company types. Company types will be linked to a company, based on an companyTypeId in the companyType model.
+    // `companyTypeId` is the id of the company type in the corresponding company type model. This may be removed if not needed.
+    companyTypeId: {
+      type: String,
+      required: false,
+    },
 
-    // TODO: Create a new schema and model for type of industries, so that the user can select from a list of industries, or add a new one.
-    // TODO: Industries will be linked to a company, based on an industryId in the industry model.
-    // TODO: Create collection of industries, and link the companies in a companies[] property, which should contain company id's of the companies.
-    // The industry the company is in. (The type of field it is operational in.)
-    industry: {
+    // TODO: [MERNSTACK-30] Create a new schema and model for type of industries, so that the user can select from a list of industries, or add a new one.
+    // TODO: [MERNSTACK-31] Industries will be linked to a company, based on an industryId in the industry model.
+    // TODO: [MERNSTACK-32] Create collection of industries, and link the companies in a companies[] property, which should contain company id's of the companies.
+    // The id of the industry the company is in. Corresponds to the industry id in the industry model.
+    industryId: {
       type: String,
       required: false,
     },
     // Is the company public or private at THIS moment?
-    // TODO: Make it possible to change this value in the user/owner settings.
+    // TODO: [MERNSTACK-33] Make it possible to change this value in the user/owner settings.
     isPublic: {
       type: Boolean,
       required: true,
     },
-    // TODO: Create review schema and model.
-    // TODO: Reviews will be linked to a company, based on an reviewId in the review model. This model should contain the review text, rating, reviewer, timestamp and maybe more.
-    // TODO: "reviews" array should contain review objects with an reviewId.
+    // TODO: [MERNSTACK-34] Create review schema and model.
+    // TODO: [MERNSTACK-35] Reviews will be linked to a company, based on an reviewId in the review model. This model should contain the review text, rating, reviewer, timestamp and maybe more.
+    // TODO: [MERNSTACK-36] "reviews" array should contain review objects with an reviewId.
     reviews: {
       type: Array,
       required: true,
@@ -204,14 +212,14 @@ const companySchema = new mongoose.Schema(
       required: true,
     },
     // "premiumKind" is "bronze", "silver", "gold", "platinum" or "astronomical"? TODO: Decide on the premium names, which features they have, and how much they cost and how to pay for them.
-    // TODO: Create a new schema and model for premium types. Premium types will be linked to a company, based on an premiumTypeId in the premiumType model.
-    // TODO:
-    premiumKind: {
+    // TODO: [MERNSTACK-37] Create a new schema and model for premium types. Premium types will be linked to a company, based on an premiumTypeId in the premiumType model.
+    // `premiumTypeId` is the id of the premium type in the corresponding premium type model.
+    premiumTypeId: {
       type: String,
       required: false,
     },
-    // TODO: Create a new schema and model for vendors. Decide what kind of vendors there are, and what properties they need. Vendors are the business to business users and can possibly be linked to a company, based on an vendorId in the vendor model.
-    // TODO: Decide what kind of functionalities and authorizations vendors have.
+    // TODO: [MERNSTACK-38] Create a new schema and model for vendors. Decide what kind of vendors there are, and what properties they need. Vendors are the business to business users and can possibly be linked to a company, based on an vendorId in the vendor model.
+    // TODO: [MERNSTACK-39] Decide what kind of functionalities and authorizations vendors have.
     // Is this company a vendor itself? True or false.
     isVendor: {
       type: Boolean,
@@ -222,32 +230,33 @@ const companySchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
-    // TODO: Create a new schema and model for employees. Decide what kind of functionalities and authorizations employees have. Owners should automatically have employee rights and functionalities. The key difference between owner and employee is the authorization to change company (profile and project association) settings.
-    // TODO: Employees will be linked to a company, based on an employeeId in the employee model. (and userId?)
+    // TODO: [MERNSTACK-40] Create a new schema and model for employees.
+
+    // TODO: [MERNSTACK-41] Employees will be linked to a company, based on an employeeId in the employee model. (and userId?)
     // Linked employees.
     linkedEmployees: {
       type: Array,
       required: true,
     },
-    // TODO: Create a new schema and model for stories. Stories will be linked to a company, to read on their profile page. Stories will contain a title, text, image, linked customer, linked employees, linked vendors, linked products, linked services, linked projects, and more.
+    // TODO: [MERNSTACK-42] Create a new schema and model for stories. Stories will be linked to a company, to read on their profile page. Stories will contain a title, text, image, linked customer, linked employees, linked vendors, linked products, linked services, linked projects, and more.
 
     stories: {
       type: Array,
       required: true,
     },
-    // TODO: Create a new schema and model for projects. It should be possible for different companies to be associated to a project. (many-to-many relationship) A project page should also have a storyline of stories linked to companies, employees, associated customers, reviews and more.
-    // TODO: IMPORTANT! Find out how to use a "junction table" to link companies to projects. (many-to-many relationship)
+    // TODO: [MERNSTACK-43] Create a new schema and model for projects.
+    // TODO: [MERNSTACK-44] IMPORTANT! Find out how to use a "junction table" to link companies to projects. (many-to-many relationship)
     // "projects" is an array of project objects with an projectId.
     projects: {
       type: Array,
       required: true,
     },
-    // TODO: Create a new schema and model for products. If more than one company would associate to a product, they have to create a project together and work from there. The products from a project should also (optionally) be visible on the associated company profiles.
-    // TODO: A company product listing page should have a search bar, and a filter for industry, rating, price, and more.
-    // TODO: It should be possible to search for products without having to visit a company profile. (search bar on the home page)
-    // TODO: Make product listing something companies can pay for. (premium feature) IMPORTANT: Make sure that the users finds what they search for, that should have BIG priority over paid listings that will feel unpleasant and not logical.
-    // TODO: A product page should also have reviews from customers. (maybe also from employees and vendors?)
-    // TODO: IMPORTANT! Find out how to use a "junction table" to link companies to products and products to projects. (many-to-many relationship)
+    // TODO: [MERNSTACK-45] Create a new schema and model for products. If more than one company would associate to a product, they have to create a project together and work from there. The products from a project should also (optionally) be visible on the associated company profiles.
+    // TODO: [MERNSTACK-46] A company product listing page should have a search bar, and a filter for industry, rating, price, and more.
+    // TODO: [MERNSTACK-47] It should be possible to search for products without having to visit a company profile. (search bar on the home page)
+    // TODO: [MERNSTACK-48] Make product listing something companies can pay for. (premium feature) IMPORTANT: Make sure that the users finds what they search for, that should have BIG priority over paid listings that will feel unpleasant and not logical.
+    // TODO: [MERNSTACK-49] A product page should also have reviews from customers. (maybe also from employees and vendors?)
+    // TODO: [MERNSTACK-50] IMPORTANT! Find out how to use a "junction table" to link companies to products and products to projects. (many-to-many relationship)
     // "products" is an array of product objects with an productId.
     products: {
       type: Array,
@@ -309,3 +318,5 @@ const companySchema = new mongoose.Schema(
 // A model is a class with which we construct documents.
 // In this case, a company will be a document in our MongoDB database.
 export const Company = mongoose.model("Company", companySchema);
+
+// TODO: Decide what kind of functionalities and authorizations employees have. Owners should automatically have employee rights and functionalities.
