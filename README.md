@@ -21,313 +21,160 @@ The schema contains a **lot** of TODO's, because I'm still figuring out how to s
 - [ ] Set up GET, POST, PUT and DELETE Company server routes.
 
 ```javascript
-import mongoose from "mongoose";
-
-/**
- * @file This file defines the CompanySchema. It also creates a model from that schema.
- * @description The schema defines the shape of documents in a collection.
- * `{ timestamps: true }` in the schema adds createdAt and updatedAt properties to the company document.
- * createdAt is the date and time when the company document was created.
- * updatedAt is the date and time when the company document was last updated.
- * These properties are useful for debugging purposes.
- * For example, if a company document was created a long time ago and it has not been updated since,
- * then it is probably safe to delete it.
- * If a company document was created a long time ago and it has been updated recently,
- * then it is probably still in use and should not be deleted.
- * The timestamps option is not required, but it is useful.
- * @typedef {Object} CompanySchema
- * @property {string} name - The name of the company.
- * @property {country} - The country of the company billing address.
- * @property {Object} addressFormat - The address format of the company. For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: null }, because there are not regional address format differences in the Netherlands.
- * @property {Object} address - The address of the company. For example: { street: "Kerkstraat", number: "1", postalCode: "1234AB", city: "Amsterdam", region: "Noord-Holland", country: "NL" }
- * @property {string} city - The city of the company.
- * @property {string} country - The country of the company.
- * @property {string} email - The email of the company.
- * @property {string} phone - The phone number of the company.
- * @property {string} owner - The owner of the company.
- * @property {Date} createdAt - The date and time when the company document was created.
- * @property {Date} updatedAt - The date and time when the company document was last updated.
- * @property {string} slogan - The slogan of the company.
- * @property {string} description - The description of the company.
- * @property {string} industry - The industry of the company.
- * @property {boolean} isPublic - Is the company public or private at THIS moment?
- * @property {boolean} isPremium - Is the company a bronze, silver, gold or platinum premium company? Does it pay for extra features? True or false.
- * @property {string} premiumPackage - "bronze", "silver", "gold", "platinum" or "astronomical"?
- *
- * @property {boolean} isVendor - Is the company a vendor itself? True or false.
- */
-const companySchema = new mongoose.Schema(
-  {
-    // TODO: Investigate the usefulness of generating an id myself.
-    name: {
-      type: String,
-      required: true,
-    },
-    // Country of the company billing address. For example: "NL" for the Netherlands.
-    country: {
-      type: String,
-      required: true,
-    },
-    // "addressFormat" will be used to format the address in the correct way for the country and regional address format.
-    // TODO: Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
-    // For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: null }, because there are not regional address format differences in the Netherlands.
-    addressFormat: {
-      type: Object,
-      required: true,
-    },
-    // Registered address of the company.
-    // For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
-    address: {
-      type: Object,
-      required: true,
-    },
-    // Adress to send invoices to.
-    // For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
-    billingAddress: {
-      type: Object,
-      required: true,
-    },
-
-    // TODO: Create a new schema and model for user and one for owner.
-    // TODO: Save the name , email, phone, and role properties in a new user model. (to be created)
-    // TODO: Owners  will be linked to a company, based on an ownerId in the owner model.
-    // TODO: "owners" array should contain owner objects with an userId.
-    owners: {
-      type: Array,
-      required: true,
-    },
-    // TODO: Create a new schema and model for admin users.
-    // TODO: Admin users will be linked to a company, based on an adminUserId in the adminUser model.
-    // TODO: "admins" array should contain admin objects with an adminUserId. (For example: { adminUserId = "1234", role = "owner" })
-    companyAdmins: {
-      type: Array,
-      required: true,
-    },
-    // TODO: Create a new schema and model for roles.
-    // TODO: Roles will be linked to a company (or project), based on an roleId in the role model.
-    // `roles` is an array of role objects with an roleId and role. For example: [{ roleId = "0", role = "admin" }, { roleId = "1", role = "owner" }, { roleId = "2", role = "employee" }, { roleId = "3", role = "vendor"}].
-    roles: {
-      type: Array,
-      required: true,
-    },
-    // TODO: Create a new schema and model for address.
-    // TODO: Locations will be linked to a company, based on an addressId in the address model.
-    // TODO: "locations" array should contain address objects with all address fields an addressId.
-    locations: {
-      type: Array,
-      required: true,
-    },
-
-    // Format of which payment options and details are required for the country or region.
-    // `businessConfigFormat` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the required payment details for that country or region.
-    // The required payment details will be booleans, true or false.
-    // The required payment details will be used to validate the payment details of a company.
-    // TODO: Find out how to validate correct business and payment details.
-    // TODO: Inform myself about the required payment details for each country or region. (First the Netherlands, then, maybe the rest of the world.)
-    // `businessConfigFormat` Object example (way to):
-    // {
-    //   "NL": {
-    //     "vatNumber": true,
-    //     "iban": true,
-    //     "bic": true,
-    //     "kvkNumber": true,
-    //     "btwNumber": true,
-    //     "taxNumber": true,
-    //     "taxOffice": true,
-    //     "taxOfficeAddress": true,
-    //     "taxOfficePostalCode": true,
-    //     "taxOfficeCity": true,
-    //     "taxOfficeCountry": true,
-    //     "taxOfficePhone": true,
-    //     "taxOfficeEmail": true,
-    //     "taxOfficeWebsite": true,
-    //     "taxOfficeContactPerson": true,
-    //     "taxOfficeContactPersonPhone": true,
-    //     "taxOfficeContactPersonEmail": true,
-    //     "taxOfficeContactPersonWebsite": true,
-    //     "taxOfficeContactPersonAddress": true,
-    //     "taxOfficeContactPersonPostalCode": true,
-    //     "taxOfficeContactPersonCity": true,
-    //     "taxOfficeContactPersonCountry": true,
-    //     "taxOfficeContactPersonRole": true,
-    //     "taxOfficeContactPersonDepartment": true,
-    //     "taxOfficeContactPersonFax": true,
-    //     "taxOfficeContactPersonMobile": true,
-    //     "taxOfficeContactPersonGender": true,
-    //     "taxOfficeContactPersonBirthDate": true,
-    //     }
-    // }
-    // TODO: Find out how to validate if the correct business and payment details are being used and the REAL "owner" is the only one authorized to change these details.
-    // Object of smaller configurable payment details like VAT number, IBAN, BIC, kvkNumber etc.
-    businessConfigFormat: {
-      type: Object,
-      required: true,
-    },
-    // `paymentDetails` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the payment details for that country or region.
-    // for example: { vatNumber: "NL123456789B01", iban: "NL12ABNA0123456789", creditCard: { number: "", securityCode: "" }, bic: "ABNANL2A", kvkNumber: "12345678", btwNumber: "NL123456789B01", taxNumber: "123456789", taxOffice: "Belastingdienst", taxOfficeAddress: "Parnassusweg 5", taxOfficePostalCode: "1077 DC", taxOfficeCity: "Amsterdam", taxOfficeCountry: "NL", taxOfficePhone: "0800-0543", taxOfficeEmail: ""}
-    paymentDetails: {
-      type: Object,
-      required: true,
-    },
-    // The year the company was started.
-    startedInYear: {
-      type: Number,
-      required: true,
-    },
-    // Is the company active at THIS moment? True or false.
-    stillActive: {
-      type: Boolean,
-      required: true,
-    },
-    // company slogan
-    slogan: {
-      type: String,
-      required: false,
-    },
-    // Short description of the company.
-    description: {
-      type: String,
-      required: false,
-    },
-    // TODO: Create a new schema and model for type of industries, so that the user can select from a list of industries, or add a new one.
-    // TODO: Industries will be linked to a company, based on an industryId in the industry model.
-    // TODO: Create collection of industries, and link the companies in a companies[] property, which should contain company id's of the companies.
-    // The industry the company is in. (The type of field it is operational in.)
-    industry: {
-      type: String,
-      required: false,
-    },
-    // Is the company public or private at THIS moment?
-    // TODO: Make it possible to change this value in the user/owner settings.
-    isPublic: {
-      type: Boolean,
-      required: true,
-    },
-    // TODO: Create review schema and model.
-    // TODO: Reviews will be linked to a company, based on an reviewId in the review model. This model should contain the review text, rating, reviewer, timestamp and maybe more.
-    // TODO: "reviews" array should contain review objects with an reviewId.
-    reviews: {
-      type: Array,
-      required: true,
-    },
-    // Rating of the company. Will be calculated based on the reviews property "ratings". This will only show on the profile page when some (10 or more) reviews with ratings are present. (reviews.length > 10 maybe)
-    rating: {
-      type: Float,
-      required: false,
-    },
-    // Users that want to be affiliated with the company so they can profit of special company's benefits in exchange for a review/rating or something else.
-    linkedCustomers: {
-      type: Object,
-      required: true,
-    },
-    // Is the company a bronze, silver, gold or platinum premium company? Does it pay for extra features? True or false.
-    isPremium: {
-      type: Boolean,
-      required: true,
-    },
-    // "premiumKind" is "bronze", "silver", "gold", "platinum" or "astronomical"? TODO: Decide on the premium names, which features they have, and how much they cost and how to pay for them.
-    // TODO: Create a new schema and model for premium types. Premium types will be linked to a company, based on an premiumTypeId in the premiumType model.
-    // TODO:
-    premiumKind: {
-      type: String,
-      required: false,
-    },
-    // TODO: Create a new schema and model for vendors. Decide what kind of vendors there are, and what properties they need. Vendors are the business to business users and can possibly be linked to a company, based on an vendorId in the vendor model.
-    // TODO: Decide what kind of functionalities and authorizations vendors have.
-    // Is this company a vendor itself? True or false.
-    isVendor: {
-      type: Boolean,
-      required: true,
-    },
-    // "associatedVendors" is an array of vendor objects with an vendorId (and userId?).
-    associatedVendors: {
-      type: Array,
-      required: true,
-    },
-    // TODO: Create a new schema and model for employees. Decide what kind of functionalities and authorizations employees have. Owners should automatically have employee rights and functionalities. The key difference between owner and employee is the authorization to change company (profile and project association) settings.
-    // TODO: Employees will be linked to a company, based on an employeeId in the employee model. (and userId?)
-    // Linked employees.
-    linkedEmployees: {
-      type: Array,
-      required: true,
-    },
-    // TODO: Create a new schema and model for stories. Stories will be linked to a company, to read on their profile page. Stories will contain a title, text, image, linked customer, linked employees, linked vendors, linked products, linked services, linked projects, and more.
-
-    stories: {
-      type: Array,
-      required: true,
-    },
-    // TODO: Create a new schema and model for projects. It should be possible for different companies to be associated to a project. (many-to-many relationship) A project page should also have a storyline of stories linked to companies, employees, associated customers, reviews and more.
-    // TODO: IMPORTANT! Find out how to use a "junction table" to link companies to projects. (many-to-many relationship)
-    // "projects" is an array of project objects with an projectId.
-    projects: {
-      type: Array,
-      required: true,
-    },
-    // TODO: Create a new schema and model for products. If more than one company would associate to a product, they have to create a project together and work from there. The products from a project should also (optionally) be visible on the associated company profiles.
-    // TODO: A company product listing page should have a search bar, and a filter for industry, rating, price, and more.
-    // TODO: It should be possible to search for products without having to visit a company profile. (search bar on the home page)
-    // TODO: Make product listing something companies can pay for. (premium feature) IMPORTANT: Make sure that the users finds what they search for, that should have BIG priority over paid listings that will feel unpleasant and not logical.
-    // TODO: A product page should also have reviews from customers. (maybe also from employees and vendors?)
-    // TODO: IMPORTANT! Find out how to use a "junction table" to link companies to products and products to projects. (many-to-many relationship)
-    // "products" is an array of product objects with an productId.
-    products: {
-      type: Array,
-      required: true,
-    },
-    // TODO: Create a new schema and model for services. If more than one company would associate to a service, they have to create a project together and work from there. The services from a project should also (optionally) be visible on the associated company profiles.
-    // TODO: Make it possible for users to contact a company for about a service with chat and video call (maybe chat and video calls should be a premium features, decide about this later).
-    // TODO: A appointment can be made with a company, with the advantage that the service delivered to the customer can be linked to a story on the company/project profile page. The customer, employee, vendor, product, service, and more can be linked to the story and leave their part of the message, this way a customer (user) can maybe have a beneficial price in return for a review with rating.
-    // TODO: Think about how to make appointments with companies, how the agenda model and schema should look like, and how to link appointments to stories.
-    // TODO: IMPORTANT! Find out how to use a "junction table" to link companies and projects to services. (many-to-many relationship)
-    // "services" is an array of service objects with an serviceId.
-    services: {
-      type: Array,
-      required: true,
-    },
-    // TODO: Create a new schema and model for `appointment`. An appointment will be linked to a company or project, based on an appointmentId in the appointment model. Employees, users, vendors, products, a service and more can be linked to an appointment.
-    appointments: {
-      type: Array,
-      required: true,
-    },
-    // TODO: Make it possible for employees to respond on service contact chat/video call requests, and make appointments with customers. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
-    // TODO: Create message schema and model. Messages will be linked to a company, based on an messageId in the message model. This model should contain the message text, timestamp, and more. Messages will be linked to a company, based on an messageId in the message model. This is a one-to-many relationship, between company and messages OR project and messages. It should not be hard to switch between the `company messenger inbox` and the `project messenger inbox`.
-    // TODO: Create messenger functionality and use encryption for the privacy and security of the messages. Never store the encryption key in the database, only encrypt and decrypt the messages in the frontend. (Use a library for this)
-    // q: Which library should I use for encryption of personal chat messages?
-    // a: https://www.npmjs.com/package/crypto-js
-    // TODO: Make it possible for normal users to send messages to a company, project or employee. Make it possible for employees to respond to messages from users.
-    // TODO: Make it possible for vendors to send messages to a company, project or employee. (Employees have to be authorized by the company (main) owner to connect with vendors). Make it possible for (authorized) employees, owners and companies to respond to messages from vendors.
-    // TODO: Build a sharable functionality (a link to each functionality, agreement, project, product, revenue agreement, appointment or whatever) in all features where it is possible to communicate about between 2 related users. Make it possible to share a link from one to another if both users (companies, owners, (authorized) employees, project associates or whichever other user that is associated to each other in that specific "thing" they use, share (or possibly CAN share), or whatever way they (can) relate to each other for EVERY possible functionality and feature I can think of to be USEFUL and NOT too distracting from ANY more important things (functionalities or features).
-    // `messages` is an array of message objects with an messageId, corresponding userId, timestamp, and more.
-    messages: {
-      type: Array,
-      required: true,
-    },
-    // TODO: GOOD IDEA: Maybe it is possible to save the agenda data in a separate agenda model and schema, and link the agenda to the company, project or user. (one-to-one relationship) And think about how to link the agenda  to `company`, `project`` and even `user` schemes and models.
-    agenda: {
-      type: Array,
-      required: true,
-    },
-
-    // TODO: Create a new schema and model for projects. Projects will be linked to a company, based on an projectId in the project model. (and maybe userId's? or employeeId's)
-    // TODO: Make it possible to create and design a project profile page, with a storyline of stories linked to companies, employees, associated customers, reviews, ratings and more. Authorize employees to change project settings. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
-    // TODO: Create functionalities for companies to automatically share costs for premium features, based on a percentage all associated companies have to agree on for this to work.
-    // TODO: Make functionalities so companies can share the revenue of a project's products and services, based on a percentage all associated companies have to agree on for this to work, or share revenue based on the assigned employees (from a specific company) that are associated to the delivered products and services.
-    // TODO: Make it possible for companies associated to projects to share revenue per service or product.
-    // TODO: Make it possible to configure revenue sharing per product, per service based on from which profile page the product or service was ordered.
-    // TODO: Make it possible to share revenue based on which company performs the service.
-    projects: {
-      type: Object,
-      required: true,
-    },
-  },
-  // enable timestamps
-  { timestamps: true }
-);
-
-// Company model:
-// Create a new model using the companySchema.
-// A model is a class with which we construct documents.
-// In this case, a company will be a document in our MongoDB database.
-export const Company = mongoose.model("Company", companySchema);
+└─ MERN-stack-project
+   ├─ backend
+   │  ├─ models
+   │  │  ├─ bookModel.js
+   │  │  │  └─ line 17: TODO : Delete this schema once it is no longer needed.
+   │  │  └─ companyModel.js
+   │  │     ├─ line 28: TODO : Investigate the usefulness of generating an id myself.
+   │  │     ├─ line 59: TODO : Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
+   │  │     ├─ line 78: TODO : Create a new schema and model for user and one for owner.
+   │  │     ├─ line 79: TODO : Save the name , email, phone, and role properties in a new user model. (to be created)
+   │  │     ├─ line 80: TODO : Owners  will be linked to a company, based on an ownerId in the owner model.
+   │  │     ├─ line 81: TODO : "owners" array should contain owner objects with an userId.
+   │  │     ├─ line 86: TODO : Create a new schema and model for admin users.
+   │  │     ├─ line 87: TODO : Admin users will be linked to a company, based on an adminUserId in the adminUser model.
+   │  │     ├─ line 88: TODO : "admins" array should contain admin objects with an adminUserId. (For example: { adminUserId = "1234", role = "owner" })
+   │  │     ├─ line 93: TODO : Create a new schema and model for roles.
+   │  │     ├─ line 94: TODO : Roles will be linked to a company (or project), based on an roleId in the role model.
+   │  │     ├─ line 100: TODO : Create a new schema and model for address.
+   │  │     ├─ line 101: TODO : Locations will be linked to a company, based on an addressId in the address model.
+   │  │     ├─ line 102: TODO : "locations" array should contain address objects with all address fields an addressId.
+   │  │     ├─ line 112: TODO : Find out how to validate correct business and payment details.
+   │  │     ├─ line 113: TODO : Inform myself about the required payment details for each country or region. (First the Netherlands, then, maybe the rest of the world.)
+   │  │     ├─ line 147: TODO : Find out how to validate if the correct business and payment details are being used and the REAL "owner" is the only one authorized to change these details.
+   │  │     ├─ line 170: TODO : Create a new schema and model for type of industries, so that the user can select from a list of industries, or add a new one.
+   │  │     ├─ line 171: TODO : Industries will be linked to a company, based on an industryId in the industry model.
+   │  │     ├─ line 172: TODO : Create collection of industries, and link the companies in a companies[] property, which should contain company id's of the companies.
+   │  │     ├─ line 179: TODO : Make it possible to change this value in the user/owner settings.
+   │  │     ├─ line 184: TODO : Create review schema and model.
+   │  │     ├─ line 185: TODO : Reviews will be linked to a company, based on an reviewId in the review model. This model should contain the review text, rating, reviewer, timestamp and maybe more.
+   │  │     ├─ line 186: TODO : "reviews" array should contain review objects with an reviewId.
+   │  │     ├─ line 207: TODO : Create a new schema and model for premium types. Premium types will be linked to a company, based on an premiumTypeId in the premiumType model.
+   │  │     ├─ line 208: TODO :
+   │  │     ├─ line 213: TODO : Create a new schema and model for vendors. Decide what kind of vendors there are, and what properties they need. Vendors are the business to business users and can possibly be linked to a company, based on an vendorId in the vendor model.
+   │  │     ├─ line 214: TODO : Decide what kind of functionalities and authorizations vendors have.
+   │  │     ├─ line 225: TODO : Create a new schema and model for employees. Decide what kind of functionalities and authorizations employees have. Owners should automatically have employee rights and functionalities. The key difference between owner and employee is the authorization to change company (profile and project association) settings.
+   │  │     ├─ line 226: TODO : Employees will be linked to a company, based on an employeeId in the employee model. (and userId?)
+   │  │     ├─ line 232: TODO : Create a new schema and model for stories. Stories will be linked to a company, to read on their profile page. Stories will contain a title, text, image, linked customer, linked employees, linked vendors, linked products, linked services, linked projects, and more.
+   │  │     ├─ line 238: TODO : Create a new schema and model for projects. It should be possible for different companies to be associated to a project. (many-to-many relationship) A project page should also have a storyline of stories linked to companies, employees, associated customers, reviews and more.
+   │  │     ├─ line 239: TODO : IMPORTANT! Find out how to use a "junction table" to link companies to projects. (many-to-many relationship)
+   │  │     ├─ line 245: TODO : Create a new schema and model for products. If more than one company would associate to a product, they have to create a project together and work from there. The products from a project should also (optionally) be visible on the associated company profiles.
+   │  │     ├─ line 246: TODO : A company product listing page should have a search bar, and a filter for industry, rating, price, and more.
+   │  │     ├─ line 247: TODO : It should be possible to search for products without having to visit a company profile. (search bar on the home page)
+   │  │     ├─ line 248: TODO : Make product listing something companies can pay for. (premium feature) IMPORTANT: Make sure that the users finds what they search for, that should have BIG priority over paid listings that will feel unpleasant and not logical.
+   │  │     ├─ line 249: TODO : A product page should also have reviews from customers. (maybe also from employees and vendors?)
+   │  │     ├─ line 250: TODO : IMPORTANT! Find out how to use a "junction table" to link companies to products and products to projects. (many-to-many relationship)
+   │  │     ├─ line 256: TODO : Create a new schema and model for services. If more than one company would associate to a service, they have to create a project together and work from there. The services from a project should also (optionally) be visible on the associated company profiles.
+   │  │     ├─ line 257: TODO : Make it possible for users to contact a company for about a service with chat and video call (maybe chat and video calls should be a premium features, decide about this later).
+   │  │     ├─ line 258: TODO : A appointment can be made with a company, with the advantage that the service delivered to the customer can be linked to a story on the company/project profile page. The customer, employee, vendor, product, service, and more can be linked to the story and leave their part of the message, this way a customer (user) can maybe have a beneficial price in return for a review with rating.
+   │  │     ├─ line 259: TODO : Think about how to make appointments with companies, how the agenda model and schema should look like, and how to link appointments to stories.
+   │  │     ├─ line 260: TODO : IMPORTANT! Find out how to use a "junction table" to link companies and projects to services. (many-to-many relationship)
+   │  │     ├─ line 266: TODO : Create a new schema and model for `appointment`. An appointment will be linked to a company or project, based on an appointmentId in the appointment model. Employees, users, vendors, products, a service and more can be linked to an appointment.
+   │  │     ├─ line 271: TODO : Make it possible for employees to respond on service contact chat/video call requests, and make appointments with customers. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
+   │  │     ├─ line 272: TODO : Create message schema and model. Messages will be linked to a company, based on an messageId in the message model. This model should contain the message text, timestamp, and more. Messages will be linked to a company, based on an messageId in the message model. This is a one-to-many relationship, between company and messages OR project and messages. It should not be hard to switch between the `company messenger inbox` and the `project messenger inbox`.
+   │  │     ├─ line 273: TODO : Create messenger functionality and use encryption for the privacy and security of the messages. Never store the encryption key in the database, only encrypt and decrypt the messages in the frontend. (Use a library for this)
+   │  │     ├─ line 276: TODO : Make it possible for normal users to send messages to a company, project or employee. Make it possible for employees to respond to messages from users.
+   │  │     ├─ line 277: TODO : Make it possible for vendors to send messages to a company, project or employee. (Employees have to be authorized by the company (main) owner to connect with vendors). Make it possible for (authorized) employees, owners and companies to respond to messages from vendors.
+   │  │     ├─ line 278: TODO : Build a sharable functionality (a link to each functionality, agreement, project, product, revenue agreement, appointment or whatever) in all features where it is possible to communicate about between 2 related users. Make it possible to share a link from one to another if both users (companies, owners, (authorized) employees, project associates or whichever other user that is associated to each other in that specific "thing" they use, share (or possibly CAN share), or whatever way they (can) relate to each other for EVERY possible functionality and feature I can think of to be USEFUL and NOT too distracting from ANY more important things (functionalities or features).
+   │  │     ├─ line 284: TODO : GOOD IDEA: Maybe it is possible to save the agenda data in a separate agenda model and schema, and link the agenda to the company, project or user. (one-to-one relationship) And think about how to link the agenda  to `company`, `project`` and even `user` schemes and models.
+   │  │     ├─ line 290: TODO : Create a new schema and model for projects. Projects will be linked to a company, based on an projectId in the project model. (and maybe userId's? or employeeId's)
+   │  │     ├─ line 291: TODO : Make it possible to create and design a project profile page, with a storyline of stories linked to companies, employees, associated customers, reviews, ratings and more. Authorize employees to change project settings. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
+   │  │     ├─ line 292: TODO : Create functionalities for companies to automatically share costs for premium features, based on a percentage all associated companies have to agree on for this to work.
+   │  │     ├─ line 293: TODO : Make functionalities so companies can share the revenue of a project's products and services, based on a percentage all associated companies have to agree on for this to work, or share revenue based on the assigned employees (from a specific company) that are associated to the delivered products and services.
+   │  │     ├─ line 294: TODO : Make it possible for companies associated to projects to share revenue per service or product.
+   │  │     ├─ line 295: TODO : Make it possible to configure revenue sharing per product, per service based on from which profile page the product or service was ordered.
+   │  │     └─ line 296: TODO : Make it possible to share revenue based on which company performs the service.
+   │  ├─ routes
+   │  │  ├─ booksRoute.js
+   │  │  │  ├─ line 21: TODO : Check if the book already exists in the database. Hint: Use the findOne method and consider using `unique: true` in the book schema.
+   │  │  │  └─ line 22: TODO : If the book already exists, send status 409 response and a (error) message to inform the client.
+   │  │  └─ companiesRoute.js
+   │  │     ├─ line 1: TODO : Create a route to save a new Company document in the database.
+   │  │     ├─ line 2: TODO : Create a route to get all Company documents from the database.
+   │  │     ├─ line 3: TODO : Create a route to get a single Company document from the database.
+   │  │     ├─ line 4: TODO : Create a route to update a single Company document in the database.
+   │  │     └─ line 5: TODO : Create a route to delete a single Company document from the database.
+   │  └─ index.js
+   │     ├─ line 16: TODO : Create a route to save a new Company document in the database.
+   │     ├─ line 17: TODO : Create a route to get all Company documents from the database.
+   │     ├─ line 18: TODO : Create a route to get a single Company document from the database.
+   │     ├─ line 19: TODO : Create a route to update a single Company document in the database.
+   │     ├─ line 20: TODO : Create a route to delete a single Company document from the database.
+   │     ├─ line 37: TODO : Check if the book already exists in the database. Hint: Use the findOne method and consider using `unique: true` in the book schema.
+   │     └─ line 38: TODO : If the book already exists, send status 409 response and a (error) message to inform the client.
+   └─ README.md
+      ├─ line 9: [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
+      ├─ line 10: [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
+      ├─ line 11: [x] Finish basic Book schema and model. For faster functional development and testing purposes.
+      ├─ line 12: [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
+      ├─ line 13: [x] Set up company scheme.
+      ├─ line 14: [x] Set up company model.
+      ├─ line 15: [ ] Actualize, complete and correct Company scheme documentation.
+      ├─ line 16: [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
+      ├─ line 17: [ ] Set up GET, POST, PUT and DELETE Book server routes.
+      ├─ line 18: [ ] Link Backend To
+      ├─ line 19: [ ] Make planning and prioritize things TODO first.
+      ├─ line 20: [ ] Finish company `required:` values to correct Boolean value.
+      ├─ line 21: [ ] Set up GET, POST, PUT and DELETE Company server routes.
+      ├─ line 61: TODO : Investigate the usefulness of generating an id myself.
+      ├─ line 72: TODO : Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
+      ├─ line 91: TODO : Create a new schema and model for user and one for owner.
+      ├─ line 92: TODO : Save the name , email, phone, and role properties in a new user model. (to be created)
+      ├─ line 93: TODO : Owners  will be linked to a company, based on an ownerId in the owner model.
+      ├─ line 94: TODO : "owners" array should contain owner objects with an userId.
+      ├─ line 99: TODO : Create a new schema and model for admin users.
+      ├─ line 100: TODO : Admin users will be linked to a company, based on an adminUserId in the adminUser model.
+      ├─ line 101: TODO : "admins" array should contain admin objects with an adminUserId. (For example: { adminUserId = "1234", role = "owner" })
+      ├─ line 106: TODO : Create a new schema and model for roles.
+      ├─ line 107: TODO : Roles will be linked to a company (or project), based on an roleId in the role model.
+      ├─ line 113: TODO : Create a new schema and model for address.
+      ├─ line 114: TODO : Locations will be linked to a company, based on an addressId in the address model.
+      ├─ line 115: TODO : "locations" array should contain address objects with all address fields an addressId.
+      ├─ line 125: TODO : Find out how to validate correct business and payment details.
+      ├─ line 126: TODO : Inform myself about the required payment details for each country or region. (First the Netherlands, then, maybe the rest of the world.)
+      ├─ line 160: TODO : Find out how to validate if the correct business and payment details are being used and the REAL "owner" is the only one authorized to change these details.
+      ├─ line 192: TODO : Create a new schema and model for type of industries, so that the user can select from a list of industries, or add a new one.
+      ├─ line 193: TODO : Industries will be linked to a company, based on an industryId in the industry model.
+      ├─ line 194: TODO : Create collection of industries, and link the companies in a companies[] property, which should contain company id's of the companies.
+      ├─ line 201: TODO : Make it possible to change this value in the user/owner settings.
+      ├─ line 206: TODO : Create review schema and model.
+      ├─ line 207: TODO : Reviews will be linked to a company, based on an reviewId in the review model. This model should contain the review text, rating, reviewer, timestamp and maybe more.
+      ├─ line 208: TODO : "reviews" array should contain review objects with an reviewId.
+      ├─ line 229: TODO : Create a new schema and model for premium types. Premium types will be linked to a company, based on an premiumTypeId in the premiumType model.
+      ├─ line 230: TODO :
+      ├─ line 235: TODO : Create a new schema and model for vendors. Decide what kind of vendors there are, and what properties they need. Vendors are the business to business users and can possibly be linked to a company, based on an vendorId in the vendor model.
+      ├─ line 236: TODO : Decide what kind of functionalities and authorizations vendors have.
+      ├─ line 247: TODO : Create a new schema and model for employees. Decide what kind of functionalities and authorizations employees have. Owners should automatically have employee rights and functionalities. The key difference between owner and employee is the authorization to change company (profile and project association) settings.
+      ├─ line 248: TODO : Employees will be linked to a company, based on an employeeId in the employee model. (and userId?)
+      ├─ line 254: TODO : Create a new schema and model for stories. Stories will be linked to a company, to read on their profile page. Stories will contain a title, text, image, linked customer, linked employees, linked vendors, linked products, linked services, linked projects, and more.
+      ├─ line 260: TODO : Create a new schema and model for projects. It should be possible for different companies to be associated to a project. (many-to-many relationship) A project page should also have a storyline of stories linked to companies, employees, associated customers, reviews and more.
+      ├─ line 261: TODO : IMPORTANT! Find out how to use a "junction table" to link companies to projects. (many-to-many relationship)
+      ├─ line 267: TODO : Create a new schema and model for products. If more than one company would associate to a product, they have to create a project together and work from there. The products from a project should also (optionally) be visible on the associated company profiles.
+      ├─ line 268: TODO : A company product listing page should have a search bar, and a filter for industry, rating, price, and more.
+      ├─ line 269: TODO : It should be possible to search for products without having to visit a company profile. (search bar on the home page)
+      ├─ line 270: TODO : Make product listing something companies can pay for. (premium feature) IMPORTANT: Make sure that the users finds what they search for, that should have BIG priority over paid listings that will feel unpleasant and not logical.
+      ├─ line 271: TODO : A product page should also have reviews from customers. (maybe also from employees and vendors?)
+      ├─ line 272: TODO : IMPORTANT! Find out how to use a "junction table" to link companies to products and products to projects. (many-to-many relationship)
+      ├─ line 278: TODO : Create a new schema and model for services. If more than one company would associate to a service, they have to create a project together and work from there. The services from a project should also (optionally) be visible on the associated company profiles.
+      ├─ line 279: TODO : Make it possible for users to contact a company for about a service with chat and video call (maybe chat and video calls should be a premium features, decide about this later).
+      ├─ line 280: TODO : A appointment can be made with a company, with the advantage that the service delivered to the customer can be linked to a story on the company/project profile page. The customer, employee, vendor, product, service, and more can be linked to the story and leave their part of the message, this way a customer (user) can maybe have a beneficial price in return for a review with rating.
+      ├─ line 281: TODO : Think about how to make appointments with companies, how the agenda model and schema should look like, and how to link appointments to stories.
+      ├─ line 282: TODO : IMPORTANT! Find out how to use a "junction table" to link companies and projects to services. (many-to-many relationship)
+      ├─ line 288: TODO : Create a new schema and model for `appointment`. An appointment will be linked to a company or project, based on an appointmentId in the appointment model. Employees, users, vendors, products, a service and more can be linked to an appointment.
+      ├─ line 293: TODO : Make it possible for employees to respond on service contact chat/video call requests, and make appointments with customers. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
+      ├─ line 294: TODO : Create message schema and model. Messages will be linked to a company, based on an messageId in the message model. This model should contain the message text, timestamp, and more. Messages will be linked to a company, based on an messageId in the message model. This is a one-to-many relationship, between company and messages OR project and messages. It should not be hard to switch between the `company messenger inbox` and the `project messenger inbox`.
+      ├─ line 295: TODO : Create messenger functionality and use encryption for the privacy and security of the messages. Never store the encryption key in the database, only encrypt and decrypt the messages in the frontend. (Use a library for this)
+      ├─ line 298: TODO : Make it possible for normal users to send messages to a company, project or employee. Make it possible for employees to respond to messages from users.
+      ├─ line 299: TODO : Make it possible for vendors to send messages to a company, project or employee. (Employees have to be authorized by the company (main) owner to connect with vendors). Make it possible for (authorized) employees, owners and companies to respond to messages from vendors.
+      ├─ line 300: TODO : Build a sharable functionality (a link to each functionality, agreement, project, product, revenue agreement, appointment or whatever) in all features where it is possible to communicate about between 2 related users. Make it possible to share a link from one to another if both users (companies, owners, (authorized) employees, project associates or whichever other user that is associated to each other in that specific "thing" they use, share (or possibly CAN share), or whatever way they (can) relate to each other for EVERY possible functionality and feature I can think of to be USEFUL and NOT too distracting from ANY more important things (functionalities or features).
+      ├─ line 306: TODO : GOOD IDEA: Maybe it is possible to save the agenda data in a separate agenda model and schema, and link the agenda to the company, project or user. (one-to-one relationship) And think about how to link the agenda  to `company`, `project`` and even `user` schemes and models.
+      ├─ line 312: TODO : Create a new schema and model for projects. Projects will be linked to a company, based on an projectId in the project model. (and maybe userId's? or employeeId's)
+      ├─ line 313: TODO : Make it possible to create and design a project profile page, with a storyline of stories linked to companies, employees, associated customers, reviews, ratings and more. Authorize employees to change project settings. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
+      ├─ line 314: TODO : Create functionalities for companies to automatically share costs for premium features, based on a percentage all associated companies have to agree on for this to work.
+      ├─ line 315: TODO : Make functionalities so companies can share the revenue of a project's products and services, based on a percentage all associated companies have to agree on for this to work, or share revenue based on the assigned employees (from a specific company) that are associated to the delivered products and services.
+      ├─ line 316: TODO : Make it possible for companies associated to projects to share revenue per service or product.
+      ├─ line 317: TODO : Make it possible to configure revenue sharing per product, per service based on from which profile page the product or service was ordered.
+      └─ line 318: TODO : Make it possible to share revenue based on which company performs the service.
 ```
