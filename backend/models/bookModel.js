@@ -15,6 +15,8 @@ import mongoose from "mongoose";
 // then it is probably still in use and should not be deleted.
 // The timestamps option is not required, but it is useful.
 
+// TODO: Solve Codacy issue that ticketnumber is not used.
+
 // TODO: MERNSTACK-9 Delete this schema once it is no longer needed.
 
 /**
