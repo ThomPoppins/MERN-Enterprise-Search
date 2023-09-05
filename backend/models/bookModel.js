@@ -15,7 +15,7 @@ import mongoose from "mongoose";
 // then it is probably still in use and should not be deleted.
 // The timestamps option is not required, but it is useful.
 
-// TODO: Delete this schema once it is no longer needed. MERN-6
+// TODO: MERNSTACK-9 Delete this schema once it is no longer needed.
 
 /**
  * @typedef {Object} Book
