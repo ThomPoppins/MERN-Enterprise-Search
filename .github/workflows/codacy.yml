@@ -15,10 +15,10 @@ name: Codacy Security Scan
 
 on:
   push:
-    branches: ["UNSAFE_BRANCH_configure_github_workflows"]
+    branches: ["main"]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: ["UNSAFE_BRANCH_configure_github_workflows"]
+    branches: ["main"]
   schedule:
     - cron: "42 3 * * 0"
 
