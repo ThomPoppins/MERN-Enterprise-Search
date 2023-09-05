@@ -25,7 +25,7 @@ import mongoose from "mongoose";
  */
 const companySchema = new mongoose.Schema(
   {
-    // TODO: KAN-1 Investigate the usefulness of generating an id myself.
+    // TODO: MERN-4 Investigate the usefulness of generating an id myself.
     name: {
       type: String,
       required: true,
@@ -91,7 +91,7 @@ const companySchema = new mongoose.Schema(
       required: true,
     },
     // TODO: Create a new schema and model for roles.
-    // TODO: KAN-3 Roles will be linked to a company (or project), based on an roleId in the role model.
+    // TODO: MERN-5 Roles will be linked to a company (or project), based on an roleId in the role model.
     // `roles` is an array of role objects with an roleId and role. For example: [{ roleId = "0", role = "admin" }, { roleId = "1", role = "owner" }, { roleId = "2", role = "employee" }, { roleId = "3", role = "vendor"}].
     roles: {
       type: Array,
