@@ -14,3 +14,5 @@ externals/
 run-helper.cmd.template
 run-helper.sh.template
 run.cmd
+.runner
+run-helper.cmd
