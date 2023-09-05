@@ -14,7 +14,7 @@ import mongoose from "mongoose";
 // If a book document was created a long time ago and it has been updated recently,
 // then it is probably still in use and should not be deleted.
 // The timestamps option is not required, but it is useful.
-// TODO: Delete this schema once it is no longer needed.
+// TODO: MERN-6 Delete this schema once it is no longer needed.
 /**
  * @typedef {Object} Book
  * @property {string} title - The title of the book.
