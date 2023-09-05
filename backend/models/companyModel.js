@@ -35,7 +35,7 @@ const companySchema = new mongoose.Schema(
     // company email address for correspondence directed to the company with this application.
     email: {
       type: String,
-      required: true,
+      required: false,
     },
     // company slogan
     slogan: {
@@ -50,31 +50,31 @@ const companySchema = new mongoose.Schema(
     // Country of the company billing address. For example: "NL" for the Netherlands.
     country: {
       type: String,
-      required: true,
+      required: false,
     },
     // Region of the company billing address. For example: "Texas" for Texas in the US.
     region: {
       type: String,
-      required: true,
+      required: false,
     },
     // "addressFormat" will be used to format the address in the correct way for the country and regional address format.
     // TODO: [MERNSTACK-13] Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
     // For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: null }, because there are not regional address format differences in the Netherlands.
     addressFormat: {
       type: Object,
-      required: true,
+      required: false,
     },
     // Registered address of the company.
     // For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
     address: {
       type: Object,
-      required: true,
+      required: false,
     },
     // Adress to send invoices to.
     // For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
     billingAddress: {
       type: Object,
-      required: true,
+      required: false,
     },
 
     // TODO: [MERNSTACK-14] Create a new schema and model for user and one for owner.
@@ -83,28 +83,28 @@ const companySchema = new mongoose.Schema(
     // TODO: [MERNSTACK-17] "owners" array should contain owner objects with an userId.
     owners: {
       type: Array,
-      required: true,
+      required: false,
     },
     // TODO: [MERNSTACK-18] Create a new schema and model for admin users.
     // TODO: [MERNSTACK-19] Admin users will be linked to a company, based on an adminUserId in the adminUser model.
     // TODO: [MERNSTACK-20] `admins` array should contain admin objects with an adminUserId. (For example: { adminUserId = "1234", role = "owner" })
     companyAdmins: {
       type: Array,
-      required: true,
+      required: false,
     },
     // TODO: [MERNSTACK-21] Create a new schema and model for roles.
     // TODO: [MERNSTACK-22] Roles will be linked to a company (or project), based on an roleId in the role model.
     // `roles` is an array of role objects with an roleId and role. For example: [{ roleId = "0", role = "admin" }, { roleId = "1", role = "owner" }, { roleId = "2", role = "employee" }, { roleId = "3", role = "vendor"}].
     roles: {
       type: Array,
-      required: true,
+      required: false,
     },
     // TODO: [MERNSTACK-23] Create a new schema and model for address.
     // TODO: [MERNSTACK-24] Locations will be linked to a company, based on an addressId in the address model.
     // TODO: [MERNSTACK-25] "locations" array should contain address objects with all address fields an addressId.
     locations: {
       type: Array,
-      required: true,
+      required: false,
     },
 
     // Format of which payment options and details are required for the country or region.
@@ -150,23 +150,23 @@ const companySchema = new mongoose.Schema(
     // Object of smaller configurable payment details like VAT number, IBAN, BIC, kvkNumber etc.
     businessConfigFormat: {
       type: Object,
-      required: true,
+      required: false,
     },
     // `paymentDetails` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the payment details for that country or region.
     // for example: { vatNumber: "NL123456789B01", iban: "NL12ABNA0123456789", creditCard: { number: "", securityCode: "" }, bic: "ABNANL2A", kvkNumber: "12345678", btwNumber: "NL123456789B01", taxNumber: "123456789", taxOffice: "Belastingdienst", taxOfficeAddress: "Parnassusweg 5", taxOfficePostalCode: "1077 DC", taxOfficeCity: "Amsterdam", taxOfficeCountry: "NL", taxOfficePhone: "0800-0543", taxOfficeEmail: ""}
     paymentDetails: {
       type: Object,
-      required: true,
+      required: false,
     },
     // The year the company was started.
     startedInYear: {
       type: Number,
-      required: true,
+      required: false,
     },
     // Is the company active at THIS moment? True or false.
     stillActive: {
       type: Boolean,
-      required: true,
+      required: false,
     },
     // TODO: [MERNSTACK-29] Create a new schema and model for company types. Company types will be linked to a company, based on an companyTypeId in the companyType model.
     // `companyTypeId` is the id of the company type in the corresponding company type model. This may be removed if not needed.
@@ -187,14 +187,14 @@ const companySchema = new mongoose.Schema(
     // TODO: [MERNSTACK-33] Make it possible to change this value in the user/owner settings.
     isPublic: {
       type: Boolean,
-      required: true,
+      required: false,
     },
     // TODO: [MERNSTACK-34] Create review schema and model.
     // TODO: [MERNSTACK-35] Reviews will be linked to a company, based on an reviewId in the review model. This model should contain the review text, rating, reviewer, timestamp and maybe more.
     // TODO: [MERNSTACK-36] "reviews" array should contain review objects with an reviewId.
     reviews: {
       type: Array,
-      required: true,
+      required: false,
     },
     // Rating of the company. Will be calculated based on the reviews property "ratings". This will only show on the profile page when some (10 or more) reviews with ratings are present. (reviews.length > 10 maybe)
     rating: {
@@ -204,12 +204,12 @@ const companySchema = new mongoose.Schema(
     // Users that want to be affiliated with the company so they can profit of special company's benefits in exchange for a review/rating or something else.
     linkedCustomers: {
       type: Object,
-      required: true,
+      required: false,
     },
     // Is the company a bronze, silver, gold or platinum premium company? Does it pay for extra features? True or false.
     isPremium: {
       type: Boolean,
-      required: true,
+      required: false,
     },
     // "premiumKind" is "bronze", "silver", "gold", "platinum" or "astronomical"? TODO: Decide on the premium names, which features they have, and how much they cost and how to pay for them.
     // TODO: [MERNSTACK-37] Create a new schema and model for premium types. Premium types will be linked to a company, based on an premiumTypeId in the premiumType model.
@@ -223,12 +223,12 @@ const companySchema = new mongoose.Schema(
     // Is this company a vendor itself? True or false.
     isVendor: {
       type: Boolean,
-      required: true,
+      required: false,
     },
     // "associatedVendors" is an array of vendor objects with an vendorId (and userId?).
     associatedVendors: {
       type: Array,
-      required: true,
+      required: false,
     },
     // TODO: [MERNSTACK-40] Create a new schema and model for employees.
 
@@ -236,20 +236,20 @@ const companySchema = new mongoose.Schema(
     // Linked employees.
     linkedEmployees: {
       type: Array,
-      required: true,
+      required: false,
     },
     // TODO: [MERNSTACK-42] Create a new schema and model for stories. Stories will be linked to a company, to read on their profile page. Stories will contain a title, text, image, linked customer, linked employees, linked vendors, linked products, linked services, linked projects, and more.
 
     stories: {
       type: Array,
-      required: true,
+      required: false,
     },
     // TODO: [MERNSTACK-43] Create a new schema and model for projects.
     // TODO: [MERNSTACK-44] IMPORTANT! Find out how to use a "junction table" to link companies to projects. (many-to-many relationship)
     // "projects" is an array of project objects with an projectId.
     projects: {
       type: Array,
-      required: true,
+      required: false,
     },
     // TODO: [MERNSTACK-45] Create a new schema and model for products. If more than one company would associate to a product, they have to create a project together and work from there. The products from a project should also (optionally) be visible on the associated company profiles.
     // TODO: [MERNSTACK-46] A company product listing page should have a search bar, and a filter for industry, rating, price, and more.
@@ -260,7 +260,7 @@ const companySchema = new mongoose.Schema(
     // "products" is an array of product objects with an productId.
     products: {
       type: Array,
-      required: true,
+      required: false,
     },
     // TODO: Create a new schema and model for services. If more than one company would associate to a service, they have to create a project together and work from there. The services from a project should also (optionally) be visible on the associated company profiles.
     // TODO: Make it possible for users to contact a company for about a service with chat and video call (maybe chat and video calls should be a premium features, decide about this later).
@@ -270,12 +270,12 @@ const companySchema = new mongoose.Schema(
     // "services" is an array of service objects with an serviceId.
     services: {
       type: Array,
-      required: true,
+      required: false,
     },
     // TODO: Create a new schema and model for `appointment`. An appointment will be linked to a company or project, based on an appointmentId in the appointment model. Employees, users, vendors, products, a service and more can be linked to an appointment.
     appointments: {
       type: Array,
-      required: true,
+      required: false,
     },
     // TODO: Make it possible for employees to respond on service contact chat/video call requests, and make appointments with customers. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
     // TODO: Create message schema and model. Messages will be linked to a company, based on an messageId in the message model. This model should contain the message text, timestamp, and more. Messages will be linked to a company, based on an messageId in the message model. This is a one-to-many relationship, between company and messages OR project and messages. It should not be hard to switch between the `company messenger inbox` and the `project messenger inbox`.
@@ -288,12 +288,12 @@ const companySchema = new mongoose.Schema(
     // `messages` is an array of message objects with an messageId, corresponding userId, timestamp, and more.
     messages: {
       type: Array,
-      required: true,
+      required: false,
     },
     // TODO: GOOD IDEA: Maybe it is possible to save the agenda data in a separate agenda model and schema, and link the agenda to the company, project or user. (one-to-one relationship) And think about how to link the agenda  to `company`, `project`` and even `user` schemes and models.
     agenda: {
       type: Array,
-      required: true,
+      required: false,
     },
 
     // TODO: Create a new schema and model for projects. Projects will be linked to a company, based on an projectId in the project model. (and maybe userId's? or employeeId's)
@@ -306,7 +306,7 @@ const companySchema = new mongoose.Schema(
     // `projects` is an array of project objects with an projectId.
     projects: {
       type: Array,
-      required: true,
+      required: false,
     },
   },
   // enable timestamps
