@@ -14,6 +14,8 @@
 - [ ] [MERNSTACK-55] Create User model.
 - [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
 - [ ] [MERNSTACK-59] Create one-to-many relationship between Owner and Company in the Owner schema. This will allow to associate each Owner document with multiple Company documents.
+- [ ] Create React app using Vite.js.
+- [ ] Move Vite.js documentation from backend devdocs folder to frontend devdocs folder
 - [ ] [MERNSTACK-56] Create login and register functionality. Hash user password on register and compare hashed password on login. (see backend devdocs folder)
 - [ ] [MERNSTACK-60] Create `user` authentication and authorization functionality using JSON Web Token authorization. (see backend devdocs folder)
 - [ ] [MERNSTACK-58] When user is logged in, create a form to register a company and make user owner (+ admin).
@@ -22,6 +24,9 @@
 - [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers)
 - [ ] After user login, display link that will `navigate` (?with `useNavigate()`?) user to `my-companies` where companies will be listed and with a company register form. (see frontend devdocs folder)
 - [ ] [MERNSTACK-64] In the frontend, create a route to `/my-companies` where `user` companies will be listed.
+- [ ] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (Just to show that I know how to use Redux in React.) (see backend devdocs folder)
+- [ ] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
+- [ ]
 
 ## Everything else I know I need to do:
 
