@@ -25,7 +25,7 @@ import mongoose from "mongoose";
  */
 const companySchema = new mongoose.Schema(
   {
-    // TODO: Investigate the usefulness of generating an id myself.
+    // TODO: KAN-1 Investigate the usefulness of generating an id myself.
     name: {
       type: String,
       required: true,
@@ -56,7 +56,7 @@ const companySchema = new mongoose.Schema(
       required: true,
     },
     // "addressFormat" will be used to format the address in the correct way for the country and regional address format.
-    // TODO: Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
+    // TODO: KAN-2 Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
     // For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: null }, because there are not regional address format differences in the Netherlands.
     addressFormat: {
       type: Object,
@@ -91,7 +91,7 @@ const companySchema = new mongoose.Schema(
       required: true,
     },
     // TODO: Create a new schema and model for roles.
-    // TODO: Roles will be linked to a company (or project), based on an roleId in the role model.
+    // TODO: KAN-3 Roles will be linked to a company (or project), based on an roleId in the role model.
     // `roles` is an array of role objects with an roleId and role. For example: [{ roleId = "0", role = "admin" }, { roleId = "1", role = "owner" }, { roleId = "2", role = "employee" }, { roleId = "3", role = "vendor"}].
     roles: {
       type: Array,
