@@ -13,25 +13,15 @@ import mongoose from "mongoose";
  * then it is probably still in use and should not be deleted.
  * The timestamps option is not required, but it is useful.
  * @typedef {Object} CompanySchema
- * @property {string} name - The name of the company.
- * @property {country} - The country of the company billing address.
- * @property {Object} addressFormat - The address format of the company. For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: null }, because there are not regional address format differences in the Netherlands.
- * @property {Object} address - The address of the company. For example: { street: "Kerkstraat", number: "1", postalCode: "1234AB", city: "Amsterdam", region: "Noord-Holland", country: "NL" }
- * @property {string} city - The city of the company.
- * @property {string} country - The country of the company.
- * @property {string} email - The email of the company.
- * @property {string} phone - The phone number of the company.
- * @property {string} owner - The owner of the company.
- * @property {Date} createdAt - The date and time when the company document was created.
- * @property {Date} updatedAt - The date and time when the company document was last updated.
- * @property {string} slogan - The slogan of the company.
- * @property {string} description - The description of the company.
- * @property {string} industry - The industry of the company.
- * @property {boolean} isPublic - Is the company public or private at THIS moment?
- * @property {boolean} isPremium - Is the company a bronze, silver, gold or platinum premium company? Does it pay for extra features? True or false.
- * @property {string} premiumPackage - "bronze", "silver", "gold", "platinum" or "astronomical"?
- *
- * @property {boolean} isVendor - Is the company a vendor itself? True or false.
+ * @property {String} name - The name of the company.
+ * @property {String} slogan - The slogan of the company.
+ * @property {String} description - The short description of the company.
+ * @property {String} country - The country of the company billing address. For example: "NL" or "US".
+ * @property {String} region - The region of the company billing address. For example: "Texas".
+ * @property {String} addressFormat - The address format of the company based on local requirements.
+ * @property {String} address - The registered address of the company.
+ * @property {String} email - The email address of the company.
+ * TODO: Actualize, complete and correct this documentation on top of schema.
  */
 const companySchema = new mongoose.Schema(
   {
@@ -40,8 +30,28 @@ const companySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    // company email address for correspondence directed to the company with this application.
+    email: {
+      type: String,
+      required: true,
+    },
+    // company slogan
+    slogan: {
+      type: String,
+      required: false,
+    },
+    // Short description of the company.
+    description: {
+      type: String,
+      required: false,
+    },
     // Country of the company billing address. For example: "NL" for the Netherlands.
     country: {
+      type: String,
+      required: true,
+    },
+    // Region of the company billing address. For example: "Texas" for Texas in the US.
+    region: {
       type: String,
       required: true,
     },
@@ -156,16 +166,7 @@ const companySchema = new mongoose.Schema(
       type: Boolean,
       required: true,
     },
-    // company slogan
-    slogan: {
-      type: String,
-      required: false,
-    },
-    // Short description of the company.
-    description: {
-      type: String,
-      required: false,
-    },
+
     // TODO: Create a new schema and model for type of industries, so that the user can select from a list of industries, or add a new one.
     // TODO: Industries will be linked to a company, based on an industryId in the industry model.
     // TODO: Create collection of industries, and link the companies in a companies[] property, which should contain company id's of the companies.
@@ -293,8 +294,9 @@ const companySchema = new mongoose.Schema(
     // TODO: Make it possible for companies associated to projects to share revenue per service or product.
     // TODO: Make it possible to configure revenue sharing per product, per service based on from which profile page the product or service was ordered.
     // TODO: Make it possible to share revenue based on which company performs the service.
+    // `projects` is an array of project objects with an projectId.
     projects: {
-      type: Object,
+      type: Array,
       required: true,
     },
   },
