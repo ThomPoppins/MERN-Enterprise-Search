@@ -2,17 +2,3 @@ node_modules
 
 # Config file with database credentials
 backend/config.js
-
-# Github actions runner files
-.credentials
-.credentials_rsaparams
-_diag/
-actions-runner-win-x64-2.308.0.zip
-bin/
-config.cmd
-externals/
-run-helper.cmd.template
-run-helper.sh.template
-run.cmd
-.runner
-run-helper.cmd
