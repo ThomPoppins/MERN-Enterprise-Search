@@ -1,4 +1,4 @@
-# MERN_STACK_PROJ :rocket:
+# MERN_STACK_PROJ. :rocket:
 
 ## Application Description
 
