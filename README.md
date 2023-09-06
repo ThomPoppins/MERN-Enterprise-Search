@@ -1,5 +1,17 @@
 # MERN_STACK_PROJ. :rocket:
 
+- [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
+  - [Application Description](#application-description)
+    - [Frontend](#frontend)
+    - [Backend](#backend)
+    - [Many-to-Many Relationships](#many-to-many-relationships)
+- [Future functionalities:](#future-functionalities)
+  - [User Privilege Management and Admin Authorization](#user-privilege-management-and-admin-authorization)
+- [TODO:](#todo)
+- [Everything else for now:](#everything-else-for-now)
+
+Each section title is linked to the corresponding part of the document for easy navigation.
+
 ## Application Description
 
 Welcome to my FullStack JavaScript application built with Express.js on the backend and React with Redux on the frontend. This application leverages the power of Axios for seamless communication between the two layers. MongoDB serves as the database, and Mongoose is our trusted tool for connecting and interacting with it.
@@ -23,43 +35,6 @@ In the backend, I've set up RESTful API endpoints to create, read, update, and d
 One interesting aspect of this project is handling many-to-many relationships between companies and projects. In real-world scenarios, companies often take part in multiple projects, and a single project can involve multiple companies. To achieve this, I'll be using a `junction` collection in MongoDB.
 
 The main advantage of using a `junction` collection is that it simplifies the management of these relationships. For instance, consider a scenario where Company A and Company B collaborate on Project X. Instead of duplicating data or creating complex nested structures, the `junction` collection allows us to create a clear and efficient link between Company A, Company B, and Project X. This makes it easy to track participation and configure revenue sharing settings dynamically when all parties agree.
-
-### Feel free to explore this repository to see these concepts in action and dive into [my code](https://github.com/ThomPoppins/MERN_STACK_PROJ.)!
-
-## TODO:
-
-- [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
-- [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
-- [x] Finish basic Book schema and model. For faster functional development and testing purposes.
-- [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
-- [ ] [MERNSTACK-74] Set up `Company` model.
-- [ ] [MERNSTACK-65] Create a route to save a new Company document in the database.
-- [ ] [MERNSTACK-66] Create a route to get all Company documents from the database.
-- [ ] [MERNSTACK-67] Create a route to get a single Company document from the database.
-- [ ] [MERNSTACK-68] Create a route to update a single Company document in the database.
-- [ ] [MERNSTACK-69] Create a route to delete a single Company document from the database.
-- [ ] Actualize, complete and correct Company scheme documentation.
-- [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
-- [x] [MERNSTACK-70] Set up GET, POST, PUT and DELETE Book server routes.
-- [ ] [MERNSTACK-51] Create Jira tickets for all TODO's.
-- [ ] [MERNSTACK-53] Set up GET, POST, PUT and DELETE Company server routes.
-- [ ] [MERNSTACK-55] Create User model.
-- [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
-- [ ] [MERNSTACK-59] Create one-to-many relationship between Owner and Company in the Owner schema. This will allow to associate each Owner document with multiple Company documents.
-- [ ] Create React app using Vite.js.
-- [ ] Move Vite.js documentation from backend devdocs folder to frontend devdocs folder
-- [ ] [MERNSTACK-56] Create login and register functionality. Hash user password on register and compare hashed password on login. (see backend devdocs folder)
-- [ ] [MERNSTACK-60] Create `user` authentication and authorization functionality using JSON Web Token authorization. (see backend devdocs folder)
-- [ ] [MERNSTACK-58] When user is logged in, create a form to register a company and make user owner. Owner has admin rights at first when creating his account and registering his company.
-- [ ]
-- [ ] [MERNSTACK-61] Create `junction` table for many-to-many relationship between `owners` and `companies`. (see backend devdocs folder)
-- [ ] [MERNSTACK-62] Create `junction` table between `Company` and `Project`. This table will be used because of the many-to-many relationship and additional properties that are needed to link a company to a project. (see backend devdocs folder)
-- [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers)
-- [ ] After user login, display link that will `navigate` (?with `useNavigate()`?) user to `my-companies` where companies will be listed and with a company register form. (see frontend devdocs folder)
-- [ ] [MERNSTACK-64] In the frontend, create a route to `/my-companies` where `user` companies will be listed.
-- [ ] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (Just to show that I know how to use Redux in React.) (see backend devdocs folder)
-- [ ] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
-- [ ] Break down all ideas in the `Future functionalities:` section below into smaller tasks and create Jira tickets for them.
 
 # Future functionalities:
 
@@ -96,7 +71,44 @@ My application offers robust user privilege management with a seamless admin aut
 
 My application prioritizes both security and user-friendliness, empowering company owners to efficiently manage their admin privileges while maintaining a high level of control and awareness.
 
-## Everything else I know I need to do:
+***Feel free to explore this repository to see these concepts in action and dive into [my code](https://github.com/ThomPoppins/MERN_STACK_PROJ.)***
+
+# TODO:
+
+- [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
+- [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
+- [x] Finish basic Book schema and model. For faster functional development and testing purposes.
+- [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
+- [x] [MERNSTACK-74] Set up `Company` model.
+- [ ] [MERNSTACK-65] Create a route to save a new Company document in the database.
+- [ ] [MERNSTACK-66] Create a route to get all Company documents from the database.
+- [ ] [MERNSTACK-67] Create a route to get a single Company document from the database.
+- [ ] [MERNSTACK-68] Create a route to update a single Company document in the database.
+- [ ] [MERNSTACK-69] Create a route to delete a single Company document from the database.
+- [ ] Actualize, complete and correct Company scheme documentation.
+- [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
+- [x] [MERNSTACK-70] Set up GET, POST, PUT and DELETE Book server routes.
+- [ ] [MERNSTACK-51] Create Jira tickets for all TODO's.
+- [x] [MERNSTACK-53] Create GET, POST, PUT and DELETE Company server routes.
+- [ ] [MERNSTACK-55] Create User model.
+- [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
+- [ ] [MERNSTACK-59] Create one-to-many relationship between Owner and Company in the Owner schema. This will allow to associate each Owner document with multiple Company documents.
+- [ ] Create React app using Vite.js.
+- [ ] Move Vite.js documentation from backend devdocs folder to frontend devdocs folder
+- [ ] [MERNSTACK-56] Create login and register functionality. Hash user password on register and compare hashed password on login. (see backend devdocs folder)
+- [ ] [MERNSTACK-60] Create `user` authentication and authorization functionality using JSON Web Token authorization. (see backend devdocs folder)
+- [ ] [MERNSTACK-58] When user is logged in, create a form to register a company and make user owner. Owner has admin rights at first when creating his account and registering his company.
+- [ ]
+- [ ] [MERNSTACK-61] Create `junction` table for many-to-many relationship between `owners` and `companies`. (see backend devdocs folder)
+- [ ] [MERNSTACK-62] Create `junction` table between `Company` and `Project`. This table will be used because of the many-to-many relationship and additional properties that are needed to link a company to a project. (see backend devdocs folder)
+- [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers)
+- [ ] After user login, display link that will `navigate` (?with `useNavigate()`?) user to `my-companies` where companies will be listed and with a company register form. (see frontend devdocs folder)
+- [ ] [MERNSTACK-64] In the frontend, create a route to `/my-companies` where `user` companies will be listed.
+- [ ] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (Just to show that I know how to use Redux in React.) (see backend devdocs folder)
+- [ ] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
+- [ ] Break down all ideas in the `Future functionalities:` section below into smaller tasks and create Jira tickets for them.
+
+# Everything else for now:
 
 > **Note**: All TODO's are linked to Jira tickets, so that I can keep track of everything I have to do.
 
