@@ -37,6 +37,10 @@ const companySchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    phone: {
+      type: String,
+      required: false,
+    },
     // company slogan
     slogan: {
       type: String,
@@ -45,23 +49,6 @@ const companySchema = new mongoose.Schema(
     // Short description of the company.
     description: {
       type: String,
-      required: false,
-    },
-    // Country of the company billing address. For example: "NL" for the Netherlands.
-    country: {
-      type: String,
-      required: false,
-    },
-    // Region of the company billing address. For example: "Texas" for Texas in the US.
-    region: {
-      type: String,
-      required: false,
-    },
-    // "addressFormat" will be used to format the address in the correct way for the country and regional address format.
-    // TODO: [MERNSTACK-13] Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
-    // For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: null }, because there are not regional address format differences in the Netherlands.
-    addressFormat: {
-      type: Object,
       required: false,
     },
     // Registered address of the company.
@@ -76,7 +63,23 @@ const companySchema = new mongoose.Schema(
       type: Object,
       required: false,
     },
-    // TODO: [MERNSTACK-14] Create a new schema and model for user and one for owner.
+    // "addressFormat" will be used to format the address in the correct way for the country and regional address format.
+    // TODO: [MERNSTACK-13] Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
+    // For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: "" }, because there are not regional address format differences in the Netherlands.
+    addressFormat: {
+      type: Object,
+      required: false,
+    },
+    // Country of the company billing address. For example: "NL" for the Netherlands.
+    country: {
+      type: String,
+      required: false,
+    },
+    // Region of the company billing address. For example: "Texas" for Texas in the US.
+    region: {
+      type: String,
+      required: false,
+    },
     // TODO: [MERNSTACK-15] Save the name , email, phone, and role related to the company as properties in a new user model. (to be created)
     // TODO: [MERNSTACK-16] Owners  will be linked to a company, based on an ownerId in the owner model.
     // TODO: [MERNSTACK-17] "owners" array should contain owner objects with an userId.
@@ -84,23 +87,24 @@ const companySchema = new mongoose.Schema(
       type: Array,
       required: false,
     },
-    // TODO: [MERNSTACK-18] Create a new schema and model for admin users.
+    // TODO: [MERNSTACK-18] Create a new schema and model for companyAdmin users.
     // TODO: [MERNSTACK-19] Admin users will be linked to a company, based on an adminUserId in the adminUser model.
     // TODO: [MERNSTACK-20] `admins` array should contain admin objects with an adminUserId. (For example: { adminUserId = "1234", role = "owner" })
     companyAdmins: {
       type: Array,
       required: false,
     },
-    // TODO: [MERNSTACK-21] Create a new schema and model for roles.
-    // TODO: [MERNSTACK-22] Roles will be linked to a company (or project), based on an roleId in the role model.
-    // `roles` is an array of role objects with an roleId and role. For example: [{ roleId = "0", role = "admin" }, { roleId = "1", role = "owner" }, { roleId = "2", role = "employee" }, { roleId = "3", role = "vendor"}].
-    roles: {
-      type: Array,
-      required: false,
-    },
+    // TODO: [MERNSTACK-21] Create a new schema and model for Role with an roleId and role. For example: { roleId: { type: Number, required: true }, role: { type: String, required: true } } (roleId = 1, role = "owner") (roleId = 2, role = "admin") (roleId = 3, role = "employee") (roleId = 4, role = "vendor") (roleId = 5, role = "customer") (roleId = 6, role = "guest")
+    // TODO: [MERNSTACK-22] Roles will be linked to company associated users like employees, vendors, customers, and more, based on an roleId in the role model.
+    // TODO: [MERNSTACK-71] companyModel.js: Create `junction` table between companies and the role users have in this many-to-many relationship with the companies. Users can get assigned more than 1 role per company.
+    // TODO: [MERNSTACK-72] Reconsider `employees` field if the role `junction` table is not the right place to store the `employee` data.
+    // employees: {
+    //   type: Array,
+    //   required: false,
+    // },
     // TODO: [MERNSTACK-23] Create a new schema and model for address.
     // TODO: [MERNSTACK-24] Locations will be linked to a company, based on an addressId in the address model.
-    // TODO: [MERNSTACK-25] "locations" array should contain address objects with all address fields an addressId.
+    // TODO: [MERNSTACK-25] "locations" array should contain address objects with all address field properties and addressId compatible with the configured addressFormat for the country and region.
     locations: {
       type: Array,
       required: false,
@@ -144,95 +148,84 @@ const companySchema = new mongoose.Schema(
     //     "taxOfficeContactPersonBirthDate": true,
     //     }
     // }
+    // TODO: Create department schema and model. Company associated users (with roles) can be linked to a department, based on a userId OR maybe with an employeeId.
+    // `departments` is an array of objects with an departmentId. Many departments can be linked to a company. many-to-one relationship.
+    departments: {
+      type: Array,
+      required: false,
+    },
     // TODO: [MERNSTACK-28] Find out how to validate if the correct business and payment details are being used and the REAL "owner" is the only one authorized to change these details.
-    // Object of smaller configurable payment details like VAT number, IBAN, BIC, kvkNumber etc.
-    businessConfigFormat: {
+    // Object of configurable settings that `company` owners and admins can change.
+    businessConfig: {
       type: Object,
       required: false,
     },
+    // TODO:[MERNSTACK-75] Create paymentMethod schema and model.
     // `paymentDetails` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the payment details for that country or region.
-    // for example: { vatNumber: "NL123456789B01", iban: "NL12ABNA0123456789", creditCard: { number: "", securityCode: "" }, bic: "ABNANL2A", kvkNumber: "12345678", btwNumber: "NL123456789B01", taxNumber: "123456789", taxOffice: "Belastingdienst", taxOfficeAddress: "Parnassusweg 5", taxOfficePostalCode: "1077 DC", taxOfficeCity: "Amsterdam", taxOfficeCountry: "NL", taxOfficePhone: "0800-0543", taxOfficeEmail: ""}
+    // For example: { paymentMethodId: 0, vatNumber: "", iban: "", creditCard: { number: "", securityCode: "" }, bic: "", kvkNumber: "", taxNumber: "", taxOffice: "Belastingdienst", taxOfficeAddress: "Parnassusweg 5", taxOfficePostalCode: "1077 DC", taxOfficeCity: "Amsterdam", taxOfficeCountry: "NL", taxOfficePhone: "", taxOfficeEmail: "", }
     paymentDetails: {
       type: Object,
       required: false,
     },
     // The year the company was started.
-    startedInYear: {
+    startYear: {
       type: Number,
       required: false,
     },
     // Is the company active at THIS moment? True or false.
-    stillActive: {
+    active: {
       type: Boolean,
       required: false,
     },
-    // TODO: [MERNSTACK-29] Create a new schema and model for company types. Company types will be linked to a company, based on an companyTypeId in the companyType model.
-    // `companyTypeId` is the id of the company type in the corresponding company type model. This may be removed if not needed.
-    companyTypeId: {
-      type: String,
-      required: false,
-    },
-
-    // TODO: [MERNSTACK-30] Create a new schema and model for type of industries, so that the user can select from a list of industries, or add a new one.
-    // TODO: [MERNSTACK-31] Industries will be linked to a company, based on an industryId in the industry model.
-    // TODO: [MERNSTACK-32] Create collection of industries, and link the companies in a companies[] property, which should contain company id's of the companies.
-    // The id of the industry the company is in. Corresponds to the industry id in the industry model.
-    industryId: {
+    // TODO: [MERNSTACK-29] Create a new schema and model for Industry. Industry will be linked to a company, based on an industryId in the industry model.
+    // TODO: [MERNSTACK-76] RECONSIDER: Maybe a `junction` table between companies and the industries they are in is the right place to store necessary data for the specific companyIndustry relationships This extra data might be data like metadata that can be used to improve the result listing order of companies when searched by user in frontend.
+    industry: {
       type: String,
       required: false,
     },
     // Is the company public or private at THIS moment?
     // TODO: [MERNSTACK-33] Make it possible to change this value in the user/owner settings.
-    isPublic: {
+    public: {
       type: Boolean,
       required: false,
     },
-    // TODO: [MERNSTACK-34] Create review schema and model.
     // TODO: [MERNSTACK-35] Reviews will be linked to a company, based on an reviewId in the review model. This model should contain the review text, rating, reviewer, timestamp and maybe more.
     // TODO: [MERNSTACK-36] "reviews" array should contain review objects with an reviewId.
     reviews: {
       type: Array,
       required: false,
     },
-    // Rating of the company. Will be calculated based on the reviews property "ratings". This will only show on the profile page when some (10 or more) reviews with ratings are present. (reviews.length > 10 maybe)
+    // Rating property would be the result of calculations based on the ratings given within together with the reviews (or given after being send a mail to user, asking them to rate the `service` or `product`.
     rating: {
       type: Float,
       required: false,
     },
     // Users that want to be affiliated with the company so they can profit of special company's benefits in exchange for a review/rating or something else.
-    linkedCustomers: {
-      type: Object,
-      required: false,
-    },
-    // Is the company a bronze, silver, gold or platinum premium company? Does it pay for extra features? True or false.
-    isPremium: {
-      type: Boolean,
-      required: false,
-    },
-    // "premiumKind" is "bronze", "silver", "gold", "platinum" or "astronomical"? TODO: Decide on the premium names, which features they have, and how much they cost and how to pay for them.
-    // TODO: [MERNSTACK-37] Create a new schema and model for premium types. Premium types will be linked to a company, based on an premiumTypeId in the premiumType model.
-    // `premiumTypeId` is the id of the premium type in the corresponding premium type model.
-    premiumTypeId: {
-      type: String,
-      required: false,
-    },
-    // TODO: [MERNSTACK-38] Create a new schema and model for vendors. Decide what kind of vendors there are, and what properties they need. Vendors are the business to business users and can possibly be linked to a company, based on an vendorId in the vendor model.
-    // TODO: [MERNSTACK-39] Decide what kind of functionalities and authorizations vendors have.
-    // Is this company a vendor itself? True or false.
-    isVendor: {
-      type: Boolean,
-      required: false,
-    },
-    // "associatedVendors" is an array of vendor objects with an vendorId (and userId?).
-    associatedVendors: {
+    // `customers` is an array of objects with userId
+    customers: {
       type: Array,
       required: false,
     },
-    // TODO: [MERNSTACK-40] Create a new schema and model for employees.
-
+    // "premium" will be the premiumTypeName "none" "bronze", "silver", "gold" or "platinum" corresponding with the premiumType model? TODO: Decide on the premium names, which features they have, and how much they cost, what you get for every premium kind and how to pay/bill them.
+    // `premium` is the id of the premium type in the corresponding premium type model.
+    premium: {
+      type: String,
+      required: false,
+    },
+    // Is this company a vendor? This will be a object containing the vendorId corresponding with the Vendor model. (one-to-one relationship)
+    vendor: {
+      type: Object,
+      required: false,
+    },
+    // TODO: Create `junction` table between companies and vendors. (many-to-many relationship)
+    // associatedVendors: {
+    //   type: Array,
+    //   required: false,
+    // },
+    // TODO: [MERNSTACK-40] Create a new schema and model `Employee`
     // TODO: [MERNSTACK-41] Employees will be linked to a company, based on an employeeId in the employee model. (and userId?)
-    // Linked employees.
-    linkedEmployees: {
+    // `employees` is an array of employee objects with an employeeId corresponding with the `id` in the Employee model.
+    employees: {
       type: Array,
       required: false,
     },

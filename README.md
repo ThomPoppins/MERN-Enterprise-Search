@@ -1,14 +1,18 @@
-# MERN Stack Project
+# :computer: MERN Stack Project :rocket:
 
 - [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
 - [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
 - [x] Finish basic Book schema and model. For faster functional development and testing purposes.
 - [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
-- [x] Set up company scheme.
-- [x] Set up company model.
+- [ ] [MERNSTACK-74] Set up `Company` model.
+- [ ] [MERNSTACK-65] Create a route to save a new Company document in the database.
+- [ ] [MERNSTACK-66] Create a route to get all Company documents from the database.
+- [ ] [MERNSTACK-67] Create a route to get a single Company document from the database.
+- [ ] [MERNSTACK-68] Create a route to update a single Company document in the database.
+- [ ] [MERNSTACK-69] Create a route to delete a single Company document from the database.
 - [ ] Actualize, complete and correct Company scheme documentation.
 - [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
-- [ ] Set up GET, POST, PUT and DELETE Book server routes.
+- [x] [MERNSTACK-70] Set up GET, POST, PUT and DELETE Book server routes.
 - [ ] [MERNSTACK-51] Create Jira tickets for all TODO's.
 - [ ] [MERNSTACK-53] Set up GET, POST, PUT and DELETE Company server routes.
 - [ ] [MERNSTACK-55] Create User model.
@@ -18,7 +22,8 @@
 - [ ] Move Vite.js documentation from backend devdocs folder to frontend devdocs folder
 - [ ] [MERNSTACK-56] Create login and register functionality. Hash user password on register and compare hashed password on login. (see backend devdocs folder)
 - [ ] [MERNSTACK-60] Create `user` authentication and authorization functionality using JSON Web Token authorization. (see backend devdocs folder)
-- [ ] [MERNSTACK-58] When user is logged in, create a form to register a company and make user owner (+ admin).
+- [ ] [MERNSTACK-58] When user is logged in, create a form to register a company and make user owner. Owner has admin rights at first when creating his account and registering his company.
+- [ ]
 - [ ] [MERNSTACK-61] Create `junction` table for many-to-many relationship between `owners` and `companies`. (see backend devdocs folder)
 - [ ] [MERNSTACK-62] Create `junction` table between `Company` and `Project`. This table will be used because of the many-to-many relationship and additional properties that are needed to link a company to a project. (see backend devdocs folder)
 - [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers)
@@ -26,7 +31,11 @@
 - [ ] [MERNSTACK-64] In the frontend, create a route to `/my-companies` where `user` companies will be listed.
 - [ ] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (Just to show that I know how to use Redux in React.) (see backend devdocs folder)
 - [ ] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
-- [ ]
+- [ ] Break down all ideas in the `Future functionalities:` section below into smaller tasks and create Jira tickets for them.
+
+### Future functionalities:
+
+**BREAK DOWN:** After user becomes `owner` by registering `company`, in his account settings there will be a setting saying `use admin rights` or something like that will be disabled by default. When the `owner` wants to do something what should be done with admin authorization, he can enable this setting first and then do whatever he needs to do. If `owner` has not executes `admin` actions for a while, remember to disable admin rights and after that remember him/her daily. Important admin configurations that possibly can have big impact, the frontend should always WARN the `admin` user, prompt to confirm the action. After executing the admin authorized action, prompt to disable admin rights directly with a switch off button in the prompt, so `admin` user does not have to go back to the settings to disable which feel user friendly and secure. Of course `admin` user can also close prompt by clicking on a `Continue` button that will be red if `admin rights` is enabled and green if disabled.
 
 ## Everything else I know I need to do:
 
