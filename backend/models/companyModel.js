@@ -222,8 +222,6 @@ const companySchema = new mongoose.Schema(
     //   type: Array,
     //   required: false,
     // },
-    // TODO: [MERNSTACK-40] Create a new schema and model `Employee`
-    // TODO: [MERNSTACK-41] Employees will be linked to a company, based on an employeeId in the employee model. (and userId?)
     // `employees` is an array of employee objects with an employeeId corresponding with the `id` in the Employee model.
     employees: {
       type: Array,
