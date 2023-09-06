@@ -4,11 +4,7 @@
 
 Welcome to my FullStack JavaScript application built with Express.js on the backend and React with Redux on the frontend. This application leverages the power of Axios for seamless communication between the two layers. MongoDB serves as the database, and Mongoose is our trusted tool for connecting and interacting with it.
 
-### Backend
-
-In the backend, I've set up RESTful API endpoints to create, read, update, and delete documents from collections. These collections are defined and configured in the `/backend/models` folder, ensuring a structured and organized approach to data management.
-
-### Frontend
+## Frontend
 
 On the frontend, I've chosen React for building user interfaces and Redux for state management. For those less familiar with these technologies, here's why Redux is a game-changer:
 
@@ -18,7 +14,11 @@ On the frontend, I've chosen React for building user interfaces and Redux for st
 
 **Dispatch actions from anywhere:** Redux allows us to dispatch actions from anywhere within our application. This means that you can trigger changes to the data store from any component, making it incredibly flexible and responsive to user interactions.
 
-## Many-to-Many Relationships
+## Backend
+
+In the backend, I've set up RESTful API endpoints to create, read, update, and delete documents from collections. These collections are defined and configured in the `/backend/models` folder, ensuring a structured and organized approach to data management.
+
+### Many-to-Many Relationships
 
 One interesting aspect of this project is handling many-to-many relationships between companies and projects. In real-world scenarios, companies often take part in multiple projects, and a single project can involve multiple companies. To achieve this, I'll be using a `junction` collection in MongoDB.
 
