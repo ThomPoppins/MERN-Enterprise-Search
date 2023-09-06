@@ -1,26 +1,54 @@
-### GitHub Copilot: To use Redux in a React application, you need to follow these steps:
+### GitHub Copilot: Om Redux te implementeren in een React-applicatie voor state management, moet je de volgende stappen volgen:
 
-1. Install the required packages:
+1. Installeer de vereiste pakketten:
 
    ```
    npm install redux react-redux
    ```
 
-2. Create a Redux store:
+2. Maak een Redux-reducerfunctie die de initiële staat van de applicatie definieert en de acties afhandelt die de staat van de applicatie wijzigen. Hier is een voorbeeld van een eenvoudige teller-reducer:
+
+   ```javascript
+   const initialState = {
+     count: 0,
+   };
+
+   function counterReducer(state = initialState, action) {
+     switch (action.type) {
+       case "INCREMENT":
+         return { ...state, count: state.count + 1 };
+       case "DECREMENT":
+         return { ...state, count: state.count - 1 };
+       default:
+         return state;
+     }
+   }
+
+   export default counterReducer;
+   ```
+
+   In dit voorbeeld definieert de `counterReducer`-functie de initiële staat van de applicatie als `{ count: 0 }`. De reducerfunctie handelt ook twee acties af: `INCREMENT` en `DECREMENT`, die de `count`-waarde van de staat van de applicatie respectievelijk verhogen en verlagen.
+
+3. Maak een Redux-winkel met behulp van de `createStore`-functie van Redux en de reducerfunctie die je hebt gemaakt. Hier is een voorbeeld:
 
    ```javascript
    import { createStore } from "redux";
-   import rootReducer from "./reducers";
+   import counterReducer from "./reducers/counterReducer";
 
-   const store = createStore(rootReducer);
+   const store = createStore(counterReducer);
+
+   export default store;
    ```
 
-   In this example, the `createStore()` function from the `redux` package is used to create a Redux store. The `rootReducer` is a function that combines all the reducers in your application.
+   In dit voorbeeld maakt de `createStore`-functie van Redux een Redux-winkel met de `counterReducer`-functie als reducer. De gemaakte winkel wordt geëxporteerd als de standaard export van het bestand.
 
-3. Wrap your React application with the `Provider` component from the `react-redux` package:
+4. Wikkel je React-applicatie in een `Provider`-component van `react-redux` en geef de Redux-winkel door als een eigenschap. Hier is een voorbeeld:
 
    ```javascript
+   import React from "react";
+   import ReactDOM from "react-dom";
    import { Provider } from "react-redux";
+   import store from "./store";
    import App from "./App";
 
    ReactDOM.render(
@@ -31,126 +59,66 @@
    );
    ```
 
-   In this example, the `Provider` component is used to provide the Redux store to the entire React application.
+   In dit voorbeeld wordt de `Provider`-component van `react-redux` gebruikt om de Redux-winkel door te geven aan de hele React-applicatie. De `store`-variabele wordt geïmporteerd uit het `store.js`-bestand waar de Redux-winkel is gemaakt.
 
-4. Create a Redux reducer:
-
-   ```javascript
-   const initialState = {
-     counter: 0,
-   };
-
-   function rootReducer(state = initialState, action) {
-     switch (action.type) {
-       case "INCREMENT":
-         return { ...state, counter: state.counter + 1 };
-       case "DECREMENT":
-         return { ...state, counter: state.counter - 1 };
-       default:
-         return state;
-     }
-   }
-   ```
-
-   In this example, the `rootReducer` function is a Redux reducer that handles two actions: `INCREMENT` and `DECREMENT`. The `initialState` object defines the initial state of the Redux store.
-
-5. Use the `useSelector` and `useDispatch` hooks to access the Redux store and dispatch actions:
+5. Gebruik de `connect`-functie van `react-redux` om je React-componenten te verbinden met de Redux-winkel en de staat van de applicatie te lezen en te wijzigen. Hier is een voorbeeld:
 
    ```javascript
-   import { useSelector, useDispatch } from "react-redux";
+   import React from "react";
+   import { connect } from "react-redux";
 
-   function Counter() {
-     const counter = useSelector((state) => state.counter);
-     const dispatch = useDispatch();
-
-     const handleIncrement = () => {
-       dispatch({ type: "INCREMENT" });
-     };
-
-     const handleDecrement = () => {
-       dispatch({ type: "DECREMENT" });
-     };
-
+   function Counter(props) {
      return (
        <div>
-         <p>Counter: {counter}</p>
-         <button onClick={handleIncrement}>Increment</button>
-         <button onClick={handleDecrement}>Decrement</button>
+         <p>Count: {props.count}</p>
+         <button onClick={props.increment}>Increment</button>
+         <button onClick={props.decrement}>Decrement</button>
        </div>
      );
    }
+
+   function mapStateToProps(state) {
+     return {
+       count: state.count,
+     };
+   }
+
+   function mapDispatchToProps(dispatch) {
+     return {
+       increment: () => dispatch({ type: "INCREMENT" }),
+       decrement: () => dispatch({ type: "DECREMENT" }),
+     };
+   }
+
+   export default connect(mapStateToProps, mapDispatchToProps)(Counter);
    ```
 
-   In this example, the `useSelector` hook is used to access the `counter` state from the Redux store. The `useDispatch` hook is used to get a reference to the `dispatch` function, which can be used to dispatch actions to the Redux store.
+   In dit voorbeeld wordt de `connect`-functie van `react-redux` gebruikt om de `Counter`-component te verbinden met de Redux-winkel. De `mapStateToProps`-functie wordt gebruikt om de `count`-waarde van de staat van de applicatie te lezen en door te geven als een eigenschap aan de `Counter`-component. De `mapDispatchToProps`-functie wordt gebruikt om de `increment`- en `decrement`-acties door te geven aan de `Counter`-component als eigenschappen.
 
-By following these steps, you can use Redux in your React application to manage the state of your application in a predictable and scalable way.
+Door deze stappen te volgen, kun je Redux implementeren in een React-applicatie voor state management.
 
-### GitHub Copilot: In a React application that uses Redux, you should create the Redux store in a separate file, typically called `store.js` or `configureStore.js`. This file should export the created store so that it can be used throughout the application.
+### GitHub Copilot: Natuurlijk! Hier is een voorbeeld van hoe je de bestanden kunt structureren om Redux te implementeren in een React-applicatie:
 
-Here's an example of how you can create a Redux store in a separate file:
-
-```javascript
-import { createStore } from "redux";
-import rootReducer from "./reducers";
-
-const store = createStore(rootReducer);
-
-export default store;
+```
+src/
+├── actions/
+│   └── counterActions.js
+├── components/
+│   └── Counter.js
+├── reducers/
+│   └── counterReducer.js
+├── store.js
+└── App.js
 ```
 
-In this example, the `createStore()` function from the `redux` package is used to create a Redux store. The `rootReducer` is a function that combines all the reducers in your application. The created store is then exported as the default export of the file.
+- `actions/`: Deze map bevat de actiebestanden die Redux-acties definiëren. In het voorbeeld van mijn vorige antwoord zou je hier een `counterActions.js`-bestand kunnen hebben dat de `increment`- en `decrement`-acties definieert.
 
-Once you have created the Redux store, you can use it in your React application by wrapping your root component with the `Provider` component from the `react-redux` package. Here's an example:
+- `components/`: Deze map bevat de React-componenten van de applicatie. In het voorbeeld van mijn vorige antwoord zou je hier een `Counter.js`-bestand kunnen hebben dat de `Counter`-component definieert.
 
-```javascript
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import store from "./store";
-import App from "./App";
+- `reducers/`: Deze map bevat de reducerbestanden die de staat van de applicatie beheren. In het voorbeeld van mijn vorige antwoord zou je hier een `counterReducer.js`-bestand kunnen hebben dat de `counter`-staat beheert.
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById("root")
-);
-```
+- `store.js`: Dit bestand bevat de Redux-winkel die de staat van de applicatie beheert. In het voorbeeld van mijn vorige antwoord zou je hier de Redux-winkel kunnen maken en de reducer importeren.
 
-In this example, the `Provider` component is used to provide the Redux store to the entire React application. The `store` variable is imported from the `store.js` file where the Redux store was created.
+- `App.js`: Dit bestand bevat de hoofdcomponent van de applicatie. In het voorbeeld van mijn vorige antwoord zou je hier de `Counter`-component kunnen renderen.
 
-By creating the Redux store in a separate file and exporting it, you can ensure that the store is created only once and can be easily accessed throughout your application.
-
-### GitHub Copilot: To combine two or more reducers in a Redux application, you can use the `combineReducers()` function from the `redux` package. Here's an example of how you can combine two reducers:
-
-```javascript
-import { combineReducers } from "redux";
-import counterReducer from "./counterReducer";
-import todoReducer from "./todoReducer";
-
-const rootReducer = combineReducers({
-  counter: counterReducer,
-  todo: todoReducer,
-});
-
-export default rootReducer;
-```
-
-In this example, the `combineReducers()` function is used to combine two reducers: `counterReducer` and `todoReducer`. The resulting combined reducer is then exported as the default export of the file.
-
-The `combineReducers()` function takes an object as an argument, where each key-value pair represents a slice of the application state and the corresponding reducer function that manages that slice of state. In this example, the `counter` slice of state is managed by the `counterReducer` function, and the `todo` slice of state is managed by the `todoReducer` function.
-
-Once you have combined your reducers, you can use the resulting combined reducer to create your Redux store. Here's an example:
-
-```javascript
-import { createStore } from "redux";
-import rootReducer from "./reducers";
-
-const store = createStore(rootReducer);
-
-export default store;
-```
-
-In this example, the `createStore()` function from the `redux` package is used to create a Redux store. The `rootReducer` is the combined reducer that was created using the `combineReducers()` function.
-
-By combining reducers in this way, you can manage different slices of your application state with different reducer functions, and then combine them into a single reducer that can be used to create your Redux store.
+Je kunt deze bestanden structureren zoals je wilt, maar dit is een veelgebruikte structuur voor het implementeren van Redux in een React-applicatie.

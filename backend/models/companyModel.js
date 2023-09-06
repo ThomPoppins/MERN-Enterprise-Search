@@ -76,7 +76,6 @@ const companySchema = new mongoose.Schema(
       type: Object,
       required: false,
     },
-
     // TODO: [MERNSTACK-14] Create a new schema and model for user and one for owner.
     // TODO: [MERNSTACK-15] Save the name , email, phone, and role related to the company as properties in a new user model. (to be created)
     // TODO: [MERNSTACK-16] Owners  will be linked to a company, based on an ownerId in the owner model.
@@ -106,7 +105,6 @@ const companySchema = new mongoose.Schema(
       type: Array,
       required: false,
     },
-
     // Format of which payment options and details are required for the country or region.
     // `businessConfigFormat` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the required payment details for that country or region.
     // The required payment details will be booleans, true or false.
@@ -239,7 +237,6 @@ const companySchema = new mongoose.Schema(
       required: false,
     },
     // TODO: [MERNSTACK-42] Create a new schema and model for stories. Stories will be linked to a company, to read on their profile page. Stories will contain a title, text, image, linked customer, linked employees, linked vendors, linked products, linked services, linked projects, and more.
-
     stories: {
       type: Array,
       required: false,
