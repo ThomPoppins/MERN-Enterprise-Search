@@ -10,9 +10,16 @@ app.use(express.json());
 
 // GET method available at "/".
 app.get("/", (request, response) => {
-  response.status(200).send("Welcome to my Express.js backend server!");
+  response
+    .status(200)
+    .send(
+      "<div style='padding: 30px; width: 100vw; height: 100vh; background-color: black; position:fixed; top: 0; left: 0;'>" +
+        "<h1 style='color: white;'>Welcome to my MERN stack backend server with Express.js!</h1>" +
+        "</div>"
+    );
 });
 
+// Use routers from /routes folder
 app.use("/books", booksRoute);
 
 // Connect to MongoDB database
