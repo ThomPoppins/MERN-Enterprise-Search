@@ -148,7 +148,6 @@ const companySchema = new mongoose.Schema(
     //     "taxOfficeContactPersonBirthDate": true,
     //     }
     // }
-    // TODO: Create department schema and model. Company associated users (with roles) can be linked to a department, based on a userId OR maybe with an employeeId.
     // `departments` is an array of objects with an departmentId. Many departments can be linked to a company. many-to-one relationship.
     departments: {
       type: Array,
@@ -217,7 +216,7 @@ const companySchema = new mongoose.Schema(
       type: Object,
       required: false,
     },
-    // TODO: Create `junction` table between companies and vendors. (many-to-many relationship)
+    // TODO: [MERNSTACK-80] Create `junction` table between companies and vendors. (many-to-many relationship)
     // associatedVendors: {
     //   type: Array,
     //   required: false,
@@ -281,7 +280,6 @@ const companySchema = new mongoose.Schema(
       type: Array,
       required: false,
     },
-
     // TODO: [MERNSTACK-63] Create a new schema and model for projects. Projects will be linked to a company, based on an projectId in the project model. (and maybe userId's? or employeeId's)
     // TODO: [MERNSTACK-64] Make it possible to create and design a project profile page, with a storyline of stories linked to companies, employees, associated customers, reviews, ratings and more. Authorize employees to change project settings. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
     // TODO: [MERNSTACK-65] Create functionalities for companies to automatically share costs for premium features, based on a percentage all associated companies have to agree on for this to work.
@@ -298,7 +296,6 @@ const companySchema = new mongoose.Schema(
   // enable timestamps
   { timestamps: true }
 );
-
 // Company model:
 // Create a new model using the companySchema.
 // A model is a class with which we construct documents.
