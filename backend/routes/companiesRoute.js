@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Route to save a new Company
 router.post("/", async (request, response) => {
-  // Create a new book document using the Book model
+  // Create a new book document using the Company model
   try {
     if (!request.body.name) {
       // Send status 400 response if data fields are missing and a (error) message to inform the client.
@@ -17,7 +17,7 @@ router.post("/", async (request, response) => {
     // TODO: Check if the book already exists in the database. Hint: Use the findOne method and consider using `unique: true` in the book schema.
     // TODO: If the book already exists, send status 409 response and a (error) message to inform the client.
 
-    // Create a new book document using the Book model and the properties from the request body
+    // Create a new book document using the Company model and the properties from the request body
     // TODO: Add all properties assigned in the schema and request body, check their value to be true
     const newCompany = {
       name: request.body.name,
@@ -67,32 +67,35 @@ router.post("/", async (request, response) => {
       rating: 0,
       customers: request.body.customers ? request.body.customers : [],
       premium: request.body.premium ? request.body.premium : "none",
+      vendor: request.body.vendor ? request.body.vendor : { vendorId: "" },
+      employees: request.body.employees ? request.body.employees : [],
+      stories: request.body.stories ? request.body.stories : [],
     };
 
-    // Create a new book document using the Book model and the properties from the request body
-    const book = await Book.create(newBook);
+    // Create a new book document using the Company model and the properties from the request body
+    const book = await Company.create(newBook);
 
     // Send status 201 response and the newly created book to the client
     return response.status(201).send(book);
   } catch (error) {
-    console.log("Error in POST /books: ", error);
+    console.log("Error in POST /companies: ", error);
     response.status(500).send({ message: error.message });
   }
 });
 
-// Route to get all books
+// Route to get all companies
 router.get("/", async (request, response) => {
   try {
-    // Get all book documents using the Book model's find method
-    const books = await Book.find({});
+    // Get all book documents using the Company model's find method
+    const companies = await Company.find({});
 
-    // Send status 200 response and the books to the client
+    // Send status 200 response and the companies to the client
     return response.status(200).json({
-      count: books.length,
-      data: books,
+      count: companies.length,
+      data: companies,
     });
   } catch (error) {
-    console.log("Error in GET /books: ", error);
+    console.log("Error in GET /companies: ", error);
     response.status(500).send({ message: error.message });
   }
 });
@@ -103,13 +106,13 @@ router.get("/:id", async (request, response) => {
     // Get the book id from the request parameters
     const { id } = request.params;
 
-    // Get all book documents using the Book model's find method
-    const book = await Book.findById(id);
+    // Get all book documents using the Company model's find method
+    const book = await Company.findById(id);
 
-    // Send status 200 response and the books to the client
+    // Send status 200 response and the companies to the client
     return response.status(200).json(book);
   } catch (error) {
-    console.log("Error in GET /books: ", error);
+    console.log("Error in GET /companies: ", error);
     response.status(500).send({ message: error.message });
   }
 });
@@ -131,7 +134,7 @@ router.put("/:id", async (request, response) => {
 
     const { id } = request.params;
 
-    const result = await Book.findByIdAndUpdate(id, request.body);
+    const result = await Company.findByIdAndUpdate(id, request.body);
 
     if (!result) {
       return response.status(404).json({
@@ -139,9 +142,11 @@ router.put("/:id", async (request, response) => {
       });
     }
 
-    return response.status(200).send({ message: "Book updated successfully." });
+    return response
+      .status(200)
+      .send({ message: "Company updated successfully." });
   } catch (error) {
-    console.log("Error in PUT /books: ", error);
+    console.log("Error in PUT /companies: ", error);
     response.status(500).send({ message: error.message });
   }
 });
@@ -151,8 +156,8 @@ router.delete("/:id", async (request, response) => {
   try {
     const { id } = request.params;
 
-    // Delete the book document using the Book model's findByIdAndDelete method
-    const result = await Book.findByIdAndDelete(id);
+    // Delete the book document using the Company model's findByIdAndDelete method
+    const result = await Company.findByIdAndDelete(id);
 
     // If no book was found, send status 404 response and a (error) message to inform the client.
     if (!result) {
@@ -162,9 +167,11 @@ router.delete("/:id", async (request, response) => {
     }
 
     // Send status 200 response and a (success) message to inform the client the book was deleted successfully
-    return response.status(200).send({ message: "Book deleted successfully." });
+    return response
+      .status(200)
+      .send({ message: "Company deleted successfully." });
   } catch (error) {
-    console.log("Error in DELETE /books: ", error);
+    console.log("Error in DELETE /companies: ", error);
     response.status(500).send({ message: error.message });
   }
 });

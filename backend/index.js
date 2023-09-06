@@ -2,6 +2,7 @@ import express from "express";
 import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import booksRoute from "./routes/booksRoute.js";
+import companiesRoute from "./routes/companiesRoute.js";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.get("/", (request, response) => {
 
 // Use routers from /routes folder
 app.use("/books", booksRoute);
+app.use("/companies", companiesRoute);
 
 // Connect to MongoDB database
 // If connection is successful, start Express.js backend server and listen to PORT
@@ -37,5 +39,3 @@ mongoose
   .catch((error) => {
     console.log("Mongoose connect error in index.js: ", error);
   });
-
-//hello
