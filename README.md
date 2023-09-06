@@ -24,9 +24,9 @@ One interesting aspect of this project is handling many-to-many relationships be
 
 The main advantage of using a `junction` collection is that it simplifies the management of these relationships. For instance, consider a scenario where Company A and Company B collaborate on Project X. Instead of duplicating data or creating complex nested structures, the `junction` collection allows us to create a clear and efficient link between Company A, Company B, and Project X. This makes it easy to track participation and configure revenue sharing settings dynamically when all parties agree.
 
-Feel free to explore this repository to see these concepts in action and dive into the code. Happy coding!
+Feel free to explore this repository to see these concepts and dive into my code!
 
-## TODO:
+## Progress:
 
 - [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
 - [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
