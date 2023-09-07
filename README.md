@@ -2,8 +2,9 @@
 
 - [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
   - [Application Description](#application-description)
-    - [Frontend](#frontend)
-    - [Backend](#backend)
+  - [Frontend](#frontend)
+    - [Vite.js:](#vitejs)
+  - [Backend](#backend)
     - [Many-to-Many Relationships](#many-to-many-relationships)
 - [Future functionalities:](#future-functionalities)
   - [User Privilege Management and Admin Authorization](#user-privilege-management-and-admin-authorization)
@@ -21,7 +22,7 @@ Each section title is linked to the corresponding part of the document for easy 
 
 Welcome to my FullStack JavaScript application built with Express.js on the backend and React with Redux on the frontend. This application leverages the power of Axios for seamless communication between the two layers. MongoDB serves as the database, and Mongoose is our trusted tool for connecting and interacting with it.
 
-### Frontend
+## Frontend
 
 On the frontend, I've chosen React for building user interfaces and Redux for state management. For those less familiar with these technologies, here's why implementing Redux in React is a game-changer:
 
@@ -59,7 +60,21 @@ Using React and Redux together provides several advantages for building scalable
 
 The `react-redux` library is a popular library that makes it easy to implement Redux in a JavaScript React application. It provides a set of bindings between React and Redux, allowing you to easily connect your React components to the Redux store and dispatch actions.
 
-### Backend
+### Vite.js:
+
+The React frontend application was installed using Vite.js, a modern build tool that provides fast development server and efficient build process.
+
+- **Faster development:** Vite.js provides a fast development server that supports near-instantaneous hot module replacement (HMR) for React components. This means that changes to your code are reflected in the browser almost immediately, without requiring a full page reload. This can speed up the development process and make it easier to iterate on code.
+
+- **Efficient builds:** Vite.js uses a highly optimized build process that leverages the native ES modules support in modern browsers. This can result in faster build times and smaller bundle sizes compared to other build tools.
+
+- **Modern web technologies:** Vite.js supports modern web technologies out of the box, including ES modules, TypeScript, and CSS modules. This makes it easy to build modern, high-performance web applications.
+
+- **Plugin ecosystem:** Vite.js has a growing ecosystem of plugins that can be used to extend its functionality. This includes plugins for things like CSS preprocessing, image optimization, and more.
+
+Overall, using Vite.js to install a React project can help you build faster, more efficient, and more modern web applications.
+
+## Backend
 
 In the backend, I've set up RESTful API endpoints to create, read, update, and delete documents from collections. These collections are defined and configured in the `/backend/models` folder, ensuring a structured and organized approach to data management.
 
