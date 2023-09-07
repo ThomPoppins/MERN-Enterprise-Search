@@ -11,6 +11,7 @@
     - [Company](#company)
       - [Fields:](#fields)
 - [Routes:](#routes)
+- [Tests:](#tests)
 - [TODO:](#todo)
 - [Everything else:](#everything-else)
 
@@ -277,6 +278,26 @@ The `Company` model represents a business entity in the application.
 - Use Express.js's support for templating engines to generate dynamic HTML pages and other types of content.
 - Benefit from Express.js's integration with other Node.js libraries, such as Mongoose, which makes it easier to build scalable and maintainable applications.
 - Take advantage of Express.js's support for testing frameworks like Mocha and Chai to write automated tests for their endpoints and ensure that my code is working correctly.
+
+# Tests:
+
+Mocha and Chai are popular testing frameworks for Node.js applications, and they provide several advantages for testing Express.js API endpoints:
+
+- **Easy to use**: Mocha and Chai are easy to set up and use, and they provide a simple and intuitive syntax for writing tests.
+
+- **Flexible**: Mocha and Chai are highly flexible and can be used to test a wide range of scenarios, from simple unit tests to complex integration tests.
+
+- **Modular**: Mocha and Chai are modular and can be easily extended with plugins and custom assertions, making it easy to add new functionality to your tests.
+
+- **Readable**: Mocha and Chai provide a readable and expressive syntax for writing tests, which makes it easy to understand what each test is doing and why.
+
+- **Integration with Express.js**: Mocha and Chai integrate seamlessly with Express.js, making it easy to test my API endpoints and ensure that they are working correctly.
+
+- **Asynchronous support**: Mocha and Chai provide built-in support for testing asynchronous code, which is essential for testing Express.js API endpoints that rely on callbacks or promises.
+
+- **Assertions**: Chai provides a wide range of built-in assertions and supports custom assertions, which makes it easy to write tests that check for specific conditions and behaviors. (Assertions are statements that check whether a certain condition is true or false. In the context of testing with Mocha and Chai, assertions are used to verify that the code being tested is behaving as expected.)
+
+Overall, Mocha and Chai provide a powerful and flexible testing framework for testing Express.js API endpoints, and they are widely used in the Node.js community for this purpose.
 
 
 # TODO:
