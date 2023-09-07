@@ -10,6 +10,7 @@
 - [Models:](#models)
     - [Company](#company)
       - [Fields:](#fields)
+- [Routes:](#routes)
 - [TODO:](#todo)
 - [Everything else:](#everything-else)
 
@@ -264,12 +265,27 @@ The `Company` model represents a business entity in the application.
   - Required: No
 
 
+# Routes:
+
+GitHub Copilot: Express.js is a popular Node.js framework that provides a simple and flexible way to create REST API endpoints. By using Express.js, I can:
+
+- Easily create HTTP endpoints for handling GET, POST, PUT, and DELETE requests.
+- Use middleware to add custom behavior to my endpoints, such as authentication, logging, and error handling.
+- Take advantage of Express.js's routing system to organize my endpoints into logical groups and make my code more modular and maintainable.
+- Use a wide range of third-party middleware and plugins to add additional functionality to my endpoints, such as compression, caching, and rate limiting.
+- Use Express.js's built-in support for JSON and URL-encoded data to easily handle incoming request data and send responses in the desired format.
+- Use Express.js's support for templating engines to generate dynamic HTML pages and other types of content.
+- Benefit from Express.js's integration with other Node.js libraries, such as Mongoose, which makes it easier to build scalable and maintainable applications.
+- Take advantage of Express.js's support for testing frameworks like Mocha and Chai to write automated tests for their endpoints and ensure that my code is working correctly.
+
+
 # TODO:
 
 - [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
 - [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
 - [x] Finish basic Book schema and model. For faster functional development and testing purposes.
 - [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
+- [ ] [MERNSTACK-Start using testing frameworks Mocha and Chai to write automated tests for the endpoints and ensure that the code is working correctly.
 - [x] [MERNSTACK-74] Set up `Company` model.
 - [x] [MERNSTACK-65] Create a route to save a new Company document in the database.
 - [ ] [MERNSTACK-95] Test companyRouter POST route `/` for saving a new company with Postman.
@@ -284,7 +300,7 @@ The `Company` model represents a business entity in the application.
 - [ ] Actualize, complete and correct Company scheme documentation.
 - [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
 - [x] [MERNSTACK-70] Set up GET, POST, PUT and DELETE Book server routes.
-- [ ] [MERNSTACK-51] Create Jira tickets for all TODO's.
+- [x] [MERNSTACK-51] Create Jira tickets for all TODO's.
 - [x] [MERNSTACK-53] Create GET, POST, PUT and DELETE Company server routes.
 - [ ] [MERNSTACK-55] Create User model.
 - [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
@@ -294,7 +310,6 @@ The `Company` model represents a business entity in the application.
 - [ ] [MERNSTACK-56] Create login and register functionality. Hash user password on register and compare hashed password on login. (see backend devdocs folder)
 - [ ] [MERNSTACK-60] Create `user` authentication and authorization functionality using JSON Web Token authorization. (see backend devdocs folder)
 - [ ] [MERNSTACK-58] When user is logged in, create a form to register a company and make user owner. Owner has admin rights at first when creating his account and registering his company.
-- [ ]
 - [ ] [MERNSTACK-61] Create `junction` table for many-to-many relationship between `owners` and `companies`. (see backend devdocs folder)
 - [ ] [MERNSTACK-62] Create `junction` table between `Company` and `Project`. This table will be used because of the many-to-many relationship and additional properties that are needed to link a company to a project. (see backend devdocs folder)
 - [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers)
