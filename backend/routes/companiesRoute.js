@@ -147,18 +147,6 @@ router.get("/:id", async (request, response) => {
 // Route to update one company in the database using the company's id
 router.put("/:id", async (request, response) => {
   try {
-    // Validate the request body
-    if (
-      !request.body.title ||
-      !request.body.author ||
-      !request.body.publishYear
-    ) {
-      // Send status 400 response if data fields are missing and a (error) message to inform the client.
-      return response.status(400).send({
-        message: "Data fields missing, need title, author, and publishYear.",
-      });
-    }
-
     const { id } = request.params;
 
     const result = await Company.findByIdAndUpdate(id, request.body);
@@ -199,15 +187,6 @@ router.delete("/:id", async (request, response) => {
       .send({ message: "Company deleted successfully." });
   } catch (error) {
     console.log("Error in DELETE /companies: ", error);
-    response.status(500).send({ message: error.message });
-  }
-});
-
-// TODO: Finish route to seed the database with companies
-router.get("/seed", async (request, response) => {
-  try {
-  } catch (error) {
-    console.log("Error in GET /companies/seed: ", error);
     response.status(500).send({ message: error.message });
   }
 });

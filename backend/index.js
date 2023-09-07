@@ -3,11 +3,23 @@ import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import booksRoute from "./routes/booksRoute.js";
 import companiesRoute from "./routes/companiesRoute.js";
+import cors from "cors";
 
 const app = express();
 
 // Middleware to parse the request body as JSON.
 app.use(express.json());
+
+// TODO: [MERNSTACK-113] Configure CORS properly before deployment.
+// Example CORS configuration:
+// app.use(cors({
+//   origin: "http://localhost:3000",
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   allowedHeaders: ["Content-Type"]
+// }));
+// How to set up credentials with CORS: https://stackoverflow.com/questions/19743396/cors-cannot-use-wildcard-in-access-control-allow-origin-when-credentials-flag-i
+// Middleware to allow cross-origin requests.
+app.use(cors());
 
 // GET method available at "/".
 app.get("/", (request, response) => {
