@@ -346,7 +346,7 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
 - [x] [MERNSTACK-97] Test companyRouter GET route `/:id` for getting a single company with Postman.
 - [ ] [MERNSTACK-105] Test companyRouter GET route `/:id` for getting a single company with Chai and Mocha.
 - [x] [MERNSTACK-68] Create a route to update a single Company document in the database.
-- [ ] [MERNSTACK-98] Test companyRouter PUT route `/:id` for updating a single company with Postman.
+- [x] [MERNSTACK-98] Test companyRouter PUT route `/:id` for updating a single company with Postman.
 - [ ] [MERNSTACK-106] Test companyRouter PUT route `/:id` for updating a single company with Chai and Mocha.
 - [x] [MERNSTACK-69] Create a route to delete a single Company document from the database.
 - [ ] [MERNSTACK-99] Test companyRouter DELETE route `/:id` for deleting a single company with Postman.
