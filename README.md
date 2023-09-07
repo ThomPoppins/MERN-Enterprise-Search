@@ -267,7 +267,7 @@ The `Company` model represents a business entity in the application.
 
 # Routes:
 
-GitHub Copilot: Express.js is a popular Node.js framework that provides a simple and flexible way to create REST API endpoints. By using Express.js, I can:
+**Express.js** is a popular Node.js framework that provides a simple and flexible way to create REST API endpoints. By using Express.js, I can:
 
 - Easily create HTTP endpoints for handling GET, POST, PUT, and DELETE requests.
 - Use middleware to add custom behavior to my endpoints, such as authentication, logging, and error handling.
