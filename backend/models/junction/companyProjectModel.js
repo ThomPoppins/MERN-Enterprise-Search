@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-// TODO: Fix this schema and reconsider the properties
-const companyProjectJunctionSchema = new mongoose.Schema(
+// TODO: [MERNSTACK-101] Fix this schema and reconsider the fields
+const companyProjectSchema = new mongoose.Schema(
   {
     companyId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -78,9 +78,6 @@ const companyProjectJunctionSchema = new mongoose.Schema(
   }
 );
 
-const CompanyProjectJunction = mongoose.model(
-  "CompanyProjectJunction",
-  companyProjectJunctionSchema
-);
+const CompanyProject = mongoose.model("CompanyProject", companyProjectSchema);
 
-export default CompanyProjectJunction;
+export default CompanyProject;

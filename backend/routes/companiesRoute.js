@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Route to save a new Company
 router.post("/", async (request, response) => {
-  // Create a new book document using the Company model
+  // Create a new company document using the Company model
   try {
     if (!request.body.name) {
       // Send status 400 response if data fields are missing and a (error) message to inform the client.
@@ -14,11 +14,11 @@ router.post("/", async (request, response) => {
       });
     }
 
-    // TODO: Check if the book already exists in the database. Hint: Use the findOne method and consider using `unique: true` in the book schema.
-    // TODO: If the book already exists, send status 409 response and a (error) message to inform the client.
+    // TODO: Check if the company already exists in the database. Hint: Use the findOne method and consider using `unique: true` in the company schema.
+    // TODO: If the company already exists, send status 409 response and a (error) message to inform the client.
 
-    // Create a new book document using the Company model and the properties from the request body
-    // TODO: Add all properties assigned in the schema and request body, check their value to be true
+    // Create a new company document using the Company model and the properties from the request body
+    // TODO: Add all fields assigned in the schema and request body, check their value to be true
     const newCompany = {
       name: request.body.name,
       email: request.body.email ? request.body.email : "",
@@ -70,13 +70,21 @@ router.post("/", async (request, response) => {
       vendor: request.body.vendor ? request.body.vendor : { vendorId: "" },
       employees: request.body.employees ? request.body.employees : [],
       stories: request.body.stories ? request.body.stories : [],
+      products: request.body.products ? request.body.products : [],
+      services: request.body.services ? request.body.services : [],
+      appointments: request.body.appointments ? request.body.appointments : [],
+      messages: request.body.messages ? request.body.messages : [],
+      notifications: request.body.notifications
+        ? request.body.notifications
+        : [],
+      events: request.body.events ? request.body.events : [],
     };
 
-    // Create a new book document using the Company model and the properties from the request body
-    const book = await Company.create(newBook);
+    // Create a new company document using the Company model and the properties from the request body
+    const company = await Company.create(newCompany);
 
-    // Send status 201 response and the newly created book to the client
-    return response.status(201).send(book);
+    // Send status 201 response and the newly created company to the client
+    return response.status(201).send(company);
   } catch (error) {
     console.log("Error in POST /companies: ", error);
     response.status(500).send({ message: error.message });
@@ -86,7 +94,7 @@ router.post("/", async (request, response) => {
 // Route to get all companies
 router.get("/", async (request, response) => {
   try {
-    // Get all book documents using the Company model's find method
+    // Get all company documents using the Company model's find method
     const companies = await Company.find({});
 
     // Send status 200 response and the companies to the client
@@ -100,24 +108,24 @@ router.get("/", async (request, response) => {
   }
 });
 
-// Route to get one book from database using the book's id
+// Route to get one company from database using the company's id
 router.get("/:id", async (request, response) => {
   try {
-    // Get the book id from the request parameters
+    // Get the company id from the request parameters
     const { id } = request.params;
 
-    // Get all book documents using the Company model's find method
-    const book = await Company.findById(id);
+    // Get all company documents using the Company model's find method
+    const company = await Company.findById(id);
 
     // Send status 200 response and the companies to the client
-    return response.status(200).json(book);
+    return response.status(200).json(company);
   } catch (error) {
     console.log("Error in GET /companies: ", error);
     response.status(500).send({ message: error.message });
   }
 });
 
-// Route to update one book in the database using the book's id
+// Route to update one company in the database using the company's id
 router.put("/:id", async (request, response) => {
   try {
     // Validate the request body
@@ -138,7 +146,7 @@ router.put("/:id", async (request, response) => {
 
     if (!result) {
       return response.status(404).json({
-        message: `Cannot find book with id=${id}.`,
+        message: `Cannot find company with id=${id}.`,
       });
     }
 
@@ -151,22 +159,22 @@ router.put("/:id", async (request, response) => {
   }
 });
 
-// Route to delete one book from the database using the book's id
+// Route to delete one company from the database using the company's id
 router.delete("/:id", async (request, response) => {
   try {
     const { id } = request.params;
 
-    // Delete the book document using the Company model's findByIdAndDelete method
+    // Delete the company document using the Company model's findByIdAndDelete method
     const result = await Company.findByIdAndDelete(id);
 
-    // If no book was found, send status 404 response and a (error) message to inform the client.
+    // If no company was found, send status 404 response and a (error) message to inform the client.
     if (!result) {
       return response.status(404).json({
-        message: `Cannot find book with id=${id}.`,
+        message: `Cannot find company with id=${id}.`,
       });
     }
 
-    // Send status 200 response and a (success) message to inform the client the book was deleted successfully
+    // Send status 200 response and a (success) message to inform the client the company was deleted successfully
     return response
       .status(200)
       .send({ message: "Company deleted successfully." });

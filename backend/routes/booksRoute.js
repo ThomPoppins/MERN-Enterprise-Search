@@ -22,14 +22,14 @@ router.post("/", async (request, response) => {
     // TODO: If the book already exists, send status 409 response and a (error) message to inform the client.
 
     // Create a new book document using the Book model and the properties from the request body
-    const newBook = {
+    const newCompany = {
       title: request.body.title,
       author: request.body.author,
       publishYear: request.body.publishYear,
     };
 
     // Create a new book document using the Book model and the properties from the request body
-    const book = await Book.create(newBook);
+    const book = await Book.create(newCompany);
 
     // Send status 201 response and the newly created book to the client
     return response.status(201).send(book);

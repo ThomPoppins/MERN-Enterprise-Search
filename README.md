@@ -7,8 +7,11 @@
     - [Many-to-Many Relationships](#many-to-many-relationships)
 - [Future functionalities:](#future-functionalities)
   - [User Privilege Management and Admin Authorization](#user-privilege-management-and-admin-authorization)
+- [Models:](#models)
+    - [Company](#company)
+      - [Fields:](#fields)
 - [TODO:](#todo)
-- [Everything else for now:](#everything-else-for-now)
+- [Everything else:](#everything-else)
 
 Each section title is linked to the corresponding part of the document for easy navigation.
 
@@ -73,6 +76,184 @@ My application prioritizes both security and user-friendliness, empowering compa
 
 ***Feel free to explore this repository to see these concepts in action and dive into [my code](https://github.com/ThomPoppins/MERN_STACK_PROJ.)***
 
+# Models:
+
+### Company
+
+The `Company` model represents a business entity in the application.
+
+#### Fields:
+
+- **name** (String)
+  - Description: The name of the company.
+  - Required: Yes
+
+- **email** (String)
+  - Description: The email address for correspondence directed to the company.
+  - Required: No
+
+- **phone** (String)
+  - Description: The phone number of the company.
+  - Required: No
+
+- **slogan** (String)
+  - Description: The slogan or motto of the company.
+  - Required: No
+
+- **description** (String)
+  - Description: A short description of the company.
+  - Required: No
+
+- **address** (Object)
+  - Description: The registered address of the company.
+  - Fields:
+    - street (String)
+    - number (String)
+    - postalCode (String)
+    - city (String)
+    - country (String)
+  - Required: No
+
+- **billingAddress** (Object)
+  - Description: The address to send invoices to.
+  - Fields:
+    - street (String)
+    - number (String)
+    - postalCode (String)
+    - city (String)
+    - country (String)
+  - Required: No
+
+- **addressFormat** (Object)
+  - Description: Format for the address in the correct way for the country and regional address format.
+  - Fields:
+    - country (String)
+    - region (String)
+  - Required: No
+
+- **country** (String)
+  - Description: Country of the company billing address.
+  - Required: No
+
+- **region** (String)
+  - Description: Region of the company billing address.
+  - Required: No
+
+- **owners** (Array)
+  - Description: Array of owner objects with userId.
+  - Required: No
+
+- **companyAdmins** (Array)
+  - Description: Array of admin objects with adminUserId and role.
+  - Required: No
+
+- **locations** (Array)
+  - Description: Array of address objects with addressId compatible with configured addressFormat for country and region.
+  - Required: No
+
+- **departments** (Array)
+  - Description: Array of department objects with departmentId.
+  - Required: No
+
+- **businessConfig** (Object)
+  - Description: Configurable settings that company owners and admins can change.
+  - Required: No
+
+- **paymentDetails** (Object)
+  - Description: Payment details for specific country or region.
+  - Required: No
+
+- **startYear** (Number)
+  - Description: The year the company was started.
+  - Required: No
+
+- **active** (Boolean)
+  - Description: Indicates if the company is currently active.
+  - Required: No
+
+- **industry** (String)
+  - Description: The industry or sector in which the company operates.
+  - Required: No
+
+- **public** (Boolean)
+  - Description: Indicates if the company is public or private.
+  - Required: No
+
+- **reviews** (Array)
+  - Description: Array of review objects with reviewId, text, rating, reviewer, timestamp, etc.
+  - Required: No
+
+- **rating** (Number)
+  - Description: The overall rating of the company.
+  - Required: No
+
+- **customers** (Array)
+  - Description: Array of customer objects with customerId.
+  - Required: No
+
+- **premium** (String)
+  - Description: The type of premium membership ("none", "bronze", "silver", "gold", "platinum").
+  - Required: No
+
+- **vendor** (Object)
+  - Description: Information about whether the company is a vendor.
+  - Fields:
+    - vendorId (String)
+  - Required: No
+
+- **employees** (Array)
+  - Description: Array of employee objects with employeeId.
+  - Required: No
+
+- **stories** (Array)
+  - Description: Array of story objects.
+  - Required: No
+
+- **products** (Array)
+  - Description: Array of product objects with productId.
+  - Required: No
+
+- **services** (Array)
+  - Description: Array of service objects with serviceId.
+  - Required: No
+
+- **appointments** (Array)
+  - Description: Array of appointment objects.
+  - Required: No
+
+- **messages** (Array)
+  - Description: Array of message objects with messageId, corresponding userId, timestamp, etc.
+  - Required: No
+
+- **notifications** (Array)
+  - Description: Array of notification objects.
+  - Required: No
+
+- **events** (Array)
+  - Description: Array of event objects with eventId.
+  - Required: No
+
+- **agenda** (Array)
+  - Description: Array of agenda objects with agendaId.
+  - Required: No
+
+- **tasks** (Array)
+  - Description: Array of task objects with taskId.
+  - Required: No
+
+- **invoices** (Array)
+  - Description: Array of invoice objects with invoiceId.
+  - Required: No
+
+- **orders** (Array)
+  - Description: Array of order objects with orderId.
+  - Required: No
+
+- **payments** (Array)
+  - Description: Array of payment objects with paymentId.
+  - Required: No
+
+
 # TODO:
 
 - [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
@@ -80,11 +261,16 @@ My application prioritizes both security and user-friendliness, empowering compa
 - [x] Finish basic Book schema and model. For faster functional development and testing purposes.
 - [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
 - [x] [MERNSTACK-74] Set up `Company` model.
-- [ ] [MERNSTACK-65] Create a route to save a new Company document in the database.
-- [ ] [MERNSTACK-66] Create a route to get all Company documents from the database.
-- [ ] [MERNSTACK-67] Create a route to get a single Company document from the database.
-- [ ] [MERNSTACK-68] Create a route to update a single Company document in the database.
-- [ ] [MERNSTACK-69] Create a route to delete a single Company document from the database.
+- [x] [MERNSTACK-65] Create a route to save a new Company document in the database.
+- [ ] [MERNSTACK-95] Test companyRouter POST route `/` for saving a new company with Postman.
+- [x] [MERNSTACK-66] Create a route to get all Company documents from the database.
+- [ ] [MERNSTACK-96] Test companyRouter GET route `/` for getting all companies with Postman.
+- [x] [MERNSTACK-67] Create a route to get a single Company document from the database.
+- [ ] [MERNSTACK-97] Test companyRouter GET route `/:id` for getting a single company with Postman.
+- [x] [MERNSTACK-68] Create a route to update a single Company document in the database.
+- [ ] [MERNSTACK-98] Test companyRouter PUT route `/:id` for updating a single company with Postman.
+- [x] [MERNSTACK-69] Create a route to delete a single Company document from the database.
+- [ ] [MERNSTACK-99] Test companyRouter DELETE route `/:id` for deleting a single company with Postman.
 - [ ] Actualize, complete and correct Company scheme documentation.
 - [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
 - [x] [MERNSTACK-70] Set up GET, POST, PUT and DELETE Book server routes.
@@ -107,8 +293,9 @@ My application prioritizes both security and user-friendliness, empowering compa
 - [ ] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (Just to show that I know how to use Redux in React.) (see backend devdocs folder)
 - [ ] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
 - [ ] Break down all ideas in the `Future functionalities:` section below into smaller tasks and create Jira tickets for them.
+- [ ] [MERNSTACK-102] Check for the word `property` when it should be `field` in the documentation of schemas and models. Check for the word `field` when it should be `property` in the documentation when talking about database `document`'s
 
-# Everything else for now:
+# Everything else:
 
 > **Note**: All TODO's are linked to Jira tickets, so that I can keep track of everything I have to do.
 
