@@ -281,7 +281,7 @@ The `Company` model represents a business entity in the application.
 
 # Tests:
 
-Mocha and Chai are popular testing frameworks for Node.js applications, and they provide several advantages for testing Express.js API endpoints:
+**Mocha** and **Chai** are popular testing frameworks for Node.js applications, and they provide several advantages for testing Express.js API endpoints:
 
 - **Easy to use**: Mocha and Chai are easy to set up and use, and they provide a simple and intuitive syntax for writing tests.
 
