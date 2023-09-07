@@ -81,7 +81,7 @@ router.post("/", async (request, response) => {
     };
 
     // Create a new company document using the Company model and the properties from the request body
-    const company = await Company.create(newBook);
+    const company = await Company.create(newCompany);
 
     // Send status 201 response and the newly created company to the client
     return response.status(201).send(company);
