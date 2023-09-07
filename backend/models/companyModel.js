@@ -5,10 +5,10 @@ import mongoose from "mongoose";
 /**
  * @file This file defines the CompanySchema. It also creates a model from that schema.
  * @description The schema defines the shape of documents in a collection.
- * `{ timestamps: true }` in the schema adds createdAt and updatedAt properties to the company document.
+ * `{ timestamps: true }` in the schema adds createdAt and updatedAt fields to the company document.
  * createdAt is the date and time when the company document was created.
  * updatedAt is the date and time when the company document was last updated.
- * These properties are useful for debugging purposes.
+ * These fields are useful for debugging purposes.
  * For example, if a company document was created a long time ago and it has not been updated since,
  * then it is probably safe to delete it.
  * If a company document was created a long time ago and it has been updated recently,
@@ -80,7 +80,7 @@ const companySchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    // TODO: [MERNSTACK-15] Save the name , email, phone, and role related to the company as properties in a new user model. (to be created)
+    // TODO: [MERNSTACK-15] Save the name , email, phone, and role related to the company as fields in a new user model. (to be created)
     // TODO: [MERNSTACK-16] Owners  will be linked to a company, based on an ownerId in the owner model.
     // TODO: [MERNSTACK-17] "owners" array should contain owner objects with an userId.
     owners: {
@@ -104,7 +104,7 @@ const companySchema = new mongoose.Schema(
     // },
     // TODO: [MERNSTACK-23] Create a new schema and model for address.
     // TODO: [MERNSTACK-24] Locations will be linked to a company, based on an addressId in the address model.
-    // TODO: [MERNSTACK-25] "locations" array should contain address objects with all address field properties and addressId compatible with the configured addressFormat for the country and region.
+    // TODO: [MERNSTACK-25] "locations" array should contain address objects with all address field fields and addressId compatible with the configured addressFormat for the country and region.
     locations: {
       type: Array,
       required: false,
@@ -196,16 +196,18 @@ const companySchema = new mongoose.Schema(
     },
     // Rating property would be the result of calculations based on the ratings given within together with the reviews (or given after being send a mail to user, asking them to rate the `service` or `product`.
     rating: {
-      type: Float,
+      type: Number,
       required: false,
+      min: 0,
+      max: 5,
     },
     // Users that want to be affiliated with the company so they can profit of special company's benefits in exchange for a review/rating or something else.
-    // `customers` is an array of objects with userId
+    // `customers` is an array of objects with customerId corresponding with the `id` of the Customer model.
     customers: {
       type: Array,
       required: false,
     },
-    // "premium" will be the premiumTypeName "none" "bronze", "silver", "gold" or "platinum" corresponding with the premiumType model? TODO: Decide on the premium names, which features they have, and how much they cost, what you get for every premium kind and how to pay/bill them.
+    // "premium" will be the premiumTypeName "none" "bronze", "silver", "gold" or "platinum" corresponding with the premiumType model?
     // `premium` is the id of the premium type in the corresponding premium type model.
     premium: {
       type: String,
@@ -216,7 +218,6 @@ const companySchema = new mongoose.Schema(
       type: Object,
       required: false,
     },
-    // TODO: [MERNSTACK-80] Create `junction` collection between companies and vendors. (many-to-many relationship)
     // associatedVendors: {
     //   type: Array,
     //   required: false,
@@ -225,45 +226,74 @@ const companySchema = new mongoose.Schema(
     employees: {
       type: Array,
       required: false,
+      /* unique: true, */
     },
     stories: {
       type: Array,
       required: false,
-    },
-    // "projects" is an array of project objects with an projectId.
-    projects: {
-      type: Array,
-      required: false,
+      /* unique: true, */
     },
     // "products" is an array of product objects with an productId which is the `id` of the Product model.
     products: {
       type: Array,
       required: false,
+      /* unique: true, */
     },
     // "services" is an array of service objects with an serviceId.
     services: {
       type: Array,
       required: false,
+      /* unique: true, */
     },
-    // TODO: Create a new schema and model for `appointment`. An appointment will be linked to a company or project, based on an appointmentId in the appointment model. Employees, users, vendors, products, a service and more can be linked to an appointment.
     appointments: {
       type: Array,
       required: false,
+      /* unique: true, */
     },
     // `messages` is an array of message objects with an messageId, corresponding userId, timestamp, and more.
     messages: {
       type: Array,
       required: false,
     },
-    // TODO: [MERNSTACK-62] GOOD IDEA: Maybe it is possible to save the agenda data in a separate agenda model and schema, and link the agenda to the company, project or user. (one-to-one relationship) And think about how to link the agenda  to `company`, `project`` and even `user` schemes and models.
+    notifications: {
+      type: Array,
+      required: false,
+      /* unique: true, */
+    },
+    // `events` is an array of event objects with an eventId.
+    events: {
+      type: Array,
+      required: false,
+      /* unique: true, */
+    },
+    // `agenda` is an array of agenda objects with an agendaId corresponding with the Agenda model.
     agenda: {
       type: Array,
       required: false,
     },
-    // `projects` is an array of project objects with an projectId.
-    projects: {
+    // `tasks` is an array of task objects with an taskId.
+    tasks: {
       type: Array,
       required: false,
+      /* unique: true, */
+    },
+    // `invoices` is an array of invoice objects with an invoiceId corresponding with the Invoice model.
+    invoices: {
+      type: Array,
+      required: false,
+      /* unique: true, */
+    },
+    // `orders` is an array of order objects with an orderId corresponding with the Order model.
+    orders: {
+      type: Array,
+      required: false,
+      /* unique: true, */
+    },
+    // `payments` is an array of payment objects with an paymentId corresponding with the Payment model.
+    payments: {
+      type: Array,
+      required: false,
+      /* unique: true, */
     },
   },
   // enable timestamps

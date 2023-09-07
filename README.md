@@ -80,11 +80,16 @@ My application prioritizes both security and user-friendliness, empowering compa
 - [x] Finish basic Book schema and model. For faster functional development and testing purposes.
 - [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
 - [x] [MERNSTACK-74] Set up `Company` model.
-- [ ] [MERNSTACK-65] Create a route to save a new Company document in the database.
-- [ ] [MERNSTACK-66] Create a route to get all Company documents from the database.
-- [ ] [MERNSTACK-67] Create a route to get a single Company document from the database.
-- [ ] [MERNSTACK-68] Create a route to update a single Company document in the database.
-- [ ] [MERNSTACK-69] Create a route to delete a single Company document from the database.
+- [x] [MERNSTACK-65] Create a route to save a new Company document in the database.
+- [ ] [MERNSTACK-95] Test companyRouter POST route `/` for saving a new company with Postman.
+- [x] [MERNSTACK-66] Create a route to get all Company documents from the database.
+- [ ] [MERNSTACK-96] Test companyRouter GET route `/` for getting all companies with Postman.
+- [x] [MERNSTACK-67] Create a route to get a single Company document from the database.
+- [ ] [MERNSTACK-97] Test companyRouter GET route `/:id` for getting a single company with Postman.
+- [x] [MERNSTACK-68] Create a route to update a single Company document in the database.
+- [ ] [MERNSTACK-98] Test companyRouter PUT route `/:id` for updating a single company with Postman.
+- [x] [MERNSTACK-69] Create a route to delete a single Company document from the database.
+- [ ] [MERNSTACK-99] Test companyRouter DELETE route `/:id` for deleting a single company with Postman.
 - [ ] Actualize, complete and correct Company scheme documentation.
 - [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
 - [x] [MERNSTACK-70] Set up GET, POST, PUT and DELETE Book server routes.
@@ -107,6 +112,7 @@ My application prioritizes both security and user-friendliness, empowering compa
 - [ ] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (Just to show that I know how to use Redux in React.) (see backend devdocs folder)
 - [ ] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
 - [ ] Break down all ideas in the `Future functionalities:` section below into smaller tasks and create Jira tickets for them.
+- [ ] [MERNSTACK-102] Check for the word `property` when it should be `field` in the documentation of schemas and models. Check for the word `field` when it should be `property` in the documentation when talking about database `document`'s
 
 # Everything else for now:
 
