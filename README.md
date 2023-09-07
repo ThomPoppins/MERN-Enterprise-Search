@@ -23,13 +23,41 @@ Welcome to my FullStack JavaScript application built with Express.js on the back
 
 ### Frontend
 
-On the frontend, I've chosen React for building user interfaces and Redux for state management. For those less familiar with these technologies, here's why Redux is a game-changer:
+On the frontend, I've chosen React for building user interfaces and Redux for state management. For those less familiar with these technologies, here's why implementing Redux in React is a game-changer:
 
-**Redux simplifies state management:** In plain English, Redux provides a centralized place to manage the data that your application uses. This means that every component can easily access and modify the same data, making it more predictable and easier to work with.
+React is a popular JavaScript library for building user interfaces. It provides a declarative syntax for defining UI components, and uses a virtual DOM to efficiently update the UI in response to changes in state. Some of the main advantages of React include:
 
-**Combining reducers for global state:** I'll be combining reducers in Redux to create a single store. This store will be available across all components, ensuring that data is consistent and can be accessed anywhere within the app. Imagine it as a shared brain for your application.
+- **Declarative syntax:** React provides a simple and intuitive syntax for defining UI components, making it easy to reason about the structure and behavior of your application.
 
-**Dispatch actions from anywhere:** Redux allows us to dispatch actions from anywhere within our application. This means that you can trigger changes to the data store from any component, making it incredibly flexible and responsive to user interactions.
+- **Efficient updates:** React uses a virtual DOM to efficiently update the UI in response to changes in state, minimizing the number of DOM manipulations required.
+
+- **Component reusability:** React components are modular and reusable, making it easy to build complex UIs from simple building blocks.
+
+- **Large ecosystem:** React has a large and active ecosystem of libraries and tools, making it easy to find solutions to common problems and integrate with other technologies.
+
+Redux is a state management library that is often used in conjunction with React. It provides a centralized store for managing application state, and uses a unidirectional data flow to ensure that state changes are predictable and easy to reason about. Some of the main advantages of using Redux with React include:
+
+- **Centralized state management:** Redux provides a single source of truth for application state, making it easy to manage and reason about complex state interactions.
+
+- **Predictable state changes:** Redux uses a unidirectional data flow to ensure that state changes are predictable and easy to reason about, making it easier to debug and maintain your application.
+
+- **Time-travel debugging:** Redux provides a powerful debugging tool called "time-travel debugging", which allows you to step through state changes and see how your application state evolves over time.
+
+- **Ecosystem integration:** Redux has a large and active ecosystem of libraries and tools, making it easy to integrate with other technologies and solve common problems.
+
+Using React and Redux together provides several advantages for building scalable and maintainable applications. Here are some of the main advantages:
+
+- **Centralized state management:** Redux provides a centralized store for managing application state, making it easy to manage and reason about complex state interactions.
+
+- **Predictable state changes:** Redux uses a unidirectional data flow to ensure that state changes are predictable and easy to reason about, making it easier to debug and maintain your application.
+
+- **Component reusability:** React components are modular and reusable, making it easy to build complex UIs from simple building blocks.
+
+- **Time-travel debugging:** Redux provides a powerful debugging tool called "time-travel debugging", which allows you to step through state changes and see how your application state evolves over time.
+
+- **Ecosystem integration:** React and Redux have large and active ecosystems of libraries and tools, making it easy to integrate with other technologies and solve common problems.
+
+The `react-redux` library is a popular library that makes it easy to implement Redux in a JavaScript React application. It provides a set of bindings between React and Redux, allowing you to easily connect your React components to the Redux store and dispatch actions.
 
 ### Backend
 
@@ -306,18 +334,23 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
 - [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
 - [x] Finish basic Book schema and model. For faster functional development and testing purposes.
 - [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
-- [ ] [MERNSTACK-Start using testing frameworks Mocha and Chai to write automated tests for the endpoints and ensure that the code is working correctly.
+- [x] [MERNSTACK-103] Start using testing frameworks Mocha and Chai to write automated tests for the endpoints and ensure that the code is working correctly.
 - [x] [MERNSTACK-74] Set up `Company` model.
 - [x] [MERNSTACK-65] Create a route to save a new Company document in the database.
-- [ ] [MERNSTACK-95] Test companyRouter POST route `/` for saving a new company with Postman.
+- [x] [MERNSTACK-95] Test companyRouter POST route `/` for saving a new company with Postman.
+- [ ] [MERNSTACK-103] Test companyRouter POST route `/` for saving a new company with Chai and Mocha.
 - [x] [MERNSTACK-66] Create a route to get all Company documents from the database.
-- [ ] [MERNSTACK-96] Test companyRouter GET route `/` for getting all companies with Postman.
+- [x] [MERNSTACK-96] Test companyRouter GET route `/` for getting all companies with Postman.
+- [ ] [MERNSTACK-104] Test companyRouter GET route `/` for getting all companies with Chai and Mocha.
 - [x] [MERNSTACK-67] Create a route to get a single Company document from the database.
-- [ ] [MERNSTACK-97] Test companyRouter GET route `/:id` for getting a single company with Postman.
+- [x] [MERNSTACK-97] Test companyRouter GET route `/:id` for getting a single company with Postman.
+- [ ] [MERNSTACK-105] Test companyRouter GET route `/:id` for getting a single company with Chai and Mocha.
 - [x] [MERNSTACK-68] Create a route to update a single Company document in the database.
 - [ ] [MERNSTACK-98] Test companyRouter PUT route `/:id` for updating a single company with Postman.
+- [ ] [MERNSTACK-106] Test companyRouter PUT route `/:id` for updating a single company with Chai and Mocha.
 - [x] [MERNSTACK-69] Create a route to delete a single Company document from the database.
 - [ ] [MERNSTACK-99] Test companyRouter DELETE route `/:id` for deleting a single company with Postman.
+- [ ] [MERNSTACK-107] Test companyRouter DELETE route `/:id` for deleting a single company with Chai and Mocha.
 - [ ] Actualize, complete and correct Company scheme documentation.
 - [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
 - [x] [MERNSTACK-70] Set up GET, POST, PUT and DELETE Book server routes.
