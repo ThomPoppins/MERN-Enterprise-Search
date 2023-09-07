@@ -293,7 +293,7 @@ const companySchema = new mongoose.Schema(
     payments: {
       type: Array,
       required: false,
-      /* unique: true, */
+      unique: true,
     },
   },
   // enable timestamps

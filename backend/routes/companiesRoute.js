@@ -1,5 +1,6 @@
 import express from "express";
 import { Company } from "../models/companyModel.js";
+import { v4 as uuidv4 } from "uuid";
 
 const router = express.Router();
 
@@ -14,11 +15,18 @@ router.post("/", async (request, response) => {
       });
     }
 
-    // TODO: Check if the company already exists in the database. Hint: Use the findOne method and consider using `unique: true` in the company schema.
-    // TODO: If the company already exists, send status 409 response and a (error) message to inform the client.
+    // TODO: [MERNSTACK-110] Check if the company already exists in the database. Hint: Use the findOne method and consider using `unique: true` in the company schema.
+    // TODO: [MERNSTACK-111] If the company already exists, send status 409 response and a (error) message to inform the client.
 
-    // Create a new company document using the Company model and the properties from the request body
-    // TODO: Add all fields assigned in the schema and request body, check their value to be true
+    // TODO: [MERNSTACK-112] Remove this function once the payment model has been fully implemented.
+    // Generate a random payment id using the uuidv4 function.
+    const generateRandomId = () => {
+      let paymentId = uuidv4();
+      return paymentId;
+    };
+
+    // Create a new company document using the Company model and the properties from the request body.
+    // TODO: [MERNSTACK-109] Populate the company document with the properties from the request body if they exist.
     const newCompany = {
       name: request.body.name,
       email: request.body.email ? request.body.email : "",
@@ -78,6 +86,17 @@ router.post("/", async (request, response) => {
         ? request.body.notifications
         : [],
       events: request.body.events ? request.body.events : [],
+      agenda: request.body.agenda ? request.body.agenda : [],
+      tasks: request.body.tasks ? request.body.tasks : [],
+      invoices: request.body.invoices ? request.body.invoices : [],
+      orders: request.body.orders ? request.body.orders : [],
+      payments: request.body.payments
+        ? request.body.payments
+        : [
+            {
+              id: generateRandomId(),
+            },
+          ],
     };
 
     // Create a new company document using the Company model and the properties from the request body
@@ -180,6 +199,15 @@ router.delete("/:id", async (request, response) => {
       .send({ message: "Company deleted successfully." });
   } catch (error) {
     console.log("Error in DELETE /companies: ", error);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+// TODO: Finish route to seed the database with companies
+router.get("/seed", async (request, response) => {
+  try {
+  } catch (error) {
+    console.log("Error in GET /companies/seed: ", error);
     response.status(500).send({ message: error.message });
   }
 });
