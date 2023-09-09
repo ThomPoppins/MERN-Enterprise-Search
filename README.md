@@ -388,6 +388,7 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
 - [x] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
 - [ ] Break down all ideas in the `Future functionalities:` section below into smaller tasks and create Jira tickets for them.
 - [ ] [MERNSTACK-102] Check for the word `property` when it should be `field` in the documentation of schemas and models. Check for the word `field` when it should be `property` in the documentation when talking about database `document`'s
+- [ ] [MERNSTACK-114] Implement time-travel debugging with Redux DevTools.
 
 # Everything else:
 
