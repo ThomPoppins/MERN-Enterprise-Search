@@ -345,6 +345,8 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
 
 # TODO:
 
+> **Note**: All TODO's are linked to Jira tickets, so that I can keep track of everything I have to do.
+
 - [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
 - [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
 - [x] Finish basic Book schema and model. For faster functional development and testing purposes.
@@ -369,7 +371,7 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
 - [ ] Actualize, complete and correct Company scheme documentation.
 - [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
 - [x] [MERNSTACK-70] Set up GET, POST, PUT and DELETE Book server routes.
-- [x] [MERNSTACK-51] Create Jira tickets for all TODO's.
+- [x] [MERNSTACK-51] Create Jira tickets for all TODOs.
 - [x] [MERNSTACK-53] Create GET, POST, PUT and DELETE Company server routes.
 - [ ] [MERNSTACK-55] Create User model.
 - [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
@@ -389,15 +391,24 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
 - [ ] Break down all ideas in the `Future functionalities:` section below into smaller tasks and create Jira tickets for them.
 - [ ] [MERNSTACK-102] Check for the word `property` when it should be `field` in the documentation of schemas and models. Check for the word `field` when it should be `property` in the documentation when talking about database `document`'s
 - [ ] [MERNSTACK-114] Implement time-travel debugging with Redux DevTools.
+- [ ] [MERNSTACK-115] Decide the default destination after clicking the BackButton, something like the previous page or the home page.
 
 # Everything else:
 
-> **Note**: All TODO's are linked to Jira tickets, so that I can keep track of everything I have to do.
 
-```javascript
+```s
 └─ MERN-stack-project
    ├─ backend
    │  ├─ models
+   │  │  ├─ junction
+   │  │  │  ├─ companyProjectModel.js
+   │  │  │  │  └─ line 3: TODO : [MERNSTACK-101] Fix this schema and reconsider the fields
+   │  │  │  └─ companyVendorJunctionModel.js
+   │  │  │     └─ line 1: TODO : [MERNSTACK-80] Create `junction` collection between companies and vendors. (many-to-many relationship)
+   │  │  ├─ agendaModel.js
+   │  │  │  └─ line 1: TODO : [MERNSTACK-62] GOOD IDEA: Maybe it is possible to save the agenda data in a separate agenda model and schema, and link the agenda to the company, project or user. (one-to-one relationship) And think about how to link the agenda  to `company`, `project`` and even `user` schemes and models.
+   │  │  ├─ appointmentModel.js
+   │  │  │  └─ line 1: TODO : [MERNSTACK-84] Create a new schema and model for `appointment`. An appointment will be linked to a company or project, based on an appointmentId in the appointment model. Employees, users, vendors, products, a service and more can be linked to an appointment.
    │  │  ├─ bookModel.js
    │  │  │  ├─ line 18: TODO : [MERNSTACK-10] Solve Codacy issue that ticketnumber is not used.
    │  │  │  └─ line 20: TODO : [MERNSTACK-11] Delete this schema once it is no longer needed.
@@ -405,7 +416,7 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
    │  │  │  ├─ line 3: TODO : [MERNSTACK-51] Finish putting all TODOs into Jira tickets.
    │  │  │  ├─ line 30: TODO : [MERNSTACK-4] Investigate the usefulness of generating an id myself.
    │  │  │  ├─ line 67: TODO : [MERNSTACK-13] Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
-   │  │  │  ├─ line 83: TODO : [MERNSTACK-15] Save the name , email, phone, and role related to the company as properties in a new user model. (to be created)
+   │  │  │  ├─ line 83: TODO : [MERNSTACK-15] Save the name , email, phone, and role related to the company as fields in a new user model. (to be created)
    │  │  │  ├─ line 84: TODO : [MERNSTACK-16] Owners  will be linked to a company, based on an ownerId in the owner model.
    │  │  │  ├─ line 85: TODO : [MERNSTACK-17] "owners" array should contain owner objects with an userId.
    │  │  │  ├─ line 90: TODO : [MERNSTACK-18] Create a new schema and model for companyAdmin users.
@@ -417,7 +428,7 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
    │  │  │  ├─ line 100: TODO : [MERNSTACK-72] Reconsider `employees` field if the role `junction` table is not the right place to store the `employee` data.
    │  │  │  ├─ line 105: TODO : [MERNSTACK-23] Create a new schema and model for address.
    │  │  │  ├─ line 106: TODO : [MERNSTACK-24] Locations will be linked to a company, based on an addressId in the address model.
-   │  │  │  ├─ line 107: TODO : [MERNSTACK-25] "locations" array should contain address objects with all address field properties and addressId compatible with the configured addressFormat for the country and region.
+   │  │  │  ├─ line 107: TODO : [MERNSTACK-25] "locations" array should contain address objects with all address field fields and addressId compatible with the configured addressFormat for the country and region.
    │  │  │  ├─ line 116: TODO : [MERNSTACK-26] Find out how to validate correct business and payment details.
    │  │  │  ├─ line 117: TODO : [MERNSTACK-27] Inform myself about the required payment details for each country or region. (First the Netherlands, then, maybe the rest of the world.)
    │  │  │  ├─ line 156: TODO : [MERNSTACK-28] Find out how to validate if the correct business and payment details are being used and the REAL "owner" is the only one authorized to change these details.
@@ -427,48 +438,66 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
    │  │  │  ├─ line 186: TODO : [MERNSTACK-33] Make it possible to change this value in the user/owner settings.
    │  │  │  ├─ line 191: TODO : [MERNSTACK-35] Reviews will be linked to a company, based on an reviewId in the review model. This model should contain the review text, rating, reviewer, timestamp and maybe more.
    │  │  │  ├─ line 192: TODO : [MERNSTACK-36] "reviews" array should contain review objects with an reviewId.
-   │  │  │  ├─ line 219: TODO : [MERNSTACK-80] Create `junction` table between companies and vendors. (many-to-many relationship)
-   │  │  │  ├─ line 229: TODO : [MERNSTACK-42] Create a new schema and model for stories. Stories will be linked to a company, to read on their profile page. Stories will contain a title, text, image, linked customer, linked employees, linked vendors, linked products, linked services, linked projects, and more.
-   │  │  │  ├─ line 234: TODO : [MERNSTACK-43] Create a new schema and model for projects.
-   │  │  │  ├─ line 240: TODO : [MERNSTACK-45] Create a new schema and model for products. If more than one company would associate to a product, they have to create a project together and work from there. The products from a project should also (optionally) be visible on the associated company profiles.
-   │  │  │  ├─ line 241: TODO : [MERNSTACK-46] A company product listing page should have a search bar, and a filter for industry, rating, price, and more.
-   │  │  │  ├─ line 242: TODO : [MERNSTACK-47] It should be possible to search for products without having to visit a company profile. (search bar on the home page)
-   │  │  │  ├─ line 243: TODO : [MERNSTACK-48] Make product listing something companies can pay for. (premium feature) IMPORTANT: Make sure that the users finds what they search for, that should have BIG priority over paid listings that will feel unpleasant and not logical.
-   │  │  │  ├─ line 244: TODO : [MERNSTACK-49] A product page should also have reviews from customers. (maybe also from employees and vendors?)
-   │  │  │  ├─ line 245: TODO : [MERNSTACK-50] IMPORTANT! Find out how to use a "junction table" to link companies to products and products to projects. (many-to-many relationship)
-   │  │  │  ├─ line 251: TODO : [MERNSTACK-52] Create a new schema and model for services. If more than one company would associate to a service, they have to create a project together and work from there. The services from a project should also (optionally) be visible on the associated company profiles.
-   │  │  │  ├─ line 252: TODO : [MERNSTACK-53] Make it possible for users to contact a company for about a service with chat and video call (maybe chat and video calls should be a premium features, decide about this later).
-   │  │  │  ├─ line 253: TODO : [MERNSTACK-54] A appointment can be made with a company, with the advantage that the service delivered to the customer can be linked to a story on the company/project profile page. The customer, employee, vendor, product, service, and more can be linked to the story and leave their part of the message, this way a customer (user) can maybe have a beneficial price in return for a review with rating.
-   │  │  │  ├─ line 254: TODO : [MERNSTACK-55] Think about how to make appointments with companies, how the agenda model and schema should look like, and how to link appointments to stories.
-   │  │  │  ├─ line 260: TODO : Create a new schema and model for `appointment`. An appointment will be linked to a company or project, based on an appointmentId in the appointment model. Employees, users, vendors, products, a service and more can be linked to an appointment.
-   │  │  │  ├─ line 265: TODO : [MERNSTACK-56] Make it possible for employees to respond on service contact chat/video call requests, and make appointments with customers. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
-   │  │  │  ├─ line 266: TODO : [MERNSTACK-57] Create message schema and model. Messages will be linked to a company, based on an messageId in the message model. This model should contain the message text, timestamp, and more. Messages will be linked to a company, based on an messageId in the message model. This is a one-to-many relationship, between company and messages OR project and messages. It should not be hard to switch between the `company messenger inbox` and the `project messenger inbox`.
-   │  │  │  ├─ line 267: TODO : [MERNSTACK-58] Create messenger functionality and use encryption for the privacy and security of the messages. Never store the encryption key in the database, only encrypt and decrypt the messages in the frontend. (Use a library for this)
-   │  │  │  ├─ line 270: TODO : [MERNSTACK-59] Make it possible for normal users to send messages to a company, project or employee. Make it possible for employees to respond to messages from users.
-   │  │  │  ├─ line 271: TODO : [MERNSTACK-60] Make it possible for vendors to send messages to a company, project or employee. (Employees have to be authorized by the company (main) owner to connect with vendors). Make it possible for (authorized) employees, owners and companies to respond to messages from vendors.
-   │  │  │  ├─ line 272: TODO : [MERNSTACK-61] Build a sharable functionality (a link to each functionality, agreement, project, product, revenue agreement, appointment or whatever) in all features where it is possible to communicate about between 2 related users. Make it possible to share a link from one to another if both users (companies, owners, (authorized) employees, project associates or whichever other user that is associated to each other in that specific "thing" they use, share (or possibly CAN share), or whatever way they (can) relate to each other for EVERY possible functionality and feature I can think of to be USEFUL and NOT too distracting from ANY more important things (functionalities or features).
-   │  │  │  ├─ line 278: TODO : [MERNSTACK-62] GOOD IDEA: Maybe it is possible to save the agenda data in a separate agenda model and schema, and link the agenda to the company, project or user. (one-to-one relationship) And think about how to link the agenda  to company`, `project`` and even `user` schemes and models.
-   │  │  │  ├─ line 283: TODO : [MERNSTACK-63] Create a new schema and model for projects. Projects will be linked to a company, based on an projectId in the project model. (and maybe userId's? or employeeId's)
-   │  │  │  ├─ line 284: TODO : [MERNSTACK-64] Make it possible to create and design a project profile page, with a storyline of stories linked to companies, employees, associated customers, reviews, ratings and more. Authorize employees to change project settings. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
-   │  │  │  ├─ line 285: TODO : [MERNSTACK-65] Create functionalities for companies to automatically share costs for premium features, based on a percentage all associated companies have to agree on for this to work.
-   │  │  │  ├─ line 286: TODO : [MERNSTACK-66] Make functionalities so companies can share the revenue of a projects products and services, based on a percentage all associated companies have to agree on for this to work, or share revenue based on the assigned employees (from a specific company) that are associated to the delivered products and services.
-   │  │  │  ├─ line 287: TODO : [MERNSTACK-67] Make it possible for companies associated to projects to share revenue per service or product.
-   │  │  │  ├─ line 288: TODO : [MERNSTACK-68] Make it possible to configure revenue sharing per product, per service based on from which profile page the product or service was ordered.
-   │  │  │  ├─ line 289: TODO : [MERNSTACK-69] Make it possible to share revenue based on which company performs the service.
-   │  │  │  └─ line 305: TODO : [MERNSTACK-70] Decide what kind of functionalities and authorizations employees have. Owners should automatically have employee rights and functionalities.
+   │  │  │  └─ line 308: TODO : [MERNSTACK-70] Decide what kind of functionalities and authorizations employees have. Owners should automatically have employee rights and functionalities.
+   │  │  ├─ customerModel.js
+   │  │  │  └─ line 1: TODO : [MERNSTACK-94] Create customer model and schema and link it to the company model and schema.
    │  │  ├─ departmentModel.js
-   │  │  │  └─ line 1: TODO : Create department schema and model. Company associated users (with roles) can be linked to a department, based on a userId OR maybe with an employeeId.
+   │  │  │  └─ line 1: TODO : [MERNSTACK-100] Create department schema and model. Company associated users (with roles) can be linked to a department, based on a userId OR maybe with an employeeId.
    │  │  ├─ employeeModel.js
    │  │  │  ├─ line 1: TODO : [MERNSTACK-40] Create a new schema and model `Employee`
    │  │  │  └─ line 2: TODO : [MERNSTACK-41] Employees will be linked to a company, based on an employeeId in the employee model. (and userId?)
+   │  │  ├─ eventModel.js
+   │  │  │  ├─ line 1: TODO : [MERNSTACK-86] Create a new schema and model for events. Events will be linked to a company, based on an eventId in the event model.
+   │  │  │  └─ line 2: TODO : [MERNSTACK-87] GOOD IDEA: Maybe it is possible to save the event data in a separate event model and schema, and link the event to the company, project or user. (one-to-one relationship) And think about how to link the event to `company`, `project`` and even `user` schemes and models.
+   │  │  ├─ invoiceModel.js
+   │  │  │  └─ line 1: TODO : [MERNSTACK-89] Create a new schema and model for invoice. Invoices will be linked to a company, based on an invoiceId in the invoice model.
+   │  │  ├─ messageModel.js
+   │  │  │  ├─ line 1: TODO : [MERNSTACK-57] Create message schema and model. Messages will be linked to a company, based on an messageId in the message model. This model should contain the message text, timestamp, and more. Messages will be linked to a company, based on an messageId in the message model. This is a one-to-many relationship, between company and messages OR project and messages. It should not be hard to switch between the `company messenger inbox` and the `project messenger inbox`.
+   │  │  │  ├─ line 2: TODO : [MERNSTACK-58] Create messenger functionality and use encryption for the privacy and security of the messages. Never store the encryption key in the database, only encrypt and decrypt the messages in the frontend. (Use a library for this)
+   │  │  │  ├─ line 5: TODO : [MERNSTACK-59] Make it possible for normal users to send messages to a company, project or employee. Make it possible for employees to respond to messages from users.
+   │  │  │  ├─ line 6: TODO : [MERNSTACK-60] Make it possible for vendors to send messages to a company, project or employee. (Employees have to be authorized by the company (main) owner to connect with vendors). Make it possible for (authorized) employees, owners and companies to respond to messages from vendors.
+   │  │  │  └─ line 7: TODO : [MERNSTACK-61] Build a sharable functionality (a link to each functionality, agreement, project, product, revenue agreement, appointment or whatever) in all features where it is possible to communicate about between 2 related users. Make it possible to share a link from one to another if both users (companies, owners, (authorized) employees, project associates or whichever other user that is associated to each other in that specific "thing" they use, share (or possibly CAN share), or whatever way they (can) relate to each other for EVERY possible functionality and feature I can think of to be USEFUL and NOT too distracting from ANY more important things (functionalities or features).
+   │  │  ├─ notificationModel.js
+   │  │  │  └─ line 1: TODO : [MERNSTACK-85] Create a new schema and model for notifications. Notifications will be linked to a company, based on an notificationId in the notification model.
+   │  │  ├─ orderModel.js
+   │  │  │  └─ line 1: TODO : [MERNSTACK-91] Create a new schema and model for orders. Orders will be linked to a company, based on an orderId in the order model.
+   │  │  ├─ paymentMethodModel.js
+   │  │  │  └─ line 1: TODO : [MERNSTACK-83] Create Payment Method Model
    │  │  ├─ premiumTypeModel.js
-   │  │  │  └─ line 1: TODO : [MERNSTACK-37] Create a new schema and model for premium types. Premium types will be linked to a company, based on an premiumTypeId in the premiumType model.
+   │  │  │  ├─ line 1: TODO : [MERNSTACK-37] Create a new schema and model for premium types. Premium types will be linked to a company, based on an premiumTypeId in the premiumType model.
+   │  │  │  └─ line 2: TODO : [MERNSTACK-93] Decide on the premium names, which features they have, and how much they cost, what you get for every premium kind and how to pay/bill them.
+   │  │  ├─ productModel.js
+   │  │  │  ├─ line 1: TODO : [MERNSTACK-45] Create a new schema and model for products. If more than one company would associate to a product, they have to create a project together and work from there. The products from a project should also (optionally) be visible on the associated company profiles.
+   │  │  │  ├─ line 2: TODO : [MERNSTACK-46] A company product listing page should have a search bar, and a filter for industry, rating, price, and more.
+   │  │  │  ├─ line 3: TODO : [MERNSTACK-47] It should be possible to search for products without having to visit a company profile. (search bar on the home page)
+   │  │  │  ├─ line 4: TODO : [MERNSTACK-48] Make product listing something companies can pay for. (premium feature) IMPORTANT: Make sure that the users finds what they search for, that should have BIG priority over paid listings that will feel unpleasant and not logical.
+   │  │  │  ├─ line 5: TODO : [MERNSTACK-49] A product page should also have reviews from customers. (maybe also from employees and vendors?)
+   │  │  │  └─ line 6: TODO : [MERNSTACK-50] IMPORTANT! Find out how to use a "junction table" to link companies to products and products to projects. (many-to-many relationship)
+   │  │  ├─ projectModel.js
+   │  │  │  ├─ line 1: TODO : [MERNSTACK-43] Create a new schema and model for projects.
+   │  │  │  ├─ line 2: TODO : [MERNSTACK-63] Create a new schema and model for projects. Projects will be linked to a company, based on an projectId in the project model. (and maybe userId's? or employeeId's)
+   │  │  │  ├─ line 3: TODO : [MERNSTACK-64] Make it possible to create and design a project profile page, with a storyline of stories linked to companies, employees, associated customers, reviews, ratings and more. Authorize employees to change project settings. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
+   │  │  │  ├─ line 4: TODO : [MERNSTACK-65] Create functionalities for companies to automatically share costs for premium features, based on a percentage all associated companies have to agree on for this to work.
+   │  │  │  ├─ line 5: TODO : [MERNSTACK-66] Make functionalities so companies can share the revenue of a projects products and services, based on a percentage all associated companies have to agree on for this to work, or share revenue based on the assigned employees (from a specific company) that are associated to the delivered products and services.
+   │  │  │  ├─ line 6: TODO : [MERNSTACK-67] Make it possible for companies associated to projects to share revenue per service or product.
+   │  │  │  ├─ line 7: TODO : [MERNSTACK-68] Make it possible to configure revenue sharing per product, per service based on from which profile page the product or service was ordered.
+   │  │  │  └─ line 8: TODO : [MERNSTACK-69] Make it possible to share revenue based on which company performs the service.
    │  │  ├─ ratingModel.js
    │  │  │  ├─ line 1: TODO : [MERNSTACK-73] Create a new schema and model for `rating`. Ratings will be linked to a company, based on an ratingId in the rating model. This model should contain the rating number, reviewer, timestamp and maybe more.
    │  │  │  └─ line 2: TODO : [MERNSTACK-78] Think about ways to reward users that leave honest ratings. Think about ways to punish those who only leave trolling ratings and reviews with the intention to give one or more businesses a bad name or harass companies.)
    │  │  ├─ reviewModel.js
    │  │  │  ├─ line 1: TODO : [MERNSTACK-34] Create review schema and model.
    │  │  │  └─ line 2: TODO : [MERNSTACK-77] Set some kind of `target` properties to link the review to the company, project, product, service, employee, vendor etc. And set some kind of `source` properties to link the review to the user, customer, employee, vendor etc. (many-to-many relationship), the `type` of review could be `product` or `service` linked to `product` `id` and `service` `id`.
+   │  │  ├─ serviceModel.js
+   │  │  │  ├─ line 1: TODO : [MERNSTACK-52] Create a new schema and model for services. If more than one company would associate to a service, they have to create a project together and work from there. The services from a project should also (optionally) be visible on the associated company profiles.
+   │  │  │  ├─ line 2: TODO : [MERNSTACK-53] Make it possible for users to contact a company for about a service with chat and video call (maybe chat and video calls should be a premium features, decide about this later).
+   │  │  │  ├─ line 3: TODO : [MERNSTACK-54] A appointment can be made with a company, with the advantage that the service delivered to the customer can be linked to a story on the company/project profile page. The customer, employee, vendor, product, service, and more can be linked to the story and leave their part of the message, this way a customer (user) can maybe have a beneficial price in return for a review with rating.
+   │  │  │  ├─ line 4: TODO : [MERNSTACK-55] Think about how to make appointments with companies, how the agenda model and schema should look like, and how to link appointments to stories.
+   │  │  │  └─ line 5: TODO : [MERNSTACK-56] Make it possible for employees to respond on service contact chat/video call requests, and make appointments with customers. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
+   │  │  ├─ storyModel.js
+   │  │  │  └─ line 1: TODO : [MERNSTACK-42] Create a new schema and model for stories. Stories will be linked to a company, to read on their profile page. Stories will contain a title, text, image, linked customer, linked employees, linked vendors, linked products, linked services, linked projects, and more.
+   │  │  ├─ taskModel.js
+   │  │  │  └─ line 1: TODO : [MERNSTACK-88] Create a new schema and model for tasks. Tasks will be linked to a company, based on an taskId in the task model.
    │  │  ├─ userModel.js
    │  │  │  └─ line 1: TODO : [MERNSTACK-14] Create a new schema and model for User.
    │  │  └─ vendorModel.js
@@ -479,47 +508,59 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
    │  │  │  ├─ line 21: TODO : Check if the book already exists in the database. Hint: Use the findOne method and consider using `unique: true` in the book schema.
    │  │  │  └─ line 22: TODO : If the book already exists, send status 409 response and a (error) message to inform the client.
    │  │  └─ companiesRoute.js
-   │  │     ├─ line 17: TODO : Check if the book already exists in the database. Hint: Use the findOne method and consider using `unique: true` in the book schema.
-   │  │     ├─ line 18: TODO : If the book already exists, send status 409 response and a (error) message to inform the client.
-   │  │     ├─ line 21: TODO : Add all properties assigned in the schema and request body, check their value to be true
-   │  │     └─ line 42: TODO : `id` corresponding to the `paymentMethod` model document `id`
-   │  └─ config.js
-   │     └─ line 3: TODO : if something is not working right, add books-collection to the end of the URL:
+   │  │     ├─ line 18: TODO : [MERNSTACK-110] Check if the company already exists in the database. Hint: Use the findOne method and consider using `unique: true` in the company schema.
+   │  │     ├─ line 19: TODO : [MERNSTACK-111] If the company already exists, send status 409 response and a (error) message to inform the client.
+   │  │     ├─ line 21: TODO : [MERNSTACK-112] Remove this function once the payment model has been fully implemented.
+   │  │     ├─ line 29: TODO : [MERNSTACK-109] Populate the company document with the properties from the request body if they exist.
+   │  │     └─ line 50: TODO : `id` corresponding to the `paymentMethod` model document `id`
+   │  └─ index.js
+   │     └─ line 13: TODO : [MERNSTACK-113] Configure CORS properly before deployment.
    └─ README.md
-      ├─ line 29: TODO :
-      ├─ line 31: [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
-      ├─ line 32: [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
-      ├─ line 33: [x] Finish basic Book schema and model. For faster functional development and testing purposes.
-      ├─ line 34: [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
-      ├─ line 35: [ ] [MERNSTACK-74] Set up `Company` model.
-      ├─ line 36: [ ] [MERNSTACK-65] Create a route to save a new Company document in the database.
-      ├─ line 37: [ ] [MERNSTACK-66] Create a route to get all Company documents from the database.
-      ├─ line 38: [ ] [MERNSTACK-67] Create a route to get a single Company document from the database.
-      ├─ line 39: [ ] [MERNSTACK-68] Create a route to update a single Company document in the database.
-      ├─ line 40: [ ] [MERNSTACK-69] Create a route to delete a single Company document from the database.
-      ├─ line 41: [ ] Actualize, complete and correct Company scheme documentation.
-      ├─ line 42: [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
-      ├─ line 43: [x] [MERNSTACK-70] Set up GET, POST, PUT and DELETE Book server routes.
-      ├─ line 44: [ ] [MERNSTACK-51] Create Jira tickets for all TODO's.
-      ├─ line 45: [ ] [MERNSTACK-53] Set up GET, POST, PUT and DELETE Company server routes.
-      ├─ line 46: [ ] [MERNSTACK-55] Create User model.
-      ├─ line 47: [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
-      ├─ line 48: [ ] [MERNSTACK-59] Create one-to-many relationship between Owner and Company in the Owner schema. This will allow to associate each Owner document with multiple Company documents.
-      ├─ line 49: [ ] Create React app using Vite.js.
-      ├─ line 50: [ ] Move Vite.js documentation from backend devdocs folder to frontend devdocs folder
-      ├─ line 51: [ ] [MERNSTACK-56] Create login and register functionality. Hash user password on register and compare hashed password on login. (see backend devdocs folder)
-      ├─ line 52: [ ] [MERNSTACK-60] Create `user` authentication and authorization functionality using JSON Web Token authorization. (see backend devdocs folder)
-      ├─ line 53: [ ] [MERNSTACK-58] When user is logged in, create a form to register a company and make user owner. Owner has admin rights at first when creating his account and registering his company.
-      ├─ line 54: [ ]
-      ├─ line 55: [ ] [MERNSTACK-61] Create `junction` table for many-to-many relationship between `owners` and `companies`. (see backend devdocs folder)
-      ├─ line 56: [ ] [MERNSTACK-62] Create `junction` table between `Company` and `Project`. This table will be used because of the many-to-many relationship and additional properties that are needed to link a company to a project. (see backend devdocs folder)
-      ├─ line 57: [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers)
-      ├─ line 58: [ ] After user login, display link that will `navigate` (?with `useNavigate()`?) user to `my-companies` where companies will be listed and with a company register form. (see frontend devdocs folder)
-      ├─ line 59: [ ] [MERNSTACK-64] In the frontend, create a route to `/my-companies` where `user` companies will be listed.
-      ├─ line 60: [ ] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (Just to show that I know how to use Redux in React.) (see backend devdocs folder)
-      ├─ line 61: [ ] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
-      └─ line 62: [ ] Break down all ideas in the `Future functionalities:` section below into smaller tasks and create Jira tickets for them.
+      ├─ line 346: TODO :
+      ├─ line 348: [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
+      ├─ line 349: [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
+      ├─ line 350: [x] Finish basic Book schema and model. For faster functional development and testing purposes.
+      ├─ line 351: [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
+      ├─ line 352: [x] [MERNSTACK-103] Start using testing frameworks Mocha and Chai to write automated tests for the endpoints and ensure that the code is working correctly.
+      ├─ line 353: [x] [MERNSTACK-74] Set up `Company` model.
+      ├─ line 354: [x] [MERNSTACK-65] Create a route to save a new Company document in the database.
+      ├─ line 355: [x] [MERNSTACK-95] Test companyRouter POST route `/` for saving a new company with Postman.
+      ├─ line 356: [ ] [MERNSTACK-103] Test companyRouter POST route `/` for saving a new company with Chai and Mocha.
+      ├─ line 357: [x] [MERNSTACK-66] Create a route to get all Company documents from the database.
+      ├─ line 358: [x] [MERNSTACK-96] Test companyRouter GET route `/` for getting all companies with Postman.
+      ├─ line 359: [ ] [MERNSTACK-104] Test companyRouter GET route `/` for getting all companies with Chai and Mocha.
+      ├─ line 360: [x] [MERNSTACK-67] Create a route to get a single Company document from the database.
+      ├─ line 361: [x] [MERNSTACK-97] Test companyRouter GET route `/:id` for getting a single company with Postman.
+      ├─ line 362: [ ] [MERNSTACK-105] Test companyRouter GET route `/:id` for getting a single company with Chai and Mocha.
+      ├─ line 363: [x] [MERNSTACK-68] Create a route to update a single Company document in the database.
+      ├─ line 364: [x] [MERNSTACK-98] Test companyRouter PUT route `/:id` for updating a single company with Postman.
+      ├─ line 365: [ ] [MERNSTACK-106] Test companyRouter PUT route `/:id` for updating a single company with Chai and Mocha.
+      ├─ line 366: [x] [MERNSTACK-69] Create a route to delete a single Company document from the database.
+      ├─ line 367: [ ] [MERNSTACK-99] Test companyRouter DELETE route `/:id` for deleting a single company with Postman.
+      ├─ line 368: [ ] [MERNSTACK-107] Test companyRouter DELETE route `/:id` for deleting a single company with Chai and Mocha.
+      ├─ line 369: [ ] Actualize, complete and correct Company scheme documentation.
+      ├─ line 370: [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
+      ├─ line 371: [x] [MERNSTACK-70] Set up GET, POST, PUT and DELETE Book server routes.
+      ├─ line 372: [x] [MERNSTACK-51] Create Jira tickets for all TODOs.
+      ├─ line 373: [x] [MERNSTACK-53] Create GET, POST, PUT and DELETE Company server routes.
+      ├─ line 374: [ ] [MERNSTACK-55] Create User model.
+      ├─ line 375: [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
+      ├─ line 376: [ ] [MERNSTACK-59] Create one-to-many relationship between Owner and Company in the Owner schema. This will allow to associate each Owner document with multiple Company documents.
+      ├─ line 377: [ ] Create React app using Vite.js.
+      ├─ line 378: [x] Move Vite.js documentation from backend devdocs folder to frontend devdocs folder
+      ├─ line 379: [ ] [MERNSTACK-56] Create login and register functionality. Hash user password on register and compare hashed password on login. (see backend devdocs folder)
+      ├─ line 380: [ ] [MERNSTACK-60] Create `user` authentication and authorization functionality using JSON Web Token authorization. (see backend devdocs folder)
+      ├─ line 381: [ ] [MERNSTACK-58] When user is logged in, create a form to register a company and make user owner. Owner has admin rights at first when creating his account and registering his company.
+      ├─ line 382: [ ] [MERNSTACK-61] Create `junction` table for many-to-many relationship between `owners` and `companies`. (see backend devdocs folder)
+      ├─ line 383: [ ] [MERNSTACK-62] Create `junction` table between `Company` and `Project`. This table will be used because of the many-to-many relationship and additional properties that are needed to link a company to a project. (see backend devdocs folder)
+      ├─ line 384: [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers)
+      ├─ line 385: [ ] After user login, display link that will `navigate` (?with `useNavigate()`?) user to `my-companies` where companies will be listed and with a company register form. (see frontend devdocs folder)
+      ├─ line 386: [ ] [MERNSTACK-64] In the frontend, create a route to `/my-companies` where `user` companies will be listed.
+      ├─ line 387: [ ] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (see frontend devdocs folder)
+      ├─ line 388: [x] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
+      ├─ line 389: [ ] Break down all ideas in the `Future functionalities:` section below into smaller tasks and create Jira tickets for them.
+      ├─ line 390: [ ] [MERNSTACK-102] Check for the word `property` when it should be `field` in the documentation of schemas and models. Check for the word `field` when it should be `property` in the documentation when talking about database `document`s
+      ├─ line 391: [ ] [MERNSTACK-114] Implement time-travel debugging with Redux DevTools.
+      └─ line 392: [ ] [MERNSTACK-115] Decide the default destination after clicking the BackButton, something like the previous page or the home page.
 
 ```
-
-
