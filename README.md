@@ -398,6 +398,7 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
 - [ ] [MERNSTACK-119] Create DeleteCompany component to delete a single company.
 - [ ] [MERNSTACK-120] Create CreateCompany component to create a new company.
 - [ ] [MERNSTACK-121] Implement a button on the ShowCompany component that allows the user to navigate to the corresponding EditCompany page.
+- [ ] [MERNSTACK-122] Save `showType` state of BooksList component to Redux store so when the `BackButton` is clicked you can navigate back to the previous page and display the same `showType` state (`table` or `card`).
 
 # Everything else:
 
