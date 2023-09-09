@@ -392,6 +392,13 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
 - [ ] [MERNSTACK-102] Check for the word `property` when it should be `field` in the documentation of schemas and models. Check for the word `field` when it should be `property` in the documentation when talking about database `document`'s
 - [ ] [MERNSTACK-114] Implement time-travel debugging with Redux DevTools.
 - [ ] [MERNSTACK-115] Decide the default destination after clicking the BackButton, something like the previous page or the home page.
+- [ ] [MERNSTACK-116] Create table on the frontend to display all companies.
+- [ ] [MERNSTACK-117] Create ShowCompany component to display a single company's details
+- [ ] [MERNSTACK-118] Create EditCompany component to edit a single company's details.
+- [ ] [MERNSTACK-119] Create DeleteCompany component to delete a single company.
+- [ ] [MERNSTACK-120] Create CreateCompany component to create a new company.
+- [ ] [MERNSTACK-121] Implement a button on the ShowCompany component that allows the user to navigate to the corresponding EditCompany page.
+- [ ] [MERNSTACK-122] Save `showType` state of BooksList component to Redux store so when the `BackButton` is clicked you can navigate back to the previous page and display the same `showType` state (`table` or `card`).
 
 # Everything else:
 
