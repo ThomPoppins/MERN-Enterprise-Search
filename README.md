@@ -397,6 +397,7 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
 - [ ] [MERNSTACK-118] Create EditCompany component to edit a single company's details.
 - [ ] [MERNSTACK-119] Create DeleteCompany component to delete a single company.
 - [ ] [MERNSTACK-120] Create CreateCompany component to create a new company.
+- [ ] [MERNSTACK-121] Implement a button on the ShowCompany component that allows the user to navigate to the corresponding EditCompany page.
 
 # Everything else:
 
