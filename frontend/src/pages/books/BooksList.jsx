@@ -7,6 +7,7 @@ import { MdOutlineAddBox } from "react-icons/md";
 import { BACKEND_URL } from "../../../config";
 import BooksTable from "../../components/booksList/BooksTable";
 import BooksCard from "../../components/booksList/BooksCard";
+import { BOOKS_LIST_SHOW_TYPE } from "../../store/actions";
 
 const BooksList = () => {
   // useDispatch() is a hook that returns the reference to the dispatch function from the Redux store.
@@ -15,12 +16,6 @@ const BooksList = () => {
   const showType = useSelector((state) => state.booksListShowType);
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  // get current Redux state and log it to  the console
-  console.log(
-    "current Redux state: ",
-    useSelector((state) => state)
-  );
 
   useEffect(() => {
     setLoading(true);
@@ -39,8 +34,7 @@ const BooksList = () => {
   const handleShowTypeChange = (type) => {
     // dispatch() is a function of the Redux store. You call store.dispatch to dispatch an action.
     // The object passed to the dispatch() function is called action.
-    dispatch({ type: "SET_SHOW_TYPE", payload: type });
-    console.log("showType: ", showType);
+    dispatch({ type: BOOKS_LIST_SHOW_TYPE, payload: type });
   };
 
   return (
