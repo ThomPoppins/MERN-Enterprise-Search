@@ -4,11 +4,11 @@ import Spinner from "../../components/Spinner";
 import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
 import { BACKEND_URL } from "../../../config";
-import BooksTable from "../../components/booksList/BooksTable";
-import BooksCard from "../../components/booksList/BooksCard";
+import CompaniesTable from "../../components/companiesList/CompaniesTable";
+import CompaniesCard from "../../components/companiesList/CompaniesCard";
 
 const BooksList = () => {
-  const [books, setBooks] = useState([]);
+  const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showType, setShowType] = useState("table");
 

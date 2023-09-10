@@ -4,6 +4,7 @@ import Spinner from "../../components/Spinner";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { BACKEND_URL } from "../../../config.js";
+import { useSnackbar } from "notistack";
 
 const DeleteBook = () => {
   const [loading, setLoading] = useState(false);
@@ -12,17 +13,25 @@ const DeleteBook = () => {
   // useNavigate is a hook that allows us to navigate to a different page
   const navigate = useNavigate();
 
+  // useSnackbar is a hook that returns an object with two properties: enqueueSnackbar and closeSnackbar
+  // enqueueSnackbar is a function that takes an object as an argument
+  // and displays a snackbar with the message and the variant that we pass in the object
+  // closeSnackbar is a function that takes an id as an argument and closes the snackbar with that id
+  // https://iamhosseindhv.com/notistack/demos#use-snackbar
+  const { enqueueSnackbar } = useSnackbar();
+
   const handleDeleteBook = () => {
     setLoading(true);
     axios
       .delete(BACKEND_URL + `/books/${id}`)
       .then(() => {
         setLoading(false);
+        enqueueSnackbar("Book deleted successfully!", { variant: "success" });
         navigate("/books");
       })
       .catch((error) => {
         setLoading(false);
-        alert("Error deleting book, please check the console.");
+        enqueueSnackbar("Error deleting book!", { variant: "error" });
         console.log(error);
       });
   };

@@ -60,6 +60,10 @@ Using React and Redux together provides several advantages for building scalable
 
 The `react-redux` library is a popular library that makes it easy to implement Redux in a JavaScript React application. It provides a set of bindings between React and Redux, allowing you to easily connect your React components to the Redux store and dispatch actions.
 
+**Combining state management by React and Redux:** When using both useState() and Redux together, I can use useState() to manage local component state and Redux to manage global application state. This allows me to keep my state management organized and scalable, while still providing a simple and lightweight way to manage local state within individual components.
+
+For example, I use useState() to manage the state of a form within a component, while using Redux to manage the state of the user's authentication status across the entire application. By combining useState() and Redux, I can create a flexible and scalable state management system that meets the needs of my application.
+
 ### Vite.js:
 
 The React frontend application was installed using Vite.js, a modern build tool that provides fast development server and efficient build process.
