@@ -390,7 +390,6 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
 - [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers)
 - [ ] After user login, display link that will `navigate` (?with `useNavigate()`?) user to `my-companies` where companies will be listed and with a company register form. (see frontend devdocs folder)
 - [ ] [MERNSTACK-64] In the frontend, create a route to `/my-companies` where `user` companies will be listed.
-- [ ] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (see frontend devdocs folder)
 - [x] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
 - [ ] Break down all ideas in the `Future functionalities:` section below into smaller tasks and create Jira tickets for them.
 - [ ] [MERNSTACK-102] Check for the word `property` when it should be `field` in the documentation of schemas and models. Check for the word `field` when it should be `property` in the documentation when talking about database `document`'s
@@ -406,6 +405,7 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
 - [ ] [MERNSTACK-122] Create CompaniesList page (where all companies for a user will be shown in `table` or `card` view.) and safe this `table`/`card` setting to Redux store state so user will return to listing page with preferred setting.
 - [ ] [MERNSTACK-124] Use useSnackbar() for displaying error or success messages to the user in the Company components.
 - [ ] [MERNSTACK-125] Inform myself better about using useEffect() to prevent infinite loop situations when my application get more complex. [Speech about using useEffect effectively](https://www.youtube.com/watch?v=eFGeStq8dZo&list=PLokIxGKSireSB4Gx6r7xWlFs9Q9PueDED&ab_channel=ReactConferencesbyGitNation )
+- [ ] [MERNSTACK-126] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (see frontend devdocs folder)
 
 
 
