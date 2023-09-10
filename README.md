@@ -402,7 +402,14 @@ Overall, Mocha and Chai provide a powerful and flexible testing framework for te
 - [ ] [MERNSTACK-119] Create DeleteCompany component to delete a single company.
 - [ ] [MERNSTACK-120] Create CreateCompany component to create a new company.
 - [ ] [MERNSTACK-121] Implement a button on the ShowCompany component that allows the user to navigate to the corresponding EditCompany page.
-- [ ] [MERNSTACK-122] Save `showType` state of BooksList component to Redux store so when the `BackButton` is clicked you can navigate back to the previous page and display the same `showType` state (`table` or `card`).
+- [ ] [MERNSTACK-123] Create a CompanyModal component that will show up on the CompaniesList page when the user clicks on the `eye` icon.
+- [ ] [MERNSTACK-122] Create CompaniesList page (where all companies for a user will be shown in `table` or `card` view.) and safe this `table`/`card` setting to Redux store state so user will return to listing page with preferred setting.
+- [ ] [MERNSTACK-124] Use useSnackbar() for displaying error or success messages to the user in the Company components.
+- [ ] [MERNSTACK-125] Inform myself better about using useEffect() to prevent infinite loop situations when my application get more complex. [Speech about using useEffect effectively](https://www.youtube.com/watch?v=eFGeStq8dZo&list=PLokIxGKSireSB4Gx6r7xWlFs9Q9PueDED&ab_channel=ReactConferencesbyGitNation )
+
+
+
+
 
 # Everything else:
 
