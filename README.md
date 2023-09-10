@@ -1,26 +1,80 @@
 # MERN_STACK_PROJ. :rocket:
 
 - [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
-  - [Application Description](#application-description)
+- [Getting Started](#getting-started)
+- [Application Description](#application-description)
   - [Frontend](#frontend)
     - [Vite.js:](#vitejs)
   - [Backend](#backend)
     - [Many-to-Many Relationships](#many-to-many-relationships)
-- [How to test application yourself:](#how-to-test-application-yourself)
-- [Getting Started](#getting-started)
 - [Future functionalities:](#future-functionalities)
   - [User Privilege Management and Admin Authorization](#user-privilege-management-and-admin-authorization)
 - [Models:](#models)
     - [Company](#company)
       - [Fields:](#fields)
 - [Routes:](#routes)
-- [Tests:](#tests)
+- [Testing:](#testing)
+  - [Mocha and Chai](#mocha-and-chai)
+  - [Postman](#postman)
 - [TODO:](#todo)
 - [Everything else:](#everything-else)
 
-Each section title is linked to the corresponding part of the document for easy navigation.
 
-## Application Description
+# Getting Started
+
+To run this application locally, follow these steps:
+
+1. **Clone the Repository**:
+   ```bash
+   git clone git@github.com:ThomPoppins/MERN_STACK_PROJ..git
+   ```
+
+2. **Set Up Backend Configuration**:
+   - Navigate to the `/backend` folder.
+   - Create a `config.js` file if it doesn't exist.
+   - Add the following constants and export them:
+     ```javascript
+     // backend/config.js
+     export const PORT = 5555;
+     export const mongoDBURL = 'YourMongoDBDatabaseConnectionURLWithUsernamePasswordAuthenticationHere';
+     ```
+
+3. **Set Up Frontend Configuration**:
+   - Navigate to the `/frontend` folder.
+   - Create a `config.js` file if it doesn't exist.
+   - Add the following constant and export it:
+     ```javascript
+     // frontend/config.js
+     export const BACKEND_URL = 'http://localhost:5555';
+     ```
+
+4. **Install Dependencies**:
+   - Inside the `/backend` folder, run:
+     ```bash
+     npm install
+     ```
+   - Inside the `/frontend` folder, run:
+     ```bash
+     npm install
+     ```
+
+5. **Start the Servers**:
+   - Inside the `/backend` folder, run:
+     ```bash
+     npm run dev
+     ```
+   - In a separate terminal, inside the `/frontend` folder, run:
+     ```bash
+     npm run dev
+     ```
+
+6. **Access the Application**:
+   - Visit the web application in your browser using the link printed by the Vite.js server after starting the frontend server.
+
+Now you have the application up and running locally!
+
+
+# Application Description
 
 Welcome to my FullStack JavaScript application built with Express.js on the backend and React with Redux on the frontend. This application leverages the power of Axios for seamless communication between the two layers. MongoDB serves as the database, and Mongoose is our trusted tool for connecting and interacting with it.
 
@@ -89,62 +143,6 @@ In the backend, I've set up RESTful API endpoints to create, read, update, and d
 One interesting aspect of this project is handling many-to-many relationships between companies and projects. In real-world scenarios, companies often take part in multiple projects, and a single project can involve multiple companies. To achieve this, I'll be using a `junction` collection in MongoDB.
 
 The main advantage of using a `junction` collection is that it simplifies the management of these relationships. For instance, consider a scenario where Company A and Company B collaborate on Project X. Instead of duplicating data or creating complex nested structures, the `junction` collection allows us to create a clear and efficient link between Company A, Company B, and Project X. This makes it easy to track participation and configure revenue sharing settings dynamically when all parties agree.
-
-# How to test application yourself:
-
-
-# Getting Started
-
-To run this application locally, follow these steps:
-
-1. **Clone the Repository**:
-   ```bash
-   git clone git@github.com:ThomPoppins/MERN_STACK_PROJ..git
-   ```
-
-2. **Set Up Backend Configuration**:
-   - Navigate to the `/backend` folder.
-   - Create a `config.js` file if it doesn't exist.
-   - Add the following constants and export them:
-     ```javascript
-     // backend/config.js
-     export const PORT = 5555;
-     export const mongoDBURL = 'YourMongoDBDatabaseConnectionURLWithUsernamePasswordAuthenticationHere';
-     ```
-
-3. **Set Up Frontend Configuration**:
-   - Navigate to the `/frontend` folder.
-   - Create a `config.js` file if it doesn't exist.
-   - Add the following constant and export it:
-     ```javascript
-     // frontend/config.js
-     export const BACKEND_URL = 'http://localhost:5555';
-     ```
-
-4. **Install Dependencies**:
-   - Inside the `/backend` folder, run:
-     ```bash
-     npm install
-     ```
-   - Inside the `/frontend` folder, run:
-     ```bash
-     npm install
-     ```
-
-5. **Start the Servers**:
-   - Inside the `/backend` folder, run:
-     ```bash
-     npm run dev
-     ```
-   - In a separate terminal, inside the `/frontend` folder, run:
-     ```bash
-     npm run dev
-     ```
-
-6. **Access the Application**:
-   - Visit the web application in your browser using the link printed by the Vite.js server after starting the frontend server.
-
-Now you have the application up and running locally!
 
 
 # Future functionalities:
@@ -385,9 +383,11 @@ The `Company` model represents a business entity in the application.
 - Benefit from Express.js's integration with other Node.js libraries, such as Mongoose, which makes it easier to build scalable and maintainable applications.
 - Take advantage of Express.js's support for testing frameworks like Mocha and Chai to write automated tests for their endpoints and ensure that my code is working correctly.
 
-# Tests:
+# Testing:
 
-**Mocha** and **Chai** are popular testing frameworks for Node.js applications, and they provide several advantages for testing Express.js API endpoints:
+## Mocha and Chai
+
+Mocha and Chai are popular testing frameworks for Node.js applications, and they provide several advantages for testing Express.js API endpoints:
 
 - **Easy to use**: Mocha and Chai are easy to set up and use, and they provide a simple and intuitive syntax for writing tests.
 
@@ -405,6 +405,23 @@ The `Company` model represents a business entity in the application.
 
 Overall, Mocha and Chai provide a powerful and flexible testing framework for testing Express.js API endpoints, and they are widely used in the Node.js community for this purpose.
 
+## Postman
+
+Postman is a popular tool for testing and debugging APIs, and it provides several advantages for developers:
+
+**Easy to use**: Postman is easy to set up and use, and it provides a simple and intuitive interface for sending requests and viewing responses.
+
+**Flexible**: Postman is highly flexible and can be used to test a wide range of scenarios, from simple GET requests to complex workflows involving multiple requests and responses.
+
+**Collaboration**: Postman provides collaboration features that make it easy to share collections of requests and responses with other developers, making it easier to work together on API development.
+
+**Automation**: Postman provides automation features that allow developers to create and run tests automatically, making it easier to catch bugs and ensure that the API is working correctly.
+
+**Environment variables**: Postman allows developers to define environment variables that can be used to store and reuse values across requests, making it easier to manage complex workflows and avoid repetition.
+
+**Documentation**: Postman provides tools for generating documentation for APIs, making it easier to share information about the API with other developers and stakeholders.
+
+Overall, Postman provides a powerful and flexible toolset for testing and debugging APIs, and it is widely used in the development community for this purpose.
 
 # TODO:
 
