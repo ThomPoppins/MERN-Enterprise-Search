@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import Spinner from "../../components/Spinner";
 import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
 import { BACKEND_URL } from "../../../config";
-import CompaniesTable from "../../components/companiesList/CompaniesTable";
-import CompaniesCard from "../../components/companiesList/CompaniesCard";
+import BooksTable from "../../components/booksList/BooksTable";
+import BooksCard from "../../components/booksList/BooksCard";
+import { COMPANIES_LIST_SHOW_TYPE } from "../../store/actions";
 
-const BooksList = () => {
+const CompaniesList = () => {
+  // useDispatch() is a hook that returns the reference to the dispatch function from the Redux store.
+  const dispatch = useDispatch();
+  // useSelector() is a hook that takes the current state as an argument and returns whatever data you want from it.
+  const showType = useSelector((state) => state.companiesListShowType);
   const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showType, setShowType] = useState("table");
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get(BACKEND_URL + "/books")
+      .get(BACKEND_URL + "/companies")
       .then((response) => {
-        setBooks(response.data.data);
+        setCompanies(response.data.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -26,18 +31,24 @@ const BooksList = () => {
       });
   }, []);
 
+  const handleShowTypeChange = (type) => {
+    // dispatch() is a function of the Redux store. You call store.dispatch to dispatch an action.
+    // The object passed to the dispatch() function is called action.
+    dispatch({ type: COMPANIES_LIST_SHOW_TYPE, payload: type });
+  };
+
   return (
     <div className="p-4">
       <div className="flex justify-center items-center gap-x-4">
         <button
           className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
-          onClick={() => setShowType("table")}
+          onClick={() => handleShowTypeChange("table")}
         >
           Table
         </button>
         <button
           className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
-          onClick={() => setShowType("card")}
+          onClick={() => handleShowTypeChange("card")}
         >
           Card
         </button>
@@ -52,12 +63,12 @@ const BooksList = () => {
       {loading ? (
         <Spinner />
       ) : showType === "table" ? (
-        <BooksTable books={books} />
+        <CompaniesTable companies={companies} />
       ) : (
-        <BooksCard books={books} />
+        <BooksCard companies={companies} />
       )}
     </div>
   );
 };
 
-export default BooksList;
+export default CompaniesList;
