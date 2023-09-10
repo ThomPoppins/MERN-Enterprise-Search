@@ -6,6 +6,8 @@
     - [Vite.js:](#vitejs)
   - [Backend](#backend)
     - [Many-to-Many Relationships](#many-to-many-relationships)
+- [How to test application yourself:](#how-to-test-application-yourself)
+- [Getting Started](#getting-started)
 - [Future functionalities:](#future-functionalities)
   - [User Privilege Management and Admin Authorization](#user-privilege-management-and-admin-authorization)
 - [Models:](#models)
@@ -87,6 +89,63 @@ In the backend, I've set up RESTful API endpoints to create, read, update, and d
 One interesting aspect of this project is handling many-to-many relationships between companies and projects. In real-world scenarios, companies often take part in multiple projects, and a single project can involve multiple companies. To achieve this, I'll be using a `junction` collection in MongoDB.
 
 The main advantage of using a `junction` collection is that it simplifies the management of these relationships. For instance, consider a scenario where Company A and Company B collaborate on Project X. Instead of duplicating data or creating complex nested structures, the `junction` collection allows us to create a clear and efficient link between Company A, Company B, and Project X. This makes it easy to track participation and configure revenue sharing settings dynamically when all parties agree.
+
+# How to test application yourself:
+
+
+# Getting Started
+
+To run this application locally, follow these steps:
+
+1. **Clone the Repository**:
+   ```bash
+   git clone git@github.com:ThomPoppins/MERN_STACK_PROJ..git
+   ```
+
+2. **Set Up Backend Configuration**:
+   - Navigate to the `/backend` folder.
+   - Create a `config.js` file if it doesn't exist.
+   - Add the following constants and export them:
+     ```javascript
+     // backend/config.js
+     export const PORT = 5555;
+     export const mongoDBURL = 'YourMongoDBDatabaseConnectionURLWithUsernamePasswordAuthenticationHere';
+     ```
+
+3. **Set Up Frontend Configuration**:
+   - Navigate to the `/frontend` folder.
+   - Create a `config.js` file if it doesn't exist.
+   - Add the following constant and export it:
+     ```javascript
+     // frontend/config.js
+     export const BACKEND_URL = 'http://localhost:5555';
+     ```
+
+4. **Install Dependencies**:
+   - Inside the `/backend` folder, run:
+     ```bash
+     npm install
+     ```
+   - Inside the `/frontend` folder, run:
+     ```bash
+     npm install
+     ```
+
+5. **Start the Servers**:
+   - Inside the `/backend` folder, run:
+     ```bash
+     npm run dev
+     ```
+   - In a separate terminal, inside the `/frontend` folder, run:
+     ```bash
+     npm run dev
+     ```
+
+6. **Access the Application**:
+   - Visit the web application in your browser using the link printed by the Vite.js server after starting the frontend server.
+
+Now you have the application up and running locally!
+
 
 # Future functionalities:
 
