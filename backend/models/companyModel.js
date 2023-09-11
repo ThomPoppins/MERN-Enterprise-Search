@@ -1,29 +1,7 @@
 import mongoose from "mongoose";
 
-// TODO: [MERNSTACK-51] Finish putting all TODO's into Jira tickets.
-
-/**
- * @file This file defines the CompanySchema. It also creates a model from that schema.
- * @description The schema defines the shape of documents in a collection.
- * `{ timestamps: true }` in the schema adds createdAt and updatedAt fields to the company document.
- * createdAt is the date and time when the company document was created.
- * updatedAt is the date and time when the company document was last updated.
- * These fields are useful for debugging purposes.
- * For example, if a company document was created a long time ago and it has not been updated since,
- * then it is probably safe to delete it.
- * If a company document was created a long time ago and it has been updated recently,
- * then it is probably still in use and should not be deleted.
- * The timestamps option is not required, but it is useful.
- * @typedef {Object} CompanySchema
- * @property {String} name - The name of the company.
- * @property {String} slogan - The slogan of the company.
- * @property {String} description - The short description of the company.
- * @property {String} country - The country of the company billing address. For example: "NL" or "US".
- * @property {String} region - The region of the company billing address. For example: "Texas".
- * @property {String} addressFormat - The address format of the company based on local requirements.
- * @property {String} address - The registered address of the company.
- * @property {String} email - The email address of the company.
- * TODO: [MERNSTACK-12] Actualize, complete and correct this documentation on top of schema.
+/*
+ * Comprehensive MongoDB schema for the Company Model.
  */
 const companySchema = new mongoose.Schema(
   {
@@ -33,6 +11,7 @@ const companySchema = new mongoose.Schema(
       required: true,
     },
     // company email address for correspondence directed to the company with this application.
+    // TODO: [MERNSTACK-134] Send confirmation e-mail to this address to verify the company email address.
     email: {
       type: String,
       required: false,
@@ -294,6 +273,14 @@ const companySchema = new mongoose.Schema(
       type: Array,
       required: false,
       unique: true,
+    },
+    mainImage: {
+      type: String,
+      required: false,
+    },
+    images: {
+      type: Array,
+      required: false,
     },
   },
   // enable timestamps

@@ -459,20 +459,21 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [ ] [MERNSTACK-102] Check for the word `property` when it should be `field` in the documentation of schemas and models. Check for the word `field` when it should be `property` in the documentation when talking about database `document`'s
 - [ ] [MERNSTACK-114] Implement time-travel debugging with Redux DevTools.
 - [ ] [MERNSTACK-115] Decide the default destination after clicking the BackButton, something like the previous page or the home page.
-- [ ] [MERNSTACK-116] Create table on the frontend to display all companies.
-- [ ] [MERNSTACK-117] Create ShowCompany component to display a single company's details
-- [ ] [MERNSTACK-118] Create EditCompany component to edit a single company's details.
-- [ ] [MERNSTACK-119] Create DeleteCompany component to delete a single company.
-- [ ] [MERNSTACK-120] Create CreateCompany component to create a new company.
-- [ ] [MERNSTACK-121] Implement a button on the ShowCompany component that allows the user to navigate to the corresponding EditCompany page.
-- [ ] [MERNSTACK-123] Create a CompanyModal component that will show up on the CompaniesList page when the user clicks on the `eye` icon.
-- [ ] [MERNSTACK-122] Create CompaniesList page (where all companies for a user will be shown in `table` or `card` view.) and safe this `table`/`card` setting to Redux store state so user will return to listing page with preferred setting.
-- [ ] [MERNSTACK-124] Use useSnackbar() for displaying error or success messages to the user in the Company components.
+- [x] [MERNSTACK-116] Create table on the frontend to display all companies.
+- [x] [MERNSTACK-117] Create ShowCompany component to display a single company's details
+- [x] [MERNSTACK-118] Create EditCompany component to edit a single company's details.
+- [x] [MERNSTACK-119] Create DeleteCompany component to delete a single company.
+- [x] [MERNSTACK-120] Create CreateCompany component to create a new company.
+- [x] [MERNSTACK-121] Implement a button on the ShowCompany component that allows the user to navigate to the corresponding EditCompany page.
+- [x] [MERNSTACK-123] Create a CompanyModal component that will show up on the CompaniesList page when the user clicks on the `eye` icon.
+- [x] [MERNSTACK-122] Create CompaniesList page (where all companies for a user will be shown in `table` or `card` view.) and safe this `table`/`card` setting to Redux store state so user will return to listing page with preferred setting.
+- [x] [MERNSTACK-124] Use useSnackbar() for displaying error or success messages to the user in the Company components.
 - [ ] [MERNSTACK-125] Inform myself better about using useEffect() to prevent infinite loop situations when my application get more complex. [Speech about using useEffect effectively](https://www.youtube.com/watch?v=eFGeStq8dZo&list=PLokIxGKSireSB4Gx6r7xWlFs9Q9PueDED&ab_channel=ReactConferencesbyGitNation )
-- [ ] [MERNSTACK-126] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (see frontend devdocs folder)
-
-
-
+- [x] [MERNSTACK-126] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (see frontend devdocs folder)
+- [ ] [MERNSTACK-138] Create user register page and functionality, save with bcrypt hashed password in database.
+- [ ] [MERNSTACK-139] Create a user login page and functionality, validate user password has with bcrypt and compare hashed password on login.
+- [ ] [MERNSTACK-140] Make it possible for a user to register a company and automatically become first company owner.
+- [ ] [MERNSTACK-141]  Find fitting icons for company `name` `phone number` and `email` for the ListCompanies `card` view and CompaniesModal component. Find them in the react-icons library. DO THIS BEFORE CREATING ANY OTHER LIST COMPONENTS!
 
 
 # Everything else:
