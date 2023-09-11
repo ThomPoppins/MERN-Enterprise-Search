@@ -97,7 +97,7 @@ Redux is a state management library that is often used in conjunction with React
 - **Centralized state management:** Redux provides a centralized store for managing application state, making it easy to manage and reason about complex state interactions.
 
 - **Predictable state changes:** Redux uses a unidirectional data flow to ensure that state changes are predictable and easy to reason about, making it easier to debug and maintain your application.
-- 
+
 - **Time-travel debugging:** Redux provides a powerful debugging tool called "time-travel debugging", which allows you to step through state changes and see how your application state evolves over time.
 
 - **Ecosystem integration:** React and Redux have large and active ecosystems of libraries and tools, making it easy to integrate with other technologies and solve common problems.
