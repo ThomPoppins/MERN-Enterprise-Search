@@ -6,8 +6,15 @@
   - [Frontend](#frontend)
     - [Vite.js:](#vitejs)
   - [Backend](#backend)
-    - [Many-to-Many Relationships](#many-to-many-relationships)
-- [Future functionalities:](#future-functionalities)
+    - [MongoDB and Mongoose](#mongodb-and-mongoose)
+      - [Many-to-Many Relationships](#many-to-many-relationships)
+- [Features:](#features)
+  - [User Account Management](#user-account-management)
+    - [Registering an Account](#registering-an-account)
+    - [Logging In](#logging-in)
+  - [Company Registration and Ownership](#company-registration-and-ownership)
+    - [Key Features:](#key-features)
+    - [How to Register a Company:](#how-to-register-a-company)
   - [User Privilege Management and Admin Authorization](#user-privilege-management-and-admin-authorization)
 - [Models:](#models)
     - [Company](#company)
@@ -126,14 +133,55 @@ Overall, using Vite.js to install a React project can help you build faster, mor
 
 In the backend, I've set up RESTful API endpoints to create, read, update, and delete documents from collections. These collections are defined and configured in the `/backend/models` folder, ensuring a structured and organized approach to data management.
 
-### Many-to-Many Relationships
+### MongoDB and Mongoose
+
+**MongoDB** is a popular NoSQL database that provides a flexible and scalable solution for storing and retrieving data. It uses a document-based data model, which means that data is stored in JSON-like documents instead of tables and rows. This makes it easy to store and retrieve complex data structures, and allows for more flexible data modeling compared to traditional relational databases.
+
+**Mongoose** is a popular Node.js library that provides a convenient and flexible way to interact with MongoDB. It provides a schema-based approach to defining and creating models, which makes it easier to validate and enforce data consistency. It also provides a wide range of data types and validators, making it easy to ensure that my data is stored correctly and consistently.
+
+**Mongoose** also provides a built-in query builder that allows you to construct complex queries using a fluent API. This makes it easy to build queries that are easy to read and understand, and can be easily modified and reused.
+
+**Mongoose** also provides a middleware system that allows you to add custom behavior to your models. This includes things like pre- and post-save hooks, virtual properties, and more. This makes it easy to add custom behavior to your models without having to modify the underlying schema.
+
+Overall, **Mongoose** provides a convenient and flexible way to interact with **MongoDB**, and it is widely used in the Node.js community for this purpose.
+
+
+#### Many-to-Many Relationships
 
 One interesting aspect of this project is handling many-to-many relationships between companies and projects. In real-world scenarios, companies often take part in multiple projects, and a single project can involve multiple companies. To achieve this, I'll be using a `junction` collection in MongoDB.
 
 The main advantage of using a `junction` collection is that it simplifies the management of these relationships. For instance, consider a scenario where Company A and Company B collaborate on Project X. Instead of duplicating data or creating complex nested structures, the `junction` collection allows us to create a clear and efficient link between Company A, Company B, and Project X. This makes it easy to track participation and configure revenue sharing settings dynamically when all parties agree.
 
 
-# Future functionalities:
+# Features:
+
+## User Account Management
+
+### Registering an Account
+
+Users can easily create an account by visiting the homepage of our application. The registration process is straightforward and requires users to provide basic information such as their email address, a secure password, and any additional required details. Once registered, users gain access to the full suite of functionalities offered by the application.
+
+### Logging In
+
+Registered users can log in to their accounts using their previously provided credentials. This allows them to access and utilize all features and services provided by the application. The login process is secure and ensures that only authorized users can access their accounts.
+
+## Company Registration and Ownership
+
+Upon logging in to their account, users have the capability to register a company that they own. This action automatically designates the user as the owner of the registered company, granting them administrative privileges within the application.
+
+### Key Features:
+
+- **Ownership Privileges:** The user, upon registering a company, assumes the role of owner with full administrative control over the company's operations.
+
+### How to Register a Company:
+
+1. Log in to your account.
+2. Navigate to the company registration section within the application.
+3. Provide the necessary details for company registration, including but not limited to company name, industry, and relevant contact information.
+4. Submit the registration form.
+
+Upon successful registration, the user will be recognized as the owner of the company and will have access to all administrative functionalities associated with it.
+
 
 ## User Privilege Management and Admin Authorization
 
@@ -168,7 +216,9 @@ My application offers robust user privilege management with a seamless admin aut
 
 My application prioritizes both security and user-friendliness, empowering company owners to efficiently manage their admin privileges while maintaining a high level of control and awareness.
 
-***Feel free to explore this repository to see these concepts in action and dive into [my code](https://github.com/ThomPoppins/MERN_STACK_PROJ.)***
+
+
+***Feel free to clone this repository to see these concepts in action and dive into [my code](https://github.com/ThomPoppins/MERN_STACK_PROJ.)!***
 
 # Models:
 
@@ -455,7 +505,7 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [ ] [MERNSTACK-144] After user login, display link that will `navigate` (?with `useNavigate()`?) user to `my-companies` where companies will be listed and with a company register form. (see frontend devdocs folder)
 - [ ] [MERNSTACK-64] In the frontend, create a route to `/my-companies` where `user` companies will be listed.
 - [x] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
-- [ ] [MERNSTACK-145] Break down all ideas in the `Future functionalities:` section below into smaller tasks and create Jira tickets for them.
+- [ ] [MERNSTACK-145] Break down all ideas in the `Features:` section below into smaller tasks and create Jira tickets for them.
 - [ ] [MERNSTACK-102] Check for the word `property` when it should be `field` in the documentation of schemas and models. Check for the word `field` when it should be `property` in the documentation when talking about database `document`'s
 - [ ] [MERNSTACK-114] Implement time-travel debugging with Redux DevTools.
 - [x] [MERNSTACK-115] Decide the default destination after clicking the BackButton, something like the previous page or the home page.
