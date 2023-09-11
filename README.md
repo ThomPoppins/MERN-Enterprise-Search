@@ -436,15 +436,15 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-69] Create a route to delete a single Company document from the database.
 - [ ] [MERNSTACK-99] Test companyRouter DELETE route `/:id` for deleting a single company with Postman.
 - [ ] [MERNSTACK-107] Test companyRouter DELETE route `/:id` for deleting a single company with Chai and Mocha.
-- [ ] Actualize, complete and correct Company scheme documentation.
-- [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
+- [x] Actualize, complete and correct Company scheme documentation.
+- [x] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
 - [x] [MERNSTACK-70] Set up GET, POST, PUT and DELETE Book server routes.
 - [x] [MERNSTACK-51] Create Jira tickets for all TODOs.
 - [x] [MERNSTACK-53] Create GET, POST, PUT and DELETE Company server routes.
 - [ ] [MERNSTACK-55] Create User model.
 - [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
 - [ ] [MERNSTACK-59] Create one-to-many relationship between Owner and Company in the Owner schema. This will allow to associate each Owner document with multiple Company documents.
-- [ ] Create React app using Vite.js.
+- [x] Create React app using Vite.js.
 - [x] Move Vite.js documentation from backend devdocs folder to frontend devdocs folder
 - [ ] [MERNSTACK-56] Create login and register functionality. Hash user password on register and compare hashed password on login. (see backend devdocs folder)
 - [ ] [MERNSTACK-60] Create `user` authentication and authorization functionality using JSON Web Token authorization. (see backend devdocs folder)
@@ -452,13 +452,13 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [ ] [MERNSTACK-61] Create `junction` table for many-to-many relationship between `owners` and `companies`. (see backend devdocs folder)
 - [ ] [MERNSTACK-62] Create `junction` table between `Company` and `Project`. This table will be used because of the many-to-many relationship and additional properties that are needed to link a company to a project. (see backend devdocs folder)
 - [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers)
-- [ ] After user login, display link that will `navigate` (?with `useNavigate()`?) user to `my-companies` where companies will be listed and with a company register form. (see frontend devdocs folder)
+- [ ] [MERNSTACK-144] After user login, display link that will `navigate` (?with `useNavigate()`?) user to `my-companies` where companies will be listed and with a company register form. (see frontend devdocs folder)
 - [ ] [MERNSTACK-64] In the frontend, create a route to `/my-companies` where `user` companies will be listed.
 - [x] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
-- [ ] Break down all ideas in the `Future functionalities:` section below into smaller tasks and create Jira tickets for them.
+- [ ] [MERNSTACK-145] Break down all ideas in the `Future functionalities:` section below into smaller tasks and create Jira tickets for them.
 - [ ] [MERNSTACK-102] Check for the word `property` when it should be `field` in the documentation of schemas and models. Check for the word `field` when it should be `property` in the documentation when talking about database `document`'s
 - [ ] [MERNSTACK-114] Implement time-travel debugging with Redux DevTools.
-- [ ] [MERNSTACK-115] Decide the default destination after clicking the BackButton, something like the previous page or the home page.
+- [x] [MERNSTACK-115] Decide the default destination after clicking the BackButton, something like the previous page or the home page.
 - [x] [MERNSTACK-116] Create table on the frontend to display all companies.
 - [x] [MERNSTACK-117] Create ShowCompany component to display a single company's details
 - [x] [MERNSTACK-118] Create EditCompany component to edit a single company's details.
@@ -474,6 +474,8 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [ ] [MERNSTACK-139] Create a user login page and functionality, validate user password has with bcrypt and compare hashed password on login.
 - [ ] [MERNSTACK-140] Make it possible for a user to register a company and automatically become first company owner.
 - [ ] [MERNSTACK-141]  Find fitting icons for company `name` `phone number` and `email` for the ListCompanies `card` view and CompaniesModal component. Find them in the react-icons library. DO THIS BEFORE CREATING ANY OTHER LIST COMPONENTS!
+- [ ] [MERNSTACK-142] Update README.md with explanation about the validators I created in the frontend application. Explain the regex used to validate and the test method that returns true or false.
+- [ ] [MERNSTACK-143] Add explanation about the main advantages of using MongoDB and Mongoose in the README.md file in the Backend section.
 
 
 # Everything else:
