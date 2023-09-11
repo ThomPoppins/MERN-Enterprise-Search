@@ -5,10 +5,14 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { BACKEND_URL } from "../../../config.js";
 import { useSnackbar } from "notistack";
+import phoneNumberValidator from "../../validation/phoneNumberValidator";
+import emailValidator from "../../validation/emailValidator";
 
 const EditCompany = () => {
   // TODO: [MERNSTACK-129] Add state for all companies fields that can be edited
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
@@ -42,8 +46,28 @@ const EditCompany = () => {
 
   // handleEditCompany is a function that sends a PUT request to the backend to update a company
   const handleEditCompany = () => {
+    const invalidValues = false;
+
+    if (emailValidator(email) === false) {
+      enqueueSnackbar("Invalid email!", { variant: "error" });
+      console.log("Invalid email" + email);
+      invalidValues = true;
+    }
+
+    if (phoneNumberValidator(phone, "NL") === false) {
+      enqueueSnackbar("Invalid phone number!", { variant: "error" });
+      console.log("Invalid phone number" + phone);
+      invalidValues = true;
+    }
+
+    if (invalidValues) {
+      return;
+    }
+
     const data = {
-      name,
+      name: name,
+      email: email,
+      phone: phone,
     };
     setLoading(true);
     axios
@@ -67,6 +91,7 @@ const EditCompany = () => {
       {loading ? <Spinner /> : ""}
       <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
         {/* TODO: [MERNSTACK-130] Add input fields for all editable company details. To achieve this, copy the outer div with class ".my-4". */}
+        {/* Comany Name input field */}
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Name</label>
           <input
@@ -76,6 +101,32 @@ const EditCompany = () => {
             // and sets the title state to the value of the input
             // e.target.value is the value of the input
             onChange={(e) => setName(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2 w-full"
+          />
+        </div>
+        {/* Comany Email input field */}
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Email</label>
+          <input
+            type="text"
+            value={email}
+            // onChange is a function that takes an event as an argument
+            // and sets the title state to the value of the input
+            // e.target.value is the value of the input
+            onChange={(e) => setEmail(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2 w-full"
+          />
+        </div>
+        {/* Comany Phone Number input field */}
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Phone</label>
+          <input
+            type="text"
+            value={phone}
+            // onChange is a function that takes an event as an argument
+            // and sets the title state to the value of the input
+            // e.target.value is the value of the input
+            onChange={(e) => setPhone(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>

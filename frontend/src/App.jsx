@@ -10,12 +10,19 @@ import RegisterCompany from "./pages/companies/RegisterCompany";
 import EditCompany from "./pages/companies/EditCompany";
 import ShowCompany from "./pages/companies/ShowCompany";
 import DeleteCompany from "./pages/companies/DeleteCompany";
+import LoginUser from "./pages/users/LoginUser";
+import RegisterUser from "./pages/users/RegisterUser";
 import Home from "./pages/Home";
 
 const App = () => {
   return (
     <Routes>
+      {/* / route, render homepage*/}
       <Route path="/" element={<Home />} />
+      {/* /login route, render user login page */}
+      <Route path="/login-user" element={<LoginUser />} />
+      {/* /register route, render user register page */}
+      <Route path="/register-user" element={<RegisterUser />} />
       {/* /companies/* routes */}
       <Route path="/companies" element={<CompaniesList />} />
       <Route path="/companies/register" element={<RegisterCompany />} />

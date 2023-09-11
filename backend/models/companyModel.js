@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-// TODO: [MERNSTACK-51] Finish putting all TODO's into Jira tickets.
-
-// Comprehensive MongoDB schema for the Company Model
+/*
+ * Comprehensive MongoDB schema for the Company Model.
+ */
 const companySchema = new mongoose.Schema(
   {
     // TODO: [MERNSTACK-4] Investigate the usefulness of generating an id myself.
@@ -11,6 +11,7 @@ const companySchema = new mongoose.Schema(
       required: true,
     },
     // company email address for correspondence directed to the company with this application.
+    // TODO: [MERNSTACK-134] Send confirmation e-mail to this address to verify the company email address.
     email: {
       type: String,
       required: false,

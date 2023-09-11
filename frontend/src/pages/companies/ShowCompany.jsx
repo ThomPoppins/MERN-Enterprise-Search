@@ -42,6 +42,14 @@ const ShowCompany = () => {
             <span>{company.name}</span>
           </div>
           <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Email</span>
+            <span>{company.email}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Phone</span>
+            <span>{company.phone}</span>
+          </div>
+          <div className="my-4">
             <span className="text-xl mr-4 text-gray-500">Create Time</span>
             <span>{new Date(company.createdAt).toString()}</span>
           </div>

@@ -12,7 +12,9 @@ const CompaniesTable = ({ companies }) => {
           <th className="border border-slate-600 rounded-md">No</th>
           <th className="border border-slate-600 rounded-md">Name</th>
           {/* max-md:hidden hides this column on mobile devices and tablets */}
-          <th className="border border-slate-600 rounded-md">Operations</th>
+          <th className="border border-slate-600 rounded-md w-[150px]">
+            Operations
+          </th>
         </tr>
       </thead>
       <tbody>

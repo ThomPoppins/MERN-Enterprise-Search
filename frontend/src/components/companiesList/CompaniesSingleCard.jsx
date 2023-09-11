@@ -25,6 +25,16 @@ const CompaniesSingleCard = ({ company }) => {
         <PiBookOpenTextLight className="text-red-300 text-2xl" />
         <h2 className="my-1">{company.name}</h2>
       </div>
+      {/* TODO: [MERNSTACK-136] Find fitting email icon from react-icons and replace the following icon with it */}
+      <div className="flex justify-start items-center gap-x-2">
+        <PiBookOpenTextLight className="text-red-300 text-2xl" />
+        <h2 className="my-1">{company.email}</h2>
+      </div>
+      {/* TODO: [MERNSTACK-137] Find fitting phone icon from react-icons and replace the following icon with it */}
+      <div className="flex justify-start items-center gap-x-2">
+        <PiBookOpenTextLight className="text-red-300 text-2xl" />
+        <h2 className="my-1">{company.phone}</h2>
+      </div>
       <div className="flex justify-start items-center gap-x-2">
         <BiUserCircle className="text-red-300 text-2xl" />
         <h2 className="my-1">{owners}</h2>
