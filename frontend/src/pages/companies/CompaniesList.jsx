@@ -5,8 +5,8 @@ import Spinner from "../../components/Spinner";
 import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
 import { BACKEND_URL } from "../../../config";
-import BooksTable from "../../components/booksList/BooksTable";
-import BooksCard from "../../components/booksList/BooksCard";
+import CompaniesTable from "../../components/companiesList/CompaniesTable";
+import CompaniesCard from "../../components/companiesList/CompaniesCard";
 import { COMPANIES_LIST_SHOW_TYPE } from "../../store/actions";
 
 const CompaniesList = () => {
@@ -31,10 +31,10 @@ const CompaniesList = () => {
       });
   }, []);
 
-  const handleShowTypeChange = (type) => {
+  const handleShowTypeChange = (showType) => {
     // dispatch() is a function of the Redux store. You call store.dispatch to dispatch an action.
     // The object passed to the dispatch() function is called action.
-    dispatch({ type: COMPANIES_LIST_SHOW_TYPE, payload: type });
+    dispatch({ type: COMPANIES_LIST_SHOW_TYPE, payload: showType });
   };
 
   return (
@@ -55,8 +55,8 @@ const CompaniesList = () => {
       </div>
 
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl my-8">Books List</h1>
-        <Link to="/books/create">
+        <h1 className="text-3xl my-8">Companies List</h1>
+        <Link to="/companies/register">
           <MdOutlineAddBox className="text-sky-800 text-4xl" />
         </Link>
       </div>
@@ -65,7 +65,7 @@ const CompaniesList = () => {
       ) : showType === "table" ? (
         <CompaniesTable companies={companies} />
       ) : (
-        <BooksCard companies={companies} />
+        <CompaniesCard companies={companies} />
       )}
     </div>
   );

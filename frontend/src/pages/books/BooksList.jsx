@@ -31,10 +31,10 @@ const BooksList = () => {
       });
   }, []);
 
-  const handleShowTypeChange = (type) => {
+  const handleShowTypeChange = (showType) => {
     // dispatch() is a function of the Redux store. You call store.dispatch to dispatch an action.
     // The object passed to the dispatch() function is called action.
-    dispatch({ type: BOOKS_LIST_SHOW_TYPE, payload: type });
+    dispatch({ type: BOOKS_LIST_SHOW_TYPE, payload: showType });
   };
 
   return (
