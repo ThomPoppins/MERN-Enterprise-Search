@@ -10,31 +10,19 @@ const CompaniesTable = ({ companies }) => {
       <thead>
         <tr>
           <th className="border border-slate-600 rounded-md">No</th>
-          <th className="border border-slate-600 rounded-md">Title</th>
+          <th className="border border-slate-600 rounded-md">Name</th>
           {/* max-md:hidden hides this column on mobile devices and tablets */}
-          <th className="border border-slate-600 rounded-md max-md:hidden">
-            Author
-          </th>
-          <th className="border border-slate-600 rounded-md max-md:hidden">
-            Publish Year
-          </th>
           <th className="border border-slate-600 rounded-md">Operations</th>
         </tr>
       </thead>
       <tbody>
-        {books.map((company, index) => (
+        {companies.map((company, index) => (
           <tr key={company._id} className="h-8">
             <td className="border border-slate-700 rounded-md text-center">
               {index + 1}
             </td>
             <td className="border border-slate-700 rounded-md text-center">
-              {company.title}
-            </td>
-            <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-              {company.author}
-            </td>
-            <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-              {company.publishYear}
+              {company.name}
             </td>
             <td className="border border-slate-700 rounded-md text-center">
               <div className="flex justify-center gap-x-4">
