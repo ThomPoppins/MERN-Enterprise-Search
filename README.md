@@ -6,7 +6,7 @@
   - [Frontend](#frontend)
     - [Vite.js:](#vitejs)
   - [Backend](#backend)
-    - [Express.js](#expressjs)
+    - [Express.js (using CORS)](#expressjs-using-cors)
       - [Efficient Routing](#efficient-routing)
       - [Middleware Support](#middleware-support)
       - [Streamlined Database Interactions](#streamlined-database-interactions)
@@ -143,7 +143,7 @@ Overall, using Vite.js to install a React project can help you build faster, mor
 
 In the backend, I've set up RESTful API endpoints to create, read, update, and delete documents from collections. These collections are defined and configured in the `/backend/models` folder, ensuring a structured and organized approach to data management.
 
-### Express.js
+### Express.js (using CORS)
 
 #### Efficient Routing
 
