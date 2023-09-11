@@ -4,6 +4,9 @@
 - [Getting Started](#getting-started)
 - [Application Description](#application-description)
   - [Frontend](#frontend)
+    - [React](#react)
+    - [Redux](#redux)
+    - [react-redux](#react-redux)
     - [Vite.js:](#vitejs)
   - [Backend](#backend)
     - [Express.js (using CORS)](#expressjs-using-cors)
@@ -99,6 +102,8 @@ Welcome to my FullStack JavaScript application built with Express.js on the back
 
 On the frontend, I've chosen React for building user interfaces and Redux for state management. For those less familiar with these technologies, here's why implementing Redux in React is a game-changer:
 
+### React
+
 React is a popular JavaScript library for building user interfaces. It provides a declarative syntax for defining UI components, and uses a virtual DOM to efficiently update the UI in response to changes in state. Some of the main advantages of React include:
 
 - **Declarative syntax:** React provides a simple and intuitive syntax for defining UI components, making it easy to reason about the structure and behavior of your application.
@@ -109,6 +114,8 @@ React is a popular JavaScript library for building user interfaces. It provides 
 
 - **Large ecosystem:** React has a large and active ecosystem of libraries and tools, making it easy to find solutions to common problems and integrate with other technologies.
 
+### Redux
+
 Redux is a state management library that is often used in conjunction with React. It provides a centralized store for managing application state, and uses a unidirectional data flow to ensure that state changes are predictable and easy to reason about. Some of the main advantages of using Redux with React include:
 
 - **Centralized state management:** Redux provides a centralized store for managing application state, making it easy to manage and reason about complex state interactions.
@@ -118,6 +125,8 @@ Redux is a state management library that is often used in conjunction with React
 - **Time-travel debugging:** Redux provides a powerful debugging tool called "time-travel debugging", which allows you to step through state changes and see how your application state evolves over time.
 
 - **Ecosystem integration:** React and Redux have large and active ecosystems of libraries and tools, making it easy to integrate with other technologies and solve common problems.
+
+### react-redux
 
 The `react-redux` library is a popular library that makes it easy to implement Redux in a JavaScript React application. It provides a set of bindings between React and Redux, allowing you to easily connect your React components to the Redux store and dispatch actions.
 
