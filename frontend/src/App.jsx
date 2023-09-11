@@ -6,6 +6,10 @@ import EditBook from "./pages/books/EditBook";
 import ShowBook from "./pages/books/ShowBook";
 import DeleteBook from "./pages/books/DeleteBook";
 import CompaniesList from "./pages/companies/CompaniesList";
+import RegisterCompany from "./pages/companies/RegisterCompany";
+import EditCompany from "./pages/companies/EditCompany";
+import ShowCompany from "./pages/companies/ShowCompany";
+import DeleteCompany from "./pages/companies/DeleteCompany";
 import Home from "./pages/Home";
 
 const App = () => {
