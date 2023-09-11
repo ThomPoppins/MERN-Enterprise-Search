@@ -7,7 +7,7 @@
     - [Vite.js:](#vitejs)
   - [Backend](#backend)
     - [MongoDB and Mongoose](#mongodb-and-mongoose)
-    - [Many-to-Many Relationships](#many-to-many-relationships)
+      - [Many-to-Many Relationships](#many-to-many-relationships)
 - [Features:](#features)
   - [User Account Management](#user-account-management)
     - [Registering an Account](#registering-an-account)
@@ -146,8 +146,7 @@ In the backend, I've set up RESTful API endpoints to create, read, update, and d
 Overall, **Mongoose** provides a convenient and flexible way to interact with **MongoDB**, and it is widely used in the Node.js community for this purpose.
 
 
-
-### Many-to-Many Relationships
+#### Many-to-Many Relationships
 
 One interesting aspect of this project is handling many-to-many relationships between companies and projects. In real-world scenarios, companies often take part in multiple projects, and a single project can involve multiple companies. To achieve this, I'll be using a `junction` collection in MongoDB.
 
