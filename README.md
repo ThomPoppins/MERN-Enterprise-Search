@@ -218,7 +218,7 @@ My application prioritizes both security and user-friendliness, empowering compa
 
 
 
-***Feel free to explore this repository to see these concepts in action and dive into [my code](https://github.com/ThomPoppins/MERN_STACK_PROJ.)!***
+***Feel free to clone this repository to see these concepts in action and dive into [my code](https://github.com/ThomPoppins/MERN_STACK_PROJ.)!***
 
 # Models:
 
