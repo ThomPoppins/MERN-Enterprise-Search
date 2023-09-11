@@ -597,32 +597,32 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
    │  │  │  ├─ line 18: TODO : [MERNSTACK-10] Solve Codacy issue that ticketnumber is not used.
    │  │  │  └─ line 20: TODO : [MERNSTACK-11] Delete this schema once it is no longer needed.
    │  │  ├─ companyModel.js
-   │  │  │  ├─ line 3: TODO : [MERNSTACK-51] Finish putting all TODOs into Jira tickets.
-   │  │  │  ├─ line 30: TODO : [MERNSTACK-4] Investigate the usefulness of generating an id myself.
-   │  │  │  ├─ line 67: TODO : [MERNSTACK-13] Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
-   │  │  │  ├─ line 83: TODO : [MERNSTACK-15] Save the name , email, phone, and role related to the company as fields in a new user model. (to be created)
-   │  │  │  ├─ line 84: TODO : [MERNSTACK-16] Owners  will be linked to a company, based on an ownerId in the owner model.
-   │  │  │  ├─ line 85: TODO : [MERNSTACK-17] "owners" array should contain owner objects with an userId.
-   │  │  │  ├─ line 90: TODO : [MERNSTACK-18] Create a new schema and model for companyAdmin users.
-   │  │  │  ├─ line 91: TODO : [MERNSTACK-19] Admin users will be linked to a company, based on an adminUserId in the adminUser model.
-   │  │  │  ├─ line 92: TODO : [MERNSTACK-20] `admins` array should contain admin objects with an adminUserId. (For example: { adminUserId = "1234", role = "owner" })
-   │  │  │  ├─ line 97: TODO : [MERNSTACK-21] Create a new schema and model for Role with an roleId and role. For example: { roleId: { type: Number, required: true }, role: { type: String, required: true } } (roleId = 1, role = "owner") (roleId = 2, role = "admin") (roleId = 3, role = "employee") (roleId = 4, role = "vendor") (roleId = 5, role = "customer") (roleId = 6, role = "guest")
-   │  │  │  ├─ line 98: TODO : [MERNSTACK-22] Roles will be linked to company associated users like employees, vendors, customers, and more, based on an roleId in the role model.
-   │  │  │  ├─ line 99: TODO : [MERNSTACK-71] companyModel.js: Create `junction` table between companies and the role users have in this many-to-many relationship with the companies. Users can get assigned more than 1 role per company.
-   │  │  │  ├─ line 100: TODO : [MERNSTACK-72] Reconsider `employees` field if the role `junction` table is not the right place to store the `employee` data.
-   │  │  │  ├─ line 105: TODO : [MERNSTACK-23] Create a new schema and model for address.
-   │  │  │  ├─ line 106: TODO : [MERNSTACK-24] Locations will be linked to a company, based on an addressId in the address model.
-   │  │  │  ├─ line 107: TODO : [MERNSTACK-25] "locations" array should contain address objects with all address field fields and addressId compatible with the configured addressFormat for the country and region.
-   │  │  │  ├─ line 116: TODO : [MERNSTACK-26] Find out how to validate correct business and payment details.
-   │  │  │  ├─ line 117: TODO : [MERNSTACK-27] Inform myself about the required payment details for each country or region. (First the Netherlands, then, maybe the rest of the world.)
-   │  │  │  ├─ line 156: TODO : [MERNSTACK-28] Find out how to validate if the correct business and payment details are being used and the REAL "owner" is the only one authorized to change these details.
-   │  │  │  ├─ line 162: TODO :[MERNSTACK-75] Create paymentMethod schema and model.
-   │  │  │  ├─ line 179: TODO : [MERNSTACK-29] Create a new schema and model for Industry. Industry will be linked to a company, based on an industryId in the industry model.
-   │  │  │  ├─ line 180: TODO : [MERNSTACK-76] RECONSIDER: Maybe a `junction` table between companies and the industries they are in is the right place to store necessary data for the specific companyIndustry relationships This extra data might be data like metadata that can be used to improve the result listing order of companies when searched by user in frontend.
-   │  │  │  ├─ line 186: TODO : [MERNSTACK-33] Make it possible to change this value in the user/owner settings.
-   │  │  │  ├─ line 191: TODO : [MERNSTACK-35] Reviews will be linked to a company, based on an reviewId in the review model. This model should contain the review text, rating, reviewer, timestamp and maybe more.
-   │  │  │  ├─ line 192: TODO : [MERNSTACK-36] "reviews" array should contain review objects with an reviewId.
-   │  │  │  └─ line 308: TODO : [MERNSTACK-70] Decide what kind of functionalities and authorizations employees have. Owners should automatically have employee rights and functionalities.
+   │  │  │  ├─ line 8: TODO : [MERNSTACK-4] Investigate the usefulness of generating an id myself.
+   │  │  │  ├─ line 14: TODO : [MERNSTACK-134] Send confirmation e-mail to this address to verify the company email address.
+   │  │  │  ├─ line 46: TODO : [MERNSTACK-13] Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
+   │  │  │  ├─ line 62: TODO : [MERNSTACK-15] Save the name , email, phone, and role related to the company as fields in a new user model. (to be created)
+   │  │  │  ├─ line 63: TODO : [MERNSTACK-16] Owners  will be linked to a company, based on an ownerId in the owner model.
+   │  │  │  ├─ line 64: TODO : [MERNSTACK-17] "owners" array should contain owner objects with an userId.
+   │  │  │  ├─ line 69: TODO : [MERNSTACK-18] Create a new schema and model for companyAdmin users.
+   │  │  │  ├─ line 70: TODO : [MERNSTACK-19] Admin users will be linked to a company, based on an adminUserId in the adminUser model.
+   │  │  │  ├─ line 71: TODO : [MERNSTACK-20] `admins` array should contain admin objects with an adminUserId. (For example: { adminUserId = "1234", role = "owner" })
+   │  │  │  ├─ line 76: TODO : [MERNSTACK-21] Create a new schema and model for Role with an roleId and role. For example: { roleId: { type: Number, required: true }, role: { type: String, required: true } } (roleId = 1, role = "owner") (roleId = 2, role = "admin") (roleId = 3, role = "employee") (roleId = 4, role = "vendor") (roleId = 5, role = "customer") (roleId = 6, role = "guest")
+   │  │  │  ├─ line 77: TODO : [MERNSTACK-22] Roles will be linked to company associated users like employees, vendors, customers, and more, based on an roleId in the role model.
+   │  │  │  ├─ line 78: TODO : [MERNSTACK-71] companyModel.js: Create `junction` table between companies and the role users have in this many-to-many relationship with the companies. Users can get assigned more than 1 role per company.
+   │  │  │  ├─ line 79: TODO : [MERNSTACK-72] Reconsider `employees` field if the role `junction` table is not the right place to store the `employee` data.
+   │  │  │  ├─ line 84: TODO : [MERNSTACK-23] Create a new schema and model for address.
+   │  │  │  ├─ line 85: TODO : [MERNSTACK-24] Locations will be linked to a company, based on an addressId in the address model.
+   │  │  │  ├─ line 86: TODO : [MERNSTACK-25] "locations" array should contain address objects with all address field fields and addressId compatible with the configured addressFormat for the country and region.
+   │  │  │  ├─ line 95: TODO : [MERNSTACK-26] Find out how to validate correct business and payment details.
+   │  │  │  ├─ line 96: TODO : [MERNSTACK-27] Inform myself about the required payment details for each country or region. (First the Netherlands, then, maybe the rest of the world.)
+   │  │  │  ├─ line 135: TODO : [MERNSTACK-28] Find out how to validate if the correct business and payment details are being used and the REAL "owner" is the only one authorized to change these details.
+   │  │  │  ├─ line 141: TODO :[MERNSTACK-75] Create paymentMethod schema and model.
+   │  │  │  ├─ line 158: TODO : [MERNSTACK-29] Create a new schema and model for Industry. Industry will be linked to a company, based on an industryId in the industry model.
+   │  │  │  ├─ line 159: TODO : [MERNSTACK-76] RECONSIDER: Maybe a `junction` table between companies and the industries they are in is the right place to store necessary data for the specific companyIndustry relationships This extra data might be data like metadata that can be used to improve the result listing order of companies when searched by user in frontend.
+   │  │  │  ├─ line 165: TODO : [MERNSTACK-33] Make it possible to change this value in the user/owner settings.
+   │  │  │  ├─ line 170: TODO : [MERNSTACK-35] Reviews will be linked to a company, based on an reviewId in the review model. This model should contain the review text, rating, reviewer, timestamp and maybe more.
+   │  │  │  ├─ line 171: TODO : [MERNSTACK-36] "reviews" array should contain review objects with an reviewId.
+   │  │  │  └─ line 295: TODO : [MERNSTACK-70] Decide what kind of functionalities and authorizations employees have. Owners should automatically have employee rights and functionalities.
    │  │  ├─ customerModel.js
    │  │  │  └─ line 1: TODO : [MERNSTACK-94] Create customer model and schema and link it to the company model and schema.
    │  │  ├─ departmentModel.js
@@ -699,52 +699,84 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
    │  │     └─ line 50: TODO : `id` corresponding to the `paymentMethod` model document `id`
    │  └─ index.js
    │     └─ line 13: TODO : [MERNSTACK-113] Configure CORS properly before deployment.
+   ├─ frontend
+   │  ├─ components
+   │  │  └─ CompaniesSingleCard.jsx
+   │  │     ├─ line 28: TODO : [MERNSTACK-136] Find fitting email icon from react-icons and replace the following icon with it */}
+   │  │     └─ line 33: TODO : [MERNSTACK-137] Find fitting phone icon from react-icons and replace the following icon with it */}
+   │  └─ pages
+   │     ├─ EditCompany.jsx
+   │     │  ├─ line 12: TODO : [MERNSTACK-129] Add state for all companies fields that can be edited
+   │     │  ├─ line 37: TODO : [MERNSTACK-131] Set state for all companies fields that can be edited
+   │     │  └─ line 93: TODO : [MERNSTACK-130] Add input fields for all editable company details. To achieve this, copy the outer div with class ".my-4". */}
+   │     ├─ RegisterCompany.jsx
+   │     │  ├─ line 12: TODO : [MERNSTACK-127] Add state for all companies fields that can be registered
+   │     │  ├─ line 45: TODO : [MERNSTACK-132] Add all companies fields that can be registered
+   │     │  └─ line 73: TODO : [MERNSTACK-128] RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this*/}
+   │     └─ ShowCompany.jsx
+   │        └─ line 35: TODO : [MERNSTACK-133] Add all fields of the company model here. Copy paste outer div with ".my-4" class below to achieve this. */}
    └─ README.md
-      ├─ line 346: TODO :
-      ├─ line 348: [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
-      ├─ line 349: [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
-      ├─ line 350: [x] Finish basic Book schema and model. For faster functional development and testing purposes.
-      ├─ line 351: [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
-      ├─ line 352: [x] [MERNSTACK-103] Start using testing frameworks Mocha and Chai to write automated tests for the endpoints and ensure that the code is working correctly.
-      ├─ line 353: [x] [MERNSTACK-74] Set up `Company` model.
-      ├─ line 354: [x] [MERNSTACK-65] Create a route to save a new Company document in the database.
-      ├─ line 355: [x] [MERNSTACK-95] Test companyRouter POST route `/` for saving a new company with Postman.
-      ├─ line 356: [ ] [MERNSTACK-103] Test companyRouter POST route `/` for saving a new company with Chai and Mocha.
-      ├─ line 357: [x] [MERNSTACK-66] Create a route to get all Company documents from the database.
-      ├─ line 358: [x] [MERNSTACK-96] Test companyRouter GET route `/` for getting all companies with Postman.
-      ├─ line 359: [ ] [MERNSTACK-104] Test companyRouter GET route `/` for getting all companies with Chai and Mocha.
-      ├─ line 360: [x] [MERNSTACK-67] Create a route to get a single Company document from the database.
-      ├─ line 361: [x] [MERNSTACK-97] Test companyRouter GET route `/:id` for getting a single company with Postman.
-      ├─ line 362: [ ] [MERNSTACK-105] Test companyRouter GET route `/:id` for getting a single company with Chai and Mocha.
-      ├─ line 363: [x] [MERNSTACK-68] Create a route to update a single Company document in the database.
-      ├─ line 364: [x] [MERNSTACK-98] Test companyRouter PUT route `/:id` for updating a single company with Postman.
-      ├─ line 365: [ ] [MERNSTACK-106] Test companyRouter PUT route `/:id` for updating a single company with Chai and Mocha.
-      ├─ line 366: [x] [MERNSTACK-69] Create a route to delete a single Company document from the database.
-      ├─ line 367: [ ] [MERNSTACK-99] Test companyRouter DELETE route `/:id` for deleting a single company with Postman.
-      ├─ line 368: [ ] [MERNSTACK-107] Test companyRouter DELETE route `/:id` for deleting a single company with Chai and Mocha.
-      ├─ line 369: [ ] Actualize, complete and correct Company scheme documentation.
-      ├─ line 370: [ ] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
-      ├─ line 371: [x] [MERNSTACK-70] Set up GET, POST, PUT and DELETE Book server routes.
-      ├─ line 372: [x] [MERNSTACK-51] Create Jira tickets for all TODOs.
-      ├─ line 373: [x] [MERNSTACK-53] Create GET, POST, PUT and DELETE Company server routes.
-      ├─ line 374: [ ] [MERNSTACK-55] Create User model.
-      ├─ line 375: [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
-      ├─ line 376: [ ] [MERNSTACK-59] Create one-to-many relationship between Owner and Company in the Owner schema. This will allow to associate each Owner document with multiple Company documents.
-      ├─ line 377: [ ] Create React app using Vite.js.
-      ├─ line 378: [x] Move Vite.js documentation from backend devdocs folder to frontend devdocs folder
-      ├─ line 379: [ ] [MERNSTACK-56] Create login and register functionality. Hash user password on register and compare hashed password on login. (see backend devdocs folder)
-      ├─ line 380: [ ] [MERNSTACK-60] Create `user` authentication and authorization functionality using JSON Web Token authorization. (see backend devdocs folder)
-      ├─ line 381: [ ] [MERNSTACK-58] When user is logged in, create a form to register a company and make user owner. Owner has admin rights at first when creating his account and registering his company.
-      ├─ line 382: [ ] [MERNSTACK-61] Create `junction` table for many-to-many relationship between `owners` and `companies`. (see backend devdocs folder)
-      ├─ line 383: [ ] [MERNSTACK-62] Create `junction` table between `Company` and `Project`. This table will be used because of the many-to-many relationship and additional properties that are needed to link a company to a project. (see backend devdocs folder)
-      ├─ line 384: [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers)
-      ├─ line 385: [ ] After user login, display link that will `navigate` (?with `useNavigate()`?) user to `my-companies` where companies will be listed and with a company register form. (see frontend devdocs folder)
-      ├─ line 386: [ ] [MERNSTACK-64] In the frontend, create a route to `/my-companies` where `user` companies will be listed.
-      ├─ line 387: [ ] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (see frontend devdocs folder)
-      ├─ line 388: [x] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
-      ├─ line 389: [ ] Break down all ideas in the `Future functionalities:` section below into smaller tasks and create Jira tickets for them.
-      ├─ line 390: [ ] [MERNSTACK-102] Check for the word `property` when it should be `field` in the documentation of schemas and models. Check for the word `field` when it should be `property` in the documentation when talking about database `document`s
-      ├─ line 391: [ ] [MERNSTACK-114] Implement time-travel debugging with Redux DevTools.
-      └─ line 392: [ ] [MERNSTACK-115] Decide the default destination after clicking the BackButton, something like the previous page or the home page.
+      ├─ line 513: TODO :
+      ├─ line 517: [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
+      ├─ line 518: [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
+      ├─ line 519: [x] Finish basic Book schema and model. For faster functional development and testing purposes.
+      ├─ line 520: [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
+      ├─ line 521: [x] [MERNSTACK-103] Start using testing frameworks Mocha and Chai to write automated tests for the endpoints and ensure that the code is working correctly.
+      ├─ line 522: [x] [MERNSTACK-74] Set up `Company` model.
+      ├─ line 523: [x] [MERNSTACK-65] Create a route to save a new Company document in the database.
+      ├─ line 524: [x] [MERNSTACK-95] Test companyRouter POST route `/` for saving a new company with Postman.
+      ├─ line 525: [ ] [MERNSTACK-103] Test companyRouter POST route `/` for saving a new company with Chai and Mocha.
+      ├─ line 526: [x] [MERNSTACK-66] Create a route to get all Company documents from the database.
+      ├─ line 527: [x] [MERNSTACK-96] Test companyRouter GET route `/` for getting all companies with Postman.
+      ├─ line 528: [ ] [MERNSTACK-104] Test companyRouter GET route `/` for getting all companies with Chai and Mocha.
+      ├─ line 529: [x] [MERNSTACK-67] Create a route to get a single Company document from the database.
+      ├─ line 530: [x] [MERNSTACK-97] Test companyRouter GET route `/:id` for getting a single company with Postman.
+      ├─ line 531: [ ] [MERNSTACK-105] Test companyRouter GET route `/:id` for getting a single company with Chai and Mocha.
+      ├─ line 532: [x] [MERNSTACK-68] Create a route to update a single Company document in the database.
+      ├─ line 533: [x] [MERNSTACK-98] Test companyRouter PUT route `/:id` for updating a single company with Postman.
+      ├─ line 534: [ ] [MERNSTACK-106] Test companyRouter PUT route `/:id` for updating a single company with Chai and Mocha.
+      ├─ line 535: [x] [MERNSTACK-69] Create a route to delete a single Company document from the database.
+      ├─ line 536: [ ] [MERNSTACK-99] Test companyRouter DELETE route `/:id` for deleting a single company with Postman.
+      ├─ line 537: [ ] [MERNSTACK-107] Test companyRouter DELETE route `/:id` for deleting a single company with Chai and Mocha.
+      ├─ line 538: [x] Actualize, complete and correct Company scheme documentation.
+      ├─ line 539: [x] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
+      ├─ line 540: [x] [MERNSTACK-70] Set up GET, POST, PUT and DELETE Book server routes.
+      ├─ line 541: [x] [MERNSTACK-51] Create Jira tickets for all TODOs.
+      ├─ line 542: [x] [MERNSTACK-53] Create GET, POST, PUT and DELETE Company server routes.
+      ├─ line 543: [ ] [MERNSTACK-55] Create User model.
+      ├─ line 544: [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
+      ├─ line 545: [ ] [MERNSTACK-59] Create one-to-many relationship between Owner and Company in the Owner schema. This will allow to associate each Owner document with multiple Company documents.
+      ├─ line 546: [x] Create React app using Vite.js.
+      ├─ line 547: [x] Move Vite.js documentation from backend devdocs folder to frontend devdocs folder
+      ├─ line 548: [ ] [MERNSTACK-56] Create login and register functionality. Hash user password on register and compare hashed password on login. (see backend devdocs folder)
+      ├─ line 549: [ ] [MERNSTACK-60] Create `user` authentication and authorization functionality using JSON Web Token authorization. (see backend devdocs folder)
+      ├─ line 550: [ ] [MERNSTACK-58] When user is logged in, create a form to register a company and make user owner. Owner has admin rights at first when creating his account and registering his company.
+      ├─ line 551: [ ] [MERNSTACK-61] Create `junction` table for many-to-many relationship between `owners` and `companies`. (see backend devdocs folder)
+      ├─ line 552: [ ] [MERNSTACK-62] Create `junction` table between `Company` and `Project`. This table will be used because of the many-to-many relationship and additional properties that are needed to link a company to a project. (see backend devdocs folder)
+      ├─ line 553: [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers)
+      ├─ line 554: [ ] [MERNSTACK-144] After user login, display link that will `navigate` (?with `useNavigate()`?) user to `my-companies` where companies will be listed and with a company register form. (see frontend devdocs folder)
+      ├─ line 555: [ ] [MERNSTACK-64] In the frontend, create a route to `/my-companies` where `user` companies will be listed.
+      ├─ line 556: [x] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
+      ├─ line 557: [ ] [MERNSTACK-145] Break down all ideas in the `Features:` section below into smaller tasks and create Jira tickets for them.
+      ├─ line 558: [ ] [MERNSTACK-102] Check for the word `property` when it should be `field` in the documentation of schemas and models. Check for the word `field` when it should be `property` in the documentation when talking about database `document`s
+      ├─ line 559: [ ] [MERNSTACK-114] Implement time-travel debugging with Redux DevTools.
+      ├─ line 560: [x] [MERNSTACK-115] Decide the default destination after clicking the BackButton, something like the previous page or the home page.
+      ├─ line 561: [x] [MERNSTACK-116] Create table on the frontend to display all companies.
+      ├─ line 562: [x] [MERNSTACK-117] Create ShowCompany component to display a single companies details
+      ├─ line 563: [x] [MERNSTACK-118] Create EditCompany component to edit a single companys details.
+      ├─ line 564: [x] [MERNSTACK-119] Create DeleteCompany component to delete a single company.
+      ├─ line 565: [x] [MERNSTACK-120] Create CreateCompany component to create a new company.
+      ├─ line 566: [x] [MERNSTACK-121] Implement a button on the ShowCompany component that allows the user to navigate to the corresponding EditCompany page.
+      ├─ line 567: [x] [MERNSTACK-123] Create a CompanyModal component that will show up on the CompaniesList page when the user clicks on the `eye` icon.
+      ├─ line 568: [x] [MERNSTACK-122] Create CompaniesList page (where all companies for a user will be shown in `table` or `card` view.) and safe this `table`/`card` setting to Redux store state so user will return to listing page with preferred setting.
+      ├─ line 569: [x] [MERNSTACK-124] Use useSnackbar() for displaying error or success messages to the user in the Company components.
+      ├─ line 570: [ ] [MERNSTACK-125] Inform myself better about using useEffect() to prevent infinite loop situations when my application get more complex. [Speech about using useEffect effectively](https://www.youtube.com/watch?v=eFGeStq8dZo&list=PLokIxGKSireSB4Gx6r7xWlFs9Q9PueDED&ab_channel=ReactConferencesbyGitNation )
+      ├─ line 571: [x] [MERNSTACK-126] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (see frontend devdocs folder)
+      ├─ line 572: [ ] [MERNSTACK-138] Create user register page and functionality, save with bcrypt hashed password in database.
+      ├─ line 573: [ ] [MERNSTACK-139] Create a user login page and functionality, validate user password has with bcrypt and compare hashed password on login.
+      ├─ line 574: [ ] [MERNSTACK-140] Make it possible for a user to register a company and automatically become first company owner.
+      ├─ line 575: [ ] [MERNSTACK-141]  Find fitting icons for company `name` `phone number` and `email` for the ListCompanies `card` view and CompaniesModal component. Find them in the react-icons library. DO THIS BEFORE CREATING ANY OTHER LIST COMPONENTS!
+      ├─ line 576: [ ] [MERNSTACK-142] Update README.md with explanation about the validators I created in the frontend application. Explain the regex used to validate and the test method that returns true or false.
+      └─ line 577: [ ] [MERNSTACK-143] Add explanation about the main advantages of using MongoDB and Mongoose in the README.md file in the Backend section.
 
 ```
