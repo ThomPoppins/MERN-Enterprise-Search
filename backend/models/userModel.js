@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 /**
  * Mongoose Schema for User
  *
@@ -21,15 +23,18 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      default: "",
     },
     email: {
       type: String,
       required: true,
       unique: true,
+      default: "",
     },
     hashedPassword: {
       type: String,
       required: true,
+      default: "",
     },
     firstName: {
       type: String,

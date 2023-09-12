@@ -585,7 +585,7 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [ ] [MERNSTACK-138] Create user register page and functionality, save with bcrypt hashed password in database.
 - [ ] [MERNSTACK-139] Create a user login page and functionality, validate user password has with bcrypt and compare hashed password on login.
 - [ ] [MERNSTACK-140] Make it possible for a user to register a company and automatically become first company owner.
-- [ ] [MERNSTACK-141]  Find fitting icons for company `name` `phone number` and `email` for the ListCompanies `card` view and CompaniesModal component. Find them in the react-icons library. DO THIS BEFORE CREATING ANY OTHER LIST COMPONENTS!
+- [x] [MERNSTACK-141]  Find fitting icons for company `name` `phone number` and `email` for the ListCompanies `card` view and CompaniesModal component. Find them in the react-icons library. DO THIS BEFORE CREATING ANY OTHER LIST COMPONENTS!
 - [ ] [MERNSTACK-142] Update README.md with explanation about the validators I created in the frontend application. Explain the regex used to validate and the test method that returns true or false.
 - [ ] [MERNSTACK-143] Add explanation about the main advantages of using MongoDB and Mongoose in the README.md file in the Backend section.
 - [x] [MERNSTACK-14] Create a new schema and model for user.

@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { PiBookOpenTextLight } from "react-icons/pi";
-import { BiUserCircle } from "react-icons/bi";
+import { FcBriefcase } from "react-icons/fc";
+import { FcBusinessman } from "react-icons/fc";
 
 const CompanyModal = ({ company, onClose }) => {
   const owners = company.owners.map((owner) => owner.name).join(", ");
@@ -27,11 +27,11 @@ const CompanyModal = ({ company, onClose }) => {
         </h2>
         <h4 className="my-2 text-gray-500">{company._id}</h4>
         <div className="flex justify-start items-center gap-x-2">
-          <PiBookOpenTextLight className="text-red-300 text-2xl" />
+          <FcBriefcase className="text-red-300 text-2xl" />
           <h2 className="my-1">{company.name}</h2>
         </div>
         <div className="flex justify-start items-center gap-x-2">
-          <BiUserCircle className="text-red-300 text-2xl" />
+          <FcBusinessman className="text-red-300 text-2xl" />
           <h2 className="my-1">{owners}</h2>
         </div>
         <p className="mt-4">Future company slogan</p>

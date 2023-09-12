@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PiBookOpenTextLight } from "react-icons/pi";
-import { BiUserCircle, BiShow } from "react-icons/bi";
+import { FcBriefcase } from "react-icons/fc";
+import { FcBusinessman } from "react-icons/fc";
+import { FcCellPhone } from "react-icons/fc";
+import { FcAddressBook } from "react-icons/fc";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineDelete } from "react-icons/md";
@@ -22,21 +24,21 @@ const CompaniesSingleCard = ({ company }) => {
       </h2>
       <h4 className="my-2 text-gray-500">{company._id}</h4>
       <div className="flex justify-start items-center gap-x-2">
-        <PiBookOpenTextLight className="text-red-300 text-2xl" />
+        <FcBriefcase className="text-2xl" />
         <h2 className="my-1">{company.name}</h2>
       </div>
       {/* TODO: [MERNSTACK-136] Find fitting email icon from react-icons and replace the following icon with it */}
       <div className="flex justify-start items-center gap-x-2">
-        <PiBookOpenTextLight className="text-red-300 text-2xl" />
+        <FcAddressBook className="text-2xl" />
         <h2 className="my-1">{company.email}</h2>
       </div>
       {/* TODO: [MERNSTACK-137] Find fitting phone icon from react-icons and replace the following icon with it */}
       <div className="flex justify-start items-center gap-x-2">
-        <PiBookOpenTextLight className="text-red-300 text-2xl" />
+        <FcCellPhone className="text-2xl" />
         <h2 className="my-1">{company.phone}</h2>
       </div>
       <div className="flex justify-start items-center gap-x-2">
-        <BiUserCircle className="text-red-300 text-2xl" />
+        <FcBusinessman className="text-2xl" />
         <h2 className="my-1">{owners}</h2>
       </div>
       <div className="flex justify-between items-center gap-x-2 mt-4 p-4">

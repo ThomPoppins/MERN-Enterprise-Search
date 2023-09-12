@@ -1,3 +1,4 @@
+// TODO: [MERNSTACK-151] Remove this file if not needed.
 const jwt = require("jsonwebtoken");
 
 /* I'm defining a middleware function called authenticateToken
