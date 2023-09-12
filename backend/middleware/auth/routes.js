@@ -1,3 +1,5 @@
+// TODO: [MERNSTACK-150] Remove this file if not needed.
+
 const express = require("express");
 const { authenticateToken } = require("./middleware");
 
