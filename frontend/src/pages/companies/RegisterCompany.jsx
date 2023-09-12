@@ -24,6 +24,8 @@ const RegisterCompany = () => {
 
   let invalidValues = false;
 
+  // TODO: [MERNSTACK-159] Give input field of the form a red border if the input is invalid
+  // TODO: [MERNSTACK-160] Display error message under the input field if the input is invalid explaining the right format
   const handleSaveCompany = () => {
     if (emailValidator(email) === false) {
       enqueueSnackbar("Invalid email!", { variant: "error" });
