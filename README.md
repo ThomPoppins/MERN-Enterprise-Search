@@ -55,8 +55,12 @@ To run this application locally, follow these steps:
    - Add the following constants and export them:
      ```javascript
      // backend/config.js
+     // port for the server to listen on
      export const PORT = 5555;
+     // MongoDB database connection URL
      export const mongoDBURL = 'YourMongoDBDatabaseConnectionURLWithUsernamePasswordAuthenticationHere';
+     // Secret key for JWT signing and encryption
+     export const JWT_SECRET = "yoursecretkey";
      ```
 
 3. **Set Up Frontend Configuration**:
@@ -584,6 +588,8 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [ ] [MERNSTACK-141]  Find fitting icons for company `name` `phone number` and `email` for the ListCompanies `card` view and CompaniesModal component. Find them in the react-icons library. DO THIS BEFORE CREATING ANY OTHER LIST COMPONENTS!
 - [ ] [MERNSTACK-142] Update README.md with explanation about the validators I created in the frontend application. Explain the regex used to validate and the test method that returns true or false.
 - [ ] [MERNSTACK-143] Add explanation about the main advantages of using MongoDB and Mongoose in the README.md file in the Backend section.
+- [x] [MERNSTACK-14] Create a new schema and model for user.
+
 
 
 # Everything else:
