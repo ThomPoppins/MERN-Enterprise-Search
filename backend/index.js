@@ -3,6 +3,7 @@ import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import booksRoute from "./routes/booksRoute.js";
 import companiesRoute from "./routes/companiesRoute.js";
+import usersRoute from "./routes/usersRoute.js";
 import cors from "cors";
 
 const app = express();
@@ -35,6 +36,7 @@ app.get("/", (request, response) => {
 // Use routers from /routes folder
 app.use("/books", booksRoute);
 app.use("/companies", companiesRoute);
+app.use("/users", usersRoute);
 
 // Connect to MongoDB database
 // If connection is successful, start Express.js backend server and listen to PORT

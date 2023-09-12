@@ -1,24 +1,26 @@
 import express from "express";
 import { Company } from "../models/companyModel.js";
 import { v4 as uuidv4 } from "uuid";
+import { User } from "../models/userModel.js";
+import bcrypt from "bcryptjs";
 
 const router = express.Router();
 
 // Generate random id
 // TODO: Remove function if not needed anymore.
 const generateRandomId = () => {
-  let paymentId = uuidv4();
-  return paymentId;
+  return uuidv4();
 };
 
-// Route to save a new User
+// TODO: [MERNSTACK-161] Fix CORS policy error when registering user
+// Route to register a new User
 router.post("/", async (request, response) => {
   // Create a new user document using the User model
   try {
     if (
       !request.body.username ||
       !request.body.email ||
-      !request.body.hashedPassword
+      !request.body.password
     ) {
       // Send status 400 response if data fields are missing and a (error) message to inform the client.
       return response.status(400).send({
@@ -27,20 +29,31 @@ router.post("/", async (request, response) => {
       });
     }
 
-    // TODO: Check if the user already exists in the database. Hint: Use the findOne method and consider using `unique: true` in the company schema.
-    // TODO: If the user already exists, send status 409 response and a (error) message to inform the client.
+    // Hash the password using bcrypt
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(request.body.password, salt);
+
+    // TODO: [MERNSTACK-153] Check if the user already exists in the database. Hint: Use the findOne method and consider using `unique: true` in the user schema.
+
+    // TODO: [MERNSTACK-154] If the user already exists, send status 409 response and a (error) message to inform the client.
 
     // Create a new user document using the User model and the properties from the request body.
-    // TODO: Populate the user document with the properties from the request body if they exist.
-    const newUser = {};
+    // TODO: [MERNSTACK-155] Populate the user document with the properties from the request body if they exist.
+    const newUser = {
+      username: request.body.username,
+      email: request.body.email,
+      hashedPassword: hashedPassword,
+      firstName: request.body.firstName ? request.body.firstName : "",
+      lastName: request.body.lastName ? request.body.lastName : "",
+    };
 
-    // Create a new company document using the Company model and the properties from the request body
-    const user = await User.create(newCompany);
+    // Create a new user document using the User model and the properties from the request body
+    const user = await User.create(newUser);
 
-    // Send status 201 response and the newly created company to the client
-    return response.status(201).send(company);
+    // Send status 201 response and the newly created user to the client
+    return response.status(201).send(user);
   } catch (error) {
-    console.log("Error in POST /companies: ", error);
+    console.log("Error in POST /users: ", error);
     response.status(500).send({ message: error.message });
   }
 });
