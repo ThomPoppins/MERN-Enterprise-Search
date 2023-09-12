@@ -11,7 +11,6 @@ const generateRandomId = () => {
   return paymentId;
 };
 
-// TODO: [MERNSTACK-149] Move save company logic to the company controller
 // Route to save a new Company
 router.post("/", async (request, response) => {
   // Create a new company document using the Company model
