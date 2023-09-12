@@ -1,7 +1,58 @@
 import mongoose from "mongoose";
 
-/*
- * Comprehensive MongoDB schema for the Company Model.
+/**
+ * Mongoose Schema for Company
+ *
+ * This schema defines the structure for storing detailed information about a company in the database.
+ * It encompasses various aspects such as contact details, addresses, billing information, owners, admins, and more.
+ * Several TODOs are marked for future enhancements and integrations with related models.
+ *
+ * @typedef {Object} CompanySchema
+ * @property {string} name - The name of the company.
+ * @property {string} email - The email address for company correspondence (optional).
+ * @property {string} phone - The contact phone number for the company (optional).
+ * @property {string} slogan - A slogan associated with the company (optional).
+ * @property {string} description - A short description of the company (optional).
+ * @property {Object} address - Registered address of the company (optional).
+ * @property {Object} billingAddress - Address for sending invoices (optional).
+ * @property {Object} addressFormat - Format for the company's address (optional).
+ * @property {string} country - Country of the company billing address (optional).
+ * @property {string} region - Region of the company billing address (optional).
+ * @property {Array} owners - Array of owner objects linked to the company (optional).
+ * @property {string} kvkNumber - KVK number of the company (optional).
+ * @property {boolean} kvkValidated - Validation status of the KVK number (default: false).
+ * @property {Array} companyAdmins - Array of admin objects linked to the company (optional).
+ * @property {Array} departments - Array of departments associated with the company (optional).
+ * @property {Object} businessConfig - Configurable settings for owners and admins (optional).
+ * @property {Object} paymentDetails - Payment details for different countries or regions (optional).
+ * @property {number} startYear - The year the company was started (optional).
+ * @property {boolean} active - Current activity status of the company (optional).
+ * @property {string} industry - Industry associated with the company (optional).
+ * @property {boolean} public - Public or private status of the company (optional).
+ * @property {Array} reviews - Array of review objects linked to the company (optional).
+ * @property {number} rating - Calculated rating based on reviews (optional).
+ * @property {Array} customers - Array of customers affiliated with the company (optional).
+ * @property {string} premium - Premium type associated with the company (optional).
+ * @property {Object} vendor - Vendor information linked to the company (optional).
+ * @property {Array} employees - Array of employee objects linked to the company (optional).
+ * @property {Array} stories - Array of stories associated with the company (optional).
+ * @property {Array} products - Array of product objects linked to the company (optional).
+ * @property {Array} services - Array of service objects linked to the company (optional).
+ * @property {Array} appointments - Array of appointment objects linked to the company (optional).
+ * @property {Array} messages - Array of message objects linked to the company (optional).
+ * @property {Array} notifications - Array of notification objects linked to the company (optional).
+ * @property {Array} events - Array of event objects linked to the company (optional).
+ * @property {Array} agenda - Array of agenda objects linked to the company (optional).
+ * @property {Array} tasks - Array of task objects linked to the company (optional).
+ * @property {Array} invoices - Array of invoice objects linked to the company (optional).
+ * @property {Array} orders - Array of order objects linked to the company (optional).
+ * @property {Array} payments - Array of payment objects linked to the company (optional).
+ * @property {string} mainImage - URL of the main image associated with the company (optional).
+ * @property {Array} images - Array of image URLs linked to the company (optional).
+ * @property {Date} createdAt - Automatically generated timestamp for document creation.
+ * @property {Date} updatedAt - Automatically updated timestamp for document modification.
+ *
+ * Several TODOs indicate planned enhancements and integrations for future development.
  */
 const companySchema = new mongoose.Schema(
   {
@@ -65,6 +116,17 @@ const companySchema = new mongoose.Schema(
     owners: {
       type: Array,
       required: false,
+    },
+    // `kvkNumber` contains the KVK number of the company
+    kvkNumber: {
+      type: String,
+      required: false,
+    },
+    // kvk number is validated (with the correct owner and company name) by the ?KVK API?. True or false.
+    kvkValidated: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
     // TODO: [MERNSTACK-18] Create a new schema and model for companyAdmin users.
     // TODO: [MERNSTACK-19] Admin users will be linked to a company, based on an adminUserId in the adminUser model.

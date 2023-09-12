@@ -55,8 +55,12 @@ To run this application locally, follow these steps:
    - Add the following constants and export them:
      ```javascript
      // backend/config.js
+     // port for the server to listen on
      export const PORT = 5555;
+     // MongoDB database connection URL
      export const mongoDBURL = 'YourMongoDBDatabaseConnectionURLWithUsernamePasswordAuthenticationHere';
+     // Secret key for JWT signing and encryption
+     export const JWT_SECRET = "yoursecretkey";
      ```
 
 3. **Set Up Frontend Configuration**:
@@ -584,6 +588,8 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [ ] [MERNSTACK-141]  Find fitting icons for company `name` `phone number` and `email` for the ListCompanies `card` view and CompaniesModal component. Find them in the react-icons library. DO THIS BEFORE CREATING ANY OTHER LIST COMPONENTS!
 - [ ] [MERNSTACK-142] Update README.md with explanation about the validators I created in the frontend application. Explain the regex used to validate and the test method that returns true or false.
 - [ ] [MERNSTACK-143] Add explanation about the main advantages of using MongoDB and Mongoose in the README.md file in the Backend section.
+- [x] [MERNSTACK-14] Create a new schema and model for user.
+
 
 
 # Everything else:
@@ -603,7 +609,7 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
    │  │  ├─ appointmentModel.js
    │  │  │  └─ line 1: TODO : [MERNSTACK-84] Create a new schema and model for `appointment`. An appointment will be linked to a company or project, based on an appointmentId in the appointment model. Employees, users, vendors, products, a service and more can be linked to an appointment.
    │  │  ├─ bookModel.js
-   │  │  │  ├─ line 18: TODO : [MERNSTACK-10] Solve Codacy issue that ticketnumber is not used.
+   │  │  │  ├─ line 18: TODO : [MERNSTACK-10] Solve Codacy issue that ticket number is not used.
    │  │  │  └─ line 20: TODO : [MERNSTACK-11] Delete this schema once it is no longer needed.
    │  │  ├─ companyModel.js
    │  │  │  ├─ line 8: TODO : [MERNSTACK-4] Investigate the usefulness of generating an id myself.
@@ -772,7 +778,7 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
       ├─ line 560: [x] [MERNSTACK-115] Decide the default destination after clicking the BackButton, something like the previous page or the home page.
       ├─ line 561: [x] [MERNSTACK-116] Create table on the frontend to display all companies.
       ├─ line 562: [x] [MERNSTACK-117] Create ShowCompany component to display a single companies details
-      ├─ line 563: [x] [MERNSTACK-118] Create EditCompany component to edit a single companys details.
+      ├─ line 563: [x] [MERNSTACK-118] Create EditCompany component to edit a single company details.
       ├─ line 564: [x] [MERNSTACK-119] Create DeleteCompany component to delete a single company.
       ├─ line 565: [x] [MERNSTACK-120] Create CreateCompany component to create a new company.
       ├─ line 566: [x] [MERNSTACK-121] Implement a button on the ShowCompany component that allows the user to navigate to the corresponding EditCompany page.
