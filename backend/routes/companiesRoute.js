@@ -4,6 +4,13 @@ import { v4 as uuidv4 } from "uuid";
 
 const router = express.Router();
 
+// TODO: [MERNSTACK-112] Remove this function once the payment model has been fully implemented.
+// Generate a random payment id using the uuidv4 function.
+const generateRandomId = () => {
+  let paymentId = uuidv4();
+  return paymentId;
+};
+
 // Route to save a new Company
 router.post("/", async (request, response) => {
   // Create a new company document using the Company model
@@ -18,15 +25,9 @@ router.post("/", async (request, response) => {
     // TODO: [MERNSTACK-110] Check if the company already exists in the database. Hint: Use the findOne method and consider using `unique: true` in the company schema.
     // TODO: [MERNSTACK-111] If the company already exists, send status 409 response and a (error) message to inform the client.
 
-    // TODO: [MERNSTACK-112] Remove this function once the payment model has been fully implemented.
-    // Generate a random payment id using the uuidv4 function.
-    const generateRandomId = () => {
-      let paymentId = uuidv4();
-      return paymentId;
-    };
-
     // Create a new company document using the Company model and the properties from the request body.
     // TODO: [MERNSTACK-109] Populate the company document with the properties from the request body if they exist.
+    // TODO: [MERNSTACK-] Decide if the default values should be set in the model or in the route. Hint: Consider using the `default` property in the company schema.
     const newCompany = {
       name: request.body.name,
       email: request.body.email ? request.body.email : "",
@@ -36,6 +37,7 @@ router.post("/", async (request, response) => {
       country: request.body.country ? request.body.country : "",
       region: request.body.region ? request.body.region : "",
       owners: request.body.owners ? request.body.owners : [],
+      kvkNumber: "",
       companyAdmins: request.body.companyAdmins
         ? request.body.companyAdmins
         : [],
@@ -56,7 +58,6 @@ router.post("/", async (request, response) => {
               securityCode: "",
             },
             bic: "",
-            kvkNumber: "",
             taxNumber: "",
             taxOffice: "Belastingdienst",
             taxOfficeAddress: "Parnassusweg 5",
