@@ -8,11 +8,6 @@ const Home = () => {
   // Get userLoggedInId state from Redux store
   let userLoggedInId = useSelector((state) => state.userLoggedInId);
 
-  // TODO: Why is useEffect() not re-rendering when state changes?
-  useEffect(() => {
-    console.log("userLoggedInId in Home.jsx: ", userLoggedInId);
-  }, [userLoggedInId]);
-
   if (userLoggedInId) {
     return (
       <div>
