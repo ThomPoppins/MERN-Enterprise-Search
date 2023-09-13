@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../../../config.js";
 import { useSnackbar } from "notistack";
 import emailValidator from "../../validation/emailValidator";
+import verifyToken from "../../utils/auth/verifyToken.jsx";
 
 const RegisterUser = () => {
   const [email, setEmail] = useState("");
@@ -54,6 +55,7 @@ const RegisterUser = () => {
         // the case where the JWT token expires before the cookie and the user is
         // logged out before the cookie expires.
         Cookies.set("jwt", token, { expires: 29 });
+        verifyToken(token);
         enqueueSnackbar("You are logged in!", {
           variant: "success",
         });

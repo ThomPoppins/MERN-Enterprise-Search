@@ -12,19 +12,22 @@ import ShowCompany from "./pages/companies/ShowCompany";
 import DeleteCompany from "./pages/companies/DeleteCompany";
 import LoginUser from "./pages/users/LoginUser";
 import RegisterUser from "./pages/users/RegisterUser";
+import LogoutUser from "./pages/users/LogoutUser";
 import Home from "./pages/Home";
 import Cookies from "js-cookie";
 import verifyToken from "./utils/auth/verifyToken.jsx";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 const App = () => {
   const token = Cookies.get("jwt");
   verifyToken(token);
 
-  // Get userLoggedIn state from Redux store
+  // Get userLoggedInId state from Redux store
   const userLoggedInId = useSelector((state) => state.userLoggedInId);
 
+  console.log("userLoggedInId in App.jsx: ", userLoggedInId);
+
+  // TODO: [MERNSTACK-163] Redirect user from routes other then /, /login and /register if user is not logged in
   if (userLoggedInId) {
     return (
       <Routes>
@@ -34,6 +37,8 @@ const App = () => {
         <Route path="/login" element={<LoginUser />} />
         {/* /register route, render user register page */}
         <Route path="/register" element={<RegisterUser />} />
+        {/* /logout route, render user logout page */}
+        <Route path="/logout" element={<LogoutUser />} />
         {/* /companies/* routes */}
         <Route path="/companies" element={<CompaniesList />} />
         <Route path="/companies/register" element={<RegisterCompany />} />
