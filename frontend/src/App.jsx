@@ -22,13 +22,13 @@ const App = () => {
   const token = Cookies.get("jwt");
   verifyToken(token);
 
-  // Get userLoggedInId state from Redux store
-  const userLoggedInId = useSelector((state) => state.userLoggedInId);
+  // Get userId state from Redux store
+  const userId = useSelector((state) => state.userId);
 
-  console.log("userLoggedInId in App.jsx: ", userLoggedInId);
+  console.log("userId in App.jsx: ", userId);
 
   // TODO: [MERNSTACK-163] Redirect user from routes other then /, /login and /register if user is not logged in
-  if (userLoggedInId) {
+  if (userId) {
     return (
       <Routes>
         {/* / route, render homepage*/}
