@@ -3,8 +3,6 @@ import { BACKEND_URL } from "../../../config.js";
 import store from "../../store/store.jsx";
 import { USER_LOGGED_IN_ID } from "../../store/actions.jsx";
 
-// TODO: [MERNSTACK-162] Save userId as state in Redux store
-
 const verifyToken = async (token) => {
   if (token) {
     await axios
