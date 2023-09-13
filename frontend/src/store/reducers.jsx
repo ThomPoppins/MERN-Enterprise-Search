@@ -1,4 +1,8 @@
-import { BOOKS_LIST_SHOW_TYPE, COMPANIES_LIST_SHOW_TYPE } from "./actions.jsx";
+import {
+  BOOKS_LIST_SHOW_TYPE,
+  COMPANIES_LIST_SHOW_TYPE,
+  USER_LOGGED_IN,
+} from "./actions.jsx";
 
 const booksListShowTypeReducer = (state = "table", action) => {
   switch (action.type) {
@@ -24,7 +28,23 @@ const companiesListShowTypeReducer = (state = "table", action) => {
   }
 };
 
+const userLoggedInReducer = (state = null, action) => {
+  switch (action.type) {
+    case USER_LOGGED_IN:
+      // return a new state object
+      // the new state object is a copy of the old state object
+      // with the userLoggedIn property updated
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 // Add additional reducers here to the object
 // Don't forget to import them at the top of the rootReducer.jsx file
 // and add them to the combineReducers() function
-export { booksListShowTypeReducer, companiesListShowTypeReducer };
+export {
+  booksListShowTypeReducer,
+  companiesListShowTypeReducer,
+  userLoggedInReducer,
+};

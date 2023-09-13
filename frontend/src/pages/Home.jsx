@@ -4,10 +4,6 @@ import verifyToken from "../utils/auth/verifyToken.jsx";
 import Cookies from "js-cookie";
 
 const Home = () => {
-  const token = Cookies.get("jwt");
-  console.log("token in Home.jsx: ", token);
-  verifyToken(token);
-
   return (
     <div>
       <div className="mx-auto p-5">
