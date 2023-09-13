@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import booksRoute from "./routes/booksRoute.js";
 import companiesRoute from "./routes/companiesRoute.js";
 import usersRoute from "./routes/usersRoute.js";
+import authRoute from "./routes/authRoute.js";
 import cors from "cors";
 
 const app = express();
@@ -37,6 +38,7 @@ app.get("/", (request, response) => {
 app.use("/books", booksRoute);
 app.use("/companies", companiesRoute);
 app.use("/users", usersRoute);
+app.use("/auth", authRoute);
 
 // Connect to MongoDB database
 // If connection is successful, start Express.js backend server and listen to PORT

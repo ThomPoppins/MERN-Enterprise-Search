@@ -3,6 +3,7 @@ import { Company } from "../models/companyModel.js";
 import { v4 as uuidv4 } from "uuid";
 import { User } from "../models/userModel.js";
 import bcrypt from "bcryptjs";
+import { generateToken } from "../middleware/auth/jwt.js";
 
 const router = express.Router();
 
@@ -58,83 +59,52 @@ router.post("/", async (request, response) => {
   }
 });
 
-// Route to get all companies
-router.get("/", async (request, response) => {
+router.post("/login", async (request, response) => {
   try {
-    // Get all company documents using the Company model's find method
-    const companies = await Company.find({});
-
-    // Send status 200 response and the companies to the client
-    return response.status(200).json({
-      count: companies.length,
-      data: companies,
-    });
-  } catch (error) {
-    console.log("Error in GET /companies: ", error);
-    response.status(500).send({ message: error.message });
-  }
-});
-
-// Route to get one company from database using the company's id
-router.get("/:id", async (request, response) => {
-  try {
-    // Get the company id from the request parameters
-    const { id } = request.params;
-
-    // Get all company documents using the Company model's find method
-    const company = await Company.findById(id);
-
-    // Send status 200 response and the companies to the client
-    return response.status(200).json(company);
-  } catch (error) {
-    console.log("Error in GET /companies: ", error);
-    response.status(500).send({ message: error.message });
-  }
-});
-
-// Route to update one company in the database using the company's id
-router.put("/:id", async (request, response) => {
-  try {
-    const { id } = request.params;
-
-    const result = await Company.findByIdAndUpdate(id, request.body);
-
-    if (!result) {
-      return response.status(404).json({
-        message: `Cannot find company with id=${id}.`,
+    if (
+      !request.body.email ||
+      !request.body.password ||
+      request.body.email === "" ||
+      request.body.password === ""
+    ) {
+      // Send status 400 response if data fields are missing and a (error) message to inform the client.
+      return response.status(400).send({
+        message: "Data fields missing, need at least a username and password.",
       });
     }
 
-    return response
-      .status(200)
-      .send({ message: "Company updated successfully." });
-  } catch (error) {
-    console.log("Error in PUT /companies: ", error);
-    response.status(500).send({ message: error.message });
-  }
-});
+    // Get user from database based on email
+    const user = await User.findOne({ email: request.body.email });
 
-// Route to delete one company from the database using the company's id
-router.delete("/:id", async (request, response) => {
-  try {
-    const { id } = request.params;
-
-    // Delete the company document using the Company model's findByIdAndDelete method
-    const result = await Company.findByIdAndDelete(id);
-
-    // If no company was found, send status 404 response and a (error) message to inform the client.
-    if (!result) {
-      return response.status(404).json({
-        message: `Cannot find company with id=${id}.`,
+    if (!user) {
+      // Send status 404 response if user is not found and a (error) message to inform the client.
+      return response.status(404).send({
+        message: "User not found, please register an account.",
       });
     }
 
-    // Send status 200 response and a (success) message to inform the client the company was deleted successfully
-    return response
-      .status(200)
-      .send({ message: "Company deleted successfully." });
+    const isMatch = await bcrypt.compare(
+      request.body.password,
+      user.hashedPassword
+    );
+
+    if (!isMatch) {
+      // Send status 401 response if password is incorrect and a (error) message to inform the client.
+      return response.status(401).send({
+        message: "Password is incorrect.",
+      });
+    }
+
+    // Generate a new token for the user to save as a cookie in the client browser
+    const token = generateToken(user);
+
+    // Add the token to the user object
+    const responseData = { user, token };
+
+    // Send status 200 response and the user to the client
+    return response.status(200).send(responseData);
   } catch (error) {
-    console.log("Error in DELETE /companies: ", error);
+    console.log("Error in GET /users/login: ", error);
     response.status(500).send({ message: error.message });
   }
 });

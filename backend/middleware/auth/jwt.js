@@ -1,4 +1,4 @@
-import { JWT_SECRET } from "../config.js";
+import { JWT_SECRET } from "../../config.js";
 import jwt from "jsonwebtoken";
 
 const generateToken = (user) => {
@@ -19,9 +19,10 @@ const generateToken = (user) => {
 
 const verifyToken = (token) => {
   try {
+    console.log("JWT verification token in /middleware/auth/jwt.js: ", token);
     const decoded = jwt.verify(token, JWT_SECRET);
     console.log("JWT verification successful: ", decoded);
-    return decoded.userId;
+    return decoded._id;
   } catch (error) {
     console.log("JWT verification error: ", error.message);
     return null;
