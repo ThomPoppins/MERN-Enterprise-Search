@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import BooksList from "./pages/books/BooksList";
 import CreateBook from "./pages/books/CreateBook";
@@ -13,8 +13,22 @@ import DeleteCompany from "./pages/companies/DeleteCompany";
 import LoginUser from "./pages/users/LoginUser";
 import RegisterUser from "./pages/users/RegisterUser";
 import Home from "./pages/Home";
+import Cookies from "js-cookie";
+import verifyToken from "./utils/auth/verifyToken.jsx";
 
 const App = () => {
+  const [userId, setUserId] = useState(null);
+  useEffect(() => {
+    const getUserIdFromToken = async () => {
+      const token = Cookies.get("jwt");
+      const getUserId = await verifyToken(token);
+      setUserId(getUserId);
+    };
+    getUserIdFromToken();
+    console.log("userId in App.jsx: ", userId);
+  }, []);
+
+  console.log("userId in App.jsx: ", userId);
   return (
     <Routes>
       {/* / route, render homepage*/}

@@ -46,7 +46,7 @@ const EditCompany = () => {
 
   // handleEditCompany is a function that sends a PUT request to the backend to update a company
   const handleEditCompany = () => {
-    const invalidValues = false;
+    let invalidValues = false;
 
     if (emailValidator(email) === false) {
       enqueueSnackbar("Invalid email!", { variant: "error" });

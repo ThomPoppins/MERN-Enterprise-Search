@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import verifyToken from "../utils/auth/verifyToken.jsx";
+import Cookies from "js-cookie";
 
 const Home = () => {
   return (
