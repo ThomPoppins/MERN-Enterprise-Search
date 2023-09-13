@@ -2,14 +2,14 @@ import { combineReducers } from "redux";
 import {
   booksListShowTypeReducer,
   companiesListShowTypeReducer,
-  userLoggedInIdReducer,
+  userIdReducer,
   userReducer,
 } from "./reducers.jsx";
 
 const rootReducer = combineReducers({
   booksListShowType: booksListShowTypeReducer,
   companiesListShowType: companiesListShowTypeReducer,
-  userLoggedInId: userLoggedInIdReducer,
+  userId: userIdReducer,
   user: userReducer,
 });
 

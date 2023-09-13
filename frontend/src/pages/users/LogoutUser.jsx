@@ -7,7 +7,7 @@ import { BACKEND_URL } from "../../../config.js";
 import { useSnackbar } from "notistack";
 import Cookies from "js-cookie";
 import store from "../../store/store.jsx";
-import { USER_LOGGED_IN_ID } from "../../store/actions.jsx";
+import { USER_ID } from "../../store/actions.jsx";
 
 const LogoutUser = () => {
   const [loading, setLoading] = useState(false);
@@ -26,7 +26,7 @@ const LogoutUser = () => {
     setLoading(true);
     Cookies.remove("jwt");
     store.dispatch({
-      type: USER_LOGGED_IN_ID,
+      type: USER_ID,
       payload: null,
     });
     setLoading(false);

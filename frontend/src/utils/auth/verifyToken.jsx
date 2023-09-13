@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BACKEND_URL } from "../../../config.js";
 import store from "../../store/store.jsx";
-import { USER_LOGGED_IN_ID, USER } from "../../store/actions.jsx";
+import { USER_ID, USER } from "../../store/actions.jsx";
 import { useSelector } from "react-redux";
 
 const verifyToken = async (token) => {
@@ -15,7 +15,7 @@ const verifyToken = async (token) => {
           userId
         );
         store.dispatch({
-          type: USER_LOGGED_IN_ID,
+          type: USER_ID,
           payload: userId,
         });
         await axios
@@ -38,7 +38,7 @@ const verifyToken = async (token) => {
       })
       .catch((error) => {
         store.dispatch({
-          type: USER_LOGGED_IN_ID,
+          type: USER_ID,
           payload: null,
         });
         console.log("ERROR in verifyToken.jsx: ", error);

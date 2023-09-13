@@ -1,16 +1,13 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import verifyToken from "../utils/auth/verifyToken.jsx";
-import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
 
 const Home = () => {
-  // Get userLoggedInId state from Redux store
-  let userLoggedInId = useSelector((state) => state.userLoggedInId);
+  let userId = useSelector((state) => state.userId);
 
   let user = useSelector((state) => state.user);
 
-  if (userLoggedInId) {
+  if (userId) {
     return (
       <div>
         <div className="mx-auto p-5">
