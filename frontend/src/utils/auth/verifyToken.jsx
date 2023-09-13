@@ -1,14 +1,14 @@
 import axios from "axios";
 import { BACKEND_URL } from "../../../config.js";
 import store from "../../store/store.jsx";
-import { USER_LOGGED_IN_ID } from "../../store/actions.jsx";
+import { USER_LOGGED_IN_ID, USER } from "../../store/actions.jsx";
 import { useSelector } from "react-redux";
 
 const verifyToken = async (token) => {
   if (token) {
     await axios
       .get(BACKEND_URL + "/auth/verify-token?token=" + token)
-      .then((response) => {
+      .then(async (response) => {
         const userId = response.data.userId;
         console.log(
           "response.data.userId in verifyToken.jsx (should be userId): ",
@@ -18,7 +18,23 @@ const verifyToken = async (token) => {
           type: USER_LOGGED_IN_ID,
           payload: userId,
         });
-        // TODO: Get user details from database and set redux user state
+        await axios
+          .get(BACKEND_URL + "/users/" + userId)
+          .then((response) => {
+            const user = response.data;
+            console.log("user in verifyToken.jsx: ", user);
+            store.dispatch({
+              type: USER,
+              payload: user,
+            });
+          })
+          .catch((error) => {
+            store.dispatch({
+              type: USER,
+              payload: null,
+            });
+            console.log("ERROR in verifyToken.jsx: ", error);
+          });
       })
       .catch((error) => {
         store.dispatch({
