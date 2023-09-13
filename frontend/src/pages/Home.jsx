@@ -8,11 +8,15 @@ const Home = () => {
   // Get userLoggedInId state from Redux store
   let userLoggedInId = useSelector((state) => state.userLoggedInId);
 
+  let user = useSelector((state) => state.user);
+
   if (userLoggedInId) {
     return (
       <div>
         <div className="mx-auto p-5">
-          <h1 className="text-3xl my-8">Welcome to your account!</h1>
+          <h1 className="text-3xl my-8">
+            Welcome to your account {user?.firstName} {user?.lastName}!
+          </h1>
 
           <p className="">
             Visit /books and /companies route to see some of this this
