@@ -41,6 +41,10 @@ const verifyToken = async (token) => {
           type: USER_ID,
           payload: null,
         });
+        store.dispatch({
+          type: USER,
+          payload: null,
+        });
         console.log("ERROR in verifyToken.jsx: ", error);
       });
   }
