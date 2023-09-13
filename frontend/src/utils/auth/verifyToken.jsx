@@ -2,6 +2,7 @@ import axios from "axios";
 import { BACKEND_URL } from "../../../config.js";
 import store from "../../store/store.jsx";
 import { USER_LOGGED_IN_ID } from "../../store/actions.jsx";
+import { useSelector } from "react-redux";
 
 const verifyToken = async (token) => {
   if (token) {
@@ -17,9 +18,14 @@ const verifyToken = async (token) => {
           type: USER_LOGGED_IN_ID,
           payload: userId,
         });
+        // TODO: Get user details from database and set redux user state
       })
       .catch((error) => {
-        console.log(error);
+        store.dispatch({
+          type: USER_LOGGED_IN_ID,
+          payload: null,
+        });
+        console.log("ERROR in verifyToken.jsx: ", error);
       });
   }
 };

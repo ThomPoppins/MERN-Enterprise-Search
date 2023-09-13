@@ -58,6 +58,8 @@ const RegisterUser = () => {
           variant: "success",
         });
         navigate("/");
+        // reload window, REMOVE if useEffect() in <Home /> component works and displays the correct JSX
+        window.location.reload();
       })
       .catch((error) => {
         setLoading(false);
