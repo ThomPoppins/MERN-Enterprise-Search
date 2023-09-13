@@ -1,7 +1,7 @@
 import {
   BOOKS_LIST_SHOW_TYPE,
   COMPANIES_LIST_SHOW_TYPE,
-  USER_LOGGED_IN,
+  USER_LOGGED_IN_ID,
 } from "./actions.jsx";
 
 const booksListShowTypeReducer = (state = "table", action) => {
@@ -28,9 +28,9 @@ const companiesListShowTypeReducer = (state = "table", action) => {
   }
 };
 
-const userLoggedInReducer = (state = null, action) => {
+const userLoggedInIdReducer = (state = null, action) => {
   switch (action.type) {
-    case USER_LOGGED_IN:
+    case USER_LOGGED_IN_ID:
       // return a new state object
       // the new state object is a copy of the old state object
       // with the userLoggedIn property updated
@@ -46,5 +46,5 @@ const userLoggedInReducer = (state = null, action) => {
 export {
   booksListShowTypeReducer,
   companiesListShowTypeReducer,
-  userLoggedInReducer,
+  userLoggedInIdReducer,
 };
