@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import Spinner from "../../components/Spinner";
+import BackButton from "../../components/BackButton";
 import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
 import { BACKEND_URL } from "../../../config";
@@ -39,6 +40,7 @@ const BooksList = () => {
 
   return (
     <div className="p-4">
+      <BackButton destination={"/"} />
       <div className="flex justify-center items-center gap-x-4">
         <button
           className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
