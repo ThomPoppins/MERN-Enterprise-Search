@@ -15,11 +15,17 @@ const generateRandomId = () => {
 router.post("/", async (request, response) => {
   // Create a new company document using the Company model
   try {
-    if (!request.body.name || !request.body.owners) {
+    if (
+      !request.body.name ||
+      !request.body.email ||
+      !request.body.phone ||
+      !request.body.startYear ||
+      !request.body.owners
+    ) {
       // Send status 400 response if data fields are missing and a (error) message to inform the client.
       return response.status(400).send({
         message:
-          "Data fields missing, need at least a company name and a company owner.",
+          "Data fields missing, need at least a company name, company owner and a start year.",
       });
     }
 
@@ -34,6 +40,7 @@ router.post("/", async (request, response) => {
       email: request.body.email ? request.body.email : "",
       phone: request.body.phone ? request.body.phone : "",
       owners: request.body.owners ? request.body.owners : [],
+      startYear: request.body.startYear ? request.body.startYear : 0,
       payments: request.body.payments
         ? request.body.payments
         : [

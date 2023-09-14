@@ -7,14 +7,16 @@ import { BACKEND_URL } from "../../../config.js";
 import { useSnackbar } from "notistack";
 import phoneNumberValidator from "../../validation/phoneNumberValidator";
 import emailValidator from "../../validation/emailValidator";
+import startYearValidator from "../../validation/startYearValidator";
 
 const EditCompany = () => {
   // TODO: [MERNSTACK-129] Add state for all companies fields that can be edited
+  const { id } = useParams();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [startYear, setStartYear] = useState(0);
   const [loading, setLoading] = useState(false);
-  const { id } = useParams();
 
   // useNavigate is a hook that allows us to navigate to a different page
   const navigate = useNavigate();
@@ -36,6 +38,9 @@ const EditCompany = () => {
         const company = response.data;
         // TODO: [MERNSTACK-131] Set state for all companies fields that can be edited
         setName(company.name);
+        setEmail(company.email);
+        setPhone(company.phone);
+        setStartYear(company.startYear);
       })
       .catch((error) => {
         setLoading(false);
@@ -47,6 +52,12 @@ const EditCompany = () => {
   // handleEditCompany is a function that sends a PUT request to the backend to update a company
   const handleEditCompany = () => {
     let invalidValues = false;
+
+    if (companyNameValidator(name) === false) {
+      enqueueSnackbar("Invalid company name!", { variant: "error" });
+      console.log("Invalid company name" + name);
+      invalidValues = true;
+    }
 
     if (emailValidator(email) === false) {
       enqueueSnackbar("Invalid email!", { variant: "error" });
@@ -68,6 +79,7 @@ const EditCompany = () => {
       name: name,
       email: email,
       phone: phone,
+      startYear: startYear,
     };
     setLoading(true);
     axios
