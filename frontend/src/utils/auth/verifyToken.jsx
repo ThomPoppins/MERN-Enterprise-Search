@@ -10,10 +10,6 @@ const verifyToken = async (token) => {
       .get(BACKEND_URL + "/auth/verify-token?token=" + token)
       .then(async (response) => {
         const userId = response.data.userId;
-        console.log(
-          "response.data.userId in verifyToken.jsx (should be userId): ",
-          userId
-        );
         store.dispatch({
           type: USER_ID,
           payload: userId,
@@ -22,7 +18,6 @@ const verifyToken = async (token) => {
           .get(BACKEND_URL + "/users/" + userId)
           .then((response) => {
             const user = response.data;
-            console.log("user in verifyToken.jsx: ", user);
             store.dispatch({
               type: USER,
               payload: user,
