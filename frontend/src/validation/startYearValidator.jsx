@@ -6,7 +6,7 @@ function startYearValidator(startYear) {
     return false;
   }
 
-  if (startYearInt > currentYear) {
+  if (startYearInt > currentYear || startYearInt < 1) {
     return false;
   }
 
