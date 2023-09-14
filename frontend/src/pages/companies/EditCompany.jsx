@@ -10,13 +10,15 @@ import emailValidator from "../../validation/emailValidator";
 import startYearValidator from "../../validation/startYearValidator";
 
 const EditCompany = () => {
-  // TODO: Make possible for user (owner) to add other owners to the company by finding other users and adding them to the company
+  // TODO: [MERNSTACK-168] Make possible for user (owner) to add other owners to the company by finding other users and adding them to the company
   // TODO: [MERNSTACK-129] Add state for all companies fields that can be edited
   const { id } = useParams();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [startYear, setStartYear] = useState(0);
+
+  // Display a spinner when loading data from the backend
   const [loading, setLoading] = useState(false);
 
   // useNavigate is a hook that allows us to navigate to a different page

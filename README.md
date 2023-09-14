@@ -592,6 +592,7 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-162] Save userId as state in Redux store after verification of JWT token, make only /, /login and /register routes accessible for users that are not logged in.
 - [x] [MERNSTACK-161] Fix CORS policy error when registering user
 - [x] [MERNSTACK-155] Populate the user document with the properties from the request body if they exist when registering account.
+- [ ] [MERNSTACK-169] On all forms, validate user input when losing focus and display error message if input is not valid and the right format and color the input field border red.
 
 
 
