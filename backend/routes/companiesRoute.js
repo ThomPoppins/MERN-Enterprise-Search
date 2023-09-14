@@ -15,10 +15,11 @@ const generateRandomId = () => {
 router.post("/", async (request, response) => {
   // Create a new company document using the Company model
   try {
-    if (!request.body.name) {
+    if (!request.body.name || !request.body.owners) {
       // Send status 400 response if data fields are missing and a (error) message to inform the client.
       return response.status(400).send({
-        message: "Data fields missing, need at least a company name.",
+        message:
+          "Data fields missing, need at least a company name and a company owner.",
       });
     }
 
@@ -116,6 +117,27 @@ router.get("/", async (request, response) => {
   try {
     // Get all company documents using the Company model's find method
     const companies = await Company.find({});
+
+    // Send status 200 response and the companies to the client
+    return response.status(200).json({
+      count: companies.length,
+      data: companies,
+    });
+  } catch (error) {
+    console.log("Error in GET /companies: ", error);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+// Route to get all companies from certain owner
+router.get("/owned-companies/:ownerUserId", async (request, response) => {
+  try {
+    // Get the  owners' userId from the request parameters
+    const { ownerUserId } = request.params;
+    // Get all company documents frm
+    const companies = await Company.find({
+      owners: { $elemMatch: { userId: ownerUserId } },
+    });
 
     // Send status 200 response and the companies to the client
     return response.status(200).json({
