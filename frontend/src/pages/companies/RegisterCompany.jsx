@@ -7,6 +7,7 @@ import { BACKEND_URL } from "../../../config.js";
 import { useSnackbar } from "notistack";
 import phoneNumberValidator from "../../validation/phoneNumberValidator";
 import emailValidator from "../../validation/emailValidator";
+import { useSelector } from "react-redux";
 
 const RegisterCompany = () => {
   // TODO: [MERNSTACK-127] Add state for all companies fields that can be registered
@@ -14,6 +15,7 @@ const RegisterCompany = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+  const userId = useSelector((state) => state.userId);
   const navigate = useNavigate();
   // useSnackbar is a hook that returns an object with two properties: enqueueSnackbar and closeSnackbar
   // enqueueSnackbar is a function that takes an object as an argument
@@ -48,6 +50,7 @@ const RegisterCompany = () => {
       name: name,
       email: email,
       phone: phone,
+      owners: [{ userId: userId }], // Make sure that the user that registers the company is added as an owner
     };
     setLoading(true);
     axios

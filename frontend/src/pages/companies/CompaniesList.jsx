@@ -16,12 +16,13 @@ const CompaniesList = () => {
   // useSelector() is a hook that takes the current state as an argument and returns whatever data you want from it.
   const showType = useSelector((state) => state.companiesListShowType);
   const [companies, setCompanies] = useState([]);
+  const userId = useSelector((state) => state.userId);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get(BACKEND_URL + "/companies")
+      .get(BACKEND_URL + "/companies/owned-companies/" + userId)
       .then((response) => {
         setCompanies(response.data.data);
         setLoading(false);
