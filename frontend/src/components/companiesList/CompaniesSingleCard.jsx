@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { BiShow } from "react-icons/bi";
 import { FcBriefcase } from "react-icons/fc";
@@ -10,10 +11,32 @@ import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineDelete } from "react-icons/md";
 import { useState } from "react";
 import CompanyModal from "./CompanyModal";
+import { BACKEND_URL } from "../../../config";
 
 const CompaniesSingleCard = ({ company }) => {
   const [showModal, setShowModal] = useState(false);
-  const owners = company.owners.map((owner) => owner.name).join(", ");
+  const [owners, setOwners] = useState([]);
+
+  useEffect(() => {
+    const ownerPromises = company.owners.map((owner) =>
+      axios.get(BACKEND_URL + `/users/${owner.userId}`)
+    );
+
+    Promise.all(ownerPromises)
+      .then((responses) => {
+        const ownersData = responses.map((response) => response.data);
+        setOwners(ownersData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [company.owners]);
+
+  useEffect(() => {
+    console.log("Owners in CompaniesSingleCard.jsx: ", owners);
+
+    return () => {};
+  }, [owners]);
 
   return (
     <div
@@ -40,7 +63,15 @@ const CompaniesSingleCard = ({ company }) => {
       </div>
       <div className="flex justify-start items-center gap-x-2">
         <FcBusinessman className="text-2xl" />
-        <h2 className="my-1">{owners}</h2>
+        <h2>
+          <span>
+            {owners
+              ?.map((owner) => {
+                return owner.firstName + " " + owner.lastName;
+              })
+              .join(", ")}
+          </span>
+        </h2>
       </div>
       <div className="flex justify-between items-center gap-x-2 mt-4 p-4">
         <BiShow
@@ -58,7 +89,11 @@ const CompaniesSingleCard = ({ company }) => {
         </Link>
       </div>
       {showModal && (
-        <CompanyModal company={company} onClose={() => setShowModal(false)} />
+        <CompanyModal
+          owners={owners}
+          company={company}
+          onClose={() => setShowModal(false)}
+        />
       )}
     </div>
   );

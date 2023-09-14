@@ -3,9 +3,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { FcBriefcase } from "react-icons/fc";
 import { FcBusinessman } from "react-icons/fc";
 
-const CompanyModal = ({ company, onClose }) => {
-  const owners = company.owners.map((owner) => owner.name).join(", ");
-
+const CompanyModal = ({ owners, company, onClose }) => {
   return (
     <div
       className="fixed bg-black bg-opacity-60 top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center"
@@ -32,7 +30,13 @@ const CompanyModal = ({ company, onClose }) => {
         </div>
         <div className="flex justify-start items-center gap-x-2">
           <FcBusinessman className="text-red-300 text-2xl" />
-          <h2 className="my-1">{owners}</h2>
+          <h2 className="my-1">
+            {owners
+              ?.map((owner) => {
+                return owner.firstName + " " + owner.lastName;
+              })
+              .join(", ")}
+          </h2>
         </div>
         <p className="mt-4">Future company slogan</p>
         <p className="my-2">

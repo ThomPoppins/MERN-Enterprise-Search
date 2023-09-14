@@ -33,65 +33,7 @@ router.post("/", async (request, response) => {
       name: request.body.name,
       email: request.body.email ? request.body.email : "",
       phone: request.body.phone ? request.body.phone : "",
-      slogan: request.body.slogan ? request.body.slogan : "",
-      description: request.body.description ? request.body.description : "",
-      country: request.body.country ? request.body.country : "",
-      region: request.body.region ? request.body.region : "",
       owners: request.body.owners ? request.body.owners : [],
-      kvkNumber: "",
-      companyAdmins: request.body.companyAdmins
-        ? request.body.companyAdmins
-        : [],
-      locations: request.body.locations ? request.body.locations : [],
-      departments: request.body.departments ? request.body.departments : [],
-      businessConfig: request.body.businessConfig
-        ? request.body.businessConfig
-        : {},
-      paymentDetails: request.body.paymentDetails
-        ? request.body.paymentDetails
-        : {
-            // TODO: `id` corresponding to the `paymentMethod` model document `id`
-            paymentMethodId: 0,
-            vatNumber: "",
-            iban: "",
-            creditCard: {
-              number: "",
-              securityCode: "",
-            },
-            bic: "",
-            taxNumber: "",
-            taxOffice: "Belastingdienst",
-            taxOfficeAddress: "Parnassusweg 5",
-            taxOfficePostalCode: "1077 DC",
-            taxOfficeCity: "Amsterdam",
-            taxOfficeCountry: "NL",
-            taxOfficePhone: "",
-            taxOfficeEmail: "",
-          },
-      startYear: request.body.startYear ? request.body.startYear : 0,
-      endYear: request.body.endYear ? request.body.endYear : 0,
-      active: request.body.active ? request.body.active : true,
-      industry: request.body.industry ? request.body.industry : "",
-      public: request.body.public ? request.body.public : true,
-      reviews: request.body.reviews ? request.body.reviews : [],
-      rating: 0,
-      customers: request.body.customers ? request.body.customers : [],
-      premium: request.body.premium ? request.body.premium : "none",
-      vendor: request.body.vendor ? request.body.vendor : { vendorId: "" },
-      employees: request.body.employees ? request.body.employees : [],
-      stories: request.body.stories ? request.body.stories : [],
-      products: request.body.products ? request.body.products : [],
-      services: request.body.services ? request.body.services : [],
-      appointments: request.body.appointments ? request.body.appointments : [],
-      messages: request.body.messages ? request.body.messages : [],
-      notifications: request.body.notifications
-        ? request.body.notifications
-        : [],
-      events: request.body.events ? request.body.events : [],
-      agenda: request.body.agenda ? request.body.agenda : [],
-      tasks: request.body.tasks ? request.body.tasks : [],
-      invoices: request.body.invoices ? request.body.invoices : [],
-      orders: request.body.orders ? request.body.orders : [],
       payments: request.body.payments
         ? request.body.payments
         : [
@@ -145,7 +87,7 @@ router.get("/owned-companies/:ownerUserId", async (request, response) => {
       data: companies,
     });
   } catch (error) {
-    console.log("Error in GET /companies: ", error);
+    console.log("Error in GET /owned-companies/:ownerUserId ", error);
     response.status(500).send({ message: error.message });
   }
 });

@@ -65,33 +65,39 @@ const companySchema = new mongoose.Schema(
     // TODO: [MERNSTACK-134] Send confirmation e-mail to this address to verify the company email address.
     email: {
       type: String,
-      required: false,
+      required: true,
+      default: "",
     },
     phone: {
       type: String,
-      required: false,
+      required: true,
+      default: "",
     },
     // company slogan
     slogan: {
       type: String,
       required: false,
+      default: "",
     },
     // Short description of the company.
     description: {
       type: String,
       required: false,
+      default: "",
     },
     // Registered address of the company.
     // For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
     address: {
       type: Object,
       required: false,
+      default: {},
     },
     // Adress to send invoices to.
     // For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
     billingAddress: {
       type: Object,
       required: false,
+      default: {},
     },
     // "addressFormat" will be used to format the address in the correct way for the country and regional address format.
     // TODO: [MERNSTACK-13] Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
@@ -99,16 +105,19 @@ const companySchema = new mongoose.Schema(
     addressFormat: {
       type: Object,
       required: false,
+      default: {},
     },
     // Country of the company billing address. For example: "NL" for the Netherlands.
     country: {
       type: String,
       required: false,
+      default: "NL",
     },
     // Region of the company billing address. For example: "Texas" for Texas in the US.
     region: {
       type: String,
       required: false,
+      default: "",
     },
     // TODO: [MERNSTACK-15] Save the name , email, phone, and role related to the company as fields in a new user model. (to be created)
     // TODO: [MERNSTACK-16] Owners  will be linked to a company, based on an ownerId in the owner model.
@@ -116,11 +125,13 @@ const companySchema = new mongoose.Schema(
     owners: {
       type: Array,
       required: false,
+      default: [],
     },
     // `kvkNumber` contains the KVK number of the company
     kvkNumber: {
       type: String,
       required: false,
+      default: "",
     },
     // kvk number is validated (with the correct owner and company name) by the ?KVK API?. True or false.
     kvkValidated: {
@@ -134,6 +145,7 @@ const companySchema = new mongoose.Schema(
     companyAdmins: {
       type: Array,
       required: false,
+      default: [],
     },
     // TODO: [MERNSTACK-21] Create a new schema and model for Role with an roleId and role. For example: { roleId: { type: Number, required: true }, role: { type: String, required: true } } (roleId = 1, role = "owner") (roleId = 2, role = "admin") (roleId = 3, role = "employee") (roleId = 4, role = "vendor") (roleId = 5, role = "customer") (roleId = 6, role = "guest")
     // TODO: [MERNSTACK-22] Roles will be linked to company associated users like employees, vendors, customers, and more, based on an roleId in the role model.
@@ -149,6 +161,7 @@ const companySchema = new mongoose.Schema(
     locations: {
       type: Array,
       required: false,
+      default: [],
     },
     // Format of which payment options and details are required for the country or region.
     // `businessConfigFormat` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the required payment details for that country or region.
@@ -193,12 +206,14 @@ const companySchema = new mongoose.Schema(
     departments: {
       type: Array,
       required: false,
+      default: [],
     },
     // TODO: [MERNSTACK-28] Find out how to validate if the correct business and payment details are being used and the REAL "owner" is the only one authorized to change these details.
     // Object of configurable settings that `company` owners and admins can change.
     businessConfig: {
       type: Object,
       required: false,
+      default: {},
     },
     // TODO:[MERNSTACK-75] Create paymentMethod schema and model.
     // `paymentDetails` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the payment details for that country or region.
@@ -206,34 +221,40 @@ const companySchema = new mongoose.Schema(
     paymentDetails: {
       type: Object,
       required: false,
+      default: {},
     },
     // The year the company was started.
     startYear: {
       type: Number,
       required: false,
+      default: 0,
     },
     // Is the company active at THIS moment? True or false.
     active: {
       type: Boolean,
       required: false,
+      default: true,
     },
     // TODO: [MERNSTACK-29] Create a new schema and model for Industry. Industry will be linked to a company, based on an industryId in the industry model.
     // TODO: [MERNSTACK-76] RECONSIDER: Maybe a `junction` table between companies and the industries they are in is the right place to store necessary data for the specific companyIndustry relationships This extra data might be data like metadata that can be used to improve the result listing order of companies when searched by user in frontend.
     industry: {
       type: String,
       required: false,
+      default: "",
     },
     // Is the company public or private at THIS moment?
     // TODO: [MERNSTACK-33] Make it possible to change this value in the user/owner settings.
     public: {
       type: Boolean,
       required: false,
+      default: true,
     },
     // TODO: [MERNSTACK-35] Reviews will be linked to a company, based on an reviewId in the review model. This model should contain the review text, rating, reviewer, timestamp and maybe more.
     // TODO: [MERNSTACK-36] "reviews" array should contain review objects with an reviewId.
     reviews: {
       type: Array,
       required: false,
+      default: [],
     },
     // Rating property would be the result of calculations based on the ratings given within together with the reviews (or given after being send a mail to user, asking them to rate the `service` or `product`.
     rating: {
@@ -241,23 +262,27 @@ const companySchema = new mongoose.Schema(
       required: false,
       min: 0,
       max: 5,
+      default: 0,
     },
     // Users that want to be affiliated with the company so they can profit of special company's benefits in exchange for a review/rating or something else.
     // `customers` is an array of objects with customerId corresponding with the `id` of the Customer model.
     customers: {
       type: Array,
       required: false,
+      default: [],
     },
     // "premium" will be the premiumTypeName "none" "bronze", "silver", "gold" or "platinum" corresponding with the premiumType model?
     // `premium` is the id of the premium type in the corresponding premium type model.
     premium: {
       type: String,
       required: false,
+      default: "none",
     },
     // Is this company a vendor? This will be a object containing the vendorId corresponding with the Vendor model. (one-to-one relationship)
     vendor: {
       type: Object,
       required: false,
+      default: {},
     },
     // associatedVendors: {
     //   type: Array,
@@ -267,79 +292,85 @@ const companySchema = new mongoose.Schema(
     employees: {
       type: Array,
       required: false,
-      /* unique: true, */
+      default: [],
     },
     stories: {
       type: Array,
       required: false,
-      /* unique: true, */
+      default: [],
     },
     // "products" is an array of product objects with an productId which is the `id` of the Product model.
     products: {
       type: Array,
       required: false,
-      /* unique: true, */
+      default: [],
     },
     // "services" is an array of service objects with an serviceId.
     services: {
       type: Array,
       required: false,
-      /* unique: true, */
+      default: [],
     },
     appointments: {
       type: Array,
       required: false,
-      /* unique: true, */
+      default: [],
     },
     // `messages` is an array of message objects with an messageId, corresponding userId, timestamp, and more.
     messages: {
       type: Array,
       required: false,
+      default: [],
     },
     notifications: {
       type: Array,
       required: false,
-      /* unique: true, */
+      default: [],
     },
     // `events` is an array of event objects with an eventId.
     events: {
       type: Array,
       required: false,
-      /* unique: true, */
+      default: [],
     },
     // `agenda` is an array of agenda objects with an agendaId corresponding with the Agenda model.
     agenda: {
       type: Array,
       required: false,
+      default: [],
     },
     // `tasks` is an array of task objects with an taskId.
     tasks: {
       type: Array,
       required: false,
-      /* unique: true, */
+      default: [],
     },
     // `invoices` is an array of invoice objects with an invoiceId corresponding with the Invoice model.
     invoices: {
       type: Array,
       required: false,
-      /* unique: true, */
+      default: [],
     },
     // `orders` is an array of order objects with an orderId corresponding with the Order model.
     orders: {
       type: Array,
       required: false,
-      /* unique: true, */
+      default: [],
     },
     // `payments` is an array of payment objects with an paymentId corresponding with the Payment model.
     payments: {
       type: Array,
       required: false,
       unique: true,
+      default: [],
     },
-    mainImage: {
+    // `mainImage` is the image corresponding with the Image model id.
+    mainImageId: {
       type: String,
       required: false,
+      default: "",
     },
+    // `images` is an array of image objects with an imageId corresponding with the Image model.
     images: {
       type: Array,
       required: false,
