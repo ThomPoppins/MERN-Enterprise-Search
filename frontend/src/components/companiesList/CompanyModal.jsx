@@ -21,7 +21,7 @@ const CompanyModal = ({ owners, company, onClose }) => {
           onClick={onClose}
         />
         <h2 className="w-fit px-4 py-1 bg-red-300 rounded-lg">
-          {company.publishYear}
+          {company.startYear}
         </h2>
         <h4 className="my-2 text-gray-500">{company._id}</h4>
         <div className="flex justify-start items-center gap-x-2">
