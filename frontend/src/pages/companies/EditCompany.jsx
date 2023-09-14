@@ -10,6 +10,7 @@ import emailValidator from "../../validation/emailValidator";
 import startYearValidator from "../../validation/startYearValidator";
 
 const EditCompany = () => {
+  // TODO: Make possible for user (owner) to add other owners to the company by finding other users and adding them to the company
   // TODO: [MERNSTACK-129] Add state for all companies fields that can be edited
   const { id } = useParams();
   const [name, setName] = useState("");
@@ -68,6 +69,12 @@ const EditCompany = () => {
     if (phoneNumberValidator(phone, "NL") === false) {
       enqueueSnackbar("Invalid phone number!", { variant: "error" });
       console.log("Invalid phone number" + phone);
+      invalidValues = true;
+    }
+
+    if (startYearValidator(startYear) === false) {
+      enqueueSnackbar("Invalid start year!", { variant: "error" });
+      console.log("Invalid start year" + startYear);
       invalidValues = true;
     }
 

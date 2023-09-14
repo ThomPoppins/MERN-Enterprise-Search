@@ -564,7 +564,7 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [ ] [MERNSTACK-61] Create `junction` table for many-to-many relationship between `owners` and `companies`. (see backend devdocs folder)
 - [ ] [MERNSTACK-62] Create `junction` table between `Company` and `Project`. This table will be used because of the many-to-many relationship and additional properties that are needed to link a company to a project. (see backend devdocs folder)
 - [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers)
-- [ ] [MERNSTACK-144] After user login, display link that will `navigate` (?with `useNavigate()`?) user to `my-companies` where companies will be listed and with a company register form. (see frontend devdocs folder)
+- [x] [MERNSTACK-144] After user login, display link that will `navigate` (?with `useNavigate()`?) user to `my-companies` where companies will be listed and with a company register form. (see frontend devdocs folder)
 - [ ] [MERNSTACK-64] In the frontend, create a route to `/my-companies` where `user` companies will be listed.
 - [x] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
 - [ ] [MERNSTACK-145] Break down all ideas in the `Features:` section below into smaller tasks and create Jira tickets for them.
@@ -582,14 +582,16 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-124] Use useSnackbar() for displaying error or success messages to the user in the Company components.
 - [ ] [MERNSTACK-125] Inform myself better about using useEffect() to prevent infinite loop situations when my application get more complex. [Speech about using useEffect effectively](https://www.youtube.com/watch?v=eFGeStq8dZo&list=PLokIxGKSireSB4Gx6r7xWlFs9Q9PueDED&ab_channel=ReactConferencesbyGitNation )
 - [x] [MERNSTACK-126] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (see frontend devdocs folder)
-- [ ] [MERNSTACK-138] Create user register page and functionality, save with bcrypt hashed password in database.
-- [ ] [MERNSTACK-139] Create a user login page and functionality, validate user password has with bcrypt and compare hashed password on login.
+- [x] [MERNSTACK-138] Create user register page and functionality, save with bcrypt hashed password in database.
+- [x] [MERNSTACK-139] Create a user login page and functionality, validate user password has with bcrypt and compare hashed password on login.
 - [ ] [MERNSTACK-140] Make it possible for a user to register a company and automatically become first company owner.
 - [x] [MERNSTACK-141]  Find fitting icons for company `name` `phone number` and `email` for the ListCompanies `card` view and CompaniesModal component. Find them in the react-icons library. DO THIS BEFORE CREATING ANY OTHER LIST COMPONENTS!
 - [ ] [MERNSTACK-142] Update README.md with explanation about the validators I created in the frontend application. Explain the regex used to validate and the test method that returns true or false.
 - [ ] [MERNSTACK-143] Add explanation about the main advantages of using MongoDB and Mongoose in the README.md file in the Backend section.
 - [x] [MERNSTACK-14] Create a new schema and model for user.
 - [x] [MERNSTACK-162] Save userId as state in Redux store after verification of JWT token, make only /, /login and /register routes accessible for users that are not logged in.
+- [x] [MERNSTACK-161] Fix CORS policy error when registering user
+- [x] [MERNSTACK-155] Populate the user document with the properties from the request body if they exist when registering account.
 
 
 

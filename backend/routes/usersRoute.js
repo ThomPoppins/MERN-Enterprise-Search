@@ -13,7 +13,6 @@ const generateRandomId = () => {
   return uuidv4();
 };
 
-// TODO: [MERNSTACK-161] Fix CORS policy error when registering user
 // Route to register a new User
 router.post("/", async (request, response) => {
   // Create a new user document using the User model
@@ -39,7 +38,6 @@ router.post("/", async (request, response) => {
     // TODO: [MERNSTACK-154] If the user already exists, send status 409 response and a (error) message to inform the client.
 
     // Create a new user document using the User model and the properties from the request body.
-    // TODO: [MERNSTACK-155] Populate the user document with the properties from the request body if they exist.
     const newUser = {
       username: request.body.username,
       email: request.body.email,
