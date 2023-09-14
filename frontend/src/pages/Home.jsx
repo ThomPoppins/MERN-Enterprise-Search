@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 const Home = () => {
   let userId = useSelector((state) => state.userId);
-
   let user = useSelector((state) => state.user);
 
   if (userId) {
@@ -16,8 +15,8 @@ const Home = () => {
           </h1>
 
           <p className="">
-            Visit /books and /companies route to see some of this this
-            application's functionalities in action.
+            Visit Books and Companies links to see some of this this
+            application's features in action.
           </p>
         </div>
 
@@ -50,9 +49,9 @@ const Home = () => {
           <h1 className="text-3xl my-8">Home</h1>
 
           <p className="">
-            After registering an account and logging in, visit /books and
-            /companies route to see some of this this application's
-            functionalities in action.
+            Register and login to your account to see the features of this
+            application in action. Account data will only be saved to your own
+            MongoDB database and your password will be saved hashed by bcrypt.
           </p>
         </div>
 

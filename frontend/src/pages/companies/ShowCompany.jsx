@@ -7,6 +7,7 @@ import { BACKEND_URL } from "../../../config.js";
 
 const ShowCompany = () => {
   const [company, setCompany] = useState({});
+  const [owners, setOwners] = useState([]);
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
@@ -16,13 +17,27 @@ const ShowCompany = () => {
       .get(BACKEND_URL + `/companies/${id}`)
       .then((response) => {
         setCompany(response.data);
-        setLoading(false);
+
+        const ownerPromises = response.data.owners.map((owner) =>
+          axios.get(BACKEND_URL + `/users/${owner.userId}`)
+        );
+
+        Promise.all(ownerPromises)
+          .then((responses) => {
+            const ownersData = responses.map((response) => response.data);
+            setOwners(ownersData);
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.log(error);
+            setLoading(false);
+          });
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });
-  }, []);
+  }, [id]);
 
   return (
     <div className="p-4">
@@ -48,6 +63,14 @@ const ShowCompany = () => {
           <div className="my-4">
             <span className="text-xl mr-4 text-gray-500">Phone</span>
             <span>{company.phone}</span>
+          </div>
+          <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Owners</span>
+            <span>
+              {owners
+                .map((owner) => owner.firstName + " " + owner.lastName)
+                .join(", ")}
+            </span>
           </div>
           <div className="my-4">
             <span className="text-xl mr-4 text-gray-500">Create Time</span>
