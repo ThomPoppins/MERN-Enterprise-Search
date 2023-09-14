@@ -142,6 +142,18 @@ const EditCompany = () => {
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Start Year</label>
+          <input
+            type="number"
+            value={startYear}
+            // onChange is a function that takes an event as an argument
+            // and sets the title state to the value of the input
+            // e.target.value is the value of the input
+            onChange={(e) => setStartYear(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2 w-full"
+          />
+        </div>
         <button className="p-2 bg-sky-300 m-8" onClick={handleEditCompany}>
           Save
         </button>
