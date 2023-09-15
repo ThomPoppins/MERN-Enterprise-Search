@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { BACKEND_URL } from "../../config";
 
-const UserSearch = ({ company, handleAddUserAsCompanyOwner }) => {
+const UserSearch = ({ handleAddUserAsCompanyOwner }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [usersResult, setUsersResult] = useState([]);
 
