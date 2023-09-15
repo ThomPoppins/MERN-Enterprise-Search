@@ -9,6 +9,7 @@ import phoneNumberValidator from "../../validation/phoneNumberValidator";
 import emailValidator from "../../validation/emailValidator";
 import startYearValidator from "../../validation/startYearValidator";
 import UserSearch from "../../components/UserSearch";
+import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
 
 const EditCompany = () => {
   // ADD OWNERS TO COMPANY TICKETS:
@@ -241,11 +242,17 @@ const EditCompany = () => {
                 <div className="mb-4" key={owner._id + index}>
                   <li>
                     <ul>
-                      <li>user: {owner.username}</li>
                       <li>
-                        name: {owner.firstName} {owner.lastName}
+                        <VscMention className="inline" />
+                        {owner.username}
                       </li>
-                      <li>email: {owner.email}</li>
+                      <li>
+                        <VscPerson className="inline" /> {owner.firstName}{" "}
+                        {owner.lastName}
+                      </li>
+                      <li>
+                        <VscMail className="inline" /> {owner.email}
+                      </li>
                     </ul>
                   </li>
                 </div>
