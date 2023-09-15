@@ -45,12 +45,22 @@ const UserSearch = ({ handleAddUserAsCompanyOwner }) => {
       </div>
       <ul>
         {usersResult.map((user) => (
-          <li key={user._id}>
-            {user.username} {user.name} {user.email}{" "}
-            <button value={user._id} onClick={handleAddOwner}>
-              Add
-            </button>
-          </li>
+          <div className="flex border-sky-400 rounded-xl mx-auto justify-between">
+            <div>
+              <li key={user._id}>
+                {user.username} {user.name} {user.email}{" "}
+              </li>
+            </div>
+            <div>
+              <button
+                className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto mb-4"
+                value={user._id}
+                onClick={handleAddOwner}
+              >
+                Add
+              </button>
+            </div>
+          </div>
         ))}
       </ul>
     </div>
