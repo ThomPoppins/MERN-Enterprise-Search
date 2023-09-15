@@ -194,7 +194,7 @@ router.put("/:companyId/add-owner/:userId", async (request, response) => {
   }
 });
 
-// Remove owner from company based on userId
+// Remove owner from company based on companyId and userId
 router.put("/:companyId/remove-owner/:userId", async (request, response) => {
   try {
     const { companyId, userId } = request.params;

@@ -33,6 +33,14 @@ const UserSearch = ({ handleAddUserAsCompanyOwner }) => {
         <label className="text-xl mr-4 text-gray-500">
           Search user to add as company owner:
         </label>
+        <div className="my-4">
+          <p className="text-gray-400">
+            <strong>Note:</strong> Register more accounts if you want results,
+            search query will match on username, first name, last name and
+            email.
+          </p>
+        </div>
+
         <input
           type="text"
           value={searchTerm}
