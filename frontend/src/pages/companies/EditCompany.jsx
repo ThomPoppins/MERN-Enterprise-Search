@@ -9,19 +9,19 @@ import phoneNumberValidator from "../../validation/phoneNumberValidator";
 import emailValidator from "../../validation/emailValidator";
 import startYearValidator from "../../validation/startYearValidator";
 import UserSearch from "../../components/UserSearch";
+import companyNameValidator from "../../validation/companyNameValidator";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
+import { useSelector } from "react-redux";
 
 const EditCompany = () => {
   // ADD OWNERS TO COMPANY TICKETS:
-  // TODO: [MERNSTACK-172] In the <EditCompany /> component, add a button that opens the <UserSearch /> component when clicked. You can use the useState() hook to create a state variable that controls whether the <UserSearch /> component is visible or not.
-  // TODO: [MERNSTACK-174] When the user selects a user to add as an owner to the company, update the owners state variable in the <EditCompany /> component to include the selected user. You can use the setOwners() function to update the owners state variable.
   // TODO: [MERNSTACK-175] When the user saves the changes to the company, make an API call to your backend to update the company with the new owners.
-  // TODO: [MERNSTACK-168] Make possible for user (owner) to add other owners to the company by finding other users and adding them to the company
 
   // TODO: [MERNSTACK-129] Add state for all companies fields that can be edited
   const { id } = useParams();
   const companyId = id;
   const [company, setCompany] = useState({});
+  const userId = useSelector((state) => state.userId);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -288,7 +288,7 @@ const EditCompany = () => {
             {owners.map((owner, index) => {
               return (
                 <div
-                  className="mb-4 flex justify-between"
+                  className="mb-4 flex justify-between items-center"
                   key={owner._id + index}
                 >
                   <div>
@@ -309,13 +309,17 @@ const EditCompany = () => {
                     </li>
                   </div>
                   <div>
-                    <button
-                      className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto mb-4"
-                      value={owner._id}
-                      onClick={handleRemoveUserAsCompanyOwner}
-                    >
-                      Remove
-                    </button>
+                    {owner._id !== userId ? (
+                      <button
+                        className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto mb-4"
+                        value={owner._id}
+                        onClick={handleRemoveUserAsCompanyOwner}
+                      >
+                        Remove
+                      </button>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
               );
