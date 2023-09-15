@@ -288,7 +288,7 @@ const EditCompany = () => {
             {owners.map((owner, index) => {
               return (
                 <div
-                  className="mb-4 flex justify-between"
+                  className="mb-4 flex justify-between items-center"
                   key={owner._id + index}
                 >
                   <div>

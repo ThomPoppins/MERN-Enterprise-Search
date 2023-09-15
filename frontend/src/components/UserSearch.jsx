@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { BACKEND_URL } from "../../config";
+import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
 
 const UserSearch = ({ handleAddUserAsCompanyOwner }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -53,10 +54,14 @@ const UserSearch = ({ handleAddUserAsCompanyOwner }) => {
       </div>
       <ul>
         {usersResult.map((user) => (
-          <div className="flex border-sky-400 rounded-xl mx-auto justify-between">
-            <div>
+          <div className="flex border-sky-400 rounded-xl mx-auto justify-between items-center">
+            <div className="mb-4">
               <li key={user._id}>
-                {user.username} {user.name} {user.email}{" "}
+                <VscMention className="inline" />
+                {user.username} <br />
+                <VscPerson className="inline" /> {user.firstName}{" "}
+                {user.lastName} <br />
+                <VscMail className="inline" /> {user.email}
               </li>
             </div>
             <div>
