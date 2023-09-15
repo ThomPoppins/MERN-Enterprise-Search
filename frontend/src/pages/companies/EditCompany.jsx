@@ -59,9 +59,11 @@ const EditCompany = () => {
           userIds.push(owner.userId);
         });
 
-        const ownerPromises = userIds.map((userId) =>
-          axios.get(BACKEND_URL + "/users/user/" + userId)
-        );
+        console.log("userIds: ", userIds);
+
+        const ownerPromises = userIds.map((userId) => {
+          return axios.get(BACKEND_URL + "/users/user/" + userId);
+        });
 
         Promise.all(ownerPromises)
           .then((responses) => {
@@ -234,7 +236,6 @@ const EditCompany = () => {
             <label className="text-xl mr-4 text-gray-500">Owners</label>
           </div>
           <ul className="mb-4">
-            {console.log("owners in EditCompany.jsx: " + owners)}
             {owners.map((owner, index) => {
               return (
                 <div className="mb-4" key={owner._id + index}>
