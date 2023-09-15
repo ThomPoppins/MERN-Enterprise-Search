@@ -143,7 +143,10 @@ const RegisterCompany = () => {
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
-        <button className="p-2 bg-sky-300 m-8" onClick={handleSaveCompany}>
+        <button
+          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto w-1/2"
+          onClick={handleSaveCompany}
+        >
           Save
         </button>
       </div>

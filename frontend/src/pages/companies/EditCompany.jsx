@@ -132,10 +132,6 @@ const EditCompany = () => {
       });
   };
 
-  const addSearchBoxForNewOwner = () => {
-    console.log("addSearchBoxForNewOwner");
-  };
-
   const handleAddUserAsCompanyOwner = (userId) => {
     console.log("handleAddUserAsCompanyOwner userId: " + userId);
     axios
@@ -234,36 +230,34 @@ const EditCompany = () => {
           />
         </div>
         <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Owners</label>
+          <div className="mb-4">
+            <label className="text-xl mr-4 text-gray-500">Owners</label>
+          </div>
           <ul className="mb-4">
             {console.log("owners in EditCompany.jsx: " + owners)}
             {owners.map((owner, index) => {
               return (
-                <li key={owner._id + index}>
-                  <ul>
-                    <li>user: {owner.username}</li>
-                    <li>
-                      name: {owner.firstName} {owner.lastName}
-                    </li>
-                    <li>email: {owner.email}</li>
-                  </ul>
-                </li>
+                <div className="mb-4" key={owner._id + index}>
+                  <li>
+                    <ul>
+                      <li>user: {owner.username}</li>
+                      <li>
+                        name: {owner.firstName} {owner.lastName}
+                      </li>
+                      <li>email: {owner.email}</li>
+                    </ul>
+                  </li>
+                </div>
               );
             })}
           </ul>
         </div>
-        <button
-          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mr-3"
-          onClick={addSearchBoxForNewOwner}
-        >
-          Add Owner
-        </button>
         <UserSearch
           company={company}
           handleAddUserAsCompanyOwner={handleAddUserAsCompanyOwner}
         />
         <button
-          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mr-3"
+          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto w-1/2"
           onClick={handleEditCompany}
         >
           Save
