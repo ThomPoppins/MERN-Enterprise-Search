@@ -5,7 +5,6 @@ import { BACKEND_URL } from "../../config";
 const UserSearch = ({ company, handleAddUserAsCompanyOwner }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [usersResult, setUsersResult] = useState([]);
-  const companyId = company._id;
 
   const handleSearch = (e) => {
     // e.preventDefault();
