@@ -595,6 +595,7 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [ ] [MERNSTACK-169] On all forms, validate user input when losing focus and display error message if input is not valid and the right format and color the input field border red.
 - [ ] [MERNSTACK-173] Finish EditCompany component, integrated with search functionality so users can be found by name, username or email and added to company as owner.
 - [x] [MERNSTACK-175] Solve the problem of the owner being undefined
+- [ ] [MERNSTACK-181] Add remove button to remove owner from company in EditCompany component.
 - [ ] [MERNSTACK-176] Display owners first name and last name on <ShowCompany /> <CompanySingleCard /> and <CompanyModal />.
 - [ ] [MERNSTACK-177] Only find owners that are not already owners of the company in the EditCompany and UserSearch component.
 - [ ] [MERNSTACK-178] Send invitation to user to become owner of company.
