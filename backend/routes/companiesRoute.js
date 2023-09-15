@@ -15,11 +15,17 @@ const generateRandomId = () => {
 router.post("/", async (request, response) => {
   // Create a new company document using the Company model
   try {
-    if (!request.body.name || !request.body.owners) {
+    if (
+      !request.body.name ||
+      !request.body.email ||
+      !request.body.phone ||
+      !request.body.startYear ||
+      !request.body.owners
+    ) {
       // Send status 400 response if data fields are missing and a (error) message to inform the client.
       return response.status(400).send({
         message:
-          "Data fields missing, need at least a company name and a company owner.",
+          "Data fields missing, need at least a company name, company owner and a start year.",
       });
     }
 
@@ -34,6 +40,7 @@ router.post("/", async (request, response) => {
       email: request.body.email ? request.body.email : "",
       phone: request.body.phone ? request.body.phone : "",
       owners: request.body.owners ? request.body.owners : [],
+      startYear: request.body.startYear ? request.body.startYear : 0,
       payments: request.body.payments
         ? request.body.payments
         : [
@@ -152,6 +159,70 @@ router.delete("/:id", async (request, response) => {
       .send({ message: "Company deleted successfully." });
   } catch (error) {
     console.log("Error in DELETE /companies: ", error);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+// Add owner to company based on userId
+router.put("/:companyId/add-owner/:userId", async (request, response) => {
+  try {
+    const { companyId, userId } = request.params;
+
+    const company = await Company.findById(companyId);
+
+    if (!company) {
+      console.logo(`Cannot find company with id=${companyId}.`);
+      return response.status(404).json({
+        message: `Cannot find company with id=${companyId}.`,
+      });
+    }
+
+    const newOwner = {
+      userId: userId,
+    };
+
+    console.log("newOwner in /:companyId/add-owner/:userId", newOwner);
+
+    company.owners.push(newOwner);
+
+    const updatedCompany = await company.save();
+
+    return response.status(200).json(updatedCompany);
+  } catch (error) {
+    console.log("Error in PUT /companies/add-owner/:userId: ", error);
+    response.status(500).send({ message: error.message });
+  }
+});
+
+// Remove owner from company based on companyId and userId
+router.put("/:companyId/remove-owner/:userId", async (request, response) => {
+  try {
+    const { companyId, userId } = request.params;
+
+    const company = await Company.findById(companyId);
+
+    if (!company) {
+      console.logo(`Cannot find company with id=${companyId}.`);
+      return response.status(404).json({
+        message: `Cannot find company with id=${companyId}.`,
+      });
+    }
+
+    // Filter out the owner with the userId to save the company without the owner
+    const updatedOwners = company.owners.filter(
+      (owner) => owner.userId !== userId
+    );
+
+    company.owners = updatedOwners;
+
+    const updatedCompany = await company.save();
+
+    return response.status(200).json(updatedCompany);
+  } catch (error) {
+    console.log(
+      "Error in PUT /companies/:companyId/remove-owner/:userId: ",
+      error
+    );
     response.status(500).send({ message: error.message });
   }
 });

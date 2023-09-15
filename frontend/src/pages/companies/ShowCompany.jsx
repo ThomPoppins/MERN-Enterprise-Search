@@ -65,6 +65,10 @@ const ShowCompany = () => {
             <span>{company.phone}</span>
           </div>
           <div className="my-4">
+            <span className="text-xl mr-4 text-gray-500">Start Year</span>
+            <span>{company.startYear}</span>
+          </div>
+          <div className="my-4">
             <span className="text-xl mr-4 text-gray-500">Owners</span>
             <span>
               {owners

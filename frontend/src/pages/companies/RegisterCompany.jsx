@@ -5,8 +5,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../../../config.js";
 import { useSnackbar } from "notistack";
+import companyNameValidator from "../../validation/companyNameValidator";
 import phoneNumberValidator from "../../validation/phoneNumberValidator";
 import emailValidator from "../../validation/emailValidator";
+import startYearValidator from "../../validation/startYearValidator";
 import { useSelector } from "react-redux";
 
 const RegisterCompany = () => {
@@ -14,6 +16,7 @@ const RegisterCompany = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [startYear, setStartYear] = useState("");
   const [loading, setLoading] = useState(false);
   const userId = useSelector((state) => state.userId);
   const navigate = useNavigate();
@@ -29,6 +32,12 @@ const RegisterCompany = () => {
   // TODO: [MERNSTACK-159] Give input field of the form a red border if the input is invalid
   // TODO: [MERNSTACK-160] Display error message under the input field if the input is invalid explaining the right format
   const handleSaveCompany = () => {
+    if (companyNameValidator(name) === false) {
+      enqueueSnackbar("Invalid company name!", { variant: "error" });
+      console.log("Invalid company name" + name);
+      invalidValues = true;
+    }
+
     if (emailValidator(email) === false) {
       enqueueSnackbar("Invalid email!", { variant: "error" });
       console.log("Invalid email" + email);
@@ -41,15 +50,25 @@ const RegisterCompany = () => {
       invalidValues = true;
     }
 
+    if (startYearValidator(startYear) === false) {
+      enqueueSnackbar("Invalid start year!", { variant: "error" });
+      console.log("Invalid start year" + startYear);
+      invalidValues = true;
+    }
+
     if (invalidValues) {
       return;
     }
+
+    // TODO: [MERNSTACK-167] Add KVK number to the form
+    // TODO: [MERNSTACK-166] Validate validity and uniqueness of company KVK number
 
     const data = {
       // TODO: [MERNSTACK-132] Add all companies fields that can be registered
       name: name,
       email: email,
       phone: phone,
+      startYear: startYear,
       owners: [{ userId: userId }], // Make sure that the user that registers the company is added as an owner
     };
     setLoading(true);
@@ -112,7 +131,22 @@ const RegisterCompany = () => {
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
-        <button className="p-2 bg-sky-300 m-8" onClick={handleSaveCompany}>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Start Year</label>
+          <input
+            type="number"
+            value={startYear}
+            // onChange is a function that takes an event as an argument
+            // and sets the name state to the value of the input
+            // e.target.value is the value of the input
+            onChange={(e) => setStartYear(e.target.value)}
+            className="border-2 border-gray-500 px-4 py-2 w-full"
+          />
+        </div>
+        <button
+          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto w-1/2"
+          onClick={handleSaveCompany}
+        >
           Save
         </button>
       </div>
