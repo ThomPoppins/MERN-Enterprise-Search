@@ -174,6 +174,54 @@ const EditCompany = () => {
       });
   };
 
+  const handleRemoveUserAsCompanyOwner = (e) => {
+    console.log(
+      "handleRemoveUserAsCompanyOwner e.target.value: ",
+      e.target.value
+    );
+    axios
+      .put(
+        BACKEND_URL +
+          "/companies/" +
+          companyId +
+          "/remove-owner/" +
+          e.target.value
+      )
+      .then((response) => {
+        console.log(
+          "handleRemoveUserAsCompanyOwner response.data: ",
+          response.data
+        );
+        console.log(
+          "handleRemoveUserAsCompanyOwner response.data.owners: ",
+          response.data.owners
+        );
+
+        const userIds = [];
+        response.data.owners.forEach((owner) => {
+          userIds.push(owner.userId);
+        });
+
+        const ownerPromises = userIds.map((userId) =>
+          axios.get(BACKEND_URL + "/users/user/" + userId)
+        );
+
+        Promise.all(ownerPromises)
+          .then((responses) => {
+            const ownersData = responses.map((response) => response.data);
+            console.log(
+              "ownersData in removeUserAsOwner function: ",
+              ownersData
+            );
+            setOwners(ownersData);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        setCompany(response.data);
+      });
+  };
+
   return (
     <div className="p-4">
       <BackButton destination={"/companies"} />
@@ -239,22 +287,36 @@ const EditCompany = () => {
           <ul className="mb-4">
             {owners.map((owner, index) => {
               return (
-                <div className="mb-4" key={owner._id + index}>
-                  <li>
-                    <ul>
-                      <li>
-                        <VscMention className="inline" />
-                        {owner.username}
-                      </li>
-                      <li>
-                        <VscPerson className="inline" /> {owner.firstName}{" "}
-                        {owner.lastName}
-                      </li>
-                      <li>
-                        <VscMail className="inline" /> {owner.email}
-                      </li>
-                    </ul>
-                  </li>
+                <div
+                  className="mb-4 flex justify-between"
+                  key={owner._id + index}
+                >
+                  <div>
+                    <li>
+                      <ul>
+                        <li>
+                          <VscMention className="inline" />
+                          {owner.username}
+                        </li>
+                        <li>
+                          <VscPerson className="inline" /> {owner.firstName}{" "}
+                          {owner.lastName}
+                        </li>
+                        <li>
+                          <VscMail className="inline" /> {owner.email}
+                        </li>
+                      </ul>
+                    </li>
+                  </div>
+                  <div>
+                    <button
+                      className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto mb-4"
+                      value={owner._id}
+                      onClick={handleRemoveUserAsCompanyOwner}
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
               );
             })}

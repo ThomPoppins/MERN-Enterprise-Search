@@ -194,4 +194,37 @@ router.put("/:companyId/add-owner/:userId", async (request, response) => {
   }
 });
 
+// Remove owner from company based on userId
+router.put("/:companyId/remove-owner/:userId", async (request, response) => {
+  try {
+    const { companyId, userId } = request.params;
+
+    const company = await Company.findById(companyId);
+
+    if (!company) {
+      console.logo(`Cannot find company with id=${companyId}.`);
+      return response.status(404).json({
+        message: `Cannot find company with id=${companyId}.`,
+      });
+    }
+
+    // Filter out the owner with the userId to save the company without the owner
+    const updatedOwners = company.owners.filter(
+      (owner) => owner.userId !== userId
+    );
+
+    company.owners = updatedOwners;
+
+    const updatedCompany = await company.save();
+
+    return response.status(200).json(updatedCompany);
+  } catch (error) {
+    console.log(
+      "Error in PUT /companies/:companyId/remove-owner/:userId: ",
+      error
+    );
+    response.status(500).send({ message: error.message });
+  }
+});
+
 export default router;
