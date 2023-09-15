@@ -15,7 +15,7 @@ const verifyToken = async (token) => {
           payload: userId,
         });
         await axios
-          .get(BACKEND_URL + "/users/" + userId)
+          .get(BACKEND_URL + "/users/user/" + userId)
           .then((response) => {
             const user = response.data;
             store.dispatch({

@@ -163,4 +163,35 @@ router.delete("/:id", async (request, response) => {
   }
 });
 
+// Add owner to company based on userId
+router.put("/:companyId/add-owner/:userId", async (request, response) => {
+  try {
+    const { companyId, userId } = request.params;
+
+    const company = await Company.findById(companyId);
+
+    if (!company) {
+      console.logo(`Cannot find company with id=${companyId}.`);
+      return response.status(404).json({
+        message: `Cannot find company with id=${companyId}.`,
+      });
+    }
+
+    const newOwner = {
+      userId: userId,
+    };
+
+    console.log("newOwner in /:companyId/add-owner/:userId", newOwner);
+
+    company.owners.push(newOwner);
+
+    const updatedCompany = await company.save();
+
+    return response.status(200).json(updatedCompany);
+  } catch (error) {
+    console.log("Error in PUT /companies/add-owner/:userId: ", error);
+    response.status(500).send({ message: error.message });
+  }
+});
+
 export default router;

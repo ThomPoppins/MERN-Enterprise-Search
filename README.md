@@ -593,11 +593,12 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-161] Fix CORS policy error when registering user
 - [x] [MERNSTACK-155] Populate the user document with the properties from the request body if they exist when registering account.
 - [ ] [MERNSTACK-169] On all forms, validate user input when losing focus and display error message if input is not valid and the right format and color the input field border red.
+- [ ] [MERNSTACK-173] Finish EditCompany component, integrated with search functionality so users can be found by name, username or email and added to company as owner.
+- [x] [MERNSTACK-175] Solve the problem of the owner being undefined
 
 
 
 # Everything else:
-
 
 ```s
 └─ MERN-stack-project

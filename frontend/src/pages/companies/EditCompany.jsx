@@ -8,14 +8,23 @@ import { useSnackbar } from "notistack";
 import phoneNumberValidator from "../../validation/phoneNumberValidator";
 import emailValidator from "../../validation/emailValidator";
 import startYearValidator from "../../validation/startYearValidator";
+import UserSearch from "../../components/UserSearch";
 
 const EditCompany = () => {
+  // ADD OWNERS TO COMPANY TICKETS:
+  // TODO: [MERNSTACK-172] In the <EditCompany /> component, add a button that opens the <UserSearch /> component when clicked. You can use the useState() hook to create a state variable that controls whether the <UserSearch /> component is visible or not.
+  // TODO: [MERNSTACK-174] When the user selects a user to add as an owner to the company, update the owners state variable in the <EditCompany /> component to include the selected user. You can use the setOwners() function to update the owners state variable.
+  // TODO: [MERNSTACK-175] When the user saves the changes to the company, make an API call to your backend to update the company with the new owners.
   // TODO: [MERNSTACK-168] Make possible for user (owner) to add other owners to the company by finding other users and adding them to the company
+
   // TODO: [MERNSTACK-129] Add state for all companies fields that can be edited
   const { id } = useParams();
+  const companyId = id;
+  const [company, setCompany] = useState({});
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [owners, setOwners] = useState([]);
   const [startYear, setStartYear] = useState(0);
 
   // Display a spinner when loading data from the backend
@@ -38,12 +47,30 @@ const EditCompany = () => {
       .get(BACKEND_URL + "/companies/" + id)
       .then((response) => {
         setLoading(false);
-        const company = response.data;
+        setCompany(response.data);
         // TODO: [MERNSTACK-131] Set state for all companies fields that can be edited
-        setName(company.name);
-        setEmail(company.email);
-        setPhone(company.phone);
-        setStartYear(company.startYear);
+        setName(response.data.name);
+        setEmail(response.data.email);
+        setPhone(response.data.phone);
+        setStartYear(response.data.startYear);
+        // Put all userIds of the owners in an array
+        const userIds = [];
+        response.data.owners.forEach((owner) => {
+          userIds.push(owner.userId);
+        });
+
+        const ownerPromises = userIds.map((userId) =>
+          axios.get(BACKEND_URL + "/users/user/" + userId)
+        );
+
+        Promise.all(ownerPromises)
+          .then((responses) => {
+            const ownersData = responses.map((response) => response.data);
+            setOwners(ownersData);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         setLoading(false);
@@ -101,6 +128,49 @@ const EditCompany = () => {
       .catch((error) => {
         setLoading(false);
         enqueueSnackbar("Error editing company!", { variant: "error" });
+        console.log(error);
+      });
+  };
+
+  const addSearchBoxForNewOwner = () => {
+    console.log("addSearchBoxForNewOwner");
+  };
+
+  const handleAddUserAsCompanyOwner = (userId) => {
+    console.log("handleAddUserAsCompanyOwner userId: " + userId);
+    axios
+      .put(BACKEND_URL + "/companies/" + companyId + "/add-owner/" + userId)
+      .then((response) => {
+        console.log(
+          "handleAddUserAsCompanyOwner response.data: ",
+          response.data
+        );
+        console.log(
+          "handleAddUserAsCompanyOwner response.data.owners: ",
+          response.data.owners
+        );
+
+        const userIds = [];
+        response.data.owners.forEach((owner) => {
+          userIds.push(owner.userId);
+        });
+
+        const ownerPromises = userIds.map((userId) =>
+          axios.get(BACKEND_URL + "/users/user/" + userId)
+        );
+
+        Promise.all(ownerPromises)
+          .then((responses) => {
+            const ownersData = responses.map((response) => response.data);
+            console.log("ownersData: ", ownersData);
+            setOwners(ownersData);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        setCompany(response.data);
+      })
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -163,7 +233,39 @@ const EditCompany = () => {
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
-        <button className="p-2 bg-sky-300 m-8" onClick={handleEditCompany}>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Owners</label>
+          <ul className="mb-4">
+            {console.log("owners in EditCompany.jsx: " + owners)}
+            {owners.map((owner, index) => {
+              return (
+                <li key={owner._id + index}>
+                  <ul>
+                    <li>user: {owner.username}</li>
+                    <li>
+                      name: {owner.firstName} {owner.lastName}
+                    </li>
+                    <li>email: {owner.email}</li>
+                  </ul>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <button
+          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mr-3"
+          onClick={addSearchBoxForNewOwner}
+        >
+          Add Owner
+        </button>
+        <UserSearch
+          company={company}
+          handleAddUserAsCompanyOwner={handleAddUserAsCompanyOwner}
+        />
+        <button
+          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mr-3"
+          onClick={handleEditCompany}
+        >
           Save
         </button>
       </div>

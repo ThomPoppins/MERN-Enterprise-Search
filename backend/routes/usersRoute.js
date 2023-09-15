@@ -108,8 +108,43 @@ router.post("/login", async (request, response) => {
   }
 });
 
+router.get("/search", async (request, response) => {
+  return response.status(200).json([]);
+});
+
+// Find user by username, name or email
+router.get("/search/:searchTerm", async (request, response) => {
+  try {
+    // Get the user id from the request parameters
+    const { searchTerm } = request.params;
+
+    console.log("searchTerm: ", searchTerm);
+
+    // If searchTerm is empty, return an empty array
+    if (!searchTerm) {
+      return response.status(200).json([]);
+    }
+
+    // Get user documents using the findById method
+    const users = await User.find({
+      $or: [
+        { username: { $regex: searchTerm, $options: "i" } },
+        { firstName: { $regex: searchTerm, $options: "i" } },
+        { lastName: { $regex: searchTerm, $options: "i" } },
+        { email: { $regex: searchTerm, $options: "i" } },
+      ],
+    });
+
+    // Send status 200 response and the companies to the client
+    return response.status(200).json(users);
+  } catch (error) {
+    console.log("Error in GET /users/search/:searchTerm: ", error);
+    response.status(500).send({ message: error.message });
+  }
+});
+
 // Route to get one user from database using the user's id
-router.get("/:id", async (request, response) => {
+router.get("/user/:id", async (request, response) => {
   try {
     // Get the user id from the request parameters
     const { id } = request.params;
