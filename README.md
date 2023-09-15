@@ -593,16 +593,22 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-161] Fix CORS policy error when registering user
 - [x] [MERNSTACK-155] Populate the user document with the properties from the request body if they exist when registering account.
 - [ ] [MERNSTACK-169] On all forms, validate user input when losing focus and display error message if input is not valid and the right format and color the input field border red.
-- [ ] [MERNSTACK-173] Finish EditCompany component, integrated with search functionality so users can be found by name, username or email and added to company as owner.
+- [x] [MERNSTACK-173] Finish EditCompany component, integrated with search functionality so users can be found by name, username or email and added to company as owner.
 - [x] [MERNSTACK-175] Solve the problem of the owner being undefined
-- [ ] [MERNSTACK-181] Add remove button to remove owner from company in EditCompany component.
+- [x] [MERNSTACK-181] Add remove button to remove owner from company in EditCompany component.
 - [ ] [MERNSTACK-176] Display owners first name and last name on <ShowCompany /> <CompanySingleCard /> and <CompanyModal />.
 - [ ] [MERNSTACK-177] Only find owners that are not already owners of the company in the EditCompany and UserSearch component.
 - [ ] [MERNSTACK-178] Send invitation to user to become owner of company.
 - [ ] [MERNSTACK-179] Display a "Invitation pending" or "Invited" message in de EditCompany page when user hasn't accepted the invitation to become owner of the company yet.
 - [ ] [MERNSTACK-180] Move save new company owner functionality to acceptBecomeCompanyOwnerInvitation() function in some new component.
 - [ ] [MERNSTACK-182] Save new owners of company after pressing save button in EditCompany component.
-- [ ] [MERNSTACK-183] Remove "Remove" button from EditCompany component of the current logged in user.
+- [x] [MERNSTACK-183] Remove "Remove" button from EditCompany component of the current logged in user.
+- [x] [MERNSTACK-174] When the user selects a user to add as an owner to the company, update the owners state variable in the <EditCompany /> component to include the selected user. You can use the setOwners() function to update the owners state variable.
+- [x] [MERNSTACK-171] Display results in a list displaying the username, name and email
+- [x] [MERNSTACK-170] Make API call to backend to find users by query on username, name or email, use useEffect to call this function when query changes
+- [x] [MERNSTACK-168] Make possible for user (owner) to add other owners to the company by finding other users and adding them to the company
+- [x] [MERNSTACK-17] "owners" array should contain owner objects with an userId.
+- [x] [MERNSTACK-16] Owners  will be linked to a company, based on an ownerId in the owner model.
 
 
 
