@@ -20,7 +20,6 @@ const EditCompany = () => {
   // TODO: [MERNSTACK-129] Add state for all companies fields that can be edited
   const { id } = useParams();
   const companyId = id;
-  const [company, setCompany] = useState({});
   const userId = useSelector((state) => state.userId);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -48,24 +47,20 @@ const EditCompany = () => {
       .get(BACKEND_URL + "/companies/" + id)
       .then((response) => {
         setLoading(false);
-        setCompany(response.data);
         // TODO: [MERNSTACK-131] Set state for all companies fields that can be edited
         setName(response.data.name);
         setEmail(response.data.email);
         setPhone(response.data.phone);
         setStartYear(response.data.startYear);
-        // Put all userIds of the owners in an array
+
+        // Set owners
         const userIds = [];
         response.data.owners.forEach((owner) => {
           userIds.push(owner.userId);
         });
-
-        console.log("userIds: ", userIds);
-
         const ownerPromises = userIds.map((userId) => {
           return axios.get(BACKEND_URL + "/users/user/" + userId);
         });
-
         Promise.all(ownerPromises)
           .then((responses) => {
             const ownersData = responses.map((response) => response.data);
@@ -167,7 +162,6 @@ const EditCompany = () => {
           .catch((error) => {
             console.log(error);
           });
-        setCompany(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -218,7 +212,6 @@ const EditCompany = () => {
           .catch((error) => {
             console.log(error);
           });
-        setCompany(response.data);
       });
   };
 
