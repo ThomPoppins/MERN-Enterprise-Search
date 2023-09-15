@@ -602,7 +602,7 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [ ] [MERNSTACK-179] Display a "Invitation pending" or "Invited" message in de EditCompany page when user hasn't accepted the invitation to become owner of the company yet.
 - [ ] [MERNSTACK-180] Move save new company owner functionality to acceptBecomeCompanyOwnerInvitation() function in some new component.
 - [ ] [MERNSTACK-182] Save new owners of company after pressing save button in EditCompany component.
-- [ ] [MERNSTACK-183] Remove "Remove" button from EditCompany component of the current user.
+- [ ] [MERNSTACK-183] Remove "Remove" button from EditCompany component of the current logged in user.
 
 
 
