@@ -3,28 +3,34 @@ import React, { useState } from "react";
 import { BACKEND_URL } from "../../config";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
 
-const UserSearch = ({ handleAddUserAsCompanyOwner }) => {
+const UserSearch = ({ companyId, handleAddUserAsCompanyOwner }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [usersResult, setUsersResult] = useState([]);
 
   const handleSearch = (e) => {
-    // e.preventDefault();
-
     setSearchTerm(e.target.value);
-
-    // TODO: [MERNSTACK-170] Make API call to backend to find users by query on username, name or email, use useEffect to call this function when query changes
     axios
-      .get(BACKEND_URL + "/users/search/" + e.target.value)
+      .get(BACKEND_URL + "/users/search/" + e.target.value, {
+        headers: {
+          companyId: companyId,
+        },
+      })
       .then((response) => {
         setUsersResult(response.data);
         console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(
+          "ERROR in UserSearch.jsx get search results API call: ",
+          error
+        );
       });
-    // TODO: [MERNSTACK-171] Display results in a list displaying the username, name and email
 
     console.log(e.target.value);
   };
 
   const handleAddOwner = (e) => {
+    // TODO: [MERNSTACK-184] Remove item from search results when added
     handleAddUserAsCompanyOwner(e.target.value);
   };
 

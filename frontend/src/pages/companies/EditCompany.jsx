@@ -319,7 +319,10 @@ const EditCompany = () => {
             })}
           </ul>
         </div>
-        <UserSearch handleAddUserAsCompanyOwner={handleAddUserAsCompanyOwner} />
+        <UserSearch
+          companyId={companyId}
+          handleAddUserAsCompanyOwner={handleAddUserAsCompanyOwner}
+        />
         <button
           className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto w-1/2"
           onClick={handleEditCompany}

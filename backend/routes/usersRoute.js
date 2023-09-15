@@ -112,10 +112,10 @@ router.get("/search", async (request, response) => {
   return response.status(200).json([]);
 });
 
-// Find user by username, name or email
+// TODO: TEST THIS ROUTE!
+// Find user by username, name or email search term
 router.get("/search/:searchTerm", async (request, response) => {
   try {
-    // Get the user id from the request parameters
     const { searchTerm } = request.params;
 
     console.log("searchTerm: ", searchTerm);
@@ -125,13 +125,29 @@ router.get("/search/:searchTerm", async (request, response) => {
       return response.status(200).json([]);
     }
 
-    // Get user documents using the findById method
+    // Get the company id from the request headers
+    const companyId = request.headers.companyid;
+
+    // Get the owners of the company
+    const company = await Company.findById(companyId);
+    const ownerIds = company.owners.map((owner) => owner.userId);
+
+    // Get user documents using the find method
     const users = await User.find({
-      $or: [
-        { username: { $regex: searchTerm, $options: "i" } },
-        { firstName: { $regex: searchTerm, $options: "i" } },
-        { lastName: { $regex: searchTerm, $options: "i" } },
-        { email: { $regex: searchTerm, $options: "i" } },
+      $and: [
+        {
+          _id: {
+            $nin: ownerIds,
+          },
+        },
+        {
+          $or: [
+            { username: { $regex: searchTerm, $options: "i" } },
+            { firstName: { $regex: searchTerm, $options: "i" } },
+            { lastName: { $regex: searchTerm, $options: "i" } },
+            { email: { $regex: searchTerm, $options: "i" } },
+          ],
+        },
       ],
     });
 
