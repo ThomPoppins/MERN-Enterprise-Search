@@ -10,10 +10,34 @@ import emailValidator from "../../validation/emailValidator";
 import verifyToken from "../../utils/auth/verifyToken.jsx";
 
 const RegisterUser = () => {
+  // Input field values for logging in a user as state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Error state for displaying error messages if the user enters invalid input
+  const [emailError, setEmailError] = useState(false);
+
+  // Validate input fields
+  const validateEmail = () => {
+    if (emailValidator(email) === false) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+  };
+
+  // Handle onChange events for input fields
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    if (emailError) {
+      validateEmail();
+    }
+  };
+
+  // Loading state for displaying a spinner while the request is being sent to the backend
   const [loading, setLoading] = useState(false);
+
+  // useNavigate is a hook that returns a navigate function that we can use to navigate to a different page
   const navigate = useNavigate();
   // useSnackbar is a hook that returns an object with two properties: enqueueSnackbar and closeSnackbar
   // enqueueSnackbar is a function that takes an object as an argument
@@ -22,18 +46,12 @@ const RegisterUser = () => {
   // https://iamhosseindhv.com/notistack/demos#use-snackbar
   const { enqueueSnackbar } = useSnackbar();
 
-  let invalidValues = false;
-
   const handleLoginUser = () => {
     // TODO: [MERNSTACK-157] Give input field of the form a red border if the input is invalid
     // TODO: [MERNSTACK-158] Display error message under the input field if the input is invalid explaining the right format
-    // Validate email address to be the correct format
-    if (emailValidator(email) === false) {
-      enqueueSnackbar("Invalid email address!", { variant: "error" });
-      console.log("Invalid email" + email);
-      invalidValues = true;
-    }
-    if (invalidValues) {
+    // Validate email address to be the correct format otherwise return before sending a request to the backend
+    validateEmail();
+    if (emailError) {
       return;
     }
 
@@ -63,7 +81,10 @@ const RegisterUser = () => {
       })
       .catch((error) => {
         setLoading(false);
-        enqueueSnackbar("Error logging in!", { variant: "error" });
+        enqueueSnackbar(
+          "Error logging in! Did you use the right credentials?",
+          { variant: "error" }
+        );
         console.log(error);
       });
   };
@@ -79,9 +100,19 @@ const RegisterUser = () => {
           <input
             type="text"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            onChange={handleEmailChange}
+            onBlur={validateEmail}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              emailError ? "border-red-500" : ""
+            }`}
           />
+          {emailError ? (
+            <p className="text-red-500 text-sm">
+              Email must be a valid email address.
+            </p>
+          ) : (
+            ""
+          )}
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Password</label>
