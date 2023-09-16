@@ -15,18 +15,32 @@ import { useSelector } from "react-redux";
 
 const EditCompany = () => {
   // ADD OWNERS TO COMPANY TICKETS:
-  // TODO: [MERNSTACK-175] When the user saves the changes to the company, make an API call to your backend to update the company with the new owners.
-
   // TODO: [MERNSTACK-129] Add state for all companies fields that can be edited
+
+  // Get the companyId from the URL
   const { id } = useParams();
   const companyId = id;
+
+  // Get the userId from the Redux store
   const userId = useSelector((state) => state.userId);
+
+  // Input field values for editing a company as state
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [owners, setOwners] = useState([]);
-  const [removedOwnersIds, setRemovedOwnersIds] = useState([]);
   const [startYear, setStartYear] = useState(0);
+
+  // Error state for displaying error messages if the user enters invalid input
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
+  const [startYearError, setStartYearError] = useState(false);
+
+  // Owners state
+  const [owners, setOwners] = useState([]);
+
+  // Removed owners ids
+  const [removedOwnersIds, setRemovedOwnersIds] = useState([]);
 
   // Display a spinner when loading data from the backend
   const [loading, setLoading] = useState(false);
@@ -40,6 +54,79 @@ const EditCompany = () => {
   // closeSnackbar is a function that takes an id as an argument and closes the snackbar with that id
   // https://iamhosseindhv.com/notistack/demos#use-snackbar
   const { enqueueSnackbar } = useSnackbar();
+
+  // Validation functions for validating the input fields and put a red border around the input field if the input is invalid
+  // and display an error message under the input field explaining the right format
+  const validateCompanyName = () => {
+    if (companyNameValidator(name) === false) {
+      setNameError(true);
+    } else {
+      setNameError(false);
+    }
+  };
+  const validateEmail = () => {
+    if (emailValidator(email) === false) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+  };
+  const validatePhone = () => {
+    if (phoneNumberValidator(phone, "NL") === false) {
+      setPhoneError(true);
+    } else {
+      setPhoneError(false);
+    }
+  };
+  const validateStartYear = () => {
+    if (startYearValidator(startYear) === false) {
+      setStartYearError(true);
+    } else {
+      setStartYearError(false);
+    }
+  };
+
+  // Handle onChange events for all input fields
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+    if (nameError) {
+      validateCompanyName();
+    }
+  };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    if (emailError) {
+      validateEmail();
+    }
+  };
+  const handlePhoneChange = (e) => {
+    setPhone(e.target.value);
+    if (phoneError) {
+      validatePhone();
+    }
+  };
+  const handleStartYearChange = (e) => {
+    setStartYear(e.target.value);
+    if (startYearError) {
+      validateStartYear();
+    }
+  };
+
+  // Display error messages when the user enters invalid input
+  useEffect(() => {
+    if (nameError) {
+      enqueueSnackbar("Invalid company name!", { variant: "error" });
+    }
+    if (emailError) {
+      enqueueSnackbar("Invalid email!", { variant: "error" });
+    }
+    if (phoneError) {
+      enqueueSnackbar("Invalid phone number!", { variant: "error" });
+    }
+    if (startYearError) {
+      enqueueSnackbar("Invalid start year!", { variant: "error" });
+    }
+  }, [nameError, emailError, phoneError, startYearError]);
 
   // useEffect() is a hook that runs a function when the component is rendered
   useEffect(() => {
@@ -80,33 +167,16 @@ const EditCompany = () => {
 
   // handleEditCompany is a function that sends a PUT request to the backend to update a company
   const handleEditCompany = () => {
-    let invalidValues = false;
-
-    if (companyNameValidator(name) === false) {
-      enqueueSnackbar("Invalid company name!", { variant: "error" });
-      console.log("Invalid company name" + name);
-      invalidValues = true;
-    }
-
-    if (emailValidator(email) === false) {
-      enqueueSnackbar("Invalid email!", { variant: "error" });
-      console.log("Invalid email" + email);
-      invalidValues = true;
-    }
-
-    if (phoneNumberValidator(phone, "NL") === false) {
-      enqueueSnackbar("Invalid phone number!", { variant: "error" });
-      console.log("Invalid phone number" + phone);
-      invalidValues = true;
-    }
-
-    if (startYearValidator(startYear) === false) {
-      enqueueSnackbar("Invalid start year!", { variant: "error" });
-      console.log("Invalid start year" + startYear);
-      invalidValues = true;
-    }
-
-    if (invalidValues) {
+    // Validate all fields before sending the request to the backend, otherwise return
+    validateCompanyName();
+    validateEmail();
+    validatePhone();
+    validateStartYear();
+    if (nameError || emailError || phoneError || startYearError) {
+      enqueueSnackbar(
+        "Please fill in all fields correctly before saving this company!",
+        { variant: "error" }
+      );
       return;
     }
 
@@ -236,9 +306,21 @@ const EditCompany = () => {
             // onChange is a function that takes an event as an argument
             // and sets the title state to the value of the input
             // e.target.value is the value of the input
-            onChange={(e) => setName(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            onChange={handleNameChange}
+            onBlur={validateCompanyName}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              nameError ? "border-red-500" : ""
+            }`}
           />
+          {nameError ? (
+            <p className="text-red-500 text-sm">
+              Company name must be between 1 and 60 characters long and can only
+              contain letters, numbers, spaces, and the following characters: -,
+              ', and .
+            </p>
+          ) : (
+            ""
+          )}
         </div>
         {/* Comany Email input field */}
         <div className="my-4">
@@ -249,9 +331,19 @@ const EditCompany = () => {
             // onChange is a function that takes an event as an argument
             // and sets the title state to the value of the input
             // e.target.value is the value of the input
-            onChange={(e) => setEmail(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            onChange={handleEmailChange}
+            onBlur={validateEmail}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              emailError ? "border-red-500" : ""
+            }`}
           />
+          {emailError ? (
+            <p className="text-red-500 text-sm">
+              Email must be a valid email address.
+            </p>
+          ) : (
+            ""
+          )}
         </div>
         {/* Comany Phone Number input field */}
         <div className="my-4">
@@ -262,9 +354,19 @@ const EditCompany = () => {
             // onChange is a function that takes an event as an argument
             // and sets the title state to the value of the input
             // e.target.value is the value of the input
-            onChange={(e) => setPhone(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            onChange={handlePhoneChange}
+            onBlur={validatePhone}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              phoneError ? "border-red-500" : ""
+            }`}
           />
+          {phoneError ? (
+            <p className="text-red-500 text-sm">
+              Phone number must be a valid phone number.
+            </p>
+          ) : (
+            ""
+          )}
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Start Year</label>
@@ -274,9 +376,21 @@ const EditCompany = () => {
             // onChange is a function that takes an event as an argument
             // and sets the title state to the value of the input
             // e.target.value is the value of the input
-            onChange={(e) => setStartYear(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            onChange={handleStartYearChange}
+            onBlur={validateStartYear}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              startYearError ? "border-red-500" : ""
+            }`}
           />
+          {startYearError ? (
+            <p className="text-red-500 text-sm">
+              Start year must be a valid year and never can be later then the
+              current year. If company hasn't started yet, register company when
+              it starts.
+            </p>
+          ) : (
+            ""
+          )}
         </div>
         <div className="my-4">
           <div className="mb-4">

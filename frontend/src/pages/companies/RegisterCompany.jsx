@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
 import axios from "axios";
@@ -13,13 +13,27 @@ import { useSelector } from "react-redux";
 
 const RegisterCompany = () => {
   // TODO: [MERNSTACK-127] Add state for all companies fields that can be registered
+  // Input field values for registering a company as state
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [startYear, setStartYear] = useState("");
+
+  // Error state for displaying error messages if the user enters invalid input
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
+  const [startYearError, setStartYearError] = useState(false);
+
+  // Loading state for displaying a spinner while the request is being sent to the backend
   const [loading, setLoading] = useState(false);
+
+  // Get the userId from the Redux store
   const userId = useSelector((state) => state.userId);
+
+  // useNavigate is a hook that returns a navigate function that we can use to navigate to a different page
   const navigate = useNavigate();
+
   // useSnackbar is a hook that returns an object with two properties: enqueueSnackbar and closeSnackbar
   // enqueueSnackbar is a function that takes an object as an argument
   // and displays a snackbar with the message and the variant that we pass in the object
@@ -27,36 +41,93 @@ const RegisterCompany = () => {
   // https://iamhosseindhv.com/notistack/demos#use-snackbar
   const { enqueueSnackbar } = useSnackbar();
 
-  let invalidValues = false;
-
   // TODO: [MERNSTACK-159] Give input field of the form a red border if the input is invalid
   // TODO: [MERNSTACK-160] Display error message under the input field if the input is invalid explaining the right format
-  const handleSaveCompany = () => {
+
+  // Validation functions for validating the input fields and put a red border around the input field if the input is invalid
+  // and display an error message under the input field explaining the right format
+  const validateCompanyName = () => {
     if (companyNameValidator(name) === false) {
-      enqueueSnackbar("Invalid company name!", { variant: "error" });
-      console.log("Invalid company name" + name);
-      invalidValues = true;
+      setNameError(true);
+    } else {
+      setNameError(false);
     }
-
+  };
+  const validateEmail = () => {
     if (emailValidator(email) === false) {
-      enqueueSnackbar("Invalid email!", { variant: "error" });
-      console.log("Invalid email" + email);
-      invalidValues = true;
+      setEmailError(true);
+    } else {
+      setEmailError(false);
     }
-
+  };
+  const validatePhone = () => {
     if (phoneNumberValidator(phone, "NL") === false) {
-      enqueueSnackbar("Invalid phone number!", { variant: "error" });
-      console.log("Invalid phone number" + phone);
-      invalidValues = true;
+      setPhoneError(true);
+    } else {
+      setPhoneError(false);
     }
-
+  };
+  const validateStartYear = () => {
     if (startYearValidator(startYear) === false) {
-      enqueueSnackbar("Invalid start year!", { variant: "error" });
-      console.log("Invalid start year" + startYear);
-      invalidValues = true;
+      setStartYearError(true);
+    } else {
+      setStartYearError(false);
     }
+  };
 
-    if (invalidValues) {
+  // Handle onChange events for all input fields
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+    if (nameError) {
+      validateCompanyName();
+    }
+  };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    if (emailError) {
+      validateEmail();
+    }
+  };
+  const handlePhoneChange = (e) => {
+    setPhone(e.target.value);
+    if (phoneError) {
+      validatePhone();
+    }
+  };
+  const handleStartYearChange = (e) => {
+    setStartYear(e.target.value);
+    if (startYearError) {
+      validateStartYear();
+    }
+  };
+
+  // Display error messages if the user enters invalid input
+  useEffect(() => {
+    if (nameError === true) {
+      enqueueSnackbar("Company name is invalid!", { variant: "error" });
+    }
+    if (emailError === true) {
+      enqueueSnackbar("Email is invalid!", { variant: "error" });
+    }
+    if (phoneError === true) {
+      enqueueSnackbar("Phone number is invalid!", { variant: "error" });
+    }
+    if (startYearError === true) {
+      enqueueSnackbar("Start year is invalid!", { variant: "error" });
+    }
+  }, [nameError, emailError, phoneError, startYearError]);
+
+  const handleSaveCompany = () => {
+    // Validate all fields before sending the request to the backend, otherwise return
+    validateCompanyName();
+    validateEmail();
+    validatePhone();
+    validateStartYear();
+    if (nameError || emailError || phoneError || startYearError) {
+      enqueueSnackbar(
+        "Please fill in all fields correctly before saving this company!",
+        { variant: "error" }
+      );
       return;
     }
 
@@ -103,9 +174,21 @@ const RegisterCompany = () => {
             // onChange is a function that takes an event as an argument
             // and sets the name state to the value of the input
             // e.target.value is the value of the input
-            onChange={(e) => setName(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            onChange={handleNameChange}
+            onBlur={validateCompanyName}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              nameError ? "border-red-500" : ""
+            }`}
           />
+          {nameError ? (
+            <p className="text-red-500 text-sm">
+              Company name must be between 1 and 60 characters long and can only
+              contain letters, numbers, spaces, and the following characters: -,
+              ', and .
+            </p>
+          ) : (
+            ""
+          )}
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Email</label>
@@ -115,9 +198,19 @@ const RegisterCompany = () => {
             // onChange is a function that takes an event as an argument
             // and sets the name state to the value of the input
             // e.target.value is the value of the input
-            onChange={(e) => setEmail(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            onChange={handleEmailChange}
+            onBlur={validateEmail}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              emailError ? "border-red-500" : ""
+            }`}
           />
+          {emailError ? (
+            <p className="text-red-500 text-sm">
+              Email must be a valid email address.
+            </p>
+          ) : (
+            ""
+          )}
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Phone</label>
@@ -127,10 +220,20 @@ const RegisterCompany = () => {
             // onChange is a function that takes an event as an argument
             // and sets the name state to the value of the input
             // e.target.value is the value of the input
-            onChange={(e) => setPhone(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            onChange={handlePhoneChange}
+            onBlur={validatePhone}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              phoneError ? "border-red-500" : ""
+            }`}
           />
         </div>
+        {phoneError ? (
+          <p className="text-red-500 text-sm">
+            Phone number must be a valid phone number.
+          </p>
+        ) : (
+          ""
+        )}
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Start Year</label>
           <input
@@ -139,9 +242,21 @@ const RegisterCompany = () => {
             // onChange is a function that takes an event as an argument
             // and sets the name state to the value of the input
             // e.target.value is the value of the input
-            onChange={(e) => setStartYear(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            onChange={handleStartYearChange}
+            onBlur={validateStartYear}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              startYearError ? "border-red-500" : ""
+            }`}
           />
+          {startYearError ? (
+            <p className="text-red-500 text-sm">
+              Start year must be a valid year and never can be later then the
+              current year. If company hasn't started yet, register company when
+              it starts.
+            </p>
+          ) : (
+            ""
+          )}
         </div>
         <button
           className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto w-1/2"
