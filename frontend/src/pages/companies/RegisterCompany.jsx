@@ -100,7 +100,7 @@ const RegisterCompany = () => {
     }
   };
 
-  // Display error messages if the user enters invalid input
+  // Display error messages if the user enters invalid input with useSnackbar
   useEffect(() => {
     if (nameError) {
       enqueueSnackbar("Company name is invalid!", { variant: "error" });
