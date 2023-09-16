@@ -25,6 +25,7 @@ const EditCompany = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [owners, setOwners] = useState([]);
+  const [removedOwnersIds, setRemovedOwnersIds] = useState([]);
   const [startYear, setStartYear] = useState(0);
 
   // Display a spinner when loading data from the backend
@@ -173,6 +174,10 @@ const EditCompany = () => {
       "handleRemoveUserAsCompanyOwner e.target.value: ",
       e.target.value
     );
+
+    // Set removed owners to show up in the search results again
+    setRemovedOwnersIds([...removedOwnersIds, e.target.value]);
+
     axios
       .put(
         BACKEND_URL +
@@ -322,6 +327,7 @@ const EditCompany = () => {
         <UserSearch
           companyId={companyId}
           handleAddUserAsCompanyOwner={handleAddUserAsCompanyOwner}
+          removedOwnersIds={removedOwnersIds}
         />
         <button
           className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto w-1/2"
