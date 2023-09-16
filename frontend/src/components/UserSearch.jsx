@@ -1,31 +1,72 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BACKEND_URL } from "../../config";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
 
-const UserSearch = ({ handleAddUserAsCompanyOwner }) => {
+const UserSearch = ({
+  companyId,
+  handleAddUserAsCompanyOwner,
+  removedOwnersIds,
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [usersResult, setUsersResult] = useState([]);
 
   const handleSearch = (e) => {
-    // e.preventDefault();
-
     setSearchTerm(e.target.value);
+    searchUsers(e.target.value);
 
-    // TODO: [MERNSTACK-170] Make API call to backend to find users by query on username, name or email, use useEffect to call this function when query changes
+    console.log(
+      "handleSearch e.target.value in UserSearch.jsx: ",
+      e.target.value
+    );
+  };
+
+  const searchUsers = (searchTerm) => {
     axios
-      .get(BACKEND_URL + "/users/search/" + e.target.value)
+      .get(BACKEND_URL + "/users/search/" + searchTerm, {
+        headers: {
+          companyid: companyId,
+        },
+      })
       .then((response) => {
         setUsersResult(response.data);
         console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(
+          "ERROR in UserSearch.jsx get search results API call: ",
+          error
+        );
       });
-    // TODO: [MERNSTACK-171] Display results in a list displaying the username, name and email
-
-    console.log(e.target.value);
   };
 
+  useEffect(() => {
+    removedOwnersIds.forEach((removedOwnerId) => {
+      axios
+        .get(BACKEND_URL + "/users/user/" + removedOwnerId)
+        .then((response) => {
+          const newUsersResult = [...usersResult, response.data];
+          console.log("newUsersResult: ", newUsersResult);
+          setUsersResult(newUsersResult);
+        })
+        .catch((error) => {
+          console.log(
+            "ERROR in UserSearch.jsx get removed owner API call: ",
+            error
+          );
+        });
+    });
+  }, [removedOwnersIds]);
+
   const handleAddOwner = (e) => {
+    e.preventDefault();
     handleAddUserAsCompanyOwner(e.target.value);
+
+    // TODO: [MERNSTACK-184] Remove item from search results when added
+    const newUsersResult = usersResult.filter(
+      (user) => user._id !== e.target.value
+    );
+    setUsersResult(newUsersResult);
   };
 
   return (
@@ -53,10 +94,13 @@ const UserSearch = ({ handleAddUserAsCompanyOwner }) => {
         />
       </div>
       <ul>
-        {usersResult.map((user) => (
-          <div className="flex border-sky-400 rounded-xl mx-auto justify-between items-center">
+        {usersResult.map((user, index) => (
+          <div
+            key={user._id + index}
+            className="search-result flex border-sky-400 rounded-xl mx-auto justify-between items-center"
+          >
             <div className="mb-4">
-              <li key={user._id}>
+              <li>
                 <VscMention className="inline" />
                 {user.username} <br />
                 <VscPerson className="inline" /> {user.firstName}{" "}

@@ -19,7 +19,7 @@ const ShowCompany = () => {
         setCompany(response.data);
 
         const ownerPromises = response.data.owners.map((owner) =>
-          axios.get(BACKEND_URL + `/users/${owner.userId}`)
+          axios.get(BACKEND_URL + `/users/user/${owner.userId}`)
         );
 
         Promise.all(ownerPromises)

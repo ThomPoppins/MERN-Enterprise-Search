@@ -120,8 +120,6 @@ const companySchema = new mongoose.Schema(
       default: "",
     },
     // TODO: [MERNSTACK-15] Save the name , email, phone, and role related to the company as fields in a new user model. (to be created)
-    // TODO: [MERNSTACK-16] Owners  will be linked to a company, based on an ownerId in the owner model.
-    // TODO: [MERNSTACK-17] "owners" array should contain owner objects with an userId.
     owners: {
       type: Array,
       required: false,
