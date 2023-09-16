@@ -19,7 +19,7 @@ const CompaniesSingleCard = ({ company }) => {
 
   useEffect(() => {
     const ownerPromises = company.owners.map((owner) =>
-      axios.get(BACKEND_URL + `/users/${owner.userId}`)
+      axios.get(BACKEND_URL + `/users/user/${owner.userId}`)
     );
 
     Promise.all(ownerPromises)
