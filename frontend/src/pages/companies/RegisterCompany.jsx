@@ -44,8 +44,7 @@ const RegisterCompany = () => {
   // TODO: [MERNSTACK-159] Give input field of the form a red border if the input is invalid
   // TODO: [MERNSTACK-160] Display error message under the input field if the input is invalid explaining the right format
 
-  // Validation functions for validating the input fields and put a red border around the input field if the input is invalid
-  // and display an error message under the input field explaining the right format
+  // Validate user input fields
   const validateCompanyName = () => {
     if (companyNameValidator(name) === false) {
       setNameError(true);
@@ -103,16 +102,16 @@ const RegisterCompany = () => {
 
   // Display error messages if the user enters invalid input
   useEffect(() => {
-    if (nameError === true) {
+    if (nameError) {
       enqueueSnackbar("Company name is invalid!", { variant: "error" });
     }
-    if (emailError === true) {
+    if (emailError) {
       enqueueSnackbar("Email is invalid!", { variant: "error" });
     }
-    if (phoneError === true) {
+    if (phoneError) {
       enqueueSnackbar("Phone number is invalid!", { variant: "error" });
     }
-    if (startYearError === true) {
+    if (startYearError) {
       enqueueSnackbar("Start year is invalid!", { variant: "error" });
     }
   }, [nameError, emailError, phoneError, startYearError]);
