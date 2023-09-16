@@ -94,9 +94,9 @@ const UserSearch = ({
         />
       </div>
       <ul>
-        {usersResult.map((user) => (
+        {usersResult.map((user, index) => (
           <div
-            key={user._id}
+            key={user._id + index}
             className="search-result flex border-sky-400 rounded-xl mx-auto justify-between items-center"
           >
             <div className="mb-4">
