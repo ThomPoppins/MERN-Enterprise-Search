@@ -10,6 +10,7 @@ import store from "../../store/store.jsx";
 import { USER_ID } from "../../store/actions.jsx";
 
 const LogoutUser = () => {
+  // Loading state for displaying a spinner while the request is being sent to the backend
   const [loading, setLoading] = useState(false);
 
   // useNavigate is a hook that allows us to navigate to a different page
