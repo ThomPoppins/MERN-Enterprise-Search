@@ -636,7 +636,7 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-173] Finish EditCompany component, integrated with search functionality so users can be found by name, username or email and added to company as owner.
 - [x] [MERNSTACK-175] Solve the problem of the owner being undefined
 - [x] [MERNSTACK-181] Add remove button to remove owner from company in EditCompany component.
-- [ ] [MERNSTACK-176] Display owners first name and last name on `<ShowCompany />` `<CompanySingleCard />` and `<CompanyModal />`.
+- [x] [MERNSTACK-176] Display owners first name and last name on `<ShowCompany />` `<CompanySingleCard />` and `<CompanyModal />`.
 - [ ] [MERNSTACK-177] Only find owners that are not already owners of the company in the EditCompany and UserSearch component.
 - [ ] [MERNSTACK-178] Send invitation to user to become owner of company.
 - [ ] [MERNSTACK-179] Display a "Invitation pending" or "Invited" message in de EditCompany page when user hasn't accepted the invitation to become owner of the company yet.
