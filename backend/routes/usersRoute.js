@@ -133,25 +133,6 @@ router.get("/search/:searchTerm", async (request, response) => {
     const company = await Company.findById(companyId);
     const ownerIds = company.owners.map((owner) => owner.userId);
 
-    // Get user documents using the find method
-    // const users = await User.find({
-    //   $and: [
-    //     {
-    //       _id: {
-    //         $nin: ownerIds,
-    //       },
-    //     },
-    //     {
-    //       $or: [
-    //         { username: { $regex: searchTerm, $options: "i" } },
-    //         { firstName: { $regex: searchTerm, $options: "i" } },
-    //         { lastName: { $regex: searchTerm, $options: "i" } },
-    //         { email: { $regex: searchTerm, $options: "i" } },
-    //       ],
-    //     },
-    //   ],
-    // });
-
     const pipeline = [
       {
         $match: {
@@ -179,6 +160,25 @@ router.get("/search/:searchTerm", async (request, response) => {
       { $sort: { relevance: -1 } },
       { $limit: 10 },
     ];
+
+    // Get user documents using the find method
+    // const users = await User.find({
+    //   $and: [
+    //     {
+    //       _id: {
+    //         $nin: ownerIds,
+    //       },
+    //     },
+    //     {
+    //       $or: [
+    //         { username: { $regex: searchTerm, $options: "i" } },
+    //         { firstName: { $regex: searchTerm, $options: "i" } },
+    //         { lastName: { $regex: searchTerm, $options: "i" } },
+    //         { email: { $regex: searchTerm, $options: "i" } },
+    //       ],
+    //     },
+    //   ],
+    // });
 
     // Calculate the relevance of each user
     // Sort the search results by relevance
