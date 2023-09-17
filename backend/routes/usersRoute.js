@@ -138,7 +138,6 @@ router.get("/search", async (request, response) => {
   return response.status(200).json([]);
 });
 
-// TODO: [MERNSTACK-186] Check MongoDB discord server and Twitter for the BUG that users aren't filtered using the $nin operator
 // Find user by username, name or email search term
 router.get("/search/:searchTerm", async (request, response) => {
   try {

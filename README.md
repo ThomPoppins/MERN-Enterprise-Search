@@ -637,7 +637,7 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-175] Solve the problem of the owner being undefined
 - [x] [MERNSTACK-181] Add remove button to remove owner from company in EditCompany component.
 - [x] [MERNSTACK-176] Display owners first name and last name on `<ShowCompany />` `<CompanySingleCard />` and `<CompanyModal />`.
-- [ ] [MERNSTACK-177] Only find owners that are not already owners of the company in the EditCompany and UserSearch component.
+- [x] [MERNSTACK-177] Only find owners that are not already owners of the company in the EditCompany and UserSearch component.
 - [ ] [MERNSTACK-178] Send invitation to user to become owner of company.
 - [ ] [MERNSTACK-179] Display a "Invitation pending" or "Invited" message in de EditCompany page when user hasn't accepted the invitation to become owner of the company yet.
 - [ ] [MERNSTACK-180] Move save new company owner functionality to acceptBecomeCompanyOwnerInvitation() function in some new component.
@@ -654,6 +654,7 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-159] Give input field of the form a red border if the input is invalid on all forms
 - [x] [MERNSTACK-153] Check if the user already exists in the database in usersRoute.jsx when registering a new user. Hint: Use the findOne method and consider using `unique: true` in the user schema.
 - [x] [MERNSTACK-154] If the user already exists, send status 409 response and a (error) message to inform the client.
+- [x] [MERNSTACK-186] Check MongoDB discord server and Twitter for the BUG that users aren't filtered using the $nin operator
 
 
 
