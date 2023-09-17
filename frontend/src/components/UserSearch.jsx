@@ -62,7 +62,6 @@ const UserSearch = ({
     e.preventDefault();
     handleAddUserAsCompanyOwner(e.target.value);
 
-    // TODO: [MERNSTACK-184] Remove item from search results when added
     const newUsersResult = usersResult.filter(
       (user) => user._id !== e.target.value
     );

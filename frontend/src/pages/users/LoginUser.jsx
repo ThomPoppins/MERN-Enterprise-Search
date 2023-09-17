@@ -47,8 +47,6 @@ const RegisterUser = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const handleLoginUser = () => {
-    // TODO: [MERNSTACK-157] Give input field of the form a red border if the input is invalid
-    // TODO: [MERNSTACK-158] Display error message under the input field if the input is invalid explaining the right format
     // Validate email address to be the correct format otherwise return before sending a request to the backend
     validateEmail();
     if (emailError) {

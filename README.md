@@ -632,7 +632,7 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-162] Save userId as state in Redux store after verification of JWT token, make only /, /login and /register routes accessible for users that are not logged in.
 - [x] [MERNSTACK-161] Fix CORS policy error when registering user
 - [x] [MERNSTACK-155] Populate the user document with the properties from the request body if they exist when registering account.
-- [ ] [MERNSTACK-169] On all forms, validate user input when losing focus and display error message if input is not valid and the right format and color the input field border red.
+- [x] [MERNSTACK-169] On all forms, validate user input when losing focus and display error message if input is not valid and the right format and color the input field border red.
 - [x] [MERNSTACK-173] Finish EditCompany component, integrated with search functionality so users can be found by name, username or email and added to company as owner.
 - [x] [MERNSTACK-175] Solve the problem of the owner being undefined
 - [x] [MERNSTACK-181] Add remove button to remove owner from company in EditCompany component.
@@ -649,6 +649,9 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-168] Make possible for user (owner) to add other owners to the company by finding other users and adding them to the company
 - [x] [MERNSTACK-17] "owners" array should contain owner objects with an userId.
 - [ ] [MERNSTACK-16] Owners  will be linked to a company, based on an ownerId in the owner model.
+- [x] [MERNSTACK-184] Remove item from search results when added
+- [x] [MERNSTACK-160] Display error message under the input field if the input is invalid explaining the right format on all forms
+- [x] [MERNSTACK-159] Give input field of the form a red border if the input is invalid on all forms
 
 
 
