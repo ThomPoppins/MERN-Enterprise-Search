@@ -162,6 +162,9 @@ router.get("/search/:searchTerm", async (request, response) => {
     );
 
     // Create the aggregation pipeline
+    // The results are sorted by relevance
+    // The relevance is calculated by the number of matches of the search term in the username, firstName, lastName and email fields
+    // The results are limited to 10 of the most relevant users
     const pipeline = [
       {
         $match: {
@@ -218,10 +221,10 @@ router.get("/search/:searchTerm", async (request, response) => {
       { $limit: 10 },
     ];
 
-    // Send status 200 response and the users to the client
+    // Get the users from the database using the aggregation pipeline
     const users = await User.aggregate(pipeline);
-    console.log("ownerIds: ", ownerIds);
-    console.log("users: ", users);
+
+    // Send status 200 response and the users to the client
     return response.status(200).json(users);
   } catch (error) {
     console.log("Error in GET /users/search/:searchTerm: ", error);
