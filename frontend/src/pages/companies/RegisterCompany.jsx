@@ -41,9 +41,6 @@ const RegisterCompany = () => {
   // https://iamhosseindhv.com/notistack/demos#use-snackbar
   const { enqueueSnackbar } = useSnackbar();
 
-  // TODO: [MERNSTACK-159] Give input field of the form a red border if the input is invalid
-  // TODO: [MERNSTACK-160] Display error message under the input field if the input is invalid explaining the right format
-
   // Validate user input fields
   const validateCompanyName = () => {
     if (companyNameValidator(name) === false) {
