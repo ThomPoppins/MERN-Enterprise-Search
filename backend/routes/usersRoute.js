@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { User } from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../middleware/auth/jwt.js";
-import calculateRelevance from "../utils/search/users/calculateRelevance.js";
+import mongoose from "mongoose";
 
 const router = express.Router();
 
@@ -144,7 +144,8 @@ router.get("/search/:searchTerm", async (request, response) => {
   try {
     const { searchTerm } = request.params;
 
-    console.log("searchTerm: ", searchTerm);
+    // Split the search term into search terms by whitespace
+    const searchTerms = searchTerm.split(/\s+/);
 
     // If searchTerm is empty, return an empty array
     if (!searchTerm) {
@@ -156,29 +157,63 @@ router.get("/search/:searchTerm", async (request, response) => {
 
     // Get the owners of the company
     const company = await Company.findById(companyId);
-    const ownerIds = company.owners.map((owner) => owner.userId);
+    const ownerIds = company.owners.map(
+      (owner) => new mongoose.Types.ObjectId(owner.userId)
+    );
 
+    // Create the aggregation pipeline
+    // The results are sorted by relevance
+    // The relevance is calculated by the number of matches of the search term in the username, firstName, lastName and email fields
+    // The results are limited to 10 of the most relevant users
     const pipeline = [
       {
         $match: {
           _id: { $nin: ownerIds },
-          $or: [
-            { username: { $regex: searchTerm, $options: "i" } },
-            { firstName: { $regex: searchTerm, $options: "i" } },
-            { lastName: { $regex: searchTerm, $options: "i" } },
-            { email: { $regex: searchTerm, $options: "i" } },
-          ],
+          $or: searchTerms.map((term) => ({
+            $or: [
+              { username: { $regex: term, $options: "i" } },
+              { firstName: { $regex: term, $options: "i" } },
+              { lastName: { $regex: term, $options: "i" } },
+              { email: { $regex: term, $options: "i" } },
+            ],
+          })),
         },
       },
       {
         $addFields: {
           relevance: {
-            $sum: [
-              { $cond: [{ $eq: ["$username", searchTerm] }, 1, 0] },
-              { $cond: [{ $eq: ["$firstName", searchTerm] }, 1, 0] },
-              { $cond: [{ $eq: ["$lastName", searchTerm] }, 1, 0] },
-              { $cond: [{ $eq: ["$email", searchTerm] }, 1, 0] },
-            ],
+            $sum: searchTerms.map((term) => ({
+              $sum: [
+                {
+                  $cond: [
+                    { $eq: [{ $toLower: "$username" }, term.toLowerCase()] },
+                    1,
+                    0,
+                  ],
+                },
+                {
+                  $cond: [
+                    { $eq: [{ $toLower: "$firstName" }, term.toLowerCase()] },
+                    1,
+                    0,
+                  ],
+                },
+                {
+                  $cond: [
+                    { $eq: [{ $toLower: "$lastName" }, term.toLowerCase()] },
+                    1,
+                    0,
+                  ],
+                },
+                {
+                  $cond: [
+                    { $eq: [{ $toLower: "$email" }, term.toLowerCase()] },
+                    1,
+                    0,
+                  ],
+                },
+              ],
+            })),
           },
         },
       },
@@ -186,38 +221,10 @@ router.get("/search/:searchTerm", async (request, response) => {
       { $limit: 10 },
     ];
 
-    // Get user documents using the find method
-    // const users = await User.find({
-    //   $and: [
-    //     {
-    //       _id: {
-    //         $nin: ownerIds,
-    //       },
-    //     },
-    //     {
-    //       $or: [
-    //         { username: { $regex: searchTerm, $options: "i" } },
-    //         { firstName: { $regex: searchTerm, $options: "i" } },
-    //         { lastName: { $regex: searchTerm, $options: "i" } },
-    //         { email: { $regex: searchTerm, $options: "i" } },
-    //       ],
-    //     },
-    //   ],
-    // });
-
-    // Calculate the relevance of each user
-    // Sort the search results by relevance
-    // const sortedUsers = users.sort((a, b) => {
-    //   const aRelevance = calculateRelevance(a, searchTerm);
-    //   const bRelevance = calculateRelevance(b, searchTerm);
-    //   return bRelevance - aRelevance;
-    // });
+    // Get the users from the database using the aggregation pipeline
+    const users = await User.aggregate(pipeline);
 
     // Send status 200 response and the users to the client
-    // return response.status(200).json(sortedUsers);
-    const users = await User.aggregate(pipeline);
-    console.log("ownerIds: ", ownerIds);
-    console.log("users: ", users);
     return response.status(200).json(users);
   } catch (error) {
     console.log("Error in GET /users/search/:searchTerm: ", error);
