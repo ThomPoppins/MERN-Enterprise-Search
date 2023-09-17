@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { User } from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../middleware/auth/jwt.js";
+import calculateRelevance from "../utils/search/users/calculateRelevance.js";
 
 const router = express.Router();
 
@@ -112,7 +113,7 @@ router.get("/search", async (request, response) => {
   return response.status(200).json([]);
 });
 
-// TODO: TEST THIS ROUTE!
+// TODO: [MERNSTACK-186] Check MongoDB discord for the BUG that users aren't filtered using the $nin operator
 // Find user by username, name or email search term
 router.get("/search/:searchTerm", async (request, response) => {
   try {
@@ -132,15 +133,10 @@ router.get("/search/:searchTerm", async (request, response) => {
     const company = await Company.findById(companyId);
     const ownerIds = company.owners.map((owner) => owner.userId);
 
-    // Get user documents using the find method
-    const users = await User.find({
-      $and: [
-        {
-          _id: {
-            $nin: ownerIds,
-          },
-        },
-        {
+    const pipeline = [
+      {
+        $match: {
+          _id: { $nin: ownerIds },
           $or: [
             { username: { $regex: searchTerm, $options: "i" } },
             { firstName: { $regex: searchTerm, $options: "i" } },
@@ -148,10 +144,55 @@ router.get("/search/:searchTerm", async (request, response) => {
             { email: { $regex: searchTerm, $options: "i" } },
           ],
         },
-      ],
-    });
+      },
+      {
+        $addFields: {
+          relevance: {
+            $sum: [
+              { $cond: [{ $eq: ["$username", searchTerm] }, 1, 0] },
+              { $cond: [{ $eq: ["$firstName", searchTerm] }, 1, 0] },
+              { $cond: [{ $eq: ["$lastName", searchTerm] }, 1, 0] },
+              { $cond: [{ $eq: ["$email", searchTerm] }, 1, 0] },
+            ],
+          },
+        },
+      },
+      { $sort: { relevance: -1 } },
+      { $limit: 10 },
+    ];
 
-    // Send status 200 response and the companies to the client
+    // Get user documents using the find method
+    // const users = await User.find({
+    //   $and: [
+    //     {
+    //       _id: {
+    //         $nin: ownerIds,
+    //       },
+    //     },
+    //     {
+    //       $or: [
+    //         { username: { $regex: searchTerm, $options: "i" } },
+    //         { firstName: { $regex: searchTerm, $options: "i" } },
+    //         { lastName: { $regex: searchTerm, $options: "i" } },
+    //         { email: { $regex: searchTerm, $options: "i" } },
+    //       ],
+    //     },
+    //   ],
+    // });
+
+    // Calculate the relevance of each user
+    // Sort the search results by relevance
+    // const sortedUsers = users.sort((a, b) => {
+    //   const aRelevance = calculateRelevance(a, searchTerm);
+    //   const bRelevance = calculateRelevance(b, searchTerm);
+    //   return bRelevance - aRelevance;
+    // });
+
+    // Send status 200 response and the users to the client
+    // return response.status(200).json(sortedUsers);
+    const users = await User.aggregate(pipeline);
+    console.log("ownerIds: ", ownerIds);
+    console.log("users: ", users);
     return response.status(200).json(users);
   } catch (error) {
     console.log("Error in GET /users/search/:searchTerm: ", error);
