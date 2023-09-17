@@ -652,6 +652,8 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-184] Remove item from search results when added
 - [x] [MERNSTACK-160] Display error message under the input field if the input is invalid explaining the right format on all forms
 - [x] [MERNSTACK-159] Give input field of the form a red border if the input is invalid on all forms
+- [x] [MERNSTACK-153] Check if the user already exists in the database in usersRoute.jsx when registering a new user. Hint: Use the findOne method and consider using `unique: true` in the user schema.
+- [x] [MERNSTACK-154] If the user already exists, send status 409 response and a (error) message to inform the client.
 
 
 

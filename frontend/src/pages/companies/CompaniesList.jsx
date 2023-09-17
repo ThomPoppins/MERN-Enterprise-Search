@@ -16,7 +16,6 @@ const CompaniesList = () => {
   // useSelector() is a hook that takes the current state as an argument and returns whatever data you want from it.
   const showType = useSelector((state) => state.companiesListShowType);
   const [companies, setCompanies] = useState([]);
-  const [owners, setOwners] = useState([]);
   const userId = useSelector((state) => state.userId);
   const [loading, setLoading] = useState(false);
 
@@ -59,7 +58,7 @@ const CompaniesList = () => {
       </div>
 
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl my-8">Companies List</h1>
+        <h1 className="text-3xl my-8">Companies</h1>
         <Link to="/companies/register">
           <MdOutlineAddBox className="text-sky-800 text-4xl" />
         </Link>

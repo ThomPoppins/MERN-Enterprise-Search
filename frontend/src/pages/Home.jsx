@@ -15,8 +15,8 @@ const Home = () => {
           </h1>
 
           <p className="">
-            Visit Books and Companies links to see some of this this
-            application's features in action.
+            Visit Companies link to see some of this this application's features
+            in action.
           </p>
         </div>
 
@@ -24,11 +24,6 @@ const Home = () => {
           <Link to="/companies">
             <button className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mr-3">
               Companies
-            </button>
-          </Link>
-          <Link to="/books">
-            <button className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mr-3">
-              Books
             </button>
           </Link>
         </div>

@@ -20,6 +20,9 @@ const RegisterUser = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
+  // Error message returned by the server when registering a user fails
+  const [registerErrorMessage, setRegisterErrorMessage] = useState("");
+
   // Error state variables for displaying error messages if the user input is invalid
   const [usernameError, setUsernameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -206,6 +209,7 @@ const RegisterUser = () => {
       })
       .catch((error) => {
         setLoading(false);
+        setRegisterErrorMessage(error.response.data.message);
         enqueueSnackbar("Error registering account!", { variant: "error" });
         console.log(error);
       });
@@ -217,6 +221,11 @@ const RegisterUser = () => {
       <h1 className="text-3xl my-4">Register Account</h1>
       {loading ? <Spinner /> : ""}
       <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
+        {registerErrorMessage ? (
+          <p className="text-red-500 text-sm">{registerErrorMessage}</p>
+        ) : (
+          ""
+        )}
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Username</label>
           <input

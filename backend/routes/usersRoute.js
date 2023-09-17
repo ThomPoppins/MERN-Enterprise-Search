@@ -30,13 +30,35 @@ router.post("/", async (request, response) => {
       });
     }
 
+    /// Get user from database based on email
+    const existingUserEmail = await User.findOne({
+      email: request.body.email,
+    });
+    // Get user from the database based on username
+    const existingUsername = await User.findOne({
+      username: request.body.username,
+    });
+    if (existingUserEmail && existingUsername) {
+      // Send status 409 response if the user already exists and a (error) message to inform the client.
+      return response.status(409).send({
+        message:
+          "User with this email and username already exists. Please try again with a different email and username.",
+      });
+    } else if (existingUserEmail) {
+      // Send status 409 response if the user already exists and a (error) message to inform the client.
+      return response.status(409).send({
+        message: "User with this email already exists.",
+      });
+    } else if (existingUsername) {
+      // Send status 409 response if the user already exists and a (error) message to inform the client.
+      return response.status(409).send({
+        message: "User with this username already exists.",
+      });
+    }
+
     // Hash the password using bcrypt
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(request.body.password, salt);
-
-    // TODO: [MERNSTACK-153] Check if the user already exists in the database. Hint: Use the findOne method and consider using `unique: true` in the user schema.
-
-    // TODO: [MERNSTACK-154] If the user already exists, send status 409 response and a (error) message to inform the client.
 
     // Create a new user document using the User model and the properties from the request body.
     const newUser = {
@@ -54,7 +76,10 @@ router.post("/", async (request, response) => {
     return response.status(201).send(user);
   } catch (error) {
     console.log("Error in POST /users: ", error);
-    response.status(500).send({ message: error.message });
+    response.status(500).send({
+      message:
+        "Error registering your account! (Developers, check backend console.log output for error details.)",
+    });
   }
 });
 
@@ -113,7 +138,7 @@ router.get("/search", async (request, response) => {
   return response.status(200).json([]);
 });
 
-// TODO: [MERNSTACK-186] Check MongoDB discord for the BUG that users aren't filtered using the $nin operator
+// TODO: [MERNSTACK-186] Check MongoDB discord server and Twitter for the BUG that users aren't filtered using the $nin operator
 // Find user by username, name or email search term
 router.get("/search/:searchTerm", async (request, response) => {
   try {
