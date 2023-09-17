@@ -30,6 +30,14 @@ const LogoutUser = () => {
       type: USER_ID,
       payload: null,
     });
+    store.dispatch({
+      type: "USER",
+      payload: null,
+    });
+    store.dispatch({
+      type: "COMPANIES_LIST_SHOW_TYPE",
+      payload: "table",
+    });
     setLoading(false);
     navigate("/");
   };

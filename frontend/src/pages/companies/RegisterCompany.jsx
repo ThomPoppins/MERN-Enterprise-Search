@@ -5,10 +5,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../../../config.js";
 import { useSnackbar } from "notistack";
-import companyNameValidator from "../../validation/companyNameValidator";
-import phoneNumberValidator from "../../validation/phoneNumberValidator";
-import emailValidator from "../../validation/emailValidator";
-import startYearValidator from "../../validation/startYearValidator";
+import companyNameValidator from "../../utils/validation/companyNameValidator";
+import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
+import emailValidator from "../../utils/validation/emailValidator";
+import startYearValidator from "../../utils/validation/startYearValidator";
 import { useSelector } from "react-redux";
 
 const RegisterCompany = () => {
