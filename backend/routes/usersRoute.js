@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { User } from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../middleware/auth/jwt.js";
+import calculateRelevance from "../utils/search/users/calculateRelevance.js";
 
 const router = express.Router();
 
@@ -151,8 +152,16 @@ router.get("/search/:searchTerm", async (request, response) => {
       ],
     });
 
+    // Calculate the relevance of each user
+    // Sort the search results by relevance
+    const sortedUsers = users.sort((a, b) => {
+      const aRelevance = calculateRelevance(a, searchTerm);
+      const bRelevance = calculateRelevance(b, searchTerm);
+      return bRelevance - aRelevance;
+    });
+
     // Send status 200 response and the companies to the client
-    return response.status(200).json(users);
+    return response.status(200).json(sortedUsers);
   } catch (error) {
     console.log("Error in GET /users/search/:searchTerm: ", error);
     response.status(500).send({ message: error.message });
