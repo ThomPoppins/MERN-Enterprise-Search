@@ -4,7 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 import { User } from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../middleware/auth/jwt.js";
-import calculateRelevance from "../utils/search/users/calculateRelevance.js";
 import mongoose from "mongoose";
 
 const router = express.Router();
@@ -145,6 +144,9 @@ router.get("/search/:searchTerm", async (request, response) => {
   try {
     const { searchTerm } = request.params;
 
+    // Split the search term into search terms by whitespace
+    const searchTerms = searchTerm.split(/\s+/);
+
     // If searchTerm is empty, return an empty array
     if (!searchTerm) {
       return response.status(200).json([]);
@@ -159,27 +161,56 @@ router.get("/search/:searchTerm", async (request, response) => {
       (owner) => new mongoose.Types.ObjectId(owner.userId)
     );
 
+    // Create the aggregation pipeline
     const pipeline = [
       {
         $match: {
           _id: { $nin: ownerIds },
-          $or: [
-            { username: { $regex: searchTerm, $options: "i" } },
-            { firstName: { $regex: searchTerm, $options: "i" } },
-            { lastName: { $regex: searchTerm, $options: "i" } },
-            { email: { $regex: searchTerm, $options: "i" } },
-          ],
+          $or: searchTerms.map((term) => ({
+            $or: [
+              { username: { $regex: term, $options: "i" } },
+              { firstName: { $regex: term, $options: "i" } },
+              { lastName: { $regex: term, $options: "i" } },
+              { email: { $regex: term, $options: "i" } },
+            ],
+          })),
         },
       },
       {
         $addFields: {
           relevance: {
-            $sum: [
-              { $cond: [{ $eq: ["$username", searchTerm] }, 1, 0] },
-              { $cond: [{ $eq: ["$firstName", searchTerm] }, 1, 0] },
-              { $cond: [{ $eq: ["$lastName", searchTerm] }, 1, 0] },
-              { $cond: [{ $eq: ["$email", searchTerm] }, 1, 0] },
-            ],
+            $sum: searchTerms.map((term) => ({
+              $sum: [
+                {
+                  $cond: [
+                    { $eq: [{ $toLower: "$username" }, term.toLowerCase()] },
+                    1,
+                    0,
+                  ],
+                },
+                {
+                  $cond: [
+                    { $eq: [{ $toLower: "$firstName" }, term.toLowerCase()] },
+                    1,
+                    0,
+                  ],
+                },
+                {
+                  $cond: [
+                    { $eq: [{ $toLower: "$lastName" }, term.toLowerCase()] },
+                    1,
+                    0,
+                  ],
+                },
+                {
+                  $cond: [
+                    { $eq: [{ $toLower: "$email" }, term.toLowerCase()] },
+                    1,
+                    0,
+                  ],
+                },
+              ],
+            })),
           },
         },
       },
