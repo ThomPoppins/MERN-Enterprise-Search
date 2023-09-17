@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../../../config.js";
 import { useSnackbar } from "notistack";
-import emailValidator from "../../validation/emailValidator";
+import emailValidator from "../../utils/validation/emailValidator";
 import verifyToken from "../../utils/auth/verifyToken.jsx";
 
 const RegisterUser = () => {

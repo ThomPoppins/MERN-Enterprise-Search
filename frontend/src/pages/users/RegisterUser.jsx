@@ -5,11 +5,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../../../config.js";
 import { useSnackbar } from "notistack";
-import emailValidator from "../../validation/emailValidator";
-import usernameValidator from "../../validation/usernameValidator";
-import passwordValidator from "../../validation/passwordValidator";
-import firstNameValidator from "../../validation/firstNameValidator";
-import lastNameValidator from "../../validation/lastNameValidator";
+import emailValidator from "../../utils/validation/emailValidator";
+import usernameValidator from "../../utils/validation/usernameValidator";
+import passwordValidator from "../../utils/validation/passwordValidator";
+import firstNameValidator from "../../utils/validation/firstNameValidator";
+import lastNameValidator from "../../utils/validation/lastNameValidator";
 
 const RegisterUser = () => {
   // Form input fields as state variables

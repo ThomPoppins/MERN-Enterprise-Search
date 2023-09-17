@@ -5,11 +5,11 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { BACKEND_URL } from "../../../config.js";
 import { useSnackbar } from "notistack";
-import phoneNumberValidator from "../../validation/phoneNumberValidator";
-import emailValidator from "../../validation/emailValidator";
-import startYearValidator from "../../validation/startYearValidator";
+import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
+import emailValidator from "../../utils/validation/emailValidator";
+import startYearValidator from "../../utils/validation/startYearValidator";
+import companyNameValidator from "../../utils/validation/companyNameValidator";
 import UserSearch from "../../components/UserSearch";
-import companyNameValidator from "../../validation/companyNameValidator";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
 import { useSelector } from "react-redux";
 
