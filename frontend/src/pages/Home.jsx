@@ -10,10 +10,15 @@ const Home = () => {
     return (
       <div>
         <div className="mx-auto p-5">
-          <h1 className="text-3xl my-8">
+          <h1 className="text-3xl my-2">
             Welcome to your account {user?.firstName} {user?.lastName}!
           </h1>
+          <p className="text-gray-500 text-sm">
+            {user ? "@" + user?.username : ""}
+          </p>
+        </div>
 
+        <div className="mx-auto p-5">
           <p className="">
             Visit Companies link to see some of this this application's features
             in action.
