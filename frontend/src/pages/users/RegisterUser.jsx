@@ -185,7 +185,13 @@ const RegisterUser = () => {
       passwordError ||
       confirmPasswordError ||
       firstNameError ||
-      lastNameError
+      lastNameError ||
+      !username ||
+      !email ||
+      !password ||
+      !confirmPassword ||
+      !firstName ||
+      !lastName
     ) {
       return;
     }

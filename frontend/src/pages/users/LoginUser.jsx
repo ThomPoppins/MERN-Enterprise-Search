@@ -49,7 +49,7 @@ const RegisterUser = () => {
   const handleLoginUser = () => {
     // Validate email address to be the correct format otherwise return before sending a request to the backend
     validateEmail();
-    if (emailError) {
+    if (emailError || !email || !password) {
       return;
     }
 
