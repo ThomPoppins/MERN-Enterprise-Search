@@ -158,7 +158,6 @@ const RegisterCompany = () => {
       return;
     }
 
-    // TODO: [MERNSTACK-167] Add KVK number to the form
     // TODO: [MERNSTACK-166] Validate validity and uniqueness of company KVK number
 
     const data = {

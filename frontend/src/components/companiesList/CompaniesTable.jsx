@@ -9,9 +9,12 @@ const CompaniesTable = ({ companies }) => {
     <table className="w-full border-separate border-spacing-2">
       <thead>
         <tr>
-          {/* TODO: [MERNSTACK-188] Remove `No` field and add KVK number field */}
-          <th className="border border-slate-600 rounded-md">No</th>
-          <th className="border border-slate-600 rounded-md">Name</th>
+          <th className="border border-slate-600 rounded-md w-[150px]">
+            KVK Number
+          </th>
+          <th className="border border-slate-600 rounded-md text-left pl-3">
+            Name
+          </th>
           {/* max-md:hidden hides this column on mobile devices and tablets */}
           <th className="border border-slate-600 rounded-md w-[150px]">
             Operations
@@ -22,9 +25,9 @@ const CompaniesTable = ({ companies }) => {
         {companies.map((company, index) => (
           <tr key={company._id} className="h-8">
             <td className="border border-slate-700 rounded-md text-center">
-              {index + 1}
+              {company.kvkNumber}
             </td>
-            <td className="border border-slate-700 rounded-md text-center">
+            <td className="border border-slate-700 rounded-md text-left pl-3">
               {company.name}
             </td>
             <td className="border border-slate-700 rounded-md text-center">
