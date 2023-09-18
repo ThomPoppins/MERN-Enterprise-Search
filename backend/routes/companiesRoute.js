@@ -20,6 +20,7 @@ router.post("/", async (request, response) => {
       !request.body.email ||
       !request.body.phone ||
       !request.body.startYear ||
+      !request.body.kvkNumber ||
       !request.body.owners
     ) {
       // Send status 400 response if data fields are missing and a (error) message to inform the client.
@@ -37,10 +38,11 @@ router.post("/", async (request, response) => {
     // TODO: [MERNSTACK-] Decide if the default values should be set in the model or in the route. Hint: Consider using the `default` property in the company schema.
     const newCompany = {
       name: request.body.name,
-      email: request.body.email ? request.body.email : "",
-      phone: request.body.phone ? request.body.phone : "",
-      owners: request.body.owners ? request.body.owners : [],
-      startYear: request.body.startYear ? request.body.startYear : 0,
+      email: request.body.email,
+      phone: request.body.phone,
+      owners: request.body.owners,
+      startYear: request.body.startYear,
+      kvkNumber: request.body.kvkNumber,
       payments: request.body.payments
         ? request.body.payments
         : [
