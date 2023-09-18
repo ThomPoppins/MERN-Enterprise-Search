@@ -19,7 +19,7 @@ const CompaniesList = () => {
   const userId = useSelector((state) => state.userId);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  const updateCompanies = () => {
     setLoading(true);
     axios
       .get(BACKEND_URL + "/companies/owned-companies/" + userId)
@@ -31,6 +31,10 @@ const CompaniesList = () => {
         console.log(error);
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    updateCompanies();
   }, []);
 
   const handleShowTypeChange = (showType) => {
@@ -68,7 +72,10 @@ const CompaniesList = () => {
       ) : showType === "table" ? (
         <CompaniesTable companies={companies} />
       ) : (
-        <CompaniesCard companies={companies} />
+        <CompaniesCard
+          companies={companies}
+          updateCompanies={updateCompanies}
+        />
       )}
     </div>
   );

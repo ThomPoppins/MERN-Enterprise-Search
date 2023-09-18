@@ -14,7 +14,7 @@ import CompanyModal from "./CompanyModal";
 import DeleteCompanyModal from "./DeleteCompanyModal";
 import { BACKEND_URL } from "../../../config";
 
-const CompaniesSingleCard = ({ company }) => {
+const CompaniesSingleCard = ({ company, updateCompanies }) => {
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [owners, setOwners] = useState([]);
@@ -80,9 +80,6 @@ const CompaniesSingleCard = ({ company }) => {
         <Link to={`/companies/edit/${company._id}`}>
           <AiOutlineEdit className="text-yellow-600 text-2xl hover:text-black" />
         </Link>
-        <Link to={`/companies/delete/${company._id}`}>
-          <MdOutlineDelete className="text-red-600 text-2xl hover:text-black" />
-        </Link>
         <MdOutlineDelete
           onClick={() => setShowDeleteModal(true)}
           className="text-red-600 text-2xl hover:text-black"
@@ -98,6 +95,7 @@ const CompaniesSingleCard = ({ company }) => {
       {showDeleteModal && (
         <DeleteCompanyModal
           companyId={company._id}
+          updateCompanies={updateCompanies}
           onClose={() => setShowDeleteModal(false)}
         />
       )}
