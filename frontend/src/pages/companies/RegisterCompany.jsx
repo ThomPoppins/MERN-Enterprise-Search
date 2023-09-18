@@ -9,6 +9,7 @@ import companyNameValidator from "../../utils/validation/companyNameValidator";
 import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
 import emailValidator from "../../utils/validation/emailValidator";
 import startYearValidator from "../../utils/validation/startYearValidator";
+import kvkNumberValidator from "../../utils/validation/kvkNumberValidator";
 import { useSelector } from "react-redux";
 
 const RegisterCompany = () => {
@@ -18,12 +19,14 @@ const RegisterCompany = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [startYear, setStartYear] = useState("");
+  const [kvkNumber, setKvkNumber] = useState("");
 
   // Error state for displaying error messages if the user enters invalid input
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
   const [startYearError, setStartYearError] = useState(false);
+  const [kvkNumberError, setKvkNumberError] = useState(false);
 
   // Loading state for displaying a spinner while the request is being sent to the backend
   const [loading, setLoading] = useState(false);
@@ -70,6 +73,13 @@ const RegisterCompany = () => {
       setStartYearError(false);
     }
   };
+  const validateKvkNumber = () => {
+    if (kvkNumberValidator(kvkNumber) === false) {
+      setKvkNumberError(true);
+    } else {
+      setKvkNumberError(false);
+    }
+  };
 
   // Handle onChange events for all input fields
   const handleNameChange = (e) => {
@@ -96,6 +106,12 @@ const RegisterCompany = () => {
       validateStartYear();
     }
   };
+  const handleKvkNumberChange = (e) => {
+    setKvkNumber(e.target.value);
+    if (kvkNumberError) {
+      validateKvkNumber();
+    }
+  };
 
   // Display error messages if the user enters invalid input with useSnackbar
   useEffect(() => {
@@ -111,7 +127,10 @@ const RegisterCompany = () => {
     if (startYearError) {
       enqueueSnackbar("Start year is invalid!", { variant: "error" });
     }
-  }, [nameError, emailError, phoneError, startYearError]);
+    if (kvkNumberError) {
+      enqueueSnackbar("KVK number is invalid!", { variant: "error" });
+    }
+  }, [nameError, emailError, phoneError, startYearError, kvkNumberError]);
 
   const handleSaveCompany = () => {
     // Validate all fields before sending the request to the backend, otherwise return
@@ -119,7 +138,14 @@ const RegisterCompany = () => {
     validateEmail();
     validatePhone();
     validateStartYear();
-    if (nameError || emailError || phoneError || startYearError) {
+    validateKvkNumber();
+    if (
+      nameError ||
+      emailError ||
+      phoneError ||
+      startYearError ||
+      kvkNumberError
+    ) {
       enqueueSnackbar(
         "Please fill in all fields correctly before saving this company!",
         { variant: "error" }
@@ -136,6 +162,7 @@ const RegisterCompany = () => {
       email: email,
       phone: phone,
       startYear: startYear,
+      kvkNumber: kvkNumber,
       owners: [{ userId: userId }], // Make sure that the user that registers the company is added as an owner
     };
     setLoading(true);
@@ -249,6 +276,28 @@ const RegisterCompany = () => {
               Start year must be a valid year and never can be later then the
               current year. If company hasn't started yet, register company when
               it starts.
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">KVK Number</label>
+          <input
+            type="text"
+            value={kvkNumber}
+            // onChange is a function that takes an event as an argument
+            // and sets the name state to the value of the input
+            // e.target.value is the value of the input
+            onChange={handleKvkNumberChange}
+            onBlur={validateKvkNumber}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              kvkNumberError ? "border-red-500" : ""
+            }`}
+          />
+          {kvkNumberError ? (
+            <p className="text-red-500 text-sm">
+              KVK number must be a valid KVK number.
             </p>
           ) : (
             ""

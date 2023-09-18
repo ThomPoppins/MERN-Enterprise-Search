@@ -9,6 +9,7 @@ const CompaniesTable = ({ companies }) => {
     <table className="w-full border-separate border-spacing-2">
       <thead>
         <tr>
+          {/* TODO: [MERNSTACK-188] Remove `No` field and add KVK number field */}
           <th className="border border-slate-600 rounded-md">No</th>
           <th className="border border-slate-600 rounded-md">Name</th>
           {/* max-md:hidden hides this column on mobile devices and tablets */}

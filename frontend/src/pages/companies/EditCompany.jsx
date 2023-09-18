@@ -9,6 +9,7 @@ import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
 import emailValidator from "../../utils/validation/emailValidator";
 import startYearValidator from "../../utils/validation/startYearValidator";
 import companyNameValidator from "../../utils/validation/companyNameValidator";
+import kvkNumberValidator from "../../utils/validation/kvkNumberValidator";
 import UserSearch from "../../components/UserSearch";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
 import { useSelector } from "react-redux";
@@ -29,12 +30,14 @@ const EditCompany = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [startYear, setStartYear] = useState(0);
+  const [kvkNumber, setKvkNumber] = useState("");
 
   // Error state for displaying error messages if the user enters invalid input
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
   const [startYearError, setStartYearError] = useState(false);
+  const [kvkNumberError, setKvkNumberError] = useState(false);
 
   // Owners state
   const [owners, setOwners] = useState([]);
@@ -85,6 +88,13 @@ const EditCompany = () => {
       setStartYearError(false);
     }
   };
+  const validateKvkNumber = () => {
+    if (kvkNumberValidator(kvkNumber) === false) {
+      setKvkNumberError(true);
+    } else {
+      setKvkNumberError(false);
+    }
+  };
 
   // Handle onChange events for all input fields
   const handleNameChange = (e) => {
@@ -111,6 +121,12 @@ const EditCompany = () => {
       validateStartYear();
     }
   };
+  const handleKvkNumberChange = (e) => {
+    setKvkNumber(e.target.value);
+    if (kvkNumberError) {
+      validateKvkNumber();
+    }
+  };
 
   // Display error messages when the user enters invalid input
   useEffect(() => {
@@ -126,7 +142,10 @@ const EditCompany = () => {
     if (startYearError) {
       enqueueSnackbar("Invalid start year!", { variant: "error" });
     }
-  }, [nameError, emailError, phoneError, startYearError]);
+    if (kvkNumberError) {
+      enqueueSnackbar("Invalid KVK number!", { variant: "error" });
+    }
+  }, [nameError, emailError, phoneError, startYearError, kvkNumberError]);
 
   // useEffect() is a hook that runs a function when the component is rendered
   useEffect(() => {
@@ -140,6 +159,7 @@ const EditCompany = () => {
         setEmail(response.data.email);
         setPhone(response.data.phone);
         setStartYear(response.data.startYear);
+        setKvkNumber(response.data.kvkNumber);
 
         // Set owners
         const userIds = [];
@@ -172,7 +192,14 @@ const EditCompany = () => {
     validateEmail();
     validatePhone();
     validateStartYear();
-    if (nameError || emailError || phoneError || startYearError) {
+    validateKvkNumber();
+    if (
+      nameError ||
+      emailError ||
+      phoneError ||
+      startYearError ||
+      kvkNumberError
+    ) {
       enqueueSnackbar(
         "Please fill in all fields correctly before saving this company!",
         { variant: "error" }
@@ -185,6 +212,7 @@ const EditCompany = () => {
       email: email,
       phone: phone,
       startYear: startYear,
+      kvkNumber: kvkNumber,
     };
     setLoading(true);
     axios
@@ -295,6 +323,59 @@ const EditCompany = () => {
       <BackButton destination={"/companies"} />
       <h1 className="text-3xl my-4">Edit Company</h1>
       {loading ? <Spinner /> : ""}
+      <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto mb-4">
+        <div className="my-4">
+          <div className="mb-4">
+            <label className="text-xl mr-4 text-gray-500">Owners</label>
+          </div>
+          <ul className="mb-4">
+            {owners.map((owner, index) => {
+              return (
+                <div
+                  className="mb-4 flex justify-between items-center"
+                  key={owner._id + index}
+                >
+                  <div>
+                    <li>
+                      <ul>
+                        <li>
+                          <VscMention className="inline" />
+                          {owner.username}
+                        </li>
+                        <li>
+                          <VscPerson className="inline" /> {owner.firstName}{" "}
+                          {owner.lastName}
+                        </li>
+                        <li>
+                          <VscMail className="inline" /> {owner.email}
+                        </li>
+                      </ul>
+                    </li>
+                  </div>
+                  <div>
+                    {owner._id !== userId ? (
+                      <button
+                        className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto mb-4"
+                        value={owner._id}
+                        onClick={handleRemoveUserAsCompanyOwner}
+                      >
+                        Remove
+                      </button>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </ul>
+        </div>
+        <UserSearch
+          companyId={companyId}
+          handleAddUserAsCompanyOwner={handleAddUserAsCompanyOwner}
+          removedOwnersIds={removedOwnersIds}
+        />
+      </div>
       <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
         {/* TODO: [MERNSTACK-130] Add input fields for all editable company details. To achieve this, copy the outer div with class ".my-4". */}
         {/* Comany Name input field */}
@@ -393,56 +474,26 @@ const EditCompany = () => {
           )}
         </div>
         <div className="my-4">
-          <div className="mb-4">
-            <label className="text-xl mr-4 text-gray-500">Owners</label>
-          </div>
-          <ul className="mb-4">
-            {owners.map((owner, index) => {
-              return (
-                <div
-                  className="mb-4 flex justify-between items-center"
-                  key={owner._id + index}
-                >
-                  <div>
-                    <li>
-                      <ul>
-                        <li>
-                          <VscMention className="inline" />
-                          {owner.username}
-                        </li>
-                        <li>
-                          <VscPerson className="inline" /> {owner.firstName}{" "}
-                          {owner.lastName}
-                        </li>
-                        <li>
-                          <VscMail className="inline" /> {owner.email}
-                        </li>
-                      </ul>
-                    </li>
-                  </div>
-                  <div>
-                    {owner._id !== userId ? (
-                      <button
-                        className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto mb-4"
-                        value={owner._id}
-                        onClick={handleRemoveUserAsCompanyOwner}
-                      >
-                        Remove
-                      </button>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </ul>
+          <label className="text-xl mr-4 text-gray-500">KVK number</label>
+          <input
+            type="text"
+            value={kvkNumber}
+            // onChange is a function that takes an event as an argument
+            // and sets the title state to the value of the input
+            // e.target.value is the value of the input
+            onChange={handleKvkNumberChange}
+            onBlur={validateKvkNumber}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              kvkNumberError ? "border-red-500" : ""
+            }`}
+          />
+          {kvkNumberError ? (
+            <p className="text-red-500 text-sm">Must be a valid KVK number.</p>
+          ) : (
+            ""
+          )}
         </div>
-        <UserSearch
-          companyId={companyId}
-          handleAddUserAsCompanyOwner={handleAddUserAsCompanyOwner}
-          removedOwnersIds={removedOwnersIds}
-        />
+
         <button
           className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto w-1/2"
           onClick={handleEditCompany}
