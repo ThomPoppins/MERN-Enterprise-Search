@@ -38,7 +38,7 @@ const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
       {/* https://stackoverflow.com/questions/4616694/what-is-event-bubbling-and-capturing */}
       <div
         onClick={(event) => event.stopPropagation()}
-        className="w-[600px] max-w-full h-[400px] bg-white rounded-xl p-4 flex flex-col items-center relative"
+        className="w-[600px] max-w-full h-[240px] bg-white rounded-xl p-4 flex flex-col items-center relative"
       >
         <AiOutlineClose
           className="absolute right-6 top-6 text-3xl text-red-600 cursor-pointer"
@@ -46,7 +46,7 @@ const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
         />
 
         {loading ? <Spinner /> : ""}
-        <div className="flex flex-col items-center rounded-xl w-[400px] p-8 mx-auto">
+        <div className="flex flex-col items-center rounded-xl w-[500px] p-8 mx-auto">
           <h3 className="text-2xl">
             Are you sure you want to delete this company?
           </h3>

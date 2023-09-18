@@ -70,7 +70,10 @@ const CompaniesList = () => {
       {loading ? (
         <Spinner />
       ) : showType === "table" ? (
-        <CompaniesTable companies={companies} />
+        <CompaniesTable
+          companies={companies}
+          updateCompanies={updateCompanies}
+        />
       ) : (
         <CompaniesCard
           companies={companies}
