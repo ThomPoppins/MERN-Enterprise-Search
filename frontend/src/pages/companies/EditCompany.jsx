@@ -198,7 +198,12 @@ const EditCompany = () => {
       emailError ||
       phoneError ||
       startYearError ||
-      kvkNumberError
+      kvkNumberError ||
+      !name ||
+      !email ||
+      !phone ||
+      !startYear ||
+      !kvkNumber
     ) {
       enqueueSnackbar(
         "Please fill in all fields correctly before saving this company!",
