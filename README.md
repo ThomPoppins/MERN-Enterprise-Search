@@ -655,6 +655,8 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-153] Check if the user already exists in the database in usersRoute.jsx when registering a new user. Hint: Use the findOne method and consider using `unique: true` in the user schema.
 - [x] [MERNSTACK-154] If the user already exists, send status 409 response and a (error) message to inform the client.
 - [x] [MERNSTACK-186] Check MongoDB discord server and Twitter for the BUG that users aren't filtered using the $nin operator
+- [x] [MERNSTACK-188] Remove `No` field and add KVK number field in CompaniesTable component
+- [x] [MERNSTACK-167] Add KVK number to the form in RegisterCompany and EditCompany components.
 
 
 
