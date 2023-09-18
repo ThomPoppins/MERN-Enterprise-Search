@@ -11,10 +11,12 @@ import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineDelete } from "react-icons/md";
 import { useState } from "react";
 import CompanyModal from "./CompanyModal";
+import DeleteCompanyModal from "./DeleteCompanyModal";
 import { BACKEND_URL } from "../../../config";
 
 const CompaniesSingleCard = ({ company }) => {
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [owners, setOwners] = useState([]);
 
   useEffect(() => {
@@ -31,12 +33,6 @@ const CompaniesSingleCard = ({ company }) => {
         console.log(error);
       });
   }, [company.owners]);
-
-  useEffect(() => {
-    console.log("Owners in CompaniesSingleCard.jsx: ", owners);
-
-    return () => {};
-  }, [owners]);
 
   return (
     <div
@@ -87,12 +83,22 @@ const CompaniesSingleCard = ({ company }) => {
         <Link to={`/companies/delete/${company._id}`}>
           <MdOutlineDelete className="text-red-600 text-2xl hover:text-black" />
         </Link>
+        <MdOutlineDelete
+          onClick={() => setShowDeleteModal(true)}
+          className="text-red-600 text-2xl hover:text-black"
+        />
       </div>
       {showModal && (
         <CompanyModal
           owners={owners}
           company={company}
           onClose={() => setShowModal(false)}
+        />
+      )}
+      {showDeleteModal && (
+        <DeleteCompanyModal
+          companyId={company._id}
+          onClose={() => setShowDeleteModal(false)}
         />
       )}
     </div>
