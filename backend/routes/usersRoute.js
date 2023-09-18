@@ -143,6 +143,10 @@ router.get("/search/:searchTerm", async (request, response) => {
   try {
     const { searchTerm } = request.params;
 
+    if (!searchTerm) {
+      return response.status(200).json([]);
+    }
+
     // Split the search term into search terms by whitespace
     const searchTerms = searchTerm.split(/\s+/);
 
