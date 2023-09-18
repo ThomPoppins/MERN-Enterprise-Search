@@ -49,8 +49,8 @@ const ShowCompany = () => {
         <div className="flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4">
           {/* TODO: [MERNSTACK-133] Add all fields of the company model here. Copy paste outer div with ".my-4" class below to achieve this. */}
           <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Id</span>
-            <span>{company._id}</span>
+            <span className="text-xl mr-4 text-gray-500">KVK</span>
+            <span>{company.kvkNumber}</span>
           </div>
           <div className="my-4">
             <span className="text-xl mr-4 text-gray-500">Name</span>

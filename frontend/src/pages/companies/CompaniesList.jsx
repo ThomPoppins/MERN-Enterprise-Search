@@ -46,21 +46,21 @@ const CompaniesList = () => {
   return (
     <div className="p-4">
       <BackButton destination={"/"} />
+
       <div className="flex justify-center items-center gap-x-4">
-        <button
-          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
-          onClick={() => handleShowTypeChange("table")}
-        >
-          Table
-        </button>
         <button
           className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
           onClick={() => handleShowTypeChange("card")}
         >
           Card
         </button>
+        <button
+          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
+          onClick={() => handleShowTypeChange("table")}
+        >
+          Table
+        </button>
       </div>
-
       <div className="flex justify-between items-center">
         <h1 className="text-3xl my-8">Companies</h1>
         <Link to="/companies/register">
