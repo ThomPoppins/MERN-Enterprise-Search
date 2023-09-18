@@ -2,5 +2,12 @@ node_modules
 
 # Config file with database credentials
 backend/config.js
-
 frontend/config.js
+
+# Environment variables
+backend/.env
+frontend/.env
+
+# Certificates
+frontend/certs/*
+backend/certs/*
