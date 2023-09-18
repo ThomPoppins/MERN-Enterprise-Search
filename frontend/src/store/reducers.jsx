@@ -5,7 +5,7 @@ import {
   USER,
 } from "./actions.jsx";
 
-const booksListShowTypeReducer = (state = "table", action) => {
+const booksListShowTypeReducer = (state = "card", action) => {
   switch (action.type) {
     case BOOKS_LIST_SHOW_TYPE:
       // return a new state object
@@ -17,7 +17,7 @@ const booksListShowTypeReducer = (state = "table", action) => {
   }
 };
 
-const companiesListShowTypeReducer = (state = "table", action) => {
+const companiesListShowTypeReducer = (state = "card", action) => {
   switch (action.type) {
     case COMPANIES_LIST_SHOW_TYPE:
       // return a new state object

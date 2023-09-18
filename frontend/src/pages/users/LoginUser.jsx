@@ -8,6 +8,7 @@ import { BACKEND_URL } from "../../../config.js";
 import { useSnackbar } from "notistack";
 import emailValidator from "../../utils/validation/emailValidator";
 import verifyToken from "../../utils/auth/verifyToken.jsx";
+import store from "../../store/store.jsx";
 
 const RegisterUser = () => {
   // Input field values for logging in a user as state
@@ -49,7 +50,7 @@ const RegisterUser = () => {
   const handleLoginUser = () => {
     // Validate email address to be the correct format otherwise return before sending a request to the backend
     validateEmail();
-    if (emailError) {
+    if (emailError || !email || !password) {
       return;
     }
 
@@ -75,6 +76,12 @@ const RegisterUser = () => {
         enqueueSnackbar("You are logged in!", {
           variant: "success",
         });
+
+        store.dispatch({
+          type: "COMPANIES_LIST_SHOW_TYPE",
+          payload: "card",
+        });
+
         navigate("/");
       })
       .catch((error) => {

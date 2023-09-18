@@ -11,10 +11,12 @@ import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineDelete } from "react-icons/md";
 import { useState } from "react";
 import CompanyModal from "./CompanyModal";
+import DeleteCompanyModal from "./DeleteCompanyModal";
 import { BACKEND_URL } from "../../../config";
 
-const CompaniesSingleCard = ({ company }) => {
+const CompaniesSingleCard = ({ company, updateCompanies }) => {
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [owners, setOwners] = useState([]);
 
   useEffect(() => {
@@ -32,12 +34,6 @@ const CompaniesSingleCard = ({ company }) => {
       });
   }, [company.owners]);
 
-  useEffect(() => {
-    console.log("Owners in CompaniesSingleCard.jsx: ", owners);
-
-    return () => {};
-  }, [owners]);
-
   return (
     <div
       key={company._id}
@@ -46,7 +42,7 @@ const CompaniesSingleCard = ({ company }) => {
       <h2 className="absolute top-1 right-2 px-4 py-1 bg-red-300 rounded-lg">
         {company.startYear}
       </h2>
-      <h4 className="my-2 text-gray-500">{company._id}</h4>
+      <h4 className="my-2 text-gray-500">KVK: {company.kvkNumber}</h4>
       <div className="flex justify-start items-center gap-x-2">
         <FcBriefcase className="text-2xl" />
         <h2 className="my-1">{company.name}</h2>
@@ -84,15 +80,23 @@ const CompaniesSingleCard = ({ company }) => {
         <Link to={`/companies/edit/${company._id}`}>
           <AiOutlineEdit className="text-yellow-600 text-2xl hover:text-black" />
         </Link>
-        <Link to={`/companies/delete/${company._id}`}>
-          <MdOutlineDelete className="text-red-600 text-2xl hover:text-black" />
-        </Link>
+        <MdOutlineDelete
+          onClick={() => setShowDeleteModal(true)}
+          className="text-red-600 text-2xl hover:text-black"
+        />
       </div>
       {showModal && (
         <CompanyModal
           owners={owners}
           company={company}
           onClose={() => setShowModal(false)}
+        />
+      )}
+      {showDeleteModal && (
+        <DeleteCompanyModal
+          companyId={company._id}
+          updateCompanies={updateCompanies}
+          onClose={() => setShowDeleteModal(false)}
         />
       )}
     </div>

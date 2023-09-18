@@ -36,7 +36,7 @@ const LogoutUser = () => {
     });
     store.dispatch({
       type: "COMPANIES_LIST_SHOW_TYPE",
-      payload: "table",
+      payload: "card",
     });
     setLoading(false);
     navigate("/");

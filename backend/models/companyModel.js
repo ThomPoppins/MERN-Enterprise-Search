@@ -131,7 +131,7 @@ const companySchema = new mongoose.Schema(
       required: false,
       default: "",
     },
-    // kvk number is validated (with the correct owner and company name) by the ?KVK API?. True or false.
+    // kvk number is validated (with the correct owner and company name) by the KVK API. True or false.
     kvkValidated: {
       type: Boolean,
       required: true,
