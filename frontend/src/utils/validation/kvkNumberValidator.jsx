@@ -2,8 +2,7 @@
 const kvkNumberValidator = (kvkNumber) => {
   const regex = /^[0-9]{8}$/;
   const validNumber = regex.test(kvkNumber);
-  const apiCallValidated = false;
-
+  const apiCallValidated = true;
   return validNumber && apiCallValidated;
 };
 
