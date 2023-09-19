@@ -28,4 +28,4 @@ config.js
 .env
 
 # KVK Api certificate chain
-certs/*
+src/utils/validation/kvkApi/certs/*
