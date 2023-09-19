@@ -3,7 +3,7 @@ import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { BACKEND_URL } from "../../../config.js";
+import { BACKEND_URL, TEST_KVK_API } from "../../../config.js";
 import { useSnackbar } from "notistack";
 import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
 import emailValidator from "../../utils/validation/emailValidator";
@@ -61,35 +61,35 @@ const EditCompany = () => {
   // Validation functions for validating the input fields and put a red border around the input field if the input is invalid
   // and display an error message under the input field explaining the right format
   const validateCompanyName = () => {
-    if (companyNameValidator(name) === false) {
+    if (!companyNameValidator(name)) {
       setNameError(true);
     } else {
       setNameError(false);
     }
   };
   const validateEmail = () => {
-    if (emailValidator(email) === false) {
+    if (!emailValidator(email)) {
       setEmailError(true);
     } else {
       setEmailError(false);
     }
   };
   const validatePhone = () => {
-    if (phoneNumberValidator(phone, "NL") === false) {
+    if (!phoneNumberValidator(phone, "NL")) {
       setPhoneError(true);
     } else {
       setPhoneError(false);
     }
   };
   const validateStartYear = () => {
-    if (startYearValidator(startYear) === false) {
+    if (!startYearValidator(startYear)) {
       setStartYearError(true);
     } else {
       setStartYearError(false);
     }
   };
-  const validateKvkNumber = () => {
-    if (kvkNumberValidator(kvkNumber) === false) {
+  const validateKvkNumber = async () => {
+    if (!(await kvkNumberValidator(kvkNumber))) {
       setKvkNumberError(true);
     } else {
       setKvkNumberError(false);
@@ -480,6 +480,21 @@ const EditCompany = () => {
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">KVK number</label>
+          {TEST_KVK_API ? (
+            <div className="mb-4">
+              <p className="text-gray-400">
+                <strong>Note:</strong> Use KVK numbers from{" "}
+                <a
+                  className="text-blue-600"
+                  href="https://developers.kvk.nl/documentation/testing"
+                >
+                  this page
+                </a>
+              </p>
+            </div>
+          ) : (
+            ""
+          )}
           <input
             type="text"
             value={kvkNumber}

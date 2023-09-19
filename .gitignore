@@ -8,6 +8,5 @@ frontend/config.js
 backend/.env
 frontend/.env
 
-# Certificates
-frontend/certs/*
-backend/certs/*
+# KVK Api certificate chain
+/backend/certs/*

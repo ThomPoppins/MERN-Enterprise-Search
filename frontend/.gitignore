@@ -26,6 +26,3 @@ dist-ssr
 # Environment files
 config.js
 .env
-
-# KVK Api certificate chain
-certs/*
