@@ -2,7 +2,9 @@ import express from "express";
 import fs from "fs";
 import axios from "axios";
 import https from "https";
+import cors from "cors";
 import { KVK_TEST_API_KEY } from "../config.js";
+import { getKvkData } from "../controllers/kvkController.js";
 
 const PATH_TO_KVK_API_CERTIFICATE_CHAIN_RELATIVE_TO_INDEX_APP =
   "./certs/kvkApi/Private_G1_chain.pem";
@@ -11,44 +13,6 @@ const router = express.Router();
 
 // Route to get data from the KVK API
 // Route to get one user from database using the user's id
-router.get("/", async (request, response) => {
-  try {
-    // Get the query from the request query parameters
-    const { kvkNumber } = request.query;
-
-    console.log("kvkNumber: ", kvkNumber);
-
-    // Get the certificate chain from the file system
-    const certificateChain = fs.readFileSync(
-      PATH_TO_KVK_API_CERTIFICATE_CHAIN_RELATIVE_TO_INDEX_APP,
-      "utf8"
-    );
-
-    const agent = new https.Agent({
-      ca: certificateChain,
-    });
-
-    // Get the data from the KVK API
-    const { data } = await axios.get(
-      `https://api.kvk.nl/test/api/v1/naamgevingen/kvknummer/${kvkNumber}`,
-      {
-        headers: {
-          apikey: KVK_TEST_API_KEY,
-        },
-        httpsAgent: agent,
-      }
-    );
-
-    // Send status 200 response and the data to the client
-    return response.status(200).json(data);
-  } catch (error) {
-    console.log("Error in GET /kvk: ", error);
-    if (error.response.status === 400) {
-      response.status(400).send({ message: error.message });
-    } else {
-      response.status(500).send({ message: error.message });
-    }
-  }
-});
+router.get("/", cors(), getKvkData);
 
 export default router;
