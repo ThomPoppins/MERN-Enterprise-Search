@@ -78,6 +78,8 @@ To run this application locally, follow these steps:
      ```javascript
      // frontend/config.js
      export const BACKEND_URL = 'http://localhost:5555';
+     // Disable company validation by KVK API (If you want to test this, mail me at thompoppins@gmail.com for instructions how to set this up.)
+     export const TEST_KVK_API = false;
      ```
 
 4. **Install Dependencies**:

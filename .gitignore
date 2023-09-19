@@ -9,4 +9,4 @@ backend/.env
 frontend/.env
 
 # KVK Api certificate chain
-/frontend/src/utils/validation/kvkApi/certs/*
+/backend/certs/*
