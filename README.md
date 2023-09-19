@@ -659,6 +659,12 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-186] Check MongoDB discord server and Twitter for the BUG that users aren't filtered using the $nin operator
 - [x] [MERNSTACK-188] Remove `No` field and add KVK number field in CompaniesTable component
 - [x] [MERNSTACK-167] Add KVK number to the form in RegisterCompany and EditCompany components.
+- [x] [MERNSTACK-191] Export working getKvkData function returning the KVK data in kvkController.js
+- [x] [MERNSTACK-190] Make call to backend API to validate kvk number in kvkNumberValidator
+- [x] [MERNSTACK-189] Add real kvk number validation with API call in kvkNumberValidator
+- [ ] 
+
+
 
 
 

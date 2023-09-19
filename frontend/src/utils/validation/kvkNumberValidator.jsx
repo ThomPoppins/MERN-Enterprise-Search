@@ -1,8 +1,6 @@
-// TODO: [MERNSTACK-190] Make call to backend API to validate kvk number in kvkNumberValidator
 import axios from "axios";
 import { BACKEND_URL, TEST_KVK_API } from "../../../config.js";
 
-// TODO: [MERNSTACK-189] Add real kvk number validation with API call
 const kvkNumberValidator = async (kvkNumber) => {
   const regex = /^[0-9]{8}$/;
   const validNumberFormat = regex.test(kvkNumber);

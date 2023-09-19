@@ -1,4 +1,3 @@
-// TODO: [MERNSTACK-191] Export working getKvkData function returning the KVK data in kvkController.js
 import axios from "axios";
 import fs from "fs";
 import https from "https";
