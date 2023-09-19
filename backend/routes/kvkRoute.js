@@ -42,7 +42,7 @@ router.get("/", async (request, response) => {
     // Send status 200 response and the data to the client
     return response.status(200).json(data);
   } catch (error) {
-    console.log("Error in GET /api/kvk: ", error);
+    console.log("Error in GET /kvk: ", error);
     if (error.response.status === 400) {
       response.status(400).send({ message: error.message });
     } else {
