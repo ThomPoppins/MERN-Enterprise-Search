@@ -495,7 +495,6 @@ const EditCompany = () => {
           ) : (
             ""
           )}
-
           <input
             type="text"
             value={kvkNumber}

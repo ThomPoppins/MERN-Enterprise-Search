@@ -3,7 +3,7 @@ import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { BACKEND_URL } from "../../../config.js";
+import { BACKEND_URL, TEST_KVK_API } from "../../../config.js";
 import { useSnackbar } from "notistack";
 import companyNameValidator from "../../utils/validation/companyNameValidator";
 import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
@@ -73,8 +73,8 @@ const RegisterCompany = () => {
       setStartYearError(false);
     }
   };
-  const validateKvkNumber = () => {
-    if (kvkNumberValidator(kvkNumber) === false) {
+  const validateKvkNumber = async () => {
+    if (!(await kvkNumberValidator(kvkNumber))) {
       setKvkNumberError(true);
     } else {
       setKvkNumberError(false);
@@ -287,6 +287,21 @@ const RegisterCompany = () => {
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">KVK Number</label>
+          {TEST_KVK_API ? (
+            <div className="mb-4">
+              <p className="text-gray-400">
+                <strong>Note:</strong> Use KVK numbers from{" "}
+                <a
+                  className="text-blue-600"
+                  href="https://developers.kvk.nl/documentation/testing"
+                >
+                  this page
+                </a>
+              </p>
+            </div>
+          ) : (
+            ""
+          )}
           <input
             type="text"
             value={kvkNumber}
