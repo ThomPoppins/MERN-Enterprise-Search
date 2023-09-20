@@ -76,7 +76,7 @@ const companySchema = new mongoose.Schema(
     // `kvkNumber` contains the KVK number of the company
     kvkNumber: {
       type: String,
-      required: false,
+      required: true,
       default: "",
     },
     // kvk number is validated (with the correct owner and company name) by the KVK API. True or false.
@@ -88,13 +88,13 @@ const companySchema = new mongoose.Schema(
     // company slogan
     slogan: {
       type: String,
-      required: false,
+      required: true,
       default: "",
     },
     // Short description of the company.
     description: {
       type: String,
-      required: false,
+      required: true,
       default: "",
     },
     // Registered address of the company.
@@ -309,6 +309,12 @@ const companySchema = new mongoose.Schema(
       required: false,
       default: [],
     },
+    // `agenda` is an array of agenda objects with an agendaId corresponding with the Agenda model.
+    agenda: {
+      type: Array,
+      required: false,
+      default: [],
+    },
     appointments: {
       type: Array,
       required: false,
@@ -327,12 +333,6 @@ const companySchema = new mongoose.Schema(
     },
     // `events` is an array of event objects with an eventId.
     events: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    // `agenda` is an array of agenda objects with an agendaId corresponding with the Agenda model.
-    agenda: {
       type: Array,
       required: false,
       default: [],
