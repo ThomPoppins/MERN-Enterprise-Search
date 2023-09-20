@@ -662,7 +662,8 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-191] Export working getKvkData function returning the KVK data in kvkController.js
 - [x] [MERNSTACK-190] Make call to backend API to validate kvk number in kvkNumberValidator
 - [x] [MERNSTACK-189] Add real kvk number validation with API call in kvkNumberValidator
-- [ ] 
+- [x] [MERNSTACK-193] Fix BUG that you can save a company without kvk number validation in RegisterCompany.jsx and EditCompany.jsx SOLUTION: Throw an error in the kvkNumberValidator if the kvk number is not valid. Catch the error in the RegisterCompany and EditCompany components and display an error message to the user. If the KVK number is not valid, return from handleEditCompany() and handleSaveCompany() functions and don't save the company.
+
 
 
 

@@ -76,6 +76,7 @@ const RegisterCompany = () => {
   const validateKvkNumber = async () => {
     if (!(await kvkNumberValidator(kvkNumber))) {
       setKvkNumberError(true);
+      throw new Error("Invalid KVK number!");
     } else {
       setKvkNumberError(false);
     }
@@ -184,11 +185,16 @@ const RegisterCompany = () => {
     validateCompanyName();
     validateEmail();
     validatePhone();
-    await validateKvkNumber();
+    try {
+      await validateKvkNumber();
+    } catch (error) {
+      enqueueSnackbar("Error validating KVK number!", { variant: "error" });
+      console.log(error);
+      return;
+    }
     validateSlogan();
     validateDescription();
     validateStartYear();
-    // TODO: [MERNSTACK-193] Fix BUG that you can save a company without kvk number validation in RegisterCompany.jsx and EditCompany.jsx
     if (
       nameError ||
       emailError ||

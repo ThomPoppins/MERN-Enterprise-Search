@@ -90,6 +90,7 @@ const EditCompany = () => {
   const validateKvkNumber = async () => {
     if (!(await kvkNumberValidator(kvkNumber))) {
       setKvkNumberError(true);
+      throw new Error("Invalid KVK number!");
     } else {
       setKvkNumberError(false);
     }
@@ -241,7 +242,13 @@ const EditCompany = () => {
     validateCompanyName();
     validateEmail();
     validatePhone();
-    await validateKvkNumber();
+    try {
+      await validateKvkNumber();
+    } catch (error) {
+      enqueueSnackbar("Error validating KVK number!", { variant: "error" });
+      console.log(error);
+      return;
+    }
     validateSlogan();
     validateDescription();
     validateStartYear();
