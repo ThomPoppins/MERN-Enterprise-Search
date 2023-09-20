@@ -2,7 +2,7 @@
 function companySloganValidator(slogan) {
   const regex = /^[a-zA-Z0-9\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
 
-  return slogan.trim().length > 0 && regex.test(slogan);
+  return slogan.trim().length > 0 && slogan.length <= 90 && regex.test(slogan);
 }
 
 export default companySloganValidator;

@@ -535,8 +535,8 @@ const EditCompany = () => {
           />
           {sloganError ? (
             <p className="text-red-500 text-sm">
-              This should be the motto of your company. It must be at least 1
-              character long.
+              This should be the motto of your company. It must be between 1 and
+              90 characters long.
             </p>
           ) : (
             ""
