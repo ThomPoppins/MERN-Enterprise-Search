@@ -33,11 +33,11 @@ import mongoose from "mongoose";
  * @property {Array} stories - Array of stories associated with the company (optional).
  * @property {Array} products - Array of product objects linked to the company (optional).
  * @property {Array} services - Array of service objects linked to the company (optional).
+ * @property {Array} agenda - Array of agenda objects linked to the company (optional).
  * @property {Array} appointments - Array of appointment objects linked to the company (optional).
  * @property {Array} messages - Array of message objects linked to the company (optional).
  * @property {Array} notifications - Array of notification objects linked to the company (optional).
  * @property {Array} events - Array of event objects linked to the company (optional).
- * @property {Array} agenda - Array of agenda objects linked to the company (optional).
  * @property {Array} tasks - Array of task objects linked to the company (optional).
  * @property {Array} invoices - Array of invoice objects linked to the company (optional).
  * @property {Array} orders - Array of order objects linked to the company (optional).
