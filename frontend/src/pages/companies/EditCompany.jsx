@@ -29,15 +29,15 @@ const EditCompany = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [startYear, setStartYear] = useState(0);
   const [kvkNumber, setKvkNumber] = useState("");
+  const [startYear, setStartYear] = useState(0);
 
   // Error state for displaying error messages if the user enters invalid input
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
-  const [startYearError, setStartYearError] = useState(false);
   const [kvkNumberError, setKvkNumberError] = useState(false);
+  const [startYearError, setStartYearError] = useState(false);
 
   // Owners state
   const [owners, setOwners] = useState([]);
@@ -81,18 +81,18 @@ const EditCompany = () => {
       setPhoneError(false);
     }
   };
-  const validateStartYear = () => {
-    if (!startYearValidator(startYear)) {
-      setStartYearError(true);
-    } else {
-      setStartYearError(false);
-    }
-  };
   const validateKvkNumber = async () => {
     if (!(await kvkNumberValidator(kvkNumber))) {
       setKvkNumberError(true);
     } else {
       setKvkNumberError(false);
+    }
+  };
+  const validateStartYear = () => {
+    if (!startYearValidator(startYear)) {
+      setStartYearError(true);
+    } else {
+      setStartYearError(false);
     }
   };
 
@@ -115,16 +115,16 @@ const EditCompany = () => {
       validatePhone();
     }
   };
+  const handleKvkNumberChange = async (e) => {
+    setKvkNumber(e.target.value);
+    if (kvkNumberError) {
+      await validateKvkNumber();
+    }
+  };
   const handleStartYearChange = (e) => {
     setStartYear(e.target.value);
     if (startYearError) {
       validateStartYear();
-    }
-  };
-  const handleKvkNumberChange = (e) => {
-    setKvkNumber(e.target.value);
-    if (kvkNumberError) {
-      validateKvkNumber();
     }
   };
 
@@ -139,13 +139,13 @@ const EditCompany = () => {
     if (phoneError) {
       enqueueSnackbar("Invalid phone number!", { variant: "error" });
     }
-    if (startYearError) {
-      enqueueSnackbar("Invalid start year!", { variant: "error" });
-    }
     if (kvkNumberError) {
       enqueueSnackbar("Invalid KVK number!", { variant: "error" });
     }
-  }, [nameError, emailError, phoneError, startYearError, kvkNumberError]);
+    if (startYearError) {
+      enqueueSnackbar("Invalid start year!", { variant: "error" });
+    }
+  }, [nameError, emailError, phoneError, kvkNumberError, startYearError]);
 
   // useEffect() is a hook that runs a function when the component is rendered
   useEffect(() => {
@@ -158,8 +158,8 @@ const EditCompany = () => {
         setName(response.data.name);
         setEmail(response.data.email);
         setPhone(response.data.phone);
-        setStartYear(response.data.startYear);
         setKvkNumber(response.data.kvkNumber);
+        setStartYear(response.data.startYear);
 
         // Set owners
         const userIds = [];
@@ -191,19 +191,19 @@ const EditCompany = () => {
     validateCompanyName();
     validateEmail();
     validatePhone();
-    validateStartYear();
     validateKvkNumber();
+    validateStartYear();
     if (
       nameError ||
       emailError ||
       phoneError ||
-      startYearError ||
       kvkNumberError ||
+      startYearError ||
       !name ||
       !email ||
       !phone ||
-      !startYear ||
-      !kvkNumber
+      !kvkNumber ||
+      !startYear
     ) {
       enqueueSnackbar(
         "Please fill in all fields correctly before saving this company!",
@@ -216,8 +216,8 @@ const EditCompany = () => {
       name: name,
       email: email,
       phone: phone,
-      startYear: startYear,
       kvkNumber: kvkNumber,
+      startYear: startYear,
     };
     setLoading(true);
     axios
@@ -455,30 +455,6 @@ const EditCompany = () => {
           )}
         </div>
         <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Start Year</label>
-          <input
-            type="number"
-            value={startYear}
-            // onChange is a function that takes an event as an argument
-            // and sets the title state to the value of the input
-            // e.target.value is the value of the input
-            onChange={handleStartYearChange}
-            onBlur={validateStartYear}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              startYearError ? "border-red-500" : ""
-            }`}
-          />
-          {startYearError ? (
-            <p className="text-red-500 text-sm">
-              Start year must be a valid year and never can be later then the
-              current year. If company hasn't started yet, register company when
-              it starts.
-            </p>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">KVK number</label>
           {TEST_KVK_API ? (
             <div className="mb-4">
@@ -513,7 +489,30 @@ const EditCompany = () => {
             ""
           )}
         </div>
-
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Start Year</label>
+          <input
+            type="number"
+            value={startYear}
+            // onChange is a function that takes an event as an argument
+            // and sets the title state to the value of the input
+            // e.target.value is the value of the input
+            onChange={handleStartYearChange}
+            onBlur={validateStartYear}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              startYearError ? "border-red-500" : ""
+            }`}
+          />
+          {startYearError ? (
+            <p className="text-red-500 text-sm">
+              Start year must be a valid year and never can be later then the
+              current year. If company hasn't started yet, register company when
+              it starts.
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
         <button
           className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto w-1/2"
           onClick={handleEditCompany}
