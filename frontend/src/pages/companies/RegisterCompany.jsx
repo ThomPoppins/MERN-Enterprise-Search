@@ -6,10 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { BACKEND_URL, TEST_KVK_API } from "../../../config.js";
 import { useSnackbar } from "notistack";
 import companyNameValidator from "../../utils/validation/companyNameValidator";
-import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
 import emailValidator from "../../utils/validation/emailValidator";
-import startYearValidator from "../../utils/validation/startYearValidator";
+import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
 import kvkNumberValidator from "../../utils/validation/kvkNumberValidator";
+import companySloganValidator from "../../utils/validation/companySloganValidator";
+import companyDescriptionValidator from "../../utils/validation/companyDescriptionValidator";
+import startYearValidator from "../../utils/validation/startYearValidator";
 import { useSelector } from "react-redux";
 
 const RegisterCompany = () => {
@@ -18,15 +20,19 @@ const RegisterCompany = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [startYear, setStartYear] = useState("");
   const [kvkNumber, setKvkNumber] = useState("");
+  const [slogan, setSlogan] = useState("");
+  const [description, setDescription] = useState("");
+  const [startYear, setStartYear] = useState("");
 
   // Error state for displaying error messages if the user enters invalid input
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
-  const [startYearError, setStartYearError] = useState(false);
   const [kvkNumberError, setKvkNumberError] = useState(false);
+  const [sloganError, setSloganError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
+  const [startYearError, setStartYearError] = useState(false);
 
   // Loading state for displaying a spinner while the request is being sent to the backend
   const [loading, setLoading] = useState(false);
@@ -44,33 +50,27 @@ const RegisterCompany = () => {
   // https://iamhosseindhv.com/notistack/demos#use-snackbar
   const { enqueueSnackbar } = useSnackbar();
 
-  // Validate user input fields
+  // Validation functions for validating the input fields and put a red border around the input field if the input is invalid
+  // and display an error message under the input field explaining the right format
   const validateCompanyName = () => {
-    if (companyNameValidator(name) === false) {
+    if (!companyNameValidator(name)) {
       setNameError(true);
     } else {
       setNameError(false);
     }
   };
   const validateEmail = () => {
-    if (emailValidator(email) === false) {
+    if (!emailValidator(email)) {
       setEmailError(true);
     } else {
       setEmailError(false);
     }
   };
   const validatePhone = () => {
-    if (phoneNumberValidator(phone, "NL") === false) {
+    if (!phoneNumberValidator(phone, "NL")) {
       setPhoneError(true);
     } else {
       setPhoneError(false);
-    }
-  };
-  const validateStartYear = () => {
-    if (startYearValidator(startYear) === false) {
-      setStartYearError(true);
-    } else {
-      setStartYearError(false);
     }
   };
   const validateKvkNumber = async () => {
@@ -78,6 +78,27 @@ const RegisterCompany = () => {
       setKvkNumberError(true);
     } else {
       setKvkNumberError(false);
+    }
+  };
+  const validateSlogan = () => {
+    if (!companySloganValidator(slogan)) {
+      setSloganError(true);
+    } else {
+      setSloganError(false);
+    }
+  };
+  const validateDescription = () => {
+    if (!companyDescriptionValidator(description)) {
+      setDescriptionError(true);
+    } else {
+      setDescriptionError(false);
+    }
+  };
+  const validateStartYear = () => {
+    if (!startYearValidator(startYear)) {
+      setStartYearError(true);
+    } else {
+      setStartYearError(false);
     }
   };
 
@@ -100,16 +121,28 @@ const RegisterCompany = () => {
       validatePhone();
     }
   };
+  const handleKvkNumberChange = async (e) => {
+    setKvkNumber(e.target.value);
+    if (kvkNumberError) {
+      await validateKvkNumber();
+    }
+  };
+  const handleSloganChange = (e) => {
+    setSlogan(e.target.value);
+    if (sloganError) {
+      validateSlogan();
+    }
+  };
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+    if (descriptionError) {
+      validateDescription();
+    }
+  };
   const handleStartYearChange = (e) => {
     setStartYear(e.target.value);
     if (startYearError) {
       validateStartYear();
-    }
-  };
-  const handleKvkNumberChange = (e) => {
-    setKvkNumber(e.target.value);
-    if (kvkNumberError) {
-      validateKvkNumber();
     }
   };
 
@@ -124,32 +157,51 @@ const RegisterCompany = () => {
     if (phoneError) {
       enqueueSnackbar("Phone number is invalid!", { variant: "error" });
     }
-    if (startYearError) {
-      enqueueSnackbar("Start year is invalid!", { variant: "error" });
-    }
     if (kvkNumberError) {
       enqueueSnackbar("KVK number is invalid!", { variant: "error" });
     }
-  }, [nameError, emailError, phoneError, startYearError, kvkNumberError]);
+    if (sloganError) {
+      enqueueSnackbar("Slogan is invalid!", { variant: "error" });
+    }
+    if (descriptionError) {
+      enqueueSnackbar("Description is invalid!", { variant: "error" });
+    }
+    if (startYearError) {
+      enqueueSnackbar("Start year is invalid!", { variant: "error" });
+    }
+  }, [
+    nameError,
+    emailError,
+    phoneError,
+    kvkNumberError,
+    sloganError,
+    descriptionError,
+    startYearError,
+  ]);
 
-  const handleSaveCompany = () => {
+  const handleSaveCompany = async () => {
     // Validate all fields before sending the request to the backend, otherwise return
     validateCompanyName();
     validateEmail();
     validatePhone();
+    await validateKvkNumber();
+    validateSlogan();
+    validateDescription();
     validateStartYear();
-    validateKvkNumber();
+    // TODO: [MERNSTACK-193] Fix BUG that you can save a company without kvk number validation in RegisterCompany.jsx and EditCompany.jsx
     if (
       nameError ||
       emailError ||
       phoneError ||
-      startYearError ||
       kvkNumberError ||
+      sloganError ||
+      startYearError ||
       !name ||
       !email ||
       !phone ||
-      !startYear ||
-      !kvkNumber
+      !kvkNumber ||
+      !slogan ||
+      !startYear
     ) {
       enqueueSnackbar(
         "Please fill in all fields correctly before saving this company!",
@@ -165,8 +217,11 @@ const RegisterCompany = () => {
       name: name,
       email: email,
       phone: phone,
-      startYear: startYear,
       kvkNumber: kvkNumber,
+      slogan: slogan,
+      startYear: startYear,
+      slogan: slogan,
+      description: description,
       owners: [{ userId: userId }], // Make sure that the user that registers the company is added as an owner
     };
     setLoading(true);
@@ -262,30 +317,6 @@ const RegisterCompany = () => {
           ""
         )}
         <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Start Year</label>
-          <input
-            type="number"
-            value={startYear}
-            // onChange is a function that takes an event as an argument
-            // and sets the name state to the value of the input
-            // e.target.value is the value of the input
-            onChange={handleStartYearChange}
-            onBlur={validateStartYear}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              startYearError ? "border-red-500" : ""
-            }`}
-          />
-          {startYearError ? (
-            <p className="text-red-500 text-sm">
-              Start year must be a valid year and never can be later then the
-              current year. If company hasn't started yet, register company when
-              it starts.
-            </p>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">KVK Number</label>
           {TEST_KVK_API ? (
             <div className="mb-4">
@@ -317,6 +348,78 @@ const RegisterCompany = () => {
           {kvkNumberError ? (
             <p className="text-red-500 text-sm">
               KVK number must be a valid KVK number.
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Slogan</label>
+          <input
+            type="text"
+            value={slogan}
+            // onChange is a function that takes an event as an argument
+            // and sets the name state to the value of the input
+            // e.target.value is the value of the input
+            onChange={handleSloganChange}
+            onBlur={validateSlogan}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              startYearError ? "border-red-500" : ""
+            }`}
+          />
+          {sloganError ? (
+            <p className="text-red-500 text-sm">
+              This should be the motto of your company. It must be between 1 and
+              90 characters long.
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">
+            Company Description
+          </label>
+          <textarea
+            type="text"
+            value={description}
+            // onChange is a function that takes an event as an argument
+            // and sets the name state to the value of the input
+            // e.target.value is the value of the input
+            onChange={handleDescriptionChange}
+            onBlur={validateDescription}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              startYearError ? "border-red-500" : ""
+            }`}
+          />
+          {descriptionError ? (
+            <p className="text-red-500 text-sm">
+              This should be the description of your company. It must be between
+              1 and 280 characters long.
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Start Year</label>
+          <input
+            type="number"
+            value={startYear}
+            // onChange is a function that takes an event as an argument
+            // and sets the name state to the value of the input
+            // e.target.value is the value of the input
+            onChange={handleStartYearChange}
+            onBlur={validateStartYear}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              startYearError ? "border-red-500" : ""
+            }`}
+          />
+          {startYearError ? (
+            <p className="text-red-500 text-sm">
+              Start year must be a valid year and never can be later then the
+              current year. If company hasn't started yet, register company when
+              it starts.
             </p>
           ) : (
             ""

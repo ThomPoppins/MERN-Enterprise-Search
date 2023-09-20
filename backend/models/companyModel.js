@@ -9,18 +9,18 @@ import mongoose from "mongoose";
  *
  * @typedef {Object} CompanySchema
  * @property {string} name - The name of the company.
- * @property {string} email - The email address for company correspondence (optional).
- * @property {string} phone - The contact phone number for the company (optional).
- * @property {string} slogan - A slogan associated with the company (optional).
- * @property {string} description - A short description of the company (optional).
+ * @property {string} email - The email address for company correspondence).
+ * @property {string} phone - The contact phone number for the company.
+ * @property {string} kvkNumber - KVK number of the company (optional).
+ * @property {boolean} kvkValidated - Validation status of the KVK number (default: false).
+ * @property {string} slogan - A slogan associated with the company.
+ * @property {string} description - A short description of the company.
  * @property {Object} address - Registered address of the company (optional).
  * @property {Object} billingAddress - Address for sending invoices (optional).
  * @property {Object} addressFormat - Format for the company's address (optional).
  * @property {string} country - Country of the company billing address (optional).
  * @property {string} region - Region of the company billing address (optional).
  * @property {Array} owners - Array of owner objects linked to the company (optional).
- * @property {string} kvkNumber - KVK number of the company (optional).
- * @property {boolean} kvkValidated - Validation status of the KVK number (default: false).
  * @property {Array} companyAdmins - Array of admin objects linked to the company (optional).
  * @property {Array} departments - Array of departments associated with the company (optional).
  * @property {Object} businessConfig - Configurable settings for owners and admins (optional).
@@ -73,6 +73,18 @@ const companySchema = new mongoose.Schema(
       required: true,
       default: "",
     },
+    // `kvkNumber` contains the KVK number of the company
+    kvkNumber: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    // kvk number is validated (with the correct owner and company name) by the KVK API. True or false.
+    kvkValidated: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     // company slogan
     slogan: {
       type: String,
@@ -124,18 +136,6 @@ const companySchema = new mongoose.Schema(
       type: Array,
       required: false,
       default: [],
-    },
-    // `kvkNumber` contains the KVK number of the company
-    kvkNumber: {
-      type: String,
-      required: false,
-      default: "",
-    },
-    // kvk number is validated (with the correct owner and company name) by the KVK API. True or false.
-    kvkValidated: {
-      type: Boolean,
-      required: true,
-      default: false,
     },
     // TODO: [MERNSTACK-18] Create a new schema and model for companyAdmin users.
     // TODO: [MERNSTACK-19] Admin users will be linked to a company, based on an adminUserId in the adminUser model.

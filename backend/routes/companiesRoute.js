@@ -19,8 +19,8 @@ router.post("/", async (request, response) => {
       !request.body.name ||
       !request.body.email ||
       !request.body.phone ||
-      !request.body.startYear ||
       !request.body.kvkNumber ||
+      !request.body.startYear ||
       !request.body.owners
     ) {
       // Send status 400 response if data fields are missing and a (error) message to inform the client.
@@ -40,9 +40,11 @@ router.post("/", async (request, response) => {
       name: request.body.name,
       email: request.body.email,
       phone: request.body.phone,
-      owners: request.body.owners,
-      startYear: request.body.startYear,
       kvkNumber: request.body.kvkNumber,
+      slogan: request.body.slogan,
+      description: request.body.description,
+      startYear: request.body.startYear,
+      owners: request.body.owners,
       payments: request.body.payments
         ? request.body.payments
         : [

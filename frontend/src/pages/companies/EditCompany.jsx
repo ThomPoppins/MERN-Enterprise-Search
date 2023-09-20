@@ -5,11 +5,13 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { BACKEND_URL, TEST_KVK_API } from "../../../config.js";
 import { useSnackbar } from "notistack";
-import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
-import emailValidator from "../../utils/validation/emailValidator";
-import startYearValidator from "../../utils/validation/startYearValidator";
 import companyNameValidator from "../../utils/validation/companyNameValidator";
+import emailValidator from "../../utils/validation/emailValidator";
+import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
 import kvkNumberValidator from "../../utils/validation/kvkNumberValidator";
+import companySloganValidator from "../../utils/validation/companySloganValidator";
+import companyDescriptionValidator from "../../utils/validation/companyDescriptionValidator";
+import startYearValidator from "../../utils/validation/startYearValidator";
 import UserSearch from "../../components/UserSearch";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
 import { useSelector } from "react-redux";
@@ -29,15 +31,19 @@ const EditCompany = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [startYear, setStartYear] = useState(0);
   const [kvkNumber, setKvkNumber] = useState("");
+  const [slogan, setSlogan] = useState("");
+  const [description, setDescription] = useState("");
+  const [startYear, setStartYear] = useState(0);
 
   // Error state for displaying error messages if the user enters invalid input
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
-  const [startYearError, setStartYearError] = useState(false);
   const [kvkNumberError, setKvkNumberError] = useState(false);
+  const [sloganError, setSloganError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
+  const [startYearError, setStartYearError] = useState(false);
 
   // Owners state
   const [owners, setOwners] = useState([]);
@@ -81,18 +87,32 @@ const EditCompany = () => {
       setPhoneError(false);
     }
   };
-  const validateStartYear = () => {
-    if (!startYearValidator(startYear)) {
-      setStartYearError(true);
-    } else {
-      setStartYearError(false);
-    }
-  };
   const validateKvkNumber = async () => {
     if (!(await kvkNumberValidator(kvkNumber))) {
       setKvkNumberError(true);
     } else {
       setKvkNumberError(false);
+    }
+  };
+  const validateSlogan = () => {
+    if (!companySloganValidator(slogan)) {
+      setSloganError(true);
+    } else {
+      setSloganError(false);
+    }
+  };
+  const validateDescription = () => {
+    if (!companyDescriptionValidator(description)) {
+      setDescriptionError(true);
+    } else {
+      setDescriptionError(false);
+    }
+  };
+  const validateStartYear = () => {
+    if (!startYearValidator(startYear)) {
+      setStartYearError(true);
+    } else {
+      setStartYearError(false);
     }
   };
 
@@ -115,16 +135,28 @@ const EditCompany = () => {
       validatePhone();
     }
   };
+  const handleKvkNumberChange = async (e) => {
+    setKvkNumber(e.target.value);
+    if (kvkNumberError) {
+      await validateKvkNumber();
+    }
+  };
+  const handleSloganChange = (e) => {
+    setSlogan(e.target.value);
+    if (sloganError) {
+      validateSlogan();
+    }
+  };
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+    if (descriptionError) {
+      validateDescription();
+    }
+  };
   const handleStartYearChange = (e) => {
     setStartYear(e.target.value);
     if (startYearError) {
       validateStartYear();
-    }
-  };
-  const handleKvkNumberChange = (e) => {
-    setKvkNumber(e.target.value);
-    if (kvkNumberError) {
-      validateKvkNumber();
     }
   };
 
@@ -139,13 +171,27 @@ const EditCompany = () => {
     if (phoneError) {
       enqueueSnackbar("Invalid phone number!", { variant: "error" });
     }
-    if (startYearError) {
-      enqueueSnackbar("Invalid start year!", { variant: "error" });
-    }
     if (kvkNumberError) {
       enqueueSnackbar("Invalid KVK number!", { variant: "error" });
     }
-  }, [nameError, emailError, phoneError, startYearError, kvkNumberError]);
+    if (sloganError) {
+      enqueueSnackbar("Invalid slogan!", { variant: "error" });
+    }
+    if (descriptionError) {
+      enqueueSnackbar("Invalid description!", { variant: "error" });
+    }
+    if (startYearError) {
+      enqueueSnackbar("Invalid start year!", { variant: "error" });
+    }
+  }, [
+    nameError,
+    emailError,
+    phoneError,
+    kvkNumberError,
+    sloganError,
+    descriptionError,
+    startYearError,
+  ]);
 
   // useEffect() is a hook that runs a function when the component is rendered
   useEffect(() => {
@@ -158,8 +204,12 @@ const EditCompany = () => {
         setName(response.data.name);
         setEmail(response.data.email);
         setPhone(response.data.phone);
-        setStartYear(response.data.startYear);
         setKvkNumber(response.data.kvkNumber);
+        setSlogan(response.data.slogan);
+        setDescription(response.data.description);
+        setStartYear(response.data.startYear);
+
+        console.log("response.data: ", response.data);
 
         // Set owners
         const userIds = [];
@@ -186,24 +236,30 @@ const EditCompany = () => {
   }, []);
 
   // handleEditCompany is a function that sends a PUT request to the backend to update a company
-  const handleEditCompany = () => {
+  const handleEditCompany = async () => {
     // Validate all fields before sending the request to the backend, otherwise return
     validateCompanyName();
     validateEmail();
     validatePhone();
+    await validateKvkNumber();
+    validateSlogan();
+    validateDescription();
     validateStartYear();
-    validateKvkNumber();
     if (
       nameError ||
       emailError ||
       phoneError ||
-      startYearError ||
       kvkNumberError ||
+      sloganError ||
+      descriptionError ||
+      startYearError ||
       !name ||
       !email ||
       !phone ||
-      !startYear ||
-      !kvkNumber
+      !kvkNumber ||
+      !slogan ||
+      !description ||
+      !startYear
     ) {
       enqueueSnackbar(
         "Please fill in all fields correctly before saving this company!",
@@ -216,8 +272,10 @@ const EditCompany = () => {
       name: name,
       email: email,
       phone: phone,
-      startYear: startYear,
       kvkNumber: kvkNumber,
+      slogan: slogan,
+      description: description,
+      startYear: startYear,
     };
     setLoading(true);
     axios
@@ -455,30 +513,6 @@ const EditCompany = () => {
           )}
         </div>
         <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Start Year</label>
-          <input
-            type="number"
-            value={startYear}
-            // onChange is a function that takes an event as an argument
-            // and sets the title state to the value of the input
-            // e.target.value is the value of the input
-            onChange={handleStartYearChange}
-            onBlur={validateStartYear}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              startYearError ? "border-red-500" : ""
-            }`}
-          />
-          {startYearError ? (
-            <p className="text-red-500 text-sm">
-              Start year must be a valid year and never can be later then the
-              current year. If company hasn't started yet, register company when
-              it starts.
-            </p>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">KVK number</label>
           {TEST_KVK_API ? (
             <div className="mb-4">
@@ -513,7 +547,78 @@ const EditCompany = () => {
             ""
           )}
         </div>
-
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Slogan</label>
+          <input
+            type="text"
+            value={slogan}
+            // onChange is a function that takes an event as an argument
+            // and sets the name state to the value of the input
+            // e.target.value is the value of the input
+            onChange={handleSloganChange}
+            onBlur={validateSlogan}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              startYearError ? "border-red-500" : ""
+            }`}
+          />
+          {sloganError ? (
+            <p className="text-red-500 text-sm">
+              This should be the motto of your company. It must be between 1 and
+              90 characters long.
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">
+            Company Description
+          </label>
+          <textarea
+            type="text"
+            value={description}
+            // onChange is a function that takes an event as an argument
+            // and sets the name state to the value of the input
+            // e.target.value is the value of the input
+            onChange={handleDescriptionChange}
+            onBlur={validateDescription}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              startYearError ? "border-red-500" : ""
+            }`}
+          />
+          {descriptionError ? (
+            <p className="text-red-500 text-sm">
+              This should be the description of your company. It must be between
+              1 and 280 characters long.
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Start Year</label>
+          <input
+            type="number"
+            value={startYear}
+            // onChange is a function that takes an event as an argument
+            // and sets the title state to the value of the input
+            // e.target.value is the value of the input
+            onChange={handleStartYearChange}
+            onBlur={validateStartYear}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              startYearError ? "border-red-500" : ""
+            }`}
+          />
+          {startYearError ? (
+            <p className="text-red-500 text-sm">
+              Start year must be a valid year and never can be later then the
+              current year. If company hasn't started yet, register company when
+              it starts.
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
         <button
           className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto w-1/2"
           onClick={handleEditCompany}
