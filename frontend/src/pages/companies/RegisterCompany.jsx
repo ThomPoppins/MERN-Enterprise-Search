@@ -13,7 +13,6 @@ import companySloganValidator from "../../utils/validation/companySloganValidato
 import companyDescriptionValidator from "../../utils/validation/companyDescriptionValidator";
 import startYearValidator from "../../utils/validation/startYearValidator";
 import { useSelector } from "react-redux";
-import UploadProfilePicture from "../../components/UploadProfilePicture";
 
 const RegisterCompany = () => {
   // TODO: [MERNSTACK-127] Add state for all companies fields that can be registered
@@ -292,10 +291,6 @@ const RegisterCompany = () => {
           ) : (
             ""
           )}
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Company logo</label>
-          <UploadCompanyLogo />
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Email</label>
