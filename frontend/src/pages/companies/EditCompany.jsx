@@ -10,6 +10,7 @@ import emailValidator from "../../utils/validation/emailValidator";
 import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
 import kvkNumberValidator from "../../utils/validation/kvkNumberValidator";
 import companySloganValidator from "../../utils/validation/companySloganValidator";
+import companyDescriptionValidator from "../../utils/validation/companyDescriptionValidator";
 import startYearValidator from "../../utils/validation/startYearValidator";
 import UserSearch from "../../components/UserSearch";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
@@ -32,6 +33,7 @@ const EditCompany = () => {
   const [phone, setPhone] = useState("");
   const [kvkNumber, setKvkNumber] = useState("");
   const [slogan, setSlogan] = useState("");
+  const [description, setDescription] = useState("");
   const [startYear, setStartYear] = useState(0);
 
   // Error state for displaying error messages if the user enters invalid input
@@ -40,6 +42,7 @@ const EditCompany = () => {
   const [phoneError, setPhoneError] = useState(false);
   const [kvkNumberError, setKvkNumberError] = useState(false);
   const [sloganError, setSloganError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
   const [startYearError, setStartYearError] = useState(false);
 
   // Owners state
@@ -98,6 +101,13 @@ const EditCompany = () => {
       setSloganError(false);
     }
   };
+  const validateDescription = () => {
+    if (!companyDescriptionValidator(description)) {
+      setDescriptionError(true);
+    } else {
+      setDescriptionError(false);
+    }
+  };
   const validateStartYear = () => {
     if (!startYearValidator(startYear)) {
       setStartYearError(true);
@@ -137,6 +147,12 @@ const EditCompany = () => {
       validateSlogan();
     }
   };
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+    if (descriptionError) {
+      validateDescription();
+    }
+  };
   const handleStartYearChange = (e) => {
     setStartYear(e.target.value);
     if (startYearError) {
@@ -161,6 +177,9 @@ const EditCompany = () => {
     if (sloganError) {
       enqueueSnackbar("Invalid slogan!", { variant: "error" });
     }
+    if (descriptionError) {
+      enqueueSnackbar("Invalid description!", { variant: "error" });
+    }
     if (startYearError) {
       enqueueSnackbar("Invalid start year!", { variant: "error" });
     }
@@ -170,6 +189,7 @@ const EditCompany = () => {
     phoneError,
     kvkNumberError,
     sloganError,
+    descriptionError,
     startYearError,
   ]);
 
@@ -185,7 +205,11 @@ const EditCompany = () => {
         setEmail(response.data.email);
         setPhone(response.data.phone);
         setKvkNumber(response.data.kvkNumber);
+        setSlogan(response.data.slogan);
+        setDescription(response.data.description);
         setStartYear(response.data.startYear);
+
+        console.log("response.data: ", response.data);
 
         // Set owners
         const userIds = [];
@@ -219,6 +243,7 @@ const EditCompany = () => {
     validatePhone();
     await validateKvkNumber();
     validateSlogan();
+    validateDescription();
     validateStartYear();
     if (
       nameError ||
@@ -226,12 +251,14 @@ const EditCompany = () => {
       phoneError ||
       kvkNumberError ||
       sloganError ||
+      descriptionError ||
       startYearError ||
       !name ||
       !email ||
       !phone ||
       !kvkNumber ||
       !slogan ||
+      !description ||
       !startYear
     ) {
       enqueueSnackbar(
@@ -247,6 +274,7 @@ const EditCompany = () => {
       phone: phone,
       kvkNumber: kvkNumber,
       slogan: slogan,
+      description: description,
       startYear: startYear,
     };
     setLoading(true);
@@ -537,6 +565,31 @@ const EditCompany = () => {
             <p className="text-red-500 text-sm">
               This should be the motto of your company. It must be between 1 and
               90 characters long.
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">
+            Company Description
+          </label>
+          <textarea
+            type="text"
+            value={description}
+            // onChange is a function that takes an event as an argument
+            // and sets the name state to the value of the input
+            // e.target.value is the value of the input
+            onChange={handleDescriptionChange}
+            onBlur={validateDescription}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              startYearError ? "border-red-500" : ""
+            }`}
+          />
+          {descriptionError ? (
+            <p className="text-red-500 text-sm">
+              This should be the description of your company. It must be between
+              1 and 280 characters long.
             </p>
           ) : (
             ""

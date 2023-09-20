@@ -1,4 +1,5 @@
-// Validate company slogan to be alphanumeric and special characters and not empty
+// Validate company slogan to be alphanumeric, white spaces, special characters and can't be empty.
+// Also slogan string can not be only white spaces
 function companySloganValidator(slogan) {
   const regex = /^[a-zA-Z0-9\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
 

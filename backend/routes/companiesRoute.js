@@ -41,6 +41,8 @@ router.post("/", async (request, response) => {
       email: request.body.email,
       phone: request.body.phone,
       kvkNumber: request.body.kvkNumber,
+      slogan: request.body.slogan,
+      description: request.body.description,
       startYear: request.body.startYear,
       owners: request.body.owners,
       payments: request.body.payments

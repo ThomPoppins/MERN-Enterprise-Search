@@ -10,6 +10,7 @@ import emailValidator from "../../utils/validation/emailValidator";
 import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
 import kvkNumberValidator from "../../utils/validation/kvkNumberValidator";
 import companySloganValidator from "../../utils/validation/companySloganValidator";
+import companyDescriptionValidator from "../../utils/validation/companyDescriptionValidator";
 import startYearValidator from "../../utils/validation/startYearValidator";
 import { useSelector } from "react-redux";
 
@@ -21,6 +22,7 @@ const RegisterCompany = () => {
   const [phone, setPhone] = useState("");
   const [kvkNumber, setKvkNumber] = useState("");
   const [slogan, setSlogan] = useState("");
+  const [description, setDescription] = useState("");
   const [startYear, setStartYear] = useState("");
 
   // Error state for displaying error messages if the user enters invalid input
@@ -29,6 +31,7 @@ const RegisterCompany = () => {
   const [phoneError, setPhoneError] = useState(false);
   const [kvkNumberError, setKvkNumberError] = useState(false);
   const [sloganError, setSloganError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
   const [startYearError, setStartYearError] = useState(false);
 
   // Loading state for displaying a spinner while the request is being sent to the backend
@@ -47,7 +50,8 @@ const RegisterCompany = () => {
   // https://iamhosseindhv.com/notistack/demos#use-snackbar
   const { enqueueSnackbar } = useSnackbar();
 
-  // Validate user input fields
+  // Validation functions for validating the input fields and put a red border around the input field if the input is invalid
+  // and display an error message under the input field explaining the right format
   const validateCompanyName = () => {
     if (!companyNameValidator(name)) {
       setNameError(true);
@@ -81,6 +85,13 @@ const RegisterCompany = () => {
       setSloganError(true);
     } else {
       setSloganError(false);
+    }
+  };
+  const validateDescription = () => {
+    if (!companyDescriptionValidator(description)) {
+      setDescriptionError(true);
+    } else {
+      setDescriptionError(false);
     }
   };
   const validateStartYear = () => {
@@ -122,6 +133,12 @@ const RegisterCompany = () => {
       validateSlogan();
     }
   };
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+    if (descriptionError) {
+      validateDescription();
+    }
+  };
   const handleStartYearChange = (e) => {
     setStartYear(e.target.value);
     if (startYearError) {
@@ -146,6 +163,9 @@ const RegisterCompany = () => {
     if (sloganError) {
       enqueueSnackbar("Slogan is invalid!", { variant: "error" });
     }
+    if (descriptionError) {
+      enqueueSnackbar("Description is invalid!", { variant: "error" });
+    }
     if (startYearError) {
       enqueueSnackbar("Start year is invalid!", { variant: "error" });
     }
@@ -155,6 +175,7 @@ const RegisterCompany = () => {
     phoneError,
     kvkNumberError,
     sloganError,
+    descriptionError,
     startYearError,
   ]);
 
@@ -165,6 +186,7 @@ const RegisterCompany = () => {
     validatePhone();
     await validateKvkNumber();
     validateSlogan();
+    validateDescription();
     validateStartYear();
     // TODO: [MERNSTACK-193] Fix BUG that you can save a company without kvk number validation in RegisterCompany.jsx and EditCompany.jsx
     if (
@@ -199,6 +221,7 @@ const RegisterCompany = () => {
       slogan: slogan,
       startYear: startYear,
       slogan: slogan,
+      description: description,
       owners: [{ userId: userId }], // Make sure that the user that registers the company is added as an owner
     };
     setLoading(true);
@@ -348,6 +371,31 @@ const RegisterCompany = () => {
             <p className="text-red-500 text-sm">
               This should be the motto of your company. It must be between 1 and
               90 characters long.
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">
+            Company Description
+          </label>
+          <textarea
+            type="text"
+            value={description}
+            // onChange is a function that takes an event as an argument
+            // and sets the name state to the value of the input
+            // e.target.value is the value of the input
+            onChange={handleDescriptionChange}
+            onBlur={validateDescription}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              startYearError ? "border-red-500" : ""
+            }`}
+          />
+          {descriptionError ? (
+            <p className="text-red-500 text-sm">
+              This should be the description of your company. It must be between
+              1 and 280 characters long.
             </p>
           ) : (
             ""
