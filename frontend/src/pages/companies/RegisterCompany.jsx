@@ -132,13 +132,14 @@ const RegisterCompany = () => {
     }
   }, [nameError, emailError, phoneError, startYearError, kvkNumberError]);
 
-  const handleSaveCompany = () => {
+  const handleSaveCompany = async () => {
     // Validate all fields before sending the request to the backend, otherwise return
     validateCompanyName();
     validateEmail();
     validatePhone();
     validateStartYear();
-    validateKvkNumber();
+    // TODO: [MERNSTACK-193] Fix BUG that you can save a company without kvk number validation in RegisterCompany.jsx and EditCompany.jsx
+    await validateKvkNumber();
     if (
       nameError ||
       emailError ||

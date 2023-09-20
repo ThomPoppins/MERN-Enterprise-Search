@@ -1,3 +1,27 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+strong {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+}
+
+/* Import TailwindCSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
