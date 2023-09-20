@@ -229,7 +229,6 @@ const RegisterCompany = () => {
       kvkNumber: kvkNumber,
       slogan: slogan,
       startYear: startYear,
-      slogan: slogan,
       description: description,
       owners: [{ userId: userId }], // Make sure that the user that registers the company is added as an owner
     };
