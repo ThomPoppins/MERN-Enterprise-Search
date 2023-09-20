@@ -2,11 +2,6 @@ import mongoose from "mongoose";
 
 /**
  * Mongoose Schema for Company
- *
- * This schema defines the structure for storing detailed information about a company in the database.
- * It encompasses various aspects such as contact details, addresses, billing information, owners, admins, and more.
- * Several TODOs are marked for future enhancements and integrations with related models.
- *
  * @typedef {Object} CompanySchema
  * @property {string} name - The name of the company.
  * @property {string} email - The email address for company correspondence).
