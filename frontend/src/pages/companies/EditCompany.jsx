@@ -5,11 +5,12 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { BACKEND_URL, TEST_KVK_API } from "../../../config.js";
 import { useSnackbar } from "notistack";
-import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
-import emailValidator from "../../utils/validation/emailValidator";
-import startYearValidator from "../../utils/validation/startYearValidator";
 import companyNameValidator from "../../utils/validation/companyNameValidator";
+import emailValidator from "../../utils/validation/emailValidator";
+import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
 import kvkNumberValidator from "../../utils/validation/kvkNumberValidator";
+import companySloganValidator from "../../utils/validation/companySloganValidator";
+import startYearValidator from "../../utils/validation/startYearValidator";
 import UserSearch from "../../components/UserSearch";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
 import { useSelector } from "react-redux";
@@ -30,6 +31,7 @@ const EditCompany = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [kvkNumber, setKvkNumber] = useState("");
+  const [slogan, setSlogan] = useState("");
   const [startYear, setStartYear] = useState(0);
 
   // Error state for displaying error messages if the user enters invalid input
@@ -37,6 +39,7 @@ const EditCompany = () => {
   const [emailError, setEmailError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
   const [kvkNumberError, setKvkNumberError] = useState(false);
+  const [sloganError, setSloganError] = useState(false);
   const [startYearError, setStartYearError] = useState(false);
 
   // Owners state
@@ -88,6 +91,13 @@ const EditCompany = () => {
       setKvkNumberError(false);
     }
   };
+  const validateSlogan = () => {
+    if (!companySloganValidator(slogan)) {
+      setSloganError(true);
+    } else {
+      setSloganError(false);
+    }
+  };
   const validateStartYear = () => {
     if (!startYearValidator(startYear)) {
       setStartYearError(true);
@@ -121,6 +131,12 @@ const EditCompany = () => {
       await validateKvkNumber();
     }
   };
+  const handleSloganChange = (e) => {
+    setSlogan(e.target.value);
+    if (sloganError) {
+      validateSlogan();
+    }
+  };
   const handleStartYearChange = (e) => {
     setStartYear(e.target.value);
     if (startYearError) {
@@ -142,10 +158,20 @@ const EditCompany = () => {
     if (kvkNumberError) {
       enqueueSnackbar("Invalid KVK number!", { variant: "error" });
     }
+    if (sloganError) {
+      enqueueSnackbar("Invalid slogan!", { variant: "error" });
+    }
     if (startYearError) {
       enqueueSnackbar("Invalid start year!", { variant: "error" });
     }
-  }, [nameError, emailError, phoneError, kvkNumberError, startYearError]);
+  }, [
+    nameError,
+    emailError,
+    phoneError,
+    kvkNumberError,
+    sloganError,
+    startYearError,
+  ]);
 
   // useEffect() is a hook that runs a function when the component is rendered
   useEffect(() => {
@@ -186,23 +212,26 @@ const EditCompany = () => {
   }, []);
 
   // handleEditCompany is a function that sends a PUT request to the backend to update a company
-  const handleEditCompany = () => {
+  const handleEditCompany = async () => {
     // Validate all fields before sending the request to the backend, otherwise return
     validateCompanyName();
     validateEmail();
     validatePhone();
-    validateKvkNumber();
+    await validateKvkNumber();
+    validateSlogan();
     validateStartYear();
     if (
       nameError ||
       emailError ||
       phoneError ||
       kvkNumberError ||
+      sloganError ||
       startYearError ||
       !name ||
       !email ||
       !phone ||
       !kvkNumber ||
+      !slogan ||
       !startYear
     ) {
       enqueueSnackbar(
@@ -217,6 +246,7 @@ const EditCompany = () => {
       email: email,
       phone: phone,
       kvkNumber: kvkNumber,
+      slogan: slogan,
       startYear: startYear,
     };
     setLoading(true);
@@ -485,6 +515,29 @@ const EditCompany = () => {
           />
           {kvkNumberError ? (
             <p className="text-red-500 text-sm">Must be a valid KVK number.</p>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Slogan</label>
+          <input
+            type="text"
+            value={slogan}
+            // onChange is a function that takes an event as an argument
+            // and sets the name state to the value of the input
+            // e.target.value is the value of the input
+            onChange={handleSloganChange}
+            onBlur={validateSlogan}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              startYearError ? "border-red-500" : ""
+            }`}
+          />
+          {sloganError ? (
+            <p className="text-red-500 text-sm">
+              This should be the motto of your company. It must be at least 1
+              character long.
+            </p>
           ) : (
             ""
           )}

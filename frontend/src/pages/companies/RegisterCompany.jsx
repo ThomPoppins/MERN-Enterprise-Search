@@ -6,10 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { BACKEND_URL, TEST_KVK_API } from "../../../config.js";
 import { useSnackbar } from "notistack";
 import companyNameValidator from "../../utils/validation/companyNameValidator";
-import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
 import emailValidator from "../../utils/validation/emailValidator";
-import startYearValidator from "../../utils/validation/startYearValidator";
+import phoneNumberValidator from "../../utils/validation/phoneNumberValidator";
 import kvkNumberValidator from "../../utils/validation/kvkNumberValidator";
+import companySloganValidator from "../../utils/validation/companySloganValidator";
+import startYearValidator from "../../utils/validation/startYearValidator";
 import { useSelector } from "react-redux";
 
 const RegisterCompany = () => {
@@ -48,21 +49,21 @@ const RegisterCompany = () => {
 
   // Validate user input fields
   const validateCompanyName = () => {
-    if (companyNameValidator(name) === false) {
+    if (!companyNameValidator(name)) {
       setNameError(true);
     } else {
       setNameError(false);
     }
   };
   const validateEmail = () => {
-    if (emailValidator(email) === false) {
+    if (!emailValidator(email)) {
       setEmailError(true);
     } else {
       setEmailError(false);
     }
   };
   const validatePhone = () => {
-    if (phoneNumberValidator(phone, "NL") === false) {
+    if (!phoneNumberValidator(phone, "NL")) {
       setPhoneError(true);
     } else {
       setPhoneError(false);
@@ -76,14 +77,14 @@ const RegisterCompany = () => {
     }
   };
   const validateSlogan = () => {
-    if (companySloganValidator(slogan) === false) {
+    if (!companySloganValidator(slogan)) {
       setSloganError(true);
     } else {
       setSloganError(false);
     }
   };
   const validateStartYear = () => {
-    if (startYearValidator(startYear) === false) {
+    if (!startYearValidator(startYear)) {
       setStartYearError(true);
     } else {
       setStartYearError(false);
@@ -142,10 +143,20 @@ const RegisterCompany = () => {
     if (kvkNumberError) {
       enqueueSnackbar("KVK number is invalid!", { variant: "error" });
     }
+    if (sloganError) {
+      enqueueSnackbar("Slogan is invalid!", { variant: "error" });
+    }
     if (startYearError) {
       enqueueSnackbar("Start year is invalid!", { variant: "error" });
     }
-  }, [nameError, emailError, phoneError, kvkNumberError, startYearError]);
+  }, [
+    nameError,
+    emailError,
+    phoneError,
+    kvkNumberError,
+    sloganError,
+    startYearError,
+  ]);
 
   const handleSaveCompany = async () => {
     // Validate all fields before sending the request to the backend, otherwise return
@@ -161,11 +172,13 @@ const RegisterCompany = () => {
       emailError ||
       phoneError ||
       kvkNumberError ||
+      sloganError ||
       startYearError ||
       !name ||
       !email ||
       !phone ||
       !kvkNumber ||
+      !slogan ||
       !startYear
     ) {
       enqueueSnackbar(
@@ -183,6 +196,7 @@ const RegisterCompany = () => {
       email: email,
       phone: phone,
       kvkNumber: kvkNumber,
+      slogan: slogan,
       startYear: startYear,
       slogan: slogan,
       owners: [{ userId: userId }], // Make sure that the user that registers the company is added as an owner
@@ -311,6 +325,29 @@ const RegisterCompany = () => {
           {kvkNumberError ? (
             <p className="text-red-500 text-sm">
               KVK number must be a valid KVK number.
+            </p>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Slogan</label>
+          <input
+            type="text"
+            value={slogan}
+            // onChange is a function that takes an event as an argument
+            // and sets the name state to the value of the input
+            // e.target.value is the value of the input
+            onChange={handleSloganChange}
+            onBlur={validateSlogan}
+            className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              startYearError ? "border-red-500" : ""
+            }`}
+          />
+          {sloganError ? (
+            <p className="text-red-500 text-sm">
+              This should be the motto of your company. It must be at least 1
+              character long.
             </p>
           ) : (
             ""
