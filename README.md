@@ -577,41 +577,36 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-74] Set up `Company` model.
 - [x] [MERNSTACK-65] Create a route to save a new Company document in the database.
 - [x] [MERNSTACK-95] Test companyRouter POST route `/` for saving a new company with Postman.
-- [ ] [MERNSTACK-103] Test companyRouter POST route `/` for saving a new company with Chai and Mocha.
 - [x] [MERNSTACK-66] Create a route to get all Company documents from the database.
 - [x] [MERNSTACK-96] Test companyRouter GET route `/` for getting all companies with Postman.
-- [ ] [MERNSTACK-104] Test companyRouter GET route `/` for getting all companies with Chai and Mocha.
 - [x] [MERNSTACK-67] Create a route to get a single Company document from the database.
 - [x] [MERNSTACK-97] Test companyRouter GET route `/:id` for getting a single company with Postman.
-- [ ] [MERNSTACK-105] Test companyRouter GET route `/:id` for getting a single company with Chai and Mocha.
 - [x] [MERNSTACK-68] Create a route to update a single Company document in the database.
 - [x] [MERNSTACK-98] Test companyRouter PUT route `/:id` for updating a single company with Postman.
-- [ ] [MERNSTACK-106] Test companyRouter PUT route `/:id` for updating a single company with Chai and Mocha.
 - [x] [MERNSTACK-69] Create a route to delete a single Company document from the database.
-- [ ] [MERNSTACK-99] Test companyRouter DELETE route `/:id` for deleting a single company with Postman.
-- [ ] [MERNSTACK-107] Test companyRouter DELETE route `/:id` for deleting a single company with Chai and Mocha.
+- [x] [MERNSTACK-99] Test companyRouter DELETE route `/:id` for deleting a single company with Postman.
 - [x] Actualize, complete and correct Company scheme documentation.
 - [x] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
 - [x] [MERNSTACK-70] Set up GET, POST, PUT and DELETE Book server routes.
 - [x] [MERNSTACK-51] Create Jira tickets for all TODOs.
 - [x] [MERNSTACK-53] Create GET, POST, PUT and DELETE Company server routes.
-- [ ] [MERNSTACK-55] Create User model.
+- [x] [MERNSTACK-55] Create User model.
 - [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
-- [ ] [MERNSTACK-59] Create one-to-many relationship between Owner and Company in the Owner schema. This will allow to associate each Owner document with multiple Company documents.
+- [x] [MERNSTACK-59] Create one-to-many relationship between Owner and Company in the Owner schema. This will allow to associate each Owner document with multiple Company documents. UPDATE: This is not needed because the Company schema will have an `owners` field that will be an array of owner objects with `userId` field.
 - [x] Create React app using Vite.js.
 - [x] Move Vite.js documentation from backend devdocs folder to frontend devdocs folder
-- [ ] [MERNSTACK-56] Create login and register functionality. Hash user password on register and compare hashed password on login. (see backend devdocs folder)
-- [ ] [MERNSTACK-60] Create `user` authentication and authorization functionality using JSON Web Token authorization. (see backend devdocs folder)
+- [x] [MERNSTACK-56] Create login and register functionality. Hash user password on register and compare hashed password on login. (see backend devdocs folder)
+- [x] [MERNSTACK-60] Create `user` authentication and authorization functionality using JSON Web Token authorization. (see backend devdocs folder)
 - [ ] [MERNSTACK-58] When user is logged in, create a form to register a company and make user owner. Owner has admin rights at first when creating his account and registering his company.
-- [ ] [MERNSTACK-61] Create `junction` table for many-to-many relationship between `owners` and `companies`. (see backend devdocs folder)
+- [x] [MERNSTACK-61] Create `junction` table for many-to-many relationship between `owners` and `companies`. (see backend devdocs folder) CANCELLED: For now it is easier to just add an `owner` field to the `Company` schema and model. This will allow to associate each Company document with company owners. No need for a `junction` table that will make it more complex without any use for it.
 - [ ] [MERNSTACK-62] Create `junction` table between `Company` and `Project`. This table will be used because of the many-to-many relationship and additional properties that are needed to link a company to a project. (see backend devdocs folder)
-- [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers)
+- [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers) CONSIDER: Saving users as customers to `company` model instead of creating a `junction` table. This will allow to associate each Company document with multiple User documents. No need for a `junction` table that will make it more complex without any use for it.
 - [x] [MERNSTACK-144] After user login, display link that will `navigate` (?with `useNavigate()`?) user to `my-companies` where companies will be listed and with a company register form. (see frontend devdocs folder)
-- [ ] [MERNSTACK-64] In the frontend, create a route to `/my-companies` where `user` companies will be listed.
+- [x] [MERNSTACK-64] In the frontend, create a route to `/my-companies` where `user` companies will be listed. UPDATE: Route will be /companies for now.
 - [x] Move redux documentation on redux from backend devdocs folder to frontend devdocs folder.
 - [ ] [MERNSTACK-145] Break down all ideas in the `Features:` section below into smaller tasks and create Jira tickets for them.
-- [ ] [MERNSTACK-102] Check for the word `property` when it should be `field` in the documentation of schemas and models. Check for the word `field` when it should be `property` in the documentation when talking about database `document`'s
-- [ ] [MERNSTACK-114] Implement time-travel debugging with Redux DevTools.
+- [x] [MERNSTACK-102] Check for the word `property` when it should be `field` in the documentation of schemas and models. Check for the word `field` when it should be `property` in the documentation when talking about database `document`'s
+- [x] [MERNSTACK-114] Use time-travel debugging with Redux DevTools.
 - [x] [MERNSTACK-115] Decide the default destination after clicking the BackButton, something like the previous page or the home page.
 - [x] [MERNSTACK-116] Create table on the frontend to display all companies.
 - [x] [MERNSTACK-117] Create ShowCompany component to display a single company's details
@@ -626,10 +621,10 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-126] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (see frontend devdocs folder)
 - [x] [MERNSTACK-138] Create user register page and functionality, save with bcrypt hashed password in database.
 - [x] [MERNSTACK-139] Create a user login page and functionality, validate user password has with bcrypt and compare hashed password on login.
-- [ ] [MERNSTACK-140] Make it possible for a user to register a company and automatically become first company owner.
+- [x] [MERNSTACK-140] Make it possible for a user to register a company and automatically become first company owner.
 - [x] [MERNSTACK-141]  Find fitting icons for company `name` `phone number` and `email` for the ListCompanies `card` view and CompaniesModal component. Find them in the react-icons library. DO THIS BEFORE CREATING ANY OTHER LIST COMPONENTS!
-- [ ] [MERNSTACK-142] Update README.md with explanation about the validators I created in the frontend application. Explain the regex used to validate and the test method that returns true or false.
-- [ ] [MERNSTACK-143] Add explanation about the main advantages of using MongoDB and Mongoose in the README.md file in the Backend section.
+- [ ] [MERNSTACK-142] Update README.md with explanation about the validators I created in the frontend application. Explain the regex of every validator used to validate and the test method that returns true or false.
+- [x] [MERNSTACK-143] Add explanation about the main advantages of using MongoDB and Mongoose in the README.md file in the Backend section.
 - [x] [MERNSTACK-14] Create a new schema and model for user.
 - [x] [MERNSTACK-162] Save userId as state in Redux store after verification of JWT token, make only /, /login and /register routes accessible for users that are not logged in.
 - [x] [MERNSTACK-161] Fix CORS policy error when registering user
@@ -643,14 +638,14 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [ ] [MERNSTACK-178] Send invitation to user to become owner of company.
 - [ ] [MERNSTACK-179] Display a "Invitation pending" or "Invited" message in de EditCompany page when user hasn't accepted the invitation to become owner of the company yet.
 - [ ] [MERNSTACK-180] Move save new company owner functionality to acceptBecomeCompanyOwnerInvitation() function in some new component.
-- [ ] [MERNSTACK-182] Save new owners of company after pressing save button in EditCompany component.
+- [x] [MERNSTACK-182] Save new owners of company after pressing save button in EditCompany component. CANCELLED: Now the owner can add owners in a different `form` in the EditCompany component without a save button so it is clear that a owner has been added without submitting the form.
 - [x] [MERNSTACK-183] Remove "Remove" button from EditCompany component of the current logged in user.
 - [x] [MERNSTACK-174] When the user selects a user to add as an owner to the company, update the owners state variable in the `<EditCompany />` component to include the selected user. You can use the setOwners() function to update the owners state variable.
 - [x] [MERNSTACK-171] Display results in a list displaying the username, name and email
 - [x] [MERNSTACK-170] Make API call to backend to find users by query on username, name or email, use useEffect to call this function when query changes
 - [x] [MERNSTACK-168] Make possible for user (owner) to add other owners to the company by finding other users and adding them to the company
 - [x] [MERNSTACK-17] "owners" array should contain owner objects with an userId.
-- [ ] [MERNSTACK-16] Owners  will be linked to a company, based on an ownerId in the owner model.
+- [x] [MERNSTACK-16] Owners  will be linked to a company, based on an ownerId in the owner model. CANCELLED: Now the owner will be linked to a company, based on an userId corresponding to the user `_id` in the user model.
 - [x] [MERNSTACK-184] Remove item from search results when added
 - [x] [MERNSTACK-160] Display error message under the input field if the input is invalid explaining the right format on all forms
 - [x] [MERNSTACK-159] Give input field of the form a red border if the input is invalid on all forms
@@ -662,9 +657,11 @@ Overall, Postman provides a powerful and flexible toolset for testing and debugg
 - [x] [MERNSTACK-191] Export working getKvkData function returning the KVK data in kvkController.js
 - [x] [MERNSTACK-190] Make call to backend API to validate kvk number in kvkNumberValidator
 - [x] [MERNSTACK-189] Add real kvk number validation with API call in kvkNumberValidator
-- [ ] 
-
-
+- [x] [MERNSTACK-193] Fix BUG that you can save a company without kvk number validation in RegisterCompany.jsx and EditCompany.jsx SOLUTION: Throw an error in the kvkNumberValidator if the kvk number is not valid. Catch the error in the RegisterCompany and EditCompany components and display an error message to the user. If the KVK number is not valid, return from handleEditCompany() and handleSaveCompany() functions and don't save the company.
+- [x] [MERNSTACK-110] Check if the company already exists in the database based on kvkNumber in companiesRoute.jsx. Hint: Use the findOne method and consider using `unique: true` in the company schema.
+- [x] [MERNSTACK-111] If the company already exists, send status 409 response and a (error) message to inform the client in companiesRoute.jsx.
+- [x] [MERNSTACK-146] Decide if the default values should be set in the model or in the route. Hint: Consider using the `default` property in the company schema. CONCLUSION: Set default values in the model.
+- [x] [MERNSTACK-109] Populate the company document with the properties from the request body if they exist in companiesRoute.js.
 
 
 

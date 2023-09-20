@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 // TODO: [MERNSTACK-101] Fix this schema and reconsider the fields
 const companyProjectSchema = new mongoose.Schema(
   {
-    companyId: {
-      type: mongoose.Schema.Types.ObjectId,
+    companyIds: {
+      type: Array,
       ref: "Company",
       required: true,
     },

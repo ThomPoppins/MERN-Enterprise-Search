@@ -30,7 +30,7 @@ import mongoose from "mongoose";
  * @property {object} paymentDetails - Payment details for different countries or regions.
  * @property {number} startYear - Year the company was started.
  * @property {boolean} active - Indicates if the project is currently active.
- * @property {string} industry - Industry associated with the project.
+ * @property {string} industries - Industries associated with the project.
  * @property {boolean} public - Indicates if the project is public or private.
  * @property {object[]} reviews - Array of project reviews.
  * @property {number} rating - Overall rating of the project.
@@ -199,10 +199,10 @@ const projectSchema = new mongoose.Schema(
       required: false,
       default: true,
     },
-    industry: {
-      type: String,
+    industries: {
+      type: Array,
       required: false,
-      default: "",
+      default: [],
     },
     // Is the project public or private at THIS moment?
     public: {

@@ -6,7 +6,7 @@ import mongoose from "mongoose";
  * @property {string} name - The name of the company.
  * @property {string} email - The email address for company correspondence).
  * @property {string} phone - The contact phone number for the company.
- * @property {string} kvkNumber - KVK number of the company (optional).
+ * @property {string} kvkNumber - KVK number of the company.
  * @property {boolean} kvkValidated - Validation status of the KVK number (default: false).
  * @property {string} slogan - A slogan associated with the company.
  * @property {string} description - A short description of the company.
@@ -72,6 +72,7 @@ const companySchema = new mongoose.Schema(
     kvkNumber: {
       type: String,
       required: true,
+      unique: true,
       default: "",
     },
     // kvk number is validated (with the correct owner and company name) by the KVK API. True or false.
@@ -110,9 +111,9 @@ const companySchema = new mongoose.Schema(
     // TODO: [MERNSTACK-13] Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
     // For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: "" }, because there are not regional address format differences in the Netherlands.
     addressFormat: {
-      type: Object,
+      type: mongoose.Schema.Types.ObjectId,
       required: false,
-      default: {},
+      default: null,
     },
     // Country of the company billing address. For example: "NL" for the Netherlands.
     country: {
@@ -230,10 +231,10 @@ const companySchema = new mongoose.Schema(
     },
     // TODO: [MERNSTACK-29] Create a new schema and model for Industry. Industry will be linked to a company, based on an industryId in the industry model.
     // TODO: [MERNSTACK-76] RECONSIDER: Maybe a `junction` table between companies and the industries they are in is the right place to store necessary data for the specific companyIndustry relationships This extra data might be data like metadata that can be used to improve the result listing order of companies when searched by user in frontend.
-    industry: {
-      type: String,
+    industries: {
+      type: Array,
       required: false,
-      default: "",
+      default: [],
     },
     // Is the company public or private at THIS moment?
     // TODO: [MERNSTACK-33] Make it possible to change this value in the user/owner settings.
@@ -267,15 +268,15 @@ const companySchema = new mongoose.Schema(
     // "premium" will be the premiumTypeName "none" "bronze", "silver", "gold" or "platinum" corresponding with the premiumType model?
     // `premium` is the id of the premium type in the corresponding premium type model.
     premium: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: false,
-      default: "none",
+      default: null,
     },
     // Is this company a vendor? This will be a object containing the vendorId corresponding with the Vendor model. (one-to-one relationship)
     vendor: {
-      type: Object,
+      type: mongoose.Schema.Types.ObjectId,
       required: false,
-      default: {},
+      default: null,
     },
     // associatedVendors: {
     //   type: Array,

@@ -45,6 +45,9 @@ const EditCompany = () => {
   const [descriptionError, setDescriptionError] = useState(false);
   const [startYearError, setStartYearError] = useState(false);
 
+  // Specific error messages to display when the user enters invalid input
+  const [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState("");
+
   // Owners state
   const [owners, setOwners] = useState([]);
 
@@ -90,6 +93,7 @@ const EditCompany = () => {
   const validateKvkNumber = async () => {
     if (!(await kvkNumberValidator(kvkNumber))) {
       setKvkNumberError(true);
+      throw new Error("Invalid KVK number!");
     } else {
       setKvkNumberError(false);
     }
@@ -241,7 +245,13 @@ const EditCompany = () => {
     validateCompanyName();
     validateEmail();
     validatePhone();
-    await validateKvkNumber();
+    try {
+      await validateKvkNumber();
+    } catch (error) {
+      enqueueSnackbar("Error validating KVK number!", { variant: "error" });
+      console.log(error);
+      return;
+    }
     validateSlogan();
     validateDescription();
     validateStartYear();
@@ -286,6 +296,16 @@ const EditCompany = () => {
         navigate("/companies");
       })
       .catch((error) => {
+        if (error.response.status === 409) {
+          enqueueSnackbar("Company with this KVK number already exists!", {
+            variant: "error",
+          });
+          setKvkNumberError(true);
+          setKvkNumberErrorMessage(
+            "Company with this KVK number already exists!"
+          );
+        }
+
         setLoading(false);
         enqueueSnackbar("Error editing company!", { variant: "error" });
         console.log(error);
@@ -542,7 +562,11 @@ const EditCompany = () => {
             }`}
           />
           {kvkNumberError ? (
-            <p className="text-red-500 text-sm">Must be a valid KVK number.</p>
+            <p className="text-red-500 text-sm">
+              {kvkNumberErrorMessage
+                ? kvkNumberErrorMessage
+                : "Must be a valid KVK number."}
+            </p>
           ) : (
             ""
           )}
