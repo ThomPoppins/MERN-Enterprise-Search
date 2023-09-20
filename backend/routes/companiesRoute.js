@@ -41,8 +41,6 @@ router.post("/", async (request, response) => {
     }
 
     // Create a new company document using the Company model and the properties from the request body.
-    // TODO: [MERNSTACK-109] Populate the company document with the properties from the request body if they exist.
-    // TODO: [MERNSTACK-] Decide if the default values should be set in the model or in the route. Hint: Consider using the `default` property in the company schema.
     const newCompany = {
       name: request.body.name,
       email: request.body.email,
@@ -207,8 +205,6 @@ router.put("/:companyId/add-owner/:userId", async (request, response) => {
     const newOwner = {
       userId: userId,
     };
-
-    console.log("newOwner in /:companyId/add-owner/:userId", newOwner);
 
     company.owners.push(newOwner);
 
