@@ -6,8 +6,8 @@ import BackButton from "../../components/BackButton";
 import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
 import { BACKEND_URL } from "../../../config";
-import CompaniesTable from "../../components/companiesList/CompaniesTable";
-import CompaniesCard from "../../components/companiesList/CompaniesCard";
+import CompaniesTable from "../../components/companies/CompaniesTable";
+import CompaniesCard from "../../components/companies/CompaniesCard";
 import { COMPANIES_LIST_SHOW_TYPE } from "../../store/actions";
 
 const CompaniesList = () => {
