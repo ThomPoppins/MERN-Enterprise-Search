@@ -30,8 +30,15 @@ router.post("/", async (request, response) => {
       });
     }
 
-    // TODO: [MERNSTACK-110] Check if the company already exists in the database. Hint: Use the findOne method and consider using `unique: true` in the company schema.
-    // TODO: [MERNSTACK-111] If the company already exists, send status 409 response and a (error) message to inform the client.
+    const existingCompanyKvk = await Company.findOne({
+      kvkNumber: request.body.kvkNumber,
+    });
+    if (existingCompanyKvk) {
+      // Send status 409 response if the company already exists and a (error) message to inform the client.
+      return response.status(409).send({
+        message: "Company with this KVK number already exists.",
+      });
+    }
 
     // Create a new company document using the Company model and the properties from the request body.
     // TODO: [MERNSTACK-109] Populate the company document with the properties from the request body if they exist.
@@ -125,8 +132,24 @@ router.put("/:id", async (request, response) => {
   try {
     const { id } = request.params;
 
+    // Check if the company kvkNumber is changed and if it changed, check if the new kvkNumber already exists in the database
+    const prevCompany = Company.findById(id);
+    if (request.body.kvkNumber !== prevCompany.kvkNumber) {
+      const existingCompanyKvk = await Company.findOne({
+        kvkNumber: request.body.kvkNumber,
+      });
+      if (existingCompanyKvk) {
+        // Send status 409 response if the company already exists and a (error) message to inform the client.
+        return response.status(409).send({
+          message: "Company with this KVK number already exists.",
+        });
+      }
+    }
+
+    // Update the company document using the Company model's findByIdAndUpdate method
     const result = await Company.findByIdAndUpdate(id, request.body);
 
+    // If no company was found, send status 404 response and a (error) message to inform the client.
     if (!result) {
       return response.status(404).json({
         message: `Cannot find company with id=${id}.`,

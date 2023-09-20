@@ -6,7 +6,7 @@ import mongoose from "mongoose";
  * @property {string} name - The name of the company.
  * @property {string} email - The email address for company correspondence).
  * @property {string} phone - The contact phone number for the company.
- * @property {string} kvkNumber - KVK number of the company (optional).
+ * @property {string} kvkNumber - KVK number of the company.
  * @property {boolean} kvkValidated - Validation status of the KVK number (default: false).
  * @property {string} slogan - A slogan associated with the company.
  * @property {string} description - A short description of the company.
@@ -72,6 +72,7 @@ const companySchema = new mongoose.Schema(
     kvkNumber: {
       type: String,
       required: true,
+      unique: true,
       default: "",
     },
     // kvk number is validated (with the correct owner and company name) by the KVK API. True or false.

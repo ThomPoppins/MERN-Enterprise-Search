@@ -12,8 +12,6 @@ export const getKvkData = async (request, response) => {
     // Get the query from the request query parameters
     const { kvkNumber } = request.query;
 
-    console.log("kvkNumber: ", kvkNumber);
-
     // Get the certificate chain from the file system
     const certificateChain = fs.readFileSync(
       PATH_TO_KVK_API_CERTIFICATE_CHAIN_RELATIVE_TO_INDEX_APP,

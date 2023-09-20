@@ -34,6 +34,9 @@ const RegisterCompany = () => {
   const [descriptionError, setDescriptionError] = useState(false);
   const [startYearError, setStartYearError] = useState(false);
 
+  // Specific error messages to display when the user enters invalid input
+  const [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState("");
+
   // Loading state for displaying a spinner while the request is being sent to the backend
   const [loading, setLoading] = useState(false);
 
@@ -241,6 +244,17 @@ const RegisterCompany = () => {
         navigate("/companies");
       })
       .catch((error) => {
+        console.log("error.response", error.response);
+        if (error.response.status === 409) {
+          enqueueSnackbar("Company with this KVK number already exists!", {
+            variant: "error",
+          });
+          setKvkNumberError(true);
+          setKvkNumberErrorMessage(
+            "Company with this KVK number already exists!"
+          );
+        }
+
         setLoading(false);
         enqueueSnackbar("Error registering company!", { variant: "error" });
         console.log(error);
@@ -353,7 +367,9 @@ const RegisterCompany = () => {
           />
           {kvkNumberError ? (
             <p className="text-red-500 text-sm">
-              KVK number must be a valid KVK number.
+              {kvkNumberErrorMessage
+                ? kvkNumberErrorMessage
+                : "Must be a valid KVK number."}
             </p>
           ) : (
             ""
@@ -370,7 +386,7 @@ const RegisterCompany = () => {
             onChange={handleSloganChange}
             onBlur={validateSlogan}
             className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              startYearError ? "border-red-500" : ""
+              sloganError ? "border-red-500" : ""
             }`}
           />
           {sloganError ? (
@@ -395,7 +411,7 @@ const RegisterCompany = () => {
             onChange={handleDescriptionChange}
             onBlur={validateDescription}
             className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              startYearError ? "border-red-500" : ""
+              descriptionError ? "border-red-500" : ""
             }`}
           />
           {descriptionError ? (
