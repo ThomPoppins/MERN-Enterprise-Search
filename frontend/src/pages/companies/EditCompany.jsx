@@ -15,7 +15,7 @@ import startYearValidator from "../../utils/validation/startYearValidator";
 import UserSearch from "../../components/UserSearch";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
 import { useSelector } from "react-redux";
-import UploadAvatar from "../../components/UploadAvatar";
+import CompanyLogoModal from "../../components/companies/CompanyLogoModal";
 
 const EditCompany = () => {
   // ADD OWNERS TO COMPANY TICKETS:
@@ -55,6 +55,9 @@ const EditCompany = () => {
 
   // Removed owners ids
   const [removedOwnersIds, setRemovedOwnersIds] = useState([]);
+
+  // Set showLogoModal to true to show the modal for uploading a company logo
+  const [showLogoModal, setShowLogoModal] = useState(false);
 
   // Display a spinner when loading data from the backend
   const [loading, setLoading] = useState(false);
@@ -495,19 +498,27 @@ const EditCompany = () => {
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Logo</label>
           <div className="w-full">
-            <div className="flex justify-center">
-              <UploadAvatar setLogo={setLogo} />
+            <div className="flex justify-center items-center my-4">
+              <div className="flex justify-center">
+                {logo && (
+                  <img src={logo} alt="Preview" width="200" height="200" />
+                )}
+              </div>
             </div>
-            {logo ? (
-              <label className="text-xl mr-4 text-gray-500">Preview</label>
-            ) : (
-              ""
+            <div className="flex justify-center items-center mb-4 mt-8">
+              <button
+                className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
+                onClick={() => setShowLogoModal(true)}
+              >
+                Upload Logo
+              </button>
+            </div>
+            {showLogoModal && (
+              <CompanyLogoModal
+                setLogo={setLogo}
+                onClose={() => setShowLogoModal(false)}
+              />
             )}
-            <div className="flex justify-center">
-              {logo && (
-                <img src={logo} alt="Preview" width="200" height="200" />
-              )}
-            </div>
           </div>
         </div>
         {/* Comany Email input field */}

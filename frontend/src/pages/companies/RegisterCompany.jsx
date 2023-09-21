@@ -13,7 +13,6 @@ import companySloganValidator from "../../utils/validation/companySloganValidato
 import companyDescriptionValidator from "../../utils/validation/companyDescriptionValidator";
 import startYearValidator from "../../utils/validation/startYearValidator";
 import { useSelector } from "react-redux";
-import UploadAvatar from "../../components/UploadAvatar";
 import CompanyLogoModal from "../../components/companies/CompanyLogoModal";
 
 const RegisterCompany = () => {
