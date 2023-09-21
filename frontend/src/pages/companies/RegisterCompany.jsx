@@ -14,6 +14,7 @@ import companyDescriptionValidator from "../../utils/validation/companyDescripti
 import startYearValidator from "../../utils/validation/startYearValidator";
 import { useSelector } from "react-redux";
 import UploadAvatar from "../../components/UploadAvatar";
+import CompanyLogoModal from "../../components/companies/CompanyLogoModal";
 
 const RegisterCompany = () => {
   // TODO: [MERNSTACK-127] Add state for all companies fields that can be registered
@@ -38,6 +39,9 @@ const RegisterCompany = () => {
 
   // Specific error messages to display when the user enters invalid input
   const [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState("");
+
+  // Set showLogoModal to true to show the modal for uploading a company logo
+  const [showLogoModal, setShowLogoModal] = useState(false);
 
   // Loading state for displaying a spinner while the request is being sent to the backend
   const [loading, setLoading] = useState(false);
@@ -298,19 +302,27 @@ const RegisterCompany = () => {
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Logo</label>
           <div className="w-full">
-            <div className="flex justify-center">
-              <UploadAvatar setLogo={setLogo} />
+            <div className="flex justify-center items-center my-4">
+              <div className="flex justify-center">
+                {logo && (
+                  <img src={logo} alt="Preview" width="200" height="200" />
+                )}
+              </div>
             </div>
-            {logo ? (
-              <label className="text-xl mr-4 text-gray-500">Preview</label>
-            ) : (
-              ""
+            <div className="flex justify-center items-center mb-4 mt-8">
+              <button
+                className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
+                onClick={() => setShowLogoModal(true)}
+              >
+                Upload Logo
+              </button>
+            </div>
+            {showLogoModal && (
+              <CompanyLogoModal
+                setLogo={setLogo}
+                onClose={() => setShowLogoModal(false)}
+              />
             )}
-            <div className="flex justify-center">
-              {logo && (
-                <img src={logo} alt="Preview" width="200" height="200" />
-              )}
-            </div>
           </div>
         </div>
         <div className="my-4">
