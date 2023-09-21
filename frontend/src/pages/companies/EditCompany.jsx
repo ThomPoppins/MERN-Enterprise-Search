@@ -15,6 +15,7 @@ import startYearValidator from "../../utils/validation/startYearValidator";
 import UserSearch from "../../components/UserSearch";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
 import { useSelector } from "react-redux";
+import UploadAvatar from "../../components/UploadAvatar";
 
 const EditCompany = () => {
   // ADD OWNERS TO COMPANY TICKETS:
@@ -201,7 +202,7 @@ const EditCompany = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(BACKEND_URL + "/companies/" + id)
+      .get(BACKEND_URL + "/companies/" + companyId)
       .then((response) => {
         setLoading(false);
         // TODO: [MERNSTACK-131] Set state for all companies fields that can be edited
@@ -289,7 +290,7 @@ const EditCompany = () => {
     };
     setLoading(true);
     axios
-      .put(BACKEND_URL + `/companies/${id}`, data)
+      .put(BACKEND_URL + `/companies/${companyId}`, data)
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Company edited successfully!", { variant: "success" });
@@ -459,6 +460,7 @@ const EditCompany = () => {
           removedOwnersIds={removedOwnersIds}
         />
       </div>
+      {/* TODO: [MERNSTACK-194] Make <CompanyRegisterEditForm company={company} /> component and use it in EditCompany.jsx and RegisterCompany.jsx */}
       <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
         {/* TODO: [MERNSTACK-130] Add input fields for all editable company details. To achieve this, copy the outer div with class ".my-4". */}
         {/* Comany Name input field */}
