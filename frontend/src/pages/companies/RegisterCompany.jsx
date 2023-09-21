@@ -13,11 +13,13 @@ import companySloganValidator from "../../utils/validation/companySloganValidato
 import companyDescriptionValidator from "../../utils/validation/companyDescriptionValidator";
 import startYearValidator from "../../utils/validation/startYearValidator";
 import { useSelector } from "react-redux";
+import UploadAvatar from "../../components/UploadAvatar";
 
 const RegisterCompany = () => {
   // TODO: [MERNSTACK-127] Add state for all companies fields that can be registered
   // Input field values for registering a company as state
   const [name, setName] = useState("");
+  const [logo, setLogo] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [kvkNumber, setKvkNumber] = useState("");
@@ -224,6 +226,7 @@ const RegisterCompany = () => {
     const data = {
       // TODO: [MERNSTACK-132] Add all companies fields that can be registered
       name: name,
+      logo: logo,
       email: email,
       phone: phone,
       kvkNumber: kvkNumber,
@@ -290,6 +293,25 @@ const RegisterCompany = () => {
           ) : (
             ""
           )}
+        </div>
+        {/* Company logo */}
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Logo</label>
+          <div className="w-full">
+            <div className="flex justify-center">
+              <UploadAvatar setLogo={setLogo} />
+            </div>
+            {logo ? (
+              <label className="text-xl mr-4 text-gray-500">Preview</label>
+            ) : (
+              ""
+            )}
+            <div className="flex justify-center">
+              {logo && (
+                <img src={logo} alt="Preview" width="200" height="200" />
+              )}
+            </div>
+          </div>
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Email</label>
