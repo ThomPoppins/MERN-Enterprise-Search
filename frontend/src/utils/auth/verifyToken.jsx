@@ -2,7 +2,6 @@ import axios from "axios";
 import { BACKEND_URL } from "../../../config.js";
 import store from "../../store/store.jsx";
 import { USER_ID, USER } from "../../store/actions.jsx";
-import { useSelector } from "react-redux";
 
 const verifyToken = async (token) => {
   if (token) {
