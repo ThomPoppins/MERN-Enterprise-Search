@@ -24,6 +24,13 @@ const CompanyModal = ({ owners, company, onClose }) => {
           {company.startYear}
         </h2>
         <h4 className="my-2 text-gray-500">KVK: {company.kvkNumber}</h4>
+        <div className="flex justify-center items-center gap-x-2 mb-4">
+          <img
+            className="w-[250px] h-[250px] rounded-full"
+            src={company.logo}
+            alt={company.name}
+          />
+        </div>
         <div className="flex justify-start items-center gap-x-2">
           <FcBriefcase className="text-red-300 text-2xl" />
           <h2 className="my-1">{company.name}</h2>

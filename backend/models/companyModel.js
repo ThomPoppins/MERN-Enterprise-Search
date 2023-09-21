@@ -4,6 +4,7 @@ import mongoose from "mongoose";
  * Mongoose Schema for Company
  * @typedef {Object} CompanySchema
  * @property {string} name - The name of the company.
+ * @property {string} logo - The logo of the company in Base64 format.
  * @property {string} email - The email address for company correspondence).
  * @property {string} phone - The contact phone number for the company.
  * @property {string} kvkNumber - KVK number of the company.
@@ -55,6 +56,12 @@ const companySchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
+    },
+    // `logo` is the company logo in Base64 format.
+    logo: {
+      type: String,
+      required: false,
+      default: "",
     },
     // company email address for correspondence directed to the company with this application.
     // TODO: [MERNSTACK-134] Send confirmation e-mail to this address to verify the company email address.

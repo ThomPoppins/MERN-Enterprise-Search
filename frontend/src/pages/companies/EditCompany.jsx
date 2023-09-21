@@ -30,6 +30,7 @@ const EditCompany = () => {
 
   // Input field values for editing a company as state
   const [name, setName] = useState("");
+  const [logo, setLogo] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [kvkNumber, setKvkNumber] = useState("");
@@ -207,6 +208,7 @@ const EditCompany = () => {
         setLoading(false);
         // TODO: [MERNSTACK-131] Set state for all companies fields that can be edited
         setName(response.data.name);
+        setLogo(response.data.logo);
         setEmail(response.data.email);
         setPhone(response.data.phone);
         setKvkNumber(response.data.kvkNumber);
@@ -281,6 +283,7 @@ const EditCompany = () => {
 
     const data = {
       name: name,
+      logo: logo,
       email: email,
       phone: phone,
       kvkNumber: kvkNumber,
@@ -487,6 +490,25 @@ const EditCompany = () => {
           ) : (
             ""
           )}
+        </div>
+        {/* Company logo */}
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Logo</label>
+          <div className="w-full">
+            <div className="flex justify-center">
+              <UploadAvatar setLogo={setLogo} />
+            </div>
+            {logo ? (
+              <label className="text-xl mr-4 text-gray-500">Preview</label>
+            ) : (
+              ""
+            )}
+            <div className="flex justify-center">
+              {logo && (
+                <img src={logo} alt="Preview" width="200" height="200" />
+              )}
+            </div>
+          </div>
         </div>
         {/* Comany Email input field */}
         <div className="my-4">
