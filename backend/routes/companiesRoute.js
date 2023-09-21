@@ -131,7 +131,7 @@ router.put("/:id", async (request, response) => {
     const { id } = request.params;
 
     // Check if the company kvkNumber is changed and if it changed, check if the new kvkNumber already exists in the database
-    const prevCompany = Company.findById(id);
+    const prevCompany = await Company.findById(id).exec();
     if (request.body.kvkNumber !== prevCompany.kvkNumber) {
       const existingCompanyKvk = await Company.findOne({
         kvkNumber: request.body.kvkNumber,
