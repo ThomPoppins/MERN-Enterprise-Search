@@ -46,6 +46,12 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: "",
     },
+    // `invites` is an array of `Invite` object IDs
+    invites: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Invite",
+      default: [],
+    },
   },
   { timestamps: true }
 );
