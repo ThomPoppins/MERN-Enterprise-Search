@@ -8,9 +8,6 @@ import {
 const booksListShowTypeReducer = (state = "card", action) => {
   switch (action.type) {
     case BOOKS_LIST_SHOW_TYPE:
-      // return a new state object
-      // the new state object is a copy of the old state object
-      // with the showType property updated
       return action.payload;
     default:
       return state;
@@ -20,9 +17,6 @@ const booksListShowTypeReducer = (state = "card", action) => {
 const companiesListShowTypeReducer = (state = "card", action) => {
   switch (action.type) {
     case COMPANIES_LIST_SHOW_TYPE:
-      // return a new state object
-      // the new state object is a copy of the old state object
-      // with the showType property updated
       return action.payload;
     default:
       return state;
@@ -32,9 +26,6 @@ const companiesListShowTypeReducer = (state = "card", action) => {
 const userIdReducer = (state = null, action) => {
   switch (action.type) {
     case USER_ID:
-      // return a new state object
-      // the new state object is a copy of the old state object
-      // with the userLoggedIn property updated
       return action.payload;
     default:
       return state;
@@ -45,9 +36,6 @@ const userIdReducer = (state = null, action) => {
 const userReducer = (state = null, action) => {
   switch (action.type) {
     case USER:
-      // return a new state object
-      // the new state object is a copy of the old state object
-      // with the user property updated
       return action.payload;
     default:
       return state;
