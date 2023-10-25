@@ -7,11 +7,17 @@ import usersRoute from "./routes/usersRoute.js";
 import authRoute from "./routes/authRoute.js";
 import kvkRoute from "./routes/kvkRoute.js";
 import cors from "cors";
+import bodyParser from "body-parser";
 
 const app = express();
 
 // Middleware to parse the request body as JSON.
 app.use(express.json());
+
+// Middleware to parse the request body as JSON. Size is increased to 30mb.
+app.use(bodyParser.json({ limit: "500mb" }));
+// Middleware to parse the request body as URL encoded data.
+app.use(bodyParser.urlencoded({ limit: "500mb", extended: true }));
 
 // TODO: [MERNSTACK-113] Configure CORS properly before deployment.
 // Example CORS configuration:

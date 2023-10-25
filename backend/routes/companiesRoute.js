@@ -1,3 +1,5 @@
+// @ts-check
+
 import express from "express";
 import { Company } from "../models/companyModel.js";
 import { v4 as uuidv4 } from "uuid";
@@ -133,7 +135,7 @@ router.put("/:id", async (request, response) => {
 
     // Check if the company kvkNumber is changed and if it changed, check if the new kvkNumber already exists in the database
     const prevCompany = await Company.findById(id).exec();
-    if (request.body.kvkNumber !== prevCompany.kvkNumber) {
+    if (prevCompany && request.body.kvkNumber !== prevCompany.kvkNumber) {
       const existingCompanyKvk = await Company.findOne({
         kvkNumber: request.body.kvkNumber,
       });
@@ -197,7 +199,7 @@ router.put("/:companyId/add-owner/:userId", async (request, response) => {
     const company = await Company.findById(companyId);
 
     if (!company) {
-      console.logo(`Cannot find company with id=${companyId}.`);
+      console.log(`Cannot find company with id=${companyId}.`);
       return response.status(404).json({
         message: `Cannot find company with id=${companyId}.`,
       });
@@ -206,6 +208,10 @@ router.put("/:companyId/add-owner/:userId", async (request, response) => {
     const newOwner = {
       userId: userId,
     };
+
+    if (!company.owners) {
+      company.owners = [];
+    }
 
     company.owners.push(newOwner);
 
@@ -226,9 +232,16 @@ router.put("/:companyId/remove-owner/:userId", async (request, response) => {
     const company = await Company.findById(companyId);
 
     if (!company) {
-      console.logo(`Cannot find company with id=${companyId}.`);
+      console.log(`Cannot find company with id=${companyId}.`);
       return response.status(404).json({
         message: `Cannot find company with id=${companyId}.`,
+      });
+    }
+
+    if (!company.owners) {
+      console.log(`Cannot find owners in company with id=${companyId}.`);
+      return response.status(404).json({
+        message: `Cannot find owners in company with id=${companyId}.`,
       });
     }
 
