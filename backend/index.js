@@ -14,6 +14,7 @@ const app = express();
 // Middleware to parse the request body as JSON.
 app.use(express.json());
 
+// TODO: [MERNSTACK-202] Fix backend error "PayloadTooLargeError: request entity too large" wanneer de afbeeldingdata te groot is voor ExpressJS (https://www.webslesson.info/2022/05/upload-file-in-node-js-express-using-multer.html)
 // Middleware to parse the request body as JSON. Size is increased to 30mb.
 app.use(bodyParser.json({ limit: "500mb" }));
 // Middleware to parse the request body as URL encoded data.
