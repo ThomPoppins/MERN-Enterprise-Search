@@ -51,28 +51,32 @@
 
 To run this application locally, follow these steps:
 
+0. Create a (free) MongoDB database to connect with and obtain a MongoDB connection URL.
+
 1. **Clone the Repository**:
    ```bash
-   git clone git@github.com:ThomPoppins/MERN_STACK_PROJ..git
+   git clone git@github.com:ThomPoppins/MERN_STACK_PROJ..git MERN_STACK_PROJ && cd MERN_STACK_PROJ
    ```
 
 2. **Set Up Backend Configuration**:
-   - Navigate to the `/backend` folder.
-   - Create a `config.js` file if it doesn't exist.
-   - Add the following constants and export them:
+   - Navigate to the `/backend` folder in your file explorer.
+   - Create a `config.js` file.
+   - Add the following constants and update them to your personal values:
      ```javascript
      // backend/config.js
      // port for the server to listen on
      export const PORT = 5555;
-     // MongoDB database connection URL
-     export const mongoDBURL = 'YourMongoDBDatabaseConnectionURLWithUsernamePasswordAuthenticationHere';
-     // Secret key for JWT signing and encryption
+
+     // YOUR MongoDB database connection URL (if you want to test this application without creating your own database, contact me at thompoppins@gmail.com, I'll provide you with a database URL)
+     export const mongoDBURL = 'mongodb+srv://exampleuser:examplepasswork@example-mern-stack-project.xhvmidl.mongodb.net/?retryWrites=true&w=majority';
+
+     // Secret key for JWT signing and encryption (just generate a random string or keep it like it is for testing purposes)
      export const JWT_SECRET = "yoursecretkey";
 
-     // TEST API key for KVK API
+     // TEST API key for KVK API (also required)
      export const KVK_TEST_API_KEY = "l7xx1f2691f2520d487b902f4e0b57a0b197";
 
-     // PROD API key for KVK API
+     // PROD API key for KVK API (also required)
      export const KVK_PROD_API_KEY = "";
      ```
 
@@ -83,7 +87,7 @@ To run this application locally, follow these steps:
      ```javascript
      // frontend/config.js
      export const BACKEND_URL = 'http://localhost:5555';
-     // Disable company validation by KVK API (If you want to test this, mail me at thompoppins@gmail.com for instructions how to set this up.)
+     // Disable company validation by KVK API (If you want to test the KVK company validation, mail me at thompoppins@gmail.com for instructions how to set this up.)
      export const TEST_KVK_API = false;
      ```
 
