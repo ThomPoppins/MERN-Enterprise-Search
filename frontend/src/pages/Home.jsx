@@ -11,14 +11,15 @@ const Home = () => {
       <div>
         <Navbar />
         <div className="mx-auto p-5">
-          <h1 className="text-3xl my-2">
-            Welcome to your account {user?.firstName} {user?.lastName}!
-          </h1>
           <img
             src={user?.profilePicture}
             alt="profile picture"
-            className="w-32 h-32 mt-2"
+            className="w-64 h-64 mt-2 rounded-full"
           />
+          <h1 className="text-3xl my-2">
+            Welcome {user?.firstName} {user?.lastName}!
+          </h1>
+
           <p className="text-gray-500 text-sm">
             {user ? "@" + user?.username : ""}
           </p>
@@ -26,8 +27,8 @@ const Home = () => {
 
         <div className="mx-auto p-5">
           <p className="">
-            Visit Companies link to see some of this this application's features
-            in action.
+            Visit the Companies link in the navigation bar to see some of this
+            this application's features in action.
           </p>
         </div>
       </div>
