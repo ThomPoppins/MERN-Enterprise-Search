@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import booksRoute from "./routes/booksRoute.js";
 import companiesRoute from "./routes/companiesRoute.js";
 import usersRoute from "./routes/usersRoute.js";
+import invitesRoute from "./routes/invitesRoute.js";
 import authRoute from "./routes/authRoute.js";
 import kvkRoute from "./routes/kvkRoute.js";
 import cors from "cors";
@@ -46,6 +47,7 @@ app.get("/", (request, response) => {
 app.use("/books", booksRoute);
 app.use("/companies", companiesRoute);
 app.use("/users", usersRoute);
+app.use("/invites", invitesRoute);
 app.use("/auth", authRoute);
 app.use("/kvk", kvkRoute);
 
