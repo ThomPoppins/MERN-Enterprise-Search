@@ -73,6 +73,7 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
         <BiShow
           className="text-3xl text-blue-800 hover:text-black cursor-pointer"
           onClick={() => setShowModal(true)}
+          data-test-id="show-button"
         />
         <Link to={`/companies/details/${company._id}`}>
           <BsInfoCircle className="text-green-800 text-2xl hover:text-black" />
@@ -83,6 +84,7 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
         <MdOutlineDelete
           onClick={() => setShowDeleteModal(true)}
           className="text-red-600 text-2xl hover:text-black"
+          data-test-id="delete-button"
         />
       </div>
       {showModal && (
