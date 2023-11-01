@@ -3,20 +3,19 @@
 - [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
 - [Getting Started](#getting-started)
 - [Application Description](#application-description)
-- [TODO (and DONE):](#todo-and-done)
-- [Features v0.0.1:](#features-v001)
+- [Versions:](#versions)
+  - [v0.0.1:](#v001)
   - [User Account Management](#user-account-management)
     - [Registering an Account](#registering-an-account)
     - [Logging In](#logging-in)
   - [Company Registration and Ownership](#company-registration-and-ownership)
     - [How to Register a Company:](#how-to-register-a-company)
     - [How to add a co-owner to a company:](#how-to-add-a-co-owner-to-a-company)
-- [Unfinished features (in development for future versions):](#unfinished-features-in-development-for-future-versions)
-  - [User Privilege Management and Admin Authorization](#user-privilege-management-and-admin-authorization)
+- [TODO and DONE:](#todo-and-done)
+- [Technologies used:](#technologies-used)
   - [Frontend](#frontend)
     - [React](#react)
     - [Redux](#redux)
-    - [react-redux](#react-redux)
     - [Vite.js:](#vitejs)
   - [Backend](#backend)
     - [Express.js](#expressjs)
@@ -42,6 +41,8 @@
 - [Testing:](#testing)
   - [Mocha and Chai](#mocha-and-chai)
   - [Postman](#postman)
+- [Unfinished features (for future versions):](#unfinished-features-for-future-versions)
+  - [User Privilege Management and Admin Authorization](#user-privilege-management-and-admin-authorization)
 
 
 
@@ -50,23 +51,33 @@
 
 To run this application locally, follow these steps:
 
+0. Create a (free) MongoDB database to connect with and obtain a MongoDB connection URL.
+
 1. **Clone the Repository**:
    ```bash
-   git clone git@github.com:ThomPoppins/MERN_STACK_PROJ..git
+   git clone git@github.com:ThomPoppins/MERN_STACK_PROJ..git MERN_STACK_PROJ && cd MERN_STACK_PROJ
    ```
 
 2. **Set Up Backend Configuration**:
-   - Navigate to the `/backend` folder.
-   - Create a `config.js` file if it doesn't exist.
-   - Add the following constants and export them:
+   - Navigate to the `/backend` folder in your file explorer.
+   - Create a `config.js` file.
+   - Add the following constants and update them to your personal values:
      ```javascript
      // backend/config.js
      // port for the server to listen on
      export const PORT = 5555;
-     // MongoDB database connection URL
-     export const mongoDBURL = 'YourMongoDBDatabaseConnectionURLWithUsernamePasswordAuthenticationHere';
-     // Secret key for JWT signing and encryption
+
+     // YOUR MongoDB database connection URL (if you want to test this application without creating your own database, contact me at thompoppins@gmail.com, I'll provide you with a database URL)
+     export const mongoDBURL = 'mongodb+srv://exampleuser:examplepasswork@example-mern-stack-project.xhvmidl.mongodb.net/?retryWrites=true&w=majority';
+
+     // Secret key for JWT signing and encryption (just generate a random string or keep it like it is for testing purposes)
      export const JWT_SECRET = "yoursecretkey";
+
+     // TEST API key for KVK API (also required)
+     export const KVK_TEST_API_KEY = "l7xx1f2691f2520d487b902f4e0b57a0b197";
+
+     // PROD API key for KVK API (also required)
+     export const KVK_PROD_API_KEY = "";
      ```
 
 3. **Set Up Frontend Configuration**:
@@ -76,7 +87,7 @@ To run this application locally, follow these steps:
      ```javascript
      // frontend/config.js
      export const BACKEND_URL = 'http://localhost:5555';
-     // Disable company validation by KVK API (If you want to test this, mail me at thompoppins@gmail.com for instructions how to set this up.)
+     // Disable company validation by KVK API (If you want to test the KVK company validation, mail me at thompoppins@gmail.com for instructions how to set this up.)
      export const TEST_KVK_API = false;
      ```
 
@@ -108,16 +119,50 @@ Now you have the application up and running locally!
 
 # Application Description
 
-Welcome to my FullStack JavaScript application built with Express.js on the backend and React with Redux on the frontend. This application leverages the power of Axios for seamless communication between the two layers. MongoDB serves as the database, and Mongoose is our trusted tool for connecting and interacting with it.
+Welcome to my FullStack JavaScript application built with Express.js on the backend and React with Redux on the frontend. The final business model for this project remains a secret for now, but you can check out the features below to get an idea of what this application is all about.
 
-# TODO (and DONE):
+# Versions:
 
-> **Note**: All TODO's are linked to Jira tickets where I manage my project.
+## v0.0.1:
 
-- [x] Install nodemon, Express.js and Mongoose and connect Mongoose to the MongoDB database.
-- [x] Express.js server listens to PORT 5555 after successful connection to MongoDB database.
-- [x] Finish basic Book schema and model. For faster functional development and testing purposes.
-- [x] Set up TODO list while completing the company schema and model to get a good view of the requirements of all Company linked business logic.
+## User Account Management
+
+### Registering an Account
+
+Users can easily create an account by visiting the homepage of my application. The registration process is straightforward and requires users to provide basic information such as their email address, a secure password, and any additional required details. Once registered, users gain access to the full suite of functionalities offered by the application.
+
+### Logging In
+
+Registered users can log in to their accounts using their previously provided credentials. This allows them to access and utilize all features and services provided by the application. The login process is secure and ensures that only authorized users can access their accounts.
+
+## Company Registration and Ownership
+
+Upon logging in to their account, users have the capability to register a company that they own. This action automatically designates the user as the owner of the registered company, granting them administrative privileges within the application.
+
+- **Ownership Privileges:** The user, upon registering a company, assumes the role of owner with full administrative control over the company's operations.
+
+### How to Register a Company:
+
+1. Log in to your account.
+2. Navigate to Companies
+3. Click the plus icon to add a new company.
+4. Fill in company details with KVK-number and submit the registration form.
+
+Upon successful registration and validation from the KVK API, the user will be recognized as the owner of the company and will have access to all administrative functionalities associated with it.
+
+### How to add a co-owner to a company:
+
+1. Log in to your account.
+2. Navigate to Companies
+3. Click the pencil icon to edit a company.
+4. Search for a user by name, username or email.
+5. Click the add button to add the user as a owner to the company.
+
+# TODO and DONE:
+
+> **NOTE:** This is a list of all the tasks that I am working on right now and also which I've completed so far. I've created Jira issues for them all and the corresponding Jira issue number is between [].
+
+
 - [x] [MERNSTACK-103] Start using testing frameworks Mocha and Chai to write automated tests for the endpoints and ensure that the code is working correctly.
 - [x] [MERNSTACK-74] Set up `Company` model.
 - [x] [MERNSTACK-65] Create a route to save a new Company document in the database.
@@ -130,16 +175,12 @@ Welcome to my FullStack JavaScript application built with Express.js on the back
 - [x] [MERNSTACK-98] Test companyRouter PUT route `/:id` for updating a single company with Postman.
 - [x] [MERNSTACK-69] Create a route to delete a single Company document from the database.
 - [x] [MERNSTACK-99] Test companyRouter DELETE route `/:id` for deleting a single company with Postman.
-- [x] Actualize, complete and correct Company scheme documentation.
-- [x] Avoid working with the complex Company scheme in early stage of development. Work with Book scheme instead until later when ready.
 - [x] [MERNSTACK-70] Set up GET, POST, PUT and DELETE Book server routes.
 - [x] [MERNSTACK-51] Create Jira tickets for all TODOs.
 - [x] [MERNSTACK-53] Create GET, POST, PUT and DELETE Company server routes.
 - [x] [MERNSTACK-55] Create User model.
 - [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
 - [x] [MERNSTACK-59] Create one-to-many relationship between Owner and Company in the Owner schema. This will allow to associate each Owner document with multiple Company documents. UPDATE: This is not needed because the Company schema will have an `owners` field that will be an array of owner objects with `userId` field.
-- [x] Create React app using Vite.js.
-- [x] Move Vite.js documentation from backend devdocs folder to frontend devdocs folder
 - [x] [MERNSTACK-56] Create login and register functionality. Hash user password on register and compare hashed password on login. (see backend devdocs folder)
 - [x] [MERNSTACK-60] Create `user` authentication and authorization functionality using JSON Web Token authorization. (see backend devdocs folder)
 - [x] [MERNSTACK-58] When user is logged in, create a form to register a company and make user owner. Owner has admin rights at first when creating his account and registering his company.
@@ -213,83 +254,9 @@ Welcome to my FullStack JavaScript application built with Express.js on the back
 - [x] [MERNSTACK-207] Save the profile picture Base64 string to the database
 - [ ] [MERNSTACK-208] Create default page layout that all pages will become children of
 - [x] [MERNSTACK-210] Change text color to white when background image is set
-- [ ] Add background color with opacity to all places where text is displayed on top of the background image
+- [ ] [MERNSTACK-211] Add background color with opacity to all places where text is displayed on top of the background image.
 
-
-# Features v0.0.1:
-
-## User Account Management
-
-### Registering an Account
-
-Users can easily create an account by visiting the homepage of our application. The registration process is straightforward and requires users to provide basic information such as their email address, a secure password, and any additional required details. Once registered, users gain access to the full suite of functionalities offered by the application.
-
-### Logging In
-
-Registered users can log in to their accounts using their previously provided credentials. This allows them to access and utilize all features and services provided by the application. The login process is secure and ensures that only authorized users can access their accounts.
-
-## Company Registration and Ownership
-
-Upon logging in to their account, users have the capability to register a company that they own. This action automatically designates the user as the owner of the registered company, granting them administrative privileges within the application.
-
-- **Ownership Privileges:** The user, upon registering a company, assumes the role of owner with full administrative control over the company's operations.
-
-### How to Register a Company:
-
-1. Log in to your account.
-2. Navigate to Companies
-3. Click the plus icon to add a new company.
-4. Fill in company details with KVK-number and submit the registration form.
-
-Upon successful registration and validation from the KVK API, the user will be recognized as the owner of the company and will have access to all administrative functionalities associated with it.
-
-### How to add a co-owner to a company:
-
-1. Log in to your account.
-2. Navigate to Companies
-3. Click the pencil icon to edit a company.
-4. Search for a user by name, username or email.
-5. Click the add button to add the user as a owner to the company.
-
-
-# Unfinished features (in development for future versions):
-
-## User Privilege Management and Admin Authorization
-
-My application offers robust user privilege management with a seamless admin authorization process to enhance security and control within your company. Here's a detailed breakdown of this functionality:
-
-1. **User Registration and Company Ownership:**
-
-   - Upon registration, users can become owners of their respective companies, granting them enhanced control over their account settings.
-
-2. **Admin Rights Management:**
-
-   - Within their account settings, owners will find an "Admin Rights" setting that is initially disabled by default. This setting allows them to perform actions that require admin authorization.
-
-3. **Enabling Admin Rights:**
-
-   - When the owner wishes to execute actions that require admin privileges, they can easily enable the "Admin Rights" setting.
-
-4. **Automatic Disabling:**
-
-   - To maintain security and compliance, if the owner does not execute admin actions for a certain period, the system will automatically disable admin rights. Users will receive a notification when this happens.
-
-5. **Warning and Confirmation:**
-
-   - When the owner attempts an action with significant administrative impact, the frontend will proactively warn them about the potential consequences. This includes prompting for confirmation before proceeding.
-
-6. **Streamlined Admin Deactivation:**
-
-   - After successfully executing an admin-authorized action, the system will provide an immediate option to disable admin rights with a simple switch-off button directly in the prompt. This user-centric approach ensures a hassle-free and secure experience.
-
-7. **Continue Button:**
-   - For added convenience, users can also choose to close the prompt by clicking the "Continue" button. This button will be color-coded, red when admin rights are enabled and green when disabled, making it easy for users to discern their current status at a glance.
-
-My application prioritizes both security and user-friendliness, empowering company owners to efficiently manage their admin privileges while maintaining a high level of control and awareness.
-
-
-
-***Feel free to clone this repository to see these concepts in action and dive into [my code](https://github.com/ThomPoppins/MERN_STACK_PROJ.)!***
+# Technologies used:
 
 ## Frontend
 
@@ -319,14 +286,6 @@ Redux is a state management library that is often used in conjunction with React
 
 - **Ecosystem integration:** React and Redux have large and active ecosystems of libraries and tools, making it easy to integrate with other technologies and solve common problems.
 
-### react-redux
-
-The `react-redux` library is a popular library that makes it easy to implement Redux in a JavaScript React application. It provides a set of bindings between React and Redux, allowing you to easily connect your React components to the Redux store and dispatch actions.
-
-**Combining state management by React and Redux:** When using both useState() and Redux together, I can use useState() to manage local component state and Redux to manage global application state. This allows me to keep my state management organized and scalable, while still providing a simple and lightweight way to manage local state within individual components.
-
-For example, I use useState() to manage the state of a form within a component, while using Redux to manage the state of the user's authentication status across the entire application. By combining useState() and Redux, I can create a flexible and scalable state management system that meets the needs of my application.
-
 ### Vite.js:
 
 The React frontend application was installed using Vite.js, a modern build tool that provides fast development server and efficient build process.
@@ -338,8 +297,6 @@ The React frontend application was installed using Vite.js, a modern build tool 
 - **Modern web technologies:** Vite.js supports modern web technologies out of the box, including ES modules, TypeScript, and CSS modules. This makes it easy to build modern, high-performance web applications.
 
 - **Plugin ecosystem:** Vite.js has a growing ecosystem of plugins that can be used to extend its functionality. This includes plugins for things like CSS preprocessing, image optimization, and more.
-
-Overall, using Vite.js to install a React project can help you build faster, more efficient, and more modern web applications.
 
 ## Backend
 
@@ -424,15 +381,9 @@ By implementing user authentication with JWTs, this repository ensures a robust 
 
 # Models:
 
-Mongoose schema and model provide a convenient and flexible way to define and create models in MongoDB. By using Mongoose, developers can:
+Mongoose schema and model provide a convenient and flexible way to define and create models in MongoDB. This makes it easy to validate and enforce data consistency. 
 
-- Define the structure of their data using a schema, which makes it easier to validate and enforce data consistency.
-- Use a wide range of data types and validators to ensure that their data is stored correctly and consistently.
-- Create reusable models that can be used across multiple parts of their application, reducing code duplication and improving maintainability.
-- Use Mongoose's built-in methods to interact with the database, making it easier to perform common operations like creating, reading, updating, and deleting documents.
-- Take advantage of Mongoose's middleware system to add custom behavior to their models, such as pre- and post-save hooks, virtual properties, and more.
-- Use Mongoose's query builder to construct complex queries that can be easily modified and reused.
-- Benefit from Mongoose's integration with other Node.js libraries and frameworks, such as Express, which makes it easier to build scalable and maintainable applications.
+It also provides a wide range of data types and validators, making it easy to ensure that my data is stored correctly and consistently. 
 
 ### Company
 
@@ -654,3 +605,43 @@ Postman is a popular tool for testing and debugging APIs, and it provides severa
 
 Overall, Postman provides a powerful and flexible toolset for testing and debugging APIs, and it is widely used in the development community for this purpose.
 
+
+
+# Unfinished features (for future versions):
+
+## User Privilege Management and Admin Authorization
+
+My application offers robust user privilege management with a seamless admin authorization process to enhance security and control within your company. Here's a detailed breakdown of this functionality:
+
+1. **User Registration and Company Ownership:**
+
+   - Upon registration, users can become owners of their respective companies, granting them enhanced control over their account settings.
+
+2. **Admin Rights Management:**
+
+   - Within their account settings, owners will find an "Admin Rights" setting that is initially disabled by default. This setting allows them to perform actions that require admin authorization.
+
+3. **Enabling Admin Rights:**
+
+   - When the owner wishes to execute actions that require admin privileges, they can easily enable the "Admin Rights" setting.
+
+4. **Automatic Disabling:**
+
+   - To maintain security and compliance, if the owner does not execute admin actions for a certain period, the system will automatically disable admin rights. Users will receive a notification when this happens.
+
+5. **Warning and Confirmation:**
+
+   - When the owner attempts an action with significant administrative impact, the frontend will proactively warn them about the potential consequences. This includes prompting for confirmation before proceeding.
+
+6. **Streamlined Admin Deactivation:**
+
+   - After successfully executing an admin-authorized action, the system will provide an immediate option to disable admin rights with a simple switch-off button directly in the prompt. This user-centric approach ensures a hassle-free and secure experience.
+
+7. **Continue Button:**
+   - For added convenience, users can also choose to close the prompt by clicking the "Continue" button. This button will be color-coded, red when admin rights are enabled and green when disabled, making it easy for users to discern their current status at a glance.
+
+My application prioritizes both security and user-friendliness, empowering company owners to efficiently manage their admin privileges while maintaining a high level of control and awareness.
+
+
+
+***Feel free to clone this repository to see these concepts in action and dive into [my code](https://github.com/ThomPoppins/MERN_STACK_PROJ.)!***
