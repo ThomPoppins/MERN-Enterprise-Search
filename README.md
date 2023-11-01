@@ -3,7 +3,7 @@
 - [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
 - [Getting Started](#getting-started)
 - [Application Description](#application-description)
-- [TODO/DONE:](#tododone)
+- [TODO (and DONE):](#todo-and-done)
   - [Frontend](#frontend)
     - [React](#react)
     - [Redux](#redux)
@@ -114,7 +114,7 @@ Now you have the application up and running locally!
 
 Welcome to my FullStack JavaScript application built with Express.js on the backend and React with Redux on the frontend. This application leverages the power of Axios for seamless communication between the two layers. MongoDB serves as the database, and Mongoose is our trusted tool for connecting and interacting with it.
 
-# TODO/DONE:
+# TODO (and DONE):
 
 > **Note**: All TODO's are linked to Jira tickets where I manage my project.
 

@@ -46,6 +46,12 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: "",
     },
+    // `profilePicture` is a Base64 encoded string
+    profilePicture: {
+      type: String,
+      required: false,
+      default: "",
+    },
     // `invites` is an array of `Invite` object IDs
     invites: {
       type: [mongoose.Schema.Types.ObjectId],
