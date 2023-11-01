@@ -31,13 +31,13 @@ const CompaniesSingleRow = ({ company, updateCompanies }) => {
 
   return (
     <>
-      <td className="border border-purple-900 bg-violet-950/80 rounded-md text-center">
+      <td className="border border-purple-900 bg-violet-950/40 rounded-md text-center">
         {company.kvkNumber}
       </td>
-      <td className="border border-purple-900 bg-violet-950/80 rounded-md text-left pl-3">
+      <td className="border border-purple-900 bg-violet-950/40 rounded-md text-left pl-3">
         {company.name}
       </td>
-      <td className="border border-purple-900 bg-violet-950/80 rounded-md text-center">
+      <td className="border border-purple-900 bg-violet-950/40 rounded-md text-center">
         <div className="flex justify-center gap-x-4">
           <BiShow
             className="text-3xl text-white hover:text-green-300 cursor-pointer"

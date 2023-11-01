@@ -38,15 +38,17 @@ const InvitesList = () => {
         <table className="w-3/4 border-separate border-spacing-2">
           <thead>
             <tr>
-              <th className="border border-slate-600 rounded-md w-[400px]">
+              <th className="border-4 border-purple-900 bg-violet-950/80 rounded-md w-[400px]">
                 From
               </th>
-              <th className="border border-slate-600 rounded-md pl-3">Kind</th>
-              <th className="border border-slate-600 rounded-md w-[175px] pl-3">
+              <th className="border-4 border-purple-900 bg-violet-950/80 rounded-md pl-3">
+                Kind
+              </th>
+              <th className="border-4 border-purple-900 bg-violet-950/80 rounded-md w-[175px] pl-3">
                 Status
               </th>
               {/* max-md:hidden hides this column on mobile devices and tablets */}
-              <th className="border border-slate-600 rounded-md w-[180px]">
+              <th className="border-4 border-purple-900 bg-violet-950/80 rounded-md w-[180px]">
                 Operations
               </th>
             </tr>
@@ -55,7 +57,7 @@ const InvitesList = () => {
             {/* {console.log("Invites in JSX", invites)} */}
             {invites?.map((invite) => (
               <tr key={invite._id}>
-                <td>
+                <td className="border-purple-900 bg-violet-950/40">
                   <img
                     className="rounded-full mr-4 float-left"
                     width="50"
@@ -65,7 +67,7 @@ const InvitesList = () => {
                   />
                   <div className="flex flex-col">
                     <div>
-                      <span className="text-xl mr-4 text-gray-500">
+                      <span className="text-xl mr-4">
                         {invite.sender.firstName} {invite.sender.lastName}
                       </span>
                     </div>
@@ -76,8 +78,8 @@ const InvitesList = () => {
                     </div>
                   </div>
                 </td>
-                <td>
-                  <span className="text-xl mr-4 text-gray-500">
+                <td className="border-purple-900 bg-violet-950/40">
+                  <span className="text-xl mr-4">
                     {invite.kind === "company_ownership" ? (
                       <span>Ownership {invite.company.name}</span>
                     ) : invite.kind === "friend_request" ? (
@@ -89,13 +91,11 @@ const InvitesList = () => {
                     )}
                   </span>
                 </td>
-                <td>
-                  <span className="text-xl mr-4 text-gray-500">
-                    {invite.status}
-                  </span>
+                <td className="border-purple-900 bg-violet-950/40">
+                  <span className="text-xl mr-4">{invite.status}</span>
                 </td>
-                <td>
-                  <span className="text-xl mr-4 text-gray-500">
+                <td className="border-purple-900 bg-violet-950/40">
+                  <span className="text-xl mr-4">
                     <button>Accept</button>
                     <button>Decline</button>
                   </span>
