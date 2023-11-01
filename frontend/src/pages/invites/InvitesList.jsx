@@ -12,61 +12,37 @@ const InvitesList = () => {
   const userId = useSelector((state) => state.userId);
 
   const getInvites = async () => {
-    // Get invites from backend for current user as recipient
-    await axios
-      .get(BACKEND_URL + `/invites/recipient/${userId}`)
-      .then((response) => {
-        const invitesArray = [];
-
-        response.data.forEach(async (invite) => {
-          const currentInvite = {};
-
-          await axios
-            .get(BACKEND_URL + `/users/user/${invite.senderId}`) // TODO:Test this
-            .then((response) => {
-              console.log("Userdata: ", response.data);
-              currentInvite.senderUsername = response.data.username;
-              currentInvite.kind = invite.kind;
-              currentInvite.status = invite.status;
-
-              invitesArray.push(currentInvite);
-            })
-            .catch((error) => {
-              console.log("Error in InvitesList.jsx axios call: ", error);
-            });
-        });
-
-        console.log("invitesArray: ", invitesArray);
-
-        return invitesArray;
-      })
-      .catch((error) => {
-        console.log("Error in InvitesList.jsx axios call: ", error);
-      });
+    try {
+      const response = await axios.get(
+        `${BACKEND_URL}/invites/recipient/${userId}`
+      );
+      console.log("Invites response: ", response);
+      setInvites(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
-    const fetchInvites = async () => {
-      const data = await getInvites();
-      console.log("data: ", data);
-      setInvites(data);
-    };
-    fetchInvites();
-    console.log("useEffect");
+    getInvites();
   }, []);
+
+  useEffect(() => {
+    console.log("Invites in state: ", invites);
+  }, [invites]);
 
   return (
     <div>
       <Navbar />
       <div className="flex justify-center mt-4">
-        <table className="w-1/2 border-separate border-spacing-2">
+        <table className="w-3/4 border-separate border-spacing-2">
           <thead>
             <tr>
-              <th className="border border-slate-600 rounded-md w-[350px]">
+              <th className="border border-slate-600 rounded-md w-[400px]">
                 From
               </th>
               <th className="border border-slate-600 rounded-md pl-3">Kind</th>
-              <th className="border border-slate-600 rounded-md pl-3">
+              <th className="border border-slate-600 rounded-md w-[175px] pl-3">
                 Status
               </th>
               {/* max-md:hidden hides this column on mobile devices and tablets */}
@@ -76,18 +52,41 @@ const InvitesList = () => {
             </tr>
           </thead>
           <tbody>
-            {console.log("Invites in JSX", invites)}
-            {invites.map((invite) => (
-              <tr>
-                {console.log("Invite in JSX", invite)}
+            {/* {console.log("Invites in JSX", invites)} */}
+            {invites?.map((invite) => (
+              <tr key={invite._id}>
                 <td>
-                  <span className="text-xl mr-4 text-gray-500">
-                    &#64;{invite.senderUsername}
-                  </span>
+                  <img
+                    className="rounded-full mr-4 float-left"
+                    width="50"
+                    height="50"
+                    src={invite.sender.profilePicture}
+                    alt="profile picture"
+                  />
+                  <div className="flex flex-col">
+                    <div>
+                      <span className="text-xl mr-4 text-gray-500">
+                        {invite.sender.firstName} {invite.sender.lastName}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-xl mr-4 text-blue-500">
+                        &#64;{invite.sender.username}
+                      </span>
+                    </div>
+                  </div>
                 </td>
                 <td>
                   <span className="text-xl mr-4 text-gray-500">
-                    {invite.kind}
+                    {invite.kind === "company_ownership" ? (
+                      <span>Ownership {invite.company.name}</span>
+                    ) : invite.kind === "friend_request" ? (
+                      <span>Friend Request</span>
+                    ) : (
+                      <span className="text-red-600 font-bold">
+                        ERROR: Invite kind is unknown!
+                      </span>
+                    )}
                   </span>
                 </td>
                 <td>

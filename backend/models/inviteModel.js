@@ -14,7 +14,7 @@ const inviteSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    // `kind` is a string with possible values: "ownership", "friend", "other"
+    // `kind` is a string with possible values: "company_ownership", "friend", "other"
     kind: {
       type: String,
       required: true,

@@ -1,6 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import inviteModel from "../models/inviteModel.js";
+import { User } from "../models/userModel.js";
+import { Company } from "../models/companyModel.js";
 
 const router = express.Router();
 
@@ -9,9 +11,27 @@ router.get("/recipient/:userId", async (request, response) => {
   const { userId } = request.params;
 
   try {
-    const invites = await inviteModel.find({
+    // TODO: change to const if possible
+    let invites = await inviteModel.find({
       recipientId: new mongoose.Types.ObjectId(userId),
     });
+
+    invites = invites.map((invite) => invite.toObject());
+
+    // Add additional info to each invite
+    for (const invite of invites) {
+      // Add sender info
+      const sender = await User.findById(invite.senderId);
+      invite.sender = sender.toObject();
+
+      // Add company info
+      if (invite.companyId) {
+        const company = await Company.findById(invite.companyId);
+        invite.company = company.toObject();
+      }
+    }
+
+    console.log(invites);
 
     // Send status 200 response and the invites as JSON response if successful
     return response.status(200).json(invites);
