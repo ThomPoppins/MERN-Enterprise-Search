@@ -14,11 +14,16 @@ const inviteSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    // `event` is a `Event` object ID
-    event: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Event",
+    // `kind` is a string with possible values: "ownership", "friend", "other"
+    kind: {
+      type: String,
       required: true,
+      default: "other",
+    },
+    // `company` is a `Company` object ID (only required if `kind` is "ownership")
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company",
     },
     // `status` is a string with possible values: "pending", "accepted", "declined"
     status: {

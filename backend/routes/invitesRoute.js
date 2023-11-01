@@ -30,9 +30,12 @@ router.post("/", async (request, response) => {
   // Create a new invite document using the Invite model
   try {
     const newInvite = new inviteModel({
-      sender: request.body.sender,
-      recipient: request.body.recipient,
-      event: request.body.event,
+      sender: mongoose.Types.ObjectId(request.body.senderId),
+      recipient: mongoose.Types.ObjectId(request.body.recipientId),
+      kind: request.body.kind,
+      company: request.body.companyId
+        ? mongoose.Types.ObjectId(request.body.companyId)
+        : null,
       status: request.body.status,
     });
 

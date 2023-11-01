@@ -8,8 +8,6 @@ const InvitesList = () => {
   // Get userId state from Redux store
   const userId = useSelector((state) => state.userId);
 
-  console.log("userId", userId);
-
   const getInvites = () => {};
 
   return (
