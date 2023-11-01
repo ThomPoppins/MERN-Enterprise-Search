@@ -13,18 +13,27 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           <div className="text-white text-2xl font-bold">Vind Expert</div>
           <div className="hidden md:flex space-x-4">
-            <a href="#" className="text-white">
-              Home
-            </a>
-            <a href="#" className="text-white">
-              About
-            </a>
-            <a href="#" className="text-white">
-              Services
-            </a>
-            <a href="#" className="text-white">
-              Contact
-            </a>
+            {userId ? (
+              <div className="flex items-center space-x-2">
+                <img
+                  src={user?.profilePicture}
+                  alt="profile picture"
+                  className="w-8 h-8 rounded-full ml-2"
+                />
+                <Link to="/logout" className="text-white">
+                  Logout
+                </Link>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-2">
+                <Link to="/login" className="text-white">
+                  Login
+                </Link>
+                <Link to="/register" className="text-white">
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
