@@ -31,22 +31,6 @@ const Home = () => {
             in action.
           </p>
         </div>
-
-        <div className="mx-auto p-5">
-          <Link to="/companies">
-            <button className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mr-3">
-              Companies
-            </button>
-          </Link>
-        </div>
-
-        <div className="mx-auto p-5">
-          <Link to="/logout">
-            <button className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mr-3">
-              Logout
-            </button>
-          </Link>
-        </div>
       </div>
     );
   } else {
