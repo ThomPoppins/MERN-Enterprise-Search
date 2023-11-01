@@ -37,9 +37,9 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
   return (
     <div
       key={company._id}
-      className="border-2 border-gray-500 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl"
+      className="border-4 border-purple-900 bg-violet-950/80 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl"
     >
-      <h2 className="absolute top-1 right-2 px-4 py-1 bg-red-300 rounded-lg">
+      <h2 className="absolute top-1 right-2 px-4 py-1 bg-purple-500 rounded-lg">
         {company.startYear}
       </h2>
       <h4 className="my-2 text-gray-500">KVK: {company.kvkNumber}</h4>
@@ -71,19 +71,19 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
       </div>
       <div className="flex justify-between items-center gap-x-2 mt-4 p-4">
         <BiShow
-          className="text-3xl text-blue-800 hover:text-black cursor-pointer"
+          className="text-3xl text-white hover:text-green-300 cursor-pointer"
           onClick={() => setShowModal(true)}
           data-test-id="show-button"
         />
         <Link to={`/companies/details/${company._id}`}>
-          <BsInfoCircle className="text-green-800 text-2xl hover:text-black" />
+          <BsInfoCircle className="text-white text-2xl hover:text-green-300" />
         </Link>
         <Link to={`/companies/edit/${company._id}`}>
-          <AiOutlineEdit className="text-yellow-600 text-2xl hover:text-black" />
+          <AiOutlineEdit className="text-white text-2xl hover:text-green-300" />
         </Link>
         <MdOutlineDelete
           onClick={() => setShowDeleteModal(true)}
-          className="text-red-600 text-2xl hover:text-black"
+          className="text-red-600 text-2xl hover:text-orange-600"
           data-test-id="delete-button"
         />
       </div>

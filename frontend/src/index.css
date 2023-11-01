@@ -24,6 +24,7 @@ strong {
 
 .outer-div {
   background-image: url("../images/background/galaxy.jpg");
+  background-attachment: fixed;
 }
 
 /* Import TailwindCSS */
