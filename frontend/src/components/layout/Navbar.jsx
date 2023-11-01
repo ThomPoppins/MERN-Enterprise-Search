@@ -1,8 +1,12 @@
 // Navbar.tsx
-
 import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
+  let userId = useSelector((state) => state.userId);
+  let user = useSelector((state) => state.user);
+
   return (
     <nav className="bg-gray-800 p-4 shadow-lg">
       <div className="container mx-auto">

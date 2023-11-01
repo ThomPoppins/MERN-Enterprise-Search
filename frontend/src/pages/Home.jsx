@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Navbar from "../components/layout/Navbar";
 
 const Home = () => {
   let userId = useSelector((state) => state.userId);
@@ -9,6 +10,7 @@ const Home = () => {
   if (userId) {
     return (
       <div>
+        <Navbar />
         <div className="mx-auto p-5">
           <h1 className="text-3xl my-2">
             Welcome to your account {user?.firstName} {user?.lastName}!
