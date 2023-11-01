@@ -31,27 +31,27 @@ const CompaniesSingleRow = ({ company, updateCompanies }) => {
 
   return (
     <>
-      <td className="border border-slate-700 rounded-md text-center">
+      <td className="border border-purple-900 bg-violet-950/40 rounded-md text-center">
         {company.kvkNumber}
       </td>
-      <td className="border border-slate-700 rounded-md text-left pl-3">
+      <td className="border border-purple-900 bg-violet-950/40 rounded-md text-left pl-3">
         {company.name}
       </td>
-      <td className="border border-slate-700 rounded-md text-center">
+      <td className="border border-purple-900 bg-violet-950/40 rounded-md text-center">
         <div className="flex justify-center gap-x-4">
           <BiShow
-            className="text-3xl text-blue-800 hover:text-black cursor-pointer"
+            className="text-3xl text-white hover:text-green-300 cursor-pointer"
             onClick={() => setShowModal(true)}
           />
           <Link to={`/companies/details/${company._id}`}>
-            <BsInfoCircle className="text-2xl text-green-800" />
+            <BsInfoCircle className="text-2xl text-white hover:text-green-300" />
           </Link>
           <Link to={`/companies/edit/${company._id}`}>
-            <AiOutlineEdit className="text-2xl text-yellow-600" />
+            <AiOutlineEdit className="text-2xl text-white hover:text-green-300" />
           </Link>
           <MdOutlineDelete
             onClick={() => setShowDeleteModal(true)}
-            className="text-red-600 text-2xl hover:text-black"
+            className="text-red-600 text-2xl hover:text-orange-600"
           />
         </div>
       </td>

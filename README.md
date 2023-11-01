@@ -12,7 +12,7 @@
     - [How to Register a Company:](#how-to-register-a-company)
     - [How to add a co-owner to a company:](#how-to-add-a-co-owner-to-a-company)
 - [TODO and DONE:](#todo-and-done)
-- [Technologies used:](#technologies-used)
+- [Technologies:](#technologies)
   - [Frontend](#frontend)
     - [React](#react)
     - [Redux](#redux)
@@ -43,8 +43,6 @@
   - [Postman](#postman)
 - [Unfinished features (for future versions):](#unfinished-features-for-future-versions)
   - [User Privilege Management and Admin Authorization](#user-privilege-management-and-admin-authorization)
-
-
 
 
 # Getting Started
@@ -256,8 +254,11 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-210] Change text color to white when background image is set
 - [ ] [MERNSTACK-211] Add background color with opacity to all places where text is displayed on top of the background image.
 - [ ] [MERNSTACK-212] Create account edit page for account configurations.
+- [ ] [MERNSTACK-213] Complete styling on RegisterCompany page.
+- [x] [MERNSTACK-166] Validate validity and uniqueness of company KVK number
+- [ ] [MERNSTACK-214] Style all form input fields
 
-# Technologies used:
+# Technologies:
 
 ## Frontend
 

@@ -15,6 +15,7 @@
 body {
   font-family: "Poppins", sans-serif;
   color: white;
+  height: 100%;
 }
 
 strong {
@@ -24,6 +25,7 @@ strong {
 
 .outer-div {
   background-image: url("../images/background/galaxy.jpg");
+  background-attachment: fixed;
 }
 
 /* Import TailwindCSS */

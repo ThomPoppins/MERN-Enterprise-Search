@@ -71,11 +71,11 @@ const UserSearch = ({
   return (
     <div>
       <div className="my-4">
-        <label className="text-xl mr-4 text-gray-500">
+        <label className="text-xl mr-4">
           Search user to add as company owner:
         </label>
         <div className="my-4">
-          <p className="text-gray-400">
+          <p className="text-gray-300">
             <strong>Note:</strong> Register more accounts if you want results,
             search query will match on username, first name, last name and
             email.
@@ -110,7 +110,7 @@ const UserSearch = ({
             </div>
             <div>
               <button
-                className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto mb-4"
+                className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4"
                 value={user._id}
                 onClick={handleAddOwner}
                 data-test-id="add-owner-button"

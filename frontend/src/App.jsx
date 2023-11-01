@@ -9,7 +9,6 @@ import CompaniesList from "./pages/companies/CompaniesList";
 import RegisterCompany from "./pages/companies/RegisterCompany";
 import EditCompany from "./pages/companies/EditCompany";
 import ShowCompany from "./pages/companies/ShowCompany";
-import DeleteCompany from "./pages/companies/DeleteCompany";
 import LoginUser from "./pages/users/LoginUser";
 import RegisterUser from "./pages/users/RegisterUser";
 import LogoutUser from "./pages/users/LogoutUser";
@@ -43,7 +42,6 @@ const App = () => {
         <Route path="/companies/register" element={<RegisterCompany />} />
         <Route path="/companies/edit/:id" element={<EditCompany />} />
         <Route path="/companies/details/:id" element={<ShowCompany />} />
-        <Route path="/companies/delete/:id" element={<DeleteCompany />} />
         {/* /invites/* routes */}
         <Route path="/invites" element={<InvitesList />} />
         {/* /books/* routes */}

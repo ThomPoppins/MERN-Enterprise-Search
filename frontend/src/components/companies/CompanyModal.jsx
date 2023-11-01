@@ -14,15 +14,15 @@ const CompanyModal = ({ owners, company, onClose }) => {
       {/* https://stackoverflow.com/questions/4616694/what-is-event-bubbling-and-capturing */}
       <div
         onClick={(event) => event.stopPropagation()}
-        className="w-[600px] max-w-full h-auto bg-white rounded-xl p-4 flex flex-col relative"
+        className="w-[600px] max-w-full h-auto bg-gradient-to-l from-violet-950 to-purple-950 rounded-xl p-4 flex flex-col relative"
         data-test-id="company-modal"
       >
         <AiOutlineClose
-          className="absolute right-6 top-6 text-3xl text-red-600 cursor-pointer"
+          className="absolute right-6 top-6 text-3xl text-green-300 hover:text-red-500 cursor-pointer"
           onClick={onClose}
           data-test-id="close-button"
         />
-        <h2 className="w-fit px-4 py-1 bg-red-300 rounded-lg">
+        <h2 className="w-fit px-4 py-1 bg-purple-500 rounded-lg">
           {company.startYear}
         </h2>
         <h4 className="my-2 text-gray-500">KVK: {company.kvkNumber}</h4>
