@@ -4,6 +4,7 @@ import axios from "axios";
 import { BACKEND_URL } from "../../../config";
 import Navbar from "../../components/layout/Navbar";
 import { current } from "@reduxjs/toolkit";
+import Layout from "../../components/layout/Layout";
 
 const InvitesList = () => {
   const [invites, setInvites] = useState([]);
@@ -32,8 +33,7 @@ const InvitesList = () => {
   }, [invites]);
 
   return (
-    <div>
-      <Navbar />
+    <Layout>
       <div className="flex justify-center mt-4">
         <table className="w-3/4 border-separate border-spacing-2">
           <thead>
@@ -105,7 +105,7 @@ const InvitesList = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </Layout>
   );
 };
 

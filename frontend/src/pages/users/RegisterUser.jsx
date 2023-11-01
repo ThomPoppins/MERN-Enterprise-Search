@@ -11,6 +11,7 @@ import passwordValidator from "../../utils/validation/passwordValidator";
 import firstNameValidator from "../../utils/validation/firstNameValidator";
 import lastNameValidator from "../../utils/validation/lastNameValidator";
 import Navbar from "../../components/layout/Navbar";
+import Layout from "../../components/layout/Layout";
 
 // TODO: [MERNSTACK-206] Set up a profile picture upload for the user
 
@@ -253,8 +254,7 @@ const RegisterUser = () => {
   };
 
   return (
-    <div>
-      <Navbar />
+    <Layout>
       <div className="p-4">
         <BackButton destination={"/"} />
         <h1 className="text-3xl my-4">Register Account</h1>
@@ -400,7 +400,7 @@ const RegisterUser = () => {
           </button>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

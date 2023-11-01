@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import store from "../../store/store.jsx";
 import { USER_ID } from "../../store/actions.jsx";
 import Navbar from "../../components/layout/Navbar";
+import Layout from "../../components/layout/Layout";
 
 const LogoutUser = () => {
   // Loading state for displaying a spinner while the request is being sent to the backend
@@ -43,8 +44,7 @@ const LogoutUser = () => {
     navigate("/");
   };
   return (
-    <div>
-      <Navbar />
+    <Layout>
       <div className="p-4">
         <BackButton destination={"/"} />
         <h1 className="text-3xl my-4">Log out</h1>
@@ -59,7 +59,7 @@ const LogoutUser = () => {
           </button>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
