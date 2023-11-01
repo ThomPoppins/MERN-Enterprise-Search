@@ -8,7 +8,7 @@ const Navbar = () => {
   let user = useSelector((state) => state.user);
 
   return (
-    <nav className="bg-gray-800 p-4 shadow-lg">
+    <nav className="bg-gradient-to-r from-violet-950 to-purple-950 p-4 shadow-lg">
       <div className="container mx-auto">
         <div className="flex justify-between items-center">
           <div className="text-white">
@@ -28,7 +28,7 @@ const Navbar = () => {
             </div>
           )}
 
-          <div className="hidden md:flex space-x-4">
+          <div className="flex space-x-4">
             {userId ? (
               <div>
                 <div className="flex items-center space-x-2">

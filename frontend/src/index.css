@@ -14,11 +14,16 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  color: grey; /* TODO: Change to white when background image is set */
 }
 
 strong {
   font-family: "Poppins", sans-serif;
   font-weight: bold;
+}
+
+.outer-div {
+  background-image: url("../images/background/galaxy.jpg");
 }
 
 /* Import TailwindCSS */
