@@ -16,6 +16,11 @@ const Home = () => {
           <p className="text-gray-500 text-sm">
             {user ? "@" + user?.username : ""}
           </p>
+          <img
+            src={user?.profilePicture}
+            alt="profile picture"
+            className="w-32 h-32 mt-2"
+          />
         </div>
 
         <div className="mx-auto p-5">
