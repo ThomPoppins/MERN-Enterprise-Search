@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { BACKEND_URL } from "../../../config.js";
 import { useSnackbar } from "notistack";
-import Navbar from "../../components/layout/Navbar";
+import Layout from "../../components/layout/Layout";
 
 const DeleteCompany = () => {
   const [loading, setLoading] = useState(false);
@@ -39,8 +39,7 @@ const DeleteCompany = () => {
       });
   };
   return (
-    <div>
-      <Navbar />
+    <Layout>
       <div className="p-4">
         <BackButton destination={"/companies"} />
         <h1 className="text-3xl my-4">Delete Company</h1>
@@ -57,7 +56,7 @@ const DeleteCompany = () => {
           </button>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
