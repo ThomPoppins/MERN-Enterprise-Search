@@ -232,7 +232,7 @@ const RegisterUser = () => {
       password: password,
       firstName: firstName,
       lastName: lastName,
-      profilePicture: profilePictureBase64, // TODO: [MERNSTACK-207] Save the profile picture Base64 string to the database
+      profilePicture: profilePictureBase64,
     };
     setLoading(true);
     axios
