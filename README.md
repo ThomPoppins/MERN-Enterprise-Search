@@ -367,7 +367,7 @@ Express.js supports asynchronous programming paradigms, allowing for non-blockin
 
 Cross-Origin Resource Sharing (CORS) is a critical security feature that safeguards my application from unwanted sources attempting to access your resources. Express.js provides built-in support for CORS, making it easy to configure and enforce CORS policies. This helps in preventing malicious attacks like cross-site scripting (XSS) and cross-site request forgery (CSRF). It also helps in preventing unauthorized access to sensitive data. 
 
-**Overall**, Express.js provides a robust and secure foundation for building RESTful APIs.
+Overall, Express.js provides a robust and secure foundation for building RESTful APIs.
 
 ### MongoDB and Mongoose
 
