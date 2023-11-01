@@ -16,7 +16,7 @@ import UserSearch from "../../components/UserSearch";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
 import { useSelector } from "react-redux";
 import CompanyLogoModal from "../../components/companies/CompanyLogoModal";
-import Navbar from "../../components/layout/Navbar";
+import Layout from "../../components/layout/Layout";
 
 const EditCompany = () => {
   // ADD OWNERS TO COMPANY TICKETS:
@@ -410,8 +410,7 @@ const EditCompany = () => {
   };
 
   return (
-    <div>
-      <Navbar />
+    <Layout>
       <div className="p-4">
         <BackButton destination={"/companies"} />
         <h1 className="text-3xl my-4">Edit Company</h1>
@@ -689,7 +688,7 @@ const EditCompany = () => {
           </button>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

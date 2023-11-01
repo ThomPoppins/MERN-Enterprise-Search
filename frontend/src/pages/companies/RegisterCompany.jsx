@@ -14,7 +14,7 @@ import companyDescriptionValidator from "../../utils/validation/companyDescripti
 import startYearValidator from "../../utils/validation/startYearValidator";
 import { useSelector } from "react-redux";
 import CompanyLogoModal from "../../components/companies/CompanyLogoModal";
-import Navbar from "../../components/layout/Navbar";
+import Layout from "../../components/layout/Layout";
 
 const RegisterCompany = () => {
   // TODO: [MERNSTACK-127] Add state for all companies fields that can be registered
@@ -268,8 +268,7 @@ const RegisterCompany = () => {
   };
 
   return (
-    <div>
-      <Navbar />
+    <Layout>
       <div className="p-4">
         <BackButton destination={"/companies"} />
         <h1 className="text-3xl my-4">Register Company</h1>
@@ -490,7 +489,7 @@ const RegisterCompany = () => {
           </button>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

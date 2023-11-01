@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
 import { BACKEND_URL } from "../../../config.js";
-import Navbar from "../../components/layout/Navbar";
+import Layout from "../../components/layout/Layout";
 
 const ShowCompany = () => {
   const [company, setCompany] = useState({});
@@ -41,8 +41,7 @@ const ShowCompany = () => {
   }, [id]);
 
   return (
-    <div>
-      <Navbar />
+    <Layout>
       <div className="p-4">
         <BackButton destination={"/companies"} />
         <h1 className="text-3xl my-4">Show Company</h1>
@@ -92,7 +91,7 @@ const ShowCompany = () => {
           </div>
         )}
       </div>
-    </div>
+    </Layout>
   );
 };
 

@@ -9,7 +9,7 @@ import { useSnackbar } from "notistack";
 import emailValidator from "../../utils/validation/emailValidator";
 import verifyToken from "../../utils/auth/verifyToken.jsx";
 import store from "../../store/store.jsx";
-import Navbar from "../../components/layout/Navbar";
+import Layout from "../../components/layout/Layout";
 
 const LoginUser = () => {
   // Input field values for logging in a user as state
@@ -96,8 +96,7 @@ const LoginUser = () => {
   };
 
   return (
-    <div>
-      <Navbar />
+    <Layout>
       <div className="p-4">
         <BackButton destination={"/"} />
         <h1 className="text-3xl my-4">Login</h1>
@@ -136,7 +135,7 @@ const LoginUser = () => {
           </button>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

@@ -6,7 +6,9 @@ const Layout = ({ children }) => {
     <>
       <div className="outer-div min-h-screen">
         <Navbar />
-        <main>{children}</main>
+        <div className="md:w-10/12 mx-auto">
+          <main>{children}</main>
+        </div>
       </div>
     </>
   );
