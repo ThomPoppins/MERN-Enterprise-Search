@@ -414,10 +414,10 @@ const EditCompany = () => {
       <div className="p-4">
         <h1 className="text-3xl my-4">Edit Company</h1>
         {loading ? <Spinner /> : ""}
-        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto mb-4">
+        <div className="flex flex-col border-4 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] p-4 mx-auto mb-4">
           <div className="my-4">
             <div className="mb-4">
-              <label className="text-xl mr-4 text-gray-500">Owners</label>
+              <label className="text-xl mr-4">Owners</label>
             </div>
             <ul className="mb-4">
               {owners.map((owner, index) => {
@@ -446,7 +446,7 @@ const EditCompany = () => {
                     <div>
                       {owner._id !== userId ? (
                         <button
-                          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto mb-4"
+                          className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4"
                           value={owner._id}
                           onClick={handleRemoveUserAsCompanyOwner}
                           data-test-id="remove-owner-button"
@@ -469,11 +469,11 @@ const EditCompany = () => {
           />
         </div>
         {/* TODO: [MERNSTACK-194] Make <CompanyRegisterEditForm company={company} /> component and use it in EditCompany.jsx and RegisterCompany.jsx */}
-        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
+        <div className="flex flex-col border-4 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] p-4 mx-auto">
           {/* TODO: [MERNSTACK-130] Add input fields for all editable company details. To achieve this, copy the outer div with class ".my-4". */}
           {/* Comany Name input field */}
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Name</label>
+            <label className="text-xl mr-4">Name</label>
             <input
               type="text"
               value={name}
@@ -499,7 +499,7 @@ const EditCompany = () => {
           </div>
           {/* Company logo */}
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Logo</label>
+            <label className="text-xl mr-4">Logo</label>
             <div className="w-full">
               <div className="flex justify-center items-center my-4">
                 <div className="flex justify-center">
@@ -510,7 +510,7 @@ const EditCompany = () => {
               </div>
               <div className="flex justify-center items-center mb-4 mt-8">
                 <button
-                  className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
+                  className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg"
                   onClick={() => setShowLogoModal(true)}
                 >
                   Upload Logo
@@ -526,7 +526,7 @@ const EditCompany = () => {
           </div>
           {/* Comany Email input field */}
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Email</label>
+            <label className="text-xl mr-4">Email</label>
             <input
               type="text"
               value={email}
@@ -549,7 +549,7 @@ const EditCompany = () => {
           </div>
           {/* Comany Phone Number input field */}
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Phone</label>
+            <label className="text-xl mr-4">Phone</label>
             <input
               type="text"
               value={phone}
@@ -571,13 +571,13 @@ const EditCompany = () => {
             )}
           </div>
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">KVK number</label>
+            <label className="text-xl mr-4">KVK number</label>
             {TEST_KVK_API ? (
               <div className="mb-4">
-                <p className="text-gray-400">
+                <p>
                   <strong>Note:</strong> Use KVK numbers from{" "}
                   <a
-                    className="text-blue-600"
+                    className="text-blue-300"
                     href="https://developers.kvk.nl/documentation/testing"
                     data-test-id="kvk-api-link"
                   >
@@ -611,7 +611,7 @@ const EditCompany = () => {
             )}
           </div>
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Slogan</label>
+            <label className="text-xl mr-4">Slogan</label>
             <input
               type="text"
               value={slogan}
@@ -634,9 +634,7 @@ const EditCompany = () => {
             )}
           </div>
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">
-              Company Description
-            </label>
+            <label className="text-xl mr-4">Company Description</label>
             <textarea
               type="text"
               value={description}
@@ -660,7 +658,7 @@ const EditCompany = () => {
             )}
           </div>
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Start Year</label>
+            <label className="text-xl mr-4">Start Year</label>
             <input
               type="number"
               value={startYear}
@@ -684,7 +682,7 @@ const EditCompany = () => {
             )}
           </div>
           <button
-            className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto w-1/2"
+            className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto w-1/2"
             onClick={handleEditCompany}
           >
             Save
