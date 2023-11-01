@@ -19,9 +19,9 @@ const generateToken = (user) => {
 
 const verifyToken = (token) => {
   try {
-    console.log("JWT verification token in /middleware/auth/jwt.js: ", token);
+    // console.log("JWT verification token in /middleware/auth/jwt.js: ", token);
     const decoded = jwt.verify(token, JWT_SECRET);
-    console.log("JWT verification successful: ", decoded);
+    // console.log("JWT verification successful: ", decoded);
     return decoded._id;
   } catch (error) {
     console.log("JWT verification error: ", error.message);

@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/verify-token", async (request, response) => {
   const { token } = request.query;
   const userId = verifyToken(token);
-  console.log("userId in authRoute.js: ", userId);
+  // console.log("userId in authRoute.js: ", userId);
   if (userId) {
     return response.status(200).json({ userId });
   }
