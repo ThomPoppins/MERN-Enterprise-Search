@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import Navbar from "../components/layout/Navbar";
+import Layout from "../components/layout/Layout";
 
 const Home = () => {
   let userId = useSelector((state) => state.userId);
@@ -8,8 +8,7 @@ const Home = () => {
 
   if (userId) {
     return (
-      <div>
-        <Navbar />
+      <Layout>
         <div className="mx-auto p-5">
           <img
             src={user?.profilePicture}
@@ -31,11 +30,11 @@ const Home = () => {
             this application's features in action.
           </p>
         </div>
-      </div>
+      </Layout>
     );
   } else {
     return (
-      <div>
+      <Layout>
         <Navbar />
         <div className="mx-auto p-5">
           <h1 className="text-3xl my-8">Home</h1>
@@ -46,7 +45,7 @@ const Home = () => {
             MongoDB database and your password will be saved hashed by bcrypt.
           </p>
         </div>
-      </div>
+      </Layout>
     );
   }
 };
