@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-
+import mongoose from "mongoose";
 // TODO: [MERNSTACK-101] Fix this schema and reconsider the fields
 const companyProjectSchema = new mongoose.Schema(
   {

@@ -90,6 +90,7 @@ const UserSearch = ({
           // e.target.value is the value of the input
           onChange={handleSearch}
           className="border-2 border-gray-500 px-4 py-2 w-full"
+          data-test-id="search-input"
         />
       </div>
       <ul>
@@ -112,6 +113,7 @@ const UserSearch = ({
                 className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto mb-4"
                 value={user._id}
                 onClick={handleAddOwner}
+                data-test-id="add-owner-button"
               >
                 Add
               </button>
