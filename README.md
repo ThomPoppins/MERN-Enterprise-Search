@@ -4,14 +4,14 @@
 - [Getting Started](#getting-started)
 - [Application Description](#application-description)
 - [TODO (and DONE):](#todo-and-done)
-- [Features:](#features)
+- [Features v0.0.1:](#features-v001)
   - [User Account Management](#user-account-management)
     - [Registering an Account](#registering-an-account)
     - [Logging In](#logging-in)
   - [Company Registration and Ownership](#company-registration-and-ownership)
     - [How to Register a Company:](#how-to-register-a-company)
     - [How to add a co-owner to a company:](#how-to-add-a-co-owner-to-a-company)
-- [Uncompleted features:](#uncompleted-features)
+- [Unfinished features (in development for future versions):](#unfinished-features-in-development-for-future-versions)
   - [User Privilege Management and Admin Authorization](#user-privilege-management-and-admin-authorization)
   - [Frontend](#frontend)
     - [React](#react)
@@ -216,7 +216,7 @@ Welcome to my FullStack JavaScript application built with Express.js on the back
 - [ ] Add background color with opacity to all places where text is displayed on top of the background image
 
 
-# Features:
+# Features v0.0.1:
 
 ## User Account Management
 
@@ -252,7 +252,7 @@ Upon successful registration and validation from the KVK API, the user will be r
 5. Click the add button to add the user as a owner to the company.
 
 
-# Uncompleted features:
+# Unfinished features (in development for future versions):
 
 ## User Privilege Management and Admin Authorization
 
