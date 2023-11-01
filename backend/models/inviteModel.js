@@ -1,4 +1,3 @@
-// TODO: [MERNSTACK-195] Define the invite model
 import mongoose from "mongoose";
 
 const inviteSchema = new mongoose.Schema(
