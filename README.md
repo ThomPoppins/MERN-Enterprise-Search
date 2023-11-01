@@ -68,6 +68,12 @@ To run this application locally, follow these steps:
      export const mongoDBURL = 'YourMongoDBDatabaseConnectionURLWithUsernamePasswordAuthenticationHere';
      // Secret key for JWT signing and encryption
      export const JWT_SECRET = "yoursecretkey";
+
+     // TEST API key for KVK API
+     export const KVK_TEST_API_KEY = "l7xx1f2691f2520d487b902f4e0b57a0b197";
+
+     // PROD API key for KVK API
+     export const KVK_PROD_API_KEY = "";
      ```
 
 3. **Set Up Frontend Configuration**:
