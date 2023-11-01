@@ -12,13 +12,22 @@ const Navbar = () => {
       <div className="container mx-auto">
         <div className="flex justify-between items-center">
           <div className="text-white">
-            <h1 className=" text-2xl font-bold">Vind Expert</h1>
+            <Link to="/">
+              <h1 className=" text-2xl font-bold">Vind Expert</h1>
+            </Link>
           </div>
+
           {userId && (
-            <div className="text-white">
-              <Link to="/companies">Companies</Link>
+            <div className="flex space-x-4">
+              <div className="text-white">
+                <Link to="/companies">Companies</Link>
+              </div>
+              <div className="text-white">
+                <Link to="/invites">Invites</Link>
+              </div>
             </div>
           )}
+
           <div className="hidden md:flex space-x-4">
             {userId ? (
               <div>

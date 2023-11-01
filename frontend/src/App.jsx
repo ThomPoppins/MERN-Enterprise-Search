@@ -13,6 +13,7 @@ import DeleteCompany from "./pages/companies/DeleteCompany";
 import LoginUser from "./pages/users/LoginUser";
 import RegisterUser from "./pages/users/RegisterUser";
 import LogoutUser from "./pages/users/LogoutUser";
+import InvitesList from "./pages/invites/InvitesList";
 import Home from "./pages/Home";
 import Cookies from "js-cookie";
 import verifyToken from "./utils/auth/verifyToken.jsx";
@@ -43,6 +44,8 @@ const App = () => {
         <Route path="/companies/edit/:id" element={<EditCompany />} />
         <Route path="/companies/details/:id" element={<ShowCompany />} />
         <Route path="/companies/delete/:id" element={<DeleteCompany />} />
+        {/* /invites/* routes */}
+        <Route path="/invites" element={<InvitesList />} />
         {/* /books/* routes */}
         <Route path="/books" element={<BooksList />} />
         <Route path="/books/create" element={<CreateBook />} />
