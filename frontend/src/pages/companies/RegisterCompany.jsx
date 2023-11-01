@@ -270,7 +270,6 @@ const RegisterCompany = () => {
   return (
     <Layout>
       <div className="p-4">
-        <BackButton destination={"/companies"} />
         <h1 className="text-3xl my-4">Register Company</h1>
         {loading ? <Spinner /> : ""}
         <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
@@ -288,12 +287,13 @@ const RegisterCompany = () => {
               className={`border-2 border-gray-500 px-4 py-2 w-full ${
                 nameError ? "border-red-500" : ""
               }`}
+              data-test-id="name-input"
             />
             {nameError ? (
               <p className="text-red-500 text-sm">
                 Company name must be between 1 and 60 characters long and can
                 only contain letters, numbers, spaces, and the following
-                characters: -, ', and .
+                characters: &#45;, &apos;, and &#46;
               </p>
             ) : (
               ""
@@ -314,6 +314,7 @@ const RegisterCompany = () => {
                 <button
                   className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
                   onClick={() => setShowLogoModal(true)}
+                  data-test-id="upload-logo-button"
                 >
                   Upload Logo
                 </button>
@@ -379,6 +380,7 @@ const RegisterCompany = () => {
                   <a
                     className="text-blue-600"
                     href="https://developers.kvk.nl/documentation/testing"
+                    data-test-id="kvk-api-link"
                   >
                     this page
                   </a>

@@ -50,6 +50,7 @@ const CompaniesList = () => {
           <button
             className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-gradient-to-l px-4 py-1 rounded-lg"
             onClick={() => handleShowTypeChange("card")}
+            data-test-id="show-card-button"
           >
             Card
           </button>

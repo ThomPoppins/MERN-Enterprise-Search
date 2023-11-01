@@ -51,7 +51,7 @@
 
 To run this application locally, follow these steps:
 
-0. Create a (free) MongoDB database to connect with and obtain a MongoDB connection URL.
+0. **Create a free MongoDB database to connect with and obtain a MongoDB authentication URL.**
 
 1. **Clone the Repository**:
    ```bash
@@ -255,6 +255,7 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [ ] [MERNSTACK-208] Create default page layout that all pages will become children of
 - [x] [MERNSTACK-210] Change text color to white when background image is set
 - [ ] [MERNSTACK-211] Add background color with opacity to all places where text is displayed on top of the background image.
+- [ ] [MERNSTACK-212] Create account edit page for account configurations.
 
 # Technologies used:
 

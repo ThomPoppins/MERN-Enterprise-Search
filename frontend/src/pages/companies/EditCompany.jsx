@@ -412,7 +412,6 @@ const EditCompany = () => {
   return (
     <Layout>
       <div className="p-4">
-        <BackButton destination={"/companies"} />
         <h1 className="text-3xl my-4">Edit Company</h1>
         {loading ? <Spinner /> : ""}
         <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto mb-4">
@@ -450,6 +449,7 @@ const EditCompany = () => {
                           className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto mb-4"
                           value={owner._id}
                           onClick={handleRemoveUserAsCompanyOwner}
+                          data-test-id="remove-owner-button"
                         >
                           Remove
                         </button>
@@ -485,6 +485,7 @@ const EditCompany = () => {
               className={`border-2 border-gray-500 px-4 py-2 w-full ${
                 nameError ? "border-red-500" : ""
               }`}
+              data-test-id="name-input"
             />
             {nameError ? (
               <p className="text-red-500 text-sm">
@@ -578,6 +579,7 @@ const EditCompany = () => {
                   <a
                     className="text-blue-600"
                     href="https://developers.kvk.nl/documentation/testing"
+                    data-test-id="kvk-api-link"
                   >
                     this page
                   </a>
@@ -646,6 +648,7 @@ const EditCompany = () => {
               className={`border-2 border-gray-500 px-4 py-2 w-full ${
                 startYearError ? "border-red-500" : ""
               }`}
+              data-test-id="description-input"
             />
             {descriptionError ? (
               <p className="text-red-500 text-sm">

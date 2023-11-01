@@ -18,6 +18,7 @@ const CompanyLogoModal = ({ setLogo, onClose }) => {
         <AiOutlineClose
           className="absolute right-6 top-6 text-3xl text-red-600 cursor-pointer"
           onClick={onClose}
+          data-test-id="close-button"
         />
         <div className="flex justify-center items-center my-4">
           <UploadAvatar setLogo={setLogo} onClose={onClose} />
