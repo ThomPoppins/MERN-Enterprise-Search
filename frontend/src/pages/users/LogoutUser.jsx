@@ -8,6 +8,7 @@ import { useSnackbar } from "notistack";
 import Cookies from "js-cookie";
 import store from "../../store/store.jsx";
 import { USER_ID } from "../../store/actions.jsx";
+import Navbar from "../../components/layout/Navbar";
 
 const LogoutUser = () => {
   // Loading state for displaying a spinner while the request is being sent to the backend
@@ -42,18 +43,21 @@ const LogoutUser = () => {
     navigate("/");
   };
   return (
-    <div className="p-4">
-      <BackButton destination={"/"} />
-      <h1 className="text-3xl my-4">Log out</h1>
-      {loading ? <Spinner /> : ""}
-      <div className="flex flex-col items-center border-2 border-sky-400 rounded-xl w-[600px] p-8 mx-auto">
-        <h3 className="text-2xl">Are you sure you want to log out?</h3>
-        <button
-          className="p-4 bg-red-600 text-white m-8 w-full"
-          onClick={handleLogoutUser}
-        >
-          Yes, please!
-        </button>
+    <div>
+      <Navbar />
+      <div className="p-4">
+        <BackButton destination={"/"} />
+        <h1 className="text-3xl my-4">Log out</h1>
+        {loading ? <Spinner /> : ""}
+        <div className="flex flex-col items-center border-2 border-sky-400 rounded-xl w-[600px] p-8 mx-auto">
+          <h3 className="text-2xl">Are you sure you want to log out?</h3>
+          <button
+            className="p-4 bg-red-600 text-white m-8 w-full"
+            onClick={handleLogoutUser}
+          >
+            Yes, please!
+          </button>
+        </div>
       </div>
     </div>
   );

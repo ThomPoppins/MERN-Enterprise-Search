@@ -14,6 +14,7 @@ import companyDescriptionValidator from "../../utils/validation/companyDescripti
 import startYearValidator from "../../utils/validation/startYearValidator";
 import { useSelector } from "react-redux";
 import CompanyLogoModal from "../../components/companies/CompanyLogoModal";
+import Navbar from "../../components/layout/Navbar";
 
 const RegisterCompany = () => {
   // TODO: [MERNSTACK-127] Add state for all companies fields that can be registered
@@ -267,224 +268,227 @@ const RegisterCompany = () => {
   };
 
   return (
-    <div className="p-4">
-      <BackButton destination={"/companies"} />
-      <h1 className="text-3xl my-4">Register Company</h1>
-      {loading ? <Spinner /> : ""}
-      <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
-        {/* // TODO: [MERNSTACK-128] RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this*/}
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Name</label>
-          <input
-            type="text"
-            value={name}
-            // onChange is a function that takes an event as an argument
-            // and sets the name state to the value of the input
-            // e.target.value is the value of the input
-            onChange={handleNameChange}
-            onBlur={validateCompanyName}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              nameError ? "border-red-500" : ""
-            }`}
-          />
-          {nameError ? (
-            <p className="text-red-500 text-sm">
-              Company name must be between 1 and 60 characters long and can only
-              contain letters, numbers, spaces, and the following characters: -,
-              ', and .
-            </p>
-          ) : (
-            ""
-          )}
-        </div>
-        {/* Company logo */}
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Logo</label>
-          <div className="w-full">
-            <div className="flex justify-center items-center my-4">
-              <div className="flex justify-center">
-                {logo && (
-                  <img src={logo} alt="Preview" width="200" height="200" />
-                )}
-              </div>
-            </div>
-            <div className="flex justify-center items-center mb-4 mt-8">
-              <button
-                className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
-                onClick={() => setShowLogoModal(true)}
-              >
-                Upload Logo
-              </button>
-            </div>
-            {showLogoModal && (
-              <CompanyLogoModal
-                setLogo={setLogo}
-                onClose={() => setShowLogoModal(false)}
-              />
+    <div>
+      <Navbar />
+      <div className="p-4">
+        <BackButton destination={"/companies"} />
+        <h1 className="text-3xl my-4">Register Company</h1>
+        {loading ? <Spinner /> : ""}
+        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
+          {/* // TODO: [MERNSTACK-128] RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this*/}
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Name</label>
+            <input
+              type="text"
+              value={name}
+              // onChange is a function that takes an event as an argument
+              // and sets the name state to the value of the input
+              // e.target.value is the value of the input
+              onChange={handleNameChange}
+              onBlur={validateCompanyName}
+              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+                nameError ? "border-red-500" : ""
+              }`}
+            />
+            {nameError ? (
+              <p className="text-red-500 text-sm">
+                Company name must be between 1 and 60 characters long and can
+                only contain letters, numbers, spaces, and the following
+                characters: -, ', and .
+              </p>
+            ) : (
+              ""
             )}
           </div>
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Email</label>
-          <input
-            type="text"
-            value={email}
-            // onChange is a function that takes an event as an argument
-            // and sets the name state to the value of the input
-            // e.target.value is the value of the input
-            onChange={handleEmailChange}
-            onBlur={validateEmail}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              emailError ? "border-red-500" : ""
-            }`}
-          />
-          {emailError ? (
-            <p className="text-red-500 text-sm">
-              Email must be a valid email address.
-            </p>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Phone</label>
-          <input
-            type="text"
-            value={phone}
-            // onChange is a function that takes an event as an argument
-            // and sets the name state to the value of the input
-            // e.target.value is the value of the input
-            onChange={handlePhoneChange}
-            onBlur={validatePhone}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              phoneError ? "border-red-500" : ""
-            }`}
-          />
-        </div>
-        {phoneError ? (
-          <p className="text-red-500 text-sm">
-            Phone number must be a valid phone number.
-          </p>
-        ) : (
-          ""
-        )}
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">KVK Number</label>
-          {TEST_KVK_API ? (
-            <div className="mb-4">
-              <p className="text-gray-400">
-                <strong>Note:</strong> Use KVK numbers from{" "}
-                <a
-                  className="text-blue-600"
-                  href="https://developers.kvk.nl/documentation/testing"
+          {/* Company logo */}
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Logo</label>
+            <div className="w-full">
+              <div className="flex justify-center items-center my-4">
+                <div className="flex justify-center">
+                  {logo && (
+                    <img src={logo} alt="Preview" width="200" height="200" />
+                  )}
+                </div>
+              </div>
+              <div className="flex justify-center items-center mb-4 mt-8">
+                <button
+                  className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
+                  onClick={() => setShowLogoModal(true)}
                 >
-                  this page
-                </a>
-              </p>
+                  Upload Logo
+                </button>
+              </div>
+              {showLogoModal && (
+                <CompanyLogoModal
+                  setLogo={setLogo}
+                  onClose={() => setShowLogoModal(false)}
+                />
+              )}
             </div>
-          ) : (
-            ""
-          )}
-          <input
-            type="text"
-            value={kvkNumber}
-            // onChange is a function that takes an event as an argument
-            // and sets the name state to the value of the input
-            // e.target.value is the value of the input
-            onChange={handleKvkNumberChange}
-            onBlur={validateKvkNumber}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              kvkNumberError ? "border-red-500" : ""
-            }`}
-          />
-          {kvkNumberError ? (
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Email</label>
+            <input
+              type="text"
+              value={email}
+              // onChange is a function that takes an event as an argument
+              // and sets the name state to the value of the input
+              // e.target.value is the value of the input
+              onChange={handleEmailChange}
+              onBlur={validateEmail}
+              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+                emailError ? "border-red-500" : ""
+              }`}
+            />
+            {emailError ? (
+              <p className="text-red-500 text-sm">
+                Email must be a valid email address.
+              </p>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Phone</label>
+            <input
+              type="text"
+              value={phone}
+              // onChange is a function that takes an event as an argument
+              // and sets the name state to the value of the input
+              // e.target.value is the value of the input
+              onChange={handlePhoneChange}
+              onBlur={validatePhone}
+              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+                phoneError ? "border-red-500" : ""
+              }`}
+            />
+          </div>
+          {phoneError ? (
             <p className="text-red-500 text-sm">
-              {kvkNumberErrorMessage
-                ? kvkNumberErrorMessage
-                : "Must be a valid KVK number."}
+              Phone number must be a valid phone number.
             </p>
           ) : (
             ""
           )}
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">KVK Number</label>
+            {TEST_KVK_API ? (
+              <div className="mb-4">
+                <p className="text-gray-400">
+                  <strong>Note:</strong> Use KVK numbers from{" "}
+                  <a
+                    className="text-blue-600"
+                    href="https://developers.kvk.nl/documentation/testing"
+                  >
+                    this page
+                  </a>
+                </p>
+              </div>
+            ) : (
+              ""
+            )}
+            <input
+              type="text"
+              value={kvkNumber}
+              // onChange is a function that takes an event as an argument
+              // and sets the name state to the value of the input
+              // e.target.value is the value of the input
+              onChange={handleKvkNumberChange}
+              onBlur={validateKvkNumber}
+              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+                kvkNumberError ? "border-red-500" : ""
+              }`}
+            />
+            {kvkNumberError ? (
+              <p className="text-red-500 text-sm">
+                {kvkNumberErrorMessage
+                  ? kvkNumberErrorMessage
+                  : "Must be a valid KVK number."}
+              </p>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Slogan</label>
+            <input
+              type="text"
+              value={slogan}
+              // onChange is a function that takes an event as an argument
+              // and sets the name state to the value of the input
+              // e.target.value is the value of the input
+              onChange={handleSloganChange}
+              onBlur={validateSlogan}
+              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+                sloganError ? "border-red-500" : ""
+              }`}
+            />
+            {sloganError ? (
+              <p className="text-red-500 text-sm">
+                This should be the motto of your company. It must be between 1
+                and 90 characters long.
+              </p>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">
+              Company Description
+            </label>
+            <textarea
+              type="text"
+              value={description}
+              // onChange is a function that takes an event as an argument
+              // and sets the name state to the value of the input
+              // e.target.value is the value of the input
+              onChange={handleDescriptionChange}
+              onBlur={validateDescription}
+              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+                descriptionError ? "border-red-500" : ""
+              }`}
+            />
+            {descriptionError ? (
+              <p className="text-red-500 text-sm">
+                This should be the description of your company. It must be
+                between 1 and 280 characters long.
+              </p>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Start Year</label>
+            <input
+              type="number"
+              value={startYear}
+              // onChange is a function that takes an event as an argument
+              // and sets the name state to the value of the input
+              // e.target.value is the value of the input
+              onChange={handleStartYearChange}
+              onBlur={validateStartYear}
+              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+                startYearError ? "border-red-500" : ""
+              }`}
+            />
+            {startYearError ? (
+              <p className="text-red-500 text-sm">
+                Start year must be a valid year and never can be later then the
+                current year. If company hasn't started yet, register company
+                when it starts.
+              </p>
+            ) : (
+              ""
+            )}
+          </div>
+          <button
+            className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto w-1/2"
+            onClick={handleSaveCompany}
+          >
+            Save
+          </button>
         </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Slogan</label>
-          <input
-            type="text"
-            value={slogan}
-            // onChange is a function that takes an event as an argument
-            // and sets the name state to the value of the input
-            // e.target.value is the value of the input
-            onChange={handleSloganChange}
-            onBlur={validateSlogan}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              sloganError ? "border-red-500" : ""
-            }`}
-          />
-          {sloganError ? (
-            <p className="text-red-500 text-sm">
-              This should be the motto of your company. It must be between 1 and
-              90 characters long.
-            </p>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">
-            Company Description
-          </label>
-          <textarea
-            type="text"
-            value={description}
-            // onChange is a function that takes an event as an argument
-            // and sets the name state to the value of the input
-            // e.target.value is the value of the input
-            onChange={handleDescriptionChange}
-            onBlur={validateDescription}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              descriptionError ? "border-red-500" : ""
-            }`}
-          />
-          {descriptionError ? (
-            <p className="text-red-500 text-sm">
-              This should be the description of your company. It must be between
-              1 and 280 characters long.
-            </p>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Start Year</label>
-          <input
-            type="number"
-            value={startYear}
-            // onChange is a function that takes an event as an argument
-            // and sets the name state to the value of the input
-            // e.target.value is the value of the input
-            onChange={handleStartYearChange}
-            onBlur={validateStartYear}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              startYearError ? "border-red-500" : ""
-            }`}
-          />
-          {startYearError ? (
-            <p className="text-red-500 text-sm">
-              Start year must be a valid year and never can be later then the
-              current year. If company hasn't started yet, register company when
-              it starts.
-            </p>
-          ) : (
-            ""
-          )}
-        </div>
-        <button
-          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto w-1/2"
-          onClick={handleSaveCompany}
-        >
-          Save
-        </button>
       </div>
     </div>
   );

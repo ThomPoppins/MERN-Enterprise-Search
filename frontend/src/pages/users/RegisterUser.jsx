@@ -10,6 +10,7 @@ import usernameValidator from "../../utils/validation/usernameValidator";
 import passwordValidator from "../../utils/validation/passwordValidator";
 import firstNameValidator from "../../utils/validation/firstNameValidator";
 import lastNameValidator from "../../utils/validation/lastNameValidator";
+import Navbar from "../../components/layout/Navbar";
 
 // TODO: [MERNSTACK-206] Set up a profile picture upload for the user
 
@@ -252,145 +253,152 @@ const RegisterUser = () => {
   };
 
   return (
-    <div className="p-4">
-      <BackButton destination={"/"} />
-      <h1 className="text-3xl my-4">Register Account</h1>
-      {loading ? <Spinner /> : ""}
-      <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
-        {registerErrorMessage ? (
-          <p className="text-red-500 text-sm">{registerErrorMessage}</p>
-        ) : (
-          ""
-        )}
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Username</label>
-          <input
-            type="text"
-            value={username}
-            onChange={handleUsernameChange}
-            onBlur={validateUsername}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              usernameError ? "border-red-500" : ""
-            }`}
-          />
-          {usernameError ? (
-            <p className="text-red-500 text-sm">
-              Username must be at least 1 alphanumeric character long.
-            </p>
+    <div>
+      <Navbar />
+      <div className="p-4">
+        <BackButton destination={"/"} />
+        <h1 className="text-3xl my-4">Register Account</h1>
+        {loading ? <Spinner /> : ""}
+        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
+          {registerErrorMessage ? (
+            <p className="text-red-500 text-sm">{registerErrorMessage}</p>
           ) : (
             ""
           )}
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Email</label>
-          <input
-            type="text"
-            value={email}
-            onChange={handleEmailChange}
-            onBlur={validateEmail}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              emailError ? "border-red-500" : ""
-            }`}
-          />
-          {emailError ? (
-            <p className="text-red-500 text-sm">
-              Email must be a valid email address.
-            </p>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            onBlur={validatePassword}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              passwordError ? "border-red-500" : ""
-            }`}
-          />
-          {passwordError ? (
-            <p className="text-red-500 text-sm">
-              Password must be at least 8 characters long, contain at least one
-              uppercase letter, one lowercase letter, one digit and one special
-              character.
-            </p>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Confirm Password</label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={handleConfirmPasswordChange}
-            onBlur={validateConfirmPassword}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              confirmPasswordError ? "border-red-500" : ""
-            }`}
-          />
-          {confirmPasswordError ? (
-            <p className="text-red-500 text-sm">
-              Confirm password does not match password.
-            </p>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">First Name</label>
-          <input
-            type="text"
-            value={firstName}
-            onChange={handleFirstNameChange}
-            onBlur={validateFirstName}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              firstNameError ? "border-red-500" : ""
-            }`}
-          />
-          {firstNameError ? (
-            <p className="text-red-500 text-sm">
-              First name must be between at least 1 character long and can only
-              contain letters, dots, and spaces.
-            </p>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Last Name</label>
-          <input
-            type="text"
-            value={lastName}
-            onChange={handleLastNameChange}
-            onBlur={validateLastName}
-            className={`border-2 border-gray-500 px-4 py-2 w-full ${
-              lastNameError ? "border-red-500" : ""
-            }`}
-          />
-          {lastNameError ? (
-            <p className="text-red-500 text-sm">
-              Last name must be between at least 1 character long and can only
-              contain letters and spaces.
-            </p>
-          ) : (
-            ""
-          )}
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Profile Picture</label>
-          <br />
-          <input type="file" onChange={handleProfilePictureChange} />
-          <div className="flex justify-center my-4">
-            <img width="200" height="200" src={profilePictureBase64} />
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Username</label>
+            <input
+              type="text"
+              value={username}
+              onChange={handleUsernameChange}
+              onBlur={validateUsername}
+              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+                usernameError ? "border-red-500" : ""
+              }`}
+            />
+            {usernameError ? (
+              <p className="text-red-500 text-sm">
+                Username must be at least 1 alphanumeric character long.
+              </p>
+            ) : (
+              ""
+            )}
           </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Email</label>
+            <input
+              type="text"
+              value={email}
+              onChange={handleEmailChange}
+              onBlur={validateEmail}
+              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+                emailError ? "border-red-500" : ""
+              }`}
+            />
+            {emailError ? (
+              <p className="text-red-500 text-sm">
+                Email must be a valid email address.
+              </p>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={handlePasswordChange}
+              onBlur={validatePassword}
+              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+                passwordError ? "border-red-500" : ""
+              }`}
+            />
+            {passwordError ? (
+              <p className="text-red-500 text-sm">
+                Password must be at least 8 characters long, contain at least
+                one uppercase letter, one lowercase letter, one digit and one
+                special character.
+              </p>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}
+              onBlur={validateConfirmPassword}
+              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+                confirmPasswordError ? "border-red-500" : ""
+              }`}
+            />
+            {confirmPasswordError ? (
+              <p className="text-red-500 text-sm">
+                Confirm password does not match password.
+              </p>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">First Name</label>
+            <input
+              type="text"
+              value={firstName}
+              onChange={handleFirstNameChange}
+              onBlur={validateFirstName}
+              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+                firstNameError ? "border-red-500" : ""
+              }`}
+            />
+            {firstNameError ? (
+              <p className="text-red-500 text-sm">
+                First name must be between at least 1 character long and can
+                only contain letters, dots, and spaces.
+              </p>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Last Name</label>
+            <input
+              type="text"
+              value={lastName}
+              onChange={handleLastNameChange}
+              onBlur={validateLastName}
+              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+                lastNameError ? "border-red-500" : ""
+              }`}
+            />
+            {lastNameError ? (
+              <p className="text-red-500 text-sm">
+                Last name must be between at least 1 character long and can only
+                contain letters and spaces.
+              </p>
+            ) : (
+              ""
+            )}
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">
+              Profile Picture
+            </label>
+            <br />
+            <input type="file" onChange={handleProfilePictureChange} />
+            <div className="flex justify-center my-4">
+              <img width="200" height="200" src={profilePictureBase64} />
+            </div>
+          </div>
+          <button className="p-2 bg-sky-300 m-8" onClick={handleSaveUser}>
+            Save
+          </button>
         </div>
-        <button className="p-2 bg-sky-300 m-8" onClick={handleSaveUser}>
-          Save
-        </button>
       </div>
     </div>
   );
