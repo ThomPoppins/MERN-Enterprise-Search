@@ -11,7 +11,7 @@ import verifyToken from "../../utils/auth/verifyToken.jsx";
 import store from "../../store/store.jsx";
 import Navbar from "../../components/layout/Navbar";
 
-const RegisterUser = () => {
+const LoginUser = () => {
   // Input field values for logging in a user as state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -140,4 +140,4 @@ const RegisterUser = () => {
   );
 };
 
-export default RegisterUser;
+export default LoginUser;
