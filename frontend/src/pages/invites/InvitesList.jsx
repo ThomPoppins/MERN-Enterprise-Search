@@ -70,7 +70,7 @@ const InvitesList = () => {
                       </span>
                     </div>
                     <div>
-                      <span className="text-xl mr-4 text-blue-500">
+                      <span className="text-xl mr-4 text-blue-400">
                         &#64;{invite.sender.username}
                       </span>
                     </div>
