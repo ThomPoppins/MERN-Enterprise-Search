@@ -216,6 +216,7 @@ Welcome to my FullStack JavaScript application built with Express.js on the back
 - [x] [MERNSTACK-195] Define the invite model
 - [x] [MERNSTACK-207] Save the profile picture Base64 string to the database
 - [ ] [MERNSTACK-208] Create default page layout that all pages will become children of
+- [x] [MERNSTACK-210] Change text color to white when background image is set
 
 ## Frontend
 
