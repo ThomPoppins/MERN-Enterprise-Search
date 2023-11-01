@@ -10,7 +10,7 @@ router.get("/recipient/:userId", async (request, response) => {
 
   try {
     const invites = await inviteModel.find({
-      recipient: mongoose.Types.ObjectId(userId),
+      recipientId: new mongoose.Types.ObjectId(userId),
     });
 
     // Send status 200 response and the invites as JSON response if successful
