@@ -4,15 +4,13 @@ import inviteModel from "../models/inviteModel.js";
 
 const router = express.Router();
 
-// Route to get all invites from a specific user
-router.get("/:userId", async (request, response) => {
-  // Find all invites from a specific user
+// Route to get all invites from a specific recipient user
+router.get("/recipient/:userId", async (request, response) => {
+  const { userId } = request.params;
+
   try {
     const invites = await inviteModel.find({
-      $or: [
-        { sender: request.params.userId },
-        { recipient: request.params.userId },
-      ],
+      recipient: mongoose.Types.ObjectId(userId),
     });
 
     // Send status 200 response and the invites as JSON response if successful
@@ -30,11 +28,11 @@ router.post("/", async (request, response) => {
   // Create a new invite document using the Invite model
   try {
     const newInvite = new inviteModel({
-      sender: mongoose.Types.ObjectId(request.body.senderId),
-      recipient: mongoose.Types.ObjectId(request.body.recipientId),
+      senderId: new mongoose.Types.ObjectId(request.body.senderId),
+      recipientId: new mongoose.Types.ObjectId(request.body.recipientId),
       kind: request.body.kind,
-      company: request.body.companyId
-        ? mongoose.Types.ObjectId(request.body.companyId)
+      companyId: request.body.companyId
+        ? new mongoose.Types.ObjectId(request.body.companyId)
         : null,
       status: request.body.status,
     });
@@ -51,3 +49,5 @@ router.post("/", async (request, response) => {
     });
   }
 });
+
+export default router;

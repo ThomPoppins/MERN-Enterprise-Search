@@ -3,13 +3,13 @@ import mongoose from "mongoose";
 const inviteSchema = new mongoose.Schema(
   {
     // `sender` is a `User` object ID
-    sender: {
+    senderId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
     // `recipient` is a `User` object ID
-    recipient: {
+    recipientId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
@@ -20,8 +20,8 @@ const inviteSchema = new mongoose.Schema(
       required: true,
       default: "other",
     },
-    // `company` is a `Company` object ID (only required if `kind` is "ownership")
-    company: {
+    // `company` is a `Company` object ID
+    companyId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Company",
     },
@@ -35,4 +35,6 @@ const inviteSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const Invite = mongoose.model("Invite", inviteSchema);
+const inviteModel = mongoose.model("Invite", inviteSchema);
+
+export default inviteModel;
