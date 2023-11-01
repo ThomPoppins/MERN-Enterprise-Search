@@ -13,14 +13,14 @@ const Home = () => {
           <h1 className="text-3xl my-2">
             Welcome to your account {user?.firstName} {user?.lastName}!
           </h1>
-          <p className="text-gray-500 text-sm">
-            {user ? "@" + user?.username : ""}
-          </p>
           <img
             src={user?.profilePicture}
             alt="profile picture"
             className="w-32 h-32 mt-2"
           />
+          <p className="text-gray-500 text-sm">
+            {user ? "@" + user?.username : ""}
+          </p>
         </div>
 
         <div className="mx-auto p-5">
