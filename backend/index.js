@@ -8,8 +8,9 @@ import invitesRoute from "./routes/invitesRoute.js";
 import authRoute from "./routes/authRoute.js";
 import kvkRoute from "./routes/kvkRoute.js";
 import uploadRoute from "./routes/uploadRoute.js";
+// import multer from "multer";
 import cors from "cors";
-import bodyParser from "body-parser";
+// import bodyParser from "body-parser";
 
 const app = express();
 
@@ -25,14 +26,7 @@ const app = express();
 app.use(cors());
 
 // Middleware to parse the request body as JSON.
-// app.use(express.json()); // TODO: TEST IF THIS 100% SURE CAN BE REMOVED BECAUSE OF THE BODY-PARSER DEPENDENCY BELOW!!!
-
-// TODO: [MERNSTACK-215] Remove body-parser dependency if unused.
-
-// Middleware to parse the request body as JSON. Size is increased to 500 MB*/
-app.use(bodyParser.json({ limit: "500mb" }));
-// Middleware to parse the request body as URL encoded data.
-app.use(bodyParser.urlencoded([{ extended: false, limit: "500mb" }]));
+app.use(express.json());
 
 // GET method available at "/".
 app.get("/", (request, response) => {
