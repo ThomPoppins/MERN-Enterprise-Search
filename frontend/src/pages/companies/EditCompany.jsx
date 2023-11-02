@@ -414,7 +414,7 @@ const EditCompany = () => {
       <div className="p-4">
         <h1 className="text-3xl my-4">Edit Company</h1>
         {loading ? <Spinner /> : ""}
-        <div className="flex flex-col border-4 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] p-4 mx-auto mb-4">
+        <div className="flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] p-4 mx-auto mb-4">
           <div className="my-4">
             <div className="mb-4">
               <label className="text-xl mr-4">Owners</label>
@@ -469,7 +469,7 @@ const EditCompany = () => {
           />
         </div>
         {/* TODO: [MERNSTACK-194] Make <CompanyRegisterEditForm company={company} /> component and use it in EditCompany.jsx and RegisterCompany.jsx */}
-        <div className="flex flex-col border-4 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] p-4 mx-auto">
+        <div className="flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] p-4 mx-auto">
           {/* TODO: [MERNSTACK-130] Add input fields for all editable company details. To achieve this, copy the outer div with class ".my-4". */}
           {/* Comany Name input field */}
           <div className="my-4">
@@ -482,7 +482,7 @@ const EditCompany = () => {
               // e.target.value is the value of the input
               onChange={handleNameChange}
               onBlur={validateCompanyName}
-              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
                 nameError ? "border-red-500" : ""
               }`}
               data-test-id="name-input"
@@ -535,7 +535,7 @@ const EditCompany = () => {
               // e.target.value is the value of the input
               onChange={handleEmailChange}
               onBlur={validateEmail}
-              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
                 emailError ? "border-red-500" : ""
               }`}
             />
@@ -558,7 +558,7 @@ const EditCompany = () => {
               // e.target.value is the value of the input
               onChange={handlePhoneChange}
               onBlur={validatePhone}
-              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
                 phoneError ? "border-red-500" : ""
               }`}
             />
@@ -596,7 +596,7 @@ const EditCompany = () => {
               // e.target.value is the value of the input
               onChange={handleKvkNumberChange}
               onBlur={validateKvkNumber}
-              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
                 kvkNumberError ? "border-red-500" : ""
               }`}
             />
@@ -620,7 +620,7 @@ const EditCompany = () => {
               // e.target.value is the value of the input
               onChange={handleSloganChange}
               onBlur={validateSlogan}
-              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
                 startYearError ? "border-red-500" : ""
               }`}
             />
@@ -643,7 +643,7 @@ const EditCompany = () => {
               // e.target.value is the value of the input
               onChange={handleDescriptionChange}
               onBlur={validateDescription}
-              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
                 startYearError ? "border-red-500" : ""
               }`}
               data-test-id="description-input"
@@ -667,7 +667,7 @@ const EditCompany = () => {
               // e.target.value is the value of the input
               onChange={handleStartYearChange}
               onBlur={validateStartYear}
-              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
                 startYearError ? "border-red-500" : ""
               }`}
             />

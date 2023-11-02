@@ -64,7 +64,7 @@ const CompaniesList = () => {
         <div className="flex justify-between items-center">
           <h1 className="text-3xl my-8">Companies</h1>
           <Link to="/companies/register">
-            <MdOutlineAddBox className="text-sky-800 text-4xl" />
+            <MdOutlineAddBox className="text-green-300 hover:text-purple-500 text-4xl" />
           </Link>
         </div>
         {loading ? (

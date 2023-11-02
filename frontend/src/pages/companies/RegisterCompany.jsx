@@ -270,7 +270,7 @@ const RegisterCompany = () => {
       <div className="p-4">
         <h1 className="text-3xl my-4">Register Company</h1>
         {loading ? <Spinner /> : ""}
-        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
+        <div className="flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] p-4 mx-auto">
           {/* // TODO: [MERNSTACK-128] RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this*/}
           <div className="my-4">
             <label className="text-xl mr-4 text-gray-500">Name</label>
@@ -282,7 +282,7 @@ const RegisterCompany = () => {
               // e.target.value is the value of the input
               onChange={handleNameChange}
               onBlur={validateCompanyName}
-              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
                 nameError ? "border-red-500" : ""
               }`}
               data-test-id="name-input"
@@ -335,7 +335,7 @@ const RegisterCompany = () => {
               // e.target.value is the value of the input
               onChange={handleEmailChange}
               onBlur={validateEmail}
-              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
                 emailError ? "border-red-500" : ""
               }`}
             />
@@ -357,7 +357,7 @@ const RegisterCompany = () => {
               // e.target.value is the value of the input
               onChange={handlePhoneChange}
               onBlur={validatePhone}
-              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
                 phoneError ? "border-red-500" : ""
               }`}
             />
@@ -395,7 +395,7 @@ const RegisterCompany = () => {
               // e.target.value is the value of the input
               onChange={handleKvkNumberChange}
               onBlur={validateKvkNumber}
-              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
                 kvkNumberError ? "border-red-500" : ""
               }`}
             />
@@ -419,7 +419,7 @@ const RegisterCompany = () => {
               // e.target.value is the value of the input
               onChange={handleSloganChange}
               onBlur={validateSlogan}
-              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
                 sloganError ? "border-red-500" : ""
               }`}
             />
@@ -444,7 +444,7 @@ const RegisterCompany = () => {
               // e.target.value is the value of the input
               onChange={handleDescriptionChange}
               onBlur={validateDescription}
-              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
                 descriptionError ? "border-red-500" : ""
               }`}
             />
@@ -467,7 +467,7 @@ const RegisterCompany = () => {
               // e.target.value is the value of the input
               onChange={handleStartYearChange}
               onBlur={validateStartYear}
-              className={`border-2 border-gray-500 px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
                 startYearError ? "border-red-500" : ""
               }`}
             />

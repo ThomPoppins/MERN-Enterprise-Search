@@ -12,6 +12,10 @@
   font-style: normal;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: "Poppins", sans-serif;
   color: white;
