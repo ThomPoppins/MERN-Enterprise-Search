@@ -13,13 +13,13 @@
 }
 
 html {
-  height: 100%;
+  height: 100% !important;
 }
 
 body {
   font-family: "Poppins", sans-serif;
   color: white;
-  height: 100%;
+  height: 100% !important;
 }
 
 /* Remove border when input field focus */
