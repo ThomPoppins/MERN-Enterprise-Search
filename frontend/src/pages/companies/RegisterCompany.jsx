@@ -268,7 +268,9 @@ const RegisterCompany = () => {
   return (
     <Layout>
       <div className="p-4">
-        <h1 className="text-3xl my-4">Register Company</h1>
+        <h1 className="flex justify-center text-3xl my-4 mb-6">
+          Register Company
+        </h1>
         {loading ? <Spinner /> : ""}
         <div className="flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto">
           {/* // TODO: [MERNSTACK-128] RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this*/}

@@ -412,7 +412,7 @@ const EditCompany = () => {
   return (
     <Layout>
       <div className="p-4">
-        <h1 className="text-3xl my-4">Edit Company</h1>
+        <h1 className="flex justify-center text-3xl my-4 mb-6">Edit Company</h1>
         {loading ? <Spinner /> : ""}
         <div className="flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto mb-4">
           <div className="my-4">
