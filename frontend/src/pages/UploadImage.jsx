@@ -9,9 +9,18 @@ const UploadImage = () => {
     const formData = new FormData();
     formData.append("image", event.target.image.files[0]);
 
-    axios.post(`${BACKEND_URL}/upload/image`, formData).then((response) => {
-      console.log(response);
-    });
+    axios
+      .post(`${BACKEND_URL}/upload/image`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        console.log("RESPONSE from /upload/image route: ", response);
+      })
+      .catch((error) => {
+        console.log("ERROR from /upload/image route: ", error);
+      });
   };
 
   return (
