@@ -13,8 +13,6 @@ import lastNameValidator from "../../utils/validation/lastNameValidator";
 import Navbar from "../../components/layout/Navbar";
 import Layout from "../../components/layout/Layout";
 
-// TODO: [MERNSTACK-206] Set up a profile picture upload for the user
-
 const RegisterUser = () => {
   // Form input fields as state variables
   const [username, setUsername] = useState("");
