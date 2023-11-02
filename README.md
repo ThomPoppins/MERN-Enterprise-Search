@@ -260,7 +260,7 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-214] Style all form input fields
 - [ ] [MERNSTACK-216] Use Multer for large image file upload.
 - [ ] [MERNSTACK-217] Create a new routes file for file uploads. When the profile picture is uploaded, save the link/URL with the filepath in the database. ALSO return the path/fileId of the image as response to the client, so when the user registers the correct fileId/filepath will be saved to the new user/company.
-- [ ] 
+- [ ] [MERNSTACK-218] Maak van /backend CDN waar alle afbeeldingen vanaf worden geladen.
 
 # Technologies:
 
