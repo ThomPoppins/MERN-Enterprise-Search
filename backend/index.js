@@ -9,6 +9,7 @@ import authRoute from "./routes/authRoute.js";
 import kvkRoute from "./routes/kvkRoute.js";
 import uploadRoute from "./routes/uploadRoute.js";
 import cors from "cors";
+import bodyParser from "body-parser";
 
 const app = express();
 
@@ -24,13 +25,14 @@ const app = express();
 app.use(cors());
 
 // Middleware to parse the request body as JSON.
-app.use(express.json());
+// app.use(express.json()); // TODO: TEST IF THIS 100% SURE CAN BE REMOVED BECAUSE OF THE BODY-PARSER DEPENDENCY BELOW!!!
 
-/* TODO: [MERNSTACK-215] Remove body-parser dependency of unused.
-// Middleware to parse the request body as JSON. Size is increased to 30mb.
-// app.use(bodyParser.json({ limit: "50mb" }));
+// TODO: [MERNSTACK-215] Remove body-parser dependency if unused.
+
+// Middleware to parse the request body as JSON. Size is increased to 500 MB*/
+app.use(bodyParser.json({ limit: "500mb" }));
 // Middleware to parse the request body as URL encoded data.
-// app.use(bodyParser.urlencoded({ limit: "50mb", extended: true })); */
+app.use(bodyParser.urlencoded([{ extended: false, limit: "500mb" }]));
 
 // GET method available at "/".
 app.get("/", (request, response) => {
