@@ -31,7 +31,7 @@ router.get("/recipient/:userId", async (request, response) => {
       }
     }
 
-    console.log(invites);
+    // console.log(invites);
 
     // Send status 200 response and the invites as JSON response if successful
     return response.status(200).json(invites);
