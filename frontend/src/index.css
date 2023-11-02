@@ -22,6 +22,12 @@ body {
   height: 100%;
 }
 
+/* Remove border when input field focus */
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
 strong {
   font-family: "Poppins", sans-serif;
   font-weight: bold;

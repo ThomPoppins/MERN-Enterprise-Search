@@ -270,10 +270,10 @@ const RegisterCompany = () => {
       <div className="p-4">
         <h1 className="text-3xl my-4">Register Company</h1>
         {loading ? <Spinner /> : ""}
-        <div className="flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] p-4 mx-auto">
+        <div className="flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto">
           {/* // TODO: [MERNSTACK-128] RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this*/}
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Name</label>
+            <label className="text-xl mr-4">Name</label>
             <input
               type="text"
               value={name}
@@ -282,7 +282,7 @@ const RegisterCompany = () => {
               // e.target.value is the value of the input
               onChange={handleNameChange}
               onBlur={validateCompanyName}
-              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 nameError ? "border-red-500" : ""
               }`}
               data-test-id="name-input"
@@ -299,7 +299,7 @@ const RegisterCompany = () => {
           </div>
           {/* Company logo */}
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Logo</label>
+            <label className="text-xl mr-4">Logo</label>
             <div className="w-full">
               <div className="flex justify-center items-center my-4">
                 <div className="flex justify-center">
@@ -310,7 +310,7 @@ const RegisterCompany = () => {
               </div>
               <div className="flex justify-center items-center mb-4 mt-8">
                 <button
-                  className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
+                  className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8"
                   onClick={() => setShowLogoModal(true)}
                   data-test-id="upload-logo-button"
                 >
@@ -326,7 +326,7 @@ const RegisterCompany = () => {
             </div>
           </div>
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Email</label>
+            <label className="text-xl mr-4">Email</label>
             <input
               type="text"
               value={email}
@@ -335,7 +335,7 @@ const RegisterCompany = () => {
               // e.target.value is the value of the input
               onChange={handleEmailChange}
               onBlur={validateEmail}
-              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 emailError ? "border-red-500" : ""
               }`}
             />
@@ -348,7 +348,7 @@ const RegisterCompany = () => {
             )}
           </div>
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Phone</label>
+            <label className="text-xl mr-4">Phone</label>
             <input
               type="text"
               value={phone}
@@ -357,7 +357,7 @@ const RegisterCompany = () => {
               // e.target.value is the value of the input
               onChange={handlePhoneChange}
               onBlur={validatePhone}
-              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 phoneError ? "border-red-500" : ""
               }`}
             />
@@ -370,7 +370,7 @@ const RegisterCompany = () => {
             ""
           )}
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">KVK Number</label>
+            <label className="text-xl mr-4">KVK Number</label>
             {TEST_KVK_API ? (
               <div className="mb-4">
                 <p className="text-gray-400">
@@ -395,7 +395,7 @@ const RegisterCompany = () => {
               // e.target.value is the value of the input
               onChange={handleKvkNumberChange}
               onBlur={validateKvkNumber}
-              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 kvkNumberError ? "border-red-500" : ""
               }`}
             />
@@ -410,7 +410,7 @@ const RegisterCompany = () => {
             )}
           </div>
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Slogan</label>
+            <label className="text-xl mr-4">Slogan</label>
             <input
               type="text"
               value={slogan}
@@ -419,7 +419,7 @@ const RegisterCompany = () => {
               // e.target.value is the value of the input
               onChange={handleSloganChange}
               onBlur={validateSlogan}
-              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 sloganError ? "border-red-500" : ""
               }`}
             />
@@ -433,9 +433,7 @@ const RegisterCompany = () => {
             )}
           </div>
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">
-              Company Description
-            </label>
+            <label className="text-xl mr-4">Company Description</label>
             <textarea
               type="text"
               value={description}
@@ -444,7 +442,7 @@ const RegisterCompany = () => {
               // e.target.value is the value of the input
               onChange={handleDescriptionChange}
               onBlur={validateDescription}
-              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 descriptionError ? "border-red-500" : ""
               }`}
             />
@@ -458,7 +456,7 @@ const RegisterCompany = () => {
             )}
           </div>
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Start Year</label>
+            <label className="text-xl mr-4">Start Year</label>
             <input
               type="number"
               value={startYear}
@@ -467,7 +465,7 @@ const RegisterCompany = () => {
               // e.target.value is the value of the input
               onChange={handleStartYearChange}
               onBlur={validateStartYear}
-              className={`border-2 border-purple-900 rounded-xl px-4 py-2 w-full ${
+              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 startYearError ? "border-red-500" : ""
               }`}
             />
@@ -482,7 +480,7 @@ const RegisterCompany = () => {
             )}
           </div>
           <button
-            className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg mx-auto w-1/2"
+            className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8"
             onClick={handleSaveCompany}
           >
             Save
