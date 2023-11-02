@@ -12,15 +12,6 @@ import cors from "cors";
 
 const app = express();
 
-// Middleware to parse the request body as JSON.
-app.use(express.json());
-
-// TODO: [MERNSTACK-215] Remove body-parser dependency of unused.
-// Middleware to parse the request body as JSON. Size is increased to 30mb.
-// app.use(bodyParser.json({ limit: "50mb" }));
-// Middleware to parse the request body as URL encoded data.
-// app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
-
 // TODO: [MERNSTACK-113] Configure CORS properly and securely before deployment.
 // Example CORS configuration:
 // app.use(cors({
@@ -31,6 +22,15 @@ app.use(express.json());
 // How to set up credentials with CORS: https://stackoverflow.com/questions/19743396/cors-cannot-use-wildcard-in-access-control-allow-origin-when-credentials-flag-i
 // Middleware to allow cross-origin requests.
 app.use(cors());
+
+// Middleware to parse the request body as JSON.
+app.use(express.json());
+
+/* TODO: [MERNSTACK-215] Remove body-parser dependency of unused.
+// Middleware to parse the request body as JSON. Size is increased to 30mb.
+// app.use(bodyParser.json({ limit: "50mb" }));
+// Middleware to parse the request body as URL encoded data.
+// app.use(bodyParser.urlencoded({ limit: "50mb", extended: true })); */
 
 // GET method available at "/".
 app.get("/", (request, response) => {
