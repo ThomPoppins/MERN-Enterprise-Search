@@ -13,6 +13,7 @@ import LoginUser from "./pages/users/LoginUser";
 import RegisterUser from "./pages/users/RegisterUser";
 import LogoutUser from "./pages/users/LogoutUser";
 import InvitesList from "./pages/invites/InvitesList";
+import UploadImage from "./pages/UploadImage";
 import Home from "./pages/Home";
 import Cookies from "js-cookie";
 import verifyToken from "./utils/auth/verifyToken.jsx";
@@ -31,6 +32,8 @@ const App = () => {
       <Routes>
         {/* / route, render homepage*/}
         <Route path="/" element={<Home />} />
+        {/* TESTROUTE: test image uploading */}
+        <Route path="/upload-image" element={<UploadImage />} />
         {/* /login route, render user login page */}
         <Route path="/login" element={<LoginUser />} />
         {/* /register route, render user register page */}
