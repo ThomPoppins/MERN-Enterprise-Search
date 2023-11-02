@@ -7,21 +7,14 @@ import usersRoute from "./routes/usersRoute.js";
 import invitesRoute from "./routes/invitesRoute.js";
 import authRoute from "./routes/authRoute.js";
 import kvkRoute from "./routes/kvkRoute.js";
+import uploadRoute from "./routes/uploadRoute.js";
+// import multer from "multer";
 import cors from "cors";
-import bodyParser from "body-parser";
+// import bodyParser from "body-parser";
 
 const app = express();
 
-// Middleware to parse the request body as JSON.
-app.use(express.json());
-
-// TODO: [MERNSTACK-202] Fix backend error "PayloadTooLargeError: request entity too large" wanneer de afbeeldingdata te groot is voor ExpressJS (https://www.webslesson.info/2022/05/upload-file-in-node-js-express-using-multer.html)
-// Middleware to parse the request body as JSON. Size is increased to 30mb.
-app.use(bodyParser.json({ limit: "500mb" }));
-// Middleware to parse the request body as URL encoded data.
-app.use(bodyParser.urlencoded({ limit: "500mb", extended: true }));
-
-// TODO: [MERNSTACK-113] Configure CORS properly before deployment.
+// TODO: [MERNSTACK-113] Configure CORS properly and securely before deployment.
 // Example CORS configuration:
 // app.use(cors({
 //   origin: "http://localhost:3000",
@@ -31,6 +24,9 @@ app.use(bodyParser.urlencoded({ limit: "500mb", extended: true }));
 // How to set up credentials with CORS: https://stackoverflow.com/questions/19743396/cors-cannot-use-wildcard-in-access-control-allow-origin-when-credentials-flag-i
 // Middleware to allow cross-origin requests.
 app.use(cors());
+
+// Middleware to parse the request body as JSON.
+app.use(express.json());
 
 // GET method available at "/".
 app.get("/", (request, response) => {
@@ -50,6 +46,7 @@ app.use("/users", usersRoute);
 app.use("/invites", invitesRoute);
 app.use("/auth", authRoute);
 app.use("/kvk", kvkRoute);
+app.use("/upload", uploadRoute);
 
 // Connect to MongoDB database
 // If connection is successful, start Express.js backend server and listen to PORT

@@ -4,6 +4,9 @@ node_modules
 backend/config.js
 frontend/config.js
 
+# Uploaded media files
+backend/uploads/*
+
 # Environment variables
 backend/.env
 frontend/.env

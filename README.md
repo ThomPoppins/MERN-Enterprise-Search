@@ -248,15 +248,20 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-109] Populate the company document with the properties from the request body if they exist in companiesRoute.js.
 - [x] [MERNSTACK-203] Make file upload possible as user profile image
 - [ ] [MERNSTACK-] Make file upload possible as company logo
+- [x] [MERNSTACK-206] Set up a profile picture upload for the user
 - [x] [MERNSTACK-195] Define the invite model
 - [x] [MERNSTACK-207] Save the profile picture Base64 string to the database
-- [ ] [MERNSTACK-208] Create default page layout that all pages will become children of
+- [x] [MERNSTACK-208] Create default page layout that all pages will become children of
 - [x] [MERNSTACK-210] Change text color to white when background image is set
-- [ ] [MERNSTACK-211] Add background color with opacity to all places where text is displayed on top of the background image.
-- [ ] [MERNSTACK-212] Create account edit page for account configurations.
-- [ ] [MERNSTACK-213] Complete styling on RegisterCompany page.
+- [x] [MERNSTACK-211] Add background color with opacity to all places where text is displayed on top of the background image.
+- [ ] [MERNSTACK-212] Create account edit page for account settings/configurations.
+- [x] [MERNSTACK-213] Complete styling on RegisterCompany page.
 - [x] [MERNSTACK-166] Validate validity and uniqueness of company KVK number
-- [ ] [MERNSTACK-214] Style all form input fields
+- [x] [MERNSTACK-214] Style all form input fields
+- [x] [MERNSTACK-216] Use Multer for large image file upload.
+- [ ] [MERNSTACK-217] Create a new routes file for file uploads. When the profile picture is uploaded, save the link/URL with the filepath in the database. ALSO return the path/fileId of the image as response to the client, so when the user registers the correct fileId/filepath will be saved to the new user/company.
+- [ ] [MERNSTACK-218] Maak van /backend CDN waar alle afbeeldingen vanaf worden geladen.
+- [x] [MERNSTACK-202] FIX backend error: "PayloadTooLargeError: request entity too large" wanneer de afbeeldingdata te groot is voor ExpressJS (https://www.webslesson.info/2022/05/upload-file-in-node-js-express-using-multer.html) SOLVED using Multer for large image file uploads.
 
 # Technologies:
 

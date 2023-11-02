@@ -89,7 +89,7 @@ const UserSearch = ({
           // and sets the title state to the value of the input
           // e.target.value is the value of the input
           onChange={handleSearch}
-          className="border-2 border-gray-500 px-4 py-2 w-full"
+          className="border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full"
           data-test-id="search-input"
         />
       </div>
