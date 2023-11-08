@@ -262,6 +262,7 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [ ] [MERNSTACK-217] Create a new routes file for file uploads. When the profile picture is uploaded, save the link/URL with the filepath in the database. ALSO return the path/fileId of the image as response to the client, so when the user registers the correct fileId/filepath will be saved to the new user/company.
 - [ ] [MERNSTACK-218] Maak van /backend CDN waar alle afbeeldingen vanaf worden geladen.
 - [x] [MERNSTACK-202] FIX backend error: "PayloadTooLargeError: request entity too large" wanneer de afbeeldingdata te groot is voor ExpressJS (https://www.webslesson.info/2022/05/upload-file-in-node-js-express-using-multer.html) SOLVED using Multer for large image file uploads.
+- [x] [MERNSTACK-165] Create a schema and model for images
 
 # Technologies:
 

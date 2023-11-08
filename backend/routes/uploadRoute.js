@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import { Image } from "../models/imageModel.js";
 import multer from "multer";
 
 const router = express.Router();
@@ -35,11 +36,37 @@ const upload = multer({ storage: storage });
 // router.use(upload.single("image"));
 
 // POST image upload route, will be in the uploadRoute.js file if it works.
-router.post("/image", upload.single("image"), (request, response) => {
+router.post("/image", upload.single("image"), async (request, response) => {
   // if the file upload was successful, the file will be stored in the "uploads/images" folder.
   console.log("REQUEST FILE: ", request.file);
 
-  return response.status(200).send(request.file.path);
+  const responseObj = {
+    message: "Image uploaded successfully!",
+    imagePath: request.file.path,
+    imageId: "",
+  };
+
+  // Save image path to database
+  const image = new Image({
+    path: request.file.path,
+  });
+
+  await image
+    .save()
+    .then((result) => {
+      console.log("Image saved to database!");
+
+      console.log("Result saving image call: ", result);
+
+      responseObj["imageId"] = result._id;
+    })
+    .catch((error) => {
+      console.log("Error saving image to database: ", error);
+    });
+
+  console.log("Response object: ", responseObj);
+
+  return response.status(200).send(responseObj);
 });
 
 // POST method to upload a image to the server.

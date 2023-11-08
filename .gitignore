@@ -5,7 +5,7 @@ backend/config.js
 frontend/config.js
 
 # Uploaded media files
-backend/uploads/*
+backend/public/uploads/*
 
 # Environment variables
 backend/.env
