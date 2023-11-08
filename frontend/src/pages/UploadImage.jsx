@@ -1,14 +1,24 @@
 import React from "react";
 import Layout from "../components/layout/Layout";
+import { useSelector } from "react-redux";
 import { BACKEND_URL } from "../../config";
 import axios from "axios";
 
 const UploadImage = () => {
+  // Get the user id from the Redux store
+  const userId = useSelector((state) => state.userId);
+
+  // Handle the form submit event
   const handleFormSubmit = (event) => {
+    // Prevent the default form submit behavior
     event.preventDefault();
+
+    // Create a new FormData object
     const formData = new FormData();
+    // Add the image data to the FormData object
     formData.append("image", event.target.image.files[0]);
 
+    // Send the image to the server
     axios
       .post(`${BACKEND_URL}/upload/image`, formData, {
         headers: {
@@ -19,9 +29,26 @@ const UploadImage = () => {
         console.log("RESPONSE from /upload/image route: ", response);
         console.log("response.data: ", response.data);
 
-        const imagePath = response.data.imagePath;
-        console.log("imagePath: ", imagePath);
-        console.log("imageId: ", response.data.imageId);
+        if (response.data.imageId) {
+          // Save the image id of the profile picture to the user's document in the database
+          axios
+            .put(`${BACKEND_URL}/users/profile-picture`, {
+              userId: userId,
+              imageId: response.data.imageId,
+            })
+            .then((response) => {
+              console.log(
+                "RESPONSE from /user/${userId}/profile-picture: ",
+                response
+              );
+            })
+            .catch((error) => {
+              console.log(
+                "ERROR from /user/${userId}/profile-picture: ",
+                error
+              );
+            });
+        }
       })
       .catch((error) => {
         console.log("ERROR from /upload/image route: ", error);

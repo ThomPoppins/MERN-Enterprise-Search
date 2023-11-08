@@ -21,9 +21,6 @@ const RegisterUser = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [profilePictureFile, setProfilePictureFile] = useState();
-  const [profilePictureBase64, setProfilePictureBase64] = useState("");
-
   // Error message returned by the server when registering a user fails
   const [registerErrorMessage, setRegisterErrorMessage] = useState("");
 
@@ -129,31 +126,6 @@ const RegisterUser = () => {
       validateLastName();
     }
   };
-  const handleProfilePictureChange = (e) => {
-    if (!e.target.files || e.target.files.length === 0) {
-      setProfilePictureFile(undefined);
-      return;
-    }
-
-    console.log(e.target.files);
-
-    setProfilePictureFile(e.target.files[0]);
-  };
-
-  // Display the profile picture preview when the user selects a profile picture
-  useEffect(() => {
-    if (!profilePictureFile) {
-      return;
-    }
-
-    const objectUrl = URL.createObjectURL(profilePictureFile);
-
-    const reader = new FileReader();
-    reader.readAsDataURL(profilePictureFile);
-    reader.onloadend = () => {
-      setProfilePictureBase64(reader.result);
-    };
-  }, [profilePictureFile]);
 
   // Display error messages if the user enters invalid input with useSnackbar
   useEffect(() => {
@@ -231,7 +203,6 @@ const RegisterUser = () => {
       password: password,
       firstName: firstName,
       lastName: lastName,
-      profilePicture: profilePictureBase64,
     };
     setLoading(true);
     axios
@@ -379,14 +350,6 @@ const RegisterUser = () => {
             ) : (
               ""
             )}
-          </div>
-          <div className="my-4">
-            <label className="text-xl mr-4">Profile Picture</label>
-            <br />
-            <input type="file" onChange={handleProfilePictureChange} />
-            <div className="flex justify-center my-4">
-              <img width="200" height="200" src={profilePictureBase64} />
-            </div>
           </div>
           <button
             className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8"

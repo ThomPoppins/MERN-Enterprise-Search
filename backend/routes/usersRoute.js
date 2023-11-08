@@ -67,9 +67,6 @@ router.post("/", async (request, response) => {
       hashedPassword: hashedPassword,
       firstName: request.body.firstName ? request.body.firstName : "",
       lastName: request.body.lastName ? request.body.lastName : "",
-      profilePicture: request.body.profilePicture
-        ? request.body.profilePicture
-        : "",
     };
 
     // Create a new user document using the User model and the properties from the request body
@@ -82,6 +79,47 @@ router.post("/", async (request, response) => {
     response.status(500).send({
       message:
         "Error registering your account! (Developers, check backend console.log output for error details.)",
+    });
+  }
+});
+
+// Route to add profile picture to user
+router.put("/profile-picture", async (request, response) => {
+  try {
+    // Get the user id from the request body
+    const { userId, imageId } = request.body;
+
+    // Get the user from the database
+    User.findById(userId)
+      .then((user) => {
+        imageId = new mongoose.Types.ObjectId(profilePicture);
+
+        // Save the updated user to the database
+        user
+          .updateOne({ profilePicture: imageId })
+          .then((result) => {
+            console.log("Result saving user call: ", result);
+
+            // Send status 200 response and the updated user to the client
+            return response.status(200).send(user);
+          })
+          .catch((error) => {
+            console.log("Error saving user to database: ", error);
+            response.status(500).send({
+              message: "Error saving user to database!",
+            });
+          });
+      })
+      .catch((error) => {
+        console.log("Error finding user in database: ", error);
+        response.status(500).send({
+          message: "Error finding user in database!",
+        });
+      });
+  } catch (error) {
+    console.log("Error in PUT /users/profilepicture: ", error);
+    response.status(500).send({
+      message: "Error updating user profile picture!",
     });
   }
 });
@@ -135,10 +173,6 @@ router.post("/login", async (request, response) => {
     console.log("Error in GET /users/login: ", error);
     response.status(500).send({ message: error.message });
   }
-});
-
-router.get("/search", async (request, response) => {
-  return response.status(200).json([]);
 });
 
 // Find user by username, name or email search term
@@ -246,6 +280,18 @@ router.get("/user/:id", async (request, response) => {
 
     // Get user documents using the findById method
     const user = await User.findById(id);
+
+    if (user.profilePicture) {
+      // Get the image from the database
+      const image = await Image.findById(user.profilePicture);
+
+      if (image.path) {
+        console.log("Image path: ", image.path);
+      }
+
+      // Add the image path to the user object
+      user.profilePictureURL = image.path;
+    }
 
     // Send status 200 response and the companies to the client
     return response.status(200).json(user);
