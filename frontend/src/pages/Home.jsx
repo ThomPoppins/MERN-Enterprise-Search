@@ -15,7 +15,7 @@ const Home = () => {
             alt="profile picture"
             className="w-64 h-64 mt-2 rounded-full mx-auto"
           />
-          <div className="mx-auto lg:w-9/12 border border-purple-900 bg-violet-950/40 p-4 mt-6">
+          <div className="mx-auto lg:w-9/12 border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-6">
             <h1 className="text-3xl my-2">
               Welcome {user?.firstName} {user?.lastName}
             </h1>
@@ -37,7 +37,7 @@ const Home = () => {
   } else {
     return (
       <Layout>
-        <div className="mx-auto lg:w-9/12 border border-purple-900 bg-violet-950/40 p-4 mt-4">
+        <div className="mx-auto lg:w-9/12 border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-4">
           <h1 className="text-3xl mb-6">Home</h1>
 
           <p className="">

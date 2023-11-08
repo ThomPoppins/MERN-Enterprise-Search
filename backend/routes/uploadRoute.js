@@ -10,7 +10,7 @@ const router = express.Router();
 const storage = multer.diskStorage({
   // Destination is the folder where the uploaded file will be stored.
   destination: function (request, file, callback) {
-    callback(null, "./uploads/images");
+    callback(null, "./public/uploads/images");
   },
   fileFilter: function (request, file, callback) {
     // Accept images only.

@@ -28,6 +28,8 @@ app.use(cors());
 // Middleware to parse the request body as JSON.
 app.use(express.json());
 
+app.use(express.static("public"));
+
 // GET method available at "/".
 app.get("/", (request, response) => {
   response
