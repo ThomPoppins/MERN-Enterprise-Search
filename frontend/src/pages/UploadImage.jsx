@@ -17,6 +17,11 @@ const UploadImage = () => {
       })
       .then((response) => {
         console.log("RESPONSE from /upload/image route: ", response);
+        console.log("response.data: ", response.data);
+
+        const imagePath = response.data.imagePath;
+        console.log("imagePath: ", imagePath);
+        console.log("imageId: ", response.data.imageId);
       })
       .catch((error) => {
         console.log("ERROR from /upload/image route: ", error);
