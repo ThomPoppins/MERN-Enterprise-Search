@@ -46,11 +46,11 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: "",
     },
-    // `profilePicture` is a Base64 encoded string
+    // `profilePicture` is a id reference to the image document in the database.
+    // The image document contains the path to the image file.
     profilePicture: {
-      type: String,
-      required: false,
-      default: "",
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Image",
     },
   },
   { timestamps: true }
