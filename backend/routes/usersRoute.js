@@ -2,6 +2,7 @@ import express from "express";
 import { Company } from "../models/companyModel.js";
 import { Image } from "../models/imageModel.js";
 import { User } from "../models/userModel.js";
+import { Invite } from "../models/inviteModel.js";
 import { getStaticFileURLFromPath } from "../middleware/files/staticFiles.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../middleware/auth/jwt.js";
@@ -16,12 +17,15 @@ router.post("/", async (request, response) => {
     if (
       !request.body.username ||
       !request.body.email ||
-      !request.body.password
+      !request.body.password ||
+      !request.body.firstName ||
+      !request.body.lastName ||
+      !request.body.gender
     ) {
       // Send status 400 response if data fields are missing and a (error) message to inform the client.
       return response.status(400).send({
         message:
-          "Data fields missing, need at least a username, email and password.",
+          "Data fields missing, need at least a username, email, password, first- & last name and the gender.",
       });
     }
 
@@ -274,8 +278,6 @@ router.get("/user/:id", async (request, response) => {
     // Get the user id from the request parameters
     const { id } = request.params;
 
-    console.log("User id: ", id);
-
     let profilePictureURL = "";
 
     // Get user documents using the findById method
@@ -287,12 +289,21 @@ router.get("/user/:id", async (request, response) => {
     if (user.profilePicture) {
       // Get the profile picture document from the database
       const image = await Image.findById(user.profilePicture);
-
       // Get the path to the profile picture file
       profilePictureURL = getStaticFileURLFromPath(image.path);
     }
 
+    // Add the profilePictureURL property to the user object
     user["profilePictureURL"] = profilePictureURL;
+
+    // Count how many pending invites the user has
+    const pendingInvitesCount = await Invite.countDocuments({
+      recipientId: new mongoose.Types.ObjectId(id),
+      status: "pending",
+    });
+
+    // Add the pendingInvitesCount property to the user object
+    user["pendingInvitesCount"] = pendingInvitesCount;
 
     console.log("User: ", user);
 

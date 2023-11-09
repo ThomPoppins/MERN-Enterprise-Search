@@ -23,7 +23,7 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
     <div id={"operations-" + invite._id} key={invite._id}>
       <span className="text-xl">
         <button
-          className={`hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 bg-green-600 rounded-lg w-[82px] float-left ml-1 ${
+          className={` hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 bg-green-600 rounded-lg w-[82px] float-left ml-1 ${
             acceptButtonSpinning
               ? "animate-spin"
               : "animate-bounce hover:animate-none"

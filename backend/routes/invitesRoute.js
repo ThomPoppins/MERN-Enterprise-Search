@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import inviteModel from "../models/inviteModel.js";
+import { Invite } from "../models/inviteModel.js";
 import { User } from "../models/userModel.js";
 import { Company } from "../models/companyModel.js";
 
@@ -12,12 +12,10 @@ router.get("/recipient/:userId/pending", async (request, response) => {
 
   try {
     // Get all invites with status "pending" and recipientId equal to userId
-    let invites = await inviteModel
-      .find({
-        recipientId: new mongoose.Types.ObjectId(userId),
-        status: "pending",
-      })
-      .sort({ createdAt: -1 });
+    let invites = await Invite.find({
+      recipientId: new mongoose.Types.ObjectId(userId),
+      status: "pending",
+    }).sort({ createdAt: -1 });
 
     // Convert invites to plain JavaScript objects
     invites = invites.map((invite) => invite.toObject());
@@ -56,7 +54,7 @@ router.put("/status/:inviteId", async (request, response) => {
 
   try {
     // Find the invite document using the inviteId
-    const invite = await inviteModel.findById(inviteId);
+    const invite = await Invite.findById(inviteId);
 
     // Update the invite status
     invite.status = request.body.status;
@@ -83,7 +81,7 @@ router.put("/status/:inviteId", async (request, response) => {
 router.post("/", async (request, response) => {
   // Create a new invite document using the Invite model
   try {
-    const newInvite = new inviteModel({
+    const newInvite = new Invite({
       senderId: new mongoose.Types.ObjectId(request.body.senderId),
       recipientId: new mongoose.Types.ObjectId(request.body.recipientId),
       kind: request.body.kind,

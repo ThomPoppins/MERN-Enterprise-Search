@@ -113,8 +113,7 @@ const InvitesList = () => {
                   <span className="text-xl mr-4">{invite.status}</span>
                 </td>
                 <td className="border-purple-900 bg-violet-950/40">
-                  {/* //! Make "Operations" component with Accept and Deny buttons */}
-
+                  {/* InviteOperations component is responsible for updating the invite status */}
                   <InviteOperations
                     invite={invite}
                     updateInviteStatus={updateInviteStatus}

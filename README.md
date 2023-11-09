@@ -285,7 +285,9 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-222] Use a placeholder image for the profile picture, specifically a man for male users and a woman for female users.
 - [x] [MERNSTACK-223] Spin animation on Find button on homepage when the button is clicked.
 - [x] [MERNSTACK-224] Update "Invite" status when user Accepts or Declines a Invite.
-- [ ] 
+- [ ] [MERNSTACK-225] If there is 1 or more pending invites, notify the user in the Navbar by making the "Invites" item bounce and give it a bright (lightblue) background color.
+- [ ] [MERNSTACK-228] The "Find" on the homepage has to transition between color using "color transitions" from TailwindCSS.
+- [ ] [MERNSTACK-227] Dropdown menu items have to become clickable over the full width of the menu instead only the text and icon
 
 # Technologies:
 

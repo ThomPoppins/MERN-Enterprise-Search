@@ -1,5 +1,5 @@
 // Navbar.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BACKEND_URL } from "../../../config";
 import {
   HiOutlineClipboardList,
@@ -11,6 +11,12 @@ import {
   HiOutlineLogout,
 } from "react-icons/hi";
 import { HiOutlineBriefcase } from "react-icons/hi2";
+import {
+  LuBellRing,
+  LuBell,
+  LuClipboardCopy,
+  LuClipboardCheck,
+} from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -18,8 +24,31 @@ const Navbar = () => {
   let userId = useSelector((state) => state.userId);
   let user = useSelector((state) => state.user);
 
-  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+  // Amount of pending invites
+  const [pendingInvitesCount, setPendingInvitesCount] = useState(0);
+  // Should the active user be alerted about pending invites?
+  //! TO BE DECIDED: Maybe ALL notifications should trigger a general notification state, maybe not.
+  const [inviteAlert, setInviteAlert] = useState(false);
 
+  // When the user data is available
+  useEffect(() => {
+    if (!user) {
+      return;
+    }
+    // Get the amount of pending invites
+    setPendingInvitesCount(user.pendingInvitesCount);
+
+    if (user.pendingInvitesCount < 1) {
+      setInviteAlert(false);
+      return;
+    }
+    setInviteAlert(true);
+  }, [userId, user]);
+
+  // Is the dropdown menu open?
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // Toggle the dropdown menu open/closed
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
@@ -55,40 +84,69 @@ const Navbar = () => {
                             : `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
                         }
                         alt="profile picture"
-                        className="w-8 h-8 rounded-full ml-2 float-left mr-2 object-cover"
+                        className="w-8 h-8 rounded-full ml-2 float-left mr-3 object-cover"
                       />
-                      {user?.firstName} {user?.lastName}
+                      {user?.firstName}
+                      {inviteAlert ? (
+                        <LuClipboardCopy className="text-xl mt-1 w-[30px] float-right ml-1 mr-3 text-yellow-400 animate-bounce" />
+                      ) : (
+                        ""
+                      )}
                     </div>
+                    {/* TODO: [MERNSTACK-226] When you click somewhere else, the dropdown should close in Navbar.jsx*/}
                     {isDropdownOpen && (
-                      <div className="absolute top-10 right-0 bg-violet-950/90 rounded-lg p-2 animate-pulse">
-                        <div className="w-[200px] pl-4">
+                      <div className="z-[100] absolute top-10 right-0 bg-violet-950/90 rounded-lg p-2">
+                        <div className="w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600">
                           <Link to="/profile" className="text-white">
-                            <HiUser className="text-xl mt-1 w-[30px] float-left mr-3" />
-                            Profile
+                            <div className="w-full h-full">
+                              <HiUser className="text-xl mt-1 w-[30px] float-left ml-2 mr-3" />
+                              Profile
+                            </div>
                           </Link>
                         </div>
-                        <div className="w-[200px] pl-4">
+                        <div
+                          className={`w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4 ${
+                            inviteAlert
+                              ? "bg-gradient-to-r from-green-600 to-green-800"
+                              : ""
+                          }`}
+                        >
                           <Link to="/invites" className="text-white">
-                            <HiOutlineClipboardList className="text-xl mt-1 w-[30px] float-left mr-3" />
-                            Invites
+                            {inviteAlert ? (
+                              <div className="w-full h-full">
+                                <LuClipboardCopy className="text-xl mt-1 w-[30px] float-left ml-2 mr-3 animate-bounce text-yellow-400 " />
+                                Invites
+                              </div>
+                            ) : (
+                              <div className="w-full h-full">
+                                <LuClipboardCheck className="text-xl mt-1 w-[30px] float-left ml-2 mr-3" />
+                                Invites
+                              </div>
+                            )}
                           </Link>
                         </div>
-                        <div className="w-[200px] pl-4">
+                        <div className="w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4">
                           <Link to="/companies" className="text-white">
-                            <HiOutlineBriefcase className="text-xl mt-1 w-[30px] float-left mr-3" />
-                            Companies
+                            <div className="w-full h-full">
+                              <HiOutlineBriefcase className="text-xl mt-1 w-[30px] float-left ml-2 mr-3" />
+                              Companies
+                            </div>
                           </Link>
                         </div>
-                        <div className="w-[200px] pl-4">
+                        <div className="w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4">
                           <Link to="/user/settings" className="text-white">
-                            <HiOutlineCog className="text-xl mt-1 w-[30px] float-left mr-3" />
-                            Settings
+                            <div className="w-full h-full">
+                              <HiOutlineCog className="text-xl mt-1 w-[30px] float-left ml-2 mr-3" />
+                              Settings
+                            </div>
                           </Link>
                         </div>
-                        <div className="w-[200px] pl-4">
+                        <div className="w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4">
                           <Link to="/logout" className="text-white">
-                            <HiOutlineLogout className="text-xl mt-1 w-[30px] float-left mr-3" />
-                            Logout
+                            <div className="w-full h-full">
+                              <HiOutlineLogout className="text-xl mt-1 w-[30px] float-left ml-2 mr-3" />
+                              Logout
+                            </div>
                           </Link>
                         </div>
                       </div>
