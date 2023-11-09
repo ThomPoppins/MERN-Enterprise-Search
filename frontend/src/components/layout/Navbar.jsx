@@ -55,7 +55,7 @@ const Navbar = () => {
                     {isDropdownOpen && (
                       <div className="absolute top-10 right-0 bg-violet-950/90 rounded-lg p-2">
                         <div className="w-[200px] pl-4">
-                          <Link to="/user/profile" className="text-white">
+                          <Link to="/profile" className="text-white">
                             Profile
                           </Link>
                         </div>
