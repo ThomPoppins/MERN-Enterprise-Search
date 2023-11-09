@@ -14,7 +14,7 @@ const CompanyModal = ({ owners, company, onClose }) => {
       {/* https://stackoverflow.com/questions/4616694/what-is-event-bubbling-and-capturing */}
       <div
         onClick={(event) => event.stopPropagation()}
-        className="w-[600px] max-w-full h-auto bg-gradient-to-l from-violet-950 to-purple-950 rounded-xl p-4 flex flex-col relative"
+        className="w-[600px] max-w-full h-auto border-2 border-purple-900 bg-violet-950/40 rounded-lg px-4 py-2 m-4 flex flex-col relative"
         data-test-id="company-modal"
       >
         <AiOutlineClose
