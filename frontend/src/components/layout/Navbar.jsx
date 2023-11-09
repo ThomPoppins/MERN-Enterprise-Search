@@ -1,6 +1,16 @@
 // Navbar.tsx
 import React from "react";
 import { BACKEND_URL } from "../../../config";
+import {
+  HiOutlineClipboardList,
+  HiOutlineClipboard,
+  HiOutlineClipboardCopy,
+  HiOutlineClipboardCheck,
+  HiUser,
+  HiOutlineCog,
+  HiOutlineLogout,
+} from "react-icons/hi";
+import { HiOutlineBriefcase } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -29,17 +39,6 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {userId && (
-            <div className="flex space-x-4">
-              <div className="text-white">
-                <Link to="/companies">Companies</Link>
-              </div>
-              <div className="text-white">
-                <Link to="/invites">Invites</Link>
-              </div>
-            </div>
-          )}
-
           <div className="flex space-x-4">
             {userId ? (
               <div>
@@ -64,16 +63,31 @@ const Navbar = () => {
                       <div className="absolute top-10 right-0 bg-violet-950/90 rounded-lg p-2 animate-pulse">
                         <div className="w-[200px] pl-4">
                           <Link to="/profile" className="text-white">
+                            <HiUser className="text-xl mt-1 w-[30px] float-left mr-3" />
                             Profile
                           </Link>
                         </div>
                         <div className="w-[200px] pl-4">
+                          <Link to="/invites" className="text-white">
+                            <HiOutlineClipboardList className="text-xl mt-1 w-[30px] float-left mr-3" />
+                            Invites
+                          </Link>
+                        </div>
+                        <div className="w-[200px] pl-4">
+                          <Link to="/companies" className="text-white">
+                            <HiOutlineBriefcase className="text-xl mt-1 w-[30px] float-left mr-3" />
+                            Companies
+                          </Link>
+                        </div>
+                        <div className="w-[200px] pl-4">
                           <Link to="/user/settings" className="text-white">
+                            <HiOutlineCog className="text-xl mt-1 w-[30px] float-left mr-3" />
                             Settings
                           </Link>
                         </div>
                         <div className="w-[200px] pl-4">
                           <Link to="/logout" className="text-white">
+                            <HiOutlineLogout className="text-xl mt-1 w-[30px] float-left mr-3" />
                             Logout
                           </Link>
                         </div>
