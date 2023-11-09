@@ -4,8 +4,10 @@
 - [Getting Started](#getting-started)
 - [Application Description](#application-description)
 - [Versions:](#versions)
+  - [v0.0.2:](#v002)
+    - [Backend server CDN for static files](#backend-server-cdn-for-static-files)
+    - [File upload](#file-upload)
   - [v0.0.1:](#v001)
-  - [User Account Management](#user-account-management)
     - [Registering an Account](#registering-an-account)
     - [Logging In](#logging-in)
   - [Company Registration and Ownership](#company-registration-and-ownership)
@@ -121,9 +123,19 @@ Welcome to my FullStack JavaScript application built with Express.js on the back
 
 # Versions:
 
+## v0.0.2:
+
+### Backend server CDN for static files
+
+The backend server is now a CDN for static files like images. This means that the backend server will serve the static files from the `/backend/public` folder. This way, the frontend application can access the images from the backend server without having to store the images in the frontend application. This also makes it possible to use the backend server as a CDN for other applications that need to access the images.
+
+### File upload
+
+Users can now upload a profile picture. The profile picture will be saved in the `/backend/public/uploads/images` folder and the path to the image will be saved in the database. The backend server will serve the image from the `/backend/public` folder. This way, the frontend application can access the image from the backend server and the image path is stored in the database.
+
+
 ## v0.0.1:
 
-## User Account Management
 
 ### Registering an Account
 
@@ -132,6 +144,8 @@ Users can easily create an account by visiting the homepage of my application. T
 ### Logging In
 
 Registered users can log in to their accounts using their previously provided credentials. This allows them to access and utilize all features and services provided by the application. The login process is secure and ensures that only authorized users can access their accounts.
+
+When you log in a JWT token is generated and stored in the browser's local storage. This token is used to authenticate the user and to make sure that the user is authorized to access the application. The token is also used to make sure that the user is authorized to access certain resources in the application. For example, the user can only access his own company resources and not the company resources of other users.
 
 ## Company Registration and Ownership
 
