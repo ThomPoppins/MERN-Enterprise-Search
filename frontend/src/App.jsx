@@ -12,6 +12,7 @@ import ShowCompany from "./pages/companies/ShowCompany";
 import LoginUser from "./pages/users/LoginUser";
 import RegisterUser from "./pages/users/RegisterUser";
 import LogoutUser from "./pages/users/LogoutUser";
+import UserProfile from "./pages/users/UserProfile";
 import InvitesList from "./pages/invites/InvitesList";
 import UploadImage from "./pages/UploadImage";
 import Home from "./pages/Home";
@@ -35,10 +36,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         {/* TESTROUTE: test image uploading */}
         <Route path="/upload-image" element={<UploadImage />} />
-        {/* /login route, render user login page */}
-        <Route path="/login" element={<LoginUser />} />
-        {/* /register route, render user register page */}
-        <Route path="/register" element={<RegisterUser />} />
+        {/* User profile page route, render user profile page */}
+        <Route path="/profile" element={<UserProfile />} />
         {/* /logout route, render user logout page */}
         <Route path="/logout" element={<LogoutUser />} />
         {/* /companies/* routes */}
