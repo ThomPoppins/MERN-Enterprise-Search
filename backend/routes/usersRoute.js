@@ -2,6 +2,7 @@ import express from "express";
 import { Company } from "../models/companyModel.js";
 import { Image } from "../models/imageModel.js";
 import { User } from "../models/userModel.js";
+import { getStaticFileURLFromPath } from "../middleware/files/staticFiles.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../middleware/auth/jwt.js";
 import mongoose from "mongoose";
@@ -272,20 +273,27 @@ router.get("/user/:id", async (request, response) => {
     // Get the user id from the request parameters
     const { id } = request.params;
 
+    console.log("User id: ", id);
+
+    let profilePictureURL = "";
+
     // Get user documents using the findById method
-    const user = await User.findById(id);
+    const userDocument = await User.findById(new mongoose.Types.ObjectId(id));
+
+    // Convert the user document to a plain JavaScript object so I can add the profilePictureURL property
+    const user = userDocument.toObject();
 
     if (user.profilePicture) {
-      // Get the image from the database
-      const image = await Image.findById(user.profilePicture);
+      // Get the profile picture document from the database
+      const profilePicture = await Image.findById(user.profilePicture);
 
-      if (image.path) {
-        console.log("Image path: ", image.path);
-      }
-
-      // Add the image path to the user object
-      user.profilePictureURL = image.path;
+      // Get the path to the profile picture file
+      profilePictureURL = getStaticFileURLFromPath(profilePicture.path);
     }
+
+    user["profilePictureURL"] = profilePictureURL;
+
+    console.log("User: ", user);
 
     // Send status 200 response and the companies to the client
     return response.status(200).json(user);
