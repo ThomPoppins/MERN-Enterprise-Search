@@ -60,8 +60,9 @@ router.post("/", async (request, response) => {
       username: request.body.username,
       email: request.body.email,
       hashedPassword: hashedPassword,
-      firstName: request.body.firstName ? request.body.firstName : "",
-      lastName: request.body.lastName ? request.body.lastName : "",
+      firstName: request.body.firstName,
+      lastName: request.body.lastName,
+      gender: request.body.gender,
     };
 
     // Create a new user document using the User model and the properties from the request body

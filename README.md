@@ -273,10 +273,17 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-166] Validate validity and uniqueness of company KVK number
 - [x] [MERNSTACK-214] Style all form input fields
 - [x] [MERNSTACK-216] Use Multer for large image file upload.
-- [ ] [MERNSTACK-217] Create a new routes file for file uploads. When the profile picture is uploaded, save the link/URL with the filepath in the database. ALSO return the path/fileId of the image as response to the client, so when the user registers the correct fileId/filepath will be saved to the new/edited user/company.
+- [x] [MERNSTACK-217] Create a new routes file for file uploads. When the profile picture is uploaded, save the link/URL with the filepath in the database. ALSO return the path/fileId of the image as response to the client, so when the user registers the correct fileId/filepath will be saved to the new/edited user/company.
 - [x] [MERNSTACK-218] Make /backend server a CDN for static files like images.
 - [x] [MERNSTACK-202] FIX backend error: "PayloadTooLargeError: request entity too large" wanneer de afbeeldingdata te groot is voor ExpressJS (https://www.webslesson.info/2022/05/upload-file-in-node-js-express-using-multer.html) SOLVED using Multer for large image file uploads.
-- [x] [MERNSTACK-165] Create a schema and model for images
+- [x] [MERNSTACK-165] Create a schema and model for images.
+- [x] [MERNSTACK-219] Make first name and last name required on user registration. In the model, route, validator and frontend page form.
+- [ ] [MERNSTACK-220] After registration, log user in automatically and redirect to /account/onboarding page.
+- [x] [MERNSTACK-158] Display error message under the input field if the input is invalid explaining the right format in LoginUser, RegisterUser, RegisterCompany and EditCompany components.
+- [x] [MERNSTACK-157] Give input field of the form a red border if the input is invalid in LoginUser, RegisterUser, RegisterCompany and EditCompany components.
+- [ ] [MERNSTACK-221] Log in when user has filled in his/her password and pressed enter.
+- [x] [MERNSTACK-222] Use a placeholder image for the profile picture, specifically a man for male users and a woman for female users.
+- [ ] Spin animation on Find button on homepage when the button is clicked
 
 # Technologies:
 

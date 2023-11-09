@@ -46,6 +46,11 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: "",
     },
+    // `gender` can be Man, Woman, or Other
+    gender: {
+      type: String,
+      required: true,
+    },
     // `profilePicture` is a id reference to the image document in the database.
     // The image document contains the path to the image file.
     profilePicture: {

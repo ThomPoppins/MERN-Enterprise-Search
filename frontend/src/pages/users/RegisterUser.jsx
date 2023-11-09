@@ -10,7 +10,7 @@ import usernameValidator from "../../utils/validation/usernameValidator";
 import passwordValidator from "../../utils/validation/passwordValidator";
 import firstNameValidator from "../../utils/validation/firstNameValidator";
 import lastNameValidator from "../../utils/validation/lastNameValidator";
-import Navbar from "../../components/layout/Navbar";
+import genderValidator from "../../utils/validation/genderValidator";
 import Layout from "../../components/layout/Layout";
 
 const RegisterUser = () => {
@@ -21,6 +21,7 @@ const RegisterUser = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [gender, setGender] = useState("");
   // Error message returned by the server when registering a user fails
   const [registerErrorMessage, setRegisterErrorMessage] = useState("");
 
@@ -31,6 +32,7 @@ const RegisterUser = () => {
   const [confirmPasswordError, setConfirmPasswordError] = useState(false);
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
+  const [genderError, setGenderError] = useState(false);
 
   // Loading state variable for displaying the spinner
   const [loading, setLoading] = useState(false);
@@ -88,6 +90,13 @@ const RegisterUser = () => {
       setLastNameError(false);
     }
   };
+  const validateGender = () => {
+    if (genderValidator(gender) === false) {
+      setGenderError(true);
+    } else {
+      setGenderError(false);
+    }
+  };
 
   // Handle onChange events for all input fields
   const handleUsernameChange = (e) => {
@@ -126,6 +135,12 @@ const RegisterUser = () => {
       validateLastName();
     }
   };
+  const handleGenderChange = (e) => {
+    setGender(e.target.value);
+    if (genderError) {
+      validateGender();
+    }
+  };
 
   // Display error messages if the user enters invalid input with useSnackbar
   useEffect(() => {
@@ -159,6 +174,9 @@ const RegisterUser = () => {
         { variant: "error" }
       );
     }
+    if (genderError) {
+      enqueueSnackbar("Gender is a required field.", { variant: "error" });
+    }
   }, [
     usernameError,
     emailError,
@@ -166,12 +184,12 @@ const RegisterUser = () => {
     confirmPasswordError,
     firstNameError,
     lastNameError,
+    genderError,
   ]);
 
   // Handle saving the user to the database
   const handleSaveUser = () => {
-    // TODO: [MERNSTACK-157] Give input field of the form a red border if the input is invalid
-    // TODO: [MERNSTACK-158] Display error message under the input field if the input is invalid explaining the right format
+    // TODO:
 
     // Validate all fields before sending the request to the backend, otherwise return
     validateUsername();
@@ -180,6 +198,7 @@ const RegisterUser = () => {
     validateConfirmPassword();
     validateFirstName();
     validateLastName();
+    validateGender();
     if (
       usernameError ||
       emailError ||
@@ -187,37 +206,52 @@ const RegisterUser = () => {
       confirmPasswordError ||
       firstNameError ||
       lastNameError ||
+      genderError ||
       !username ||
       !email ||
       !password ||
       !confirmPassword ||
       !firstName ||
-      !lastName
+      !lastName ||
+      !gender
     ) {
       return;
     }
 
+    // User data object to send to the backend
     const data = {
       username: username,
       email: email,
       password: password,
       firstName: firstName,
       lastName: lastName,
+      gender: gender,
     };
+
+    // Display the spinner
     setLoading(true);
+
+    // Send a POST request to the backend to save the user to the database
     axios
       .post(BACKEND_URL + "/users", data)
       .then(() => {
+        // Hide the spinner
         setLoading(false);
+        // Display a success message
         enqueueSnackbar("User account registered successfully!", {
           variant: "success",
         });
+        // Navigate to the home page
         navigate("/");
       })
       .catch((error) => {
+        // Hide the spinner
         setLoading(false);
+        // Display an error message
         setRegisterErrorMessage(error.response.data.message);
+        // Display an error message
         enqueueSnackbar("Error registering account!", { variant: "error" });
+        // Log the error to the console
         console.log(error);
       });
   };
@@ -350,6 +384,40 @@ const RegisterUser = () => {
             ) : (
               ""
             )}
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4">Gender</label> <br />
+            <div className="flex flex-row justify-center space-x-16">
+              <input
+                type="radio"
+                name="gender"
+                value="Man"
+                onChange={handleGenderChange}
+              />{" "}
+              Man
+              <input
+                type="radio"
+                name="gender"
+                value="Woman"
+                onChange={handleGenderChange}
+              />{" "}
+              Woman
+              <input
+                type="radio"
+                name="gender"
+                value="Other"
+                onChange={handleGenderChange}
+              />{" "}
+              Other
+            </div>
+            {genderError ? (
+              <p className="text-red-500 text-sm">
+                Gender is a required field.
+              </p>
+            ) : (
+              ""
+            )}
+            <br />
           </div>
           <button
             className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8"
