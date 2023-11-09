@@ -285,10 +285,10 @@ router.get("/user/:id", async (request, response) => {
 
     if (user.profilePicture) {
       // Get the profile picture document from the database
-      const profilePicture = await Image.findById(user.profilePicture);
+      const image = await Image.findById(user.profilePicture);
 
       // Get the path to the profile picture file
-      profilePictureURL = getStaticFileURLFromPath(profilePicture.path);
+      profilePictureURL = getStaticFileURLFromPath(image.path);
     }
 
     user["profilePictureURL"] = profilePictureURL;
