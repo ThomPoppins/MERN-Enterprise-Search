@@ -1,18 +1,12 @@
 import express from "express";
 import { Company } from "../models/companyModel.js";
-import { v4 as uuidv4 } from "uuid";
+import { Image } from "../models/imageModel.js";
 import { User } from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../middleware/auth/jwt.js";
 import mongoose from "mongoose";
 
 const router = express.Router();
-
-// Generate random id
-// TODO: Remove function if not needed anymore.
-const generateRandomId = () => {
-  return uuidv4();
-};
 
 // Route to register a new User
 router.post("/", async (request, response) => {
@@ -92,11 +86,11 @@ router.put("/profile-picture", async (request, response) => {
     // Get the user from the database
     User.findById(userId)
       .then((user) => {
-        imageId = new mongoose.Types.ObjectId(profilePicture);
+        const imageObjectId = new mongoose.Types.ObjectId(imageId);
 
         // Save the updated user to the database
         user
-          .updateOne({ profilePicture: imageId })
+          .updateOne({ profilePicture: imageObjectId })
           .then((result) => {
             console.log("Result saving user call: ", result);
 

@@ -29,6 +29,7 @@ const App = () => {
   // TODO: [MERNSTACK-163] Redirect user from routes other then /, /login and /register if user is not logged in
   if (userId) {
     return (
+      // Routes when the user is logged in
       <Routes>
         {/* / route, render homepage*/}
         <Route path="/" element={<Home />} />
@@ -57,6 +58,7 @@ const App = () => {
     );
   } else {
     return (
+      // Routes when no user is logged in
       <Routes>
         {/* / route, render homepage*/}
         <Route path="/" element={<Home />} />

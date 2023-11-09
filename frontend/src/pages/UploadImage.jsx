@@ -37,16 +37,10 @@ const UploadImage = () => {
               imageId: response.data.imageId,
             })
             .then((response) => {
-              console.log(
-                "RESPONSE from /user/${userId}/profile-picture: ",
-                response
-              );
+              console.log("RESPONSE from /users/profile-picture: ", response);
             })
             .catch((error) => {
-              console.log(
-                "ERROR from /user/${userId}/profile-picture: ",
-                error
-              );
+              console.log("ERROR from /users/profile-picture: ", error);
             });
         }
       })
