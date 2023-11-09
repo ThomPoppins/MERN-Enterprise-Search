@@ -6,8 +6,6 @@ const Home = () => {
   let userId = useSelector((state) => state.userId);
   let user = useSelector((state) => state.user);
 
-  console.log("user: ", user);
-
   if (userId) {
     return (
       <Layout>

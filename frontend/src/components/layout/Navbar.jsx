@@ -47,12 +47,10 @@ const Navbar = () => {
                         <img
                           src={user?.profilePictureURL}
                           alt="profile picture"
-                          className="w-8 h-8 rounded-full ml-2"
+                          className="w-8 h-8 rounded-full ml-2 float-left mr-2"
                         />
                       )}
-                      <div className="text-white">
-                        {user?.firstName} {user?.lastName}
-                      </div>
+                      {user?.firstName} {user?.lastName}
                     </div>
                     {isDropdownOpen && (
                       <div className="absolute top-10 right-0 bg-violet-950/90 rounded-lg p-2">
