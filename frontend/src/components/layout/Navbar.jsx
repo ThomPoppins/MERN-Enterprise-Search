@@ -29,7 +29,7 @@ const Navbar = () => {
       <div className="container mx-auto">
         <img
           src={`${BACKEND_URL}/logo/vind-expert.png`}
-          alt="profile picture"
+          alt="Vind-Expert logo"
           className="w-7 h-7 mt-1 rounded-xs float-left object-cover mr-2"
         />
         <div className="flex justify-between items-center">
