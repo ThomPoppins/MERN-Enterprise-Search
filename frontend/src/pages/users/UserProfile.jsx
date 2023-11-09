@@ -54,6 +54,7 @@ const UserProfile = () => {
       </div>
       {showEditProfilePictureModal && (
         <EditProfilePictureModal
+          userId={userId}
           onClose={() => setShowEditProfilePictureModal(false)}
         />
       )}{" "}
