@@ -283,7 +283,9 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-157] Give input field of the form a red border if the input is invalid in LoginUser, RegisterUser, RegisterCompany and EditCompany components.
 - [x] [MERNSTACK-221] Log in when user has filled in his/her password and pressed enter.
 - [x] [MERNSTACK-222] Use a placeholder image for the profile picture, specifically a man for male users and a woman for female users.
-- [x] [MERNSTACK-223] Spin animation on Find button on homepage when the button is clicked
+- [x] [MERNSTACK-223] Spin animation on Find button on homepage when the button is clicked.
+- [x] [MERNSTACK-224] Update "Invite" status when user Accepts or Declines a Invite.
+- [ ] 
 
 # Technologies:
 

@@ -25,7 +25,7 @@ const inviteSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Company",
     },
-    // `status` is a string with possible values: "pending", "accepted", "declined"
+    //! ONLY 4 STATUSES: "pending", "accepted", "declined" and "canceled"
     status: {
       type: String,
       required: true,

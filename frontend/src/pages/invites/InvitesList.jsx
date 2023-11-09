@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { BACKEND_URL } from "../../../config";
-import Navbar from "../../components/layout/Navbar";
-import { current } from "@reduxjs/toolkit";
+import InviteOperations from "../../components/invites/InviteOperations";
 import Layout from "../../components/layout/Layout";
 
 const InvitesList = () => {
@@ -12,10 +11,11 @@ const InvitesList = () => {
   // Get userId state from Redux store
   const userId = useSelector((state) => state.userId);
 
-  const getInvites = async () => {
+  // Get the invites for the user
+  const getPendingInvites = async () => {
     try {
       const response = await axios.get(
-        `${BACKEND_URL}/invites/recipient/${userId}`
+        `${BACKEND_URL}/invites/recipient/${userId}/pending`
       );
       console.log("Invites response: ", response);
       setInvites(response.data);
@@ -25,9 +25,39 @@ const InvitesList = () => {
   };
 
   useEffect(() => {
-    getInvites();
+    getPendingInvites();
   }, []);
 
+  //! ONLY 4 STATUSES: "pending", "accepted", "declined" and "canceled"
+  const updateInviteStatus = async (inviteId, newStatus) => {
+    const response = await axios.put(
+      `${BACKEND_URL}/invites/status/${inviteId}`,
+      {
+        status: newStatus,
+      }
+    );
+
+    console.log("Update invite status response: ", response);
+
+    // await getPendingInvites();
+  };
+
+  const removeAcceptedFromList = (inviteId) => {
+    // Remove the accepted invite from the invites list
+    // const updatedInvites = invites.filter((invite) => invite._id !== inviteId);
+    // setInvites(updatedInvites);
+
+    // Fade out the current invite
+    const inviteElement = document.getElementById("invite-row-" + invite._id);
+    inviteElement.classList.add("animate-fade-out");
+
+    // Remove the invite from the DOM after 0.5 seconds
+    setTimeout(() => {
+      inviteElement.remove();
+    }, 2000);
+  };
+
+  //! Remove this useEffect after testing
   useEffect(() => {
     console.log("Invites in state: ", invites);
   }, [invites]);
@@ -56,7 +86,7 @@ const InvitesList = () => {
           <tbody>
             {/* {console.log("Invites in JSX", invites)} */}
             {invites?.map((invite) => (
-              <tr key={invite._id}>
+              <tr id={"invite-row-" + invite._id} key={invite._id}>
                 <td className="border-purple-900 bg-violet-950/40">
                   <img
                     className="rounded-full mr-4 float-left"
@@ -95,10 +125,13 @@ const InvitesList = () => {
                   <span className="text-xl mr-4">{invite.status}</span>
                 </td>
                 <td className="border-purple-900 bg-violet-950/40">
-                  <span className="text-xl mr-4">
-                    <button>Accept</button>
-                    <button>Decline</button>
-                  </span>
+                  {/* //! Make "Operations" component with Accept and Deny buttons */}
+
+                  <InviteOperations
+                    invite={invite}
+                    updateInviteStatus={updateInviteStatus}
+                    removeAcceptedFromList={removeAcceptedFromList}
+                  />
                 </td>
               </tr>
             ))}
