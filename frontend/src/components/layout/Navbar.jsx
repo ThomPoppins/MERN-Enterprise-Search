@@ -97,28 +97,30 @@ const Navbar = () => {
                     {/* TODO: [MERNSTACK-226] When you click somewhere else, the dropdown should close in Navbar.jsx*/}
                     {isDropdownOpen && (
                       <div className="z-[100] absolute top-10 right-0 bg-violet-950/90 rounded-lg py-4">
-                        <div
-                          className={`w-[200px] pt-1 h-10 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-1 ${
-                            inviteAlert
-                              ? "bg-gradient-to-r from-green-600 to-green-800"
-                              : ""
-                          }`}
-                        >
-                          <Link to="/invites" className="text-white ">
-                            {inviteAlert ? (
-                              <div className="w-full h-full">
-                                <LuClipboardList className="text-xl w-[30px] float-left ml-2 mt-[-2px] mr-3 text-yellow-400 animate-waving-button" />
-                                <div className="animate-bounce mt-2">
-                                  Invites
+                        {inviteAlert ? (
+                          <div className="w-[200px] pt-1 h-10 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-1 bg-gradient-to-r from-green-600 to-green-800">
+                            <Link to="/invites" className="text-white ">
+                              {inviteAlert ? (
+                                <div className="w-full h-full">
+                                  <LuClipboardList className="text-xl w-[30px] float-left ml-2 mt-[-2px] mr-3 text-yellow-400 animate-waving-button" />
+                                  <div className="animate-bounce mt-2">
+                                    Invites
+                                  </div>
                                 </div>
-                              </div>
-                            ) : (
-                              ""
-                            )}
-                          </Link>
-                        </div>
+                              ) : (
+                                ""
+                              )}
+                            </Link>
+                          </div>
+                        ) : (
+                          ""
+                        )}
 
-                        <div className="w-[200px] pt-1 mt-4 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600">
+                        <div
+                          className={`w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 ${
+                            inviteAlert ? "mt-4 pt-1" : ""
+                          }}}`}
+                        >
                           <Link to="/profile" className="text-white">
                             <div className="w-full h-full">
                               <HiUser className="text-xl mt-1 w-[30px] float-left ml-2 mr-3" />
