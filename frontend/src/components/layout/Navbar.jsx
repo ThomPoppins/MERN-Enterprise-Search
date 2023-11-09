@@ -48,7 +48,7 @@ const Navbar = () => {
                         src={
                           user?.profilePictureURL
                             ? user?.profilePictureURL
-                            : `${BACKEND_URL}/placeholders/profile-picture-male.jpg`
+                            : `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
                         }
                         alt="profile picture"
                         className="w-8 h-8 rounded-full ml-2 float-left mr-2 object-cover"

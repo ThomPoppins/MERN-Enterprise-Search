@@ -24,7 +24,7 @@ const UserProfile = () => {
             src={
               user?.profilePictureURL
                 ? user?.profilePictureURL
-                : `${BACKEND_URL}/placeholders/profile-picture-male.jpg`
+                : `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
             }
             alt="profile picture"
             className="w-64 h-64 mt-2 rounded-full mx-auto object-cover"
