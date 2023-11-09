@@ -1,62 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { BiPencil } from "react-icons/bi";
 import Layout from "../../components/layout/Layout";
+import EditProfilePictureModal from "../../components/users/EditProfilePictureModal";
 
 const UserProfile = () => {
   let userId = useSelector((state) => state.userId);
   let user = useSelector((state) => state.user);
 
-  if (userId) {
-    return (
-      <Layout>
-        <div className="mx-auto p-5">
-          {user?.profilePictureURL && (
-            <div className="relative w-[250px] mx-auto">
-              <img
-                src={user?.profilePictureURL}
-                alt="profile picture"
-                className="w-64 h-64 mt-2 rounded-full mx-auto"
-              />
-              <div className="absolute bottom-3 right-6 bg-purple-600 px-3">
-                Edit
-              </div>
-            </div>
-          )}
+  const [showEditProfilePictureModal, setShowEditProfilePictureModal] =
+    useState(false);
 
-          <div className="mx-auto lg:w-9/12 border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-6">
-            <h1 className="text-3xl my-2">
-              {user?.firstName} {user?.lastName}
-            </h1>
+  const handleEditProfilePicture = () => {
+    setShowEditProfilePictureModal(true);
+  };
 
-            <p className="text-blue-400 text-sm">
-              {user ? "@" + user?.username : ""}
-            </p>
-
-            <div className="mx-auto mt-4 mb-3">
-              <p className="">
-                Visit the Companies link in the navigation bar to see some of
-                this this application's features in action.
-              </p>
+  return (
+    <Layout>
+      <div className="mx-auto p-5">
+        {user?.profilePictureURL && (
+          <div className="relative w-[250px] mx-auto">
+            <img
+              src={user?.profilePictureURL}
+              alt="profile picture"
+              className="w-64 h-64 mt-2 rounded-full mx-auto"
+            />
+            <div
+              className="absolute bottom-3 right-6 bg-purple-600 pl-1 pr-2 flex items-center border-2 border-purple-900 rounded-lg cursor-pointer hover:bg-purple-700"
+              onClick={handleEditProfilePicture}
+            >
+              <BiPencil className="float-left text-gray mr-1" />
+              Edit
             </div>
           </div>
-        </div>
-      </Layout>
-    );
-  } else {
-    return (
-      <Layout>
-        <div className="mx-auto lg:w-9/12 border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-4">
-          <h1 className="text-3xl mb-6">Home</h1>
+        )}
 
-          <p className="">
-            Register and login to your account to see the features of this
-            application in action. Account data will only be saved to your own
-            MongoDB database and your password will be saved hashed by bcrypt.
+        <div className="mx-auto lg:w-9/12 border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-6">
+          <h1 className="text-3xl my-2">
+            {user?.firstName} {user?.lastName}
+          </h1>
+
+          <p className="text-blue-400 text-sm">
+            {user ? "@" + user?.username : ""}
           </p>
+
+          <div className="mx-auto mt-4 mb-3">
+            <p className="">
+              Visit the Companies link in the navigation bar to see some of this
+              this application's features in action.
+            </p>
+          </div>
         </div>
-      </Layout>
-    );
-  }
+      </div>
+      {showEditProfilePictureModal && (
+        <EditProfilePictureModal
+          onClose={() => setShowEditProfilePictureModal(false)}
+        />
+      )}{" "}
+    </Layout>
+  );
 };
 
 export default UserProfile;
