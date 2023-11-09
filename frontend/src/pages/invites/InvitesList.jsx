@@ -28,7 +28,7 @@ const InvitesList = () => {
     getPendingInvites();
   }, []);
 
-  //! ONLY 4 STATUSES: "pending", "accepted", "declined" and "canceled"
+  //! STATUS STATES: "pending", "accepted", "declined" and "canceled"
   const updateInviteStatus = async (inviteId, newStatus) => {
     const response = await axios.put(
       `${BACKEND_URL}/invites/status/${inviteId}`,
@@ -45,10 +45,10 @@ const InvitesList = () => {
     }, 2200);
   };
 
-  //! Remove this useEffect after testing
-  useEffect(() => {
-    console.log("Invites in state: ", invites);
-  }, [invites]);
+  // TODO: Remove this useEffect after testing
+  // useEffect(() => {
+  //   console.log("Invites in state: ", invites);
+  // }, [invites]);
 
   return (
     <Layout>
@@ -80,26 +80,29 @@ const InvitesList = () => {
                     className="rounded-full mr-4 float-left"
                     width="50"
                     height="50"
-                    src={invite.sender.profilePicture}
+                    src={invite.sender.profilePictureURL}
                     alt="profile picture"
                   />
                   <div className="flex flex-col">
                     <div>
-                      <span className="text-xl mr-4">
+                      <span className="mr-4">
                         {invite.sender.firstName} {invite.sender.lastName}
                       </span>
                     </div>
                     <div>
-                      <span className="text-xl mr-4 text-blue-400">
+                      <span className="mr-4 text-blue-400">
                         &#64;{invite.sender.username}
                       </span>
                     </div>
                   </div>
                 </td>
                 <td className="border-purple-900 bg-violet-950/40">
-                  <span className="text-xl mr-4">
+                  <span className="mr-4">
                     {invite.kind === "company_ownership" ? (
-                      <span>Ownership {invite.company.name}</span>
+                      <span>
+                        Invited for co-ownership of{" "}
+                        <strong>{invite.company.name}</strong>
+                      </span>
                     ) : invite.kind === "friend_request" ? (
                       <span>Friend Request</span>
                     ) : (
@@ -110,7 +113,7 @@ const InvitesList = () => {
                   </span>
                 </td>
                 <td className="border-purple-900 bg-violet-950/40">
-                  <span className="text-xl mr-4">{invite.status}</span>
+                  <span className="mr-4">{invite.status}</span>
                 </td>
                 <td className="border-purple-900 bg-violet-950/40">
                   {/* InviteOperations component is responsible for updating the invite status */}

@@ -16,6 +16,7 @@ import {
   LuBell,
   LuClipboardCopy,
   LuClipboardCheck,
+  LuClipboardList,
 } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -88,15 +89,36 @@ const Navbar = () => {
                       />
                       {user?.firstName}
                       {inviteAlert ? (
-                        <LuClipboardCopy className="text-xl mt-1 w-[30px] float-right ml-1 mr-3 text-yellow-400 animate-bounce" />
+                        <LuClipboardList className="text-xl mt-1 w-[30px] float-right ml-1 mr-3 text-yellow-400 animate-waving-button" />
                       ) : (
                         ""
                       )}
                     </div>
                     {/* TODO: [MERNSTACK-226] When you click somewhere else, the dropdown should close in Navbar.jsx*/}
                     {isDropdownOpen && (
-                      <div className="z-[100] absolute top-10 right-0 bg-violet-950/90 rounded-lg p-2">
-                        <div className="w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600">
+                      <div className="z-[100] absolute top-10 right-0 bg-violet-950/90 rounded-lg py-4">
+                        <div
+                          className={`w-[200px] pt-1 h-10 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-1 ${
+                            inviteAlert
+                              ? "bg-gradient-to-r from-green-600 to-green-800"
+                              : ""
+                          }`}
+                        >
+                          <Link to="/invites" className="text-white ">
+                            {inviteAlert ? (
+                              <div className="w-full h-full">
+                                <LuClipboardList className="text-xl w-[30px] float-left ml-2 mt-[-2px] mr-3 text-yellow-400 animate-waving-button" />
+                                <div className="animate-bounce mt-2">
+                                  Invites
+                                </div>
+                              </div>
+                            ) : (
+                              ""
+                            )}
+                          </Link>
+                        </div>
+
+                        <div className="w-[200px] pt-1 mt-4 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600">
                           <Link to="/profile" className="text-white">
                             <div className="w-full h-full">
                               <HiUser className="text-xl mt-1 w-[30px] float-left ml-2 mr-3" />
@@ -104,27 +126,7 @@ const Navbar = () => {
                             </div>
                           </Link>
                         </div>
-                        <div
-                          className={`w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4 ${
-                            inviteAlert
-                              ? "bg-gradient-to-r from-green-600 to-green-800"
-                              : ""
-                          }`}
-                        >
-                          <Link to="/invites" className="text-white">
-                            {inviteAlert ? (
-                              <div className="w-full h-full">
-                                <LuClipboardCopy className="text-xl mt-1 w-[30px] float-left ml-2 mr-3 animate-bounce text-yellow-400 " />
-                                Invites
-                              </div>
-                            ) : (
-                              <div className="w-full h-full">
-                                <LuClipboardCheck className="text-xl mt-1 w-[30px] float-left ml-2 mr-3" />
-                                Invites
-                              </div>
-                            )}
-                          </Link>
-                        </div>
+
                         <div className="w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4">
                           <Link to="/companies" className="text-white">
                             <div className="w-full h-full">

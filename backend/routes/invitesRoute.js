@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import { Invite } from "../models/inviteModel.js";
 import { User } from "../models/userModel.js";
 import { Company } from "../models/companyModel.js";
+import { Image } from "../models/imageModel.js";
+import { getStaticFileURLFromPath } from "../middleware/files/staticFiles.js";
 
 const router = express.Router();
 
@@ -26,6 +28,18 @@ router.get("/recipient/:userId/pending", async (request, response) => {
       const sender = await User.findById(invite.senderId);
       invite["sender"] = sender.toObject();
 
+      if (invite.sender.profilePicture) {
+        const senderProfilePicture = await Image.findById(
+          invite.sender.profilePicture
+        );
+
+        const senderProfilePictureURL = getStaticFileURLFromPath(
+          senderProfilePicture.path
+        );
+
+        invite.sender["profilePictureURL"] = senderProfilePictureURL;
+      }
+
       const recipient = await User.findById(invite.recipientId);
       invite["recipient"] = recipient.toObject();
 
@@ -36,6 +50,11 @@ router.get("/recipient/:userId/pending", async (request, response) => {
           invite["company"] = company.toObject();
         }
       }
+
+      console.log(
+        "invite in invitesRoute.js: /invites/recipient/:userId/pending: ",
+        invite
+      );
     }
 
     // Send status 200 response and the invites as JSON response if successful

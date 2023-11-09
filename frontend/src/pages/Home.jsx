@@ -55,10 +55,11 @@ const Home = () => {
                     />
 
                     <button
-                      className={`absolute top-[-21px] right-[164px] h-[50px] w-[160px] hover:bg-gradient-to-r bg-green-400 rounded-lg animate-pulse w-[120px] m-8 pl-4  ${
+                      className={`absolute top-[-21px] right-[164px] h-[50px] w-[160px] bg-gradient-to-r from-violet-500   rounded-lg m-8 pl-4  ${
                         findButtonSpinning
-                          ? "animate-spin"
-                          : "animate-bounce hover:animate-none"
+                          ? "animate-spin bg-gradient-to-l  to-green-400"
+                          : // : "animate-bounce hover:animate-none"
+                            "animate-bounce to-violet-600 hover:bg-gradient-to-l hover:from-green-500 hover:to-green-400"
                       }`}
                       onClick={handleFindExpertsQuery}
                     >
