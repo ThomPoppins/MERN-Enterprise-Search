@@ -8,8 +8,8 @@ const inviteSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    // `recipient` is a `User` object ID
-    recieverId: {
+    // `recieverId` is a `User` object ID
+    receiverId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,

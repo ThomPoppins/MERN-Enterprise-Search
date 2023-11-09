@@ -8,14 +8,14 @@ import { getStaticFileURLFromPath } from "../middleware/files/staticFiles.js";
 
 const router = express.Router();
 
-// Route to get all invites from a specific recipient user
-router.get("/recipient/:userId/pending", async (request, response) => {
+// Route to get all invites from a specific reciever
+router.get("/reciever/:userId/pending", async (request, response) => {
   const { userId } = request.params;
 
   try {
-    // Get all invites with status "pending" and recipientId equal to userId
+    // Get all invites with status "pending" and recieverId equal to userId
     let invites = await Invite.find({
-      recipientId: new mongoose.Types.ObjectId(userId),
+      recieverId: new mongoose.Types.ObjectId(userId),
       status: "pending",
     }).sort({ createdAt: -1 });
 
@@ -40,8 +40,8 @@ router.get("/recipient/:userId/pending", async (request, response) => {
         invite.sender["profilePictureURL"] = senderProfilePictureURL;
       }
 
-      const recipient = await User.findById(invite.recipientId);
-      invite["recipient"] = recipient.toObject();
+      const reciever = await User.findById(invite.recieverId);
+      invite["reciever"] = reciever.toObject();
 
       if (invite.kind === "company_ownership") {
         // Add company info
@@ -52,7 +52,7 @@ router.get("/recipient/:userId/pending", async (request, response) => {
       }
 
       console.log(
-        "invite in invitesRoute.js: /invites/recipient/:userId/pending: ",
+        "invite in invitesRoute.js: /invites/reciever/:userId/pending: ",
         invite
       );
     }
@@ -102,7 +102,7 @@ router.post("/", async (request, response) => {
   try {
     const newInvite = new Invite({
       senderId: new mongoose.Types.ObjectId(request.body.senderId),
-      recieverId: new mongoose.Types.ObjectId(request.body.recipientId),
+      receiverId: new mongoose.Types.ObjectId(request.body.recieverId),
       kind: request.body.kind,
       companyId: request.body.companyId
         ? new mongoose.Types.ObjectId(request.body.companyId)

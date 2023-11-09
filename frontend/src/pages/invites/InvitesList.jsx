@@ -15,7 +15,7 @@ const InvitesList = () => {
   const getPendingInvites = async () => {
     try {
       const response = await axios.get(
-        `${BACKEND_URL}/invites/recipient/${userId}/pending`
+        `${BACKEND_URL}/invites/reciever/${userId}/pending`
       );
       console.log("Invites response: ", response);
       setInvites(response.data);

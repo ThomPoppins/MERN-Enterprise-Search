@@ -298,7 +298,7 @@ router.get("/user/:id", async (request, response) => {
 
     // Count how many pending invites the user has
     const pendingInvitesCount = await Invite.countDocuments({
-      recipientId: new mongoose.Types.ObjectId(id),
+      recieverId: new mongoose.Types.ObjectId(id),
       status: "pending",
     });
 
