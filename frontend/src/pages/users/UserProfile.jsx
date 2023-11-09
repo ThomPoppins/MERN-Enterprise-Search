@@ -19,11 +19,11 @@ const UserProfile = () => {
     <Layout>
       <div className="mx-auto p-5">
         {user?.profilePictureURL && (
-          <div className="relative w-[250px] mx-auto">
+          <div className="relative w-[320px] mx-auto">
             <img
               src={user?.profilePictureURL}
               alt="profile picture"
-              className="w-64 h-64 mt-2 rounded-full mx-auto"
+              className="w-64 h-64 mt-2 rounded-full mx-auto object-cover"
             />
             <div
               className="absolute bottom-3 right-6 bg-purple-600 pl-1 pr-2 flex items-center border-2 border-purple-900 rounded-lg cursor-pointer hover:bg-purple-700"
