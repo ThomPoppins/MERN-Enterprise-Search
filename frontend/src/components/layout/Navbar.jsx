@@ -7,6 +7,12 @@ const Navbar = () => {
   let userId = useSelector((state) => state.userId);
   let user = useSelector((state) => state.user);
 
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <nav className="bg-gradient-to-r from-violet-950 to-purple-950 p-4 shadow-lg">
       <div className="container mx-auto">
@@ -32,14 +38,42 @@ const Navbar = () => {
             {userId ? (
               <div>
                 <div className="flex items-center space-x-2">
-                  <img
-                    src={user?.profilePicture}
-                    alt="profile picture"
-                    className="w-8 h-8 rounded-full ml-2"
-                  />
-                  <Link to="/logout" className="text-white">
-                    Logout
-                  </Link>
+                  <div className="relative">
+                    <div
+                      className="text-white cursor-pointer"
+                      onClick={toggleDropdown}
+                    >
+                      {user?.profilePictureURL && (
+                        <img
+                          src={user?.profilePictureURL}
+                          alt="profile picture"
+                          className="w-8 h-8 rounded-full ml-2"
+                        />
+                      )}
+                      <div className="text-white">
+                        {user?.firstName} {user?.lastName}
+                      </div>
+                    </div>
+                    {isDropdownOpen && (
+                      <div className="absolute top-10 right-0 bg-violet-950/90 rounded-lg p-2">
+                        <div className="w-[200px] pl-4">
+                          <Link to="/user/profile" className="text-white">
+                            Profile
+                          </Link>
+                        </div>
+                        <div className="w-[200px] pl-4">
+                          <Link to="/user/settings" className="text-white">
+                            Settings
+                          </Link>
+                        </div>
+                        <div className="w-[200px] pl-4">
+                          <Link to="/logout" className="text-white">
+                            Logout
+                          </Link>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             ) : (

@@ -1,18 +1,13 @@
 import express from "express";
 import { Company } from "../models/companyModel.js";
-import { v4 as uuidv4 } from "uuid";
+import { Image } from "../models/imageModel.js";
 import { User } from "../models/userModel.js";
+import { getStaticFileURLFromPath } from "../middleware/files/staticFiles.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../middleware/auth/jwt.js";
 import mongoose from "mongoose";
 
 const router = express.Router();
-
-// Generate random id
-// TODO: Remove function if not needed anymore.
-const generateRandomId = () => {
-  return uuidv4();
-};
 
 // Route to register a new User
 router.post("/", async (request, response) => {
@@ -67,9 +62,6 @@ router.post("/", async (request, response) => {
       hashedPassword: hashedPassword,
       firstName: request.body.firstName ? request.body.firstName : "",
       lastName: request.body.lastName ? request.body.lastName : "",
-      profilePicture: request.body.profilePicture
-        ? request.body.profilePicture
-        : "",
     };
 
     // Create a new user document using the User model and the properties from the request body
@@ -82,6 +74,47 @@ router.post("/", async (request, response) => {
     response.status(500).send({
       message:
         "Error registering your account! (Developers, check backend console.log output for error details.)",
+    });
+  }
+});
+
+// Route to add profile picture to user
+router.put("/profile-picture", async (request, response) => {
+  try {
+    // Get the user id from the request body
+    const { userId, imageId } = request.body;
+
+    // Get the user from the database
+    User.findById(userId)
+      .then((user) => {
+        const imageObjectId = new mongoose.Types.ObjectId(imageId);
+
+        // Save the updated user to the database
+        user
+          .updateOne({ profilePicture: imageObjectId })
+          .then((result) => {
+            console.log("Result saving user call: ", result);
+
+            // Send status 200 response and the updated user to the client
+            return response.status(200).send(user);
+          })
+          .catch((error) => {
+            console.log("Error saving user to database: ", error);
+            response.status(500).send({
+              message: "Error saving user to database!",
+            });
+          });
+      })
+      .catch((error) => {
+        console.log("Error finding user in database: ", error);
+        response.status(500).send({
+          message: "Error finding user in database!",
+        });
+      });
+  } catch (error) {
+    console.log("Error in PUT /users/profilepicture: ", error);
+    response.status(500).send({
+      message: "Error updating user profile picture!",
     });
   }
 });
@@ -135,10 +168,6 @@ router.post("/login", async (request, response) => {
     console.log("Error in GET /users/login: ", error);
     response.status(500).send({ message: error.message });
   }
-});
-
-router.get("/search", async (request, response) => {
-  return response.status(200).json([]);
 });
 
 // Find user by username, name or email search term
@@ -244,8 +273,27 @@ router.get("/user/:id", async (request, response) => {
     // Get the user id from the request parameters
     const { id } = request.params;
 
+    console.log("User id: ", id);
+
+    let profilePictureURL = "";
+
     // Get user documents using the findById method
-    const user = await User.findById(id);
+    const userDocument = await User.findById(new mongoose.Types.ObjectId(id));
+
+    // Convert the user document to a plain JavaScript object so I can add the profilePictureURL property
+    const user = userDocument.toObject();
+
+    if (user.profilePicture) {
+      // Get the profile picture document from the database
+      const image = await Image.findById(user.profilePicture);
+
+      // Get the path to the profile picture file
+      profilePictureURL = getStaticFileURLFromPath(image.path);
+    }
+
+    user["profilePictureURL"] = profilePictureURL;
+
+    console.log("User: ", user);
 
     // Send status 200 response and the companies to the client
     return response.status(200).json(user);

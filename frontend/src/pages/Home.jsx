@@ -6,15 +6,20 @@ const Home = () => {
   let userId = useSelector((state) => state.userId);
   let user = useSelector((state) => state.user);
 
+  console.log("user: ", user);
+
   if (userId) {
     return (
       <Layout>
         <div className="mx-auto p-5">
-          <img
-            src={user?.profilePicture}
-            alt="profile picture"
-            className="w-64 h-64 mt-2 rounded-full mx-auto"
-          />
+          {user?.profilePictureURL && (
+            <img
+              src={user?.profilePictureURL}
+              alt="profile picture"
+              className="w-64 h-64 mt-2 rounded-full mx-auto"
+            />
+          )}
+
           <div className="mx-auto lg:w-9/12 border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-6">
             <h1 className="text-3xl my-2">
               Welcome {user?.firstName} {user?.lastName}
