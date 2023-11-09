@@ -1,6 +1,5 @@
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { BiPencil } from "react-icons/bi";
 
 const EditProfilePictureModal = ({ onClose }) => {
   return (
