@@ -55,15 +55,13 @@ router.post("/", async (request, response) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(request.body.password, salt);
 
-    // TODO: Make first name and last name required on user registration
-
     // Create a new user document using the User model and the properties from the request body.
     const newUser = {
       username: request.body.username,
       email: request.body.email,
       hashedPassword: hashedPassword,
-      firstName: request.body.firstName ? request.body.firstName : "",
-      lastName: request.body.lastName ? request.body.lastName : "",
+      firstName: request.body.firstName,
+      lastName: request.body.lastName,
       gender: request.body.gender,
     };
 

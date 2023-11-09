@@ -38,10 +38,6 @@ strong {
   background-attachment: fixed;
 }
 
-.find-button {
-  background-color: #8e03ff;
-}
-
 /* Import TailwindCSS */
 @tailwind base;
 @tailwind components;
