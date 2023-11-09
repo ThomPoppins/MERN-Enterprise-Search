@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import axios from "axios";
 import { BACKEND_URL } from "../../../config";
 import InviteOperations from "../../components/invites/InviteOperations";
@@ -20,16 +19,13 @@ const InvitesList = () => {
         .get(`${BACKEND_URL}/invites/reciever/${userId}/pending`)
         .then((response) => {
           console.log("Invites response: ", response);
-          toast.success("Invites loaded successfully!");
           setInvites(response.data);
         })
         .catch((error) => {
-          toast.error("Error loading invites!");
           console.log("ERROR in InvitesList.jsx get pending invites: ", error);
         });
     } catch (error) {
       // TODO: Handle error
-      toast.error("Error loading invites!");
       console.log(error);
     }
   };
