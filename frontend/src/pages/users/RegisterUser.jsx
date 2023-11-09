@@ -11,7 +11,6 @@ import passwordValidator from "../../utils/validation/passwordValidator";
 import firstNameValidator from "../../utils/validation/firstNameValidator";
 import lastNameValidator from "../../utils/validation/lastNameValidator";
 import genderValidator from "../../utils/validation/genderValidator";
-import Navbar from "../../components/layout/Navbar";
 import Layout from "../../components/layout/Layout";
 
 const RegisterUser = () => {

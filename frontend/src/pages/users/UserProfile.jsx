@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { BiPencil } from "react-icons/bi";
+import {
+  FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL,
+  MALE_PROFILE_PICTURE_PLACEHOLDER_URL,
+} from "../../../config";
 import { BACKEND_URL } from "../../../config";
 import Layout from "../../components/layout/Layout";
 import EditProfilePictureModal from "../../components/users/EditProfilePictureModal";
@@ -8,6 +12,25 @@ import EditProfilePictureModal from "../../components/users/EditProfilePictureMo
 const UserProfile = () => {
   let userId = useSelector((state) => state.userId);
   let user = useSelector((state) => state.user);
+
+  // Placeholder for profile picture dependent on gender
+  const [profilePicturePlaceholderURL, setProfilePicturePlaceholderURL] =
+    useState("");
+
+  useEffect(() => {
+    if (!user) return;
+
+    if (user.gender === "Woman") {
+      setProfilePicturePlaceholderURL(
+        `${BACKEND_URL}${FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL}`
+      );
+    } else {
+      setProfilePicturePlaceholderURL(
+        `${BACKEND_URL}${MALE_PROFILE_PICTURE_PLACEHOLDER_URL}`
+      );
+    }
+    console.log("user", user);
+  }, [user]);
 
   const [showEditProfilePictureModal, setShowEditProfilePictureModal] =
     useState(false);
@@ -24,7 +47,7 @@ const UserProfile = () => {
             src={
               user?.profilePictureURL
                 ? user?.profilePictureURL
-                : `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
+                : profilePicturePlaceholderURL
             }
             alt="profile picture"
             className="w-64 h-64 mt-2 rounded-full mx-auto object-cover"
