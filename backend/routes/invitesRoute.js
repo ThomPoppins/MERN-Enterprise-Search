@@ -8,6 +8,121 @@ import { getStaticFileURLFromPath } from "../middleware/files/staticFiles.js";
 
 const router = express.Router();
 
+// Route to get all pending invites from a specific sender
+router.get("/sender/pending", async (request, response) => {
+  // Get companyId from request headers
+  const { companyId, senderId } = request.headers;
+
+  console.log("companyId in pending sender invitesRoute.js: ", companyId);
+  console.log("senderId in pending sender invitesRoute.js: ", senderId);
+  return;
+
+  try {
+    // Get all invites with status "pending" and senderId equal to senderId
+    let invites = await Invite.find({
+      senderId: new mongoose.Types.ObjectId(senderId),
+      status: "pending",
+    }).sort({ createdAt: -1 });
+
+    // Convert invites to plain JavaScript objects
+    invites = invites.map((invite) => invite.toObject());
+
+    //! Remove console.log
+    console.log(
+      "invites in invitesRoute.js: /invites/sender/pending: ",
+      invites
+    );
+
+    // Add additional info to each invite
+    for (const invite of invites) {
+      // Add sender info
+      await User.findById(new mongoose.Types.ObjectId(senderId))
+        .then(
+          // Convert sender to plain JavaScript object
+          async (userData) => {
+            invite["sender"] = userData.toObject();
+
+            // Add sender profile picture URL to sender object
+            if (invite.sender.profilePicture) {
+              // Get sender profile picture
+              const profilePicture = await Image.findById(
+                invite.sender.profilePicture
+              );
+
+              // Get sender profile picture URL
+              const senderProfilePictureURL = getStaticFileURLFromPath(
+                profilePicture.path
+              );
+
+              // Add sender profile picture URL to sender object
+              invite.sender["profilePictureURL"] = senderProfilePictureURL;
+            }
+          }
+        )
+        .catch((error) => {
+          console.log("ERROR in GET /invites/sender/pending route: ", error);
+          return response.status(500).json({
+            message: error.message,
+          });
+        });
+
+      // Add reciever info
+      await User.findById(invite.receiverId)
+        .then(async (userData) => {
+          // Convert reciever to plain JavaScript object
+          invite["reciever"] = userData.toObject();
+          // Add reciever profile picture URL to reciever object
+          if (invite.reciever.profilePicture) {
+            const profilePicture = await Image.findById(
+              invite.reciever.profilePicture
+            );
+            // Get reciever profile picture URL
+            const recieverProfilePictureURL = getStaticFileURLFromPath(
+              profilePicture.path
+            );
+            // Add reciever profile picture URL to reciever object
+            invite.reciever["profilePictureURL"] = recieverProfilePictureURL;
+          }
+        })
+        .catch((error) => {
+          console.log("ERROR in GET /invites/sender/pending route: ", error);
+          // Send status 500 response and error message as JSON response if unsuccessful
+          return response.status(500).json({
+            message: error.message,
+          });
+        });
+
+      // Add company info if invite kind is "company_ownership"
+      if (invite.kind === "company_ownership") {
+        // Get company document
+        if (invite.companyId) {
+          const company = await Company.findById(invite.companyId).catch(
+            (error) =>
+              console.log("ERROR in GET /invites/sender/pending route: ", error)
+          );
+          // Convert company to plain JavaScript object and add it to invite object
+          invite["company"] = company.toObject();
+        }
+      }
+
+      //! Remove console.log
+      console.log(
+        "invite in invitesRoute.js: /invites/sender/pending: ",
+        invite
+      );
+    } // End of `invites` for loop
+
+    // Send status 200 response and the invites as JSON response if successful
+    return response.status(200).json(invites);
+  } catch (error) {
+    console.log("ERROR in GET /invites/sender/pending route: ", error);
+    // Send status 500 response and error message as JSON response if unsuccessful
+    return response.status(500).json({
+      message: error.message,
+    });
+  }
+});
+
 // Route to get all invites from a specific reciever
 router.get("/reciever/:userId/pending", async (request, response) => {
   const { userId } = request.params;
