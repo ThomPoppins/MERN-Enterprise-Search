@@ -1,5 +1,6 @@
 // Navbar.tsx
 import React from "react";
+import { BACKEND_URL } from "../../../config";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -43,17 +44,19 @@ const Navbar = () => {
                       className="text-white cursor-pointer"
                       onClick={toggleDropdown}
                     >
-                      {user?.profilePictureURL && (
-                        <img
-                          src={user?.profilePictureURL}
-                          alt="profile picture"
-                          className="w-8 h-8 rounded-full ml-2 float-left mr-2 object-cover"
-                        />
-                      )}
+                      <img
+                        src={
+                          user?.profilePictureURL
+                            ? user?.profilePictureURL
+                            : `${BACKEND_URL}/placeholders/profile-picture-male.jpg`
+                        }
+                        alt="profile picture"
+                        className="w-8 h-8 rounded-full ml-2 float-left mr-2 object-cover"
+                      />
                       {user?.firstName} {user?.lastName}
                     </div>
                     {isDropdownOpen && (
-                      <div className="absolute top-10 right-0 bg-violet-950/90 rounded-lg p-2">
+                      <div className="absolute top-10 right-0 bg-violet-950/90 rounded-lg p-2 animate-pulse">
                         <div className="w-[200px] pl-4">
                           <Link to="/profile" className="text-white">
                             Profile

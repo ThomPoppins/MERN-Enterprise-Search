@@ -273,7 +273,7 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-166] Validate validity and uniqueness of company KVK number
 - [x] [MERNSTACK-214] Style all form input fields
 - [x] [MERNSTACK-216] Use Multer for large image file upload.
-- [ ] [MERNSTACK-217] Create a new routes file for file uploads. When the profile picture is uploaded, save the link/URL with the filepath in the database. ALSO return the path/fileId of the image as response to the client, so when the user registers the correct fileId/filepath will be saved to the new/edited user/company.
+- [x] [MERNSTACK-217] Create a new routes file for file uploads. When the profile picture is uploaded, save the link/URL with the filepath in the database. ALSO return the path/fileId of the image as response to the client, so when the user registers the correct fileId/filepath will be saved to the new/edited user/company.
 - [x] [MERNSTACK-218] Make /backend server a CDN for static files like images.
 - [x] [MERNSTACK-202] FIX backend error: "PayloadTooLargeError: request entity too large" wanneer de afbeeldingdata te groot is voor ExpressJS (https://www.webslesson.info/2022/05/upload-file-in-node-js-express-using-multer.html) SOLVED using Multer for large image file uploads.
 - [x] [MERNSTACK-165] Create a schema and model for images

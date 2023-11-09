@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { BACKEND_URL } from "../../config";
 import Layout from "../components/layout/Layout";
 
 const Home = () => {
@@ -10,13 +11,15 @@ const Home = () => {
     return (
       <Layout>
         <div className="mx-auto p-5">
-          {user?.profilePictureURL && (
-            <img
-              src={user?.profilePictureURL}
-              alt="profile picture"
-              className="w-64 h-64 mt-2 rounded-full mx-auto object-cover"
-            />
-          )}
+          <img
+            src={
+              user?.profilePictureURL
+                ? user?.profilePictureURL
+                : `${BACKEND_URL}/placeholders/profile-picture-male.jpg`
+            }
+            alt="profile picture"
+            className="w-64 h-64 mt-2 rounded-full mx-auto object-cover"
+          />
 
           <div className="mx-auto lg:w-9/12 border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-6">
             <h1 className="text-3xl my-2">
