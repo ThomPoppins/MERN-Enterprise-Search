@@ -14,7 +14,7 @@ const Home = () => {
             <img
               src={user?.profilePictureURL}
               alt="profile picture"
-              className="w-64 h-64 mt-2 rounded-full mx-auto"
+              className="w-64 h-64 mt-2 rounded-full mx-auto object-cover"
             />
           )}
 
