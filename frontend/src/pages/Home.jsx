@@ -11,20 +11,13 @@ const Home = () => {
     return (
       <Layout>
         <div className="mx-auto p-5">
-          <img
-            src={
-              user?.profilePictureURL
-                ? user?.profilePictureURL
-                : `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
-            }
-            alt="profile picture"
-            className="w-64 h-64 mt-2 rounded-full mx-auto object-cover"
-          />
-
-          <div className="mx-auto lg:w-9/12 border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-6">
-            <h1 className="text-3xl my-2">
-              Welcome {user?.firstName} {user?.lastName}
-            </h1>
+          <div className="mx-auto min-h-[400px] lg:w-9/12 border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-6">
+            <img
+              src={`${BACKEND_URL}/logo/vind-expert.png`}
+              alt="profile picture"
+              className="w-64 h-64 mt-2 rounded-xl float-right object-cover"
+            />
+            <h1 className="text-6xl my-2">Vind-Expert</h1>
 
             <p className="text-blue-400 text-sm">
               {user ? "@" + user?.username : ""}

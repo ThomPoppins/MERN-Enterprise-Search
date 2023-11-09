@@ -17,10 +17,15 @@ const Navbar = () => {
   return (
     <nav className="bg-gradient-to-r from-violet-950 to-purple-950 p-4 shadow-lg">
       <div className="container mx-auto">
+        <img
+          src={`${BACKEND_URL}/logo/vind-expert.png`}
+          alt="profile picture"
+          className="w-7 h-7 mt-1 rounded-xs float-left object-cover mr-2"
+        />
         <div className="flex justify-between items-center">
           <div className="text-white">
             <Link to="/">
-              <h1 className=" text-2xl font-bold">Vind Expert</h1>
+              <h1 className=" text-2xl font-bold">Vind-Expert</h1>
             </Link>
           </div>
 
