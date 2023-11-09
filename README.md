@@ -281,9 +281,9 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [ ] [MERNSTACK-220] After registration, log user in automatically and redirect to /account/onboarding page.
 - [x] [MERNSTACK-158] Display error message under the input field if the input is invalid explaining the right format in LoginUser, RegisterUser, RegisterCompany and EditCompany components.
 - [x] [MERNSTACK-157] Give input field of the form a red border if the input is invalid in LoginUser, RegisterUser, RegisterCompany and EditCompany components.
-- [ ] [MERNSTACK-221] Log in when user has filled in his/her password and pressed enter.
+- [x] [MERNSTACK-221] Log in when user has filled in his/her password and pressed enter.
 - [x] [MERNSTACK-222] Use a placeholder image for the profile picture, specifically a man for male users and a woman for female users.
-- [ ] Spin animation on Find button on homepage when the button is clicked
+- [x] [MERNSTACK-223] Spin animation on Find button on homepage when the button is clicked
 
 # Technologies:
 

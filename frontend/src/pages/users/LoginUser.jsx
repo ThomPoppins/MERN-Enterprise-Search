@@ -126,6 +126,9 @@ const LoginUser = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => {
+                e.key === "Enter" && handleLoginUser();
+              }}
               className="border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full"
             />
           </div>
