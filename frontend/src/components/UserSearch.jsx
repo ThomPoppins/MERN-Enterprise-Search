@@ -2,12 +2,16 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BACKEND_URL } from "../../config";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
+import { useSelector } from "react-redux";
 
 const UserSearch = ({
   companyId,
   handleAddUserAsCompanyOwner,
   removedOwnersIds,
 }) => {
+  let userId = useSelector((state) => state.userId);
+  let user = useSelector((state) => state.user);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [usersResult, setUsersResult] = useState([]);
 
@@ -40,32 +44,81 @@ const UserSearch = ({
       });
   };
 
+  // Remove owner from search results if they are already an owner, but when they are removed from the company they should be able to be added again
   useEffect(() => {
+    // removedOwnersIds is an array of owner ids that have been removed from the company
     removedOwnersIds.forEach((removedOwnerId) => {
+      // Get the user object for every the removed owner
       axios
         .get(BACKEND_URL + "/users/user/" + removedOwnerId)
         .then((response) => {
+          // Add the from the company removed owner back to the search results
           const newUsersResult = [...usersResult, response.data];
-          console.log("newUsersResult: ", newUsersResult);
+
+          console.log("newUsersResult: ", newUsersResult); //! TODO: Remove console.log
+
+          // Add the removed owner back to the search results
           setUsersResult(newUsersResult);
         })
         .catch((error) => {
           console.log(
-            "ERROR in UserSearch.jsx get removed owner API call: ",
+            "ERROR in UserSearch.jsx get from company removed owner user data: ",
             error
           );
         });
     });
   }, [removedOwnersIds]);
 
-  const handleAddOwner = (e) => {
-    e.preventDefault();
-    handleAddUserAsCompanyOwner(e.target.value);
+  //! TODO: Remove deprecated add owner functionality below
+  // const handleAddOwner = (e) => {
+  //   e.preventDefault();
+  //   handleAddUserAsCompanyOwner(e.target.value);
 
-    const newUsersResult = usersResult.filter(
-      (user) => user._id !== e.target.value
-    );
-    setUsersResult(newUsersResult);
+  //   const newUsersResult = usersResult.filter(
+  //     (user) => user._id !== e.target.value
+  //   );
+  //   setUsersResult(newUsersResult);
+  // };
+  //! End of deprecated add owner functionality
+
+  // Invite owner functionality
+  const inviteOwner = (e) => {
+    // Prevent the form from submitting
+    e.preventDefault();
+
+    // Get the id of the user to be invited as an owner
+    const invitedOwnerId = e.target.value;
+
+    // Make an API call to invite the user as an owner
+    axios
+      .post(BACKEND_URL + "/invites", {
+        senderId: userId,
+        receiverId: invitedOwnerId,
+        companyId: companyId,
+        kind: "company_ownership",
+        status: "pending",
+      })
+      .then((response) => {
+        //! TODO: Remove console.log
+        console.log(
+          "UserSearch.jsx response.data invite ownership: ",
+          response.data
+        );
+
+        // Remove the invited owner from the search results
+        const newUsersResult = usersResult.filter(
+          (user) => user._id !== invitedOwnerId
+        );
+        // Update the search results
+        setUsersResult(newUsersResult);
+      })
+      .catch((error) => {
+        //! TODO: Remove console.log and replace with a toast
+        console.log(
+          "ERROR in UserSearch.jsx invite owner API call: ",
+          error.response.data
+        );
+      });
   };
 
   return (
@@ -109,13 +162,24 @@ const UserSearch = ({
               </li>
             </div>
             <div>
-              <button
+              {/* //!Replace this add owner functionality with invite owner functionality */}
+              {/* <button
                 className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4"
                 value={user._id}
                 onClick={handleAddOwner}
                 data-test-id="add-owner-button"
               >
                 Add
+              </button> */}
+              {/* //! End of to be deleted add owner functionality */}
+
+              <button
+                className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4"
+                value={user._id}
+                onClick={inviteOwner}
+                data-test-id="invite-owner-button"
+              >
+                Invite
               </button>
             </div>
           </div>

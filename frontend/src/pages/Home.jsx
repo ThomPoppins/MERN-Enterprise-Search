@@ -48,18 +48,18 @@ const Home = () => {
                   <div className="absolute top-[120px] left-[172px] w-full mt-6 mb-3">
                     <input
                       type="text"
-                      className="absolute right-[360px] top-[-14px] h-[50px]  border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 py-2 px-4 mt-6 w-2/3"
+                      className="absolute right-[400px] top-[-34px] h-[50px]  border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 py-2 px-4 mt-6 w-2/3"
                       placeholder='Search for experts "plumber", "electrician", "gardener", etc."'
                       value={searchQuery}
                       onChange={handleSearchQueryChange}
                     />
 
                     <button
-                      className={`absolute top-[-21px] right-[164px] h-[50px] w-[160px] bg-gradient-to-r from-violet-500   rounded-lg m-8 pl-4  ${
+                      className={`absolute top-[-41px] right-[195px] h-[50px] w-[160px] bg-gradient-to-r  rounded-lg m-8 pl-4  ${
                         findButtonSpinning
-                          ? "animate-spin bg-gradient-to-l  to-green-400"
+                          ? "animate-spin bg-gradient-to-l from-green-500 to-green-400"
                           : // : "animate-bounce hover:animate-none"
-                            "animate-bounce to-violet-600 hover:bg-gradient-to-l hover:from-green-500 hover:to-green-400"
+                            "animate-bounce  from-violet-500 to-violet-600 hover:bg-gradient-to-l hover:from-green-500 hover:to-green-400"
                       }`}
                       onClick={handleFindExpertsQuery}
                     >

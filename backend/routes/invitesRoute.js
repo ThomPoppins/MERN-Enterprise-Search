@@ -102,7 +102,7 @@ router.post("/", async (request, response) => {
   try {
     const newInvite = new Invite({
       senderId: new mongoose.Types.ObjectId(request.body.senderId),
-      recipientId: new mongoose.Types.ObjectId(request.body.recipientId),
+      recieverId: new mongoose.Types.ObjectId(request.body.recipientId),
       kind: request.body.kind,
       companyId: request.body.companyId
         ? new mongoose.Types.ObjectId(request.body.companyId)
