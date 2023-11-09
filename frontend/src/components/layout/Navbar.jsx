@@ -28,7 +28,7 @@ const Navbar = () => {
     <nav className="bg-gradient-to-r from-violet-950 to-purple-950 p-4 shadow-lg">
       <div className="container mx-auto">
         <img
-          src={`${BACKEND_URL}/logo/vind-expert.png`}
+          src={`${BACKEND_URL}/logo/vind-expert-transparent.png`}
           alt="Vind-Expert logo"
           className="w-7 h-7 mt-1 rounded-xs float-left object-cover mr-2"
         />
