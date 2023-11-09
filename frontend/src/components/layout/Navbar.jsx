@@ -91,7 +91,7 @@ const Navbar = () => {
                       {inviteAlert ? (
                         <LuClipboardList className="text-xl mt-1 w-[30px] float-right ml-1 mr-3 text-yellow-400 animate-waving-button" />
                       ) : (
-                        ""
+                        <LuClipboardCheck className="text-xl mt-1 w-[30px] float-right ml-1 mr-3 text-green-400" />
                       )}
                     </div>
                     {/* TODO: [MERNSTACK-226] When you click somewhere else, the dropdown should close in Navbar.jsx*/}

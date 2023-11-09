@@ -278,6 +278,8 @@ router.get("/user/:id", async (request, response) => {
     // Get the user id from the request parameters
     const { id } = request.params;
 
+    const objectId = new mongoose.Types.ObjectId(id);
+
     let profilePictureURL = "";
 
     // Get user documents using the findById method
@@ -288,7 +290,9 @@ router.get("/user/:id", async (request, response) => {
 
     if (user.profilePicture) {
       // Get the profile picture document from the database
-      const image = await Image.findById(user.profilePicture);
+      const image = await Image.findById(user.profilePicture).catch((error) =>
+        console.log("Error in GET /user/:id: ", error)
+      );
       // Get the path to the profile picture file
       profilePictureURL = getStaticFileURLFromPath(image.path);
     }
@@ -296,16 +300,16 @@ router.get("/user/:id", async (request, response) => {
     // Add the profilePictureURL property to the user object
     user["profilePictureURL"] = profilePictureURL;
 
-    // Count how many pending invites the user has
+    // Count how mant invites the user has with status "pending"
     const pendingInvitesCount = await Invite.countDocuments({
-      recieverId: new mongoose.Types.ObjectId(id),
+      receiverId: objectId,
       status: "pending",
     });
 
     // Add the pendingInvitesCount property to the user object
     user["pendingInvitesCount"] = pendingInvitesCount;
 
-    console.log("User: ", user);
+    console.log("User in usersRoute.js GET /users/user/:id: ", user);
 
     // Send status 200 response and the companies to the client
     return response.status(200).json(user);

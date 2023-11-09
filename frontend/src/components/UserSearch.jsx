@@ -45,39 +45,40 @@ const UserSearch = ({
       });
   };
 
+  //! May be deprecated below
   // Remove owner from search results if they are already an owner, but when they are removed from the company they should be able to be added again
-  useEffect(() => {
-    // removedOwnersIds is an array of owner ids that have been removed from the company
-    removedOwnersIds.forEach((removedOwnerId) => {
-      toast.info("Removed owner id: " + removedOwnerId);
+  // useEffect(() => {
+  //   // removedOwnersIds is an array of owner ids that have been removed from the company
+  //   removedOwnersIds.forEach((removedOwnerId) => {
+  //     toast.info("Removed owner id: " + removedOwnerId);
 
-      // Get the user object for every the removed owner
-      axios
-        .get(BACKEND_URL + "/users/user/" + removedOwnerId)
-        .then((response) => {
-          // Add the from the company removed owner back to the search results
-          const newUsersResult = [...usersResult, response.data];
+  //     // Get the user object for every the removed owner
+  //     axios
+  //       .get(BACKEND_URL + "/users/user/" + removedOwnerId)
+  //       .then((response) => {
+  //         // Add the from the company removed owner back to the search results
+  //         const newUsersResult = [...usersResult, response.data];
 
-          console.log("newUsersResult: ", newUsersResult); //! TODO: Remove console.log
+  //         console.log("newUsersResult: ", newUsersResult); //! TODO: Remove console.log
 
-          // Add the removed owner back to the search results
-          setUsersResult(newUsersResult);
+  //         // Add the removed owner back to the search results
+  //         setUsersResult(newUsersResult);
 
-          toast.success("Added back removed owner: " + removedOwnerId);
-        })
-        .catch((error) => {
-          toast.error(
-            "Error adding back removed owner to search results: " +
-              removedOwnerId
-          );
-          console.log(
-            "ERROR in UserSearch.jsx get from company removed owner user data: ",
-            error
-          );
-        });
-    });
-  }, [removedOwnersIds]);
-
+  //         toast.success("Added back removed owner: " + removedOwnerId);
+  //       })
+  //       .catch((error) => {
+  //         toast.error(
+  //           "Error adding back removed owner to search results: " +
+  //             removedOwnerId
+  //         );
+  //         console.log(
+  //           "ERROR in UserSearch.jsx get from company removed owner user data: ",
+  //           error
+  //         );
+  //       });
+  //   });
+  // }, [removedOwnersIds]);
+  //! End of may be deprecated useEffect hook above
   //! TODO: Remove deprecated add owner functionality below
   // const handleAddOwner = (e) => {
   //   e.preventDefault();
@@ -97,6 +98,8 @@ const UserSearch = ({
 
     // Get the id of the user to be invited as an owner
     const invitedOwnerId = e.target.value;
+
+    console.log("invitedOwnerId: ", invitedOwnerId); //! TODO: Remove console.log
 
     // Make an API call to invite the user as an owner
     axios
