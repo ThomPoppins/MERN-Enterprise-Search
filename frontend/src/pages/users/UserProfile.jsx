@@ -30,7 +30,7 @@ const UserProfile = () => {
             className="w-64 h-64 mt-2 rounded-full mx-auto object-cover"
           />
           <div
-            className="absolute bottom-3 hover:animate-pulse right-6 bg-purple-600 pl-1 pr-2 flex items-center border-2 border-purple-900 rounded-lg cursor-pointer hover:bg-purple-700"
+            className="absolute bottom-3 right-6 bg-purple-600 pl-1 pr-2 flex items-center border-2 border-purple-900 rounded-lg cursor-pointer hover:bg-purple-700"
             onClick={handleEditProfilePicture}
           >
             <BiPencil className="float-left text-gray mr-1" />
