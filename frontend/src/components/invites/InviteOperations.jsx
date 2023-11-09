@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const InviteOperations = ({
-  invite,
-  updateInviteStatus,
-  removeAcceptedFromList,
-}) => {
+const InviteOperations = ({ invite, updateInviteStatus }) => {
   // Spin accept button (after click Find)
   const [acceptButtonSpinning, setAcceptButtonSpinning] = useState(false);
 
@@ -20,8 +16,6 @@ const InviteOperations = ({
       setAcceptButtonSpinning(false);
 
       console.log("Accepted invite: ", invite._id);
-
-      removeAcceptedFromList(invite._id);
     }, 2000);
   };
 
@@ -29,7 +23,7 @@ const InviteOperations = ({
     <div id={"operations-" + invite._id} key={invite._id}>
       <span className="text-xl">
         <button
-          className={`w-1/2 hover:bg-gradient-to-r bg-green-400 rounded-lg animate-pulse w-[82px] float-left ml-1 ${
+          className={`hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 bg-green-600 rounded-lg w-[82px] float-left ml-1 ${
             acceptButtonSpinning
               ? "animate-spin"
               : "animate-bounce hover:animate-none"
@@ -40,7 +34,7 @@ const InviteOperations = ({
         </button>
         <div className="pb-6">
           <button
-            className={`w-1/2 hover:bg-gradient-to-r bg-red-800 rounded-lg animate-pulse w-[82px] float-right mr-1`}
+            className={`hover:bg-gradient-to-r bg-red-800 rounded-lg animate-pulse w-[82px] float-right mr-1`}
           >
             Decline
           </button>

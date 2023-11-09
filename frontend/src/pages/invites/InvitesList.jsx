@@ -39,22 +39,10 @@ const InvitesList = () => {
 
     console.log("Update invite status response: ", response);
 
-    // await getPendingInvites();
-  };
-
-  const removeAcceptedFromList = (inviteId) => {
-    // Remove the accepted invite from the invites list
-    // const updatedInvites = invites.filter((invite) => invite._id !== inviteId);
-    // setInvites(updatedInvites);
-
-    // Fade out the current invite
-    const inviteElement = document.getElementById("invite-row-" + invite._id);
-    inviteElement.classList.add("animate-fade-out");
-
-    // Remove the invite from the DOM after 0.5 seconds
-    setTimeout(() => {
-      inviteElement.remove();
-    }, 2000);
+    setTimeout(async () => {
+      // Update the invites state
+      await getPendingInvites();
+    }, 2200);
   };
 
   //! Remove this useEffect after testing
@@ -130,7 +118,6 @@ const InvitesList = () => {
                   <InviteOperations
                     invite={invite}
                     updateInviteStatus={updateInviteStatus}
-                    removeAcceptedFromList={removeAcceptedFromList}
                   />
                 </td>
               </tr>
