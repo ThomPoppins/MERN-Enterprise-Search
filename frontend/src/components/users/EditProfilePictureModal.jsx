@@ -23,9 +23,6 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
         },
       })
       .then((response) => {
-        console.log("RESPONSE from /upload/image route: ", response);
-        console.log("response.data: ", response.data);
-
         if (response.data.imageId) {
           // Save the image id of the profile picture to the user's document in the database
           axios
@@ -34,9 +31,6 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
               imageId: response.data.imageId,
             })
             .then((response) => {
-              console.log("RESPONSE from /users/profile-picture: ", response);
-
-              //! Add the profile picture URL to the user's profile-picture route return object and update the user state in Redux
               axios
                 .get(`${BACKEND_URL}/users/user/${userId}`)
                 .then((response) => {
