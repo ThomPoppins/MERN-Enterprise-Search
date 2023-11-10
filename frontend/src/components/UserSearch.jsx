@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { BACKEND_URL } from "../../config";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
-import { useSelector } from "react-redux";
 import { enqueueSnackbar } from "notistack";
 
 const UserSearch = ({
@@ -61,7 +61,7 @@ const UserSearch = ({
   return (
     <div>
       <div className="my-4">
-        <label className="text-xl mr-4">
+        <label htmlFor="searchInput" className="text-xl mr-4">
           Search user to add as company owner:
         </label>
         <div className="my-4">
@@ -73,6 +73,7 @@ const UserSearch = ({
         </div>
 
         <input
+          id="searchInput"
           type="text"
           value={searchTerm}
           onChange={handleSearch}
@@ -110,6 +111,20 @@ const UserSearch = ({
       </ul>
     </div>
   );
+};
+
+// Validate prop types
+UserSearch.propTypes = {
+  // `companyId` is the id of the company.
+  companyId: PropTypes.string.isRequired, 
+  // `addPendingOwnershipInvite` is a function that adds a pending ownership invite to the company.
+  addPendingOwnershipInvite: PropTypes.func.isRequired, 
+  // `usersResult` is an array of users that match the search term.
+  usersResult: PropTypes.array.isRequired, 
+  // `setUsersResult` is a function that sets the usersResult state.
+  setUsersResult: PropTypes.func.isRequired, 
+  // `userResult` is an array of users that match the search term.
+  userResult: PropTypes.array, 
 };
 
 export default UserSearch;

@@ -38,10 +38,12 @@ const UploadAvatar = ({ setLogo, onClose }) => {
   );
 };
 
-// Validation of prop types
+// Validate prop types
 UploadAvatar.propTypes = {
-  setLogo: PropTypes.func.isRequired, // `setLogo` is a function that sets the logo state in the parent component.
-  onClose: PropTypes.func.isRequired,  // `onClose` is a function that closes the modal.
+  // `setLogo` is a function that sets the logo state in the parent component.
+  setLogo: PropTypes.func.isRequired, 
+  // `onClose` is a function that closes the modal.
+  onClose: PropTypes.func.isRequired, 
 };
 
 export default UploadAvatar;
