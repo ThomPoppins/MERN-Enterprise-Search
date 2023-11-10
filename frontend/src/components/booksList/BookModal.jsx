@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { AiOutlineClose } from "react-icons/ai";
 import { PiBookOpenTextLight } from "react-icons/pi";
 import { BiUserCircle } from "react-icons/bi";
@@ -6,8 +7,10 @@ import { BiUserCircle } from "react-icons/bi";
 const BookModal = ({ book, onClose }) => {
   return (
     <div
+    id="book-modal"
       className="fixed bg-black bg-opacity-60 top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center"
       onClick={onClose}
+      onKeyDown={(event) => { if (event.key === "Escape") onClose(); }}
       data-test-id="book-modal"
     >
       {/* stopPropagation() prevents the modal to close when user clicks inside the Modal but it closes when user clicks outside of the modal. */}
@@ -50,6 +53,14 @@ const BookModal = ({ book, onClose }) => {
       </div>
     </div>
   );
+};
+
+// Validate prop types
+BookModal.propTypes = {
+  // `book` is an object with book data
+  book: PropTypes.object.isRequired, 
+  // `onClose` is a function that closes the modal.
+  onClose: PropTypes.func.isRequired, 
 };
 
 export default BookModal;

@@ -25,160 +25,169 @@ const EditCompany = () => {
 
   // Get the companyId from the URL
   const { id } = useParams()
-  const companyId = id
+
+  // Get the companyId from the URL param
+   let companyId = (typeof id !== 'string') ? id : ""
+
+   // Make sure companyId is a string because of PropTypes validation later
+   if (typeof companyId !== 'string') {
+      companyId = ""    
+   }
 
   // @ts-ignore Get the userId from the Redux store
-  const userId = useSelector((state) => state.userId)
+  const userId = useSelector((state) => state.userId),
   // @ts-ignore Get the user from the Redux store
-  const user = useSelector((state) => state.user)
+  user = useSelector((state) => state.user),
 
   // Input field values for editing a company as state
-  const [name, setName] = useState('')
-  const [logo, setLogo] = useState('')
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [kvkNumber, setKvkNumber] = useState('')
-  const [slogan, setSlogan] = useState('')
-  const [description, setDescription] = useState('')
-  const [startYear, setStartYear] = useState(0)
+  [name, setName] = useState(''),
+  [logo, setLogo] = useState(''),
+  [email, setEmail] = useState(''),
+  [phone, setPhone] = useState(''),
+  [kvkNumber, setKvkNumber] = useState(''),
+  [slogan, setSlogan] = useState(''),
+  [description, setDescription] = useState(''),
+  [startYear, setStartYear] = useState(0),
 
   // Error state for displaying error messages if the user enters invalid input
-  const [nameError, setNameError] = useState(false)
-  const [emailError, setEmailError] = useState(false)
-  const [phoneError, setPhoneError] = useState(false)
-  const [kvkNumberError, setKvkNumberError] = useState(false)
-  const [sloganError, setSloganError] = useState(false)
-  const [descriptionError, setDescriptionError] = useState(false)
-  const [startYearError, setStartYearError] = useState(false)
+  [nameError, setNameError] = useState(false),
+  [emailError, setEmailError] = useState(false),
+  [phoneError, setPhoneError] = useState(false),
+  [kvkNumberError, setKvkNumberError] = useState(false),
+  [sloganError, setSloganError] = useState(false),
+  [descriptionError, setDescriptionError] = useState(false),
+  [startYearError, setStartYearError] = useState(false),
 
   // Specific error messages to display when the user enters invalid input
-  const [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState('')
+  [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState(''),
 
   // Owners state
-  const [owners, setOwners] = useState([])
+  [owners, setOwners] = useState([]),
 
   // Pending ownership invites state
-  const [pendingOwnershipInvites, setPendingOwnershipInvites] = useState([])
+  [pendingOwnershipInvites, setPendingOwnershipInvites] = useState([]),
 
   // Search results state for searching users to add as owners
-  const [usersResult, setUsersResult] = useState([])
+  [usersResult, setUsersResult] = useState([]),
 
   // Removed owners ids
-  const [removedOwnersIds, setRemovedOwnersIds] = useState([])
+  [removedOwnersIds, setRemovedOwnersIds] = useState([]),
 
   // Set showLogoModal to true to show the modal for uploading a company logo
-  const [showLogoModal, setShowLogoModal] = useState(false)
+  [showLogoModal, setShowLogoModal] = useState(false),
 
   // Display a spinner when loading data from the backend
-  const [loading, setLoading] = useState(false)
+  [loading, setLoading] = useState(false),
 
   // useNavigate is a hook that allows us to navigate to a different page
-  const navigate = useNavigate()
+  navigate = useNavigate(),
 
   // useSnackbar is a hook that allows us to show a snackbar https://www.npmjs.com/package/notistack https://iamhosseindhv.com/notistack/demos#use-snackbar
-  const { enqueueSnackbar } = useSnackbar()
+  { enqueueSnackbar } = useSnackbar(),
 
-  // useEffect is a hook that runs a function when the component is rendered
-  useEffect(() => {
-    getPendingOwnershipInvites()
-  }, [companyId, userId, user])
 
   // Validation functions for validating the input fields and put a red border around the input field if the input is invalid
   // and display an error message under the input field explaining the right format
-  const validateCompanyName = () => {
+  validateCompanyName = () => {
     if (!companyNameValidator(name)) {
       setNameError(true)
     } else {
       setNameError(false)
     }
-  }
-  const validateEmail = () => {
+  },
+  validateEmail = () => {
     if (!emailValidator(email)) {
       setEmailError(true)
     } else {
       setEmailError(false)
     }
-  }
-  const validatePhone = () => {
+  },
+  validatePhone = () => {
     if (!phoneNumberValidator(phone, 'NL')) {
       setPhoneError(true)
     } else {
       setPhoneError(false)
     }
-  }
-  const validateKvkNumber = async () => {
+  },
+  validateKvkNumber = async () => {
     if (!(await kvkNumberValidator(kvkNumber))) {
       setKvkNumberError(true)
       throw new Error('Invalid KVK number!')
     } else {
       setKvkNumberError(false)
     }
-  }
-  const validateSlogan = () => {
+  },
+  validateSlogan = () => {
     if (!companySloganValidator(slogan)) {
       setSloganError(true)
     } else {
       setSloganError(false)
     }
-  }
-  const validateDescription = () => {
+  },
+  validateDescription = () => {
     if (!companyDescriptionValidator(description)) {
       setDescriptionError(true)
     } else {
       setDescriptionError(false)
     }
-  }
-  const validateStartYear = () => {
+  },
+  validateStartYear = () => {
     if (!startYearValidator(startYear)) {
       setStartYearError(true)
     } else {
       setStartYearError(false)
     }
-  }
+  },
 
   // Handle onChange events for all input fields
-  const handleNameChange = (e) => {
+  handleNameChange = (e) => {
     setName(e.target.value)
     if (nameError) {
       validateCompanyName()
     }
-  }
-  const handleEmailChange = (e) => {
+  },
+  handleEmailChange = (e) => {
     setEmail(e.target.value)
     if (emailError) {
       validateEmail()
     }
-  }
-  const handlePhoneChange = (e) => {
+  },
+  handlePhoneChange = (e) => {
     setPhone(e.target.value)
     if (phoneError) {
       validatePhone()
     }
-  }
-  const handleKvkNumberChange = async (e) => {
+  },
+  handleKvkNumberChange = async (e) => {
     setKvkNumber(e.target.value)
     if (kvkNumberError) {
       await validateKvkNumber()
     }
-  }
-  const handleSloganChange = (e) => {
+  },
+  handleSloganChange = (e) => {
     setSlogan(e.target.value)
     if (sloganError) {
       validateSlogan()
     }
-  }
-  const handleDescriptionChange = (e) => {
+  },
+  handleDescriptionChange = (e) => {
     setDescription(e.target.value)
     if (descriptionError) {
       validateDescription()
     }
-  }
-  const handleStartYearChange = (e) => {
+  },
+  handleStartYearChange = (e) => {
     setStartYear(e.target.value)
     if (startYearError) {
       validateStartYear()
     }
   }
+
+    // useEffect is a hook that runs a function when the component is rendered
+    useEffect(() => {
+      getPendingOwnershipInvites()
+    }, [companyId, userId, user])
+  
 
   // Display error messages when the user enters invalid input
   useEffect(() => {
@@ -365,9 +374,9 @@ const EditCompany = () => {
         })
         console.log(error)
       })
-  }
+  },
 
-  const getPendingOwnershipInvites = async () => {
+  getPendingOwnershipInvites = async () => {
     if (!userId || !user || !companyId) {
       return
     }
@@ -396,10 +405,10 @@ const EditCompany = () => {
       // @ts-ignore Set the pending ownership invites state
       setPendingOwnershipInvites(response.data)
     })
-  }
+  },
 
   // Add pending ownership invite
-  const addPendingOwnershipInvite = async (e) => {
+  addPendingOwnershipInvite = async (e) => {
     // Prevent the form from submitting
     e.preventDefault()
 
@@ -450,12 +459,11 @@ const EditCompany = () => {
           error.response.data
         ) // ! TODO: Remove console.log and write errors to logfile
       })
-  }
+  },
 
-  // useEffect is a hook that runs a function when the component is rendered
-  useEffect(() => {}, [pendingOwnershipInvites])
 
-  const handleCancelPendingOwnershipInvite = (e) => {
+
+  handleCancelPendingOwnershipInvite = (e) => {
     // Prevent the form from submitting
     e.preventDefault()
 
@@ -513,9 +521,9 @@ const EditCompany = () => {
         })
         console.log('ERROR in handleCancelPendingOwnershipInvite: ', error) // ! TODO: Remove console.log and write errors to logfile
       })
-  }
-
-  const handleRemoveUserAsCompanyOwner = (e) => {
+  },
+  
+  handleRemoveUserAsCompanyOwner = (e) => {
     console.log(
       'handleRemoveUserAsCompanyOwner e.target.value: ',
       e.target.value
@@ -584,6 +592,9 @@ const EditCompany = () => {
       })
   }
 
+    // useEffect is a hook that runs a function when the component is rendered
+    useEffect(() => {}, [pendingOwnershipInvites])
+
   return (
     <Layout>
       <div className="p-4">
@@ -651,7 +662,7 @@ const EditCompany = () => {
             </ul>
           </div>
           <UserSearch
-            companyId={companyId}
+            companyId={companyId.toString()}
             addPendingOwnershipInvite={addPendingOwnershipInvite}
             usersResult={usersResult}
             setUsersResult={setUsersResult}
