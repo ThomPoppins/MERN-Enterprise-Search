@@ -291,7 +291,7 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [ ] [MERNSTACK-228] The "Find" on the homepage has to transition between color using "color transitions" from TailwindCSS.
 - [x] [MERNSTACK-227] Dropdown menu items have to become clickable over the full width of the menu instead only the text and icon
 - [ ] [MERNSTACK-229] Replace enqueueSnackbar() with toast() from react-toastify for better user experience.
-- [ ]
+- [ ] [MERNSTACK-230] README.md: Finish tutorial about asynchronious JavaScript: https://www.youtube.com/watch?v=ZYb_ZU8LNxs&ab_channel=freeCodeCamp.org
 
 # Technologies:
 

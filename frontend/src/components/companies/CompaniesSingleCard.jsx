@@ -27,6 +27,7 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
     Promise.all(ownerPromises)
       .then((responses) => {
         const ownersData = responses.map((response) => response.data);
+        // @ts-ignore
         setOwners(ownersData);
       })
       .catch((error) => {
@@ -36,7 +37,7 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
 
   return (
     <div
-      key={company._id}
+      key={`companies=single-card-${company._id}`}
       className="border-2 border-purple-900 bg-violet-950/40 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl"
     >
       <h2 className="absolute top-1 right-2 px-4 py-1 bg-purple-500 rounded-lg">
@@ -63,6 +64,7 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
           <span>
             {owners
               ?.map((owner) => {
+                // @ts-ignore
                 return owner.firstName + " " + owner.lastName;
               })
               .join(", ")}
