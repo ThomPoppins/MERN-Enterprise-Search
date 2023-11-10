@@ -52,6 +52,7 @@ const Home = () => {
                       placeholder='Search for experts "plumber", "electrician", "gardener", etc."'
                       value={searchQuery}
                       onChange={handleSearchQueryChange}
+                      data-test-id="find-expert-search-query-input"
                     />
 
                     <button
@@ -62,6 +63,7 @@ const Home = () => {
                             "animate-bounce  from-violet-500 to-violet-600 hover:bg-gradient-to-l hover:from-green-500 hover:to-green-400"
                       }`}
                       onClick={handleFindExpertsQuery}
+                      data-test-id="find-button"
                     >
                       <div className="mx-auto">
                         <div className="py-2 ml-7 text-xl float-left">

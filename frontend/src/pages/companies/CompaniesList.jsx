@@ -57,6 +57,7 @@ const CompaniesList = () => {
           <button
             className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg"
             onClick={() => handleShowTypeChange("table")}
+            data-test-id="show-table-button"
           >
             Table
           </button>

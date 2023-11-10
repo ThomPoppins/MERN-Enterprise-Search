@@ -53,6 +53,7 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
               : "animate-bounce hover:animate-none"
           }`}
           onClick={handleAcceptInvite}
+          data-test-id="accept-button"
         >
           Accept
         </button>
@@ -68,6 +69,7 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
                 setDeclineButtonPing(false);
               }, 1000);
             }}
+            data-test-id="decline-button"
           >
             Decline
           </button>

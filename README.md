@@ -295,6 +295,7 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-127] Add state for all companies fields that can be registered in RegisterCompany.jsx
 - [x] [MERNSTACK-128] In RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this
 - [ ] [MERNSTACK-231] Use useSnackbar to UNDO steps users have taken, to start, let a user uninvite a co-owner after sending a invite and let the user UNDO removing a owner from a company. (see: https://notistack.com/features/basic#actions)
+- [ ] [MERNSTACK-232] Add a "data-test-id" attribute to all elements witn an onClick and onChange event handler.
 
 # Technologies:
 

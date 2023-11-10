@@ -282,6 +282,7 @@ const RegisterUser = () => {
               type="text"
               value={username}
               onChange={handleUsernameChange}
+              data-test-id="user-username-input"
               onBlur={validateUsername}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 usernameError ? "border-red-500" : ""
@@ -301,6 +302,7 @@ const RegisterUser = () => {
               type="text"
               value={email}
               onChange={handleEmailChange}
+              data-test-id="user-email-input"
               onBlur={validateEmail}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 emailError ? "border-red-500" : ""
@@ -320,6 +322,7 @@ const RegisterUser = () => {
               type="password"
               value={password}
               onChange={handlePasswordChange}
+              data-test-id="user-password-input"
               onBlur={validatePassword}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 passwordError ? "border-red-500" : ""
@@ -341,6 +344,7 @@ const RegisterUser = () => {
               type="password"
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
+              data-test-id="user-confirm-password-input"
               onBlur={validateConfirmPassword}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 confirmPasswordError ? "border-red-500" : ""
@@ -360,6 +364,7 @@ const RegisterUser = () => {
               type="text"
               value={firstName}
               onChange={handleFirstNameChange}
+              data-test-id="user-first-name-input"
               onBlur={validateFirstName}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 firstNameError ? "border-red-500" : ""
@@ -380,6 +385,7 @@ const RegisterUser = () => {
               type="text"
               value={lastName}
               onChange={handleLastNameChange}
+              data-test-id="user-last-name-input"
               onBlur={validateLastName}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 lastNameError ? "border-red-500" : ""
@@ -402,6 +408,7 @@ const RegisterUser = () => {
                 name="gender"
                 value="Man"
                 onChange={handleGenderChange}
+                data-test-id="user-gender-input-male"
               />{" "}
               Man
               <input
@@ -409,6 +416,7 @@ const RegisterUser = () => {
                 name="gender"
                 value="Woman"
                 onChange={handleGenderChange}
+                data-test-id="user-gender-input-female"
               />{" "}
               Woman
               <input
@@ -416,6 +424,7 @@ const RegisterUser = () => {
                 name="gender"
                 value="Other"
                 onChange={handleGenderChange}
+                data-test-id="user-gender-input-other"
               />{" "}
               Other
             </div>
@@ -431,6 +440,7 @@ const RegisterUser = () => {
           <button
             className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8"
             onClick={handleSaveUser}
+            data-test-id="user-register-button"
           >
             Save
           </button>

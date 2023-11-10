@@ -36,6 +36,7 @@ const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
     <div
       className="fixed bg-black/60 top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center"
       onClick={onClose}
+      data-test-id="company-delete-modal"
     >
       {/* stopPropagation() prevents the modal to close when user clicks inside the Modal but it closes when user clicks outside of the modal. */}
       {/* The click event will not bubble up to the parent elements where is a click event handler */}
@@ -59,6 +60,7 @@ const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
           <button
             className="p-4 bg-red-600 text-white m-8 w-full"
             onClick={handleDeleteCompany}
+            data-test-id="delete-company-button"
           >
             Yes, delete it!
           </button>
