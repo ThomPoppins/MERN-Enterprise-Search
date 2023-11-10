@@ -1,7 +1,7 @@
 import axios from "axios";
-import { BACKEND_URL } from "../../../config.js";
 import store from "../../store/store";
 import { PENDING_RECIEVED_INVITES } from "../../store/actions";
+import { BACKEND_URL } from "../../../config";
 import { useSelector } from "react-redux";
 
 export const getPendingRecievedInvites = async (userId) => {
@@ -12,7 +12,7 @@ export const getPendingRecievedInvites = async (userId) => {
   try {
     // Get the pending invites for the user
     const response = await axios
-      .get(`${BACKEND_URL}/invites/reciever/${userId}/pending`)
+      .get(BACKEND_URL + `/invites/reciever/${userId}/pending`)
       .then((response) => {
         console.log("Invites response: ", response);
 

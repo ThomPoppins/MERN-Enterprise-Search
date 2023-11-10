@@ -12,5 +12,7 @@
     "toolset",
     "uuidv",
     "vind"
-  ]
+  ],
+  "js/ts.implicitProjectConfig.checkJs": true,
+  "todo-tree.tree.showCountsInTree": true
 }

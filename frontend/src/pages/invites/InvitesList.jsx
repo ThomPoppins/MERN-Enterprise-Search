@@ -6,22 +6,27 @@ import axios from "axios";
 import { BACKEND_URL } from "../../../config";
 import InviteOperations from "../../components/invites/InviteOperations";
 import Layout from "../../components/layout/Layout";
+import store from "../../store/store";
 import { use } from "chai";
 
 const InvitesList = () => {
+  // The invites in the list
   const [invites, setInvites] = useState([]);
 
   // Get userId state from Redux store
+  // @ts-ignore
   const userId = useSelector((state) => state.userId);
 
+  // Get pending recieved invites from Redux store
   const pendingRecievedInvites = useSelector(
+    // @ts-ignore
     (state) => state.pendingRecievedInvites
   );
 
   // Get the invites for the user
   const getPendingInvites = async () => {
     try {
-      // Get the pending invites for the user
+      // Get the pending recieved invites for the user
       const response = await axios
         .get(`${BACKEND_URL}/invites/reciever/${userId}/pending`)
         .then((response) => {
@@ -71,11 +76,6 @@ const InvitesList = () => {
     }, 2200);
   };
 
-  // TODO: Remove this useEffect after testing
-  // useEffect(() => {
-  //   console.log("Invites in state: ", invites);
-  // }, [invites]);
-
   return (
     <Layout>
       <div className="flex justify-center mt-4">
@@ -100,23 +100,38 @@ const InvitesList = () => {
           <tbody>
             {/* {console.log("Invites in JSX", invites)} */}
             {invites?.map((invite) => (
-              <tr id={"invite-row-" + invite._id} key={invite._id}>
+              <tr
+                id={
+                  "invite-row-" +
+                  // @ts-ignore
+                  invite._id
+                }
+                // @ts-ignore
+                key={invite._id}
+              >
                 <td className="border-purple-900 bg-violet-950/40">
                   <img
                     className="rounded-full mr-4 float-left"
                     width="50"
                     height="50"
+                    // @ts-ignore
                     src={invite.sender.profilePictureURL}
                     alt="profile picture"
                   />
                   <div className="flex flex-col">
                     <div>
                       <span className="mr-4">
-                        {invite.sender.firstName} {invite.sender.lastName}
+                        {
+                          // @ts-ignore
+                          invite.sender.firstName
+                        }{" "}
+                        {/* @ts-ignore */}
+                        {invite.sender.lastName}
                       </span>
                     </div>
                     <div>
                       <span className="mr-4 text-blue-400">
+                        {/* @ts-ignore */}
                         &#64;{invite.sender.username}
                       </span>
                     </div>
@@ -124,12 +139,14 @@ const InvitesList = () => {
                 </td>
                 <td className="border-purple-900 bg-violet-950/40">
                   <span className="mr-4">
+                    {/* @ts-ignore */}
                     {invite.kind === "company_ownership" ? (
                       <span>
-                        Invited for co-ownership of{" "}
+                        Invited for co-ownership of {/* @ts-ignore */}
                         <strong>{invite.company.name}</strong>
                       </span>
-                    ) : invite.kind === "friend_request" ? (
+                    ) : // @ts-ignore
+                    invite.kind === "friend_request" ? (
                       <span>Friend Request</span>
                     ) : (
                       <span className="text-red-600 font-bold">
@@ -139,6 +156,7 @@ const InvitesList = () => {
                   </span>
                 </td>
                 <td className="border-purple-900 bg-violet-950/40">
+                  {/* @ts-ignore */}
                   <span className="mr-4">{invite.status}</span>
                 </td>
                 <td className="border-purple-900 bg-violet-950/40">
