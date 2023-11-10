@@ -54,8 +54,8 @@ const UploadImage = () => {
       <h1>UploadImage</h1>
 
       <form onSubmit={handleFormSubmit}>
-        <input type="file" name="image" />
-        <input type="submit" value="Submit" />
+        <input type="file" name="image" data-test-id="image-file-upload" />
+        <input type="submit" value="Submit" data-test-id="image-file-submit" />
       </form>
     </Layout>
   );
