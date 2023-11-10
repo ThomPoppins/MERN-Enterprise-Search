@@ -1,47 +1,47 @@
 import {
   BACKEND_URL,
   FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL,
-  MALE_PROFILE_PICTURE_PLACEHOLDER_URL,
-} from "../../../config";
-import React, { useEffect, useState } from "react";
-import { BiPencil } from "react-icons/bi";
-import EditProfilePictureModal from "../../components/users/EditProfilePictureModal";
-import Layout from "../../components/layout/Layout";
-import { useSelector } from "react-redux";
+  MALE_PROFILE_PICTURE_PLACEHOLDER_URL
+} from '../../../config'
+import React, { useEffect, useState } from 'react'
+import { BiPencil } from 'react-icons/bi'
+import EditProfilePictureModal from '../../components/users/EditProfilePictureModal'
+import Layout from '../../components/layout/Layout'
+import { useSelector } from 'react-redux'
 
 const UserProfile = () => {
   // @ts-ignore userId is a string from the Redux store state
-  const { userId, user } = useSelector((state) => state),
-    // Placeholder for profile picture dependent on gender
-    [profilePicturePlaceholderURL, setProfilePicturePlaceholderURL] =
-      useState(""),
-    // State for showing the edit profile picture modal
-    [showEditProfilePictureModal, setShowEditProfilePictureModal] =
-      useState(false),
-    // Handle the edit profile picture button click event
-    handleEditProfilePicture = () => {
-      setShowEditProfilePictureModal(true);
-    };
+  const { userId, user } = useSelector((state) => state)
+  // Placeholder for profile picture dependent on gender
+  const [profilePicturePlaceholderURL, setProfilePicturePlaceholderURL] =
+      useState('')
+  // State for showing the edit profile picture modal
+  const [showEditProfilePictureModal, setShowEditProfilePictureModal] =
+      useState(false)
+  // Handle the edit profile picture button click event
+  const handleEditProfilePicture = () => {
+    setShowEditProfilePictureModal(true)
+  }
 
   // When the user is available from the Redux store, set the profile picture placeholder URL
   useEffect(() => {
     if (!user) {
-      return;
+      return
     }
 
     // Set placeholder image for when the user hasn't uploaded a profile picture yet
-    if (user.gender === "Woman") {
+    if (user.gender === 'Woman') {
       // Female placeholder image
       setProfilePicturePlaceholderURL(
         `${BACKEND_URL}${FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL}`
-      );
+      )
     } else {
       // Male placeholder image
       setProfilePicturePlaceholderURL(
         `${BACKEND_URL}${MALE_PROFILE_PICTURE_PLACEHOLDER_URL}`
-      );
+      )
     }
-  }, [user]);
+  }, [user])
 
   return (
     <Layout>
@@ -62,7 +62,7 @@ const UserProfile = () => {
             data-test-id="edit-profile-picture-button"
           >
             <BiPencil className="float-left text-gray mr-1" />
-            {user?.profilePictureURL ? "Edit" : "Upload"}
+            {user?.profilePictureURL ? 'Edit' : 'Upload'}
           </div>
         </div>
 
@@ -72,14 +72,14 @@ const UserProfile = () => {
           </h1>
 
           <p className="text-blue-400 text-sm">
-            {user ? `@${user?.username}` : ""}
+            {user ? `@${user?.username}` : ''}
           </p>
 
           <div className="mx-auto mt-4 mb-3">
             {!user?.profilePictureURL && (
               <div className="flex space-x-2 text-xl ">
                 <p>
-                  You haven&apos;t set a profile picture yet!{" "}
+                  You haven&apos;t set a profile picture yet!{' '}
                   <span
                     onClick={handleEditProfilePicture}
                     data-test-id="upload-profile-picture-button"
@@ -128,9 +128,9 @@ const UserProfile = () => {
           userId={userId}
           onClose={() => setShowEditProfilePictureModal(false)}
         />
-      )}{" "}
+      )}{' '}
     </Layout>
-  );
-};
+  )
+}
 
-export default UserProfile;
+export default UserProfile
