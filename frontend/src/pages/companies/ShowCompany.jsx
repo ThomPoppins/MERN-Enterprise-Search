@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
 import { BACKEND_URL } from "../../../config.js";
-import { BACKEND_URL } from "../../../config.js";
 import Layout from "../../components/layout/Layout";
 
 const ShowCompany = () => {

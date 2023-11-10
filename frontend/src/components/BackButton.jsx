@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
 
@@ -13,6 +14,11 @@ const BackButton = ({ destination = "/" }) => {
       </Link>
     </div>
   );
+};
+
+// Validation of prop types
+BackButton.propTypes = {
+  destination: PropTypes.string, // destination is a string and the redirect destination
 };
 
 export default BackButton;

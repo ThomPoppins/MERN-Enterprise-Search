@@ -10,7 +10,7 @@ import {
   HiUser,
   HiOutlineCog,
   HiOutlineLogout,
-} from "react-icons/hi"; //! TODO: Remove unused icons
+} from "react-icons/hi"; // ! TODO: Remove unused icons
 import { HiOutlineBriefcase } from "react-icons/hi2";
 import {
   LuBellRing,
@@ -18,23 +18,23 @@ import {
   LuClipboardCopy,
   LuClipboardCheck,
   LuClipboardList,
-} from "react-icons/lu"; //! TODO: Remove unused icons
+} from "react-icons/lu"; // ! TODO: Remove unused icons
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
   // @ts-ignore
-  let userId = useSelector((state) => state.userId);
+  const userId = useSelector((state) => state.userId);
   // @ts-ignore
-  let user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
 
-  let pendingRecievedInvites = useSelector(
+  const pendingRecievedInvites = useSelector(
     // @ts-ignore
     (state) => state.pendingRecievedInvites
   );
 
   // Should the active user be alerted about pending invites?
-  //! DECIDE: Maybe ALL notifications should trigger a general notification state, maybe not.
+  // ! DECIDE: Maybe ALL notifications should trigger a general notification state, maybe not.
   const [inviteAlert, setInviteAlert] = useState(false);
 
   // When the pending invites are available

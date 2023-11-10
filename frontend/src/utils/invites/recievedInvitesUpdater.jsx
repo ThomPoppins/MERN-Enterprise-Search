@@ -36,7 +36,7 @@ export const getPendingRecievedInvites = async (userId) => {
       console.log(
         "InvitesList.jsx getPendingRecievedInvites invites: ",
         invites
-      ); //! TODO: Remove
+      ); // ! TODO: Remove
 
       // Update the pending reciever invites Redux state
       store.dispatch({

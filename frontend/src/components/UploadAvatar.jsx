@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import Avatar from "react-avatar-edit";
 
 const UploadAvatar = ({ setLogo, onClose }) => {
-  const [src, setSrc] = useState(null);
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState(null),
 
-  const onCrop = (view) => {
+  onCrop = (view) => {
     setPreview(view);
-  };
+  },
 
-  const onClickUpload = () => {
+  onClickUpload = () => {
     setLogo(preview);
     onClose();
   };
@@ -22,7 +22,7 @@ const UploadAvatar = ({ setLogo, onClose }) => {
           height={300}
           onCrop={onCrop}
           onClose={onClose}
-          src={src}
+          src=""
         />
       </div>
       <div className="flex justify-center">
@@ -36,6 +36,12 @@ const UploadAvatar = ({ setLogo, onClose }) => {
       </div>
     </div>
   );
+};
+
+// Validation of prop types
+UploadAvatar.propTypes = {
+  setLogo: PropTypes.func.isRequired, // `setLogo` is a function that sets the logo state in the parent component.
+  onClose: PropTypes.func.isRequired,  // `onClose` is a function that closes the modal.
 };
 
 export default UploadAvatar;
