@@ -290,9 +290,11 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-225] If there is 1 or more pending invites, notify the user in the Navbar by making the "Invites" item bounce and give it a bright background color.
 - [ ] [MERNSTACK-228] The "Find" on the homepage has to transition between color using "color transitions" from TailwindCSS.
 - [x] [MERNSTACK-227] Dropdown menu items have to become clickable over the full width of the menu instead only the text and icon
-- [ ] [MERNSTACK-229] Replace enqueueSnackbar() with toast() from react-toastify for better user experience.
 - [ ] [MERNSTACK-230] README.md: Finish tutorial about asynchronious JavaScript: https://www.youtube.com/watch?v=ZYb_ZU8LNxs&ab_channel=freeCodeCamp.org
-- [x] [MERNSTACK-131] Set state for all companies fields that can be edited in EditCompany.jsx and RegisterCompany.jsx
+- [x] [MERNSTACK-131] Set state for all companies fields that can be edited in EditCompany.jsx
+- [x] [MERNSTACK-127] Add state for all companies fields that can be registered in RegisterCompany.jsx
+- [x] [MERNSTACK-128] In RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this
+- [ ] [MERNSTACK-231] Use useSnackbar to UNDO steps users have taken, to start, let a user uninvite a co-owner after sending a invite and let the user UNDO removing a owner from a company. (see: https://notistack.com/features/basic#actions)
 
 # Technologies:
 

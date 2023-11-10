@@ -34,12 +34,12 @@ const UserSearch = ({
       })
       .then((response) => {
         setUsersResult(response.data);
-        // console.log(response.data); //! TODO: Remove console.log
+        // console.log(response.data); //! TODO: Remove console.log and write errors to logfile
       })
       .catch((error) => {
-        // if (error.status === 404) {
-        //   return;
-        // }
+        if (error.status === 404) {
+          return;
+        }
         enqueueSnackbar("Error searching for users", {
           variant: "error",
           preventDuplicate: true,
@@ -70,9 +70,6 @@ const UserSearch = ({
         <input
           type="text"
           value={searchTerm}
-          // onChange is a function that takes an event as an argument
-          // and sets the title state to the value of the input
-          // e.target.value is the value of the input
           onChange={handleSearch}
           className="border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full"
           data-test-id="search-input"

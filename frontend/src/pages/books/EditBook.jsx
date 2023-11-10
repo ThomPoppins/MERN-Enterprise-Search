@@ -81,9 +81,6 @@ const EditBook = () => {
           <input
             type="text"
             value={title}
-            // onChange is a function that takes an event as an argument
-            // and sets the title state to the value of the input
-            // e.target.value is the value of the input
             onChange={(e) => setTitle(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />

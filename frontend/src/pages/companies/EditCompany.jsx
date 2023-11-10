@@ -730,9 +730,6 @@ const EditCompany = () => {
             <input
               type="text"
               value={name}
-              // onChange is a function that takes an event as an argument
-              // and sets the title state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleNameChange}
               onBlur={validateCompanyName}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -783,9 +780,6 @@ const EditCompany = () => {
             <input
               type="text"
               value={email}
-              // onChange is a function that takes an event as an argument
-              // and sets the title state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleEmailChange}
               onBlur={validateEmail}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -806,9 +800,6 @@ const EditCompany = () => {
             <input
               type="text"
               value={phone}
-              // onChange is a function that takes an event as an argument
-              // and sets the title state to the value of the input
-              // e.target.value is the value of the input
               onChange={handlePhoneChange}
               onBlur={validatePhone}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -844,9 +835,6 @@ const EditCompany = () => {
             <input
               type="text"
               value={kvkNumber}
-              // onChange is a function that takes an event as an argument
-              // and sets the title state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleKvkNumberChange}
               onBlur={validateKvkNumber}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -868,9 +856,6 @@ const EditCompany = () => {
             <input
               type="text"
               value={slogan}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleSloganChange}
               onBlur={validateSlogan}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -890,9 +875,6 @@ const EditCompany = () => {
             <label className="text-xl mr-4">Company Description</label>
             <textarea
               value={description}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleDescriptionChange}
               onBlur={validateDescription}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -914,9 +896,6 @@ const EditCompany = () => {
             <input
               type="number"
               value={startYear}
-              // onChange is a function that takes an event as an argument
-              // and sets the title state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleStartYearChange}
               onBlur={validateStartYear}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${

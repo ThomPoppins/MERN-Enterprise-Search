@@ -12,10 +12,8 @@ const CreateBook = () => {
   const [publishYear, setPublishYear] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  // useSnackbar is a hook that returns an object with two properties: enqueueSnackbar and closeSnackbar
-  // enqueueSnackbar is a function that takes an object as an argument
-  // and displays a snackbar with the message and the variant that we pass in the object
-  // closeSnackbar is a function that takes an id as an argument and closes the snackbar with that id
+
+  // Log pop-up messages to UI with UseSnackbar hook
   // https://iamhosseindhv.com/notistack/demos#use-snackbar
   const { enqueueSnackbar } = useSnackbar();
 
@@ -57,9 +55,6 @@ const CreateBook = () => {
           <input
             type="text"
             value={title}
-            // onChange is a function that takes an event as an argument
-            // and sets the title state to the value of the input
-            // e.target.value is the value of the input
             onChange={(e) => setTitle(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />

@@ -17,7 +17,6 @@ import CompanyLogoModal from "../../components/companies/CompanyLogoModal";
 import Layout from "../../components/layout/Layout";
 
 const RegisterCompany = () => {
-  // TODO: [MERNSTACK-127] Add state for all companies fields that can be registered
   // Input field values for registering a company as state
   const [name, setName] = useState("");
   const [logo, setLogo] = useState("");
@@ -46,7 +45,7 @@ const RegisterCompany = () => {
   // Loading state for displaying a spinner while the request is being sent to the backend
   const [loading, setLoading] = useState(false);
 
-  // Get the userId from the Redux store
+  // @ts-ignore Get the userId from the Redux store
   const userId = useSelector((state) => state.userId);
 
   // useNavigate is a hook that returns a navigate function that we can use to navigate to a different page
@@ -302,15 +301,11 @@ const RegisterCompany = () => {
         </h1>
         {loading ? <Spinner /> : ""}
         <div className="flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto">
-          {/* // TODO: [MERNSTACK-128] RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this*/}
           <div className="my-4">
             <label className="text-xl mr-4">Name</label>
             <input
               type="text"
               value={name}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleNameChange}
               onBlur={validateCompanyName}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -361,9 +356,6 @@ const RegisterCompany = () => {
             <input
               type="text"
               value={email}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleEmailChange}
               onBlur={validateEmail}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -383,9 +375,6 @@ const RegisterCompany = () => {
             <input
               type="text"
               value={phone}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handlePhoneChange}
               onBlur={validatePhone}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -421,9 +410,6 @@ const RegisterCompany = () => {
             <input
               type="text"
               value={kvkNumber}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleKvkNumberChange}
               onBlur={validateKvkNumber}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -445,9 +431,6 @@ const RegisterCompany = () => {
             <input
               type="text"
               value={slogan}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleSloganChange}
               onBlur={validateSlogan}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -466,11 +449,7 @@ const RegisterCompany = () => {
           <div className="my-4">
             <label className="text-xl mr-4">Company Description</label>
             <textarea
-              type="text"
               value={description}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleDescriptionChange}
               onBlur={validateDescription}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -491,9 +470,6 @@ const RegisterCompany = () => {
             <input
               type="number"
               value={startYear}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleStartYearChange}
               onBlur={validateStartYear}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${

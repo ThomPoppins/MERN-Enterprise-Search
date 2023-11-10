@@ -84,7 +84,7 @@ const LoginUser = () => {
           payload: "card",
         });
 
-        navigate("/");
+        navigate("/profile");
       })
       .catch((error) => {
         setLoading(false);
