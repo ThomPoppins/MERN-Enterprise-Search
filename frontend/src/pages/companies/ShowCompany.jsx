@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
 import { BACKEND_URL } from "../../../config.js";
+import { BACKEND_URL } from "../../../config.js";
 import Layout from "../../components/layout/Layout";
 
 const ShowCompany = () => {
@@ -26,6 +27,7 @@ const ShowCompany = () => {
         Promise.all(ownerPromises)
           .then((responses) => {
             const ownersData = responses.map((response) => response.data);
+            // @ts-ignore
             setOwners(ownersData);
             setLoading(false);
           })
@@ -40,6 +42,8 @@ const ShowCompany = () => {
       });
   }, [id]);
 
+  //
+
   return (
     <Layout>
       <div className="p-4">
@@ -52,40 +56,48 @@ const ShowCompany = () => {
             {/* TODO: [MERNSTACK-133] Add all fields of the company model here. Copy paste outer div with ".my-4" class below to achieve this. */}
             <div className="my-4">
               <span className="text-xl mr-4 text-gray-500">KVK</span>
+              {/* @ts-ignore */}
               <span>{company.kvkNumber}</span>
             </div>
             <div className="my-4">
               <span className="text-xl mr-4 text-gray-500">Name</span>
+              {/* @ts-ignore */}
               <span>{company.name}</span>
             </div>
             <div className="my-4">
               <span className="text-xl mr-4 text-gray-500">Email</span>
+              {/* @ts-ignore */}
               <span>{company.email}</span>
             </div>
             <div className="my-4">
               <span className="text-xl mr-4 text-gray-500">Phone</span>
+              {/* @ts-ignore */}
               <span>{company.phone}</span>
             </div>
             <div className="my-4">
               <span className="text-xl mr-4 text-gray-500">Start Year</span>
+              {/* @ts-ignore */}
               <span>{company.startYear}</span>
             </div>
             <div className="my-4">
               <span className="text-xl mr-4 text-gray-500">Owners</span>
               <span>
                 {owners
+                  // @ts-ignore
                   .map((owner) => owner.firstName + " " + owner.lastName)
                   .join(", ")}
               </span>
             </div>
             <div className="my-4">
               <span className="text-xl mr-4 text-gray-500">Create Time</span>
+              {/* @ts-ignore */}
               <span>{new Date(company.createdAt).toString()}</span>
             </div>
             <div className="my-4">
               <span className="text-xl mr-4 text-gray-500">
                 Last Update Time
               </span>
+              {/* @ts-ignore */}
               <span>{new Date(company.updatedAt).toString()}</span>
             </div>
           </div>

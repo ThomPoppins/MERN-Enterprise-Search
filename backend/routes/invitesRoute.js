@@ -11,9 +11,18 @@ const router = express.Router();
 // Route to get all pending invites from a specific sender
 router.get("/company/sender/pending", async (request, response) => {
   // Get companyId from request headers
+  // @ts-ignore
   const companyId = request.headers.companyid;
   // Get senderId from request headers
   const senderId = request.headers.senderid;
+
+  if (typeof senderId !== "string") {
+    console.log("senderId is not a string.");
+
+    return response.status(400).json({
+      message: "senderId is required.",
+    });
+  }
 
   try {
     // Get all invites with status "pending" and senderId equal to senderId
@@ -22,9 +31,15 @@ router.get("/company/sender/pending", async (request, response) => {
       status: "pending",
     }).sort({ createdAt: -1 });
 
-    // Convert invites to plain JavaScript objects
-    invites = invites.map((invite) => invite.toObject());
+    // Log the type of invites
+    console.log("LET OP!: The type of `invites` is: ", typeof invites);
 
+    // Log the constructor name of invites
+    console.log("LET OP!: The invites.constructor.name is: ", {
+      class: invites.constructor.name,
+    });
+
+    // Convert invites to plain JavaScript objects
     console.log(
       "invites in invitesRoute.js: /invites/company/sender/pending: ",
       invites
@@ -34,6 +49,7 @@ router.get("/company/sender/pending", async (request, response) => {
     return response.status(200).send(invites);
   } catch (error) {
     console.log("ERROR in GET /invites/sender/pending route: ", error);
+
     // Send status 500 response and error message as JSON response if unsuccessful
     return response.status(500).json({
       message: error.message,
@@ -43,6 +59,7 @@ router.get("/company/sender/pending", async (request, response) => {
 
 // Route to get all invites from a specific reciever
 router.get("/reciever/:userId/pending", async (request, response) => {
+  // Get userId from URL
   const { userId } = request.params;
 
   try {
@@ -53,6 +70,7 @@ router.get("/reciever/:userId/pending", async (request, response) => {
     }).sort({ createdAt: -1 });
 
     // Convert invites to plain JavaScript objects
+    // @ts-ignore
     invites = invites.map((invite) => invite.toObject());
 
     console.log(
@@ -65,27 +83,34 @@ router.get("/reciever/:userId/pending", async (request, response) => {
       // Add sender info
       const sender = await User.findById(invite.senderId);
       // Convert sender to plain JavaScript object
+      // @ts-ignore
       invite["sender"] = sender.toObject();
 
+      // @ts-ignore
       if (invite.sender.profilePicture) {
         // Get sender profile picture
         const senderProfilePicture = await Image.findById(
+          // @ts-ignore
           invite.sender.profilePicture
         );
 
         // Get sender profile picture URL
         const senderProfilePictureURL = getStaticFileURLFromPath(
+          // @ts-ignore
           senderProfilePicture.path
         );
 
         // Add sender profile picture URL to sender object
+        // @ts-ignore
         invite.sender["profilePictureURL"] = senderProfilePictureURL;
       }
 
       // Add reciever info
+      // @ts-ignore
       const reciever = await User.findById(new mongoose.Types.ObjectId(userId))
         .then(
           // Convert reciever to plain JavaScript object
+          // @ts-ignore
           (userData) => (invite["reciever"] = userData.toObject())
         )
         .catch((error) =>
@@ -98,6 +123,7 @@ router.get("/reciever/:userId/pending", async (request, response) => {
           // Get company document
           const company = await Company.findById(invite.companyId);
           // Convert company to plain JavaScript object and add it to invite object
+          // @ts-ignore
           invite["company"] = company.toObject();
         }
       }
@@ -127,10 +153,19 @@ router.put("/status/:inviteId", async (request, response) => {
     // Find the invite document using the inviteId
     const invite = await Invite.findById(inviteId);
 
+    if (!invite) {
+      console.log(`Cannot find invite with id=${inviteId}.`);
+
+      return response.status(404).json({
+        message: `Cannot find invite with id=${inviteId}.`,
+      });
+    }
+
     // Update the invite status
     invite.status = request.body.status;
 
     // Save the updated invite document
+    // @ts-ignore
     await invite.save();
 
     // Send status 200 response and the updated invite document as JSON response if successful

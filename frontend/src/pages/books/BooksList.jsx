@@ -14,6 +14,7 @@ const BooksList = () => {
   // useDispatch() is a hook that returns the reference to the dispatch function from the Redux store.
   const dispatch = useDispatch();
   // useSelector() is a hook that takes the current state as an argument and returns whatever data you want from it.
+  // @ts-ignore
   const showType = useSelector((state) => state.booksListShowType);
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);

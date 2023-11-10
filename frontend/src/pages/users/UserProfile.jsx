@@ -1,43 +1,47 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { BiPencil } from "react-icons/bi";
 import {
+  BACKEND_URL,
   FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL,
-  MALE_PROFILE_PICTURE_PLACEHOLDER_URL,
-} from "../../../config";
-import { BACKEND_URL } from "../../../config";
-import Layout from "../../components/layout/Layout";
-import EditProfilePictureModal from "../../components/users/EditProfilePictureModal";
+  MALE_PROFILE_PICTURE_PLACEHOLDER_URL
+} from '../../../config'
+import React, { useEffect, useState } from 'react'
+import { BiPencil } from 'react-icons/bi'
+import EditProfilePictureModal from '../../components/users/EditProfilePictureModal'
+import Layout from '../../components/layout/Layout'
+import { useSelector } from 'react-redux'
 
 const UserProfile = () => {
-  let userId = useSelector((state) => state.userId);
-  let user = useSelector((state) => state.user);
-
+  // @ts-ignore userId is a string from the Redux store state
+  const { userId, user } = useSelector((state) => state)
   // Placeholder for profile picture dependent on gender
   const [profilePicturePlaceholderURL, setProfilePicturePlaceholderURL] =
-    useState("");
+      useState('')
+  // State for showing the edit profile picture modal
+  const [showEditProfilePictureModal, setShowEditProfilePictureModal] =
+      useState(false)
+  // Handle the edit profile picture button click event
+  const handleEditProfilePicture = () => {
+    setShowEditProfilePictureModal(true)
+  }
 
+  // When the user is available from the Redux store, set the profile picture placeholder URL
   useEffect(() => {
-    if (!user) return;
+    if (!user) {
+      return
+    }
 
-    if (user.gender === "Woman") {
+    // Set placeholder image for when the user hasn't uploaded a profile picture yet
+    if (user.gender === 'Woman') {
+      // Female placeholder image
       setProfilePicturePlaceholderURL(
         `${BACKEND_URL}${FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL}`
-      );
+      )
     } else {
+      // Male placeholder image
       setProfilePicturePlaceholderURL(
         `${BACKEND_URL}${MALE_PROFILE_PICTURE_PLACEHOLDER_URL}`
-      );
+      )
     }
-    console.log("user", user);
-  }, [user]);
-
-  const [showEditProfilePictureModal, setShowEditProfilePictureModal] =
-    useState(false);
-
-  const handleEditProfilePicture = () => {
-    setShowEditProfilePictureModal(true);
-  };
+  }, [user])
 
   return (
     <Layout>
@@ -58,7 +62,7 @@ const UserProfile = () => {
             data-test-id="edit-profile-picture-button"
           >
             <BiPencil className="float-left text-gray mr-1" />
-            {user?.profilePictureURL ? "Edit" : "Upload"}
+            {user?.profilePictureURL ? 'Edit' : 'Upload'}
           </div>
         </div>
 
@@ -68,14 +72,14 @@ const UserProfile = () => {
           </h1>
 
           <p className="text-blue-400 text-sm">
-            {user ? "@" + user?.username : ""}
+            {user ? `@${user?.username}` : ''}
           </p>
 
           <div className="mx-auto mt-4 mb-3">
             {!user?.profilePictureURL && (
               <div className="flex space-x-2 text-xl ">
                 <p>
-                  You haven't set a profile picture yet!{" "}
+                  You haven&apos;t set a profile picture yet!{' '}
                   <span
                     onClick={handleEditProfilePicture}
                     data-test-id="upload-profile-picture-button"
@@ -87,13 +91,34 @@ const UserProfile = () => {
               </div>
             )}
 
-            <div className="flex space-x-2">
-              <p className="text-gray-400">Email:</p>
-              <p>{user?.email}</p>
-            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th className="text-gray-400 text-2xl">About Me</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <span className="text-gray-400">Email </span>
+                  </td>
+                  <td>
+                    <span>{user?.email}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <span className="text-gray-400">Gender </span>
+                  </td>
+                  <td>
+                    <span>{user?.gender}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
             <p className="">
               Visit the Companies link in the navigation bar to see some of this
-              this application's features in action.
+              this application&apos;s features in action.
             </p>
           </div>
         </div>
@@ -103,9 +128,9 @@ const UserProfile = () => {
           userId={userId}
           onClose={() => setShowEditProfilePictureModal(false)}
         />
-      )}{" "}
+      )}{' '}
     </Layout>
-  );
-};
+  )
+}
 
-export default UserProfile;
+export default UserProfile

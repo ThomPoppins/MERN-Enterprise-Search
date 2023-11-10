@@ -1,52 +1,42 @@
-import React, { useState } from "react";
-import BackButton from "../../components/BackButton";
-import Spinner from "../../components/Spinner";
-import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import { BACKEND_URL } from "../../../config.js";
-import { useSnackbar } from "notistack";
-import Cookies from "js-cookie";
-import store from "../../store/store.jsx";
-import { USER_ID } from "../../store/actions.jsx";
-import Navbar from "../../components/layout/Navbar";
-import Layout from "../../components/layout/Layout";
+import React, { useState } from 'react'
+import Spinner from '../../components/Spinner'
+import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
+import store from '../../store/store.jsx'
+import { USER_ID } from '../../store/actions.jsx'
+import Layout from '../../components/layout/Layout'
 
 const LogoutUser = () => {
   // Loading state for displaying a spinner while the request is being sent to the backend
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   // useNavigate is a hook that allows us to navigate to a different page
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  // useSnackbar is a hook that returns an object with two properties: enqueueSnackbar and closeSnackbar
-  // enqueueSnackbar is a function that takes an object as an argument
-  // and displays a snackbar with the message and the variant that we pass in the object
-  // closeSnackbar is a function that takes an id as an argument and closes the snackbar with that id
-  // https://iamhosseindhv.com/notistack/demos#use-snackbar
-  const { enqueueSnackbar } = useSnackbar();
-
+  // handle logout user
   const handleLogoutUser = () => {
-    setLoading(true);
-    Cookies.remove("jwt");
+    setLoading(true)
+    Cookies.remove('jwt')
     store.dispatch({
       type: USER_ID,
-      payload: null,
-    });
+      payload: null
+    })
     store.dispatch({
-      type: "USER",
-      payload: null,
-    });
+      type: 'USER',
+      payload: null
+    })
     store.dispatch({
-      type: "COMPANIES_LIST_SHOW_TYPE",
-      payload: "card",
-    });
-    setLoading(false);
-    navigate("/");
-  };
+      type: 'COMPANIES_LIST_SHOW_TYPE',
+      payload: 'card'
+    })
+    setLoading(false)
+    navigate('/')
+  }
+
   return (
     <Layout>
       <div className="flex flex-col justify-center h-screen">
-        {loading ? <Spinner /> : ""}
+        {loading ? <Spinner /> : ''}
         <div className="md:w-[600px] mx-auto h-[190px] border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-16">
           <div className="flex justify-center pt-4">
             <h3 className="text-2xl">Are you sure you want to log out?</h3>
@@ -64,7 +54,7 @@ const LogoutUser = () => {
         <div className="my-32"></div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default LogoutUser;
+export default LogoutUser

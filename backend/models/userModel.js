@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 /**
  * Mongoose Schema for User
@@ -23,42 +23,46 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      default: "",
+      default: ''
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      default: "",
+      default: ''
     },
     hashedPassword: {
       type: String,
       required: true,
-      default: "",
+      default: ''
     },
     firstName: {
       type: String,
       required: true,
-      default: "",
+      default: ''
     },
     lastName: {
       type: String,
       required: true,
-      default: "",
+      default: ''
     },
     // `gender` can be Man, Woman, or Other
     gender: {
       type: String,
-      required: true,
+      required: true
     },
     // `profilePicture` is a id reference to the image document in the database.
     // The image document contains the path to the image file.
     profilePicture: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Image",
+      ref: 'Image'
     },
+    profilePictureURL: {
+      type: String,
+      default: ''
+    }
   },
   { timestamps: true }
-);
+)
 
-export const User = mongoose.model("User", userSchema);
+export const User = mongoose.model('User', userSchema)
