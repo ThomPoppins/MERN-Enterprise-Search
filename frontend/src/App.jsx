@@ -1,10 +1,5 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import BooksList from "./pages/books/BooksList";
-import CreateBook from "./pages/books/CreateBook";
-import EditBook from "./pages/books/EditBook";
-import ShowBook from "./pages/books/ShowBook";
-import DeleteBook from "./pages/books/DeleteBook";
 import CompaniesList from "./pages/companies/CompaniesList";
 import RegisterCompany from "./pages/companies/RegisterCompany";
 import EditCompany from "./pages/companies/EditCompany";
@@ -49,12 +44,6 @@ const App = () => {
         <Route path="/companies/details/:id" element={<ShowCompany />} />
         {/* /invites/* routes */}
         <Route path="/invites" element={<InvitesList />} />
-        {/* /books/* routes */}
-        <Route path="/books" element={<BooksList />} />
-        <Route path="/books/create" element={<CreateBook />} />
-        <Route path="/books/edit/:id" element={<EditBook />} />
-        <Route path="/books/details/:id" element={<ShowBook />} />
-        <Route path="/books/delete/:id" element={<DeleteBook />} />
       </Routes>
     );
   } else {
