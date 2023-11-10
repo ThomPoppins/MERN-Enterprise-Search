@@ -28,6 +28,7 @@ const EditCompany = () => {
 
   // Get the userId from the Redux store
   const userId = useSelector((state) => state.userId);
+  const user = useSelector((state) => state.user);
 
   // Input field values for editing a company as state
   const [name, setName] = useState("");
@@ -57,7 +58,7 @@ const EditCompany = () => {
   // Pending ownership invites state
   const [pendingOwnershipInvites, setPendingOwnershipInvites] = useState([]);
 
-  // Search results state
+  // Search results state for searching users to add as owners
   const [usersResult, setUsersResult] = useState([]);
 
   // Removed owners ids
@@ -78,6 +79,41 @@ const EditCompany = () => {
   // closeSnackbar is a function that takes an id as an argument and closes the snackbar with that id
   // https://iamhosseindhv.com/notistack/demos#use-snackbar
   const { enqueueSnackbar } = useSnackbar();
+
+  const getPendingOwnershipInvites = async () => {
+    if (!userId || !user || !companyId) {
+      return;
+    }
+
+    // Get all pending ownership invites for the sender
+    const pendingInvites = await axios
+      .get(`${BACKEND_URL}/invites/company/sender/pending`, {
+        headers: {
+          // Send the senders' user _id in the headers
+          senderid: userId,
+          // Send the company id in the headers
+          companyid: companyId,
+        },
+      })
+      .catch((error) => {
+        // TODO: Handle error, write to file, and show error message to user with react-toastify
+        enqueueSnackbar("Error fetching pending ownership invites", {
+          variant: "error",
+        });
+
+        console.log("ERROR in getPendingOwnershipInvites: ", error);
+      });
+
+    Promise.resolve(pendingInvites).then((response) => {
+      // Set the pending ownership invites state
+      setPendingOwnershipInvites(response.data);
+    });
+  };
+
+  // useEffect is a hook that runs a function when the component is rendered
+  useEffect(() => {
+    getPendingOwnershipInvites();
+  }, [companyId, userId, user]);
 
   // Validation functions for validating the input fields and put a red border around the input field if the input is invalid
   // and display an error message under the input field explaining the right format
@@ -326,40 +362,6 @@ const EditCompany = () => {
       });
   };
 
-  const getPendingOwnershipInvites = async () => {
-    // Array of pending ownership invites
-    let pendingOwnershipInvites = {};
-
-    // Get all pending ownership invites for the sender
-    await axios
-      .get(`${BACKEND_URL}/invites/company/sender/pending`, {
-        headers: {
-          // Send the senders' user _id in the headers
-          senderid: userId,
-          // Send the company id in the headers
-          companyid: companyId,
-        },
-      })
-      .then((response) => {
-        pendingOwnershipInvites = response.data;
-
-        console.log(
-          "getPendingOwnershipInvites pendingOwnershipInvites: ",
-          pendingOwnershipInvites
-        );
-
-        setPendingOwnershipInvites(pendingOwnershipInvites);
-      })
-      .catch((error) => {
-        console.log("ERROR in getPendingOwnershipInvites: ", error);
-      });
-  };
-
-  // useEffect is a hook that runs a function when the component is rendered
-  useEffect(() => {
-    getPendingOwnershipInvites();
-  }, []);
-
   // Add pending ownership invite
   const addPendingOwnershipInvite = (e) => {
     // Prevent the form from submitting
@@ -394,7 +396,7 @@ const EditCompany = () => {
         setUsersResult(newUsersResult);
 
         // Add the pending ownership invite to the pending ownership invites state
-        setPendingOwnershipInvites([...pendingOwnershipInvites, response.data]);
+        // setPendingOwnershipInvites([...pendingOwnershipInvites, response.data]);
       })
       .catch((error) => {
         //! TODO: Remove console.log
@@ -410,16 +412,16 @@ const EditCompany = () => {
     e.preventDefault();
 
     // Get the id of the pending ownership invite to be canceled
-    const pendingOwnershipInviteId = e.target.value;
+    const inviteId = e.target.value;
 
     console.log(
       "handleCancelPendingOwnershipInvite pendingOwnershipInviteId: ",
-      pendingOwnershipInviteId
+      inviteId
     );
 
     // Make an API call to cancel the pending ownership invite
     axios
-      .put(`${BACKEND_URL}/invites/status/${pendingOwnershipInviteId}`, {
+      .put(`${BACKEND_URL}/invites/status/${inviteId}`, {
         status: "canceled",
       })
       .then((response) => {
@@ -427,6 +429,23 @@ const EditCompany = () => {
           "handleCancelPendingOwnershipInvite response.data: ",
           response.data
         );
+
+        // Remove the canceled pending ownership invite from the pending ownership invites state
+        const newPendingOwnershipInvites = pendingOwnershipInvites.filter(
+          (invite) => invite._id !== inviteId
+        );
+
+        // Update the pending ownership invites state
+        setPendingOwnershipInvites(newPendingOwnershipInvites);
+
+        // Update the search results
+        // setUsersResult(newUsersResult);
+
+        // Add the user that was removed as an invited owner back to the search results
+        console.log("Users result before adding user back: ", usersResult);
+
+        // Update the search results
+        setUsersResult(newUsersResult);
       })
       .catch((error) => {
         //! TODO: Remove console.log
@@ -528,27 +547,64 @@ const EditCompany = () => {
   return (
     <Layout>
       <div className="p-4">
-        <h1 className="flex justify-center text-3xl my-4 mb-6">Edit Company</h1>
+        <h1 className="flex justify-center text-3xl my-4 mb-6">
+          Edit{" "}
+          <div>
+            <strong className="ml-2"> {name}</strong>
+          </div>
+        </h1>
         {loading ? <Spinner /> : ""}
-        {pendingOwnershipInvites?.length > 0 ? (
-          <div className="flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto mb-4">
-            <div className="my-4">
-              <div className="mb-4">
-                <label className="text-xl mr-4">
+        <div className="flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto mb-4">
+          <div className="my-4">
+            <div className="mb-8">
+              <div className="mb-8">
+                <label className="text-2xl mr-4">
                   Pending Ownership Invites
                 </label>
               </div>
               <ul className="mb-4">
                 {pendingOwnershipInvites.map((invite, index) => {
-                  console.log("pending invite in EditCompany.jsx: ", invite);
+                  return (
+                    <div
+                      className="mb-4 flex justify-between items-center"
+                      key={invite._id + index}
+                    >
+                      <div>
+                        <li>
+                          <ul>
+                            <li>
+                              <VscMention className="inline" />
+                              INVITE ID: {invite._id}
+                            </li>
+                            <li>
+                              <VscPerson className="inline" /> RECIEVER ID:
+                              {invite.receiverId}
+                            </li>
+                            <li>
+                              <VscMail className="inline" /> SENDER ID:{" "}
+                              {invite.senderId}
+                            </li>
+                          </ul>
+                        </li>
+                      </div>
+                      <div>
+                        <button
+                          className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-red-700 hover:to-red-400 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4"
+                          value={invite._id}
+                          onClick={handleCancelPendingOwnershipInvite}
+                          data-test-id="cancel-invite-button"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  );
                 })}
               </ul>
             </div>
           </div>
-        ) : (
-          ""
-        )}
-        ;
+        </div>
+
         <div className="flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto mb-4">
           <div className="my-4">
             <div className="mb-4">
@@ -602,7 +658,6 @@ const EditCompany = () => {
             addPendingOwnershipInvite={addPendingOwnershipInvite}
             usersResult={usersResult}
             setUsersResult={setUsersResult}
-            removedOwnersIds={removedOwnersIds}
           />
         </div>
         {/* TODO: [MERNSTACK-194] Make <CompanyRegisterEditForm company={company} /> component and use it in EditCompany.jsx and RegisterCompany.jsx */}

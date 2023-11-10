@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import { BACKEND_URL } from "../../config";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
 import { useSelector } from "react-redux";
+import { enqueueSnackbar } from "notistack";
 
 const UserSearch = ({
   companyId,
   addPendingOwnershipInvite,
   usersResult,
   setUsersResult,
-  removedOwnersIds,
 }) => {
   let userId = useSelector((state) => state.userId);
 
@@ -34,42 +34,20 @@ const UserSearch = ({
       })
       .then((response) => {
         setUsersResult(response.data);
-        console.log(response.data);
+        // console.log(response.data); //! TODO: Remove console.log
       })
       .catch((error) => {
+        enqueueSnackbar("Error fetching users search results", {
+          variant: "error",
+        });
+
+        //! TODO: Handle error in UI
         console.log(
           "ERROR in UserSearch.jsx get search results API call: ",
           error
         );
       });
   };
-
-  //! Maybe deprecated useEffect hook below
-  // Remove owner from search results if they are already an owner, but when they are removed from the company they should be able to be added again
-  useEffect(() => {
-    // removedOwnersIds is an array of owner ids that have been removed from the company
-    removedOwnersIds.forEach((removedOwnerId) => {
-      // Get the user object for every the removed owner
-      axios
-        .get(BACKEND_URL + "/users/user/" + removedOwnerId)
-        .then((response) => {
-          // Add the from the company removed owner back to the search results
-          const newUsersResult = [...usersResult, response.data];
-
-          console.log("newUsersResult: ", newUsersResult); //! TODO: Remove console.log
-
-          // Add the removed owner back to the search results
-          setUsersResult(newUsersResult);
-        })
-        .catch((error) => {
-          console.log(
-            "ERROR in UserSearch.jsx get from company removed owner user data: ",
-            error
-          );
-        });
-    });
-  }, [removedOwnersIds]);
-  //! End of maybe deprecated useEffect hook
 
   return (
     <div>

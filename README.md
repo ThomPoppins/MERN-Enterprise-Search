@@ -288,7 +288,7 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [ ] [MERNSTACK-225] If there is 1 or more pending invites, notify the user in the Navbar by making the "Invites" item bounce and give it a bright (lightblue) background color.
 - [ ] [MERNSTACK-228] The "Find" on the homepage has to transition between color using "color transitions" from TailwindCSS.
 - [ ] [MERNSTACK-227] Dropdown menu items have to become clickable over the full width of the menu instead only the text and icon
-
+- [ ] Replace enqueueSnackbar() with toast() from react-toastify for better user experience.
 # Technologies:
 
 ## Frontend
