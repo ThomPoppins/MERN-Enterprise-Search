@@ -35,6 +35,7 @@ export default {
         "bounce-fast": "bounce 0.4s infinite",
         "bounce-slow": "bounce 4s infinite",
         "bounce-reverse": "bounce-reverse 4s reverse",
+        "spin-fast": "spin 0.4s linear infinite",
       },
     },
   },

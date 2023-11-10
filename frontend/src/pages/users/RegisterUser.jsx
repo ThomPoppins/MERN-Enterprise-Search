@@ -146,7 +146,7 @@ const RegisterUser = () => {
     if (usernameError) {
       enqueueSnackbar(
         "Username is invalid! Username has to be alphanumeric and at least 1 character long.",
-        { variant: "error" }
+        { variant: "error", preventDuplicate: true }
       );
     }
     if (emailError) {
@@ -155,26 +155,32 @@ const RegisterUser = () => {
     if (passwordError) {
       enqueueSnackbar(
         "Password is invalid! Password has to be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit and one special character.",
-        { variant: "error" }
+        { variant: "error", preventDuplicate: true }
       );
     }
     if (confirmPasswordError) {
-      enqueueSnackbar("Passwords do not match!", { variant: "error" });
+      enqueueSnackbar("Passwords do not match!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (firstNameError) {
       enqueueSnackbar(
         "First name is invalid! First name has to be at least 1 character long and not contain any numbers. Names can contain dots and white spaces.",
-        { variant: "error" }
+        { variant: "error", preventDuplicate: true }
       );
     }
     if (lastNameError) {
       enqueueSnackbar(
         "Last name is invalid! Last name has to be at least 1 character long and not contain any numbers. Last name can contain white spaces.",
-        { variant: "error" }
+        { variant: "error", preventDuplicate: true }
       );
     }
     if (genderError) {
-      enqueueSnackbar("Gender is a required field.", { variant: "error" });
+      enqueueSnackbar("Gender is a required field.", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
   }, [
     usernameError,
@@ -239,6 +245,7 @@ const RegisterUser = () => {
         // Display a success message
         enqueueSnackbar("User account registered successfully!", {
           variant: "success",
+          preventDuplicate: true,
         });
         // Navigate to the home page
         navigate("/");
@@ -249,7 +256,10 @@ const RegisterUser = () => {
         // Display an error message
         setRegisterErrorMessage(error.response.data.message);
         // Display an error message
-        enqueueSnackbar("Error registering account!", { variant: "error" });
+        enqueueSnackbar("Error registering account!", {
+          variant: "error",
+          preventDuplicate: true,
+        });
         // Log the error to the console
         console.log(error);
       });

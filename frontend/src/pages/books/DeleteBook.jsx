@@ -26,12 +26,18 @@ const DeleteBook = () => {
       .delete(BACKEND_URL + `/books/${id}`)
       .then(() => {
         setLoading(false);
-        enqueueSnackbar("Book deleted successfully!", { variant: "success" });
+        enqueueSnackbar("Book deleted successfully!", {
+          variant: "success",
+          preventDuplicate: true,
+        });
         navigate("/books");
       })
       .catch((error) => {
         setLoading(false);
-        enqueueSnackbar("Error deleting book!", { variant: "error" });
+        enqueueSnackbar("Error deleting book!", {
+          variant: "error",
+          preventDuplicate: true,
+        });
         console.log(error);
       });
   };

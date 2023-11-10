@@ -15,6 +15,8 @@ import startYearValidator from "../../utils/validation/startYearValidator";
 import UserSearch from "../../components/UserSearch";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
 import { useSelector } from "react-redux";
+import { PENDING_RECIEVED_INVITES } from "../../store/actions";
+import store from "../../store/store";
 import CompanyLogoModal from "../../components/companies/CompanyLogoModal";
 import Layout from "../../components/layout/Layout";
 
@@ -26,8 +28,9 @@ const EditCompany = () => {
   const { id } = useParams();
   const companyId = id;
 
-  // Get the userId from the Redux store
+  // @ts-ignore Get the userId from the Redux store
   const userId = useSelector((state) => state.userId);
+  // @ts-ignore Get the user from the Redux store
   const user = useSelector((state) => state.user);
 
   // Input field values for editing a company as state
@@ -185,25 +188,46 @@ const EditCompany = () => {
   // Display error messages when the user enters invalid input
   useEffect(() => {
     if (nameError) {
-      enqueueSnackbar("Invalid company name!", { variant: "error" });
+      enqueueSnackbar("Invalid company name!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (emailError) {
-      enqueueSnackbar("Invalid email!", { variant: "error" });
+      enqueueSnackbar("Invalid email!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (phoneError) {
-      enqueueSnackbar("Invalid phone number!", { variant: "error" });
+      enqueueSnackbar("Invalid phone number!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (kvkNumberError) {
-      enqueueSnackbar("Invalid KVK number!", { variant: "error" });
+      enqueueSnackbar("Invalid KVK number!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (sloganError) {
-      enqueueSnackbar("Invalid slogan!", { variant: "error" });
+      enqueueSnackbar("Invalid slogan!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (descriptionError) {
-      enqueueSnackbar("Invalid description!", { variant: "error" });
+      enqueueSnackbar("Invalid description!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (startYearError) {
-      enqueueSnackbar("Invalid start year!", { variant: "error" });
+      enqueueSnackbar("Invalid start year!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
   }, [
     nameError,
@@ -222,7 +246,6 @@ const EditCompany = () => {
       .get(BACKEND_URL + "/companies/" + companyId)
       .then((response) => {
         setLoading(false);
-        // TODO: [MERNSTACK-131] Set state for all companies fields that can be edited
         setName(response.data.name);
         setLogo(response.data.logo);
         setEmail(response.data.email);
@@ -232,19 +255,22 @@ const EditCompany = () => {
         setDescription(response.data.description);
         setStartYear(response.data.startYear);
 
-        console.log("response.data: ", response.data);
-
         // Set owners
         const userIds = [];
         response.data.owners.forEach((owner) => {
           userIds.push(owner.userId);
         });
+
+        // Get all owners data
         const ownerPromises = userIds.map((userId) => {
           return axios.get(BACKEND_URL + "/users/user/" + userId);
         });
+
+        // Resolve all promises to get owners user data
         Promise.all(ownerPromises)
           .then((responses) => {
             const ownersData = responses.map((response) => response.data);
+            // @ts-ignore Update the owners state
             setOwners(ownersData);
           })
           .catch((error) => {
@@ -253,8 +279,12 @@ const EditCompany = () => {
       })
       .catch((error) => {
         setLoading(false);
-        alert("Error fetching company, please check the console.");
-        console.log(error);
+        enqueueSnackbar("Error fetching company, please check the console.", {
+          variant: "error",
+          preventDuplicate: true,
+        });
+
+        console.log("ERROR fetching company in useEffect(): ", error); //! TODO: Remove console.log and write errors to logfile
       });
   }, []);
 
@@ -267,7 +297,10 @@ const EditCompany = () => {
     try {
       await validateKvkNumber();
     } catch (error) {
-      enqueueSnackbar("Error validating KVK number!", { variant: "error" });
+      enqueueSnackbar("Error validating KVK number!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
       console.log(error);
       return;
     }
@@ -292,7 +325,7 @@ const EditCompany = () => {
     ) {
       enqueueSnackbar(
         "Please fill in all fields correctly before saving this company!",
-        { variant: "error" }
+        { variant: "error", preventDuplicate: true }
       );
       return;
     }
@@ -312,13 +345,17 @@ const EditCompany = () => {
       .put(BACKEND_URL + `/companies/${companyId}`, data)
       .then(() => {
         setLoading(false);
-        enqueueSnackbar("Company edited successfully!", { variant: "success" });
+        enqueueSnackbar("Company edited successfully!", {
+          variant: "success",
+          preventDuplicate: true,
+        });
         navigate("/companies");
       })
       .catch((error) => {
         if (error.response.status === 409) {
           enqueueSnackbar("Company with this KVK number already exists!", {
             variant: "error",
+            preventDuplicate: true,
           });
           setKvkNumberError(true);
           setKvkNumberErrorMessage(
@@ -327,7 +364,10 @@ const EditCompany = () => {
         }
 
         setLoading(false);
-        enqueueSnackbar("Error editing company!", { variant: "error" });
+        enqueueSnackbar("Error editing company!", {
+          variant: "error",
+          preventDuplicate: true,
+        });
         console.log(error);
       });
   };
@@ -351,13 +391,14 @@ const EditCompany = () => {
         // TODO: Handle error, write to file, and show error message to user with react-toastify
         enqueueSnackbar("Error fetching pending ownership invites", {
           variant: "error",
+          preventDuplicate: true,
         });
 
         console.log("ERROR in getPendingOwnershipInvites: ", error);
       });
 
     Promise.resolve(pendingInvites).then((response) => {
-      // Set the pending ownership invites state
+      // @ts-ignore Set the pending ownership invites state
       setPendingOwnershipInvites(response.data);
     });
   };
@@ -370,7 +411,7 @@ const EditCompany = () => {
     // Get the id of the user to be invited as an owner
     const invitedOwnerId = e.target.value;
 
-    console.log("invitedOwnerId: ", invitedOwnerId); //! TODO: Remove console.log
+    console.log("invitedOwnerId: ", invitedOwnerId); //! TODO: Remove console.log and write errors to logfile
 
     // Make an API call to invite the user as an owner
     await axios
@@ -382,31 +423,37 @@ const EditCompany = () => {
         status: "pending",
       })
       .then((response) => {
-        //! TODO: Remove console.log
         console.log(
           "UserSearch.jsx response.data invite ownership: ",
           response.data
-        );
+        ); //! TODO: Remove console.log and write errors to logfile
 
-        // Remove the invited owner from the search results
+        // Filter the invited owner from the search results
         const newUsersResult = usersResult.filter(
+          // @ts-ignore
           (user) => user._id !== invitedOwnerId
         );
-        // Update the search results
+        // @ts-ignore  Update the search results
         setUsersResult(newUsersResult);
 
-        // Add the pending ownership invite to the pending ownership invites state
+        // @ts-ignore Add the pending ownership invite to the pending ownership invites state
         setPendingOwnershipInvites([...pendingOwnershipInvites, response.data]);
 
-        // Add the pending ownership invite to the pending ownership invites state
-        // setPendingOwnershipInvites([...pendingOwnershipInvites, response.data]);
+        enqueueSnackbar("Co-owner invited!", {
+          variant: "success",
+          preventDuplicate: true,
+        });
       })
       .catch((error) => {
-        //! TODO: Remove console.log
+        enqueueSnackbar("Error inviting user as owner", {
+          variant: "error",
+          preventDuplicate: true,
+        });
+
         console.log(
           "ERROR in UserSearch.jsx invite owner API call: ",
           error.response.data
-        );
+        ); //! TODO: Remove console.log and write errors to logfile
       });
   };
 
@@ -423,7 +470,7 @@ const EditCompany = () => {
     console.log(
       "handleCancelPendingOwnershipInvite pendingOwnershipInviteId: ",
       inviteId
-    );
+    ); //! TODO: Remove console.log
 
     // Make an API call to cancel the pending ownership invite
     axios
@@ -434,78 +481,52 @@ const EditCompany = () => {
         console.log(
           "handleCancelPendingOwnershipInvite response.data: ",
           response.data
-        );
+        ); //! TODO: Remove console.log
 
         // Remove the canceled pending ownership invite from the pending ownership invites state
         const newPendingOwnershipInvites = pendingOwnershipInvites.filter(
+          // @ts-ignore
           (invite) => invite._id !== inviteId
         );
 
-        // Update the pending ownership invites state
-        setPendingOwnershipInvites(newPendingOwnershipInvites);
+        // @ts-ignore Update the pending ownership invites state
+        setPendingOwnershipInvites(
+          // @ts-ignore
+          newPendingOwnershipInvites ? newPendingOwnershipInvites : []
+        );
 
-        // Update the search results
-        // setUsersResult(newUsersResult);
+        store.dispatch({
+          type: PENDING_RECIEVED_INVITES,
+          payload: newPendingOwnershipInvites ? newPendingOwnershipInvites : [],
+        });
 
         // Add the user that was removed as an invited owner back to the search results
         console.log("Users result before adding user back: ", usersResult);
 
-        // Update the search results
-        setUsersResult(newUsersResult);
+        // @ts-ignore Update the search results and filter out the user that was removed to be an invited owner
+        setUsersResult(
+          usersResult.filter(
+            // @ts-ignore
+            (user) => user._id !== response.data.receiverId
+          )
+        );
       })
       .catch((error) => {
-        //! TODO: Remove console.log
-        console.log("ERROR in handleCancelPendingOwnershipInvite: ", error);
+        enqueueSnackbar("Error canceling pending ownership invite", {
+          variant: "error",
+          preventDuplicate: true,
+        });
+        console.log("ERROR in handleCancelPendingOwnershipInvite: ", error); //! TODO: Remove console.log and write errors to logfile
       });
   };
-
-  //! Remove deprecated code below
-  // const handleAddUserAsCompanyOwner = (userId) => {
-  //   console.log("handleAddUserAsCompanyOwner userId: " + userId);
-  //   axios
-  //     .put(BACKEND_URL + "/companies/" + companyId + "/add-owner/" + userId)
-  //     .then((response) => {
-  //       console.log(
-  //         "handleAddUserAsCompanyOwner response.data: ",
-  //         response.data
-  //       );
-  //       console.log(
-  //         "handleAddUserAsCompanyOwner response.data.owners: ",
-  //         response.data.owners
-  //       );
-
-  //       const userIds = [];
-  //       response.data.owners.forEach((owner) => {
-  //         userIds.push(owner.userId);
-  //       });
-
-  //       const ownerPromises = userIds.map((userId) =>
-  //         axios.get(BACKEND_URL + "/users/user/" + userId)
-  //       );
-
-  //       Promise.all(ownerPromises)
-  //         .then((responses) => {
-  //           const ownersData = responses.map((response) => response.data);
-  //           console.log("ownersData: ", ownersData);
-  //           setOwners(ownersData);
-  //         })
-  //         .catch((error) => {
-  //           console.log(error);
-  //         });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-  //! End of deprecated code above
 
   const handleRemoveUserAsCompanyOwner = (e) => {
     console.log(
       "handleRemoveUserAsCompanyOwner e.target.value: ",
       e.target.value
-    );
+    ); //! TODO: Remove console.log
 
-    // Set removed owners to show up in the search results again
+    // @ts-ignore Set removed owners to show up in the search results again
     setRemovedOwnersIds([...removedOwnersIds, e.target.value]);
 
     axios
@@ -542,9 +563,27 @@ const EditCompany = () => {
               "ownersData in removeUserAsOwner function: ",
               ownersData
             );
+            // @ts-ignore Update the owners state
             setOwners(ownersData);
+
+            // @ts-ignore Set removed owners to show up in the search results again
+            setRemovedOwnersIds([...removedOwnersIds, e.target.value]);
           })
           .catch((error) => {
+            enqueueSnackbar("Error removing user as owner", {
+              variant: "error",
+              preventDuplicate: true,
+            });
+
+            // Reset removed owners ids to before Promise
+            const removedOwnersIdsFallback = [...removedOwnersIds].filter(
+              // If the removed owner id is not equal to the removed owner id that was just removed
+              (removedOwnerId) => removedOwnerId !== e.target.value
+            );
+
+            // @ts-ignore Update the removed owners ids state
+            setRemovedOwnersIds(removedOwnersIdsFallback);
+
             console.log(error);
           });
       });
@@ -571,6 +610,7 @@ const EditCompany = () => {
                 return (
                   <div
                     className="mb-4 flex justify-between items-center"
+                    // @ts-ignore
                     key={owner._id + index}
                   >
                     <div>
@@ -578,22 +618,28 @@ const EditCompany = () => {
                         <ul>
                           <li>
                             <VscMention className="inline" />
+                            {/* @ts-ignore */}
                             {owner.username}
                           </li>
                           <li>
+                            {/* @ts-ignore */}
                             <VscPerson className="inline" /> {owner.firstName}{" "}
+                            {/* @ts-ignore */}
                             {owner.lastName}
                           </li>
                           <li>
+                            {/* @ts-ignore */}
                             <VscMail className="inline" /> {owner.email}
                           </li>
                         </ul>
                       </li>
                     </div>
                     <div>
+                      {/* @ts-ignore */}
                       {owner._id !== userId ? (
                         <button
                           className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4"
+                          // @ts-ignore
                           value={owner._id}
                           onClick={handleRemoveUserAsCompanyOwner}
                           data-test-id="remove-owner-button"
@@ -630,6 +676,7 @@ const EditCompany = () => {
                     return (
                       <div
                         className="mb-4 flex justify-between items-center"
+                        // @ts-ignore
                         key={invite._id + index}
                       >
                         <div>
@@ -637,14 +684,17 @@ const EditCompany = () => {
                             <ul>
                               <li>
                                 <VscMention className="inline" />
+                                {/* @ts-ignore */}
                                 INVITE ID: {invite._id}
                               </li>
                               <li>
                                 <VscPerson className="inline" /> RECIEVER ID:
+                                {/* @ts-ignore */}
                                 {invite.receiverId}
                               </li>
                               <li>
                                 <VscMail className="inline" /> SENDER ID:{" "}
+                                {/* @ts-ignore */}
                                 {invite.senderId}
                               </li>
                             </ul>
@@ -653,6 +703,7 @@ const EditCompany = () => {
                         <div>
                           <button
                             className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-red-700 hover:to-red-400 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4"
+                            // @ts-ignore
                             value={invite._id}
                             onClick={handleCancelPendingOwnershipInvite}
                             data-test-id="cancel-invite-button"
@@ -679,9 +730,6 @@ const EditCompany = () => {
             <input
               type="text"
               value={name}
-              // onChange is a function that takes an event as an argument
-              // and sets the title state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleNameChange}
               onBlur={validateCompanyName}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -732,9 +780,6 @@ const EditCompany = () => {
             <input
               type="text"
               value={email}
-              // onChange is a function that takes an event as an argument
-              // and sets the title state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleEmailChange}
               onBlur={validateEmail}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -755,9 +800,6 @@ const EditCompany = () => {
             <input
               type="text"
               value={phone}
-              // onChange is a function that takes an event as an argument
-              // and sets the title state to the value of the input
-              // e.target.value is the value of the input
               onChange={handlePhoneChange}
               onBlur={validatePhone}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -793,9 +835,6 @@ const EditCompany = () => {
             <input
               type="text"
               value={kvkNumber}
-              // onChange is a function that takes an event as an argument
-              // and sets the title state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleKvkNumberChange}
               onBlur={validateKvkNumber}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -817,9 +856,6 @@ const EditCompany = () => {
             <input
               type="text"
               value={slogan}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleSloganChange}
               onBlur={validateSlogan}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -838,11 +874,7 @@ const EditCompany = () => {
           <div className="my-4">
             <label className="text-xl mr-4">Company Description</label>
             <textarea
-              type="text"
               value={description}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleDescriptionChange}
               onBlur={validateDescription}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -864,9 +896,6 @@ const EditCompany = () => {
             <input
               type="number"
               value={startYear}
-              // onChange is a function that takes an event as an argument
-              // and sets the title state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleStartYearChange}
               onBlur={validateStartYear}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${

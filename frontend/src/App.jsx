@@ -25,7 +25,7 @@ const App = () => {
   const token = Cookies.get("jwt");
   verifyToken(token);
 
-  // Get userId state from Redux store
+  // @ts-ignore Get userId state from Redux store
   const userId = useSelector((state) => state.userId);
 
   // TODO: [MERNSTACK-163] Redirect user from routes other then /, /login and /register if user is not logged in

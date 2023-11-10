@@ -17,13 +17,17 @@ const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
         setLoading(false);
         enqueueSnackbar("Company deleted successfully!", {
           variant: "success",
+          preventDuplicate: true,
         });
         updateCompanies();
         onClose();
       })
       .catch((error) => {
         setLoading(false);
-        enqueueSnackbar("Error deleting company!", { variant: "error" });
+        enqueueSnackbar("Error deleting company!", {
+          variant: "error",
+          preventDuplicate: true,
+        });
         console.log(error);
       });
   };

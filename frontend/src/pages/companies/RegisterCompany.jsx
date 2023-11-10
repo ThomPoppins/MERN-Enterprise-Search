@@ -17,7 +17,6 @@ import CompanyLogoModal from "../../components/companies/CompanyLogoModal";
 import Layout from "../../components/layout/Layout";
 
 const RegisterCompany = () => {
-  // TODO: [MERNSTACK-127] Add state for all companies fields that can be registered
   // Input field values for registering a company as state
   const [name, setName] = useState("");
   const [logo, setLogo] = useState("");
@@ -46,7 +45,7 @@ const RegisterCompany = () => {
   // Loading state for displaying a spinner while the request is being sent to the backend
   const [loading, setLoading] = useState(false);
 
-  // Get the userId from the Redux store
+  // @ts-ignore Get the userId from the Redux store
   const userId = useSelector((state) => state.userId);
 
   // useNavigate is a hook that returns a navigate function that we can use to navigate to a different page
@@ -159,25 +158,46 @@ const RegisterCompany = () => {
   // Display error messages if the user enters invalid input with useSnackbar
   useEffect(() => {
     if (nameError) {
-      enqueueSnackbar("Company name is invalid!", { variant: "error" });
+      enqueueSnackbar("Company name is invalid!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (emailError) {
-      enqueueSnackbar("Email is invalid!", { variant: "error" });
+      enqueueSnackbar("Email is invalid!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (phoneError) {
-      enqueueSnackbar("Phone number is invalid!", { variant: "error" });
+      enqueueSnackbar("Phone number is invalid!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (kvkNumberError) {
-      enqueueSnackbar("KVK number is invalid!", { variant: "error" });
+      enqueueSnackbar("KVK number is invalid!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (sloganError) {
-      enqueueSnackbar("Slogan is invalid!", { variant: "error" });
+      enqueueSnackbar("Slogan is invalid!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (descriptionError) {
-      enqueueSnackbar("Description is invalid!", { variant: "error" });
+      enqueueSnackbar("Description is invalid!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (startYearError) {
-      enqueueSnackbar("Start year is invalid!", { variant: "error" });
+      enqueueSnackbar("Start year is invalid!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
   }, [
     nameError,
@@ -197,7 +217,10 @@ const RegisterCompany = () => {
     try {
       await validateKvkNumber();
     } catch (error) {
-      enqueueSnackbar("Error validating KVK number!", { variant: "error" });
+      enqueueSnackbar("Error validating KVK number!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
       console.log(error);
       return;
     }
@@ -220,7 +243,7 @@ const RegisterCompany = () => {
     ) {
       enqueueSnackbar(
         "Please fill in all fields correctly before saving this company!",
-        { variant: "error" }
+        { variant: "error", preventDuplicate: true }
       );
       return;
     }
@@ -244,6 +267,7 @@ const RegisterCompany = () => {
         setLoading(false);
         enqueueSnackbar("Company registered successfully!", {
           variant: "success",
+          preventDuplicate: true,
         });
         navigate("/companies");
       })
@@ -252,6 +276,7 @@ const RegisterCompany = () => {
         if (error.response.status === 409) {
           enqueueSnackbar("Company with this KVK number already exists!", {
             variant: "error",
+            preventDuplicate: true,
           });
           setKvkNumberError(true);
           setKvkNumberErrorMessage(
@@ -260,7 +285,10 @@ const RegisterCompany = () => {
         }
 
         setLoading(false);
-        enqueueSnackbar("Error registering company!", { variant: "error" });
+        enqueueSnackbar("Error registering company!", {
+          variant: "error",
+          preventDuplicate: true,
+        });
         console.log(error);
       });
   };
@@ -273,15 +301,11 @@ const RegisterCompany = () => {
         </h1>
         {loading ? <Spinner /> : ""}
         <div className="flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto">
-          {/* // TODO: [MERNSTACK-128] RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this*/}
           <div className="my-4">
             <label className="text-xl mr-4">Name</label>
             <input
               type="text"
               value={name}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleNameChange}
               onBlur={validateCompanyName}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -332,9 +356,6 @@ const RegisterCompany = () => {
             <input
               type="text"
               value={email}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleEmailChange}
               onBlur={validateEmail}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -354,9 +375,6 @@ const RegisterCompany = () => {
             <input
               type="text"
               value={phone}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handlePhoneChange}
               onBlur={validatePhone}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -392,9 +410,6 @@ const RegisterCompany = () => {
             <input
               type="text"
               value={kvkNumber}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleKvkNumberChange}
               onBlur={validateKvkNumber}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -416,9 +431,6 @@ const RegisterCompany = () => {
             <input
               type="text"
               value={slogan}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleSloganChange}
               onBlur={validateSlogan}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -437,11 +449,7 @@ const RegisterCompany = () => {
           <div className="my-4">
             <label className="text-xl mr-4">Company Description</label>
             <textarea
-              type="text"
               value={description}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleDescriptionChange}
               onBlur={validateDescription}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
@@ -462,9 +470,6 @@ const RegisterCompany = () => {
             <input
               type="number"
               value={startYear}
-              // onChange is a function that takes an event as an argument
-              // and sets the name state to the value of the input
-              // e.target.value is the value of the input
               onChange={handleStartYearChange}
               onBlur={validateStartYear}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
