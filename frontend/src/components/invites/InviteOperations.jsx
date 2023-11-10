@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { use } from "chai";
 import { useSelector } from "react-redux";
+import { BACKEND_URL } from "../../config";
 
 const InviteOperations = ({ invite, updateInviteStatus }) => {
   // Spin accept button (after click Find)
@@ -13,6 +14,21 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
 
   const handleAcceptInvite = async () => {
     setAcceptButtonSpinning(true);
+
+    // Add the user as owner to the company
+    const updatedCompany = await axios
+      .post(
+        `${BACKEND_URL}/companies/${invite.companyId}/add-owner/${invite.receiverId}`
+      )
+      .then((response) => {
+        console.log("Added user to company: ", response);
+      })
+      .catch((error) => {
+        console.log(
+          "ERROR in InviteOperations.jsx add user to company: ",
+          error
+        );
+      });
 
     // Update the invite status to "accepted"
     updateInviteStatus(invite._id, "accepted");
