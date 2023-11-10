@@ -8,4 +8,13 @@ const USER_ID = "USER_ID";
 // Save user details in redux store
 const USER = "USER";
 
-export { BOOKS_LIST_SHOW_TYPE, COMPANIES_LIST_SHOW_TYPE, USER_ID, USER };
+// Save pending invites in redux store
+const PENDING_RECIEVED_INVITES = "PENDING_RECIEVED_INVITES";
+
+export {
+  BOOKS_LIST_SHOW_TYPE,
+  COMPANIES_LIST_SHOW_TYPE,
+  USER_ID,
+  USER,
+  PENDING_RECIEVED_INVITES,
+};

@@ -1,6 +1,6 @@
 # MERN_STACK_PROJ. :rocket:
 
-- [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
+- [MERN_STACK_PROJ. :rocket:](#mern_stack_proj-rocket)
 - [Getting Started](#getting-started)
 - [Application Description](#application-description)
 - [Versions:](#versions)
@@ -37,15 +37,14 @@
       - [Expiration and Refresh Tokens](#expiration-and-refresh-tokens)
       - [Conclusion](#conclusion)
 - [Models:](#models)
-    - [Company](#company)
-      - [Fields:](#fields)
+  - [Company](#company)
+    - [Fields:](#fields)
 - [Routes:](#routes)
 - [Testing:](#testing)
   - [Mocha and Chai](#mocha-and-chai)
   - [Postman](#postman)
 - [Unfinished features (for future versions):](#unfinished-features-for-future-versions)
   - [User Privilege Management and Admin Authorization](#user-privilege-management-and-admin-authorization)
-
 
 # Getting Started
 
@@ -54,21 +53,25 @@ To run this application locally, follow these steps:
 0. **Create a free MongoDB database to connect with and obtain a MongoDB authentication URL.**
 
 1. **Clone the Repository**:
+
    ```bash
    git clone git@github.com:ThomPoppins/MERN_STACK_PROJ..git MERN_STACK_PROJ && cd MERN_STACK_PROJ
    ```
 
 2. **Set Up Backend Configuration**:
+
    - Navigate to the `/backend` folder in your file explorer.
    - Create a `config.js` file.
    - Add the following constants and update them to your personal values:
+
      ```javascript
      // backend/config.js
      // port for the server to listen on
      export const PORT = 5555;
 
      // YOUR MongoDB database connection URL (if you want to test this application without creating your own database, contact me at thompoppins@gmail.com, I'll provide you with a database URL)
-     export const mongoDBURL = 'mongodb+srv://exampleuser:examplepasswork@example-mern-stack-project.xhvmidl.mongodb.net/?retryWrites=true&w=majority';
+     export const mongoDBURL =
+       "mongodb+srv://exampleuser:examplepasswork@example-mern-stack-project.xhvmidl.mongodb.net/?retryWrites=true&w=majority";
 
      // Secret key for JWT signing and encryption (just generate a random string or keep it like it is for testing purposes)
      export const JWT_SECRET = "yoursecretkey";
@@ -81,17 +84,19 @@ To run this application locally, follow these steps:
      ```
 
 3. **Set Up Frontend Configuration**:
+
    - Navigate to the `/frontend` folder.
    - Create a `config.js` file if it doesn't exist.
    - Add the following constant and export it:
      ```javascript
      // frontend/config.js
-     export const BACKEND_URL = 'http://localhost:5555';
+     export const BACKEND_URL = "http://localhost:5555";
      // Disable company validation by KVK API (If you want to test the KVK company validation, mail me at thompoppins@gmail.com for instructions how to set this up.)
      export const TEST_KVK_API = false;
      ```
 
 4. **Install Dependencies**:
+
    - Inside the `/backend` folder, run:
      ```bash
      npm install
@@ -102,6 +107,7 @@ To run this application locally, follow these steps:
      ```
 
 5. **Start the Servers**:
+
    - Inside the `/backend` folder, run:
      ```bash
      npm run dev
@@ -115,7 +121,6 @@ To run this application locally, follow these steps:
    - Visit the web application in your browser using the link printed by the Vite.js server after starting the frontend server.
 
 Now you have the application up and running locally!
-
 
 # Application Description
 
@@ -133,9 +138,7 @@ The backend server is now a CDN for static files like images. This means that th
 
 Users can now upload a profile picture. The profile picture will be saved in the `/backend/public/uploads/images` folder and the path to the image will be saved in the database. The backend server will serve the image from the `/backend/public` folder. This way, the frontend application can access the image from the backend server and the image path is stored in the database.
 
-
 ## v0.0.1:
-
 
 ### Registering an Account
 
@@ -173,7 +176,6 @@ Upon successful registration and validation from the KVK API, the user will be r
 # TODO and DONE:
 
 > **NOTE:** This is a list of all the tasks that I am working on right now and also which I've completed so far. I've created Jira issues for them all and the corresponding Jira issue number is between [].
-
 
 - [x] [MERNSTACK-103] Start using testing frameworks Mocha and Chai to write automated tests for the endpoints and ensure that the code is working correctly.
 - [x] [MERNSTACK-74] Set up `Company` model.
@@ -215,12 +217,12 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-123] Create a CompanyModal component that will show up on the CompaniesList page when the user clicks on the `eye` icon.
 - [x] [MERNSTACK-122] Create CompaniesList page (where all companies for a user will be shown in `table` or `card` view.) and safe this `table`/`card` setting to Redux store state so user will return to listing page with preferred setting.
 - [x] [MERNSTACK-124] Use useSnackbar() for displaying error or success messages to the user in the Company components.
-- [x] [MERNSTACK-125] Inform myself better about using useEffect() to prevent infinite loop situations when my application get more complex. [Speech about using useEffect effectively](https://www.youtube.com/watch?v=eFGeStq8dZo&list=PLokIxGKSireSB4Gx6r7xWlFs9Q9PueDED&ab_channel=ReactConferencesbyGitNation )
+- [x] [MERNSTACK-125] Inform myself better about using useEffect() to prevent infinite loop situations when my application get more complex. [Speech about using useEffect effectively](https://www.youtube.com/watch?v=eFGeStq8dZo&list=PLokIxGKSireSB4Gx6r7xWlFs9Q9PueDED&ab_channel=ReactConferencesbyGitNation)
 - [x] [MERNSTACK-126] Use react-redux in frontend to `dispatch` actions to `reducers` and `store` to `get` and `set` `state` and `props` in the frontend and combine at least 2 `reducers`. (see frontend devdocs folder)
 - [x] [MERNSTACK-138] Create user register page and functionality, save with bcrypt hashed password in database.
 - [x] [MERNSTACK-139] Create a user login page and functionality, validate user password has with bcrypt and compare hashed password on login.
 - [x] [MERNSTACK-140] Make it possible for a user to register a company and automatically become first company owner.
-- [x] [MERNSTACK-141]  Find fitting icons for company `name` `phone number` and `email` for the ListCompanies `card` view and CompaniesModal component. Find them in the react-icons library. DO THIS BEFORE CREATING ANY OTHER LIST COMPONENTS!
+- [x] [MERNSTACK-141] Find fitting icons for company `name` `phone number` and `email` for the ListCompanies `card` view and CompaniesModal component. Find them in the react-icons library. DO THIS BEFORE CREATING ANY OTHER LIST COMPONENTS!
 - [ ] [MERNSTACK-142] Update README.md with explanation about the validators I created in the frontend application. Explain the regex of every validator used to validate and the test method that returns true or false.
 - [x] [MERNSTACK-143] Add explanation about the main advantages of using MongoDB and Mongoose in the README.md file in the Backend section.
 - [x] [MERNSTACK-14] Create a new schema and model for user.
@@ -233,9 +235,9 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-181] Add remove button to remove owner from company in EditCompany component.
 - [x] [MERNSTACK-176] Display owners first name and last name on `<ShowCompany />` `<CompanySingleCard />` and `<CompanyModal />`.
 - [x] [MERNSTACK-177] Only find owners that are not already owners of the company in the EditCompany and UserSearch component.
-- [ ] [MERNSTACK-178] Send invitation to user to become owner of company.
-- [ ] [MERNSTACK-179] Display a "Invitation pending" or "Invited" message in de EditCompany page when user hasn't accepted the invitation to become owner of the company yet.
-- [ ] [MERNSTACK-180] Move save new company owner functionality to acceptBecomeCompanyOwnerInvitation() function in some new component.
+- [x] [MERNSTACK-178] Send invitation to user to become owner of company.
+- [x] [MERNSTACK-179] Display a "Invitation pending" or "Invited" message in de EditCompany page when user hasn't accepted the invitation to become owner of the company yet.
+- [x] [MERNSTACK-180] Move save new company owner functionality to acceptBecomeCompanyOwnerInvitation() function in some new component.
 - [x] [MERNSTACK-182] Save new owners of company after pressing save button in EditCompany component. CANCELLED: Now the owner can add owners in a different `form` in the EditCompany component without a save button so it is clear that a owner has been added without submitting the form.
 - [x] [MERNSTACK-183] Remove "Remove" button from EditCompany component of the current logged in user.
 - [x] [MERNSTACK-174] When the user selects a user to add as an owner to the company, update the owners state variable in the `<EditCompany />` component to include the selected user. You can use the setOwners() function to update the owners state variable.
@@ -243,7 +245,7 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-170] Make API call to backend to find users by query on username, name or email, use useEffect to call this function when query changes
 - [x] [MERNSTACK-168] Make possible for user (owner) to add other owners to the company by finding other users and adding them to the company
 - [x] [MERNSTACK-17] "owners" array should contain owner objects with an userId.
-- [x] [MERNSTACK-16] Owners  will be linked to a company, based on an ownerId in the owner model. CANCELLED: Now the owner will be linked to a company, based on an userId corresponding to the user `_id` in the user model.
+- [x] [MERNSTACK-16] Owners will be linked to a company, based on an ownerId in the owner model. CANCELLED: Now the owner will be linked to a company, based on an userId corresponding to the user `_id` in the user model.
 - [x] [MERNSTACK-184] Remove item from search results when added
 - [x] [MERNSTACK-160] Display error message under the input field if the input is invalid explaining the right format on all forms
 - [x] [MERNSTACK-159] Give input field of the form a red border if the input is invalid on all forms
@@ -285,10 +287,12 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-222] Use a placeholder image for the profile picture, specifically a man for male users and a woman for female users.
 - [x] [MERNSTACK-223] Spin animation on Find button on homepage when the button is clicked.
 - [x] [MERNSTACK-224] Update "Invite" status when user Accepts or Declines a Invite.
-- [ ] [MERNSTACK-225] If there is 1 or more pending invites, notify the user in the Navbar by making the "Invites" item bounce and give it a bright (lightblue) background color.
+- [x] [MERNSTACK-225] If there is 1 or more pending invites, notify the user in the Navbar by making the "Invites" item bounce and give it a bright background color.
 - [ ] [MERNSTACK-228] The "Find" on the homepage has to transition between color using "color transitions" from TailwindCSS.
-- [ ] [MERNSTACK-227] Dropdown menu items have to become clickable over the full width of the menu instead only the text and icon
-- [ ] Replace enqueueSnackbar() with toast() from react-toastify for better user experience.
+- [x] [MERNSTACK-227] Dropdown menu items have to become clickable over the full width of the menu instead only the text and icon
+- [ ] [MERNSTACK-229] Replace enqueueSnackbar() with toast() from react-toastify for better user experience.
+- [ ]
+
 # Technologies:
 
 ## Frontend
@@ -355,7 +359,7 @@ Express.js supports asynchronous programming paradigms, allowing for non-blockin
 
 #### Cross-Origin Resource Sharing (CORS)
 
-Cross-Origin Resource Sharing (CORS) is a critical security feature that safeguards my application from unwanted sources attempting to access your resources. Express.js provides built-in support for CORS, making it easy to configure and enforce CORS policies. This helps in preventing malicious attacks like cross-site scripting (XSS) and cross-site request forgery (CSRF). It also helps in preventing unauthorized access to sensitive data. 
+Cross-Origin Resource Sharing (CORS) is a critical security feature that safeguards my application from unwanted sources attempting to access your resources. Express.js provides built-in support for CORS, making it easy to configure and enforce CORS policies. This helps in preventing malicious attacks like cross-site scripting (XSS) and cross-site request forgery (CSRF). It also helps in preventing unauthorized access to sensitive data.
 
 Overall, Express.js provides a robust and secure foundation for building RESTful APIs.
 
@@ -370,7 +374,6 @@ Overall, Express.js provides a robust and secure foundation for building RESTful
 **Mongoose** also provides a middleware system that allows you to add custom behavior to your models. This includes things like pre- and post-save hooks, virtual properties, and more. This makes it easy to add custom behavior to your models without having to modify the underlying schema.
 
 Overall, **Mongoose** provides a convenient and flexible way to interact with **MongoDB**, and it is widely used in the Node.js community for this purpose.
-
 
 #### Many-to-Many Relationships
 
@@ -410,13 +413,11 @@ JWTs can be configured with expiration times, reducing the window of opportunity
 
 By implementing user authentication with JWTs, this repository ensures a robust and secure authentication mechanism. The stateless nature, data integrity, and ease of integration make JWTs an excellent choice for validating user authenticity. With careful implementation and adherence to best practices, this approach provides a reliable foundation for secure user authentication in my application.
 
-
-
 # Models:
 
-Mongoose schema and model provide a convenient and flexible way to define and create models in MongoDB. This makes it easy to validate and enforce data consistency. 
+Mongoose schema and model provide a convenient and flexible way to define and create models in MongoDB. This makes it easy to validate and enforce data consistency.
 
-It also provides a wide range of data types and validators, making it easy to ensure that my data is stored correctly and consistently. 
+It also provides a wide range of data types and validators, making it easy to ensure that my data is stored correctly and consistently.
 
 ### Company
 
@@ -425,26 +426,32 @@ The `Company` model represents a business entity in the application.
 #### Fields:
 
 - **name** (String)
+
   - Description: The name of the company.
   - Required: Yes
 
 - **email** (String)
+
   - Description: The email address for correspondence directed to the company.
   - Required: No
 
 - **phone** (String)
+
   - Description: The phone number of the company.
   - Required: No
 
 - **slogan** (String)
+
   - Description: The slogan or motto of the company.
   - Required: No
 
 - **description** (String)
+
   - Description: A short description of the company.
   - Required: No
 
 - **address** (Object)
+
   - Description: The registered address of the company.
   - Fields:
     - street (String)
@@ -455,6 +462,7 @@ The `Company` model represents a business entity in the application.
   - Required: No
 
 - **billingAddress** (Object)
+
   - Description: The address to send invoices to.
   - Fields:
     - street (String)
@@ -465,6 +473,7 @@ The `Company` model represents a business entity in the application.
   - Required: No
 
 - **addressFormat** (Object)
+
   - Description: Format for the address in the correct way for the country and regional address format.
   - Fields:
     - country (String)
@@ -472,120 +481,149 @@ The `Company` model represents a business entity in the application.
   - Required: No
 
 - **country** (String)
+
   - Description: Country of the company billing address.
   - Required: No
 
 - **region** (String)
+
   - Description: Region of the company billing address.
   - Required: No
 
 - **owners** (Array)
+
   - Description: Array of owner objects with userId.
   - Required: No
 
 - **companyAdmins** (Array)
+
   - Description: Array of admin objects with adminUserId and role.
   - Required: No
 
 - **locations** (Array)
+
   - Description: Array of address objects with addressId compatible with configured addressFormat for country and region.
   - Required: No
 
 - **departments** (Array)
+
   - Description: Array of department objects with departmentId.
   - Required: No
 
 - **businessConfig** (Object)
+
   - Description: Configurable settings that company owners and admins can change.
   - Required: No
 
 - **paymentDetails** (Object)
+
   - Description: Payment details for specific country or region.
   - Required: No
 
 - **startYear** (Number)
+
   - Description: The year the company was started.
   - Required: No
 
 - **active** (Boolean)
+
   - Description: Indicates if the company is currently active.
   - Required: No
 
 - **industry** (String)
+
   - Description: The industry or sector in which the company operates.
   - Required: No
 
 - **public** (Boolean)
+
   - Description: Indicates if the company is public or private.
   - Required: No
 
 - **reviews** (Array)
+
   - Description: Array of review objects with reviewId, text, rating, reviewer, timestamp, etc.
   - Required: No
 
 - **rating** (Number)
+
   - Description: The overall rating of the company.
   - Required: No
 
 - **customers** (Array)
+
   - Description: Array of customer objects with customerId.
   - Required: No
 
 - **premium** (String)
+
   - Description: The type of premium membership ("none", "bronze", "silver", "gold", "platinum").
   - Required: No
 
 - **vendor** (Object)
+
   - Description: Information about whether the company is a vendor.
   - Fields:
     - vendorId (String)
   - Required: No
 
 - **employees** (Array)
+
   - Description: Array of employee objects with employeeId.
   - Required: No
 
 - **stories** (Array)
+
   - Description: Array of story objects.
   - Required: No
 
 - **products** (Array)
+
   - Description: Array of product objects with productId.
   - Required: No
 
 - **services** (Array)
+
   - Description: Array of service objects with serviceId.
   - Required: No
 
 - **appointments** (Array)
+
   - Description: Array of appointment objects.
   - Required: No
 
 - **messages** (Array)
+
   - Description: Array of message objects with messageId, corresponding userId, timestamp, etc.
   - Required: No
 
 - **notifications** (Array)
+
   - Description: Array of notification objects.
   - Required: No
 
 - **events** (Array)
+
   - Description: Array of event objects with eventId.
   - Required: No
 
 - **agenda** (Array)
+
   - Description: Array of agenda objects with agendaId.
   - Required: No
 
 - **tasks** (Array)
+
   - Description: Array of task objects with taskId.
   - Required: No
 
 - **invoices** (Array)
+
   - Description: Array of invoice objects with invoiceId.
   - Required: No
 
 - **orders** (Array)
+
   - Description: Array of order objects with orderId.
   - Required: No
 
@@ -593,10 +631,7 @@ The `Company` model represents a business entity in the application.
   - Description: Array of payment objects with paymentId.
   - Required: No
 
-
 # Routes:
-
-
 
 # Testing:
 
@@ -638,8 +673,6 @@ Postman is a popular tool for testing and debugging APIs, and it provides severa
 
 Overall, Postman provides a powerful and flexible toolset for testing and debugging APIs, and it is widely used in the development community for this purpose.
 
-
-
 # Unfinished features (for future versions):
 
 ## User Privilege Management and Admin Authorization
@@ -675,6 +708,4 @@ My application offers robust user privilege management with a seamless admin aut
 
 My application prioritizes both security and user-friendliness, empowering company owners to efficiently manage their admin privileges while maintaining a high level of control and awareness.
 
-
-
-***Feel free to clone this repository to see these concepts in action and dive into [my code](https://github.com/ThomPoppins/MERN_STACK_PROJ.)!***
+**_Feel free to clone this repository to see these concepts in action and dive into [my code](https://github.com/ThomPoppins/MERN_STACK_PROJ.)!_**

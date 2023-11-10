@@ -1,6 +1,7 @@
 // Navbar.tsx
 import React, { useEffect, useState } from "react";
 import { BACKEND_URL } from "../../../config";
+import { getPendingRecievedInvites } from "../../utils/invites/recievedInvitesUpdater";
 import {
   HiOutlineClipboardList,
   HiOutlineClipboard,
@@ -9,7 +10,7 @@ import {
   HiUser,
   HiOutlineCog,
   HiOutlineLogout,
-} from "react-icons/hi";
+} from "react-icons/hi"; //! TODO: Remove unused icons
 import { HiOutlineBriefcase } from "react-icons/hi2";
 import {
   LuBellRing,
@@ -17,18 +18,26 @@ import {
   LuClipboardCopy,
   LuClipboardCheck,
   LuClipboardList,
-} from "react-icons/lu";
+} from "react-icons/lu"; //! TODO: Remove unused icons
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  // @ts-ignore
   let userId = useSelector((state) => state.userId);
+  // @ts-ignore
   let user = useSelector((state) => state.user);
+
+  let pendingRecievedInvites = useSelector(
+    // @ts-ignore
+    (state) => state.pendingRecievedInvites
+  );
 
   // Amount of pending invites
   const [pendingInvitesCount, setPendingInvitesCount] = useState(0);
+
   // Should the active user be alerted about pending invites?
-  //! TO BE DECIDED: Maybe ALL notifications should trigger a general notification state, maybe not.
+  //! DECIDE: Maybe ALL notifications should trigger a general notification state, maybe not.
   const [inviteAlert, setInviteAlert] = useState(false);
 
   // When the user data is available
@@ -36,15 +45,17 @@ const Navbar = () => {
     if (!user) {
       return;
     }
-    // Get the amount of pending invites
-    setPendingInvitesCount(user.pendingInvitesCount);
 
-    if (user.pendingInvitesCount < 1) {
-      setInviteAlert(false);
-      return;
-    }
-    setInviteAlert(true);
-  }, [userId, user]);
+    // Get the pending invites
+    getPendingRecievedInvites();
+
+    // Set the amount of pending invites
+    pendingRecievedInvites === null
+      ? setInviteAlert(false)
+      : pendingRecievedInvites.length > 0
+      ? setInviteAlert(true)
+      : setInviteAlert(false);
+  }, [userId, user, pendingRecievedInvites]);
 
   // Is the dropdown menu open?
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

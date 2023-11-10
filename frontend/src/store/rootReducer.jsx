@@ -4,6 +4,7 @@ import {
   companiesListShowTypeReducer,
   userIdReducer,
   userReducer,
+  pendingRecievedInvitesReducer,
 } from "./reducers.jsx";
 
 const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   companiesListShowType: companiesListShowTypeReducer,
   userId: userIdReducer,
   user: userReducer,
+  pendingRecievedInvites: pendingRecievedInvitesReducer,
 });
 
 export default rootReducer;

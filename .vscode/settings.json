@@ -3,6 +3,7 @@
     "Codacy",
     "companyid",
     "DBURL",
+    "RECIEVED",
     "reciever",
     "senderid",
     "tailwindcss",
@@ -11,5 +12,7 @@
     "toolset",
     "uuidv",
     "vind"
-  ]
+  ],
+  "js/ts.implicitProjectConfig.checkJs": true,
+  "todo-tree.tree.showCountsInTree": true
 }
