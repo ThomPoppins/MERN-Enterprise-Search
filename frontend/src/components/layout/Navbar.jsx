@@ -44,7 +44,7 @@ const Navbar = () => {
     // Get the amount of pending invites
     setPendingInvitesCount(user.pendingInvitesCount);
 
-    if (user.pendingInvitesCount > 1 || pendingRecievedInvites.length > 1) {
+    if (user.pendingInvitesCount > 1) {
       setInviteAlert(true);
       return;
     }

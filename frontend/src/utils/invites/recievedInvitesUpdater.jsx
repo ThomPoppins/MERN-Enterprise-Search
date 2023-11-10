@@ -1,7 +1,14 @@
 import axios from "axios";
+import { BACKEND_URL } from "../../../config.js";
+import store from "../../store/store";
 import { PENDING_RECIEVED_INVITES } from "../../store/actions";
+import { useSelector } from "react-redux";
 
-export const getPendingRecievedInvites = async () => {
+export const getPendingRecievedInvites = async (userId) => {
+  if (!userId) {
+    return;
+  }
+
   try {
     // Get the pending invites for the user
     const response = await axios
@@ -14,9 +21,6 @@ export const getPendingRecievedInvites = async () => {
           type: PENDING_RECIEVED_INVITES,
           payload: response.data,
         });
-
-        // Update the invites state
-        setInvites(response.data);
       })
       .catch((error) => {
         console.log("ERROR in InvitesList.jsx get pending invites: ", error);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import BooksList from "./pages/books/BooksList";
 import CreateBook from "./pages/books/CreateBook";
@@ -31,7 +31,6 @@ const App = () => {
   // TODO: [MERNSTACK-163] Redirect user from routes other then /, /login and /register if user is not logged in
   if (userId) {
     // Get the pending invites for the user
-    getPendingRecievedInvites();
 
     return (
       // Routes when the user is logged in

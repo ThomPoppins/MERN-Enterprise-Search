@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { use } from "chai";
+import { useSelector } from "react-redux";
 
 const InviteOperations = ({ invite, updateInviteStatus }) => {
   // Spin accept button (after click Find)
   const [acceptButtonSpinning, setAcceptButtonSpinning] = useState(false);
   const [declineButtonPing, setDeclineButtonPing] = useState(false);
+
+  const user = useSelector((state) => state.user);
+  const userId = useSelector((state) => state.userId);
 
   const handleAcceptInvite = async () => {
     setAcceptButtonSpinning(true);
