@@ -181,119 +181,10 @@ const EditCompany = () => {
     if (startYearError) {
       validateStartYear()
     }
-  }
-
-    // useEffect is a hook that runs a function when the component is rendered
-    useEffect(() => {
-      getPendingOwnershipInvites()
-    }, [companyId, userId, user])
-  
-
-  // Display error messages when the user enters invalid input
-  useEffect(() => {
-    if (nameError) {
-      enqueueSnackbar('Invalid company name!', {
-        variant: 'error',
-        preventDuplicate: true
-      })
-    }
-    if (emailError) {
-      enqueueSnackbar('Invalid email!', {
-        variant: 'error',
-        preventDuplicate: true
-      })
-    }
-    if (phoneError) {
-      enqueueSnackbar('Invalid phone number!', {
-        variant: 'error',
-        preventDuplicate: true
-      })
-    }
-    if (kvkNumberError) {
-      enqueueSnackbar('Invalid KVK number!', {
-        variant: 'error',
-        preventDuplicate: true
-      })
-    }
-    if (sloganError) {
-      enqueueSnackbar('Invalid slogan!', {
-        variant: 'error',
-        preventDuplicate: true
-      })
-    }
-    if (descriptionError) {
-      enqueueSnackbar('Invalid description!', {
-        variant: 'error',
-        preventDuplicate: true
-      })
-    }
-    if (startYearError) {
-      enqueueSnackbar('Invalid start year!', {
-        variant: 'error',
-        preventDuplicate: true
-      })
-    }
-  }, [
-    nameError,
-    emailError,
-    phoneError,
-    kvkNumberError,
-    sloganError,
-    descriptionError,
-    startYearError
-  ])
-
-  // useEffect() is a hook that runs a function when the component is rendered
-  useEffect(() => {
-    setLoading(true)
-    axios
-      .get(BACKEND_URL + '/companies/' + companyId)
-      .then((response) => {
-        setLoading(false)
-        setName(response.data.name)
-        setLogo(response.data.logo)
-        setEmail(response.data.email)
-        setPhone(response.data.phone)
-        setKvkNumber(response.data.kvkNumber)
-        setSlogan(response.data.slogan)
-        setDescription(response.data.description)
-        setStartYear(response.data.startYear)
-
-        // Set owners
-        const userIds = []
-        response.data.owners.forEach((owner) => {
-          userIds.push(owner.userId)
-        })
-
-        // Get all owners data
-        const ownerPromises = userIds.map((userId) => {
-          return axios.get(BACKEND_URL + '/users/user/' + userId)
-        })
-
-        // Resolve all promises to get owners user data
-        Promise.all(ownerPromises)
-          .then((responses) => {
-            const ownersData = responses.map((response) => response.data)
-            // @ts-ignore Update the owners state
-            setOwners(ownersData)
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-      })
-      .catch((error) => {
-        setLoading(false)
-        enqueueSnackbar('Error fetching company, please check the console.', {
-          variant: 'error',
-          preventDuplicate: true
-        })
-
-        console.log('ERROR fetching company in useEffect(): ', error) // ! TODO: Remove console.log and write errors to logfile
-      })
-  }, [])
-
+  },
+    
   // handleEditCompany is a function that sends a PUT request to the backend to update a company
-  const handleEditCompany = async () => {
+  handleEditCompany = async () => {
     // Validate all fields before sending the request to the backend, otherwise return
     validateCompanyName()
     validateEmail()
@@ -591,6 +482,116 @@ const EditCompany = () => {
           })
       })
   }
+
+    // useEffect is a hook that runs a function when the component is rendered
+    useEffect(() => {
+      getPendingOwnershipInvites()
+    }, [companyId, userId, user])
+  
+
+  // Display error messages when the user enters invalid input
+  useEffect(() => {
+    if (nameError) {
+      enqueueSnackbar('Invalid company name!', {
+        variant: 'error',
+        preventDuplicate: true
+      })
+    }
+    if (emailError) {
+      enqueueSnackbar('Invalid email!', {
+        variant: 'error',
+        preventDuplicate: true
+      })
+    }
+    if (phoneError) {
+      enqueueSnackbar('Invalid phone number!', {
+        variant: 'error',
+        preventDuplicate: true
+      })
+    }
+    if (kvkNumberError) {
+      enqueueSnackbar('Invalid KVK number!', {
+        variant: 'error',
+        preventDuplicate: true
+      })
+    }
+    if (sloganError) {
+      enqueueSnackbar('Invalid slogan!', {
+        variant: 'error',
+        preventDuplicate: true
+      })
+    }
+    if (descriptionError) {
+      enqueueSnackbar('Invalid description!', {
+        variant: 'error',
+        preventDuplicate: true
+      })
+    }
+    if (startYearError) {
+      enqueueSnackbar('Invalid start year!', {
+        variant: 'error',
+        preventDuplicate: true
+      })
+    }
+  }, [
+    nameError,
+    emailError,
+    phoneError,
+    kvkNumberError,
+    sloganError,
+    descriptionError,
+    startYearError
+  ])
+
+  // useEffect() is a hook that runs a function when the component is rendered
+  useEffect(() => {
+    setLoading(true)
+    axios
+      .get(BACKEND_URL + '/companies/' + companyId)
+      .then((response) => {
+        setLoading(false)
+        setName(response.data.name)
+        setLogo(response.data.logo)
+        setEmail(response.data.email)
+        setPhone(response.data.phone)
+        setKvkNumber(response.data.kvkNumber)
+        setSlogan(response.data.slogan)
+        setDescription(response.data.description)
+        setStartYear(response.data.startYear)
+
+        // Set owners
+        const userIds = []
+        response.data.owners.forEach((owner) => {
+          userIds.push(owner.userId)
+        })
+
+        // Get all owners data
+        const ownerPromises = userIds.map((userId) => {
+          return axios.get(BACKEND_URL + '/users/user/' + userId)
+        })
+
+        // Resolve all promises to get owners user data
+        Promise.all(ownerPromises)
+          .then((responses) => {
+            const ownersData = responses.map((response) => response.data)
+            // @ts-ignore Update the owners state
+            setOwners(ownersData)
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      })
+      .catch((error) => {
+        setLoading(false)
+        enqueueSnackbar('Error fetching company, please check the console.', {
+          variant: 'error',
+          preventDuplicate: true
+        })
+
+        console.log('ERROR fetching company in useEffect(): ', error) // ! TODO: Remove console.log and write errors to logfile
+      })
+  }, [])
+
 
     // useEffect is a hook that runs a function when the component is rendered
     useEffect(() => {}, [pendingOwnershipInvites])
