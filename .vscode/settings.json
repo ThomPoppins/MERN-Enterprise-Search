@@ -65,7 +65,16 @@
   "editor.tokenColorCustomizations": {
     "comments": "#572e99" // replace #ff0000 with your desired color
   },
+  "workbench.editor.enablePreview": false,
+  "eslint.debug": true,
+  "eslint.experimental.useFlatConfig": true,
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.lintTask.options": "./**",
+  "eslint.problems.shortenToSingleLine": true,
   "cSpell.words": [
-    "RECIEVED"
+    "notistack",
+    "reduxjs",
+    "tailwindcss"
   ]
 }
