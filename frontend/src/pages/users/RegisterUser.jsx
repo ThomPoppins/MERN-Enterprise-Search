@@ -1,145 +1,140 @@
+import axios from "axios";
+import { BACKEND_URL } from "../../../config.js";
+import emailValidator from "../../utils/validation/emailValidator";
+import firstNameValidator from "../../utils/validation/firstNameValidator";
+import genderValidator from "../../utils/validation/genderValidator";
+import lastNameValidator from "../../utils/validation/lastNameValidator";
+import Layout from "../../components/layout/Layout";
+import passwordValidator from "../../utils/validation/passwordValidator";
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import Spinner from "../../components/Spinner";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { BACKEND_URL } from "../../../config.js";
 import { useSnackbar } from "notistack";
-import emailValidator from "../../utils/validation/emailValidator";
 import usernameValidator from "../../utils/validation/usernameValidator";
-import passwordValidator from "../../utils/validation/passwordValidator";
-import firstNameValidator from "../../utils/validation/firstNameValidator";
-import lastNameValidator from "../../utils/validation/lastNameValidator";
-import genderValidator from "../../utils/validation/genderValidator";
-import Layout from "../../components/layout/Layout";
 
 const RegisterUser = () => {
   // Form input fields as state variables
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [gender, setGender] = useState("");
-  // Error message returned by the server when registering a user fails
-  const [registerErrorMessage, setRegisterErrorMessage] = useState("");
-
-  // Error state variables for displaying error messages if the user input is invalid
-  const [usernameError, setUsernameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-  const [confirmPasswordError, setConfirmPasswordError] = useState(false);
-  const [firstNameError, setFirstNameError] = useState(false);
-  const [lastNameError, setLastNameError] = useState(false);
-  const [genderError, setGenderError] = useState(false);
-
-  // Loading state variable for displaying the spinner
-  const [loading, setLoading] = useState(false);
-
-  // useNavigate is a hook that returns a navigate function that we can use to navigate to a different page
-  const navigate = useNavigate();
-
-  // useSnackbar is a hook that returns an object with two properties: enqueueSnackbar and closeSnackbar
-  // enqueueSnackbar is a function that takes an object as an argument
-  // and displays a snackbar with the message and the variant that we pass in the object
-  // closeSnackbar is a function that takes an id as an argument and closes the snackbar with that id
-  // https://iamhosseindhv.com/notistack/demos#use-snackbar
-  const { enqueueSnackbar } = useSnackbar();
-
-  // Validate user input fields
-  const validateUsername = () => {
-    if (usernameValidator(username) === false) {
-      setUsernameError(true);
-    } else {
-      setUsernameError(false);
-    }
-  };
-  const validateEmail = () => {
-    if (emailValidator(email) === false) {
-      setEmailError(true);
-    } else {
-      setEmailError(false);
-    }
-  };
-  const validatePassword = () => {
-    if (passwordValidator(password) === false) {
-      setPasswordError(true);
-    } else {
-      setPasswordError(false);
-    }
-  };
-  const validateConfirmPassword = () => {
-    if (password !== confirmPassword) {
+  const [username, setUsername] = useState(""),
+    [email, setEmail] = useState(""),
+    [password, setPassword] = useState(""),
+    [confirmPassword, setConfirmPassword] = useState(""),
+    [firstName, setFirstName] = useState(""),
+    [lastName, setLastName] = useState(""),
+    [gender, setGender] = useState(""),
+    // Error message returned by the server when registering a user fails
+    [registerErrorMessage, setRegisterErrorMessage] = useState(""),
+    // Error state variables for displaying error messages if the user input is invalid
+    [usernameError, setUsernameError] = useState(false),
+    [emailError, setEmailError] = useState(false),
+    [passwordError, setPasswordError] = useState(false),
+    [confirmPasswordError, setConfirmPasswordError] = useState(false),
+    [firstNameError, setFirstNameError] = useState(false),
+    [lastNameError, setLastNameError] = useState(false),
+    [genderError, setGenderError] = useState(false),
+    // Loading state variable for displaying the spinner
+    [loading, setLoading] = useState(false),
+    // useNavigate is a hook that returns a navigate function that we can use to navigate to a different page
+    navigate = useNavigate(),
+    // useSnackbar is a hook that returns an object with two properties: enqueueSnackbar and closeSnackbar
+    // enqueueSnackbar is a function that takes an object as an argument
+    // and displays a snackbar with the message and the variant that we pass in the object
+    // closeSnackbar is a function that takes an id as an argument and closes the snackbar with that id
+    // https://iamhosseindhv.com/notistack/demos#use-snackbar
+    { enqueueSnackbar } = useSnackbar(),
+    // Validate user input fields
+    validateUsername = () => {
+      if (usernameValidator(username) === false) {
+        setUsernameError(true);
+      } else {
+        setUsernameError(false);
+      }
+    },
+    validateEmail = () => {
+      if (emailValidator(email) === false) {
+        setEmailError(true);
+      } else {
+        setEmailError(false);
+      }
+    },
+    validatePassword = () => {
+      if (passwordValidator(password) === false) {
+        setPasswordError(true);
+      } else {
+        setPasswordError(false);
+      }
+    },
+    validateConfirmPassword = () => {
+      if (password === confirmPassword) {
+        setConfirmPasswordError(false);
+        return;
+      }
       setConfirmPasswordError(true);
-    } else {
-      setConfirmPasswordError(false);
-    }
-  };
-  const validateFirstName = () => {
-    if (firstNameValidator(firstName) === false) {
-      setFirstNameError(true);
-    } else {
-      setFirstNameError(false);
-    }
-  };
-  const validateLastName = () => {
-    if (lastNameValidator(lastName) === false) {
-      setLastNameError(true);
-    } else {
-      setLastNameError(false);
-    }
-  };
-  const validateGender = () => {
-    if (genderValidator(gender) === false) {
-      setGenderError(true);
-    } else {
-      setGenderError(false);
-    }
-  };
-
-  // Handle onChange events for all input fields
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-    if (usernameError) {
-      validateUsername();
-    }
-  };
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    if (emailError) {
-      validateEmail();
-    }
-  };
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    if (passwordError) {
-      validatePassword();
-    }
-  };
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-    if (confirmPasswordError) {
-      validateConfirmPassword();
-    }
-  };
-  const handleFirstNameChange = (e) => {
-    setFirstName(e.target.value);
-    if (firstNameError) {
-      validateFirstName();
-    }
-  };
-  const handleLastNameChange = (e) => {
-    setLastName(e.target.value);
-    if (lastNameError) {
-      validateLastName();
-    }
-  };
-  const handleGenderChange = (e) => {
-    setGender(e.target.value);
-    if (genderError) {
-      validateGender();
-    }
-  };
+    },
+    validateFirstName = () => {
+      if (firstNameValidator(firstName) === false) {
+        setFirstNameError(true);
+      } else {
+        setFirstNameError(false);
+      }
+    },
+    validateLastName = () => {
+      if (lastNameValidator(lastName) === false) {
+        setLastNameError(true);
+      } else {
+        setLastNameError(false);
+      }
+    },
+    validateGender = () => {
+      if (genderValidator(gender) === false) {
+        setGenderError(true);
+      } else {
+        setGenderError(false);
+      }
+    },
+    // Handle onChange events for all input fields
+    handleUsernameChange = (event) => {
+      setUsername(event.target.value);
+      if (usernameError) {
+        validateUsername();
+      }
+    },
+    handleEmailChange = (event) => {
+      setEmail(event.target.value);
+      if (emailError) {
+        validateEmail();
+      }
+    },
+    handlePasswordChange = (event) => {
+      setPassword(event.target.value);
+      if (passwordError) {
+        validatePassword();
+      }
+    },
+    handleConfirmPasswordChange = (event) => {
+      setConfirmPassword(event.target.value);
+      if (confirmPasswordError) {
+        validateConfirmPassword();
+      }
+    },
+    handleFirstNameChange = (event) => {
+      setFirstName(event.target.value);
+      if (firstNameError) {
+        validateFirstName();
+      }
+    },
+    handleLastNameChange = (event) => {
+      setLastName(event.target.value);
+      if (lastNameError) {
+        validateLastName();
+      }
+    },
+    handleGenderChange = (event) => {
+      setGender(event.target.value);
+      if (genderError) {
+        validateGender();
+      }
+    };
 
   // Display error messages if the user enters invalid input with useSnackbar
   useEffect(() => {
