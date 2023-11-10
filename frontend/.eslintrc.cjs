@@ -1,3 +1,7 @@
+
+//! TODO: Use: eslint-plugin-react-hooks (https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks)
+//! TODO: Use: eslint-plugin-jsx-a11y (https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
+
 module.exports = {
   'env': {
     'browser': true,
@@ -9,6 +13,9 @@ module.exports = {
     "plugin:react/recommended",
     // "plugin:react/all",
     "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    // "plugin:jsx-a11y/strict"
     'prettier',
   ],
   'settings': {
@@ -19,6 +26,15 @@ module.exports = {
         "Hyperlink",
         {"name": "Link", "linkAttribute": "to"}
       ]
+    },
+    'jsx-a11y': {
+      "polymorphicPropName": "as",
+      "components": {
+        "CityInput": "input",
+        "CustomButton": "button",
+        "MyButton": "button",
+        "RoundButton": "button"
+      }
     },
   },
   'overrides': [
@@ -43,6 +59,8 @@ module.exports = {
   },
   'plugins': [
     'react',
+    'react-hooks',
+    "jsx-a11y",
   ],
   'rules': {
     'react/jsx-uses-react': 'error',
@@ -65,5 +83,7 @@ module.exports = {
     'react/prop-types': 'error', //! BE AWARE THAT YOU NEED TO KNOW HOW TO USE PROP TYPES
     'react/react-in-jsx-scope': 'error',
     'react/require-render-return': 'error',
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   },
 };
