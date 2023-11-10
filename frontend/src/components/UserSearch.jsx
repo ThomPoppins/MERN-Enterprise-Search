@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { BACKEND_URL } from "../../config";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
 import { useSelector } from "react-redux";
@@ -50,8 +49,6 @@ const UserSearch = ({
   useEffect(() => {
     // removedOwnersIds is an array of owner ids that have been removed from the company
     removedOwnersIds.forEach((removedOwnerId) => {
-      toast.info("Removed owner id: " + removedOwnerId);
-
       // Get the user object for every the removed owner
       axios
         .get(BACKEND_URL + "/users/user/" + removedOwnerId)
@@ -63,14 +60,8 @@ const UserSearch = ({
 
           // Add the removed owner back to the search results
           setUsersResult(newUsersResult);
-
-          toast.success("Added back removed owner: " + removedOwnerId);
         })
         .catch((error) => {
-          toast.error(
-            "Error adding back removed owner to search results: " +
-              removedOwnerId
-          );
           console.log(
             "ERROR in UserSearch.jsx get from company removed owner user data: ",
             error

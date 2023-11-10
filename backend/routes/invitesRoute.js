@@ -9,13 +9,14 @@ import { getStaticFileURLFromPath } from "../middleware/files/staticFiles.js";
 const router = express.Router();
 
 // Route to get all pending invites from a specific sender
-router.get("/sender/pending", async (request, response) => {
+router.get("/company/sender/pending", async (request, response) => {
   // Get companyId from request headers
-  const { companyId, senderId } = request.headers;
+  const companyId = request.headers.companyid;
+  // Get senderId from request headers
+  const senderId = request.headers.senderid;
 
   console.log("companyId in pending sender invitesRoute.js: ", companyId);
   console.log("senderId in pending sender invitesRoute.js: ", senderId);
-  return;
 
   try {
     // Get all invites with status "pending" and senderId equal to senderId

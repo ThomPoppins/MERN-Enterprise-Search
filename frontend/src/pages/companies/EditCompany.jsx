@@ -332,9 +332,10 @@ const EditCompany = () => {
 
     // Get all pending ownership invites for the sender
     await axios
-      .get(`${BACKEND_URL}/invites/sender/pending`, {
+      .get(`${BACKEND_URL}/invites/company/sender/pending`, {
         headers: {
-          senderId: userId,
+          // Send the senders' user _id in the headers
+          senderid: userId,
           // Send the company id in the headers
           companyid: companyId,
         },
@@ -529,7 +530,7 @@ const EditCompany = () => {
       <div className="p-4">
         <h1 className="flex justify-center text-3xl my-4 mb-6">Edit Company</h1>
         {loading ? <Spinner /> : ""}
-        {pendingOwnershipInvites.length > 0 ? (
+        {pendingOwnershipInvites?.length > 0 ? (
           <div className="flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto mb-4">
             <div className="my-4">
               <div className="mb-4">
@@ -539,44 +540,8 @@ const EditCompany = () => {
               </div>
               <ul className="mb-4">
                 {pendingOwnershipInvites.map((invite, index) => {
-                  return (
-                    <div
-                      className="mb-4 flex justify-between items-center"
-                      key={invite._id + index}
-                    >
-                      <div>
-                        <li>
-                          <ul>
-                            <li>
-                              <VscMention className="inline" />
-                              {invite.reciever?.username}
-                            </li>
-                            <li>
-                              <VscPerson className="inline" />{" "}
-                              {invite.reciever?.firstName}{" "}
-                              {invite.receiver?.lastName}
-                            </li>
-                            <li>
-                              <VscMail className="inline" />{" "}
-                              {invite.receiver?.email}
-                            </li>
-                          </ul>
-                        </li>
-                      </div>
-                      <div>
-                        <button
-                          className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4"
-                          value={invite._id}
-                          onClick={handleCancelPendingOwnershipInvite}
-                          data-test-id="cancel-invite-button"
-                        >
-                          Cancel Invite
-                        </button>
-                      </div>
-                    </div>
-                  );
+                  console.log("pending invite in EditCompany.jsx: ", invite);
                 })}
-                ;
               </ul>
             </div>
           </div>
