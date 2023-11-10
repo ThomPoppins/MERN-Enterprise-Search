@@ -1,6 +1,6 @@
 # MERN_STACK_PROJ. :rocket:
 
-- [MERN_STACK_PROJ. :rocket:](#mern_stack_proj-rocket)
+- [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
 - [Getting Started](#getting-started)
 - [Application Description](#application-description)
 - [Versions:](#versions)
@@ -13,7 +13,7 @@
   - [Company Registration and Ownership](#company-registration-and-ownership)
     - [How to Register a Company:](#how-to-register-a-company)
     - [How to add a co-owner to a company:](#how-to-add-a-co-owner-to-a-company)
-- [TODO and DONE:](#todo-and-done)
+  - [TODO and DONE](#todo-and-done)
 - [Technologies:](#technologies)
   - [Frontend](#frontend)
     - [React](#react)
@@ -37,8 +37,8 @@
       - [Expiration and Refresh Tokens](#expiration-and-refresh-tokens)
       - [Conclusion](#conclusion)
 - [Models:](#models)
-  - [Company](#company)
-    - [Fields:](#fields)
+    - [Company](#company)
+      - [Fields:](#fields)
 - [Routes:](#routes)
 - [Testing:](#testing)
   - [Mocha and Chai](#mocha-and-chai)
@@ -173,7 +173,7 @@ Upon successful registration and validation from the KVK API, the user will be r
 4. Search for a user by name, username or email.
 5. Click the add button to add the user as a owner to the company.
 
-# TODO and DONE:
+## TODO and DONE
 
 > **NOTE:** This is a list of all the tasks that I am working on right now and also which I've completed so far. I've created Jira issues for them all and the corresponding Jira issue number is between [].
 
@@ -295,8 +295,14 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-127] Add state for all companies fields that can be registered in RegisterCompany.jsx
 - [x] [MERNSTACK-128] In RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this
 - [ ] [MERNSTACK-231] Use useSnackbar to UNDO steps users have taken, to start, let a user uninvite a co-owner after sending a invite and let the user UNDO removing a owner from a company. (see: https://notistack.com/features/basic#actions)
-- [ ] [MERNSTACK-232] Add a "data-test-id" attribute to all elements witn an onClick and onChange event handler.
+- [x] [MERNSTACK-232] Add a "data-test-id" attribute to all elements witn an onClick and onChange event handler.
 - [ ] [MERNSTACK-232] Find a pretty loading spinner animation to replace the ugly <Spinner />
+- [ ] [MERNSTACK-234] PRIO: Finish Google Docs doc about making webapp DEMO video of application. 
+- [ ] [MERNSTACK-235] PRIO: Record first DEMO video briefly demonstrating what technology I use and what is the result.
+- [ ] [MERNSTACK-238] PRIO: Edit first DEMO video, make sure to add an explanation of the functionalities of the application and what kind of technologies were used. START OF with demonstrating the client side app and LATER technical explanation.
+- [ ] [MERNSTACK-236] PRIO: Upload DEMO video to YouTube and link to the video's in README.md and Github profile.
+- [ ] [MERNSTACK-236] PRIO: Add DEMO links to new LinkedIn profile. Explain on LinkedIn profile that I also have another account and that I can't access it anymore.
+
 
 # Technologies:
 
