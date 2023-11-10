@@ -33,21 +33,15 @@ const Navbar = () => {
     (state) => state.pendingRecievedInvites
   );
 
-  // Amount of pending invites
-  const [pendingInvitesCount, setPendingInvitesCount] = useState(0);
-
   // Should the active user be alerted about pending invites?
   //! DECIDE: Maybe ALL notifications should trigger a general notification state, maybe not.
   const [inviteAlert, setInviteAlert] = useState(false);
 
-  // When the user data is available
+  // When the pending invites are available
   useEffect(() => {
-    if (!user) {
+    if (!pendingRecievedInvites || !userId) {
       return;
     }
-
-    // Get the pending invites
-    getPendingRecievedInvites();
 
     // Set the amount of pending invites
     pendingRecievedInvites === null
@@ -55,7 +49,12 @@ const Navbar = () => {
       : pendingRecievedInvites.length > 0
       ? setInviteAlert(true)
       : setInviteAlert(false);
-  }, [userId, user, pendingRecievedInvites]);
+  }, [user, userId, pendingRecievedInvites]);
+
+  useEffect(() => {
+    // Get the pending invites for the user
+    getPendingRecievedInvites(userId);
+  }, [user, userId]);
 
   // Is the dropdown menu open?
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { PENDING_RECIEVED_INVITES } from "../../store/actions";
 import { getPendingRecievedInvites } from "../../utils/invites/recievedInvitesUpdater";
@@ -13,9 +14,13 @@ const InvitesList = () => {
   // The invites in the list
   const [invites, setInvites] = useState([]);
 
-  // Get userId state from Redux store
-  // @ts-ignore
+  // Navigation to other routes
+  const navigate = useNavigate();
+
+  // @ts-ignore Get userId state from Redux store
   const userId = useSelector((state) => state.userId);
+  // @ts-ignore Get user state from Redux store
+  const user = useSelector((state) => state.user);
 
   // Get pending recieved invites from Redux store
   const pendingRecievedInvites = useSelector(
@@ -23,36 +28,10 @@ const InvitesList = () => {
     (state) => state.pendingRecievedInvites
   );
 
-  // Get the invites for the user
-  const getPendingInvites = async () => {
-    try {
-      // Get the pending recieved invites for the user
-      const response = await axios
-        .get(`${BACKEND_URL}/invites/reciever/${userId}/pending`)
-        .then((response) => {
-          console.log("Invites response: ", response);
-
-          setInvites(response.data);
-
-          // Update the pending reciever invites Redux state
-          store.dispatch({
-            type: PENDING_RECIEVED_INVITES,
-            payload: response.data,
-          });
-        })
-        .catch((error) => {
-          console.log("ERROR in InvitesList.jsx get pending invites: ", error);
-        });
-    } catch (error) {
-      // TODO: Handle error
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    getPendingInvites();
+    // getPendingInvites();
     getPendingRecievedInvites();
-  }, []);
+  }, [user, userId]);
 
   useEffect(() => {
     setInvites(pendingRecievedInvites);
@@ -69,11 +48,30 @@ const InvitesList = () => {
 
     console.log("Update invite status response: ", response);
 
-    setTimeout(async () => {
-      // Update the invites state
-      await getPendingInvites();
-      await getPendingRecievedInvites();
-    }, 2200);
+    Promise.resolve(getPendingRecievedInvites())
+      .then((value) => {
+        console.log("InvitesList.jsx updateInviteStatus value: ", value);
+
+        setTimeout(() => {
+          // @ts-ignore
+          const filteredPendingRecievedInvites = pendingRecievedInvites.filter(
+            (invite) => invite._id !== inviteId
+          );
+
+          if (filteredPendingRecievedInvites.length === 0) {
+            navigate("/companies");
+            return;
+          }
+
+          setInvites(filteredPendingRecievedInvites);
+        }, 1000);
+
+        // Filter out the invite that was updated
+        // @ts-ignore
+      })
+      .catch((error) => {
+        console.log("ERROR in InvitesList.jsx updateInviteStatus: ", error);
+      });
   };
 
   return (

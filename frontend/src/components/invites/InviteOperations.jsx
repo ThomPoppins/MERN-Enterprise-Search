@@ -49,7 +49,7 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
         <button
           className={`bg-gradient-to-r from-green-600 to-green-700 hover:from-green-400 hover:to-green-500 rounded-lg w-[82px] float-left ml-1 ${
             acceptButtonSpinning
-              ? "animate-spin"
+              ? "animate-spin-fast"
               : "animate-bounce hover:animate-none"
           }`}
           onClick={handleAcceptInvite}

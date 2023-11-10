@@ -11,7 +11,7 @@ export const getPendingRecievedInvites = async (userId) => {
 
   try {
     // Get the pending invites for the user
-    const response = await axios
+    await axios
       .get(BACKEND_URL + `/invites/reciever/${userId}/pending`)
       .then((response) => {
         console.log("Invites response: ", response);
@@ -21,6 +21,8 @@ export const getPendingRecievedInvites = async (userId) => {
           type: PENDING_RECIEVED_INVITES,
           payload: response.data,
         });
+
+        return response.data;
       })
       .catch((error) => {
         console.log("ERROR in InvitesList.jsx get pending invites: ", error);
