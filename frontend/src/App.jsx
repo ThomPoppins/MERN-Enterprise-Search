@@ -18,6 +18,7 @@ import UploadImage from "./pages/UploadImage";
 import Home from "./pages/Home";
 import Cookies from "js-cookie";
 import verifyToken from "./utils/auth/verifyToken.jsx";
+import { getPendingRecievedInvites } from "./utils/invites/recievedInvitesUpdater.jsx";
 import { useSelector } from "react-redux";
 
 const App = () => {
@@ -29,6 +30,9 @@ const App = () => {
 
   // TODO: [MERNSTACK-163] Redirect user from routes other then /, /login and /register if user is not logged in
   if (userId) {
+    // Get the pending invites for the user
+    getPendingRecievedInvites();
+
     return (
       // Routes when the user is logged in
       <Routes>

@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { PENDING_RECIEVED_INVITES } from "../../store/actions";
+import { getPendingRecievedInvites } from "../../utils/invites/recievedInvitesUpdater";
 import axios from "axios";
 import { BACKEND_URL } from "../../../config";
 import InviteOperations from "../../components/invites/InviteOperations";
 import Layout from "../../components/layout/Layout";
+import { use } from "chai";
 
 const InvitesList = () => {
   const [invites, setInvites] = useState([]);
 
   // Get userId state from Redux store
   const userId = useSelector((state) => state.userId);
+
+  const pendingRecievedInvites = useSelector(
+    (state) => state.pendingRecievedInvites
+  );
 
   // Get the invites for the user
   const getPendingInvites = async () => {
@@ -19,7 +26,14 @@ const InvitesList = () => {
         .get(`${BACKEND_URL}/invites/reciever/${userId}/pending`)
         .then((response) => {
           console.log("Invites response: ", response);
+
           setInvites(response.data);
+
+          // Update the pending reciever invites Redux state
+          store.dispatch({
+            type: PENDING_RECIEVED_INVITES,
+            payload: response.data,
+          });
         })
         .catch((error) => {
           console.log("ERROR in InvitesList.jsx get pending invites: ", error);
@@ -32,7 +46,12 @@ const InvitesList = () => {
 
   useEffect(() => {
     getPendingInvites();
+    getPendingRecievedInvites();
   }, []);
+
+  useEffect(() => {
+    setInvites(pendingRecievedInvites);
+  }, [pendingRecievedInvites]);
 
   //! STATUS STATES: "pending", "accepted", "declined" and "canceled"
   const updateInviteStatus = async (inviteId, newStatus) => {
@@ -48,6 +67,7 @@ const InvitesList = () => {
     setTimeout(async () => {
       // Update the invites state
       await getPendingInvites();
+      await getPendingRecievedInvites();
     }, 2200);
   };
 

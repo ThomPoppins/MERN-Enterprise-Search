@@ -3,6 +3,7 @@ import {
   COMPANIES_LIST_SHOW_TYPE,
   USER_ID,
   USER,
+  PENDING_RECIEVED_INVITES,
 } from "./actions.jsx";
 
 const booksListShowTypeReducer = (state = "card", action) => {
@@ -42,6 +43,15 @@ const userReducer = (state = null, action) => {
   }
 };
 
+const pendingRecievedInvitesReducer = (state = null, action) => {
+  switch (action.type) {
+    case PENDING_RECIEVED_INVITES:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 // Add additional reducers here to the object
 // Don't forget to import them at the top of the rootReducer.jsx file
 // and add them to the combineReducers() function
@@ -50,4 +60,5 @@ export {
   companiesListShowTypeReducer,
   userIdReducer,
   userReducer,
+  pendingRecievedInvitesReducer,
 };

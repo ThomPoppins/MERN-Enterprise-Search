@@ -25,8 +25,13 @@ const Navbar = () => {
   let userId = useSelector((state) => state.userId);
   let user = useSelector((state) => state.user);
 
+  let pendingRecievedInvites = useSelector(
+    (state) => state.pendingRecievedInvites
+  );
+
   // Amount of pending invites
   const [pendingInvitesCount, setPendingInvitesCount] = useState(0);
+
   // Should the active user be alerted about pending invites?
   //! TO BE DECIDED: Maybe ALL notifications should trigger a general notification state, maybe not.
   const [inviteAlert, setInviteAlert] = useState(false);
@@ -39,12 +44,13 @@ const Navbar = () => {
     // Get the amount of pending invites
     setPendingInvitesCount(user.pendingInvitesCount);
 
-    if (user.pendingInvitesCount < 1) {
-      setInviteAlert(false);
+    if (user.pendingInvitesCount > 1 || pendingRecievedInvites.length > 1) {
+      setInviteAlert(true);
       return;
     }
+
     setInviteAlert(true);
-  }, [userId, user]);
+  }, [userId, user, pendingRecievedInvites]);
 
   // Is the dropdown menu open?
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
