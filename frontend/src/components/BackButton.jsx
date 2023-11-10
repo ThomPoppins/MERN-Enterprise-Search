@@ -16,8 +16,9 @@ const BackButton = ({ destination = "/" }) => {
   );
 };
 
+// Validation of prop types
 BackButton.propTypes = {
-  destination: PropTypes.string,
+  destination: PropTypes.string, // destination is a string and the redirect destination
 };
 
 export default BackButton;

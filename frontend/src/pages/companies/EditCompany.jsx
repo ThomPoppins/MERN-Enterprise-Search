@@ -279,7 +279,7 @@ const EditCompany = () => {
           preventDuplicate: true
         })
 
-        console.log('ERROR fetching company in useEffect(): ', error) //! TODO: Remove console.log and write errors to logfile
+        console.log('ERROR fetching company in useEffect(): ', error) // ! TODO: Remove console.log and write errors to logfile
       })
   }, [])
 
@@ -406,7 +406,7 @@ const EditCompany = () => {
     // Get the id of the user to be invited as an owner
     const invitedOwnerId = e.target.value
 
-    console.log('invitedOwnerId: ', invitedOwnerId) //! TODO: Remove console.log and write errors to logfile
+    console.log('invitedOwnerId: ', invitedOwnerId) // ! TODO: Remove console.log and write errors to logfile
 
     // Make an API call to invite the user as an owner
     await axios
@@ -421,7 +421,7 @@ const EditCompany = () => {
         console.log(
           'UserSearch.jsx response.data invite ownership: ',
           response.data
-        ) //! TODO: Remove console.log and write errors to logfile
+        ) // ! TODO: Remove console.log and write errors to logfile
 
         // Filter the invited owner from the search results
         const newUsersResult = usersResult.filter(
@@ -448,7 +448,7 @@ const EditCompany = () => {
         console.log(
           'ERROR in UserSearch.jsx invite owner API call: ',
           error.response.data
-        ) //! TODO: Remove console.log and write errors to logfile
+        ) // ! TODO: Remove console.log and write errors to logfile
       })
   }
 
@@ -465,7 +465,7 @@ const EditCompany = () => {
     console.log(
       'handleCancelPendingOwnershipInvite pendingOwnershipInviteId: ',
       inviteId
-    ) //! TODO: Remove console.log
+    ) // ! TODO: Remove console.log
 
     // Make an API call to cancel the pending ownership invite
     axios
@@ -476,7 +476,7 @@ const EditCompany = () => {
         console.log(
           'handleCancelPendingOwnershipInvite response.data: ',
           response.data
-        ) //! TODO: Remove console.log
+        ) // ! TODO: Remove console.log
 
         // Remove the canceled pending ownership invite from the pending ownership invites state
         const newPendingOwnershipInvites = pendingOwnershipInvites.filter(
@@ -511,7 +511,7 @@ const EditCompany = () => {
           variant: 'error',
           preventDuplicate: true
         })
-        console.log('ERROR in handleCancelPendingOwnershipInvite: ', error) //! TODO: Remove console.log and write errors to logfile
+        console.log('ERROR in handleCancelPendingOwnershipInvite: ', error) // ! TODO: Remove console.log and write errors to logfile
       })
   }
 
@@ -519,7 +519,7 @@ const EditCompany = () => {
     console.log(
       'handleRemoveUserAsCompanyOwner e.target.value: ',
       e.target.value
-    ) //! TODO: Remove console.log
+    ) // ! TODO: Remove console.log
 
     // @ts-ignore Set removed owners to show up in the search results again
     setRemovedOwnersIds([...removedOwnersIds, e.target.value])

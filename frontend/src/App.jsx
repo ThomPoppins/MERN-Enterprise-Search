@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import BooksList from "./pages/books/BooksList";
 import CreateBook from "./pages/books/CreateBook";
@@ -18,7 +18,6 @@ import UploadImage from "./pages/UploadImage";
 import Home from "./pages/Home";
 import Cookies from "js-cookie";
 import verifyToken from "./utils/auth/verifyToken.jsx";
-import { getPendingRecievedInvites } from "./utils/invites/recievedInvitesUpdater.jsx";
 import { useSelector } from "react-redux";
 
 const App = () => {

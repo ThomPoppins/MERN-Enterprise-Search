@@ -34,7 +34,7 @@ const InvitesList = () => {
     setInvites(pendingRecievedInvites)
   }, [pendingRecievedInvites])
 
-  //! STATUS STATES: "pending", "accepted", "declined" and "canceled"
+  // ! STATUS STATES: "pending", "accepted", "declined" and "canceled"
   const updateInviteStatus = async (inviteId, newStatus) => {
     const response = await axios.put(
       `${BACKEND_URL}/invites/status/${inviteId}`,

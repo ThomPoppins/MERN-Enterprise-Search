@@ -11,11 +11,16 @@ const UserSearch = ({
   usersResult,
   setUsersResult,
 }) => {
-  let userId = useSelector((state) => state.userId);
+  const [searchTerm, setSearchTerm] = useState(""),
 
-  const [searchTerm, setSearchTerm] = useState("");
+  handleSearch = (e) => {
+    // if the search input is empty, clear the search results
+    if (e.target.value === "") {
+      setSearchTerm("");
+      setUsersResult([]);
+      return;
+    }
 
-  const handleSearch = (e) => {
     setSearchTerm(e.target.value);
     searchUsers(e.target.value);
 
@@ -23,9 +28,9 @@ const UserSearch = ({
       "handleSearch e.target.value in UserSearch.jsx: ",
       e.target.value
     );
-  };
+  },
 
-  const searchUsers = (searchTerm) => {
+  searchUsers = (searchTerm) => {
     axios
       .get(BACKEND_URL + "/users/search/" + searchTerm, {
         headers: {
@@ -45,7 +50,7 @@ const UserSearch = ({
           preventDuplicate: true,
         });
 
-        //! TODO: Handle error in UI
+        // ! TODO: Handle error in UI
         console.log(
           "ERROR in UserSearch.jsx get search results API call: ",
           error
