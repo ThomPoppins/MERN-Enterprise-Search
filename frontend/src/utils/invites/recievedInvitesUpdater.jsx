@@ -4,31 +4,73 @@ import { PENDING_RECIEVED_INVITES } from "../../store/actions";
 import { BACKEND_URL } from "../../../config";
 import { useSelector } from "react-redux";
 
+// Get pending recieved invites from Redux store
 export const getPendingRecievedInvites = async (userId) => {
   if (!userId) {
     return;
   }
 
-  try {
-    // Get the pending invites for the user
-    await axios
-      .get(BACKEND_URL + `/invites/reciever/${userId}/pending`)
-      .then((response) => {
-        console.log("Invites response: ", response);
+  // Promise to get the recieved pending invites
+  const updateRecievedPendingInvitesPromise = await new Promise(
+    async (resolve, reject) => {
+      // Get the recieving pending invites for the user
+      await axios
+        .get(BACKEND_URL + `/invites/reciever/${userId}/pending`)
+        .then((response) => {
+          // console.log("Invites response: ", response); //! TODO: Remove
 
-        // Update the pending reciever invites Redux state
-        store.dispatch({
-          type: PENDING_RECIEVED_INVITES,
-          payload: response.data,
+          if (response.data.length > 0) {
+            resolve(response.data);
+          }
+          reject("No pending invites");
+        })
+        .catch((error) => {
+          console.log("ERROR in InvitesList.jsx get pending invites: ", error);
+          reject(error);
         });
+    }
+  );
 
-        return response.data;
-      })
-      .catch((error) => {
-        console.log("ERROR in InvitesList.jsx get pending invites: ", error);
+  Promise.resolve(updateRecievedPendingInvitesPromise)
+    .then((invites) => {
+      console.log(
+        "InvitesList.jsx getPendingRecievedInvites invites: ",
+        invites
+      ); //! TODO: Remove
+
+      // Update the pending reciever invites Redux state
+      store.dispatch({
+        type: PENDING_RECIEVED_INVITES,
+        payload: invites,
       });
-  } catch (error) {
-    // TODO: Handle error
-    console.log(error);
-  }
+    })
+    .catch((error) => {
+      console.log("ERROR in InvitesList.jsx get pending invites: ", error);
+      // Update the pending reciever invites Redux state with 0 invites
+      store.dispatch({
+        type: PENDING_RECIEVED_INVITES,
+        payload: [],
+      });
+    });
 };
+
+//   // Get the recieving pending invites for the user
+//   await axios
+//     .get(BACKEND_URL + `/invites/reciever/${userId}/pending`)
+//     .then((response) => {
+//       // console.log("Invites response: ", response); //! TODO: Remove
+
+//       // Update the pending reciever invites Redux state
+//       store.dispatch({
+//         type: PENDING_RECIEVED_INVITES,
+//         payload: response.data,
+//       });
+//     })
+//     .catch((error) => {
+//       console.log("ERROR in InvitesList.jsx get pending invites: ", error);
+//     });
+// } catch (error) {
+//   // TODO: Handle error
+//   console.log(error);
+// }
+// };
