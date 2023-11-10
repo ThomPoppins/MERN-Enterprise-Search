@@ -1,25 +1,48 @@
 module.exports = {
-  root: true,
-  env: { browser: true, es2020: true },
-  extends: [
-    "eslint:all",
-    "plugin:react/recommended",
-    "plugin:react/jsx-runtime",
-    "plugin:react-hooks/recommended",
-  ],
-  ignorePatterns: ["dist", ".eslintrc.cjs"], // Ignore dist folder and this file itself
-  parserOptions: { ecmaVersion: "latest", sourceType: "module" },
-  settings: { react: { version: "18.2" } },
-  plugins: ["react-refresh"],
-  rules: {
-    "max-lines-per-function": ["off", { max: 50, skipBlankLines: true }], // We use Prettier for this
-    "no-ternary": "off", // We use ternary operators
-    "sort-imports": "off", // We use Prettier for this
-    "sort-vars": "off", // We use Prettier for this
-    ignoreTopLevelFunctions: true, // We use Prettier for this
-    "react-refresh/only-export-components": [
-      "warn", // "error" for production
-      { allowConstantExport: true }, // Allow named exports
+    'env': {
+        'browser': true,
+        'es2021': true
+    },
+    'extends': [
+        'eslint:recommended',
+        'plugin:react/recommended'
     ],
-  },
-};
+    'overrides': [
+        {
+            'env': {
+                'node': true
+            },
+            'files': [
+                '.eslintrc.{js,cjs}'
+            ],
+            'parserOptions': {
+                'sourceType': 'script'
+            }
+        }
+    ],
+    'parserOptions': {
+        'ecmaVersion': 'latest',
+        'sourceType': 'module'
+    },
+    'plugins': [
+        'react'
+    ],
+    'rules': {
+        'indent': [
+            'error',
+            4
+        ],
+        'linebreak-style': [
+            'error',
+            'unix'
+        ],
+        'quotes': [
+            'error',
+            'single'
+        ],
+        'semi': [
+            'error',
+            'never'
+        ]
+    }
+}

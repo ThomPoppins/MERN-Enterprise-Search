@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import { BACKEND_URL } from "../../../config.js";
+import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import Cookies from "js-cookie";
 import store from "../../store/store.jsx";
 import { USER_ID } from "../../store/actions.jsx";
-import Navbar from "../../components/layout/Navbar";
 import Layout from "../../components/layout/Layout";
 
 const LogoutUser = () => {

@@ -6,7 +6,6 @@ import genderValidator from "../../utils/validation/genderValidator";
 import lastNameValidator from "../../utils/validation/lastNameValidator";
 import Layout from "../../components/layout/Layout";
 import passwordValidator from "../../utils/validation/passwordValidator";
-// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import Spinner from "../../components/Spinner";
 import { useNavigate } from "react-router-dom";

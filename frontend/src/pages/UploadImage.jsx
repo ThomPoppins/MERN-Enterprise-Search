@@ -6,6 +6,7 @@ import axios from "axios";
 
 const UploadImage = () => {
   // Get the user id from the Redux store
+  // @ts-ignore
   const userId = useSelector((state) => state.userId);
 
   // Handle the form submit event

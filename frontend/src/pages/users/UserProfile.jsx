@@ -3,7 +3,6 @@ import {
   FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL,
   MALE_PROFILE_PICTURE_PLACEHOLDER_URL,
 } from "../../../config";
-// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import { BiPencil } from "react-icons/bi";
 import EditProfilePictureModal from "../../components/users/EditProfilePictureModal";

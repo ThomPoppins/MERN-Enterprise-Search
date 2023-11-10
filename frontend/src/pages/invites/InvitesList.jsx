@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { PENDING_RECIEVED_INVITES } from "../../store/actions";
 import { getPendingRecievedInvites } from "../../utils/invites/recievedInvitesUpdater";
 import axios from "axios";
 import { BACKEND_URL } from "../../../config";
 import InviteOperations from "../../components/invites/InviteOperations";
 import Layout from "../../components/layout/Layout";
-import store from "../../store/store";
-import { use } from "chai";
 
 const InvitesList = () => {
   // The invites in the list
