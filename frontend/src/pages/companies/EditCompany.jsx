@@ -886,7 +886,6 @@ const EditCompany = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 startYearError ? "border-red-500" : ""
               }`}
-              data-test-id="description-input"
             />
             {descriptionError ? (
               <p className="text-red-500 text-sm">

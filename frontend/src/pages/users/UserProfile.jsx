@@ -10,13 +10,16 @@ import Layout from "../../components/layout/Layout";
 import EditProfilePictureModal from "../../components/users/EditProfilePictureModal";
 
 const UserProfile = () => {
+  // @ts-ignore userId is a string from the Redux store state
   let userId = useSelector((state) => state.userId);
+  // @ts-ignore user is an object from the Redux store state
   let user = useSelector((state) => state.user);
 
   // Placeholder for profile picture dependent on gender
   const [profilePicturePlaceholderURL, setProfilePicturePlaceholderURL] =
     useState("");
 
+  // When the user is available from the Redux store, set the profile picture placeholder URL
   useEffect(() => {
     if (!user) return;
 
@@ -29,12 +32,14 @@ const UserProfile = () => {
         `${BACKEND_URL}${MALE_PROFILE_PICTURE_PLACEHOLDER_URL}`
       );
     }
-    console.log("user", user);
+    // console.log("user", user); //! TODO: Remove console.log
   }, [user]);
 
+  // State for showing the edit profile picture modal
   const [showEditProfilePictureModal, setShowEditProfilePictureModal] =
     useState(false);
 
+  // Handle the edit profile picture button click event
   const handleEditProfilePicture = () => {
     setShowEditProfilePictureModal(true);
   };

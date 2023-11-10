@@ -9,16 +9,21 @@ import { BACKEND_URL } from "../../../config";
 import CompaniesTable from "../../components/companies/CompaniesTable";
 import CompaniesCard from "../../components/companies/CompaniesCard";
 import { COMPANIES_LIST_SHOW_TYPE } from "../../store/actions";
+import { enqueueSnackbar } from "notistack";
 
 const CompaniesList = () => {
   // useDispatch() is a hook that returns the reference to the dispatch function from the Redux store.
   const dispatch = useDispatch();
-  // useSelector() is a hook that takes the current state as an argument and returns whatever data you want from it.
+  // @ts-ignore useSelector() is a hook that takes the current state as an argument and returns whatever data you want from it.
   const showType = useSelector((state) => state.companiesListShowType);
-  const [companies, setCompanies] = useState([]);
+  // @ts-ignore userId is a string from the Redux store state
   const userId = useSelector((state) => state.userId);
+  // companies is an array of objects
+  const [companies, setCompanies] = useState([]);
+  // loading is a boolean that is true when the request to the backend is being sent and false when the response is received
   const [loading, setLoading] = useState(false);
 
+  // updateCompanies is a function that sends a GET request to the backend to get the companies that the user owns
   const updateCompanies = () => {
     setLoading(true);
     axios
@@ -28,7 +33,14 @@ const CompaniesList = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        enqueueSnackbar("Error loading companies, please try again later.", {
+          variant: "error",
+          preventDuplicate: true,
+        });
+
+        console.log(error); //! TODO: Remove console.log and write errors to logfile
+
+        // TODO: Search for a pretty loading spinner animation
         setLoading(false);
       });
   };
