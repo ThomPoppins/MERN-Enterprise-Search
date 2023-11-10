@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { BACKEND_URL } from "../../config";
 import Layout from "../components/layout/Layout";
 
 const Home = () => {
+  // @ts-ignore
   let userId = useSelector((state) => state.userId);
-  let user = useSelector((state) => state.user);
 
   // Spin find button (after click Find)
   const [findButtonSpinning, setFindButtonSpinning] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleFindExpertsQuery = (e) => {
+    e.preventDefault();
+
     setFindButtonSpinning(true);
 
     //! TODO: Remove this timeout when the query is implemented and redirects to the search page

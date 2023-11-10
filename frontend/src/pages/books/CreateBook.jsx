@@ -13,8 +13,7 @@ const CreateBook = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Log pop-up messages to UI with UseSnackbar hook
-  // https://iamhosseindhv.com/notistack/demos#use-snackbar
+  // useSnackbar is a hook that allows us to show a snackbar https://www.npmjs.com/package/notistack https://iamhosseindhv.com/notistack/demos#use-snackbar
   const { enqueueSnackbar } = useSnackbar();
 
   const handleSaveBook = () => {

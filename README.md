@@ -1,24 +1,24 @@
 # MERN_STACK_PROJ. :rocket:
 
 - [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
-- [Getting Started](#getting-started)
-- [Application Description](#application-description)
-- [Versions:](#versions)
-  - [v0.0.2:](#v002)
+  - [Getting Started](#getting-started)
+  - [Application Description](#application-description)
+  - [Versions](#versions)
+  - [v0.0.2](#v002)
     - [Backend server CDN for static files](#backend-server-cdn-for-static-files)
     - [File upload](#file-upload)
-  - [v0.0.1:](#v001)
+  - [v0.0.1](#v001)
     - [Registering an Account](#registering-an-account)
     - [Logging In](#logging-in)
   - [Company Registration and Ownership](#company-registration-and-ownership)
-    - [How to Register a Company:](#how-to-register-a-company)
-    - [How to add a co-owner to a company:](#how-to-add-a-co-owner-to-a-company)
+    - [How to Register a Company](#how-to-register-a-company)
+    - [How to add a co-owner to a company](#how-to-add-a-co-owner-to-a-company)
   - [TODO and DONE](#todo-and-done)
-- [Technologies:](#technologies)
+  - [Technologies](#technologies)
   - [Frontend](#frontend)
     - [React](#react)
     - [Redux](#redux)
-    - [Vite.js:](#vitejs)
+    - [Vite.js](#vitejs)
   - [Backend](#backend)
     - [Express.js](#expressjs)
       - [Efficient Routing](#efficient-routing)
@@ -36,17 +36,9 @@
       - [Easy Integration with Frontend Frameworks](#easy-integration-with-frontend-frameworks)
       - [Expiration and Refresh Tokens](#expiration-and-refresh-tokens)
       - [Conclusion](#conclusion)
-- [Models:](#models)
-    - [Company](#company)
-      - [Fields:](#fields)
-- [Routes:](#routes)
-- [Testing:](#testing)
-  - [Mocha and Chai](#mocha-and-chai)
-  - [Postman](#postman)
-- [Unfinished features (for future versions):](#unfinished-features-for-future-versions)
-  - [User Privilege Management and Admin Authorization](#user-privilege-management-and-admin-authorization)
+    - [](#)
 
-# Getting Started
+## Getting Started
 
 To run this application locally, follow these steps:
 
@@ -88,6 +80,7 @@ To run this application locally, follow these steps:
    - Navigate to the `/frontend` folder.
    - Create a `config.js` file if it doesn't exist.
    - Add the following constant and export it:
+
      ```javascript
      // frontend/config.js
      export const BACKEND_URL = "http://localhost:5555";
@@ -98,10 +91,13 @@ To run this application locally, follow these steps:
 4. **Install Dependencies**:
 
    - Inside the `/backend` folder, run:
+
      ```bash
      npm install
      ```
+
    - Inside the `/frontend` folder, run:
+
      ```bash
      npm install
      ```
@@ -109,10 +105,13 @@ To run this application locally, follow these steps:
 5. **Start the Servers**:
 
    - Inside the `/backend` folder, run:
+
      ```bash
      npm run dev
      ```
+
    - In a separate terminal, inside the `/frontend` folder, run:
+
      ```bash
      npm run dev
      ```
@@ -122,13 +121,13 @@ To run this application locally, follow these steps:
 
 Now you have the application up and running locally!
 
-# Application Description
+## Application Description
 
 Welcome to my FullStack JavaScript application built with Express.js on the backend and React with Redux on the frontend. The final business model for this project remains a secret for now, but you can check out the features below to get an idea of what this application is all about.
 
-# Versions:
+## Versions
 
-## v0.0.2:
+## v0.0.2
 
 ### Backend server CDN for static files
 
@@ -138,7 +137,7 @@ The backend server is now a CDN for static files like images. This means that th
 
 Users can now upload a profile picture. The profile picture will be saved in the `/backend/public/uploads/images` folder and the path to the image will be saved in the database. The backend server will serve the image from the `/backend/public` folder. This way, the frontend application can access the image from the backend server and the image path is stored in the database.
 
-## v0.0.1:
+## v0.0.1
 
 ### Registering an Account
 
@@ -156,7 +155,7 @@ Upon logging in to their account, users have the capability to register a compan
 
 - **Ownership Privileges:** The user, upon registering a company, assumes the role of owner with full administrative control over the company's operations.
 
-### How to Register a Company:
+### How to Register a Company
 
 1. Log in to your account.
 2. Navigate to Companies
@@ -165,7 +164,7 @@ Upon logging in to their account, users have the capability to register a compan
 
 Upon successful registration and validation from the KVK API, the user will be recognized as the owner of the company and will have access to all administrative functionalities associated with it.
 
-### How to add a co-owner to a company:
+### How to add a co-owner to a company
 
 1. Log in to your account.
 2. Navigate to Companies
@@ -277,7 +276,7 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-216] Use Multer for large image file upload.
 - [x] [MERNSTACK-217] Create a new routes file for file uploads. When the profile picture is uploaded, save the link/URL with the filepath in the database. ALSO return the path/fileId of the image as response to the client, so when the user registers the correct fileId/filepath will be saved to the new/edited user/company.
 - [x] [MERNSTACK-218] Make /backend server a CDN for static files like images.
-- [x] [MERNSTACK-202] FIX backend error: "PayloadTooLargeError: request entity too large" wanneer de afbeeldingdata te groot is voor ExpressJS (https://www.webslesson.info/2022/05/upload-file-in-node-js-express-using-multer.html) SOLVED using Multer for large image file uploads.
+- [x] [MERNSTACK-202] FIX backend error: "PayloadTooLargeError: request entity too large" wanneer de afbeeldingdata te groot is voor ExpressJS (<https://www.webslesson.info/2022/05/upload-file-in-node-js-express-using-multer.html>) SOLVED using Multer for large image file uploads.
 - [x] [MERNSTACK-165] Create a schema and model for images.
 - [x] [MERNSTACK-219] Make first name and last name required on user registration. In the model, route, validator and frontend page form.
 - [ ] [MERNSTACK-220] After registration, log user in automatically and redirect to /account/onboarding page.
@@ -290,21 +289,24 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-225] If there is 1 or more pending invites, notify the user in the Navbar by making the "Invites" item bounce and give it a bright background color.
 - [ ] [MERNSTACK-228] The "Find" on the homepage has to transition between color using "color transitions" from TailwindCSS.
 - [x] [MERNSTACK-227] Dropdown menu items have to become clickable over the full width of the menu instead only the text and icon
-- [ ] [MERNSTACK-230] README.md: Finish tutorial about asynchronious JavaScript: https://www.youtube.com/watch?v=ZYb_ZU8LNxs&ab_channel=freeCodeCamp.org
+- [ ] [MERNSTACK-230] README.md: Finish tutorial about asynchronious JavaScript: <https://www.youtube.com/watch?v=ZYb_ZU8LNxs&ab_channel=freeCodeCamp.org>
 - [x] [MERNSTACK-131] Set state for all companies fields that can be edited in EditCompany.jsx
 - [x] [MERNSTACK-127] Add state for all companies fields that can be registered in RegisterCompany.jsx
 - [x] [MERNSTACK-128] In RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this
-- [ ] [MERNSTACK-231] Use useSnackbar to UNDO steps users have taken, to start, let a user uninvite a co-owner after sending a invite and let the user UNDO removing a owner from a company. (see: https://notistack.com/features/basic#actions)
+- [ ] [MERNSTACK-231] Use useSnackbar to UNDO steps users have taken, to start, let a user uninvite a co-owner after sending a invite and let the user UNDO removing a owner from a company. (see: <https://notistack.com/features/basic#actions>)
 - [x] [MERNSTACK-232] Add a "data-test-id" attribute to all elements witn an onClick and onChange event handler.
 - [ ] [MERNSTACK-232] Find a pretty loading spinner animation to replace the ugly <Spinner />
-- [ ] [MERNSTACK-234] PRIO: Finish Google Docs doc about making webapp DEMO video of application. 
+- [ ] [MERNSTACK-234] PRIO: Finish Google Docs doc about making webapp DEMO video of application.
 - [ ] [MERNSTACK-235] PRIO: Record first DEMO video briefly demonstrating what technology I use and what is the result.
 - [ ] [MERNSTACK-238] PRIO: Edit first DEMO video, make sure to add an explanation of the functionalities of the application and what kind of technologies were used. START OF with demonstrating the client side app and LATER technical explanation.
 - [ ] [MERNSTACK-236] PRIO: Upload DEMO video to YouTube and link to the video's in README.md and Github profile.
 - [ ] [MERNSTACK-236] PRIO: Add DEMO links to new LinkedIn profile. Explain on LinkedIn profile that I also have another account and that I can't access it anymore.
+- [ ] [MERNSTACK-239] Implement ERROR logging to error log files everywhere console.log is used.
+- [ ] [MERNSTACK-240] Remove all debug data printing console.logs and keep useful error logs. Clean up the debug data flow.
 
 
-# Technologies:
+
+## Technologies
 
 ## Frontend
 
@@ -334,7 +336,7 @@ Redux is a state management library that is often used in conjunction with React
 
 - **Ecosystem integration:** React and Redux have large and active ecosystems of libraries and tools, making it easy to integrate with other technologies and solve common problems.
 
-### Vite.js:
+### Vite.js
 
 The React frontend application was installed using Vite.js, a modern build tool that provides fast development server and efficient build process.
 
@@ -424,299 +426,4 @@ JWTs can be configured with expiration times, reducing the window of opportunity
 
 By implementing user authentication with JWTs, this repository ensures a robust and secure authentication mechanism. The stateless nature, data integrity, and ease of integration make JWTs an excellent choice for validating user authenticity. With careful implementation and adherence to best practices, this approach provides a reliable foundation for secure user authentication in my application.
 
-# Models:
-
-Mongoose schema and model provide a convenient and flexible way to define and create models in MongoDB. This makes it easy to validate and enforce data consistency.
-
-It also provides a wide range of data types and validators, making it easy to ensure that my data is stored correctly and consistently.
-
-### Company
-
-The `Company` model represents a business entity in the application.
-
-#### Fields:
-
-- **name** (String)
-
-  - Description: The name of the company.
-  - Required: Yes
-
-- **email** (String)
-
-  - Description: The email address for correspondence directed to the company.
-  - Required: No
-
-- **phone** (String)
-
-  - Description: The phone number of the company.
-  - Required: No
-
-- **slogan** (String)
-
-  - Description: The slogan or motto of the company.
-  - Required: No
-
-- **description** (String)
-
-  - Description: A short description of the company.
-  - Required: No
-
-- **address** (Object)
-
-  - Description: The registered address of the company.
-  - Fields:
-    - street (String)
-    - number (String)
-    - postalCode (String)
-    - city (String)
-    - country (String)
-  - Required: No
-
-- **billingAddress** (Object)
-
-  - Description: The address to send invoices to.
-  - Fields:
-    - street (String)
-    - number (String)
-    - postalCode (String)
-    - city (String)
-    - country (String)
-  - Required: No
-
-- **addressFormat** (Object)
-
-  - Description: Format for the address in the correct way for the country and regional address format.
-  - Fields:
-    - country (String)
-    - region (String)
-  - Required: No
-
-- **country** (String)
-
-  - Description: Country of the company billing address.
-  - Required: No
-
-- **region** (String)
-
-  - Description: Region of the company billing address.
-  - Required: No
-
-- **owners** (Array)
-
-  - Description: Array of owner objects with userId.
-  - Required: No
-
-- **companyAdmins** (Array)
-
-  - Description: Array of admin objects with adminUserId and role.
-  - Required: No
-
-- **locations** (Array)
-
-  - Description: Array of address objects with addressId compatible with configured addressFormat for country and region.
-  - Required: No
-
-- **departments** (Array)
-
-  - Description: Array of department objects with departmentId.
-  - Required: No
-
-- **businessConfig** (Object)
-
-  - Description: Configurable settings that company owners and admins can change.
-  - Required: No
-
-- **paymentDetails** (Object)
-
-  - Description: Payment details for specific country or region.
-  - Required: No
-
-- **startYear** (Number)
-
-  - Description: The year the company was started.
-  - Required: No
-
-- **active** (Boolean)
-
-  - Description: Indicates if the company is currently active.
-  - Required: No
-
-- **industry** (String)
-
-  - Description: The industry or sector in which the company operates.
-  - Required: No
-
-- **public** (Boolean)
-
-  - Description: Indicates if the company is public or private.
-  - Required: No
-
-- **reviews** (Array)
-
-  - Description: Array of review objects with reviewId, text, rating, reviewer, timestamp, etc.
-  - Required: No
-
-- **rating** (Number)
-
-  - Description: The overall rating of the company.
-  - Required: No
-
-- **customers** (Array)
-
-  - Description: Array of customer objects with customerId.
-  - Required: No
-
-- **premium** (String)
-
-  - Description: The type of premium membership ("none", "bronze", "silver", "gold", "platinum").
-  - Required: No
-
-- **vendor** (Object)
-
-  - Description: Information about whether the company is a vendor.
-  - Fields:
-    - vendorId (String)
-  - Required: No
-
-- **employees** (Array)
-
-  - Description: Array of employee objects with employeeId.
-  - Required: No
-
-- **stories** (Array)
-
-  - Description: Array of story objects.
-  - Required: No
-
-- **products** (Array)
-
-  - Description: Array of product objects with productId.
-  - Required: No
-
-- **services** (Array)
-
-  - Description: Array of service objects with serviceId.
-  - Required: No
-
-- **appointments** (Array)
-
-  - Description: Array of appointment objects.
-  - Required: No
-
-- **messages** (Array)
-
-  - Description: Array of message objects with messageId, corresponding userId, timestamp, etc.
-  - Required: No
-
-- **notifications** (Array)
-
-  - Description: Array of notification objects.
-  - Required: No
-
-- **events** (Array)
-
-  - Description: Array of event objects with eventId.
-  - Required: No
-
-- **agenda** (Array)
-
-  - Description: Array of agenda objects with agendaId.
-  - Required: No
-
-- **tasks** (Array)
-
-  - Description: Array of task objects with taskId.
-  - Required: No
-
-- **invoices** (Array)
-
-  - Description: Array of invoice objects with invoiceId.
-  - Required: No
-
-- **orders** (Array)
-
-  - Description: Array of order objects with orderId.
-  - Required: No
-
-- **payments** (Array)
-  - Description: Array of payment objects with paymentId.
-  - Required: No
-
-# Routes:
-
-# Testing:
-
-## Mocha and Chai
-
-Mocha and Chai are popular testing frameworks for Node.js applications, and they provide several advantages for testing Express.js API endpoints:
-
-- **Easy to use**: Mocha and Chai are easy to set up and use, and they provide a simple and intuitive syntax for writing tests.
-
-- **Flexible**: Mocha and Chai are highly flexible and can be used to test a wide range of scenarios, from simple unit tests to complex integration tests.
-
-- **Modular**: Mocha and Chai are modular and can be easily extended with plugins and custom assertions, making it easy to add new functionality to your tests.
-
-- **Readable**: Mocha and Chai provide a readable and expressive syntax for writing tests, which makes it easy to understand what each test is doing and why.
-
-- **Integration with Express.js**: Mocha and Chai integrate seamlessly with Express.js, making it easy to test my API endpoints and ensure that they are working correctly.
-
-- **Asynchronous support**: Mocha and Chai provide built-in support for testing asynchronous code, which is essential for testing Express.js API endpoints that rely on callbacks or promises.
-
-- **Assertions**: Chai provides a wide range of built-in assertions and supports custom assertions, which makes it easy to write tests that check for specific conditions and behaviors. (Assertions are statements that check whether a certain condition is true or false. In the context of testing with Mocha and Chai, assertions are used to verify that the code being tested is behaving as expected.)
-
-Overall, Mocha and Chai provide a powerful and flexible testing framework for testing Express.js API endpoints, and they are widely used in the Node.js community for this purpose.
-
-## Postman
-
-Postman is a popular tool for testing and debugging APIs, and it provides several advantages for developers:
-
-**Easy to use**: Postman is easy to set up and use, and it provides a simple and intuitive interface for sending requests and viewing responses.
-
-**Flexible**: Postman is highly flexible and can be used to test a wide range of scenarios, from simple GET requests to complex workflows involving multiple requests and responses.
-
-**Collaboration**: Postman provides collaboration features that make it easy to share collections of requests and responses with other developers, making it easier to work together on API development.
-
-**Automation**: Postman provides automation features that allow developers to create and run tests automatically, making it easier to catch bugs and ensure that the API is working correctly.
-
-**Environment variables**: Postman allows developers to define environment variables that can be used to store and reuse values across requests, making it easier to manage complex workflows and avoid repetition.
-
-**Documentation**: Postman provides tools for generating documentation for APIs, making it easier to share information about the API with other developers and stakeholders.
-
-Overall, Postman provides a powerful and flexible toolset for testing and debugging APIs, and it is widely used in the development community for this purpose.
-
-# Unfinished features (for future versions):
-
-## User Privilege Management and Admin Authorization
-
-My application offers robust user privilege management with a seamless admin authorization process to enhance security and control within your company. Here's a detailed breakdown of this functionality:
-
-1. **User Registration and Company Ownership:**
-
-   - Upon registration, users can become owners of their respective companies, granting them enhanced control over their account settings.
-
-2. **Admin Rights Management:**
-
-   - Within their account settings, owners will find an "Admin Rights" setting that is initially disabled by default. This setting allows them to perform actions that require admin authorization.
-
-3. **Enabling Admin Rights:**
-
-   - When the owner wishes to execute actions that require admin privileges, they can easily enable the "Admin Rights" setting.
-
-4. **Automatic Disabling:**
-
-   - To maintain security and compliance, if the owner does not execute admin actions for a certain period, the system will automatically disable admin rights. Users will receive a notification when this happens.
-
-5. **Warning and Confirmation:**
-
-   - When the owner attempts an action with significant administrative impact, the frontend will proactively warn them about the potential consequences. This includes prompting for confirmation before proceeding.
-
-6. **Streamlined Admin Deactivation:**
-
-   - After successfully executing an admin-authorized action, the system will provide an immediate option to disable admin rights with a simple switch-off button directly in the prompt. This user-centric approach ensures a hassle-free and secure experience.
-
-7. **Continue Button:**
-   - For added convenience, users can also choose to close the prompt by clicking the "Continue" button. This button will be color-coded, red when admin rights are enabled and green when disabled, making it easy for users to discern their current status at a glance.
-
-My application prioritizes both security and user-friendliness, empowering company owners to efficiently manage their admin privileges while maintaining a high level of control and awareness.
-
-**_Feel free to clone this repository to see these concepts in action and dive into [my code](https://github.com/ThomPoppins/MERN_STACK_PROJ.)!_**
+### 

@@ -13,11 +13,7 @@ const DeleteBook = () => {
   // useNavigate is a hook that allows us to navigate to a different page
   const navigate = useNavigate();
 
-  // useSnackbar is a hook that returns an object with two properties: enqueueSnackbar and closeSnackbar
-  // enqueueSnackbar is a function that takes an object as an argument
-  // and displays a snackbar with the message and the variant that we pass in the object
-  // closeSnackbar is a function that takes an id as an argument and closes the snackbar with that id
-  // https://iamhosseindhv.com/notistack/demos#use-snackbar
+  // useSnackbar is a hook that allows us to show a snackbar https://www.npmjs.com/package/notistack https://iamhosseindhv.com/notistack/demos#use-snackbar
   const { enqueueSnackbar } = useSnackbar();
 
   const handleDeleteBook = () => {
