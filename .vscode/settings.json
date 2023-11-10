@@ -3,8 +3,11 @@
     "Codacy",
     "companyid",
     "DBURL",
+    "reciever",
+    "senderid",
     "tailwindcss",
     "Thom",
+    "toastify",
     "toolset",
     "uuidv",
     "vind"

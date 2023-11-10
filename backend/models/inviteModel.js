@@ -8,8 +8,8 @@ const inviteSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    // `recipient` is a `User` object ID
-    recipientId: {
+    // `recieverId` is a `User` object ID
+    receiverId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
@@ -25,7 +25,7 @@ const inviteSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Company",
     },
-    // `status` is a string with possible values: "pending", "accepted", "declined"
+    //! ONLY 4 STATUSES: "pending", "accepted", "declined" and "canceled"
     status: {
       type: String,
       required: true,
@@ -35,6 +35,4 @@ const inviteSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const inviteModel = mongoose.model("Invite", inviteSchema);
-
-export default inviteModel;
+export const Invite = mongoose.model("Invite", inviteSchema);

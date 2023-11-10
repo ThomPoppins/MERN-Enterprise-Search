@@ -57,7 +57,7 @@ const UserProfile = () => {
             onClick={handleEditProfilePicture}
           >
             <BiPencil className="float-left text-gray mr-1" />
-            Edit
+            {user?.profilePictureURL ? "Edit" : "Upload"}
           </div>
         </div>
 
@@ -71,6 +71,24 @@ const UserProfile = () => {
           </p>
 
           <div className="mx-auto mt-4 mb-3">
+            {!user?.profilePictureURL && (
+              <div className="flex space-x-2 text-xl ">
+                <p>
+                  You haven't set a profile picture yet!{" "}
+                  <span
+                    onClick={handleEditProfilePicture}
+                    className="hover:text-green-400 text-blue-400 cursor-pointer"
+                  >
+                    Upload yours now!
+                  </span>
+                </p>
+              </div>
+            )}
+
+            <div className="flex space-x-2">
+              <p className="text-gray-400">Email:</p>
+              <p>{user?.email}</p>
+            </div>
             <p className="">
               Visit the Companies link in the navigation bar to see some of this
               this application's features in action.

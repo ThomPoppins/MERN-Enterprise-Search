@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { BACKEND_URL } from "../../../config";
-import Navbar from "../../components/layout/Navbar";
-import { current } from "@reduxjs/toolkit";
+import InviteOperations from "../../components/invites/InviteOperations";
 import Layout from "../../components/layout/Layout";
 
 const InvitesList = () => {
@@ -12,25 +11,50 @@ const InvitesList = () => {
   // Get userId state from Redux store
   const userId = useSelector((state) => state.userId);
 
-  const getInvites = async () => {
+  // Get the invites for the user
+  const getPendingInvites = async () => {
     try {
-      const response = await axios.get(
-        `${BACKEND_URL}/invites/recipient/${userId}`
-      );
-      console.log("Invites response: ", response);
-      setInvites(response.data);
+      // Get the pending invites for the user
+      const response = await axios
+        .get(`${BACKEND_URL}/invites/reciever/${userId}/pending`)
+        .then((response) => {
+          console.log("Invites response: ", response);
+          setInvites(response.data);
+        })
+        .catch((error) => {
+          console.log("ERROR in InvitesList.jsx get pending invites: ", error);
+        });
     } catch (error) {
+      // TODO: Handle error
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getInvites();
+    getPendingInvites();
   }, []);
 
-  useEffect(() => {
-    console.log("Invites in state: ", invites);
-  }, [invites]);
+  //! STATUS STATES: "pending", "accepted", "declined" and "canceled"
+  const updateInviteStatus = async (inviteId, newStatus) => {
+    const response = await axios.put(
+      `${BACKEND_URL}/invites/status/${inviteId}`,
+      {
+        status: newStatus,
+      }
+    );
+
+    console.log("Update invite status response: ", response);
+
+    setTimeout(async () => {
+      // Update the invites state
+      await getPendingInvites();
+    }, 2200);
+  };
+
+  // TODO: Remove this useEffect after testing
+  // useEffect(() => {
+  //   console.log("Invites in state: ", invites);
+  // }, [invites]);
 
   return (
     <Layout>
@@ -56,32 +80,35 @@ const InvitesList = () => {
           <tbody>
             {/* {console.log("Invites in JSX", invites)} */}
             {invites?.map((invite) => (
-              <tr key={invite._id}>
+              <tr id={"invite-row-" + invite._id} key={invite._id}>
                 <td className="border-purple-900 bg-violet-950/40">
                   <img
                     className="rounded-full mr-4 float-left"
                     width="50"
                     height="50"
-                    src={invite.sender.profilePicture}
+                    src={invite.sender.profilePictureURL}
                     alt="profile picture"
                   />
                   <div className="flex flex-col">
                     <div>
-                      <span className="text-xl mr-4">
+                      <span className="mr-4">
                         {invite.sender.firstName} {invite.sender.lastName}
                       </span>
                     </div>
                     <div>
-                      <span className="text-xl mr-4 text-blue-400">
+                      <span className="mr-4 text-blue-400">
                         &#64;{invite.sender.username}
                       </span>
                     </div>
                   </div>
                 </td>
                 <td className="border-purple-900 bg-violet-950/40">
-                  <span className="text-xl mr-4">
+                  <span className="mr-4">
                     {invite.kind === "company_ownership" ? (
-                      <span>Ownership {invite.company.name}</span>
+                      <span>
+                        Invited for co-ownership of{" "}
+                        <strong>{invite.company.name}</strong>
+                      </span>
                     ) : invite.kind === "friend_request" ? (
                       <span>Friend Request</span>
                     ) : (
@@ -92,13 +119,14 @@ const InvitesList = () => {
                   </span>
                 </td>
                 <td className="border-purple-900 bg-violet-950/40">
-                  <span className="text-xl mr-4">{invite.status}</span>
+                  <span className="mr-4">{invite.status}</span>
                 </td>
                 <td className="border-purple-900 bg-violet-950/40">
-                  <span className="text-xl mr-4">
-                    <button>Accept</button>
-                    <button>Decline</button>
-                  </span>
+                  {/* InviteOperations component is responsible for updating the invite status */}
+                  <InviteOperations
+                    invite={invite}
+                    updateInviteStatus={updateInviteStatus}
+                  />
                 </td>
               </tr>
             ))}

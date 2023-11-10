@@ -2,14 +2,18 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { BACKEND_URL } from "../../config";
 import { VscMention, VscPerson, VscMail } from "react-icons/vsc";
+import { useSelector } from "react-redux";
+import { enqueueSnackbar } from "notistack";
 
 const UserSearch = ({
   companyId,
-  handleAddUserAsCompanyOwner,
-  removedOwnersIds,
+  addPendingOwnershipInvite,
+  usersResult,
+  setUsersResult,
 }) => {
+  let userId = useSelector((state) => state.userId);
+
   const [searchTerm, setSearchTerm] = useState("");
-  const [usersResult, setUsersResult] = useState([]);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -30,42 +34,19 @@ const UserSearch = ({
       })
       .then((response) => {
         setUsersResult(response.data);
-        console.log(response.data);
+        // console.log(response.data); //! TODO: Remove console.log
       })
       .catch((error) => {
+        enqueueSnackbar("Error fetching users search results", {
+          variant: "error",
+        });
+
+        //! TODO: Handle error in UI
         console.log(
           "ERROR in UserSearch.jsx get search results API call: ",
           error
         );
       });
-  };
-
-  useEffect(() => {
-    removedOwnersIds.forEach((removedOwnerId) => {
-      axios
-        .get(BACKEND_URL + "/users/user/" + removedOwnerId)
-        .then((response) => {
-          const newUsersResult = [...usersResult, response.data];
-          console.log("newUsersResult: ", newUsersResult);
-          setUsersResult(newUsersResult);
-        })
-        .catch((error) => {
-          console.log(
-            "ERROR in UserSearch.jsx get removed owner API call: ",
-            error
-          );
-        });
-    });
-  }, [removedOwnersIds]);
-
-  const handleAddOwner = (e) => {
-    e.preventDefault();
-    handleAddUserAsCompanyOwner(e.target.value);
-
-    const newUsersResult = usersResult.filter(
-      (user) => user._id !== e.target.value
-    );
-    setUsersResult(newUsersResult);
   };
 
   return (
@@ -94,28 +75,28 @@ const UserSearch = ({
         />
       </div>
       <ul>
-        {usersResult.map((user, index) => (
+        {usersResult.map((userResult, index) => (
           <div
-            key={user._id + index}
+            key={userResult._id + index}
             className="search-result flex border-sky-400 rounded-xl mx-auto justify-between items-center"
           >
             <div className="mb-4">
               <li>
                 <VscMention className="inline" />
-                {user.username} <br />
-                <VscPerson className="inline" /> {user.firstName}{" "}
-                {user.lastName} <br />
-                <VscMail className="inline" /> {user.email}
+                {userResult.username} <br />
+                <VscPerson className="inline" /> {userResult.firstName}{" "}
+                {userResult.lastName} <br />
+                <VscMail className="inline" /> {userResult.email}
               </li>
             </div>
             <div>
               <button
                 className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4"
-                value={user._id}
-                onClick={handleAddOwner}
-                data-test-id="add-owner-button"
+                value={userResult._id}
+                onClick={addPendingOwnershipInvite}
+                data-test-id="invite-owner-button"
               >
-                Add
+                Invite
               </button>
             </div>
           </div>

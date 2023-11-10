@@ -2,6 +2,7 @@ import express from "express";
 import { Company } from "../models/companyModel.js";
 import { Image } from "../models/imageModel.js";
 import { User } from "../models/userModel.js";
+import { Invite } from "../models/inviteModel.js";
 import { getStaticFileURLFromPath } from "../middleware/files/staticFiles.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../middleware/auth/jwt.js";
@@ -16,12 +17,15 @@ router.post("/", async (request, response) => {
     if (
       !request.body.username ||
       !request.body.email ||
-      !request.body.password
+      !request.body.password ||
+      !request.body.firstName ||
+      !request.body.lastName ||
+      !request.body.gender
     ) {
       // Send status 400 response if data fields are missing and a (error) message to inform the client.
       return response.status(400).send({
         message:
-          "Data fields missing, need at least a username, email and password.",
+          "Data fields missing, need at least a username, email, password, first- & last name and the gender.",
       });
     }
 
@@ -274,7 +278,7 @@ router.get("/user/:id", async (request, response) => {
     // Get the user id from the request parameters
     const { id } = request.params;
 
-    console.log("User id: ", id);
+    const objectId = new mongoose.Types.ObjectId(id);
 
     let profilePictureURL = "";
 
@@ -286,15 +290,26 @@ router.get("/user/:id", async (request, response) => {
 
     if (user.profilePicture) {
       // Get the profile picture document from the database
-      const image = await Image.findById(user.profilePicture);
-
+      const image = await Image.findById(user.profilePicture).catch((error) =>
+        console.log("Error in GET /user/:id: ", error)
+      );
       // Get the path to the profile picture file
       profilePictureURL = getStaticFileURLFromPath(image.path);
     }
 
+    // Add the profilePictureURL property to the user object
     user["profilePictureURL"] = profilePictureURL;
 
-    console.log("User: ", user);
+    // Count how mant invites the user has with status "pending"
+    const pendingInvitesCount = await Invite.countDocuments({
+      receiverId: objectId,
+      status: "pending",
+    });
+
+    // Add the pendingInvitesCount property to the user object
+    user["pendingInvitesCount"] = pendingInvitesCount;
+
+    console.log("User in usersRoute.js GET /users/user/:id: ", user);
 
     // Send status 200 response and the companies to the client
     return response.status(200).json(user);
