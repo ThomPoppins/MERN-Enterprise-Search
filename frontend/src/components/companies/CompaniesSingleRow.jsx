@@ -42,6 +42,7 @@ const CompaniesSingleRow = ({ company, updateCompanies }) => {
           <BiShow
             className="text-3xl text-white hover:text-green-300 cursor-pointer"
             onClick={() => setShowModal(true)}
+            data-test-id="show-button"
           />
           <Link to={`/companies/details/${company._id}`}>
             <BsInfoCircle className="text-2xl text-white hover:text-green-300" />
@@ -51,6 +52,7 @@ const CompaniesSingleRow = ({ company, updateCompanies }) => {
           </Link>
           <MdOutlineDelete
             onClick={() => setShowDeleteModal(true)}
+            data-test-id="delete-button"
             className="text-red-600 text-2xl hover:text-orange-600"
           />
         </div>

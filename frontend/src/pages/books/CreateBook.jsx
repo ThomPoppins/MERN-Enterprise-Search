@@ -56,6 +56,7 @@ const CreateBook = () => {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            data-test-id="book-title-input"
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
@@ -65,6 +66,7 @@ const CreateBook = () => {
             type="text"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
+            data-test-id="book-author-input"
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
@@ -74,10 +76,15 @@ const CreateBook = () => {
             type="number"
             value={publishYear}
             onChange={(e) => setPublishYear(e.target.value)}
+            data-test-id="book-publish-year-input"
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
         </div>
-        <button className="p-2 bg-sky-300 m-8" onClick={handleSaveBook}>
+        <button
+          className="p-2 bg-sky-300 m-8"
+          onClick={handleSaveBook}
+          data-test-id="save-book-button"
+        >
           Save
         </button>
       </div>

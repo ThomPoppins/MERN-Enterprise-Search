@@ -55,6 +55,7 @@ const UserProfile = () => {
           <div
             className="absolute bottom-3 right-6 bg-purple-600 pl-1 pr-2 flex items-center border-2 border-purple-900 rounded-lg cursor-pointer hover:bg-purple-700"
             onClick={handleEditProfilePicture}
+            data-test-id="edit-profile-picture-button"
           >
             <BiPencil className="float-left text-gray mr-1" />
             {user?.profilePictureURL ? "Edit" : "Upload"}
@@ -77,6 +78,7 @@ const UserProfile = () => {
                   You haven't set a profile picture yet!{" "}
                   <span
                     onClick={handleEditProfilePicture}
+                    data-test-id="upload-profile-picture-button"
                     className="hover:text-green-400 text-blue-400 cursor-pointer"
                   >
                     Upload yours now!

@@ -96,6 +96,7 @@ const Navbar = () => {
                     <div
                       className="text-white cursor-pointer"
                       onClick={toggleDropdown}
+                      data-test-id="user-dropdown"
                     >
                       <img
                         src={

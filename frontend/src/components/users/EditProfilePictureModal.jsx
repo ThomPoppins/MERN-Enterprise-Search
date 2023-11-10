@@ -92,6 +92,7 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
     <div
       className="fixed bg-black/60 top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center"
       onClick={onClose}
+      data-test-id="company-modal"
     >
       <div
         onClick={(event) => event.stopPropagation()}
@@ -106,7 +107,12 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
         <h1>Upload Profile Picture</h1>
 
         <form onSubmit={handleFormSubmit}>
-          <input type="file" name="image" onChange={onSelectFile} />
+          <input
+            type="file"
+            name="image"
+            onChange={onSelectFile}
+            data-test-id="profile-picture-image-input"
+          />
           {selectedFile && (
             <img
               src={preview}

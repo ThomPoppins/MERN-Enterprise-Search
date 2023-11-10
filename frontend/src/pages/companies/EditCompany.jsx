@@ -762,6 +762,7 @@ const EditCompany = () => {
                 <button
                   className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg"
                   onClick={() => setShowLogoModal(true)}
+                  data-test-id="upload-logo-button"
                 >
                   Upload Logo
                 </button>
@@ -781,6 +782,7 @@ const EditCompany = () => {
               type="text"
               value={email}
               onChange={handleEmailChange}
+              data-test-id="company-email-input"
               onBlur={validateEmail}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 emailError ? "border-red-500" : ""
@@ -801,6 +803,7 @@ const EditCompany = () => {
               type="text"
               value={phone}
               onChange={handlePhoneChange}
+              data-test-id="company-phone-input"
               onBlur={validatePhone}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 phoneError ? "border-red-500" : ""
@@ -836,6 +839,7 @@ const EditCompany = () => {
               type="text"
               value={kvkNumber}
               onChange={handleKvkNumberChange}
+              data-test-id="company-kvk-number-input"
               onBlur={validateKvkNumber}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 kvkNumberError ? "border-red-500" : ""
@@ -857,6 +861,7 @@ const EditCompany = () => {
               type="text"
               value={slogan}
               onChange={handleSloganChange}
+              data-test-id="company-slogan-input"
               onBlur={validateSlogan}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 startYearError ? "border-red-500" : ""
@@ -876,6 +881,7 @@ const EditCompany = () => {
             <textarea
               value={description}
               onChange={handleDescriptionChange}
+              data-test-id="company-description-input"
               onBlur={validateDescription}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 startYearError ? "border-red-500" : ""
@@ -897,6 +903,7 @@ const EditCompany = () => {
               type="number"
               value={startYear}
               onChange={handleStartYearChange}
+              data-test-id="company-start-year-input"
               onBlur={validateStartYear}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 startYearError ? "border-red-500" : ""
@@ -915,6 +922,7 @@ const EditCompany = () => {
           <button
             className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8"
             onClick={handleEditCompany}
+            data-test-id="save-edit-company-button"
           >
             Save
           </button>

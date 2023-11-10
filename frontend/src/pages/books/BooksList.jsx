@@ -45,12 +45,14 @@ const BooksList = () => {
         <button
           className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
           onClick={() => handleShowTypeChange("table")}
+          data-test-id="table-button"
         >
           Table
         </button>
         <button
           className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
           onClick={() => handleShowTypeChange("card")}
+          data-test-id="card-button"
         >
           Card
         </button>
