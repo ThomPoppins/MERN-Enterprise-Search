@@ -37,8 +37,12 @@ const UserSearch = ({
         // console.log(response.data); //! TODO: Remove console.log
       })
       .catch((error) => {
-        enqueueSnackbar("Error fetching users search results", {
+        // if (error.status === 404) {
+        //   return;
+        // }
+        enqueueSnackbar("Error searching for users", {
           variant: "error",
+          preventDuplicate: true,
         });
 
         //! TODO: Handle error in UI

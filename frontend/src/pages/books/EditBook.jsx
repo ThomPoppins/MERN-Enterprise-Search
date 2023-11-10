@@ -54,12 +54,18 @@ const EditBook = () => {
       .put(BACKEND_URL + `/books/${id}`, data)
       .then(() => {
         setLoading(false);
-        enqueueSnackbar("Book edited successfully!", { variant: "success" });
+        enqueueSnackbar("Book edited successfully!", {
+          variant: "success",
+          preventDuplicate: true,
+        });
         navigate("/books");
       })
       .catch((error) => {
         setLoading(false);
-        enqueueSnackbar("Error editing book!", { variant: "error" });
+        enqueueSnackbar("Error editing book!", {
+          variant: "error",
+          preventDuplicate: true,
+        });
         console.log(error);
       });
   };

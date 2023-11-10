@@ -159,25 +159,46 @@ const RegisterCompany = () => {
   // Display error messages if the user enters invalid input with useSnackbar
   useEffect(() => {
     if (nameError) {
-      enqueueSnackbar("Company name is invalid!", { variant: "error" });
+      enqueueSnackbar("Company name is invalid!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (emailError) {
-      enqueueSnackbar("Email is invalid!", { variant: "error" });
+      enqueueSnackbar("Email is invalid!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (phoneError) {
-      enqueueSnackbar("Phone number is invalid!", { variant: "error" });
+      enqueueSnackbar("Phone number is invalid!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (kvkNumberError) {
-      enqueueSnackbar("KVK number is invalid!", { variant: "error" });
+      enqueueSnackbar("KVK number is invalid!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (sloganError) {
-      enqueueSnackbar("Slogan is invalid!", { variant: "error" });
+      enqueueSnackbar("Slogan is invalid!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (descriptionError) {
-      enqueueSnackbar("Description is invalid!", { variant: "error" });
+      enqueueSnackbar("Description is invalid!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
     if (startYearError) {
-      enqueueSnackbar("Start year is invalid!", { variant: "error" });
+      enqueueSnackbar("Start year is invalid!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
   }, [
     nameError,
@@ -197,7 +218,10 @@ const RegisterCompany = () => {
     try {
       await validateKvkNumber();
     } catch (error) {
-      enqueueSnackbar("Error validating KVK number!", { variant: "error" });
+      enqueueSnackbar("Error validating KVK number!", {
+        variant: "error",
+        preventDuplicate: true,
+      });
       console.log(error);
       return;
     }
@@ -220,7 +244,7 @@ const RegisterCompany = () => {
     ) {
       enqueueSnackbar(
         "Please fill in all fields correctly before saving this company!",
-        { variant: "error" }
+        { variant: "error", preventDuplicate: true }
       );
       return;
     }
@@ -244,6 +268,7 @@ const RegisterCompany = () => {
         setLoading(false);
         enqueueSnackbar("Company registered successfully!", {
           variant: "success",
+          preventDuplicate: true,
         });
         navigate("/companies");
       })
@@ -252,6 +277,7 @@ const RegisterCompany = () => {
         if (error.response.status === 409) {
           enqueueSnackbar("Company with this KVK number already exists!", {
             variant: "error",
+            preventDuplicate: true,
           });
           setKvkNumberError(true);
           setKvkNumberErrorMessage(
@@ -260,7 +286,10 @@ const RegisterCompany = () => {
         }
 
         setLoading(false);
-        enqueueSnackbar("Error registering company!", { variant: "error" });
+        enqueueSnackbar("Error registering company!", {
+          variant: "error",
+          preventDuplicate: true,
+        });
         console.log(error);
       });
   };

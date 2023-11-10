@@ -76,6 +76,7 @@ const LoginUser = () => {
         verifyToken(token);
         enqueueSnackbar("You are logged in!", {
           variant: "success",
+          preventDuplicate: true,
         });
 
         store.dispatch({
@@ -89,7 +90,7 @@ const LoginUser = () => {
         setLoading(false);
         enqueueSnackbar(
           "Error logging in! Did you use the right credentials?",
-          { variant: "error" }
+          { variant: "error", preventDuplicate: true }
         );
         console.log(error);
       });

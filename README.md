@@ -292,6 +292,7 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-227] Dropdown menu items have to become clickable over the full width of the menu instead only the text and icon
 - [ ] [MERNSTACK-229] Replace enqueueSnackbar() with toast() from react-toastify for better user experience.
 - [ ] [MERNSTACK-230] README.md: Finish tutorial about asynchronious JavaScript: https://www.youtube.com/watch?v=ZYb_ZU8LNxs&ab_channel=freeCodeCamp.org
+- [x] [MERNSTACK-131] Set state for all companies fields that can be edited in EditCompany.jsx and RegisterCompany.jsx
 
 # Technologies:
 

@@ -52,9 +52,18 @@ const Navbar = () => {
   }, [user, userId, pendingRecievedInvites]);
 
   useEffect(() => {
-    // Get the pending invites for the user
-    getPendingRecievedInvites(userId);
-  }, [user, userId]);
+    if (!userId) {
+      return;
+    }
+
+    // Get pending recieved invites every 30 seconds
+    const interval = setInterval(() => {
+      getPendingRecievedInvites(userId);
+    }, 30000);
+
+    // Cleanup the interval when the component unmounts
+    return () => clearInterval(interval);
+  }, [userId]);
 
   // Is the dropdown menu open?
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

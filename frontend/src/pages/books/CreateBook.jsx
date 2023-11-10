@@ -30,12 +30,18 @@ const CreateBook = () => {
       .post(BACKEND_URL + "/books", data)
       .then(() => {
         setLoading(false);
-        enqueueSnackbar("Book created successfully!", { variant: "success" });
+        enqueueSnackbar("Book created successfully!", {
+          variant: "success",
+          preventDuplicate: true,
+        });
         navigate("/books");
       })
       .catch((error) => {
         setLoading(false);
-        enqueueSnackbar("Error creating book!", { variant: "error" });
+        enqueueSnackbar("Error creating book!", {
+          variant: "error",
+          preventDuplicate: true,
+        });
         console.log(error);
       });
   };

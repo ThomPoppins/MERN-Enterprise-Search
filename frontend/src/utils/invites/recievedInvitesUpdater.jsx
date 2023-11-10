@@ -11,10 +11,10 @@ export const getPendingRecievedInvites = async (userId) => {
   }
 
   // Promise to get the recieved pending invites
-  const updateRecievedPendingInvitesPromise = await new Promise(
+  const updateRecievedPendingInvitesPromise = new Promise(
     async (resolve, reject) => {
       // Get the recieving pending invites for the user
-      await axios
+      axios
         .get(BACKEND_URL + `/invites/reciever/${userId}/pending`)
         .then((response) => {
           // console.log("Invites response: ", response); //! TODO: Remove
