@@ -1,6 +1,66 @@
 # MERN_STACK_PROJ. :rocket:
 
+## A Visual Tour (so far)
+
+#### A video demo is in the making where I will explain about the technology of this Full Stack MERN-Stack application. Packages and libraries which I have used and also about the RAW code of course! Links to visual demo(s) and technical info can be found here in the repository and on my Github profile. So check me out later!
+
+### Some Impressions:
+
+
+### 1. Homepage when user is logged in, will be a working search engine for finding professional people with an expertise
+
+![Homepage Search Engine](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/001.png?raw=true)
+
+### 2. When you register an account your profile is very empty and your profile picture is a placeholder, a male for men and for women a female picture placeholder
+
+![Profile Page Placeholder Profile Picture](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/002.png?raw=true)
+
+### 3. After logging in the first time a user can click on the upload button on the placeholder to upload his/her first profile picture. After the click on the button a modal pops up where you can upload a image file by clicking the "browse..." button and select an image
+
+![Image Upload Modal Pop-Up](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/003.png?raw=true)
+
+### 4. After selecting a image local from your device, a preview will be shown of how your profile image is going to look like. 
+
+![Profile Picture Modal Preview](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/004.png?raw=true)
+
+#### If the user wants can he/she still change their mind and choose a different one or cancel the upload because the image is not yet uploaded. The image preview is a Base64 binary image Blob file locally in users' browser memory. 
+
+#### If the user is confident about it he/she will click the upload button and now the image will be sent through a form data object to a backend REST API ExpressJS hoster POST image upload route, where the image will be recieved and saved locally on the backend server storage. 
+
+#### The image will be served by ExpressJS as static image file which makes this backend server also the applications' CDN and because of that the client server will always be clean of accumulating images and any other kind of files and trash
+
+#### After the image is uploaded and saved in a directory, a corresponding Image document with a local filepath will be saved to the "images" collection in the MongoDB database. After succesfull saving the new image document entry the database responds with the corresponding ID which will be saved in the User document of the (logged in) user so it will be always be sure where the user his/her profile picture is saved locally on the backend server so there will never be a problem servign his/her picture.
+
+### 5. An example serving the user profile picture on the profile page and in the header.
+
+![Profile Page With Personal Profile Picture](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/005.png?raw=true)
+
+
+
+
+
+
+
+
+![Selected Profile Picture Preview Modal](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/004.png?raw=true)
+
+#### 5. 
+
+
 - [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
+  - [A Visual Tour (so far)](#a-visual-tour-so-far)
+      - [A video demo is in the making where I will explain about the technology of this Full Stack MERN-Stack application. Packages and libraries which I have used and also about the RAW code of course! Links to visual demo(s) and technical info can be found here in the repository and on my Github profile. So check me out later!](#a-video-demo-is-in-the-making-where-i-will-explain-about-the-technology-of-this-full-stack-mern-stack-application-packages-and-libraries-which-i-have-used-and-also-about-the-raw-code-of-course-links-to-visual-demos-and-technical-info-can-be-found-here-in-the-repository-and-on-my-github-profile-so-check-me-out-later)
+    - [Some Impressions:](#some-impressions)
+    - [1. Homepage when user is logged in, will be a working search engine for finding professional people with an expertise](#1-homepage-when-user-is-logged-in-will-be-a-working-search-engine-for-finding-professional-people-with-an-expertise)
+    - [2. When you register an account your profile is very empty and your profile picture is a placeholder, a male for men and for women a female picture placeholder](#2-when-you-register-an-account-your-profile-is-very-empty-and-your-profile-picture-is-a-placeholder-a-male-for-men-and-for-women-a-female-picture-placeholder)
+    - [3. After logging in the first time a user can click on the upload button on the placeholder to upload his/her first profile picture. After the click on the button a modal pops up where you can upload a image file by clicking the "browse..." button and select an image](#3-after-logging-in-the-first-time-a-user-can-click-on-the-upload-button-on-the-placeholder-to-upload-hisher-first-profile-picture-after-the-click-on-the-button-a-modal-pops-up-where-you-can-upload-a-image-file-by-clicking-the-browse-button-and-select-an-image)
+    - [4. After selecting a image local from your device, a preview will be shown of how your profile image is going to look like.](#4-after-selecting-a-image-local-from-your-device-a-preview-will-be-shown-of-how-your-profile-image-is-going-to-look-like)
+      - [If the user wants can he/she still change their mind and choose a different one or cancel the upload because the image is not yet uploaded. The image preview is a Base64 binary image Blob file locally in users' browser memory.](#if-the-user-wants-can-heshe-still-change-their-mind-and-choose-a-different-one-or-cancel-the-upload-because-the-image-is-not-yet-uploaded-the-image-preview-is-a-base64-binary-image-blob-file-locally-in-users-browser-memory)
+      - [If the user is confident about it he/she will click the upload button and now the image will be sent through a form data object to a backend REST API ExpressJS hoster POST image upload route, where the image will be recieved and saved locally on the backend server storage.](#if-the-user-is-confident-about-it-heshe-will-click-the-upload-button-and-now-the-image-will-be-sent-through-a-form-data-object-to-a-backend-rest-api-expressjs-hoster-post-image-upload-route-where-the-image-will-be-recieved-and-saved-locally-on-the-backend-server-storage)
+      - [The image will be served by ExpressJS as static image file which makes this backend server also the applications' CDN and because of that the client server will always be clean of accumulating images and any other kind of files and trash](#the-image-will-be-served-by-expressjs-as-static-image-file-which-makes-this-backend-server-also-the-applications-cdn-and-because-of-that-the-client-server-will-always-be-clean-of-accumulating-images-and-any-other-kind-of-files-and-trash)
+      - [After the image is uploaded and saved in a directory, a corresponding Image document with a local filepath will be saved to the "images" collection in the MongoDB database. After succesfull saving the new image document entry the database responds with the corresponding ID which will be saved in the User document of the (logged in) user so it will be always be sure where the user his/her profile picture is saved locally on the backend server so there will never be a problem servign his/her picture.](#after-the-image-is-uploaded-and-saved-in-a-directory-a-corresponding-image-document-with-a-local-filepath-will-be-saved-to-the-images-collection-in-the-mongodb-database-after-succesfull-saving-the-new-image-document-entry-the-database-responds-with-the-corresponding-id-which-will-be-saved-in-the-user-document-of-the-logged-in-user-so-it-will-be-always-be-sure-where-the-user-hisher-profile-picture-is-saved-locally-on-the-backend-server-so-there-will-never-be-a-problem-servign-hisher-picture)
+    - [5. An example serving the user profile picture on the profile page and in the header.](#5-an-example-serving-the-user-profile-picture-on-the-profile-page-and-in-the-header)
+      - [5.](#5)
   - [Getting Started](#getting-started)
   - [Application Description](#application-description)
   - [Versions](#versions)
@@ -37,6 +97,7 @@
       - [Expiration and Refresh Tokens](#expiration-and-refresh-tokens)
       - [Conclusion](#conclusion)
     - [](#)
+
 
 ## Getting Started
 
