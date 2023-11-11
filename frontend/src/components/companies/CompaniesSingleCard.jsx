@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { BiShow } from "react-icons/bi";
@@ -105,6 +106,11 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
       )}
     </div>
   );
+};
+
+CompaniesSingleCard.propTypes = {
+  company: PropTypes.object.isRequired,
+  updateCompanies: PropTypes.func.isRequired,
 };
 
 export default CompaniesSingleCard;
