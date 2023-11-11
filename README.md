@@ -255,7 +255,7 @@ When the user clicks on the *eye* icon on a listed company, a modal will pop up 
 
 An owner of a company can register his company in my application. On this companies listing page you see a green `+` icon in the top right corner. When a user clicks on that, he will navigate to the company register page where the user can register a new company that hasn't registered yet by filling in a company registration form.
 
-*Registration page:*
+*Registration form:*
 
 
 
