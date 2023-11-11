@@ -2,24 +2,31 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { BACKEND_URL } from '../../config';
 import Layout from '../components/layout/Layout';
+import e from 'cors';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   // @ts-ignore
   const userId = useSelector((state) => state.userId);
 
-  // Spin find button (after click Find)
-  const [findButtonSpinning, setFindButtonSpinning] = useState(false);
+  // Ping animation when the find button is clicked
+  const [findButtonPing, setFindButtonPing] = useState(false);
+
   const [searchQuery, setSearchQuery] = useState('');
+
+  const navigate = useNavigate();
 
   const handleFindExpertsQuery = (e) => {
     e.preventDefault();
 
-    setFindButtonSpinning(true);
+    setFindButtonPing(true);
+
+    
 
     // ! TODO: Remove this timeout when the query is implemented and redirects to the search page
     setTimeout(() => {
-      setFindButtonSpinning(false);
-    }, 2000);
+      setFindButtonPing(false);
+    }, 5000);
   };
 
   // Search query input change handler
@@ -43,26 +50,26 @@ const Home = () => {
                 <div className="relative">
                   <div className="ml-0 mt-6 mb-3 w-1/2 float-left">
                     <p className="">
-                      Find the best experts in your area and get in touch with
-                      them
+                    Search any keywords to find the best relevant professionals in your area first.
                     </p>
                   </div>
                   <div className="absolute top-[120px] left-[172px] w-full mt-6 mb-3">
                     <input
                       type="text"
                       className="absolute right-[400px] top-[-34px] h-[50px]  border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 py-2 px-4 mt-6 w-2/3"
-                      placeholder='Search for experts "plumber", "electrician", "gardener", etc."'
+                      placeholder="For example: plumber, electrician, gardener, developer, something else..." 
+                      onFocus={(e) => e.target.placeholder = ''}     
+                      onBlur={(e) => e.target.placeholder = 'For example: plumber, electrician, gardener, developer, something else...'}
                       value={searchQuery}
                       onChange={handleSearchQueryChange}
                       data-test-id="find-expert-search-query-input"
                     />
-
                     <button
                       className={`absolute top-[-41px] right-[195px] h-[50px] w-[160px] bg-gradient-to-r  rounded-lg m-8 pl-4  ${
-                        findButtonSpinning
-                          ? 'animate-spin bg-gradient-to-l from-green-500 to-green-400'
+                        findButtonPing
+                          ? 'animate-ping-once bg-gradient-to-l from-green-500 to-green-400'
                           : // : "animate-bounce hover:animate-none"
-                            'animate-bounce  from-violet-500 to-violet-600 hover:bg-gradient-to-l hover:from-green-500 hover:to-green-400'
+                            'animate-bounce-fast  from-violet-500 to-violet-600 hover:bg-gradient-to-l hover:from-green-500 hover:to-green-400'
                       }`}
                       onClick={handleFindExpertsQuery}
                       data-test-id="find-button"

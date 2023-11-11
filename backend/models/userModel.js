@@ -70,5 +70,5 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-// Instantiate the User model (using the defined userSchema)
+// Instantiate `User` model
 export const User = mongoose.model('User', userSchema)

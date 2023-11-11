@@ -6,7 +6,7 @@ A commercial *FullStack JavaScript* application in early development, building u
 
 Also I make use of a lot of different packages but only if they are complementary and necessary, I feel like less is more using external packages in my application  because I plan on making the application as stable and independent possible from external packages and sources (with updates).
 
-> **Note:** The exact business plan I have in mind for this application will remain secret, but if you read trough the [Visual Demo](#visual-demo-thus-far) section will give you a general idea about the size of this project where this application is all about. I hope my plan will eventually start to snowball in something real, I dare to dream and pursue a goal far away, but I will grow in the process guaranteed.
+> **Note:** The exact business plan I have in mind for this application will remain secret, but if you read trough the [Visual Demo](#visual-demo-thus-far) section then you will have a general idea about the size of this project where this application is all about. I hope my idea will eventually start to snowball and turn in to something real, I dare to dream about that and to pursue a goal still far away, but it's a guarantee that I will grow in the process and that makes it worth to work on it either way.
 
 ## Table of Contents
 
@@ -25,9 +25,12 @@ Also I make use of a lot of different packages but only if they are complementar
       - [Registration](#registration)
       - [Data structure](#data-structure)
       - [`Company` schema:](#company-schema)
-  - [Schema Details](#schema-details)
   - [Get up and running:](#get-up-and-running)
+  - [Project Issue Progression](#project-issue-progression)
   - [Versions](#versions)
+  - [v0.0.3](#v003)
+    - [Find other users for co-ownership with search field](#find-other-users-for-co-ownership-with-search-field)
+    - [Send invites to invite other users to get company co-owner](#send-invites-to-invite-other-users-to-get-company-co-owner)
   - [v0.0.2](#v002)
     - [Backend server CDN for static files](#backend-server-cdn-for-static-files)
     - [File upload](#file-upload)
@@ -37,7 +40,6 @@ Also I make use of a lot of different packages but only if they are complementar
   - [Company Registration and Ownership](#company-registration-and-ownership)
     - [How to Register a Company](#how-to-register-a-company)
     - [How to add a co-owner to a company](#how-to-add-a-co-owner-to-a-company)
-  - [TODO and DONE](#todo-and-done)
   - [Technologies](#technologies)
   - [Frontend](#frontend)
     - [React](#react)
@@ -159,8 +161,8 @@ At this point there are only a few details a user can set when registering a new
   - Type: Object
   - Description: Automatically adds `createdAt` and `updatedAt` fields to the user doc
   
-
 **Mongoose:**
+
 - The **Mongoose** schema establishes the data structure for the user information within the database.
 - It enforces uniqueness for each user's username and email to prevent double sign-ups and ensuring secure storage of their hashed password.
 User details like  `firstName`, `lastName`, `gender`and a reference field to the profile picture image document called `profilePicture`.
@@ -266,25 +268,6 @@ When I first got the business idea for building this application I decided to ma
 #### `Company` schema:
 
 **Schema fields:**
-
-```markdown
-# Company Schema
-
-The Mongoose schema provided below outlines the structure for storing comprehensive company information in a MongoDB database. Each field is described to facilitate a clear understanding of the data model.
-
-```javascript
-const companySchema = new mongoose.Schema(
-  {
-    // ... (existing schema fields)
-  },
-  { timestamps: true }
-);
-
-export const Company = mongoose.model("Company", companySchema);
-```
-
-// TODO: [MERNSTACK-241] PRIO: Evaluate all `Company` field descriptions and make correct
-## Schema Details
 
 1. **Name:**
    - Type: String
@@ -496,59 +479,56 @@ export const Company = mongoose.model("Company", companySchema);
     - Type: Array
     - Required: false
     - Default: []
-    - Description: Corresponds with messages in the `messages` collection `ObjectId`'s
-
-// TODO: GA HIER VERDER MET DESCRIPTIONS
+    - Description: Corresponds with messages in the `messages` collection `ObjectId`'s of `Message` documents. Still need to decide on the messages' format and data structure.
 
 36. **Notifications:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of notification objects associated with the company.
+    - Description: An array of corresponding `Notification` documents'
 
 37. **Events:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of event objects associated with the company.
+    - Description: `ObjectId`'s corresponding to `Event` documents in the `events` collection. Events could be anything that is organized  and it is still to decide in which many ways and configurations events could be created by users of the application.
 
 38. **Tasks:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of task objects associated with the company.
+    - Description: Array of `ObjectId`'s of `Task` documents in the `tasks` collection. Could be anything a user or company could have to do and I will decide later on all the functionalities and data structure of tasks later on.
 
 39. **Invoices:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of invoice objects associated with the company.
+    - Description: Array of `Invoice` document `ObjectId`'s in the `invoices` collection. `Invoice` data structure has to be decided on yet.
 
 40. **Orders:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of order objects associated with the company.
+    - Description: Array of `Order` document `ObjectId`'s in the `orders` collection which will contain all kind of orders users and companies could make and contains information of all order specific data like order status and much more.
 
 41. **Payments:**
     - Type: Array
     - Required: false
     - Unique: true
     - Default: []
-    - Description: An array of payment objects associated with the company.
+    - Description: Array of `Payment` document `ObjectId`'s in the `payments` collection which keeps track of all financial transactions between everybody.
 
 42. **Main Image ID:**
     - Type: String
     - Required: false
     - Default: ""
-    - Description: The main image ID corresponding to the Image model.
+    - Description: The main image should be the first thing people see when searching for a company and should be the *eye catcher* of the company to attract people to look into them. This is meant to be a different image then the company logo, the logo is also displayed in the first glance of a user searching for a company but smaller in a corner (something like that).
 
 43. **Images:**
     - Type: Array
     - Required: false
     - Description: An array of image objects associated with the company.
-
-
+  
 *Aditional fields:*
 
 - **timestamps**
@@ -556,237 +536,38 @@ export const Company = mongoose.model("Company", companySchema);
   - Description: Automatically adds `createdAt` and `updatedAt` fields to the user doc
   
 **Mongoose:**
+
 - The **Mongoose** schema establishes the data structure for the company information within the database.
 - It enforces uniqueness for each companies' KVK number to prevent double registrations.
-- The `Company` schema describing the data structure of the MongoDB `Company` documents in the `companies` collection is defined in the [backend server](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/companyModel.js).
-- The `Company` model has a lot of fields not being populated with data yet, but the size of this model displays very clearly the size of the application idea I have in my mind.
+- The `Company` model has a lot of fields not being populated with data yet, but the size of this model tells very clearly about what size of the application would become.
 
-> *[/backend/models/userModel.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/userModel.js):*
+**Schema:**
+
+
 ```javascript
-// Instantiate User schema
+# Company Schema
+// Instantiate `Company` schema
 const companySchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-    logo: {
-      type: String,
-      required: false,
-      default: "",
-    },
-    email: {
-      type: String,
-      required: true,
-      default: "",
-    },
-    phone: {
-      type: String,
-      required: true,
-      default: "",
-    },
-    kvkNumber: {
-      type: String,
-      required: true,
-      unique: true,
-      default: "",
-    },
-    kvkValidated: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
-    slogan: {
-      type: String,
-      required: true,
-      default: "",
-    },
-    description: {
-      type: String,
-      required: true,
-      default: "",
-    },
-    address: {
-      type: Object,
-      required: false,
-      default: {},
-    },
-    billingAddress: {
-      type: Object,
-      required: false,
-      default: {},
-    },
-    addressFormat: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: false,
-      default: null,
-    },
-    country: {
-      type: String,
-      required: false,
-      default: "NL",
-    },
-    region: {
-      type: String,
-      required: false,
-      default: "",
-    },
-    owners: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    companyAdmins: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    locations: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    departments: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    businessConfig: {
-      type: Object,
-      required: false,
-      default: {},
-    },
-    paymentDetails: {
-      type: Object,
-      required: false,
-      default: {},
-    },
-    startYear: {
-      type: Number,
-      required: false,
-      default: 0,
-    },
-    active: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
-    industries: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    public: {
-      type: Boolean,
-      required: false,
-      default: true,
-    },
-    reviews: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    rating: {
-      type: Number,
-      required: false,
-      min: 0,
-      max: 5,
-      default: 0,
-    },
-    customers: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    premium: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: false,
-      default: null,
-    },
-    vendor: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: false,
-      default: null,
-    },
-    employees: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    stories: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    products: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    services: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    agenda: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    appointments: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    messages: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    notifications: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    events: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    tasks: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    invoices: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    orders: {
-      type: Array,
-      required: false,
-      default: [],
-    },
-    payments: {
-      type: Array,
-      required: false,
-      unique: true,
-      default: [],
-    },
-    mainImageId: {
-      type: String,
-      required: false,
-      default: "",
-    },
-    images: {
-      type: Array,
-      required: false,
-    },
+    // ... (all schema fields are defined here)
   },
   { timestamps: true }
 );
 ```
+
+
+> **Note:** To see the complete code of the `Company` schema instantiation with all fields [here](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/companyModel.js).
+
+**Model:**
+
+```javascript
+// Instantiate `Company` model
+const Company = mongoose.model("Company", companySchema);
+```
+
+
+
+
 
 
 
@@ -922,56 +703,10 @@ To run this application locally, follow these steps:
 
 Now you have the application up and running locally!
 
-## Versions
 
-## v0.0.2
+## Project Issue Progression
 
-### Backend server CDN for static files
-
-The backend server is now a CDN for static files like images. This means that the backend server will serve the static files from the `/backend/public` folder. This way, the frontend application can access the images from the backend server without having to store the images in the frontend application. This also makes it possible to use the backend server as a CDN for other applications that need to access the images.
-
-### File upload
-
-Users can now upload a profile picture. The profile picture will be saved in the `/backend/public/uploads/images` folder and the path to the image will be saved in the database. The backend server will serve the image from the `/backend/public` folder. This way, the frontend application can access the image from the backend server and the image path is stored in the database.
-
-## v0.0.1
-
-### Registering an Account
-
-Users can easily create an account by visiting the homepage of my application. The registration process is straightforward and requires users to provide basic information such as their email address, a secure password, and any additional required details. Once registered, users gain access to the full suite of functionalities offered by the application.
-
-### Logging In
-
-Registered users can log in to their accounts using their previously provided credentials. This allows them to access and utilize all features and services provided by the application. The login process is secure and ensures that only authorized users can access their accounts.
-
-When you log in a JWT token is generated and stored in the browser's local storage. This token is used to authenticate the user and to make sure that the user is authorized to access the application. The token is also used to make sure that the user is authorized to access certain resources in the application. For example, the user can only access his own company resources and not the company resources of other users.
-
-## Company Registration and Ownership
-
-Upon logging in to their account, users have the capability to register a company that they own. This action automatically designates the user as the owner of the registered company, granting them administrative privileges within the application.
-
-- **Ownership Privileges:** The user, upon registering a company, assumes the role of owner with full administrative control over the company's operations.
-
-### How to Register a Company
-
-1. Log in to your account.
-2. Navigate to Companies
-3. Click the plus icon to add a new company.
-4. Fill in company details with KVK-number and submit the registration form.
-
-Upon successful registration and validation from the KVK API, the user will be recognized as the owner of the company and will have access to all administrative functionalities associated with it.
-
-### How to add a co-owner to a company
-
-1. Log in to your account.
-2. Navigate to Companies
-3. Click the pencil icon to edit a company.
-4. Search for a user by name, username or email.
-5. Click the add button to add the user as a owner to the company.
-
-## TODO and DONE
-
-> **NOTE:** This is a list of all the tasks that I am working on right now and also which I've completed so far. I've created Jira issues for them all and the corresponding Jira issue number is between [].
+> **NOTE:** The tags starting with [MERNSTACK-] are corresponding Jira issue identifiers.
 
 - [x] [MERNSTACK-103] Start using testing frameworks Mocha and Chai to write automated tests for the endpoints and ensure that the code is working correctly.
 - [x] [MERNSTACK-74] Set up `Company` model.
@@ -1100,6 +835,68 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [ ] [MERNSTACK-236] PRIO: Add DEMO links to new LinkedIn profile. Explain on LinkedIn profile that I also have another account and that I can't access it anymore.
 - [ ] [MERNSTACK-239] Implement ERROR logging to error log files everywhere console.log is used.
 - [ ] [MERNSTACK-240] Remove all debug data printing console.logs and keep useful error logs. Clean up the debug data flow.
+- [x] [MERNSTACK-241] PRIO: Evaluate all `Company` field descriptions and make them correct.
+- [ ] [MERNSTACK-] Fade dropdown menu in and out with quickly with customized animation defined in tailwind.config.js.
+
+## Versions
+
+## v0.0.3
+
+### Find other users for co-ownership with search field
+
+When you are an owner of a company it is possible to search for any other users of the application and the search terms are matched against other registered users' email, username, first name and last name values. The search result is updated every change within the search input field (onChange). 
+
+A list with up to 10 most relevant users that match the criteria will automatically render right below the search field input sorted by most relevant result on top to 10th relevant user last.
+
+### Send invites to invite other users to get company co-owner
+
+
+
+
+## v0.0.2
+
+### Backend server CDN for static files
+
+The backend server is now a CDN for static files like images. This means that the backend server will serve the static files from the `/backend/public` folder. This way, the frontend application can access the images from the backend server without having to store the images in the frontend application. This also makes it possible to use the backend server as a CDN for other applications that need to access the images.
+
+### File upload
+
+Users can now upload a profile picture. The profile picture will be saved in the `/backend/public/uploads/images` folder and the path to the image will be saved in the database. The backend server will serve the image from the `/backend/public` folder. This way, the frontend application can access the image from the backend server and the image path is stored in the database.
+
+## v0.0.1
+
+### Registering an Account
+
+Users can easily create an account by visiting the homepage of my application. The registration process is straightforward and requires users to provide basic information such as their email address, a secure password, and any additional required details. Once registered, users gain access to the full suite of functionalities offered by the application.
+
+### Logging In
+
+Registered users can log in to their accounts using their previously provided credentials. This allows them to access and utilize all features and services provided by the application. The login process is secure and ensures that only authorized users can access their accounts.
+
+When you log in a JWT token is generated and stored in the browser's local storage. This token is used to authenticate the user and to make sure that the user is authorized to access the application. The token is also used to make sure that the user is authorized to access certain resources in the application. For example, the user can only access his own company resources and not the company resources of other users.
+
+## Company Registration and Ownership
+
+Upon logging in to their account, users have the capability to register a company that they own. This action automatically designates the user as the owner of the registered company, granting them administrative privileges within the application.
+
+- **Ownership Privileges:** The user, upon registering a company, assumes the role of owner with full administrative control over the company's operations.
+
+### How to Register a Company
+
+1. Log in to your account.
+2. Navigate to Companies
+3. Click the plus icon to add a new company.
+4. Fill in company details with KVK-number and submit the registration form.
+
+Upon successful registration and validation from the KVK API, the user will be recognized as the owner of the company and will have access to all administrative functionalities associated with it.
+
+### How to add a co-owner to a company
+
+1. Log in to your account.
+2. Navigate to Companies
+3. Click the pencil icon to edit a company.
+4. Search for a user by name, username or email.
+5. Click the add button to add the user as a owner to the company.
 
 ## Technologies
 

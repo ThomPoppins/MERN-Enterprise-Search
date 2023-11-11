@@ -380,10 +380,8 @@ const companySchema = new mongoose.Schema(
   // enable timestamps
   { timestamps: true }
 );
-// Company model:
-// Create a new model using the companySchema.
-// A model is a class with which we construct documents.
-// In this case, a company will be a document in our MongoDB database.
+
+// Instantiate `Company` model
 export const Company = mongoose.model("Company", companySchema);
 
 // TODO: [MERNSTACK-70] Decide what kind of functionalities and authorizations employees have. Owners should automatically have employee rights and functionalities.
