@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import CompaniesSingleCard from "./CompaniesSingleCard";
 
 const CompaniesCard = ({ companies, updateCompanies }) => {
@@ -14,6 +15,14 @@ const CompaniesCard = ({ companies, updateCompanies }) => {
       ))}
     </div>
   );
+};
+
+// Validate the prop types
+CompaniesCard.propTypes = {
+  // `companies` is an array of objects, each object representing a company
+  companies: PropTypes.array.isRequired,
+  // `updateCompanies` is a function that takes no arguments and returns nothing
+  updateCompanies: PropTypes.func.isRequired,
 };
 
 export default CompaniesCard;

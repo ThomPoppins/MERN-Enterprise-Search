@@ -1,12 +1,12 @@
 @font-face {
-  font-family: "Poppins";
+  font-family: Poppins;
   src: url("../fonts/Poppins-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Poppins";
+  font-family: Poppins;
   src: url("../fonts/Poppins-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
@@ -17,8 +17,8 @@ html {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
-  color: white;
+  font-family: Poppins, sans-serif;
+  color: rgb(255, 255, 255);
   height: 100% !important;
 }
 
@@ -29,7 +29,7 @@ input:focus {
 }
 
 strong {
-  font-family: "Poppins", sans-serif;
+  font-family: Poppins, sans-serif;
   font-weight: bold;
 }
 
@@ -42,3 +42,4 @@ strong {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+

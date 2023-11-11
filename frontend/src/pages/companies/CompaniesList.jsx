@@ -13,18 +13,18 @@ import { enqueueSnackbar } from 'notistack'
 
 const CompaniesList = () => {
   // useDispatch() is a hook that returns the reference to the dispatch function from the Redux store.
-  const dispatch = useDispatch()
+  const dispatch = useDispatch(),
   // @ts-ignore useSelector() is a hook that takes the current state as an argument and returns whatever data you want from it.
-  const showType = useSelector((state) => state.companiesListShowType)
+  showType = useSelector((state) => state.companiesListShowType),
   // @ts-ignore userId is a string from the Redux store state
-  const userId = useSelector((state) => state.userId)
+  userId = useSelector((state) => state.userId),
   // companies is an array of objects
-  const [companies, setCompanies] = useState([])
+  [companies, setCompanies] = useState([]),
   // loading is a boolean that is true when the request to the backend is being sent and false when the response is received
-  const [loading, setLoading] = useState(false)
+  [loading, setLoading] = useState(false),
 
   // updateCompanies is a function that sends a GET request to the backend to get the companies that the user owns
-  const updateCompanies = () => {
+  updateCompanies = () => {
     setLoading(true)
     axios
       .get(BACKEND_URL + '/companies/owned-companies/' + userId)
@@ -43,17 +43,18 @@ const CompaniesList = () => {
         // TODO: Search for a pretty loading spinner animation
         setLoading(false)
       })
-  }
+  },
 
-  useEffect(() => {
-    updateCompanies()
-  }, [])
-
-  const handleShowTypeChange = (showType) => {
+  handleShowTypeChange = (showType) => {
     // dispatch() is a function of the Redux store. You call store.dispatch to dispatch an action.
     // The object passed to the dispatch() function is called action.
     dispatch({ type: COMPANIES_LIST_SHOW_TYPE, payload: showType })
   }
+  
+  useEffect(() => {
+    // Update the companies when the page is rendered
+    updateCompanies()
+  }, [])
 
   return (
     <Layout>

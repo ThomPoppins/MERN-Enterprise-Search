@@ -2,9 +2,6 @@
   "workbench.colorTheme": "Moxer",
   "glassit.alpha": 254,
   "terminal.integrated.defaultProfile.windows": "Git Bash",
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-  },
   "js/ts.implicitProjectConfig.checkJs": true,
   "better-comments.highlightPlainText": true,
   "better-comments.multilineComments": true,
@@ -12,7 +9,6 @@
   "editor.formatOnType": false, // required
   "editor.formatOnSaveMode": "file", // required to format on save
   "files.autoSave": "onFocusChange", // optional but recommended
-  "vs-code-prettier-eslint.prettierLast": true, // set as "true" to run 'prettier' last not first false by default so ESLint will run first and then
   "better-comments.tags": [
     {
       "tag": "!",
@@ -71,9 +67,12 @@
     "notistack",
     "Recieved",
     "reduxjs",
+    "stylelint",
     "tailwindcss"
   ],
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  //! TODO: Enable when removing stylelint 
+  "css.validate": false, 
+  "[css]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
   }
 }
