@@ -64,6 +64,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "cSpell.words": [
+    "MERN",
     "notistack",
     "Recieved",
     "reduxjs",
