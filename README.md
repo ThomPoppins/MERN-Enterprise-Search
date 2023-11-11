@@ -16,13 +16,14 @@ Also I make use of a lot of different packages but only if they are complementar
     - [2. Profile page (with gender specific placeholder profile picture)](#2-profile-page-with-gender-specific-placeholder-profile-picture)
     - [3. Profile picture upload modal](#3-profile-picture-upload-modal)
     - [4. Profile picture preview before upload](#4-profile-picture-preview-before-upload)
-    - [5. User profile page, schema and model](#5-user-profile-page-schema-and-model)
-      - [`User` model](#user-model)
-      - [**Mongoose `User` schema:**](#mongoose-user-schema)
-      - [**Mongoose `User` model:**](#mongoose-user-model)
+    - [5. User profile page and data structure](#5-user-profile-page-and-data-structure)
+      - [`User` schema:](#user-schema)
     - [6. Companies](#6-companies)
       - [Listing page](#listing-page)
-      - [Company registration](#company-registration)
+      - [Registration](#registration)
+      - [Data structure](#data-structure)
+      - [`Company` schema:](#company-schema)
+  - [Schema Details](#schema-details)
   - [Get up and running:](#get-up-and-running)
   - [Versions](#versions)
   - [v0.0.2](#v002)
@@ -100,28 +101,18 @@ After the image is uploaded and saved, a corresponding Image "document" (entry) 
 
 After succesfull saving the new Image entry (document) to the database, MongoDB responds with the Image document ID, which will immidiatly be saved to the User document(of the currently logged in user of course) so it will be always be certain where the image is. Securely saved on the backend server with the file location saved to the database with it's Image ID saved in the corresponding User document.
 
-### 5. User profile page, schema and model
+### 5. User profile page and data structure
 
 **Example serving the user profile picture, hosted as static image by the ExpressJS backend server but to be seen on the client profile page (and header)**
 
+*Profile page:*
 ![Profile Page With Profile Picture](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/005.png?raw=true)
 
 At this point there are only a few details a user can set when registering a new account. Of course this will be expend (largely) in the future. For now in this stage of the development process of the application, it's useful to keep minimalistic, clean and keep everything simple now there is not any dependency on yet and over complicate everything. Dependencies for users details could be a detailed profile pages, location/address information, media, posts on a timeline (or feed) or many other things users would want to save personally to their account eventually.
 
-#### `User` model
+#### `User` schema:
 
-The **Mongoose** schema establishes the data structure for the user information within the database.
-
-It enforces uniqueness for each user's username and email to prevent double sign-ups and ensuring secure storage of their hashed password.
-User details like  `firstName`, `lastName`, `gender`and a reference field to the profile picture image document called `profilePicture`.
-
-The `User` schema describing the data structure of the MongoDB `User` documents in the `users` collection is defined in the [backend server](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/userModel.js).
-
-The `User` schema is described and defined using Mongoose, a popular *Object Data Modeling (ODM)* library for MongoDB and Node.js.
-
-The `User` schema is expected to extends with many fields when continued development will many more dependencies on user data when the application grows and complexity increases.
-
-**Fields:**
+**Schema fields:**
 
 - **username**
   - *Type*: String
@@ -160,13 +151,20 @@ The `User` schema is expected to extends with many fields when continued develop
   - *Ref*: 'Image'
   - *Description:* This field is an ID reference to the image document in the database image collection, containing the file path local to the CDN (ExpressJS backend) server from which image file is being served. This allows for the image to be retrieved from the CDN (ExpressJS backend server) and displayed on the client-side application page based on a URL relative to the CDN server that can logically be generated from the image document's file path. This way no hard coded URLs are needed to be saved in MongoDB database and the image documents will be served independent of the backend server domain address making the image documents portable and reusable in different production and development environments and allowing easy migration of the image files to a different storage and host with a different URL/domain.
 
-*Aditional:*
+*Aditional fields:*
 
 - **timestamps**
   - Type: Object
-  - Description: Automatically adds `createdAt` and `updatedAt` fields to the user document, indicating when the document was created and last updated.
+  - Description: Automatically adds `createdAt` and `updatedAt` fields to the user doc
+  
 
-#### **Mongoose `User` schema:**
+**Mongoose:**
+- The **Mongoose** schema establishes the data structure for the user information within the database.
+- It enforces uniqueness for each user's username and email to prevent double sign-ups and ensuring secure storage of their hashed password.
+User details like  `firstName`, `lastName`, `gender`and a reference field to the profile picture image document called `profilePicture`.
+- The `User` schema describing the data structure of the MongoDB `User` documents in the `users` collection is defined in the [backend server](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/userModel.js).
+- The `User` schema is described and defined using Mongoose, a popular *Object Data Modeling (ODM)* library for MongoDB and Node.js.
+- The `User` schema is expected to extends with many fields when continued development will many more dependencies on user data when the application grows and complexity increases.
 
 > *[/backend/models/userModel.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/userModel.js):*
 ```javascript
@@ -216,7 +214,7 @@ const userSchema = new mongoose.Schema(
 )
 ```
 
-#### **Mongoose `User` model:**
+**Mongoose `User` model:**
 
 - The User model is created using the mongoose.model function, which takes the name 'User' and the user schema as arguments.
 - This model (`User`) serves as an interface to interact with the MongoDB database based on the defined schema.
@@ -251,11 +249,572 @@ When the user clicks on the *eye* icon on a listed company, a modal will pop up 
 
 ![Show Company Details Modal](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/008.png?raw=true)
 
-#### Company registration
+#### Registration
 
 An owner of a company can register his company in my application. On this companies listing page you see a green `+` icon in the top right corner. When a user clicks on that, he will navigate to the company register page where the user can register a new company that hasn't registered yet by filling in a company registration form.
 
-*Registration form:*
+*Company registration form:*
+![Company Registration Form Top](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/008.1.png?raw=true)
+![Company Registration Form Bottom](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/008.2.png?raw=true)
+
+#### Data structure
+
+When I first got the business idea for building this application I decided to make companies the main central starting point to focus on, find out what is necessary to get companies on board with my application and want to register and pay for premium features. Almost the first thing I started building was a company model that has all required fields where companies would be dependent on realizing the ideas I have in mind for my application, resulting in a `Company` model with many fields. At this stage of development only a few of there defined fields are actually used and populated with data at the moment, but because it is not a requirement to populate every field with data before saving and editing `Company` documents in the database, I feel no need to simplify the model for the time being at all.
+
+#### `Company` schema:
+
+**Schema fields:**
+
+```markdown
+# Company Schema
+
+The Mongoose schema provided below outlines the structure for storing comprehensive company information in a MongoDB database. Each field is described to facilitate a clear understanding of the data model.
+
+```javascript
+const companySchema = new mongoose.Schema(
+  {
+    // ... (existing schema fields)
+  },
+  { timestamps: true }
+);
+
+export const Company = mongoose.model("Company", companySchema);
+```
+
+## Schema Details
+
+1. **Name:**
+   - Type: String
+   - Required: true
+   - Description: The name of the company.
+
+2. **Logo:**
+   - Type: String (Base64 format)
+   - Required: false
+   - Default: ""
+   - Description: The company's logo in Base64 format.
+
+3. **Email:**
+   - Type: String
+   - Required: true
+   - Default: ""
+   - Description: The company's email address for correspondence.
+
+4. **Phone:**
+   - Type: String
+   - Required: true
+   - Default: ""
+   - Description: The company's contact phone number.
+
+5. **KVK Number:**
+   - Type: String
+   - Required: true
+   - Unique: true
+   - Default: ""
+   - Description: The Kamer van Koophandel (KVK) number of the company.
+
+6. **KVK Validated:**
+   - Type: Boolean
+   - Required: true
+   - Default: false
+   - Description: Indicates whether the KVK number is validated using the KVK API.
+
+7. **Slogan:**
+   - Type: String
+   - Required: true
+   - Default: ""
+   - Description: The company's slogan.
+
+8. **Description:**
+   - Type: String
+   - Required: true
+   - Default: ""
+   - Description: A short description of the company.
+
+9. **Address:**
+   - Type: Object
+   - Required: false
+   - Default: {}
+   - Description: The registered address of the company.
+
+10. **Billing Address:**
+    - Type: Object
+    - Required: false
+    - Default: {}
+    - Description: The address to send invoices to.
+
+11. **Address Format:**
+    - Type: ObjectId (Reference to Address Format model)
+    - Required: false
+    - Default: null
+    - Description: The format used to display the address.
+
+12. **Country:**
+    - Type: String
+    - Required: false
+    - Default: "NL"
+    - Description: The country of the company's billing address.
+
+13. **Region:**
+    - Type: String
+    - Required: false
+    - Default: ""
+    - Description: The region of the company's billing address.
+
+14. **Owners:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of objects containing owner details.
+
+15. **Company Admins:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of objects containing company admin details.
+
+16. **Locations:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of objects representing company locations.
+
+17. **Departments:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of objects representing company departments.
+
+18. **Business Config:**
+    - Type: Object
+    - Required: false
+    - Default: {}
+    - Description: Configurable settings for company owners and admins.
+
+19. **Payment Details:**
+    - Type: Object
+    - Required: false
+    - Default: {}
+    - Description: Payment details for the company.
+
+20. **Start Year:**
+    - Type: Number
+    - Required: false
+    - Default: 0
+    - Description: The year the company was started.
+
+21. **Active:**
+    - Type: Boolean
+    - Required: false
+    - Default: true
+    - Description: Indicates if the company is currently active.
+
+22. **Industries:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of industries associated with the company.
+
+23. **Public:**
+    - Type: Boolean
+    - Required: false
+    - Default: true
+    - Description: Indicates if the company is public or private.
+
+24. **Reviews:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of objects representing company reviews.
+
+25. **Rating:**
+    - Type: Number
+    - Required: false
+    - Min: 0
+    - Max: 5
+    - Default: 0
+    - Description: The overall rating of the company.
+
+26. **Customers:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of customers affiliated with the company.
+
+27. **Premium:**
+    - Type: ObjectId (Reference to Premium Type model)
+    - Required: false
+    - Default: null
+    - Description: The premium type associated with the company.
+
+28. **Vendor:**
+    - Type: ObjectId (Reference to Vendor model)
+    - Required: false
+    - Default: null
+    - Description: The vendor associated with the company.
+
+29. **Employees:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of employee objects associated with the company.
+
+30. **Stories:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of stories associated with the company.
+
+31. **Products:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of product objects associated with the company.
+
+32. **Services:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of service objects associated with the company.
+
+33. **Agenda:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of agenda objects associated with the company.
+
+34. **Appointments:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of appointment objects associated with the company.
+
+35. **Messages:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of message objects associated with the company.
+
+36. **Notifications:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of notification objects associated with the company.
+
+37. **Events:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of event objects associated with the company.
+
+38. **Tasks:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of task objects associated with the company.
+
+39. **Invoices:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of invoice objects associated with the company.
+
+40. **Orders:**
+    - Type: Array
+    - Required: false
+    - Default: []
+    - Description: An array of order objects associated with the company.
+
+41. **Payments:**
+    - Type: Array
+    - Required: false
+    - Unique: true
+    - Default: []
+    - Description: An array of payment objects associated with the company.
+
+42. **Main Image ID:**
+    - Type: String
+    - Required: false
+    - Default: ""
+    - Description: The main image ID corresponding to the Image model.
+
+43. **Images:**
+    - Type: Array
+    - Required: false
+    - Description: An array of image objects associated with the company.
+
+
+*Aditional fields:*
+
+- **timestamps**
+  - Type: Object
+  - Description: Automatically adds `createdAt` and `updatedAt` fields to the user doc
+  
+**Mongoose:**
+- The **Mongoose** schema establishes the data structure for the company information within the database.
+- It enforces uniqueness for each companies' KVK number to prevent double registrations.
+- The `Company` schema describing the data structure of the MongoDB `Company` documents in the `companies` collection is defined in the [backend server](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/companyModel.js).
+- The `Company` model has a lot of fields not being populated with data yet, but the size of this model displays very clearly the size of the application idea I have in my mind.
+
+> *[/backend/models/userModel.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/userModel.js):*
+```javascript
+// Instantiate User schema
+const companySchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    logo: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    email: {
+      type: String,
+      required: true,
+      default: "",
+    },
+    phone: {
+      type: String,
+      required: true,
+      default: "",
+    },
+    kvkNumber: {
+      type: String,
+      required: true,
+      unique: true,
+      default: "",
+    },
+    kvkValidated: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    slogan: {
+      type: String,
+      required: true,
+      default: "",
+    },
+    description: {
+      type: String,
+      required: true,
+      default: "",
+    },
+    address: {
+      type: Object,
+      required: false,
+      default: {},
+    },
+    billingAddress: {
+      type: Object,
+      required: false,
+      default: {},
+    },
+    addressFormat: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: false,
+      default: null,
+    },
+    country: {
+      type: String,
+      required: false,
+      default: "NL",
+    },
+    region: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    owners: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    companyAdmins: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    locations: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    departments: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    businessConfig: {
+      type: Object,
+      required: false,
+      default: {},
+    },
+    paymentDetails: {
+      type: Object,
+      required: false,
+      default: {},
+    },
+    startYear: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
+    active: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+    industries: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    public: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
+    reviews: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    rating: {
+      type: Number,
+      required: false,
+      min: 0,
+      max: 5,
+      default: 0,
+    },
+    customers: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    premium: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: false,
+      default: null,
+    },
+    vendor: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: false,
+      default: null,
+    },
+    employees: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    stories: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    products: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    services: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    agenda: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    appointments: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    messages: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    notifications: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    events: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    tasks: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    invoices: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    orders: {
+      type: Array,
+      required: false,
+      default: [],
+    },
+    payments: {
+      type: Array,
+      required: false,
+      unique: true,
+      default: [],
+    },
+    mainImageId: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    images: {
+      type: Array,
+      required: false,
+    },
+  },
+  { timestamps: true }
+);
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
