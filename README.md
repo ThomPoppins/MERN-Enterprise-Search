@@ -1,5 +1,63 @@
 # MERN_STACK_PROJ. :rocket:
 
+## Application Description
+
+A commercial FullStack JavaScript application (in early development stage), building upon the MERN stack mainly with React (and Redux state management) on the client side and  ExpressJS backend server running on Node.js and with MongoDB database using Mongoose package to connect and transferring data between the backend server and MongoDB and using other NPM packages if useful, complementary and necessary. Otherwise then that, I think less is more and I like to stay independent as possible from external sources and updates.
+
+**Table of Contents:**
+
+- [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
+      - [Table of Contents:](#table-of-contents)
+  - [A Visual Tour (so far)](#a-visual-tour-so-far)
+  - [Some Impressions](#some-impressions)
+      - [1. Homepage when user is logged in, will be a working search engine for finding professional people with an expertise](#1-homepage-when-user-is-logged-in-will-be-a-working-search-engine-for-finding-professional-people-with-an-expertise)
+      - [2. When you register an account your profile is very empty and your profile picture is a placeholder, a male for men and for women a female picture placeholder](#2-when-you-register-an-account-your-profile-is-very-empty-and-your-profile-picture-is-a-placeholder-a-male-for-men-and-for-women-a-female-picture-placeholder)
+      - [3. After logging in the first time a user can click on the upload button on the placeholder to upload his/her first profile picture. After the click on the button a modal pops up where you can upload a image file by clicking the "browse..." button and select an image](#3-after-logging-in-the-first-time-a-user-can-click-on-the-upload-button-on-the-placeholder-to-upload-hisher-first-profile-picture-after-the-click-on-the-button-a-modal-pops-up-where-you-can-upload-a-image-file-by-clicking-the-browse-button-and-select-an-image)
+      - [4. After selecting a image local from your device, a preview will be shown of how your profile image is going to look like](#4-after-selecting-a-image-local-from-your-device-a-preview-will-be-shown-of-how-your-profile-image-is-going-to-look-like)
+      - [5.Example serving the user profile picture, hosted as static image by the ExpressJS backend server but to be seen on the client profile page (and header)](#5example-serving-the-user-profile-picture-hosted-as-static-image-by-the-expressjs-backend-server-but-to-be-seen-on-the-client-profile-page-and-header)
+    - [User schema (currently)](#user-schema-currently)
+      - [Fields](#fields)
+    - [Additional fields](#additional-fields)
+    - [Mongoose user schema definition:](#mongoose-user-schema-definition)
+    - [User model](#user-model)
+  - [Getting Started](#getting-started)
+  - [Application Description](#application-description)
+  - [Versions](#versions)
+  - [v0.0.2](#v002)
+    - [Backend server CDN for static files](#backend-server-cdn-for-static-files)
+    - [File upload](#file-upload)
+  - [v0.0.1](#v001)
+    - [Registering an Account](#registering-an-account)
+    - [Logging In](#logging-in)
+  - [Company Registration and Ownership](#company-registration-and-ownership)
+    - [How to Register a Company](#how-to-register-a-company)
+    - [How to add a co-owner to a company](#how-to-add-a-co-owner-to-a-company)
+  - [TODO and DONE](#todo-and-done)
+  - [Technologies](#technologies)
+  - [Frontend](#frontend)
+    - [React](#react)
+    - [Redux](#redux)
+    - [Vite.js](#vitejs)
+  - [Backend](#backend)
+    - [Express.js](#expressjs)
+      - [Efficient Routing](#efficient-routing)
+      - [Middleware Support](#middleware-support)
+      - [Streamlined Database Interactions](#streamlined-database-interactions)
+      - [Asynchronous Request Handling](#asynchronous-request-handling)
+      - [Cross-Origin Resource Sharing (CORS)](#cross-origin-resource-sharing-cors)
+    - [MongoDB and Mongoose](#mongodb-and-mongoose)
+      - [Many-to-Many Relationships](#many-to-many-relationships)
+    - [Secure User Authentication with JWT](#secure-user-authentication-with-jwt)
+      - [Stateless Nature](#stateless-nature)
+      - [Data Integrity and Confidentiality](#data-integrity-and-confidentiality)
+      - [Cross-Origin Resource Sharing (CORS) Support](#cross-origin-resource-sharing-cors-support)
+      - [Granular Permissions](#granular-permissions)
+      - [Easy Integration with Frontend Frameworks](#easy-integration-with-frontend-frameworks)
+      - [Expiration and Refresh Tokens](#expiration-and-refresh-tokens)
+      - [Conclusion](#conclusion)
+    - [](#)
+
+
 ## A Visual Tour (so far)
 
 A video demo is in the making where I will explain about the technology of this Full Stack MERN-Stack application. Packages and libraries which I have used and also about the RAW code of course! Links to visual demo(s) and technical info can be found here in the repository and on my Github profile. So check me out later!
@@ -32,18 +90,151 @@ After the image is uploaded and saved, a corresponding Image "document" (entry) 
 
 After succesfull saving the new Image entry (document) to the database, MongoDB responds with the Image document ID, which will immidiatly be saved to the User document(of the currently logged in user of course) so it will be always be certain where the image is. Securely saved on the backend server with the file location saved to the database with it's Image ID saved in the corresponding User document.
 
-#### 5.Example serving the user profile picture, hosted by the backend server but to be seen on the client profile page (and header)
+#### 5.Example serving the user profile picture, hosted as static image by the ExpressJS backend server but to be seen on the client profile page (and header)
 
-![Profile Page With Personal Profile Picture](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/005.png?raw=true)
+![Profile Page With Profile Picture](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/005.png?raw=true)
+
+At this point there are only a few details a user can set when registering a new account. Of course this will be expend (largely) in the future. For now in this stage of the development process of the application, it's useful to keep minimalistic, clean and keep everything simple now there is not any dependency on yet and over complicate everything. Dependencies for users details could be a detailed profile pages, location/address information, media, posts on a timeline (or feed) or many other things users would want to save personally to their account eventually.
+
+### User schema (currently)
+
+This Mongoose schema establishes the data structure for the user information within the database.
+
+It enforces uniqueness for each user's username and email to prevent double sign-ups and ensuring secure storage of their hashed password.
+Additional user details are  `firstName`, `lastName`, `gender`and a reference to the image information of the profile picture in the `profilePicture` field.
+
+The "User schema defined" describing the User document is defined in [/backend/models/userModel.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/userModel.js), feel free to [review the code]()
+
+> The `userSchema` is designed to represent user data within a MongoDB database using Mongoose, a popular Object Data Modeling (ODM) library for MongoDB and Node.js.
+
+#### Fields
+
+- **username**
+  - *Type*: String
+  - *Required*: true
+  - *Unique*: true
+  - *Default*: ''
+
+- **email**
+  - *Type*: String
+  - *Required*: true
+  - *Unique*: true
+  - *Default*: ''
+
+- **hashedPassword**
+  - *Type*: String
+  - *Required*: true
+  - *Default*: ''
+
+- **firstName**
+  - *Type*: String
+  - *Required*: true
+  - *Default*: ''
+
+- **lastName**
+  - *Type*: String
+  - *Required*: true
+  - *Default*: ''
+
+- **gender**
+  - *Type*: String
+  - *Required*: true
+  - *Description*: Represents the gender of the user. Can be "Man," "Woman," or "Other."
+
+- **profilePicture**
+  - *Type*: mongoose.Schema.Types.ObjectId
+  - *Ref*: 'Image'
+  - *Description:* This field is an ID reference to the image document in the database image collection, containing the file path local to the CDN (ExpressJS backend) server from which image file is being served. This allows for the image to be retrieved from the CDN (ExpressJS backend server) and displayed on the client-side application page based on a URL relative to the CDN server that can logically be generated from the image document's file path. This way no hard coded URLs are needed to be saved in MongoDB database and the image documents will be served independent of the backend server domain address making the image documents portable and reusable in different production and development environments and allowing easy migration of the image files to a different storage and host with a different URL/domain.
+
+### Additional fields
+
+- **timestamps**
+  - Type: Object
+  - Description: Automatically adds `createdAt` and `updatedAt` fields to the user document, indicating when the document was created and last updated.
+
+### Mongoose user schema definition:
+
+how to set no-trailing-punctuation to false in markdown lint
+
+**JavaScript:**
+
+```javascript
+// Instantiate the User schema
+const userSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      default: ''
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      default: ''
+    },
+    hashedPassword: {
+      type: String,
+      required: true,
+      default: ''
+    },
+    firstName: {
+      type: String,
+      required: true,
+      default: ''
+    },
+    lastName: {
+      type: String,
+      required: true,
+      default: ''
+    },
+    gender: {
+      type: String,
+      required: true
+    },
+    profilePicture: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Image'
+    },
+  },
+  { timestamps: true }
+)
+```
+
+### User model
+
+- The User model is created using the mongoose.model function, which takes the name 'User' and the user schema as arguments.
+- This model (`User`) serves as an interface to interact with the MongoDB database based on the defined schema.
+- The model (`User`) is directly tied to the schema (`userSchema`). 
+- When you use methods like User.create(), User.find(), or others, Mongoose ensures that the data aligns with the structure defined in the schema.
+
+
+**JavaScript:**
+
+```javascript
+// Instantiate the User model (using the defined userSchema)
+const User = mongoose.model('User', userSchema)
+```
+
+
+
+
 
 - [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
+      - [Table of Contents:](#table-of-contents)
   - [A Visual Tour (so far)](#a-visual-tour-so-far)
   - [Some Impressions](#some-impressions)
       - [1. Homepage when user is logged in, will be a working search engine for finding professional people with an expertise](#1-homepage-when-user-is-logged-in-will-be-a-working-search-engine-for-finding-professional-people-with-an-expertise)
       - [2. When you register an account your profile is very empty and your profile picture is a placeholder, a male for men and for women a female picture placeholder](#2-when-you-register-an-account-your-profile-is-very-empty-and-your-profile-picture-is-a-placeholder-a-male-for-men-and-for-women-a-female-picture-placeholder)
       - [3. After logging in the first time a user can click on the upload button on the placeholder to upload his/her first profile picture. After the click on the button a modal pops up where you can upload a image file by clicking the "browse..." button and select an image](#3-after-logging-in-the-first-time-a-user-can-click-on-the-upload-button-on-the-placeholder-to-upload-hisher-first-profile-picture-after-the-click-on-the-button-a-modal-pops-up-where-you-can-upload-a-image-file-by-clicking-the-browse-button-and-select-an-image)
       - [4. After selecting a image local from your device, a preview will be shown of how your profile image is going to look like](#4-after-selecting-a-image-local-from-your-device-a-preview-will-be-shown-of-how-your-profile-image-is-going-to-look-like)
-      - [5.Example serving the user profile picture, hosted by the backend server but to be seen on the client profile page (and header)](#5example-serving-the-user-profile-picture-hosted-by-the-backend-server-but-to-be-seen-on-the-client-profile-page-and-header)
+      - [5.Example serving the user profile picture, hosted as static image by the ExpressJS backend server but to be seen on the client profile page (and header)](#5example-serving-the-user-profile-picture-hosted-as-static-image-by-the-expressjs-backend-server-but-to-be-seen-on-the-client-profile-page-and-header)
+    - [User schema (currently)](#user-schema-currently)
+      - [Fields](#fields)
+    - [Additional fields](#additional-fields)
+    - [Mongoose user schema definition:](#mongoose-user-schema-definition)
+    - [User model](#user-model)
   - [Getting Started](#getting-started)
   - [Application Description](#application-description)
   - [Versions](#versions)
@@ -164,9 +355,7 @@ To run this application locally, follow these steps:
 
 Now you have the application up and running locally!
 
-## Application Description
 
-Welcome to my FullStack JavaScript application built with Express.js on the backend and React with Redux on the frontend. The final business model for this project remains a secret for now, but you can check out the features below to get an idea of what this application is all about.
 
 ## Versions
 
