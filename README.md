@@ -281,6 +281,7 @@ const companySchema = new mongoose.Schema(
 export const Company = mongoose.model("Company", companySchema);
 ```
 
+// TODO: [MERNSTACK-241] PRIO: Evaluate all `Company` field descriptions and make correct
 ## Schema Details
 
 1. **Name:**
