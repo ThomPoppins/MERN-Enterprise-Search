@@ -6,6 +6,8 @@ A commercial *FullStack JavaScript* application in early development, building u
 
 Also I make use of a lot of different packages but only if they are complementary and necessary, I feel like less is more using external packages in my application  because I plan on making the application as stable and independent possible from external packages and sources (with updates).
 
+> **Note:** The exact business plan I have in mind for this application will remain secret, but if you read trough the [Visual Demo](#visual-demo-thus-far) section will give you a general idea about the size of this project where this application is all about. I hope my plan will eventually start to snowball in something real, I dare to dream and pursue a goal far away, but I will grow in the process guaranteed.
+
 ## Table of Contents
 
 - [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
@@ -293,7 +295,7 @@ export const Company = mongoose.model("Company", companySchema);
    - Type: String (Base64 format)
    - Required: false
    - Default: ""
-   - Description: The company's logo in Base64 format.
+   - Description: The company's logo (still) in Base64 format.
 
 3. **Email:**
    - Type: String
@@ -312,13 +314,13 @@ export const Company = mongoose.model("Company", companySchema);
    - Required: true
    - Unique: true
    - Default: ""
-   - Description: The Kamer van Koophandel (KVK) number of the company.
+   - Description: Kamer van Koophandel (KVK) number of the company.
 
 6. **KVK Validated:**
    - Type: Boolean
    - Required: true
    - Default: false
-   - Description: Indicates whether the KVK number is validated using the KVK API.
+   - Description: Indicates whether the KVK number is validated using the already fully functional and authenticated KVK test API end point connection.
 
 7. **Slogan:**
    - Type: String
@@ -348,7 +350,7 @@ export const Company = mongoose.model("Company", companySchema);
     - Type: ObjectId (Reference to Address Format model)
     - Required: false
     - Default: null
-    - Description: The format used to display the address.
+    - Description: The country specific address format of the country the registered company is in.
 
 12. **Country:**
     - Type: String
@@ -366,37 +368,37 @@ export const Company = mongoose.model("Company", companySchema);
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of objects containing owner details.
+    - Description: An array of objects containing owner their `User` `ObjectId`'s corresponding with their documents' ID in the of the `users` collection. Owners will always have the right to admin level access to company configuration and can disable admin level access to these configurations any time for safety, they can also enable these admin rights whenever is necessary and will be prompted regularly to disable the elevated admin access to prevent any unintended possible disasters (like deleting the company by accident and losing all reviews, score and status).
 
 15. **Company Admins:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of objects containing company admin details.
+    - Description: An array of `ObjectId`'s containing company admins `User` ID's who have elevated access to Company configuration. Admins have elevated access to company configurations and can disable admin level accessibility to these configurations any time for safety, they can also enable these admin rights whenever is necessary and will be prompted regularly to disable the elevated admin access to prevent any unintended possible disasters just like owners. Admins have the right to add other admins to a company when they have elevated access enabled, but initially a company owner with elevated access had to add the first admin (who is not company owner).
 
 16. **Locations:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of objects representing company locations.
+    - Description: An array of objects representing company locations. This will be `ObjectId`s corresponding to `Address` documents in the `address` collection.
 
 17. **Departments:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of objects representing company departments.
+    - Description: An array of objects representing company departments. To be decided the format this will be in.
 
 18. **Business Config:**
     - Type: Object
     - Required: false
     - Default: {}
-    - Description: Configurable settings for company owners and admins.
+    - Description: Configurable settings for company owners and admins with elevated access enabled.
 
 19. **Payment Details:**
     - Type: Object
     - Required: false
     - Default: {}
-    - Description: Payment details for the company.
+    - Description: Payment details for the company. Think about anything solely necessary for financial transactions in any direction. 
 
 20. **Start Year:**
     - Type: Number
@@ -408,13 +410,13 @@ export const Company = mongoose.model("Company", companySchema);
     - Type: Boolean
     - Required: false
     - Default: true
-    - Description: Indicates if the company is currently active.
+    - Description: Indicates if the company is currently active. (Open for business)
 
 22. **Industries:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of industries associated with the company.
+    - Description: An array of industries associated with the company for grouping companies and search result improvement.
 
 23. **Public:**
     - Type: Boolean
@@ -426,7 +428,7 @@ export const Company = mongoose.model("Company", companySchema);
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of objects representing company reviews.
+    - Description: An array of `ObjectId`s of `Review` documents in the `review` collection in the database representing this companies' reviews.
 
 25. **Rating:**
     - Type: Number
@@ -434,67 +436,69 @@ export const Company = mongoose.model("Company", companySchema);
     - Min: 0
     - Max: 5
     - Default: 0
-    - Description: The overall rating of the company.
+    - Description: The overall rating of the company. Every `User` can vote on this only a single time but might be able to edit their rating of the company. In what format ratings should be tracked and saved is to be decided.
 
 26. **Customers:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of customers affiliated with the company.
+    - Description: An array of customers `User` `ObjectId`s in from the `users` collection in database.
 
 27. **Premium:**
     - Type: ObjectId (Reference to Premium Type model)
     - Required: false
     - Default: null
-    - Description: The premium type associated with the company.
+    - Description: The premium type associated with the company. Like "none" "bronze", "silver", "gold" or "platinum". What every premium subscription level has to cost and what advantages or features these provide for subscribed companies is to be decided, think about company profile cosmetic changes or being able to have actions, discounts or events, BUT companies will never be able to pay for a higher place in the search result because that defeats the purpose of this application completely.
 
 28. **Vendor:**
     - Type: ObjectId (Reference to Vendor model)
     - Required: false
     - Default: null
-    - Description: The vendor associated with the company.
+    - Description: Can this company sell to other companies? If so, this company will be marked as vendor and probably have a corresponding  `Vendor` document in the (yet un-existing) `vendors` collection where all to vendors specific data will be saved.
 
 29. **Employees:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of employee objects associated with the company.
+    - Description: An array of `User` `ObjectId`'s of users who accepted the `Invite` to become employee of this company and will be able to have some functionalities within this company like writing `Story` posts under their own name and communicate with (potential) customers (users of this application).
 
 30. **Stories:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of stories associated with the company.
+    - Description: `ObjectId`'s of `Story` documents in the `stories` collection. Stories are posts placed on a timeline where you can see what the company has been active in lately and in the past. Stories can differ a lot from one another, companies have to be able to have a large spectrum of possibilities adding stories that fit their wishes.
 
 31. **Products:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of product objects associated with the company.
+    - Description: Products a company can offer and users can buy. Probably will be an array of `ObjectId`'s, but have to decide how to structure product data. Maybe product selling functionality would require a compete new platform to be with a realtime connection synchronizing with this application.
 
 32. **Services:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of service objects associated with the company.
+    - Description: A company can offer and sell services to users. The exact format this will be build in is to be decided.
 
 33. **Agenda:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of agenda objects associated with the company.
+    - Description: An array of agenda objects associated with the company. Format is to be decided.
 
 34. **Appointments:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of appointment objects associated with the company.
+    - Description: An array of appointments with users and other companies, format is to be decided.
 
 35. **Messages:**
     - Type: Array
     - Required: false
     - Default: []
-    - Description: An array of message objects associated with the company.
+    - Description: Corresponds with messages in the `messages` collection `ObjectId`'s
+
+// TODO: GA HIER VERDER MET DESCRIPTIONS
 
 36. **Notifications:**
     - Type: Array
