@@ -20,7 +20,7 @@ const CompaniesTable = ({ companies, updateCompanies }) => {
       </thead>
       <tbody>
         {companies.map((company, index) => (
-          <tr key={company._id} className='h-8'>
+          <tr className='h-8' key={company._id}>
             <CompaniesSingleRow company={company} updateCompanies={updateCompanies} />
           </tr>
         ))}

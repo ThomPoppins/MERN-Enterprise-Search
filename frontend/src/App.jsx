@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import CompaniesList from './pages/companies/CompaniesList';
 import RegisterCompany from './pages/companies/RegisterCompany';
 import EditCompany from './pages/companies/EditCompany';
@@ -30,20 +30,20 @@ const App = () => {
       // Routes when the user is logged in
       <Routes>
         {/* / route, render homepage*/}
-        <Route path='/' element={<Home />} />
+        <Route element={<Home />} path='/' />
         {/* TESTROUTE: test image uploading */}
-        <Route path='/upload-image' element={<UploadImage />} />
+        <Route element={<UploadImage />} path='/upload-image' />
         {/* User profile page route, render user profile page */}
-        <Route path='/profile' element={<UserProfile />} />
+        <Route element={<UserProfile />} path='/profile' />
         {/* /logout route, render user logout page */}
-        <Route path='/logout' element={<LogoutUser />} />
+        <Route element={<LogoutUser />} path='/logout' />
         {/* /companies/* routes */}
-        <Route path='/companies' element={<CompaniesList />} />
-        <Route path='/companies/register' element={<RegisterCompany />} />
-        <Route path='/companies/edit/:id' element={<EditCompany />} />
-        <Route path='/companies/details/:id' element={<ShowCompany />} />
+        <Route element={<CompaniesList />} path='/companies' />
+        <Route element={<RegisterCompany />} path='/companies/register' />
+        <Route element={<EditCompany />} path='/companies/edit/:id' />
+        <Route element={<ShowCompany />} path='/companies/details/:id' />
         {/* /invites/* routes */}
-        <Route path='/invites' element={<InvitesList />} />
+        <Route element={<InvitesList />} path='/invites' />
       </Routes>
     );
   } else {
@@ -51,11 +51,11 @@ const App = () => {
       // Routes when no user is logged in
       <Routes>
         {/* / route, render homepage*/}
-        <Route path='/' element={<Home />} />
+        <Route element={<Home />} path='/' />
         {/* /login route, render user login page */}
-        <Route path='/login' element={<LoginUser />} />
+        <Route element={<LoginUser />} path='/login' />
         {/* /register route, render user register page */}
-        <Route path='/register' element={<RegisterUser />} />
+        <Route element={<RegisterUser />} path='/register' />
       </Routes>
     );
   }

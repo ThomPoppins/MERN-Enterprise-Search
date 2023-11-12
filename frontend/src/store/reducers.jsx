@@ -1,9 +1,9 @@
 import {
   BOOKS_LIST_SHOW_TYPE,
   COMPANIES_LIST_SHOW_TYPE,
-  USER_ID,
-  USER,
   PENDING_RECIEVED_INVITES,
+  USER,
+  USER_ID,
 } from './actions.jsx';
 
 const booksListShowTypeReducer = (state = 'card', action) => {

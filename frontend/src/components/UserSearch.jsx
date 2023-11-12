@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { BACKEND_URL } from '../../config';
-import { VscMention, VscPerson, VscMail } from 'react-icons/vsc';
+import { VscMail, VscMention, VscPerson } from 'react-icons/vsc';
 import { enqueueSnackbar } from 'notistack';
 
 const UserSearch = ({ companyId, addPendingOwnershipInvite, usersResult, setUsersResult }) => {
@@ -48,7 +48,7 @@ const UserSearch = ({ companyId, addPendingOwnershipInvite, usersResult, setUser
   return (
     <div>
       <div className='my-4'>
-        <label htmlFor='searchInput' className='text-xl mr-4'>
+        <label className='text-xl mr-4' htmlFor='searchInput'>
           Search user to add as company owner:
         </label>
         <div className='my-4'>
@@ -59,19 +59,19 @@ const UserSearch = ({ companyId, addPendingOwnershipInvite, usersResult, setUser
         </div>
 
         <input
-          id='searchInput'
-          type='text'
-          value={searchTerm}
-          onChange={handleSearch}
           className='border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full'
           data-test-id='search-input'
+          id='searchInput'
+          onChange={handleSearch}
+          type='text'
+          value={searchTerm}
         />
       </div>
       <ul>
         {usersResult.map((userResult, index) => (
           <div
-            key={userResult._id + index}
             className='search-result flex border-sky-400 rounded-xl mx-auto justify-between items-center'
+            key={userResult._id + index}
           >
             <div className='mb-4'>
               <li>
@@ -84,9 +84,9 @@ const UserSearch = ({ companyId, addPendingOwnershipInvite, usersResult, setUser
             <div>
               <button
                 className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
-                value={userResult._id}
-                onClick={addPendingOwnershipInvite}
                 data-test-id='invite-owner-button'
+                onClick={addPendingOwnershipInvite}
+                value={userResult._id}
               >
                 Invite
               </button>
@@ -100,16 +100,16 @@ const UserSearch = ({ companyId, addPendingOwnershipInvite, usersResult, setUser
 
 // Validate prop types
 UserSearch.propTypes = {
-  // `companyId` is the id of the company.
-  companyId: PropTypes.string.isRequired,
   // `addPendingOwnershipInvite` is a function that adds a pending ownership invite to the company.
   addPendingOwnershipInvite: PropTypes.func.isRequired,
-  // `usersResult` is an array of users that match the search term.
-  usersResult: PropTypes.array.isRequired,
+  // `companyId` is the id of the company.
+  companyId: PropTypes.string.isRequired,
   // `setUsersResult` is a function that sets the usersResult state.
   setUsersResult: PropTypes.func.isRequired,
   // `userResult` is an array of users that match the search term.
   userResult: PropTypes.array,
+  // `usersResult` is an array of users that match the search term.
+  usersResult: PropTypes.array.isRequired,
 };
 
 export default UserSearch;

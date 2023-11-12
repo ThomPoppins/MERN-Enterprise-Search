@@ -15,13 +15,13 @@ const UploadAvatar = ({ setLogo, onClose }) => {
   return (
     <div>
       <div className='mb-4'>
-        <Avatar width={300} height={300} onCrop={onCrop} onClose={onClose} src='' />
+        <Avatar height={300} onClose={onClose} onCrop={onCrop} src='' width={300} />
       </div>
       <div className='flex justify-center'>
         <button
           className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'
-          onClick={onClickUpload}
           data-test-id='upload-button'
+          onClick={onClickUpload}
         >
           Upload
         </button>
@@ -32,10 +32,10 @@ const UploadAvatar = ({ setLogo, onClose }) => {
 
 // Validate prop types
 UploadAvatar.propTypes = {
-  // `setLogo` is a function that sets the logo state in the parent component.
-  setLogo: PropTypes.func.isRequired,
   // `onClose` is a function that closes the modal.
   onClose: PropTypes.func.isRequired,
+  // `setLogo` is a function that sets the logo state in the parent component.
+  setLogo: PropTypes.func.isRequired,
 };
 
 export default UploadAvatar;

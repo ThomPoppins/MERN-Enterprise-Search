@@ -44,14 +44,14 @@ const LogoutUser = () => {
           <div className='flex justify-center'>
             <button
               className='w-3/4 bg-gradient-to-r from-red-500 to-red-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
-              onClick={handleLogoutUser}
               data-test-id='logout-user-button'
+              onClick={handleLogoutUser}
             >
               Yes, please!
             </button>
           </div>
         </div>
-        <div className='my-32'></div>
+        <div className='my-32' />
       </div>
     </Layout>
   );

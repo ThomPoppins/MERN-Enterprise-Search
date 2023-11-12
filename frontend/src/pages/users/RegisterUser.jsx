@@ -269,14 +269,14 @@ const RegisterUser = () => {
           <div className='my-4'>
             <label className='text-xl mr-4'>Username</label>
             <input
-              type='text'
-              value={username}
-              onChange={handleUsernameChange}
-              data-test-id='user-username-input'
-              onBlur={validateUsername}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 usernameError ? 'border-red-500' : ''
               }`}
+              data-test-id='user-username-input'
+              onBlur={validateUsername}
+              onChange={handleUsernameChange}
+              type='text'
+              value={username}
             />
             {usernameError ? (
               <p className='text-red-500 text-sm'>
@@ -289,14 +289,14 @@ const RegisterUser = () => {
           <div className='my-4'>
             <label className='text-xl mr-4'>Email</label>
             <input
-              type='text'
-              value={email}
-              onChange={handleEmailChange}
-              data-test-id='user-email-input'
-              onBlur={validateEmail}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 emailError ? 'border-red-500' : ''
               }`}
+              data-test-id='user-email-input'
+              onBlur={validateEmail}
+              onChange={handleEmailChange}
+              type='text'
+              value={email}
             />
             {emailError ? (
               <p className='text-red-500 text-sm'>Email must be a valid email address.</p>
@@ -307,14 +307,14 @@ const RegisterUser = () => {
           <div className='my-4'>
             <label className='text-xl mr-4'>Password</label>
             <input
-              type='password'
-              value={password}
-              onChange={handlePasswordChange}
-              data-test-id='user-password-input'
-              onBlur={validatePassword}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 passwordError ? 'border-red-500' : ''
               }`}
+              data-test-id='user-password-input'
+              onBlur={validatePassword}
+              onChange={handlePasswordChange}
+              type='password'
+              value={password}
             />
             {passwordError ? (
               <p className='text-red-500 text-sm'>
@@ -328,14 +328,14 @@ const RegisterUser = () => {
           <div className='my-4'>
             <label className='text-xl mr-4'>Confirm Password</label>
             <input
-              type='password'
-              value={confirmPassword}
-              onChange={handleConfirmPasswordChange}
-              data-test-id='user-confirm-password-input'
-              onBlur={validateConfirmPassword}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 confirmPasswordError ? 'border-red-500' : ''
               }`}
+              data-test-id='user-confirm-password-input'
+              onBlur={validateConfirmPassword}
+              onChange={handleConfirmPasswordChange}
+              type='password'
+              value={confirmPassword}
             />
             {confirmPasswordError ? (
               <p className='text-red-500 text-sm'>Confirm password does not match password.</p>
@@ -346,14 +346,14 @@ const RegisterUser = () => {
           <div className='my-4'>
             <label className='text-xl mr-4'>First Name</label>
             <input
-              type='text'
-              value={firstName}
-              onChange={handleFirstNameChange}
-              data-test-id='user-first-name-input'
-              onBlur={validateFirstName}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 firstNameError ? 'border-red-500' : ''
               }`}
+              data-test-id='user-first-name-input'
+              onBlur={validateFirstName}
+              onChange={handleFirstNameChange}
+              type='text'
+              value={firstName}
             />
             {firstNameError ? (
               <p className='text-red-500 text-sm'>
@@ -367,14 +367,14 @@ const RegisterUser = () => {
           <div className='my-4'>
             <label className='text-xl mr-4 '>Last Name</label>
             <input
-              type='text'
-              value={lastName}
-              onChange={handleLastNameChange}
-              data-test-id='user-last-name-input'
-              onBlur={validateLastName}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 lastNameError ? 'border-red-500' : ''
               }`}
+              data-test-id='user-last-name-input'
+              onBlur={validateLastName}
+              onChange={handleLastNameChange}
+              type='text'
+              value={lastName}
             />
             {lastNameError ? (
               <p className='text-red-500 text-sm'>
@@ -389,27 +389,27 @@ const RegisterUser = () => {
             <label className='text-xl mr-4'>Gender</label> <br />
             <div className='flex flex-row justify-center space-x-16'>
               <input
-                type='radio'
-                name='gender'
-                value='Man'
-                onChange={handleGenderChange}
                 data-test-id='user-gender-input-male'
+                name='gender'
+                onChange={handleGenderChange}
+                type='radio'
+                value='Man'
               />{' '}
               Man
               <input
-                type='radio'
-                name='gender'
-                value='Woman'
-                onChange={handleGenderChange}
                 data-test-id='user-gender-input-female'
+                name='gender'
+                onChange={handleGenderChange}
+                type='radio'
+                value='Woman'
               />{' '}
               Woman
               <input
-                type='radio'
-                name='gender'
-                value='Other'
-                onChange={handleGenderChange}
                 data-test-id='user-gender-input-other'
+                name='gender'
+                onChange={handleGenderChange}
+                type='radio'
+                value='Other'
               />{' '}
               Other
             </div>
@@ -418,8 +418,8 @@ const RegisterUser = () => {
           </div>
           <button
             className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
-            onClick={handleSaveUser}
             data-test-id='user-register-button'
+            onClick={handleSaveUser}
           >
             Save
           </button>

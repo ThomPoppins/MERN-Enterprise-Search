@@ -10,12 +10,13 @@ module.exports = {
   'extends': [
     "eslint:recommended",
     // "eslint:all",
-    "plugin:react/recommended",
-    // "plugin:react/all",
+    // "plugin:react/recommended",
+    "plugin:react/all",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
-    "plugin:jsx-a11y/recommended",
-    // "plugin:jsx-a11y/strict"
+    // "plugin:react-hooks/all",
+    // "plugin:jsx-a11y/recommended",
+    "plugin:jsx-a11y/strict",
     'prettier',
   ],
   'settings': {
@@ -84,6 +85,13 @@ module.exports = {
     'react/react-in-jsx-scope': 'error',
     'react/require-render-return': 'error',
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "react/function-component-definition": ["error", {
+      "namedComponents": "arrow-function",
+      "unnamedComponents": "arrow-function"
+    }],
+    "react/jsx-no-bind": ["error", {"allowArrowFunctions": true}], // Allow arrow functions in JSX props (Remove this rule when performance becomes an issue)
+    "sort-imports": "warn",
+    "react/forbid-component-props": ["error", {"forbid": [], "allow": ["className"]}], 
   },
 };

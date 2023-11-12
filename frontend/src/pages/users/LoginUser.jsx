@@ -10,7 +10,7 @@ import verifyToken from '../../utils/auth/verifyToken.jsx';
 import store from '../../store/store.jsx';
 import Layout from '../../components/layout/Layout';
 
-function LoginUser() {
+const LoginUser = () => {
   // Input field values for logging in a user as state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -99,14 +99,14 @@ function LoginUser() {
           <div className='my-4'>
             <label className='text-xl mr-4'>Email</label>
             <input
-              type='text'
-              value={email}
-              onChange={handleEmailChange}
-              data-test-id='user-email-input'
-              onBlur={validateEmail}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 emailError ? 'border-red-500' : ''
               }`}
+              data-test-id='user-email-input'
+              onBlur={validateEmail}
+              onChange={handleEmailChange}
+              type='text'
+              value={email}
             />
             {emailError ? (
               <p className='text-red-500 text-sm'>Email must be a valid email address.</p>
@@ -117,20 +117,20 @@ function LoginUser() {
           <div className='my-4'>
             <label className='text-xl mr-4'>Password</label>
             <input
-              type='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              className='border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full'
               data-test-id='user-password-input'
+              onChange={(e) => setPassword(e.target.value)}
               onKeyDown={(e) => {
                 e.key === 'Enter' && handleLoginUser();
               }}
-              className='border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full'
+              type='password'
+              value={password}
             />
           </div>
           <button
             className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
-            onClick={handleLoginUser}
             data-test-id='user-login-button'
+            onClick={handleLoginUser}
           >
             Login
           </button>

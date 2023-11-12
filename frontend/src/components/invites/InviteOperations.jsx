@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { use } from 'chai';
 import { useSelector } from 'react-redux';
@@ -45,8 +45,8 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
           className={`bg-gradient-to-r from-green-600 to-green-700 hover:from-green-400 hover:to-green-500 rounded-lg w-[82px] float-left ml-1 ${
             acceptButtonSpinning ? 'animate-spin-fast' : 'animate-bounce hover:animate-none'
           }`}
-          onClick={handleAcceptInvite}
           data-test-id='accept-button'
+          onClick={handleAcceptInvite}
         >
           Accept
         </button>
@@ -55,6 +55,7 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
             className={`hover:bg-gradient-to-r bg-red-900/90 rounded-lg w-[82px] float-right mr-1 ${
               declineButtonPing ? 'animate-ping' : ''
             }`}
+            data-test-id='decline-button'
             onClick={() => {
               setDeclineButtonPing(true);
               updateInviteStatus(invite._id, 'declined');
@@ -62,7 +63,6 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
                 setDeclineButtonPing(false);
               }, 1000);
             }}
-            data-test-id='decline-button'
           >
             Decline
           </button>

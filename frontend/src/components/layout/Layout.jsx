@@ -22,14 +22,12 @@ const Layout = ({ children }) => {
   }, [userId]);
 
   return (
-    <>
-      <div className='outer-div min-h-screen'>
+    <div className='outer-div min-h-screen'>
         <Navbar />
         <div className='md:w-10/12 mx-auto'>
           <main>{children}</main>
         </div>
       </div>
-    </>
   );
 };
 

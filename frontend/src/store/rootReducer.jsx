@@ -2,9 +2,9 @@ import { combineReducers } from 'redux';
 import {
   booksListShowTypeReducer,
   companiesListShowTypeReducer,
+  pendingRecievedInvitesReducer,
   userIdReducer,
   userReducer,
-  pendingRecievedInvitesReducer,
 } from './reducers.jsx';
 
 const rootReducer = combineReducers({

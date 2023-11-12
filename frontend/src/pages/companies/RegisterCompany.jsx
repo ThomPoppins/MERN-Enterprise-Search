@@ -296,14 +296,14 @@ const RegisterCompany = () => {
           <div className='my-4'>
             <label className='text-xl mr-4'>Name</label>
             <input
-              type='text'
-              value={name}
-              onChange={handleNameChange}
-              onBlur={validateCompanyName}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 nameError ? 'border-red-500' : ''
               }`}
               data-test-id='company-name-input'
+              onBlur={validateCompanyName}
+              onChange={handleNameChange}
+              type='text'
+              value={name}
             />
             {nameError ? (
               <p className='text-red-500 text-sm'>
@@ -320,34 +320,32 @@ const RegisterCompany = () => {
             <div className='w-full'>
               <div className='flex justify-center items-center my-4'>
                 <div className='flex justify-center'>
-                  {logo && <img src={logo} alt='Preview' width='200' height='200' />}
+                  {logo ? <img alt='Preview' height='200' src={logo} width='200' /> : null}
                 </div>
               </div>
               <div className='flex justify-center items-center mb-4 mt-8'>
                 <button
                   className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
-                  onClick={() => setShowLogoModal(true)}
                   data-test-id='upload-logo-button'
+                  onClick={() => setShowLogoModal(true)}
                 >
                   Upload Logo
                 </button>
               </div>
-              {showLogoModal && (
-                <CompanyLogoModal setLogo={setLogo} onClose={() => setShowLogoModal(false)} />
-              )}
+              {showLogoModal ? <CompanyLogoModal onClose={() => setShowLogoModal(false)} setLogo={setLogo} /> : null}
             </div>
           </div>
           <div className='my-4'>
             <label className='text-xl mr-4'>Email</label>
             <input
-              type='text'
-              value={email}
-              onChange={handleEmailChange}
-              data-test-id='company-email-input'
-              onBlur={validateEmail}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 emailError ? 'border-red-500' : ''
               }`}
+              data-test-id='company-email-input'
+              onBlur={validateEmail}
+              onChange={handleEmailChange}
+              type='text'
+              value={email}
             />
             {emailError ? (
               <p className='text-red-500 text-sm'>Email must be a valid email address.</p>
@@ -358,14 +356,14 @@ const RegisterCompany = () => {
           <div className='my-4'>
             <label className='text-xl mr-4'>Phone</label>
             <input
-              type='text'
-              value={phone}
-              onChange={handlePhoneChange}
-              data-test-id='company-phone-input'
-              onBlur={validatePhone}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 phoneError ? 'border-red-500' : ''
               }`}
+              data-test-id='company-phone-input'
+              onBlur={validatePhone}
+              onChange={handlePhoneChange}
+              type='text'
+              value={phone}
             />
           </div>
           {phoneError ? (
@@ -381,8 +379,8 @@ const RegisterCompany = () => {
                   <strong>Note:</strong> Use KVK numbers from{' '}
                   <a
                     className='text-blue-600'
-                    href='https://developers.kvk.nl/documentation/testing'
                     data-test-id='kvk-api-link'
+                    href='https://developers.kvk.nl/documentation/testing'
                   >
                     this page
                   </a>
@@ -392,14 +390,14 @@ const RegisterCompany = () => {
               ''
             )}
             <input
-              type='text'
-              value={kvkNumber}
-              onChange={handleKvkNumberChange}
-              data-test-id='company-kvk-number-input'
-              onBlur={validateKvkNumber}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 kvkNumberError ? 'border-red-500' : ''
               }`}
+              data-test-id='company-kvk-number-input'
+              onBlur={validateKvkNumber}
+              onChange={handleKvkNumberChange}
+              type='text'
+              value={kvkNumber}
             />
             {kvkNumberError ? (
               <p className='text-red-500 text-sm'>
@@ -412,14 +410,14 @@ const RegisterCompany = () => {
           <div className='my-4'>
             <label className='text-xl mr-4'>Slogan</label>
             <input
-              type='text'
-              value={slogan}
-              onChange={handleSloganChange}
-              data-test-id='company-slogan-input'
-              onBlur={validateSlogan}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 sloganError ? 'border-red-500' : ''
               }`}
+              data-test-id='company-slogan-input'
+              onBlur={validateSlogan}
+              onChange={handleSloganChange}
+              type='text'
+              value={slogan}
             />
             {sloganError ? (
               <p className='text-red-500 text-sm'>
@@ -433,13 +431,13 @@ const RegisterCompany = () => {
           <div className='my-4'>
             <label className='text-xl mr-4'>Company Description</label>
             <textarea
-              value={description}
-              onChange={handleDescriptionChange}
-              data-test-id='company-description-input'
-              onBlur={validateDescription}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 descriptionError ? 'border-red-500' : ''
               }`}
+              data-test-id='company-description-input'
+              onBlur={validateDescription}
+              onChange={handleDescriptionChange}
+              value={description}
             />
             {descriptionError ? (
               <p className='text-red-500 text-sm'>
@@ -453,14 +451,14 @@ const RegisterCompany = () => {
           <div className='my-4'>
             <label className='text-xl mr-4'>Start Year</label>
             <input
-              type='number'
-              value={startYear}
-              onChange={handleStartYearChange}
-              data-test-id='company-start-year-input'
-              onBlur={validateStartYear}
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 startYearError ? 'border-red-500' : ''
               }`}
+              data-test-id='company-start-year-input'
+              onBlur={validateStartYear}
+              onChange={handleStartYearChange}
+              type='number'
+              value={startYear}
             />
             {startYearError ? (
               <p className='text-red-500 text-sm'>
@@ -473,8 +471,8 @@ const RegisterCompany = () => {
           </div>
           <button
             className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
-            onClick={handleSaveCompany}
             data-test-id='save-register-company-button'
+            onClick={handleSaveCompany}
           >
             Save
           </button>

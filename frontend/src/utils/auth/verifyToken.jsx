@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { BACKEND_URL } from '../../../config.js';
 import store from '../../store/store.jsx';
-import { USER_ID, USER } from '../../store/actions.jsx';
+import { USER, USER_ID } from '../../store/actions.jsx';
 
 const verifyToken = async (token) => {
   if (token) {

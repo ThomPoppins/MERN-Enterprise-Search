@@ -38,8 +38,8 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
 
   return (
     <div
-      key={`companies=single-card-${company._id}`}
       className='border-2 border-purple-900 bg-violet-950/40 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl'
+      key={`companies=single-card-${company._id}`}
     >
       <h2 className='absolute top-1 right-2 px-4 py-1 bg-purple-500 rounded-lg'>
         {company.startYear}
@@ -75,8 +75,8 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
       <div className='flex justify-between items-center gap-x-2 mt-4 p-4'>
         <BiShow
           className='text-3xl text-white hover:text-green-300 cursor-pointer'
-          onClick={() => setShowModal(true)}
           data-test-id='show-button'
+          onClick={() => setShowModal(true)}
         />
         <Link to={`/companies/details/${company._id}`}>
           <BsInfoCircle className='text-white text-2xl hover:text-green-300' />
@@ -85,21 +85,17 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
           <AiOutlineEdit className='text-white text-2xl hover:text-green-300' />
         </Link>
         <MdOutlineDelete
-          onClick={() => setShowDeleteModal(true)}
           className='text-red-600 text-2xl hover:text-orange-600'
           data-test-id='delete-button'
+          onClick={() => setShowDeleteModal(true)}
         />
       </div>
-      {showModal && (
-        <CompanyModal owners={owners} company={company} onClose={() => setShowModal(false)} />
-      )}
-      {showDeleteModal && (
-        <DeleteCompanyModal
+      {showModal ? <CompanyModal company={company} onClose={() => setShowModal(false)} owners={owners} /> : null}
+      {showDeleteModal ? <DeleteCompanyModal
           companyId={company._id}
-          updateCompanies={updateCompanies}
           onClose={() => setShowDeleteModal(false)}
-        />
-      )}
+          updateCompanies={updateCompanies}
+        /> : null}
     </div>
   );
 };

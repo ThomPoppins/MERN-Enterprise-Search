@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { BsInfoCircle } from 'react-icons/bs';
@@ -42,8 +42,8 @@ const CompaniesSingleRow = ({ company, updateCompanies }) => {
         <div className='flex justify-center gap-x-4'>
           <BiShow
             className='text-3xl text-white hover:text-green-300 cursor-pointer'
-            onClick={() => setShowModal(true)}
             data-test-id='show-button'
+            onClick={() => setShowModal(true)}
           />
           <Link to={`/companies/details/${company._id}`}>
             <BsInfoCircle className='text-2xl text-white hover:text-green-300' />
@@ -52,22 +52,18 @@ const CompaniesSingleRow = ({ company, updateCompanies }) => {
             <AiOutlineEdit className='text-2xl text-white hover:text-green-300' />
           </Link>
           <MdOutlineDelete
-            onClick={() => setShowDeleteModal(true)}
-            data-test-id='delete-button'
             className='text-red-600 text-2xl hover:text-orange-600'
+            data-test-id='delete-button'
+            onClick={() => setShowDeleteModal(true)}
           />
         </div>
       </td>
-      {showModal && (
-        <CompanyModal owners={owners} company={company} onClose={() => setShowModal(false)} />
-      )}
-      {showDeleteModal && (
-        <DeleteCompanyModal
+      {showModal ? <CompanyModal company={company} onClose={() => setShowModal(false)} owners={owners} /> : null}
+      {showDeleteModal ? <DeleteCompanyModal
           companyId={company._id}
-          updateCompanies={updateCompanies}
           onClose={() => setShowDeleteModal(false)}
-        />
-      )}
+          updateCompanies={updateCompanies}
+        /> : null}
     </>
   );
 };

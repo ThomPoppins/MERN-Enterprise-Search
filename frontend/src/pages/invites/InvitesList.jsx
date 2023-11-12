@@ -101,12 +101,12 @@ const InvitesList = () => {
               >
                 <td className='border-purple-900 bg-violet-950/40'>
                   <img
+                    alt='profile picture'
                     className='rounded-full mr-4 float-left'
                     width='50'
                     height='50'
                     // @ts-ignore
                     src={invite.sender.profilePictureURL}
-                    alt='profile picture'
                   />
                   <div className='flex flex-col'>
                     <div>

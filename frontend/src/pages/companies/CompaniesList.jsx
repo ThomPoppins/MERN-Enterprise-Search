@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import Layout from '../../components/layout/Layout';
 import Spinner from '../../components/Spinner';
@@ -60,15 +60,15 @@ const CompaniesList = () => {
         <div className='flex justify-center items-center gap-x-4'>
           <button
             className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-gradient-to-l px-4 py-1 rounded-lg'
-            onClick={() => handleShowTypeChange('card')}
             data-test-id='show-card-button'
+            onClick={() => handleShowTypeChange('card')}
           >
             Card
           </button>
           <button
             className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg'
-            onClick={() => handleShowTypeChange('table')}
             data-test-id='show-table-button'
+            onClick={() => handleShowTypeChange('table')}
           >
             Table
           </button>

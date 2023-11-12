@@ -42,14 +42,14 @@ const UserProfile = () => {
       <div className='mx-auto p-5'>
         <div className='relative w-[320px] mx-auto'>
           <img
-            src={user?.profilePictureURL ? user?.profilePictureURL : profilePicturePlaceholderURL}
             alt='profile picture'
             className='w-64 h-64 mt-2 rounded-full mx-auto object-cover'
+            src={user?.profilePictureURL ? user?.profilePictureURL : profilePicturePlaceholderURL}
           />
           <div
             className='absolute bottom-3 right-6 bg-purple-600 pl-1 pr-2 flex items-center border-2 border-purple-900 rounded-lg cursor-pointer hover:bg-purple-700'
-            onClick={handleEditProfilePicture}
             data-test-id='edit-profile-picture-button'
+            onClick={handleEditProfilePicture}
           >
             <BiPencil className='float-left text-gray mr-1' />
             {user?.profilePictureURL ? 'Edit' : 'Upload'}
@@ -69,9 +69,9 @@ const UserProfile = () => {
                 <p>
                   You haven&apos;t set a profile picture yet!{' '}
                   <span
-                    onClick={handleEditProfilePicture}
-                    data-test-id='upload-profile-picture-button'
                     className='hover:text-green-400 text-blue-400 cursor-pointer'
+                    data-test-id='upload-profile-picture-button'
+                    onClick={handleEditProfilePicture}
                   >
                     Upload yours now!
                   </span>
@@ -111,12 +111,10 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
-      {showEditProfilePictureModal && (
-        <EditProfilePictureModal
-          userId={userId}
+      {showEditProfilePictureModal ? <EditProfilePictureModal
           onClose={() => setShowEditProfilePictureModal(false)}
-        />
-      )}{' '}
+          userId={userId}
+        /> : null}{' '}
     </Layout>
   );
 };
