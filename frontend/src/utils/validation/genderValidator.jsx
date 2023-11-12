@@ -1,5 +1,5 @@
 const genderValidator = (value) => {
-  if (value === "Man" || value === "Woman" || value === "Other") {
+  if (value === 'Man' || value === 'Woman' || value === 'Other') {
     return true;
   }
 

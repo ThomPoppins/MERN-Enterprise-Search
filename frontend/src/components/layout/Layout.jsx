@@ -1,8 +1,8 @@
-import React from "react";
-import Navbar from "./Navbar";
-import { useEffect } from "react";
-import { getPendingRecievedInvites } from "../../utils/invites/recievedInvitesUpdater";
-import { useSelector } from "react-redux";
+import React from 'react';
+import Navbar from './Navbar';
+import { useEffect } from 'react';
+import { getPendingRecievedInvites } from '../../utils/invites/recievedInvitesUpdater';
+import { useSelector } from 'react-redux';
 
 const Layout = ({ children }) => {
   // Get userId state from Redux store
@@ -23,9 +23,9 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <div className="outer-div min-h-screen">
+      <div className='outer-div min-h-screen'>
         <Navbar />
-        <div className="md:w-10/12 mx-auto">
+        <div className='md:w-10/12 mx-auto'>
           <main>{children}</main>
         </div>
       </div>

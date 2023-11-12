@@ -1,12 +1,12 @@
-import axios from "axios";
-import { BACKEND_URL } from "../../../config.js";
-import store from "../../store/store.jsx";
-import { USER_ID, USER } from "../../store/actions.jsx";
+import axios from 'axios';
+import { BACKEND_URL } from '../../../config.js';
+import store from '../../store/store.jsx';
+import { USER_ID, USER } from '../../store/actions.jsx';
 
 const verifyToken = async (token) => {
   if (token) {
     await axios
-      .get(BACKEND_URL + "/auth/verify-token?token=" + token)
+      .get(BACKEND_URL + '/auth/verify-token?token=' + token)
       .then(async (response) => {
         const userId = response.data.userId;
         store.dispatch({
@@ -14,7 +14,7 @@ const verifyToken = async (token) => {
           payload: userId,
         });
         await axios
-          .get(BACKEND_URL + "/users/user/" + userId)
+          .get(BACKEND_URL + '/users/user/' + userId)
           .then((response) => {
             const user = response.data;
             store.dispatch({
@@ -27,7 +27,7 @@ const verifyToken = async (token) => {
               type: USER,
               payload: null,
             });
-            console.log("ERROR in verifyToken.jsx: ", error);
+            console.log('ERROR in verifyToken.jsx: ', error);
           });
       })
       .catch((error) => {
@@ -39,7 +39,7 @@ const verifyToken = async (token) => {
           type: USER,
           payload: null,
         });
-        console.log("ERROR in verifyToken.jsx: ", error);
+        console.log('ERROR in verifyToken.jsx: ', error);
       });
   }
 };

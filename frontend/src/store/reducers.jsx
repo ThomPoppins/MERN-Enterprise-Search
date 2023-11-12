@@ -4,9 +4,9 @@ import {
   USER_ID,
   USER,
   PENDING_RECIEVED_INVITES,
-} from "./actions.jsx";
+} from './actions.jsx';
 
-const booksListShowTypeReducer = (state = "card", action) => {
+const booksListShowTypeReducer = (state = 'card', action) => {
   switch (action.type) {
     case BOOKS_LIST_SHOW_TYPE:
       return action.payload;
@@ -15,7 +15,7 @@ const booksListShowTypeReducer = (state = "card", action) => {
   }
 };
 
-const companiesListShowTypeReducer = (state = "card", action) => {
+const companiesListShowTypeReducer = (state = 'card', action) => {
   switch (action.type) {
     case COMPANIES_LIST_SHOW_TYPE:
       return action.payload;

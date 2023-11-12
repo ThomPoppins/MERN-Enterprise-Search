@@ -1,11 +1,11 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 import {
   booksListShowTypeReducer,
   companiesListShowTypeReducer,
   userIdReducer,
   userReducer,
   pendingRecievedInvitesReducer,
-} from "./reducers.jsx";
+} from './reducers.jsx';
 
 const rootReducer = combineReducers({
   booksListShowType: booksListShowTypeReducer,

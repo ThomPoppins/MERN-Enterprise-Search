@@ -1,6 +1,6 @@
 const phoneNumberValidator = (phoneNumber, countryCode) => {
   switch (countryCode) {
-    case "NL":
+    case 'NL':
       return validateNLPhoneNumber(phoneNumber);
     default:
       return false;

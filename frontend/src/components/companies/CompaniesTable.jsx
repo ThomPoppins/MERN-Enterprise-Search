@@ -1,30 +1,27 @@
-import React from "react";
-import CompaniesSingleRow from "./CompaniesSingleRow";
+import React from 'react';
+import CompaniesSingleRow from './CompaniesSingleRow';
 
 const CompaniesTable = ({ companies, updateCompanies }) => {
   return (
-    <table className="w-full border-separate border-spacing-2">
+    <table className='w-full border-separate border-spacing-2'>
       <thead>
         <tr>
-          <th className="border-4 border-purple-900 bg-violet-950/80 rounded-md w-[150px]">
+          <th className='border-4 border-purple-900 bg-violet-950/80 rounded-md w-[150px]'>
             KVK Number
           </th>
-          <th className="border-4 border-purple-900 bg-violet-950/80 rounded-md text-left pl-3">
+          <th className='border-4 border-purple-900 bg-violet-950/80 rounded-md text-left pl-3'>
             Name
           </th>
           {/* max-md:hidden hides this column on mobile devices and tablets */}
-          <th className="border-4 border-purple-900 bg-violet-950/80 rounded-md w-[180px]">
+          <th className='border-4 border-purple-900 bg-violet-950/80 rounded-md w-[180px]'>
             Operations
           </th>
         </tr>
       </thead>
       <tbody>
         {companies.map((company, index) => (
-          <tr key={company._id} className="h-8">
-            <CompaniesSingleRow
-              company={company}
-              updateCompanies={updateCompanies}
-            />
+          <tr key={company._id} className='h-8'>
+            <CompaniesSingleRow company={company} updateCompanies={updateCompanies} />
           </tr>
         ))}
       </tbody>
