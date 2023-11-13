@@ -767,15 +767,15 @@ When a user is invited by the owner for co-ownership the user "result" will be r
 
 When the `User` is invited to become co-owner of the company, that user will receive a invite notification in the navigation bar.
 
-![User Invited On Edit Company Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/User-Invited.png?raw=true)
+![User Invited On Edit Company Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Invite-Notification.png?raw=true)
 
 Clicking on the `Invites` dropdown menu item, the user will navigate to the invites page and be able to *Accept* or *Decline* the invite by clicking the buttons in the *Operations* section in the *Invites* table listing the pending invites.
 
-![Invites Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/User-Invited.png?raw=true)
+![Invites Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Invites-Page.png?raw=true)
 
 After clicking *Accept* or *Decline* and there is no pending invite left, the user will navigate to the companies listing page and the companies they accepted will be listed there with their name added as co-owner.
 
-![Invite Accepted](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/User-Invited.png?raw=true)
+![Invite Accepted](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Invite-Accepted.png?raw=true)
 
 > **Note:** The invite notification has disappeared, the *Invites* dropdown menu item isn't listing anymore.
 
