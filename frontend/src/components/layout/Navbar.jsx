@@ -1,6 +1,6 @@
 import { HiOutlineCog, HiOutlineLogout, HiUser } from 'react-icons/hi'
 import { LuClipboardCheck, LuClipboardList } from 'react-icons/lu'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { BACKEND_URL } from '../../../config'
 import { HiOutlineBriefcase } from 'react-icons/hi2'
 import { getPendingRecievedInvites } from '../../utils/invites/recievedInvitesUpdater'
@@ -12,6 +12,7 @@ const Navbar = () => {
   const userId = useSelector((state) => state.userId),
     // @ts-ignore
     user = useSelector((state) => state.user),
+    // The pending invites for the active user
     pendingRecievedInvites = useSelector(
       // @ts-ignore
       (state) => state.pendingRecievedInvites,
@@ -23,7 +24,9 @@ const Navbar = () => {
     // Toggle the dropdown menu open/closed
     toggleDropdown = () => {
       setIsDropdownOpen(!isDropdownOpen)
-    }
+    },
+    // UseRef is used to detect clicks outside the dropdown menu
+    dropdownRef = useRef(null)
 
   // When the pending invites are available
   useEffect(() => {
@@ -49,6 +52,23 @@ const Navbar = () => {
     // Cleanup the interval when the component unmounts
     return () => clearInterval(interval)
   }, [userId])
+
+  // Listen for clicks outside the dropdown menu and close it if it's open
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // @ts-ignore If the dropdownRef is set to the dropdown menu, and the click is outside the dropdown menu. (dropdownRef.current will be null if no dropdown menu is open)
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false)
+      }
+    }
+    // Bind the event listener to the "mousedown" event and execute handleClickOutside() when it fires
+    window.addEventListener('mousedown', handleClickOutside)
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   return (
     <nav className='bg-gradient-to-r from-violet-950 to-purple-950 p-4 shadow-lg'>
@@ -99,7 +119,10 @@ const Navbar = () => {
                     </div>
                     {/* TODO: [MERNSTACK-226] When you click somewhere else, the dropdown should close in Navbar.jsx*/}
                     {isDropdownOpen ? (
-                      <div className='z-[100] absolute top-10 right-0 bg-violet-950/90 rounded-lg py-4'>
+                      <div
+                        className='z-[100] absolute top-10 right-0 bg-violet-950/90 rounded-lg py-4'
+                        ref={dropdownRef}
+                      >
                         {inviteAlert ? (
                           <div className='w-[200px] pt-1 h-10 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-1 bg-gradient-to-r from-green-600 to-green-800'>
                             <Link className='text-white ' to='/invites'>
