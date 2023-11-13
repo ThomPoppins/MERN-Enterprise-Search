@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 /*
  * TODO: [MERNSTACK-43] Create a new schema and model for projects.
@@ -67,24 +67,24 @@ const projectSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      default: "",
+      default: '',
     },
     phone: {
       type: String,
       required: true,
-      default: "",
+      default: '',
     },
     // Project slogan
     slogan: {
       type: String,
       required: true,
-      default: "",
+      default: '',
     },
     // Short description of the company.
     description: {
       type: String,
       required: true,
-      default: "",
+      default: '',
     },
     /*
      * Registered address of the project.
@@ -117,13 +117,13 @@ const projectSchema = new mongoose.Schema(
     country: {
       type: String,
       required: false,
-      default: "NL",
+      default: 'NL',
     },
     // Region of the project billing address. For example: "Texas" for Texas in the US.
     region: {
       type: String,
       required: false,
-      default: "",
+      default: '',
     },
     projectAdmins: {
       type: Array,
@@ -253,7 +253,7 @@ const projectSchema = new mongoose.Schema(
     premium: {
       type: String,
       required: false,
-      default: "none",
+      default: 'none',
     },
     // Is this project a vendor? This will be a object containing the vendorId corresponding with the Vendor model. (one-to-one relationship)
     vendor: {
@@ -347,7 +347,7 @@ const projectSchema = new mongoose.Schema(
     mainImageId: {
       type: String,
       required: false,
-      default: "",
+      default: '',
     },
     // `images` is an array of image objects with an imageId corresponding with the Image model.
     images: {
@@ -356,12 +356,12 @@ const projectSchema = new mongoose.Schema(
     },
   },
   // Enable timestamps
-  { timestamps: true }
-);
+  { timestamps: true },
+)
 /*
  * Project model:
  * Create a new model using the companySchema.
  * A model is a class with which we construct documents.
  * In this case, a project will be a document in our MongoDB database.
  */
-export const Project = mongoose.model("Project", projectSchema);
+export const Project = mongoose.model('Project', projectSchema)

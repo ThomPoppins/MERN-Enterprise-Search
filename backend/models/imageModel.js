@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 /*
  * Image schema.
@@ -10,10 +10,10 @@ const imageSchema = new mongoose.Schema(
     path: {
       type: String,
       required: true,
-      default: "",
+      default: '',
     },
   },
-  { timestamps: true }
-);
+  { timestamps: true },
+)
 
-export const Image = mongoose.model("Image", imageSchema);
+export const Image = mongoose.model('Image', imageSchema)

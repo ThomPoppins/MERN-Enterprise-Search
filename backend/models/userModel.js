@@ -6,13 +6,13 @@ import mongoose from 'mongoose'
  * This Mongoose schema establishes the data structure for the user information within the database.
  * It enforces uniqueness for each user's username and email to prevent double sign-ups and ensuring secure storage of their hashed password.
  * Additional user details are stored in the fields like `firstName`, `lastName`, and `gender`.
- * 
+ *
  * The `profilePicture` field is an ID reference to the image document in the database image collection, containing the file path local to the CDN (ExpressJS backend) server from
  * which image file is being served. This allows for the image to be retrieved from the CDN (ExpressJS backend server) and displayed on the client-side application
- * page based on a (image_ URL that can logically be generated from the image document's file path. This way no hard coded URLs are needed to be saved in MongoDB database 
+ * page based on a (image_ URL that can logically be generated from the image document's file path. This way no hard coded URLs are needed to be saved in MongoDB database
  * and the image documents will be served independent of the backend server domain address making the image documents portable and reusable in different production and development environments and
  * allowing for easy migration of the image documents to a different storage location hosted on a different domain address.
- * 
+ *
  *  Additionally, timestamps are automatically recorded for each user document.
  *
  * @typedef {Object} UserSchema
@@ -32,33 +32,33 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      default: ''
+      default: '',
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      default: ''
+      default: '',
     },
     hashedPassword: {
       type: String,
       required: true,
-      default: ''
+      default: '',
     },
     firstName: {
       type: String,
       required: true,
-      default: ''
+      default: '',
     },
     lastName: {
       type: String,
       required: true,
-      default: ''
+      default: '',
     },
     // `gender` can be Man, Woman, or Other
     gender: {
       type: String,
-      required: true
+      required: true,
     },
     /*
      * `profilePicture` is a id reference to the image document in the database.
@@ -66,10 +66,10 @@ const userSchema = new mongoose.Schema(
      */
     profilePicture: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Image'
+      ref: 'Image',
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 )
 
 // Instantiate `User` model

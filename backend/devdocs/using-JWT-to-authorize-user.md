@@ -13,37 +13,37 @@
 Here's an example of how you can implement JWT authentication in a Node.js/Express.js application:
 
 ```javascript
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken')
 
 // Create a JWT token
-const token = jwt.sign({ userId: 123 }, "secretKey");
+const token = jwt.sign({ userId: 123 }, 'secretKey')
 
 // Send the JWT token to the client
-res.json({ token });
+res.json({ token })
 
 // Verify the JWT token on the server
-const authHeader = req.headers.authorization;
+const authHeader = req.headers.authorization
 if (authHeader) {
-  const token = authHeader.split(" ")[1];
-  jwt.verify(token, "secretKey", (err, user) => {
+  const token = authHeader.split(' ')[1]
+  jwt.verify(token, 'secretKey', (err, user) => {
     if (err) {
-      return res.sendStatus(403);
+      return res.sendStatus(403)
     }
-    req.user = user;
-    next();
-  });
+    req.user = user
+    next()
+  })
 } else {
-  res.sendStatus(401);
+  res.sendStatus(401)
 }
 
 // Grant access to authorized users
-app.get("/protected", (req, res) => {
+app.get('/protected', (req, res) => {
   if (req.user && req.user.userId === 123) {
-    res.json({ message: "You are authorized to access this resource." });
+    res.json({ message: 'You are authorized to access this resource.' })
   } else {
-    res.sendStatus(403);
+    res.sendStatus(403)
   }
-});
+})
 ```
 
 In this example, we're using the `jsonwebtoken` library to create and verify JWT tokens. We're creating a JWT token with a user ID of `123` and a secret key of `"secretKey"`. We're sending the JWT token to the client as a JSON response.
@@ -55,14 +55,14 @@ Finally, we're granting access to authorized users by checking the `req.user` pr
 **To create a JWT token, you can use a library like `jsonwebtoken`. Here's an example of how you can create a JWT token in Node.js using the `jsonwebtoken` library:**
 
 ```javascript
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken')
 
-const payload = { userId: 123 };
-const secretKey = "mySecretKey";
-const options = { expiresIn: "1h" };
+const payload = { userId: 123 }
+const secretKey = 'mySecretKey'
+const options = { expiresIn: '1h' }
 
-const token = jwt.sign(payload, secretKey, options);
-console.log(token);
+const token = jwt.sign(payload, secretKey, options)
+console.log(token)
 ```
 
 In this example, we're using the `jsonwebtoken` library to create a JWT token. We're defining a `payload` object that contains the data we want to include in the JWT token (in this case, a `userId` property with a value of `123`). We're also defining a `secretKey` that will be used to sign the JWT token, and an `options` object that specifies the expiration time of the token (in this case, 1 hour).

@@ -7,16 +7,16 @@ To mitigate this risk, it's recommended to configure CORS to only allow requests
 For example, if you only want to allow requests from `example.com`, you can configure CORS like this:
 
 ```javascript
-const express = require("express");
-const cors = require("cors");
+const express = require('express')
+const cors = require('cors')
 
-const app = express();
+const app = express()
 
 const corsOptions = {
-  origin: "https://example.com",
-};
+  origin: 'https://example.com',
+}
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions))
 
 // ...rest of your server code
 ```

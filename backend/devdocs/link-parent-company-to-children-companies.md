@@ -7,7 +7,7 @@ To implement this relationship in your schema, you can add a `parentCompanyId` f
 Here's an example of what the schema for the `Company` model might look like:
 
 ```javascript
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const companySchema = new mongoose.Schema({
   name: {
@@ -16,17 +16,17 @@ const companySchema = new mongoose.Schema({
   },
   parentCompanyId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Company",
+    ref: 'Company',
   },
   childCompanies: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Company",
+      ref: 'Company',
     },
   ],
-});
+})
 
-module.exports = mongoose.model("Company", companySchema);
+module.exports = mongoose.model('Company', companySchema)
 ```
 
 In this example, the `parentCompanyId` field is a foreign key that references the `_id` field of the parent company, while the `childCompanies` field is an array of foreign keys that reference the `_id` field of the child companies. You can then use Mongoose's `populate()` method to retrieve the associated parent or child companies for a given record.

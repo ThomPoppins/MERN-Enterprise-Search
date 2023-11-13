@@ -5,7 +5,7 @@ In your case, the error is occurring on the line `import booksRoute from "./rout
 To fix this error, you can try using a path alias in your import statement. For example, if you have set up a path alias for your `routes` directory called `@routes`, you can modify the import statement like this:
 
 ```javascript
-import booksRoute from "@routes/booksRoute.js";
+import booksRoute from '@routes/booksRoute.js'
 ```
 
 This will use the `@routes` path alias instead of the relative path `./routes`.

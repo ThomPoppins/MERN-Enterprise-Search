@@ -5,7 +5,7 @@ In the context of linking many companies to many projects in MongoDB using an ar
 When you want to query for documents that have a reference to another document, you can use the `$in` operator with an array of `ObjectId` references. For example, to find all companies that have a reference to a specific project, you can use the following query:
 
 ```javascript
-db.companies.find({ projects: { $in: [ObjectId("...")] } });
+db.companies.find({ projects: { $in: [ObjectId('...')] } })
 ```
 
 In this query, `ObjectId("...")` is the `ObjectId` of the project that you want to find companies for. The `$in` operator matches documents that have any of the `ObjectId` references in the specified array.

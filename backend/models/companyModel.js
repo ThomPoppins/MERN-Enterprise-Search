@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 /**
  * Mongoose Schema for Company
@@ -61,7 +61,7 @@ const companySchema = new mongoose.Schema(
     logo: {
       type: String,
       required: false,
-      default: "",
+      default: '',
     },
     /*
      * Company email address for correspondence directed to the company with this application.
@@ -70,19 +70,19 @@ const companySchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      default: "",
+      default: '',
     },
     phone: {
       type: String,
       required: true,
-      default: "",
+      default: '',
     },
     // `kvkNumber` contains the KVK number of the company
     kvkNumber: {
       type: String,
       required: true,
       unique: true,
-      default: "",
+      default: '',
     },
     // Kvk number is validated (with the correct owner and company name) by the KVK API. True or false.
     kvkValidated: {
@@ -94,13 +94,13 @@ const companySchema = new mongoose.Schema(
     slogan: {
       type: String,
       required: true,
-      default: "",
+      default: '',
     },
     // Short description of the company.
     description: {
       type: String,
       required: true,
-      default: "",
+      default: '',
     },
     /*
      * Registered address of the company.
@@ -134,13 +134,13 @@ const companySchema = new mongoose.Schema(
     country: {
       type: String,
       required: false,
-      default: "NL",
+      default: 'NL',
     },
     // Region of the company billing address. For example: "Texas" for Texas in the US.
     region: {
       type: String,
       required: false,
-      default: "",
+      default: '',
     },
     // TODO: [MERNSTACK-15] Save the name , email, phone, and role related to the company as fields in a new user model. (to be created)
     owners: {
@@ -399,7 +399,7 @@ const companySchema = new mongoose.Schema(
     mainImageId: {
       type: String,
       required: false,
-      default: "",
+      default: '',
     },
     // `images` is an array of image objects with an imageId corresponding with the Image model.
     images: {
@@ -408,10 +408,10 @@ const companySchema = new mongoose.Schema(
     },
   },
   // Enable timestamps
-  { timestamps: true }
-);
+  { timestamps: true },
+)
 
 // Instantiate `Company` model
-export const Company = mongoose.model("Company", companySchema);
+export const Company = mongoose.model('Company', companySchema)
 
 // TODO: [MERNSTACK-70] Decide what kind of functionalities and authorizations employees have. Owners should automatically have employee rights and functionalities.

@@ -13,49 +13,51 @@
 4. In `booksRoute.test.js`, require the necessary modules:
 
    ```javascript
-   const chai = require('chai');
-   const chaiHttp = require('chai-http');
-   const app = require('../app');
-   
-   const expect = chai.expect;
-   
-   chai.use(chaiHttp);
+   const chai = require('chai')
+   const chaiHttp = require('chai-http')
+   const app = require('../app')
+
+   const expect = chai.expect
+
+   chai.use(chaiHttp)
    ```
 
 5. Write your tests using the `describe` and `it` functions provided by Mocha:
 
    ```javascript
-   describe('Books API', function() {
-     it('should return all books', function(done) {
-       chai.request(app)
+   describe('Books API', function () {
+     it('should return all books', function (done) {
+       chai
+         .request(app)
          .get('/books')
-         .end(function(err, res) {
-           expect(res).to.have.status(200);
-           expect(res.body).to.be.an('array');
-           done();
-         });
-     });
-   
-     it('should add a new book', function(done) {
-       chai.request(app)
+         .end(function (err, res) {
+           expect(res).to.have.status(200)
+           expect(res.body).to.be.an('array')
+           done()
+         })
+     })
+
+     it('should add a new book', function (done) {
+       chai
+         .request(app)
          .post('/books')
          .send({
            title: 'Test Book',
            author: 'Test Author',
-           year: 2021
+           year: 2021,
          })
-         .end(function(err, res) {
-           expect(res).to.have.status(201);
-           expect(res.body).to.be.an('object');
-           expect(res.body.title).to.equal('Test Book');
-           expect(res.body.author).to.equal('Test Author');
-           expect(res.body.year).to.equal(2021);
-           done();
-         });
-     });
-   
+         .end(function (err, res) {
+           expect(res).to.have.status(201)
+           expect(res.body).to.be.an('object')
+           expect(res.body.title).to.equal('Test Book')
+           expect(res.body.author).to.equal('Test Author')
+           expect(res.body.year).to.equal(2021)
+           done()
+         })
+     })
+
      // Add more tests as needed
-   });
+   })
    ```
 
 6. Run your tests using the `mocha` command:

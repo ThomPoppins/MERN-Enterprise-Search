@@ -9,26 +9,26 @@ Here's an example of how you can use JWTs to authenticate users in a React and E
 2. If the credentials are valid, generate a JWT on the backend using a library such as `jsonwebtoken`, and send the JWT as a response to the login request.
 
 ```javascript
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken')
 
 // ...
 
-app.post("/login", (req, res) => {
+app.post('/login', (req, res) => {
   // Check user credentials
-  const { username, password } = req.body;
+  const { username, password } = req.body
   const user = users.find(
-    (u) => u.username === username && u.password === password
-  );
+    (u) => u.username === username && u.password === password,
+  )
   if (!user) {
-    return res.status(401).json({ message: "Invalid credentials" });
+    return res.status(401).json({ message: 'Invalid credentials' })
   }
 
   // Generate JWT
-  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+  const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET)
 
   // Send JWT as response
-  res.json({ token });
-});
+  res.json({ token })
+})
 ```
 
 In this example, the `jsonwebtoken` library is used to generate a JWT with a payload containing the `userId` of the authenticated user. The JWT is then sent as a response to the login request.
@@ -39,14 +39,14 @@ In this example, the `jsonwebtoken` library is used to generate a JWT with a pay
 // ...
 
 const handleLogin = async () => {
-  const response = await fetch("/login", {
-    method: "POST",
+  const response = await fetch('/login', {
+    method: 'POST',
     body: JSON.stringify({ username, password }),
-    headers: { "Content-Type": "application/json" },
-  });
-  const { token } = await response.json();
-  localStorage.setItem("token", token);
-};
+    headers: { 'Content-Type': 'application/json' },
+  })
+  const { token } = await response.json()
+  localStorage.setItem('token', token)
+}
 ```
 
 In this example, the JWT is stored in local storage using the `localStorage` API.
@@ -56,11 +56,11 @@ In this example, the JWT is stored in local storage using the `localStorage` API
 ```javascript
 // ...
 
-const token = localStorage.getItem("token");
+const token = localStorage.getItem('token')
 
-const response = await fetch("/protected-resource", {
+const response = await fetch('/protected-resource', {
   headers: { Authorization: `Bearer ${token}` },
-});
+})
 ```
 
 In this example, the JWT is included in the `Authorization` header using the `Bearer` scheme.
@@ -68,27 +68,27 @@ In this example, the JWT is included in the `Authorization` header using the `Be
 5. On the backend, validate the JWT and extract the user ID from the payload.
 
 ```javascript
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken')
 
 // ...
 
-app.get("/protected-resource", (req, res) => {
+app.get('/protected-resource', (req, res) => {
   // Get JWT from Authorization header
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(" ")[1];
+  const authHeader = req.headers.authorization
+  const token = authHeader && authHeader.split(' ')[1]
   if (!token) {
-    return res.status(401).json({ message: "Missing token" });
+    return res.status(401).json({ message: 'Missing token' })
   }
 
   // Verify JWT and extract user ID
   try {
-    const { userId } = jwt.verify(token, process.env.JWT_SECRET);
+    const { userId } = jwt.verify(token, process.env.JWT_SECRET)
     // Use user ID to authorize access to protected resource
     // ...
   } catch (err) {
-    return res.status(401).json({ message: "Invalid token" });
+    return res.status(401).json({ message: 'Invalid token' })
   }
-});
+})
 ```
 
 In this example, the `jsonwebtoken` library is used to verify the JWT and extract the `userId` from the payload. The `userId` can then be used to authorize access to the protected resource.

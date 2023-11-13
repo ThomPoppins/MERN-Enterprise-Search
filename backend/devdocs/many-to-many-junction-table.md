@@ -5,24 +5,24 @@ Suppose you have two models: `Company` and `Project`. A company can have many pr
 Here's an example of how you can set up the `CompanyProject` model:
 
 ```javascript
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const companyProjectSchema = new mongoose.Schema({
   companyId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Company",
+    ref: 'Company',
     required: true,
   },
   projectId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Project",
+    ref: 'Project',
     required: true,
   },
-});
+})
 
-const CompanyProject = mongoose.model("CompanyProject", companyProjectSchema);
+const CompanyProject = mongoose.model('CompanyProject', companyProjectSchema)
 
-module.exports = CompanyProject;
+module.exports = CompanyProject
 ```
 
 In this example, the `companyId` field and the `projectId` field are both `ObjectId` references to the `Company` and `Project` models, respectively. The `ref` option specifies the name of the referenced model, and the `required` option specifies that both fields are required.
@@ -30,20 +30,20 @@ In this example, the `companyId` field and the `projectId` field are both `Objec
 To create a new relationship between a company and a project, you can create a new `CompanyProject` document that includes the `companyId` and `projectId` fields. For example:
 
 ```javascript
-const CompanyProject = require("./models/companyProject");
+const CompanyProject = require('./models/companyProject')
 
-const company = new Company({ name: "Acme Inc." });
-const project = new Project({ name: "Project X" });
+const company = new Company({ name: 'Acme Inc.' })
+const project = new Project({ name: 'Project X' })
 
-company.save();
-project.save();
+company.save()
+project.save()
 
 const companyProject = new CompanyProject({
   companyId: company._id,
   projectId: project._id,
-});
+})
 
-companyProject.save();
+companyProject.save()
 ```
 
 In this example, a new `CompanyProject` document is created that links the `company` and `project` documents together.
@@ -52,10 +52,10 @@ To query for all projects associated with a company, you can use the `populate()
 
 ```javascript
 CompanyProject.find({ companyId: company._id })
-  .populate("projectId")
+  .populate('projectId')
   .exec((err, projects) => {
-    console.log(projects);
-  });
+    console.log(projects)
+  })
 ```
 
 In this example, the `populate()` method populates the `projectId` field with the corresponding `Project` documents, so you can access the project's properties directly.
@@ -64,10 +64,10 @@ To query for all companies associated with a project, you can use the `populate(
 
 ```javascript
 CompanyProject.find({ projectId: project._id })
-  .populate("companyId")
+  .populate('companyId')
   .exec((err, companies) => {
-    console.log(companies);
-  });
+    console.log(companies)
+  })
 ```
 
 In this example, the `populate()` method populates the `companyId` field with the corresponding `Company` documents, so you can access the company's properties directly.
@@ -81,24 +81,24 @@ In this case, you can create a new model called `CompanyUser` that represents th
 Here's an example of how you can set up the `CompanyUser` model with a junction table:
 
 ```javascript
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const companyUserSchema = new mongoose.Schema({
   companyId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Company",
+    ref: 'Company',
     required: true,
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
     required: true,
   },
-});
+})
 
-const CompanyUser = mongoose.model("CompanyUser", companyUserSchema);
+const CompanyUser = mongoose.model('CompanyUser', companyUserSchema)
 
-module.exports = CompanyUser;
+module.exports = CompanyUser
 ```
 
 In this example, the `companyId` and `userId` fields are `ObjectId` references to the `Company` and `User` models, respectively. The `ref` option specifies the name of the referenced model, and the `required` option specifies that both fields are required.
@@ -106,20 +106,20 @@ In this example, the `companyId` and `userId` fields are `ObjectId` references t
 To create a new relationship between a company and a user, you can create a new `CompanyUser` document that includes the `companyId` and `userId` fields. For example:
 
 ```javascript
-const CompanyUser = require("./models/companyUser");
+const CompanyUser = require('./models/companyUser')
 
-const company = new Company({ name: "Acme Inc." });
-const user = new User({ name: "John Doe", email: "johndoe@example.com" });
+const company = new Company({ name: 'Acme Inc.' })
+const user = new User({ name: 'John Doe', email: 'johndoe@example.com' })
 
-company.save();
-user.save();
+company.save()
+user.save()
 
 const companyUser = new CompanyUser({
   companyId: company._id,
   userId: user._id,
-});
+})
 
-companyUser.save();
+companyUser.save()
 ```
 
 In this example, new `Company` and `User` documents are created and saved to the database. A new `CompanyUser` document is then created that includes the `companyId` and `userId` fields, which reference the `_id` fields of the `company` and `user` documents.
@@ -128,10 +128,10 @@ To query for all users associated with a company, you can use the `find()` metho
 
 ```javascript
 CompanyUser.find({ companyId: company._id })
-  .populate("userId")
+  .populate('userId')
   .exec((err, users) => {
-    console.log(users);
-  });
+    console.log(users)
+  })
 ```
 
 In this example, the `find()` method is used to find all documents in the `CompanyUser` collection that have a `companyId` field matching the `_id` of the `company` document. The `populate()` method is then used to populate the `userId` field with the corresponding `User` documents. Finally, the `exec()` method is used to execute the query and log the results to the console.
@@ -149,13 +149,13 @@ Using a junction table allows you to represent the many-to-many relationship bet
 Here's an example of how you can query for all companies associated with a project using the `populate()` method:
 
 ```javascript
-const CompanyProject = require("./models/companyProject");
+const CompanyProject = require('./models/companyProject')
 
 CompanyProject.find({ projectId: project._id })
-  .populate("companyId")
+  .populate('companyId')
   .exec((err, companies) => {
-    console.log(companies);
-  });
+    console.log(companies)
+  })
 ```
 
 In this example, the `find()` method is used to find all documents in the `CompanyProject` collection that have a `projectId` field matching the ID of the `project` document. The `populate()` method is then used to populate the `companyId` field with the corresponding `Company` documents. Finally, the `exec()` method is used to execute the query and log the results to the console.
@@ -205,7 +205,7 @@ In this example, the `companies` field is an array of `ObjectId` references to t
 4. To query for all projects associated with a company, you can use the `$in` operator to find all projects that have a reference to the company's `_id`. For example:
 
 ```javascript
-db.projects.find({ companies: { $in: [ObjectId("...")] } });
+db.projects.find({ companies: { $in: [ObjectId('...')] } })
 ```
 
 This query will return all projects that have a reference to the company with the `_id` of `ObjectId("...")`.
@@ -213,7 +213,7 @@ This query will return all projects that have a reference to the company with th
 5. To query for all companies associated with a project, you can use the `$in` operator to find all companies that have a reference to the project's `_id`. For example:
 
 ```javascript
-db.companies.find({ projects: { $in: [ObjectId("...")] } });
+db.companies.find({ projects: { $in: [ObjectId('...')] } })
 ```
 
 This query will return all companies that have a reference to the project with the `_id` of `ObjectId("...")`.
@@ -227,7 +227,7 @@ In the context of linking many companies to many projects in MongoDB using an ar
 When you want to query for documents that have a reference to another document, you can use the `$in` operator with an array of `ObjectId` references. For example, to find all companies that have a reference to a specific project, you can use the following query:
 
 ```javascript
-db.companies.find({ projects: { $in: [ObjectId("...")] } });
+db.companies.find({ projects: { $in: [ObjectId('...')] } })
 ```
 
 In this query, `ObjectId("...")` is the `ObjectId` of the project that you want to find companies for. The `$in` operator matches documents that have any of the `ObjectId` references in the specified array.

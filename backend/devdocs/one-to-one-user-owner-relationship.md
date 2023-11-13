@@ -3,7 +3,7 @@ GitHub Copilot: To create a one-to-one relationship between a `User` model and a
 Here's an example of how you can set up the `Owner` model with a `userId` field:
 
 ```javascript
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const ownerSchema = new mongoose.Schema({
   name: {
@@ -12,15 +12,15 @@ const ownerSchema = new mongoose.Schema({
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
     required: true,
     unique: true,
   },
-});
+})
 
-const Owner = mongoose.model("Owner", ownerSchema);
+const Owner = mongoose.model('Owner', ownerSchema)
 
-module.exports = Owner;
+module.exports = Owner
 ```
 
 In this example, the `userId` field is a `ObjectId` reference to the `User` model, and the `ref` option specifies the name of the referenced model. The `required` option specifies that the `userId` field is required, and the `unique` option specifies that the `userId` field must be unique.
@@ -28,18 +28,18 @@ In this example, the `userId` field is a `ObjectId` reference to the `User` mode
 To create a new `Owner` document associated with a `User` document, you can create a new `Owner` document that includes the `userId` field. For example:
 
 ```javascript
-const Owner = require("./models/owner");
+const Owner = require('./models/owner')
 
-const user = new User({ name: "John Doe", email: "johndoe@example.com" });
+const user = new User({ name: 'John Doe', email: 'johndoe@example.com' })
 
-user.save();
+user.save()
 
 const owner = new Owner({
-  name: "Acme Inc.",
+  name: 'Acme Inc.',
   userId: user._id,
-});
+})
 
-owner.save();
+owner.save()
 ```
 
 In this example, a new `User` document is created and saved to the database. A new `Owner` document is then created that includes the `userId` field, which references the `_id` field of the `user` document.
@@ -48,8 +48,8 @@ To query for the `Owner` document associated with a `User` document, you can use
 
 ```javascript
 Owner.findOne({ userId: user._id }, (err, owner) => {
-  console.log(owner);
-});
+  console.log(owner)
+})
 ```
 
 In this example, the `findOne()` method is used to find the document in the `Owner` collection that has a `userId` field matching the `_id` of the `user` document. The result is then logged to the console.

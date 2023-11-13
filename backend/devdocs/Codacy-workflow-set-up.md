@@ -13,9 +13,9 @@ name: Codacy Security Scan
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
   pull_request:
-    branches: ["main"]
+    branches: ['main']
 
 permissions:
   contents: read
@@ -51,9 +51,9 @@ To run the Codacy security scan action on a specific branch, you can modify the 
 ```yaml
 on:
   push:
-    branches: ["dev"]
+    branches: ['dev']
   pull_request:
-    branches: ["dev"]
+    branches: ['dev']
 ```
 
 This configuration will run the Codacy security scan action on every push to the `dev` branch and every pull request targeting the `dev` branch.
@@ -63,9 +63,9 @@ If you want to scan multiple branches, you can include them in the `branches` ke
 ```yaml
 on:
   push:
-    branches: ["main", "dev", "feature-branch"]
+    branches: ['main', 'dev', 'feature-branch']
   pull_request:
-    branches: ["main", "dev", "feature-branch"]
+    branches: ['main', 'dev', 'feature-branch']
 ```
 
 This configuration will run the Codacy security scan action on every push to the `main`, `dev`, and `feature-branch` branches, and every pull request targeting these branches.
