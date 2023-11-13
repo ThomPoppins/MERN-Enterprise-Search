@@ -2,9 +2,9 @@
 // contain alphanumeric characters, special characters and be up to 280 characters long.
 // Also description string can not be only white spaces.
 function companyDescriptionValidator(description) {
-  const regex = /^[a-zA-Z0-9\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
+  const regex = /^[a-zA-Z0-9\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/
 
-  return description.trim().length > 0 && description.length <= 280 && regex.test(description);
+  return description.trim().length > 0 && description.length <= 280 && regex.test(description)
 }
 
-export default companyDescriptionValidator;
+export default companyDescriptionValidator

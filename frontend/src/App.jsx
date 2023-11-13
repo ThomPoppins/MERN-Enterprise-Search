@@ -1,26 +1,28 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import CompaniesList from './pages/companies/CompaniesList';
-import RegisterCompany from './pages/companies/RegisterCompany';
-import EditCompany from './pages/companies/EditCompany';
-import ShowCompany from './pages/companies/ShowCompany';
-import LoginUser from './pages/users/LoginUser';
-import RegisterUser from './pages/users/RegisterUser';
-import LogoutUser from './pages/users/LogoutUser';
-import UserProfile from './pages/users/UserProfile';
-import InvitesList from './pages/invites/InvitesList';
-import UploadImage from './pages/UploadImage';
-import Home from './pages/Home';
-import Cookies from 'js-cookie';
-import verifyToken from './utils/auth/verifyToken.jsx';
-import { useSelector } from 'react-redux';
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import CompaniesList from './pages/companies/CompaniesList'
+import RegisterCompany from './pages/companies/RegisterCompany'
+import EditCompany from './pages/companies/EditCompany'
+import ShowCompany from './pages/companies/ShowCompany'
+import LoginUser from './pages/users/LoginUser'
+import RegisterUser from './pages/users/RegisterUser'
+import LogoutUser from './pages/users/LogoutUser'
+import UserProfile from './pages/users/UserProfile'
+import InvitesList from './pages/invites/InvitesList'
+import UploadImage from './pages/UploadImage'
+import Home from './pages/Home'
+import Cookies from 'js-cookie'
+import verifyToken from './utils/auth/verifyToken.jsx'
+import { useSelector } from 'react-redux'
 
 const App = () => {
-  const token = Cookies.get('jwt');
-  verifyToken(token);
+  // Get the JWT token from the cookies
+  const token = Cookies.get('jwt')
+  // Verify the JWT token
+  verifyToken(token)
 
   // @ts-ignore Get userId state from Redux store
-  const userId = useSelector((state) => state.userId);
+  const userId = useSelector((state) => state.userId)
 
   // TODO: [MERNSTACK-163] Redirect user from routes other then /, /login and /register if user is not logged in
   if (userId) {
@@ -45,7 +47,7 @@ const App = () => {
         {/* /invites/* routes */}
         <Route element={<InvitesList />} path='/invites' />
       </Routes>
-    );
+    )
   } else {
     return (
       // Routes when no user is logged in
@@ -57,8 +59,8 @@ const App = () => {
         {/* /register route, render user register page */}
         <Route element={<RegisterUser />} path='/register' />
       </Routes>
-    );
+    )
   }
-};
+}
 
-export default App;
+export default App

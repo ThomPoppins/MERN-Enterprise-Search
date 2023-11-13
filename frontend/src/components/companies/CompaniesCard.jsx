@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import CompaniesSingleCard from './CompaniesSingleCard';
+import React from 'react'
+import PropTypes from 'prop-types'
+import CompaniesSingleCard from './CompaniesSingleCard'
 
 const CompaniesCard = ({ companies, updateCompanies }) => {
   return (
@@ -11,8 +11,8 @@ const CompaniesCard = ({ companies, updateCompanies }) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
 // Validate the prop types
 CompaniesCard.propTypes = {
@@ -20,6 +20,6 @@ CompaniesCard.propTypes = {
   companies: PropTypes.array.isRequired,
   // `updateCompanies` is a function that takes no arguments and returns nothing
   updateCompanies: PropTypes.func.isRequired,
-};
+}
 
-export default CompaniesCard;
+export default CompaniesCard

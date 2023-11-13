@@ -1,7 +1,7 @@
-import React from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
-import { FcBriefcase } from 'react-icons/fc';
-import { FcBusinessman } from 'react-icons/fc';
+import React from 'react'
+import { AiOutlineClose } from 'react-icons/ai'
+import { FcBriefcase } from 'react-icons/fc'
+import { FcBusinessman } from 'react-icons/fc'
 
 const CompanyModal = ({ owners, company, onClose }) => {
   return (
@@ -37,7 +37,7 @@ const CompanyModal = ({ owners, company, onClose }) => {
           <h2 className='my-1'>
             {owners
               ?.map((owner) => {
-                return owner.firstName + ' ' + owner.lastName;
+                return owner.firstName + ' ' + owner.lastName
               })
               .join(', ')}
           </h2>
@@ -48,7 +48,7 @@ const CompanyModal = ({ owners, company, onClose }) => {
         <p className='my-2'>{company.description}</p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CompanyModal;
+export default CompanyModal

@@ -60,7 +60,6 @@
     "comments": "#572e99" // replace #ff0000 with your desired color
   },
   "workbench.editor.enablePreview": false,
-  "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "cSpell.words": [
@@ -83,16 +82,17 @@
     "tailwindcss",
     "textnodes",
     "Thom",
+    "Vind",
     "xhvmidl",
     "yoursecretkey"
   ],
   //! TODO: Enable when removing stylelint 
-  "css.validate": false, 
+  "css.validate": false,
   "[css]": {
     "editor.defaultFormatter": "stylelint.vscode-stylelint"
   },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+  "files.eol": "\n",
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
-  "files.eol": "\n"
 }

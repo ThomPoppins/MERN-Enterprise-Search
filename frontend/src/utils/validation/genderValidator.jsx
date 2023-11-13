@@ -1,9 +1,9 @@
 const genderValidator = (value) => {
   if (value === 'Man' || value === 'Woman' || value === 'Other') {
-    return true;
+    return true
   }
 
-  return false;
-};
+  return false
+}
 
-export default genderValidator;
+export default genderValidator

@@ -1,36 +1,36 @@
-import React, { useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
-import { BACKEND_URL } from '../../../config';
-import axios from 'axios';
-import { useSnackbar } from 'notistack';
-import Spinner from '../Spinner';
+import React, { useState } from 'react'
+import { AiOutlineClose } from 'react-icons/ai'
+import { BACKEND_URL } from '../../../config'
+import axios from 'axios'
+import { useSnackbar } from 'notistack'
+import Spinner from '../Spinner'
 
 const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
-  const [loading, setLoading] = useState(false);
-  const { enqueueSnackbar } = useSnackbar();
+  const [loading, setLoading] = useState(false)
+  const { enqueueSnackbar } = useSnackbar()
 
   const handleDeleteCompany = () => {
-    setLoading(true);
+    setLoading(true)
     axios
       .delete(BACKEND_URL + `/companies/${companyId}`)
       .then(() => {
-        setLoading(false);
+        setLoading(false)
         enqueueSnackbar('Company deleted successfully!', {
           variant: 'success',
           preventDuplicate: true,
-        });
-        updateCompanies();
-        onClose();
+        })
+        updateCompanies()
+        onClose()
       })
       .catch((error) => {
-        setLoading(false);
+        setLoading(false)
         enqueueSnackbar('Error deleting company!', {
           variant: 'error',
           preventDuplicate: true,
-        });
-        console.log(error);
-      });
-  };
+        })
+        console.log(error)
+      })
+  }
 
   return (
     <div
@@ -65,7 +65,7 @@ const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CompanyModal;
+export default CompanyModal

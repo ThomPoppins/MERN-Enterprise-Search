@@ -1,30 +1,18 @@
+'use strict';
+
 module.exports = {
   'env': {
     'browser': true,
     'es2021': true,
   },
   'extends': [
-    "eslint:recommended",
-    // "eslint:all",
-    // "plugin:react/recommended",
+    "eslint:all",
     "plugin:react/all",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
-    // "plugin:react-hooks/all",
-    // "plugin:jsx-a11y/recommended",
     "plugin:jsx-a11y/strict",
     'prettier',
   ],
-  'settings': {
-    'react': {
-      'version': 'detect',
-      "linkComponents": [
-        // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
-        "Hyperlink",
-        {"name": "Link", "linkAttribute": "to"}
-      ]
-    },
-  },
   'overrides': [
     {
       'env': {
@@ -51,13 +39,30 @@ module.exports = {
     "jsx-a11y",
   ],
   'rules': {
-    'react/jsx-uses-react': 'error',
-    'react/jsx-uses-vars': 'error',
+    'consistent-return': 'off',
+    "max-lines-per-function": "off",
+    "no-magic-numbers": "off",
+    "no-nested-ternary": "off",
+    "no-ternary": "off",
+    "no-warning-comments": "off",
+    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/rules-of-hooks": "error",
     'react/display-name': 'error',
+    "react/forbid-component-props": ["error", { "allow": ["className"], "forbid": [] }],
+    "react/function-component-definition": ["error", {
+      "namedComponents": "arrow-function",
+      "unnamedComponents": "arrow-function"
+    }],
     'react/jsx-key': 'error',
+    "react/jsx-max-depth": ["error", { "max": 5 }],
+    // Allow arrow functions in JSX props (Remove this rule when performance becomes an issue)
+    "react/jsx-no-bind": ["error", { "allowArrowFunctions": true }],
     'react/jsx-no-comment-textnodes': 'error',
+    "react/jsx-no-literals": "off",
     'react/jsx-no-target-blank': 'error',
     'react/jsx-no-undef': 'error',
+    'react/jsx-uses-react': 'error',
+    'react/jsx-uses-vars': 'error',
     'react/no-children-prop': 'error',
     'react/no-danger-with-children': 'error',
     'react/no-deprecated': 'error',
@@ -71,16 +76,17 @@ module.exports = {
     'react/prop-types': 'error',
     'react/react-in-jsx-scope': 'error',
     'react/require-render-return': 'error',
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "react/function-component-definition": ["error", {
-      "namedComponents": "arrow-function",
-      "unnamedComponents": "arrow-function"
-    }],
-    "react/jsx-max-depth": ["error", {"max": 5}],
-    "react/jsx-no-bind": ["error", {"allowArrowFunctions": true}], // Allow arrow functions in JSX props (Remove this rule when performance becomes an issue)
     "sort-imports": "off",
-    "react/forbid-component-props": ["error", {"forbid": [], "allow": ["className"]}],
-    "react/jsx-no-literals": "off", // TODO: [MERNSTACK-245] Turn "react/jsx-no-literals" rule back on when the translation system is in place
+    "sort-vars": "off",
+  },
+  'settings': {
+    'react': {
+      "linkComponents": [
+        // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
+        "Hyperlink",
+        { "linkAttribute": "to", "name": "Link" }
+      ],
+      'version': 'detect',
     },
+  },
 };

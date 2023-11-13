@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import Layout from '../../components/layout/Layout';
-import Spinner from '../../components/Spinner';
-import { Link } from 'react-router-dom';
-import { MdOutlineAddBox } from 'react-icons/md';
-import { BACKEND_URL } from '../../../config';
-import CompaniesTable from '../../components/companies/CompaniesTable';
-import CompaniesCard from '../../components/companies/CompaniesCard';
-import { COMPANIES_LIST_SHOW_TYPE } from '../../store/actions';
-import { enqueueSnackbar } from 'notistack';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios'
+import Layout from '../../components/layout/Layout'
+import Spinner from '../../components/Spinner'
+import { Link } from 'react-router-dom'
+import { MdOutlineAddBox } from 'react-icons/md'
+import { BACKEND_URL } from '../../../config'
+import CompaniesTable from '../../components/companies/CompaniesTable'
+import CompaniesCard from '../../components/companies/CompaniesCard'
+import { COMPANIES_LIST_SHOW_TYPE } from '../../store/actions'
+import { enqueueSnackbar } from 'notistack'
 
 const CompaniesList = () => {
   // useDispatch() is a hook that returns the reference to the dispatch function from the Redux store.
@@ -24,35 +24,35 @@ const CompaniesList = () => {
     [loading, setLoading] = useState(false),
     // updateCompanies is a function that sends a GET request to the backend to get the companies that the user owns
     updateCompanies = () => {
-      setLoading(true);
+      setLoading(true)
       axios
         .get(BACKEND_URL + '/companies/owned-companies/' + userId)
         .then((response) => {
-          setCompanies(response.data.data);
-          setLoading(false);
+          setCompanies(response.data.data)
+          setLoading(false)
         })
         .catch((error) => {
           enqueueSnackbar('Error loading companies, please try again later.', {
             variant: 'error',
             preventDuplicate: true,
-          });
+          })
 
-          console.log(error);
+          console.log(error)
 
           // TODO: Search for a pretty loading spinner animation
-          setLoading(false);
-        });
+          setLoading(false)
+        })
     },
     handleShowTypeChange = (showType) => {
       // dispatch() is a function of the Redux store. You call store.dispatch to dispatch an action.
       // The object passed to the dispatch() function is called action.
-      dispatch({ type: COMPANIES_LIST_SHOW_TYPE, payload: showType });
-    };
+      dispatch({ type: COMPANIES_LIST_SHOW_TYPE, payload: showType })
+    }
 
   useEffect(() => {
     // Update the companies when the page is rendered
-    updateCompanies();
-  }, []);
+    updateCompanies()
+  }, [])
 
   return (
     <Layout>
@@ -88,7 +88,7 @@ const CompaniesList = () => {
         )}
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default CompaniesList;
+export default CompaniesList

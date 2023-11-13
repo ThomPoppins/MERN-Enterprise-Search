@@ -1,42 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { use } from 'chai';
-import { useSelector } from 'react-redux';
-import { BACKEND_URL } from '../../../config';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { use } from 'chai'
+import { useSelector } from 'react-redux'
+import { BACKEND_URL } from '../../../config'
 
 const InviteOperations = ({ invite, updateInviteStatus }) => {
   // Spin accept button (after click Find)
-  const [acceptButtonSpinning, setAcceptButtonSpinning] = useState(false);
-  const [declineButtonPing, setDeclineButtonPing] = useState(false);
+  const [acceptButtonSpinning, setAcceptButtonSpinning] = useState(false)
+  const [declineButtonPing, setDeclineButtonPing] = useState(false)
 
   // @ts-ignore
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user)
   // @ts-ignore
-  const userId = useSelector((state) => state.userId);
+  const userId = useSelector((state) => state.userId)
 
   const handleAcceptInvite = async () => {
-    setAcceptButtonSpinning(true);
+    setAcceptButtonSpinning(true)
 
     // Add the user as owner to the company
     await axios
       .put(`${BACKEND_URL}/companies/${invite.companyId}/add-owner/${invite.receiverId}`)
       .then((response) => {
-        console.log('Added user to company: ', response);
+        console.log('Added user to company: ', response)
 
         // Update the invite status to "accepted"
-        updateInviteStatus(invite._id, 'accepted');
+        updateInviteStatus(invite._id, 'accepted')
       })
       .catch((error) => {
-        console.log('ERROR in InviteOperations.jsx add user to company: ', error);
-      });
+        console.log('ERROR in InviteOperations.jsx add user to company: ', error)
+      })
 
     // Timeout for stopping the animation after 2 seconds
     setTimeout(() => {
-      setAcceptButtonSpinning(false);
+      setAcceptButtonSpinning(false)
 
-      console.log('Accepted invite: ', invite._id);
-    }, 2000);
-  };
+      console.log('Accepted invite: ', invite._id)
+    }, 2000)
+  }
 
   return (
     <div id={'operations-' + invite._id} key={invite._id}>
@@ -57,11 +57,11 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
             }`}
             data-test-id='decline-button'
             onClick={() => {
-              setDeclineButtonPing(true);
-              updateInviteStatus(invite._id, 'declined');
+              setDeclineButtonPing(true)
+              updateInviteStatus(invite._id, 'declined')
               setTimeout(() => {
-                setDeclineButtonPing(false);
-              }, 1000);
+                setDeclineButtonPing(false)
+              }, 1000)
             }}
           >
             Decline
@@ -69,7 +69,7 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
         </div>
       </span>
     </div>
-  );
-};
+  )
+}
 
-export default InviteOperations;
+export default InviteOperations

@@ -1,72 +1,72 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { getPendingRecievedInvites } from '../../utils/invites/recievedInvitesUpdater';
-import axios from 'axios';
-import { BACKEND_URL } from '../../../config';
-import InviteOperations from '../../components/invites/InviteOperations';
-import Layout from '../../components/layout/Layout';
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { getPendingRecievedInvites } from '../../utils/invites/recievedInvitesUpdater'
+import axios from 'axios'
+import { BACKEND_URL } from '../../../config'
+import InviteOperations from '../../components/invites/InviteOperations'
+import Layout from '../../components/layout/Layout'
 
 const InvitesList = () => {
   // The invites in the list
-  const [invites, setInvites] = useState([]);
+  const [invites, setInvites] = useState([])
 
   // Navigation to other routes
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   // @ts-ignore Get userId state from Redux store
-  const userId = useSelector((state) => state.userId);
+  const userId = useSelector((state) => state.userId)
   // @ts-ignore Get user state from Redux store
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user)
 
   // Get pending recieved invites from Redux store
   const pendingRecievedInvites = useSelector(
     // @ts-ignore
     (state) => state.pendingRecievedInvites,
-  );
+  )
 
   useEffect(() => {
     // getPendingInvites();
-    getPendingRecievedInvites();
-  }, [user, userId]);
+    getPendingRecievedInvites()
+  }, [user, userId])
 
   useEffect(() => {
-    setInvites(pendingRecievedInvites);
-  }, [pendingRecievedInvites]);
+    setInvites(pendingRecievedInvites)
+  }, [pendingRecievedInvites])
 
   // ! STATUS STATES: "pending", "accepted", "declined" and "canceled"
   const updateInviteStatus = async (inviteId, newStatus) => {
     const response = await axios.put(`${BACKEND_URL}/invites/status/${inviteId}`, {
       status: newStatus,
-    });
+    })
 
-    console.log('Update invite status response: ', response);
+    console.log('Update invite status response: ', response)
 
     Promise.resolve(getPendingRecievedInvites())
       .then((value) => {
-        console.log('InvitesList.jsx updateInviteStatus value: ', value);
+        console.log('InvitesList.jsx updateInviteStatus value: ', value)
 
         setTimeout(() => {
           // @ts-ignore
           const filteredPendingRecievedInvites = pendingRecievedInvites.filter(
             (invite) => invite._id !== inviteId,
-          );
+          )
 
           if (filteredPendingRecievedInvites.length === 0) {
-            navigate('/companies');
-            return;
+            navigate('/companies')
+            return
           }
 
-          setInvites(filteredPendingRecievedInvites);
-        }, 1000);
+          setInvites(filteredPendingRecievedInvites)
+        }, 1000)
 
         // Filter out the invite that was updated
         // @ts-ignore
       })
       .catch((error) => {
-        console.log('ERROR in InvitesList.jsx updateInviteStatus: ', error);
-      });
-  };
+        console.log('ERROR in InvitesList.jsx updateInviteStatus: ', error)
+      })
+  }
 
   return (
     <Layout>
@@ -156,7 +156,7 @@ const InvitesList = () => {
         </table>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default InvitesList;
+export default InvitesList

@@ -1,13 +1,13 @@
-import axios from 'axios';
-import store from '../../store/store';
-import { PENDING_RECIEVED_INVITES } from '../../store/actions';
-import { BACKEND_URL } from '../../../config';
-import { useSelector } from 'react-redux';
+import axios from 'axios'
+import store from '../../store/store'
+import { PENDING_RECIEVED_INVITES } from '../../store/actions'
+import { BACKEND_URL } from '../../../config'
+import { useSelector } from 'react-redux'
 
 // Get pending recieved invites from Redux store
 export const getPendingRecievedInvites = async (userId) => {
   if (!userId) {
-    return;
+    return
   }
 
   // Promise to get the recieved pending invites
@@ -19,35 +19,35 @@ export const getPendingRecievedInvites = async (userId) => {
         // console.log("Invites response: ", response); //! TODO: Remove
 
         if (response.data.length > 0) {
-          resolve(response.data);
+          resolve(response.data)
         }
-        reject('No pending invites');
+        reject('No pending invites')
       })
       .catch((error) => {
-        console.log('ERROR in InvitesList.jsx get pending invites: ', error);
-        reject(error);
-      });
-  });
+        console.log('ERROR in InvitesList.jsx get pending invites: ', error)
+        reject(error)
+      })
+  })
 
   Promise.resolve(updateRecievedPendingInvitesPromise)
     .then((invites) => {
-      console.log('InvitesList.jsx getPendingRecievedInvites invites: ', invites); // ! TODO: Remove
+      console.log('InvitesList.jsx getPendingRecievedInvites invites: ', invites) // ! TODO: Remove
 
       // Update the pending reciever invites Redux state
       store.dispatch({
         type: PENDING_RECIEVED_INVITES,
         payload: invites,
-      });
+      })
     })
     .catch((error) => {
-      console.log('ERROR in InvitesList.jsx get pending invites: ', error);
+      console.log('ERROR in InvitesList.jsx get pending invites: ', error)
       // Update the pending reciever invites Redux state with 0 invites
       store.dispatch({
         type: PENDING_RECIEVED_INVITES,
         payload: [],
-      });
-    });
-};
+      })
+    })
+}
 
 //   // Get the recieving pending invites for the user
 //   await axios

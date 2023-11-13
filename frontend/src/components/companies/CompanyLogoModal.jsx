@@ -1,6 +1,6 @@
-import React from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
-import UploadAvatar from '../UploadAvatar';
+import React from 'react'
+import { AiOutlineClose } from 'react-icons/ai'
+import UploadAvatar from '../UploadAvatar'
 
 const CompanyLogoModal = ({ setLogo, onClose }) => {
   return (
@@ -27,7 +27,7 @@ const CompanyLogoModal = ({ setLogo, onClose }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CompanyLogoModal;
+export default CompanyLogoModal

@@ -1,5 +1,5 @@
-import React from 'react';
-import CompaniesSingleRow from './CompaniesSingleRow';
+import React from 'react'
+import CompaniesSingleRow from './CompaniesSingleRow'
 
 const CompaniesTable = ({ companies, updateCompanies }) => {
   return (
@@ -26,7 +26,7 @@ const CompaniesTable = ({ companies, updateCompanies }) => {
         ))}
       </tbody>
     </table>
-  );
-};
+  )
+}
 
-export default CompaniesTable;
+export default CompaniesTable

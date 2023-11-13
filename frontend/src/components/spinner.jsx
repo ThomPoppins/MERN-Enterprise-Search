@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 const Spinner = () => {
-  return <div />;
-};
+  return <div />
+}
 
-export default Spinner;
+export default Spinner

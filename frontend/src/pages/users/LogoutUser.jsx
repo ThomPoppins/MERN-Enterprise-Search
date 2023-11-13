@@ -1,37 +1,37 @@
-import React, { useState } from 'react';
-import Spinner from '../../components/Spinner';
-import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import store from '../../store/store.jsx';
-import { USER_ID } from '../../store/actions.jsx';
-import Layout from '../../components/layout/Layout';
+import React, { useState } from 'react'
+import Spinner from '../../components/Spinner'
+import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
+import store from '../../store/store.jsx'
+import { USER_ID } from '../../store/actions.jsx'
+import Layout from '../../components/layout/Layout'
 
 const LogoutUser = () => {
   // Loading state for displaying a spinner while the request is being sent to the backend
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   // useNavigate is a hook that allows us to navigate to a different page
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   // handle logout user
   const handleLogoutUser = () => {
-    setLoading(true);
-    Cookies.remove('jwt');
+    setLoading(true)
+    Cookies.remove('jwt')
     store.dispatch({
       type: USER_ID,
       payload: null,
-    });
+    })
     store.dispatch({
       type: 'USER',
       payload: null,
-    });
+    })
     store.dispatch({
       type: 'COMPANIES_LIST_SHOW_TYPE',
       payload: 'card',
-    });
-    setLoading(false);
-    navigate('/');
-  };
+    })
+    setLoading(false)
+    navigate('/')
+  }
 
   return (
     <Layout>
@@ -54,7 +54,7 @@ const LogoutUser = () => {
         <div className='my-32' />
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default LogoutUser;
+export default LogoutUser

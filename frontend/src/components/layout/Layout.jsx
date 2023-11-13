@@ -1,25 +1,25 @@
-import React from 'react';
-import Navbar from './Navbar';
-import { useEffect } from 'react';
-import { getPendingRecievedInvites } from '../../utils/invites/recievedInvitesUpdater';
-import { useSelector } from 'react-redux';
+import React from 'react'
+import Navbar from './Navbar'
+import { useEffect } from 'react'
+import { getPendingRecievedInvites } from '../../utils/invites/recievedInvitesUpdater'
+import { useSelector } from 'react-redux'
 
 const Layout = ({ children }) => {
   // Get userId state from Redux store
   // @ts-ignore
-  const userId = useSelector((state) => state.userId);
+  const userId = useSelector((state) => state.userId)
 
   // Get the pending invites for the user
   useEffect(() => {
     if (!userId) {
-      return;
+      return
     }
 
     return () => {
       // Get the pending invites for the user
-      getPendingRecievedInvites(userId);
-    };
-  }, [userId]);
+      getPendingRecievedInvites(userId)
+    }
+  }, [userId])
 
   return (
     <div className='outer-div min-h-screen'>
@@ -28,7 +28,7 @@ const Layout = ({ children }) => {
         <main>{children}</main>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

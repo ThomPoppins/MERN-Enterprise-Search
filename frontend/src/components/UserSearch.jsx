@@ -1,24 +1,24 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { BACKEND_URL } from '../../config';
-import { VscMail, VscMention, VscPerson } from 'react-icons/vsc';
-import { enqueueSnackbar } from 'notistack';
+import axios from 'axios'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { BACKEND_URL } from '../../config'
+import { VscMail, VscMention, VscPerson } from 'react-icons/vsc'
+import { enqueueSnackbar } from 'notistack'
 
 const UserSearch = ({ companyId, addPendingOwnershipInvite, usersResult, setUsersResult }) => {
   const [searchTerm, setSearchTerm] = useState(''),
     handleSearch = (e) => {
       // if the search input is empty, clear the search results
       if (e.target.value === '') {
-        setSearchTerm('');
-        setUsersResult([]);
-        return;
+        setSearchTerm('')
+        setUsersResult([])
+        return
       }
 
-      setSearchTerm(e.target.value);
-      searchUsers(e.target.value);
+      setSearchTerm(e.target.value)
+      searchUsers(e.target.value)
 
-      console.log('handleSearch e.target.value in UserSearch.jsx: ', e.target.value);
+      console.log('handleSearch e.target.value in UserSearch.jsx: ', e.target.value)
     },
     searchUsers = (searchTerm) => {
       axios
@@ -28,22 +28,22 @@ const UserSearch = ({ companyId, addPendingOwnershipInvite, usersResult, setUser
           },
         })
         .then((response) => {
-          setUsersResult(response.data);
+          setUsersResult(response.data)
           // console.log(response.data); //! TODO: Remove console.log and write errors to logfile
         })
         .catch((error) => {
           if (error.status === 404) {
-            return;
+            return
           }
           enqueueSnackbar('Error searching for users', {
             variant: 'error',
             preventDuplicate: true,
-          });
+          })
 
           // ! TODO: Handle error in UI
-          console.log('ERROR in UserSearch.jsx get search results API call: ', error);
-        });
-    };
+          console.log('ERROR in UserSearch.jsx get search results API call: ', error)
+        })
+    }
 
   return (
     <div>
@@ -95,8 +95,8 @@ const UserSearch = ({ companyId, addPendingOwnershipInvite, usersResult, setUser
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
 // Validate prop types
 UserSearch.propTypes = {
@@ -110,6 +110,6 @@ UserSearch.propTypes = {
   userResult: PropTypes.array,
   // `usersResult` is an array of users that match the search term.
   usersResult: PropTypes.array.isRequired,
-};
+}
 
-export default UserSearch;
+export default UserSearch

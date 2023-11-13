@@ -1,36 +1,36 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { BACKEND_URL } from '../../config';
-import Layout from '../components/layout/Layout';
-import e from 'cors';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { BACKEND_URL } from '../../config'
+import Layout from '../components/layout/Layout'
+import e from 'cors'
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
   // @ts-ignore
-  const userId = useSelector((state) => state.userId);
+  const userId = useSelector((state) => state.userId)
 
   // Ping animation when the find button is clicked
-  const [findButtonPing, setFindButtonPing] = useState(false);
+  const [findButtonPing, setFindButtonPing] = useState(false)
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('')
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleFindExpertsQuery = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    setFindButtonPing(true);
+    setFindButtonPing(true)
 
     // ! TODO: Remove this timeout when the query is implemented and redirects to the search page
     setTimeout(() => {
-      setFindButtonPing(false);
-    }, 5000);
-  };
+      setFindButtonPing(false)
+    }, 5000)
+  }
 
   // Search query input change handler
   const handleSearchQueryChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
+    setSearchQuery(e.target.value)
+  }
 
   if (userId) {
     return (
@@ -92,7 +92,7 @@ const Home = () => {
           </div>
         </div>
       </Layout>
-    );
+    )
   } else {
     return (
       <Layout>
@@ -106,8 +106,8 @@ const Home = () => {
           </p>
         </div>
       </Layout>
-    );
+    )
   }
-};
+}
 
-export default Home;
+export default Home

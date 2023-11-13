@@ -1,45 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import BackButton from '../../components/BackButton';
-import Spinner from '../../components/Spinner';
-import { BACKEND_URL } from '../../../config.js';
-import Layout from '../../components/layout/Layout';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
+import BackButton from '../../components/BackButton'
+import Spinner from '../../components/Spinner'
+import { BACKEND_URL } from '../../../config.js'
+import Layout from '../../components/layout/Layout'
 
 const ShowCompany = () => {
-  const [company, setCompany] = useState({});
-  const [owners, setOwners] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const { id } = useParams();
+  const [company, setCompany] = useState({})
+  const [owners, setOwners] = useState([])
+  const [loading, setLoading] = useState(false)
+  const { id } = useParams()
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(true)
     axios
       .get(BACKEND_URL + `/companies/${id}`)
       .then((response) => {
-        setCompany(response.data);
+        setCompany(response.data)
 
         const ownerPromises = response.data.owners.map((owner) =>
           axios.get(BACKEND_URL + `/users/user/${owner.userId}`),
-        );
+        )
 
         Promise.all(ownerPromises)
           .then((responses) => {
-            const ownersData = responses.map((response) => response.data);
+            const ownersData = responses.map((response) => response.data)
             // @ts-ignore
-            setOwners(ownersData);
-            setLoading(false);
+            setOwners(ownersData)
+            setLoading(false)
           })
           .catch((error) => {
-            console.log(error);
-            setLoading(false);
-          });
+            console.log(error)
+            setLoading(false)
+          })
       })
       .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  }, [id]);
+        console.log(error)
+        setLoading(false)
+      })
+  }, [id])
 
   //
 
@@ -101,7 +101,7 @@ const ShowCompany = () => {
         )}
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default ShowCompany;
+export default ShowCompany

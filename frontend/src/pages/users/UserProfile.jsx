@@ -2,40 +2,40 @@ import {
   BACKEND_URL,
   FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL,
   MALE_PROFILE_PICTURE_PLACEHOLDER_URL,
-} from '../../../config';
-import React, { useEffect, useState } from 'react';
-import { BiPencil } from 'react-icons/bi';
-import EditProfilePictureModal from '../../components/users/EditProfilePictureModal';
-import Layout from '../../components/layout/Layout';
-import { useSelector } from 'react-redux';
+} from '../../../config'
+import React, { useEffect, useState } from 'react'
+import { BiPencil } from 'react-icons/bi'
+import EditProfilePictureModal from '../../components/users/EditProfilePictureModal'
+import Layout from '../../components/layout/Layout'
+import { useSelector } from 'react-redux'
 
 const UserProfile = () => {
   // @ts-ignore userId is a string from the Redux store state
-  const { userId, user } = useSelector((state) => state);
+  const { userId, user } = useSelector((state) => state)
   // Placeholder for profile picture dependent on gender
-  const [profilePicturePlaceholderURL, setProfilePicturePlaceholderURL] = useState('');
+  const [profilePicturePlaceholderURL, setProfilePicturePlaceholderURL] = useState('')
   // State for showing the edit profile picture modal
-  const [showEditProfilePictureModal, setShowEditProfilePictureModal] = useState(false);
+  const [showEditProfilePictureModal, setShowEditProfilePictureModal] = useState(false)
   // Handle the edit profile picture button click event
   const handleEditProfilePicture = () => {
-    setShowEditProfilePictureModal(true);
-  };
+    setShowEditProfilePictureModal(true)
+  }
 
   // When the user is available from the Redux store, set the profile picture placeholder URL
   useEffect(() => {
     if (!user) {
-      return;
+      return
     }
 
     // Set placeholder image for when the user hasn't uploaded a profile picture yet
     if (user.gender === 'Woman') {
       // Female placeholder image
-      setProfilePicturePlaceholderURL(`${BACKEND_URL}${FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL}`);
+      setProfilePicturePlaceholderURL(`${BACKEND_URL}${FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL}`)
     } else {
       // Male placeholder image
-      setProfilePicturePlaceholderURL(`${BACKEND_URL}${MALE_PROFILE_PICTURE_PLACEHOLDER_URL}`);
+      setProfilePicturePlaceholderURL(`${BACKEND_URL}${MALE_PROFILE_PICTURE_PLACEHOLDER_URL}`)
     }
-  }, [user]);
+  }, [user])
 
   return (
     <Layout>
@@ -118,7 +118,7 @@ const UserProfile = () => {
         />
       ) : null}{' '}
     </Layout>
-  );
-};
+  )
+}
 
-export default UserProfile;
+export default UserProfile

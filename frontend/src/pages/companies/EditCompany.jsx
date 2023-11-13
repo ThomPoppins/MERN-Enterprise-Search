@@ -1,184 +1,184 @@
-import React, { useEffect, useState } from 'react';
-import Spinner from '../../components/Spinner';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
-import { BACKEND_URL, TEST_KVK_API } from '../../../config.js';
-import { useSnackbar } from 'notistack';
-import companyNameValidator from '../../utils/validation/companyNameValidator';
-import emailValidator from '../../utils/validation/emailValidator';
-import phoneNumberValidator from '../../utils/validation/phoneNumberValidator';
-import kvkNumberValidator from '../../utils/validation/kvkNumberValidator';
-import companySloganValidator from '../../utils/validation/companySloganValidator';
-import companyDescriptionValidator from '../../utils/validation/companyDescriptionValidator';
-import startYearValidator from '../../utils/validation/startYearValidator';
-import UserSearch from '../../components/UserSearch';
-import { VscMail, VscMention, VscPerson } from 'react-icons/vsc';
-import { useSelector } from 'react-redux';
-import { PENDING_RECIEVED_INVITES } from '../../store/actions';
-import store from '../../store/store';
-import CompanyLogoModal from '../../components/companies/CompanyLogoModal';
-import Layout from '../../components/layout/Layout';
+import React, { useEffect, useState } from 'react'
+import Spinner from '../../components/Spinner'
+import axios from 'axios'
+import { useNavigate, useParams } from 'react-router-dom'
+import { BACKEND_URL, TEST_KVK_API } from '../../../config.js'
+import { useSnackbar } from 'notistack'
+import companyNameValidator from '../../utils/validation/companyNameValidator'
+import emailValidator from '../../utils/validation/emailValidator'
+import phoneNumberValidator from '../../utils/validation/phoneNumberValidator'
+import kvkNumberValidator from '../../utils/validation/kvkNumberValidator'
+import companySloganValidator from '../../utils/validation/companySloganValidator'
+import companyDescriptionValidator from '../../utils/validation/companyDescriptionValidator'
+import startYearValidator from '../../utils/validation/startYearValidator'
+import UserSearch from '../../components/UserSearch'
+import { VscMail, VscMention, VscPerson } from 'react-icons/vsc'
+import { useSelector } from 'react-redux'
+import { PENDING_RECIEVED_INVITES } from '../../store/actions'
+import store from '../../store/store'
+import CompanyLogoModal from '../../components/companies/CompanyLogoModal'
+import Layout from '../../components/layout/Layout'
 
 const EditCompany = () => {
   // ADD OWNERS TO COMPANY TICKETS:
   // TODO: [MERNSTACK-129] Add state for all companies fields that can be edited
 
   // Get the companyId from the URL
-  const { id } = useParams();
-  const companyId = id;
+  const { id } = useParams()
+  const companyId = id
 
   // @ts-ignore Get the userId from the Redux store
-  const userId = useSelector((state) => state.userId);
+  const userId = useSelector((state) => state.userId)
   // @ts-ignore Get the user from the Redux store
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user)
 
   // Input field values for editing a company as state
-  const [name, setName] = useState('');
-  const [logo, setLogo] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [kvkNumber, setKvkNumber] = useState('');
-  const [slogan, setSlogan] = useState('');
-  const [description, setDescription] = useState('');
-  const [startYear, setStartYear] = useState(0);
+  const [name, setName] = useState('')
+  const [logo, setLogo] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [kvkNumber, setKvkNumber] = useState('')
+  const [slogan, setSlogan] = useState('')
+  const [description, setDescription] = useState('')
+  const [startYear, setStartYear] = useState(0)
 
   // Error state for displaying error messages if the user enters invalid input
-  const [nameError, setNameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [phoneError, setPhoneError] = useState(false);
-  const [kvkNumberError, setKvkNumberError] = useState(false);
-  const [sloganError, setSloganError] = useState(false);
-  const [descriptionError, setDescriptionError] = useState(false);
-  const [startYearError, setStartYearError] = useState(false);
+  const [nameError, setNameError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
+  const [phoneError, setPhoneError] = useState(false)
+  const [kvkNumberError, setKvkNumberError] = useState(false)
+  const [sloganError, setSloganError] = useState(false)
+  const [descriptionError, setDescriptionError] = useState(false)
+  const [startYearError, setStartYearError] = useState(false)
 
   // Specific error messages to display when the user enters invalid input
-  const [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState('');
+  const [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState('')
 
   // Owners state
-  const [owners, setOwners] = useState([]);
+  const [owners, setOwners] = useState([])
 
   // Pending ownership invites state
-  const [pendingOwnershipInvites, setPendingOwnershipInvites] = useState([]);
+  const [pendingOwnershipInvites, setPendingOwnershipInvites] = useState([])
 
   // Search results state for searching users to add as owners
-  const [usersResult, setUsersResult] = useState([]);
+  const [usersResult, setUsersResult] = useState([])
 
   // Removed owners ids
-  const [removedOwnersIds, setRemovedOwnersIds] = useState([]);
+  const [removedOwnersIds, setRemovedOwnersIds] = useState([])
 
   // Set showLogoModal to true to show the modal for uploading a company logo
-  const [showLogoModal, setShowLogoModal] = useState(false);
+  const [showLogoModal, setShowLogoModal] = useState(false)
 
   // Display a spinner when loading data from the backend
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   // useNavigate is a hook that allows us to navigate to a different page
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   // useSnackbar is a hook that allows us to show a snackbar https://www.npmjs.com/package/notistack https://iamhosseindhv.com/notistack/demos#use-snackbar
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar()
 
   // useEffect is a hook that runs a function when the component is rendered
   useEffect(() => {
-    getPendingOwnershipInvites();
-  }, [companyId, userId, user]);
+    getPendingOwnershipInvites()
+  }, [companyId, userId, user])
 
   // Validation functions for validating the input fields and put a red border around the input field if the input is invalid
   // and display an error message under the input field explaining the right format
   const validateCompanyName = () => {
     if (!companyNameValidator(name)) {
-      setNameError(true);
+      setNameError(true)
     } else {
-      setNameError(false);
+      setNameError(false)
     }
-  };
+  }
   const validateEmail = () => {
     if (!emailValidator(email)) {
-      setEmailError(true);
+      setEmailError(true)
     } else {
-      setEmailError(false);
+      setEmailError(false)
     }
-  };
+  }
   const validatePhone = () => {
     if (!phoneNumberValidator(phone, 'NL')) {
-      setPhoneError(true);
+      setPhoneError(true)
     } else {
-      setPhoneError(false);
+      setPhoneError(false)
     }
-  };
+  }
   const validateKvkNumber = async () => {
     if (!(await kvkNumberValidator(kvkNumber))) {
-      setKvkNumberError(true);
-      throw new Error('Invalid KVK number!');
+      setKvkNumberError(true)
+      throw new Error('Invalid KVK number!')
     } else {
-      setKvkNumberError(false);
+      setKvkNumberError(false)
     }
-  };
+  }
   const validateSlogan = () => {
     if (!companySloganValidator(slogan)) {
-      setSloganError(true);
+      setSloganError(true)
     } else {
-      setSloganError(false);
+      setSloganError(false)
     }
-  };
+  }
   const validateDescription = () => {
     if (!companyDescriptionValidator(description)) {
-      setDescriptionError(true);
+      setDescriptionError(true)
     } else {
-      setDescriptionError(false);
+      setDescriptionError(false)
     }
-  };
+  }
   const validateStartYear = () => {
     if (!startYearValidator(startYear)) {
-      setStartYearError(true);
+      setStartYearError(true)
     } else {
-      setStartYearError(false);
+      setStartYearError(false)
     }
-  };
+  }
 
   // Handle onChange events for all input fields
   const handleNameChange = (e) => {
-    setName(e.target.value);
+    setName(e.target.value)
     if (nameError) {
-      validateCompanyName();
+      validateCompanyName()
     }
-  };
+  }
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    setEmail(e.target.value)
     if (emailError) {
-      validateEmail();
+      validateEmail()
     }
-  };
+  }
   const handlePhoneChange = (e) => {
-    setPhone(e.target.value);
+    setPhone(e.target.value)
     if (phoneError) {
-      validatePhone();
+      validatePhone()
     }
-  };
+  }
   const handleKvkNumberChange = async (e) => {
-    setKvkNumber(e.target.value);
+    setKvkNumber(e.target.value)
     if (kvkNumberError) {
-      await validateKvkNumber();
+      await validateKvkNumber()
     }
-  };
+  }
   const handleSloganChange = (e) => {
-    setSlogan(e.target.value);
+    setSlogan(e.target.value)
     if (sloganError) {
-      validateSlogan();
+      validateSlogan()
     }
-  };
+  }
   const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
+    setDescription(e.target.value)
     if (descriptionError) {
-      validateDescription();
+      validateDescription()
     }
-  };
+  }
   const handleStartYearChange = (e) => {
-    setStartYear(e.target.value);
+    setStartYear(e.target.value)
     if (startYearError) {
-      validateStartYear();
+      validateStartYear()
     }
-  };
+  }
 
   // Display error messages when the user enters invalid input
   useEffect(() => {
@@ -186,43 +186,43 @@ const EditCompany = () => {
       enqueueSnackbar('Invalid company name!', {
         variant: 'error',
         preventDuplicate: true,
-      });
+      })
     }
     if (emailError) {
       enqueueSnackbar('Invalid email!', {
         variant: 'error',
         preventDuplicate: true,
-      });
+      })
     }
     if (phoneError) {
       enqueueSnackbar('Invalid phone number!', {
         variant: 'error',
         preventDuplicate: true,
-      });
+      })
     }
     if (kvkNumberError) {
       enqueueSnackbar('Invalid KVK number!', {
         variant: 'error',
         preventDuplicate: true,
-      });
+      })
     }
     if (sloganError) {
       enqueueSnackbar('Invalid slogan!', {
         variant: 'error',
         preventDuplicate: true,
-      });
+      })
     }
     if (descriptionError) {
       enqueueSnackbar('Invalid description!', {
         variant: 'error',
         preventDuplicate: true,
-      });
+      })
     }
     if (startYearError) {
       enqueueSnackbar('Invalid start year!', {
         variant: 'error',
         preventDuplicate: true,
-      });
+      })
     }
   }, [
     nameError,
@@ -232,76 +232,76 @@ const EditCompany = () => {
     sloganError,
     descriptionError,
     startYearError,
-  ]);
+  ])
 
   // useEffect() is a hook that runs a function when the component is rendered
   useEffect(() => {
-    setLoading(true);
+    setLoading(true)
     axios
       .get(BACKEND_URL + '/companies/' + companyId)
       .then((response) => {
-        setLoading(false);
-        setName(response.data.name);
-        setLogo(response.data.logo);
-        setEmail(response.data.email);
-        setPhone(response.data.phone);
-        setKvkNumber(response.data.kvkNumber);
-        setSlogan(response.data.slogan);
-        setDescription(response.data.description);
-        setStartYear(response.data.startYear);
+        setLoading(false)
+        setName(response.data.name)
+        setLogo(response.data.logo)
+        setEmail(response.data.email)
+        setPhone(response.data.phone)
+        setKvkNumber(response.data.kvkNumber)
+        setSlogan(response.data.slogan)
+        setDescription(response.data.description)
+        setStartYear(response.data.startYear)
 
         // Set owners
-        const userIds = [];
+        const userIds = []
         response.data.owners.forEach((owner) => {
-          userIds.push(owner.userId);
-        });
+          userIds.push(owner.userId)
+        })
 
         // Get all owners data
         const ownerPromises = userIds.map((userId) => {
-          return axios.get(BACKEND_URL + '/users/user/' + userId);
-        });
+          return axios.get(BACKEND_URL + '/users/user/' + userId)
+        })
 
         // Resolve all promises to get owners user data
         Promise.all(ownerPromises)
           .then((responses) => {
-            const ownersData = responses.map((response) => response.data);
+            const ownersData = responses.map((response) => response.data)
             // @ts-ignore Update the owners state
-            setOwners(ownersData);
+            setOwners(ownersData)
           })
           .catch((error) => {
-            console.log(error);
-          });
+            console.log(error)
+          })
       })
       .catch((error) => {
-        setLoading(false);
+        setLoading(false)
         enqueueSnackbar('Error fetching company, please check the console.', {
           variant: 'error',
           preventDuplicate: true,
-        });
+        })
 
-        console.log('ERROR fetching company in useEffect(): ', error); // ! TODO: Remove console.log and write errors to logfile
-      });
-  }, []);
+        console.log('ERROR fetching company in useEffect(): ', error) // ! TODO: Remove console.log and write errors to logfile
+      })
+  }, [])
 
   // handleEditCompany is a function that sends a PUT request to the backend to update a company
   const handleEditCompany = async () => {
     // Validate all fields before sending the request to the backend, otherwise return
-    validateCompanyName();
-    validateEmail();
-    validatePhone();
+    validateCompanyName()
+    validateEmail()
+    validatePhone()
     try {
-      await validateKvkNumber();
+      await validateKvkNumber()
     } catch (error) {
       enqueueSnackbar('Error validating KVK number!', {
         variant: 'error',
         preventDuplicate: true,
-      });
-      console.log(error);
-      return;
+      })
+      console.log(error)
+      return
     }
-    validateSlogan();
-    validateDescription();
-    validateStartYear();
+    validateSlogan()
+    validateDescription()
+    validateStartYear()
     if (
       nameError ||
       emailError ||
@@ -321,8 +321,8 @@ const EditCompany = () => {
       enqueueSnackbar('Please fill in all fields correctly before saving this company!', {
         variant: 'error',
         preventDuplicate: true,
-      });
-      return;
+      })
+      return
     }
 
     const data = {
@@ -334,40 +334,40 @@ const EditCompany = () => {
       slogan,
       description,
       startYear,
-    };
-    setLoading(true);
+    }
+    setLoading(true)
     axios
       .put(BACKEND_URL + `/companies/${companyId}`, data)
       .then(() => {
-        setLoading(false);
+        setLoading(false)
         enqueueSnackbar('Company edited successfully!', {
           variant: 'success',
           preventDuplicate: true,
-        });
-        navigate('/companies');
+        })
+        navigate('/companies')
       })
       .catch((error) => {
         if (error.response.status === 409) {
           enqueueSnackbar('Company with this KVK number already exists!', {
             variant: 'error',
             preventDuplicate: true,
-          });
-          setKvkNumberError(true);
-          setKvkNumberErrorMessage('Company with this KVK number already exists!');
+          })
+          setKvkNumberError(true)
+          setKvkNumberErrorMessage('Company with this KVK number already exists!')
         }
 
-        setLoading(false);
+        setLoading(false)
         enqueueSnackbar('Error editing company!', {
           variant: 'error',
           preventDuplicate: true,
-        });
-        console.log(error);
-      });
-  };
+        })
+        console.log(error)
+      })
+  }
 
   const getPendingOwnershipInvites = async () => {
     if (!userId || !user || !companyId) {
-      return;
+      return
     }
 
     // Get all pending ownership invites for the sender
@@ -385,26 +385,26 @@ const EditCompany = () => {
         enqueueSnackbar('Error fetching pending ownership invites', {
           variant: 'error',
           preventDuplicate: true,
-        });
+        })
 
-        console.log('ERROR in getPendingOwnershipInvites: ', error);
-      });
+        console.log('ERROR in getPendingOwnershipInvites: ', error)
+      })
 
     Promise.resolve(pendingInvites).then((response) => {
       // @ts-ignore Set the pending ownership invites state
-      setPendingOwnershipInvites(response.data);
-    });
-  };
+      setPendingOwnershipInvites(response.data)
+    })
+  }
 
   // Add pending ownership invite
   const addPendingOwnershipInvite = async (e) => {
     // Prevent the form from submitting
-    e.preventDefault();
+    e.preventDefault()
 
     // Get the id of the user to be invited as an owner
-    const invitedOwnerId = e.target.value;
+    const invitedOwnerId = e.target.value
 
-    console.log('invitedOwnerId: ', invitedOwnerId); // ! TODO: Remove console.log and write errors to logfile
+    console.log('invitedOwnerId: ', invitedOwnerId) // ! TODO: Remove console.log and write errors to logfile
 
     // Make an API call to invite the user as an owner
     await axios
@@ -416,45 +416,45 @@ const EditCompany = () => {
         status: 'pending',
       })
       .then((response) => {
-        console.log('UserSearch.jsx response.data invite ownership: ', response.data); // ! TODO: Remove console.log and write errors to logfile
+        console.log('UserSearch.jsx response.data invite ownership: ', response.data) // ! TODO: Remove console.log and write errors to logfile
 
         // Filter the invited owner from the search results
         const newUsersResult = usersResult.filter(
           // @ts-ignore
           (user) => user._id !== invitedOwnerId,
-        );
+        )
         // @ts-ignore  Update the search results
-        setUsersResult(newUsersResult);
+        setUsersResult(newUsersResult)
 
         // @ts-ignore Add the pending ownership invite to the pending ownership invites state
-        setPendingOwnershipInvites([...pendingOwnershipInvites, response.data]);
+        setPendingOwnershipInvites([...pendingOwnershipInvites, response.data])
 
         enqueueSnackbar('Co-owner invited!', {
           variant: 'success',
           preventDuplicate: true,
-        });
+        })
       })
       .catch((error) => {
         enqueueSnackbar('Error inviting user as owner', {
           variant: 'error',
           preventDuplicate: true,
-        });
+        })
 
-        console.log('ERROR in UserSearch.jsx invite owner API call: ', error.response.data); // ! TODO: Remove console.log and write errors to logfile
-      });
-  };
+        console.log('ERROR in UserSearch.jsx invite owner API call: ', error.response.data) // ! TODO: Remove console.log and write errors to logfile
+      })
+  }
 
   // useEffect is a hook that runs a function when the component is rendered
-  useEffect(() => {}, [pendingOwnershipInvites]);
+  useEffect(() => {}, [pendingOwnershipInvites])
 
   const handleCancelPendingOwnershipInvite = (e) => {
     // Prevent the form from submitting
-    e.preventDefault();
+    e.preventDefault()
 
     // Get the id of the pending ownership invite to be canceled
-    const inviteId = e.target.value;
+    const inviteId = e.target.value
 
-    console.log('handleCancelPendingOwnershipInvite pendingOwnershipInviteId: ', inviteId); // ! TODO: Remove console.log
+    console.log('handleCancelPendingOwnershipInvite pendingOwnershipInviteId: ', inviteId) // ! TODO: Remove console.log
 
     // Make an API call to cancel the pending ownership invite
     axios
@@ -462,27 +462,27 @@ const EditCompany = () => {
         status: 'canceled',
       })
       .then((response) => {
-        console.log('handleCancelPendingOwnershipInvite response.data: ', response.data); // ! TODO: Remove console.log
+        console.log('handleCancelPendingOwnershipInvite response.data: ', response.data) // ! TODO: Remove console.log
 
         // Remove the canceled pending ownership invite from the pending ownership invites state
         const newPendingOwnershipInvites = pendingOwnershipInvites.filter(
           // @ts-ignore
           (invite) => invite._id !== inviteId,
-        );
+        )
 
         // @ts-ignore Update the pending ownership invites state
         setPendingOwnershipInvites(
           // @ts-ignore
           newPendingOwnershipInvites || [],
-        );
+        )
 
         store.dispatch({
           type: PENDING_RECIEVED_INVITES,
           payload: newPendingOwnershipInvites || [],
-        });
+        })
 
         // Add the user that was removed as an invited owner back to the search results
-        console.log('Users result before adding user back: ', usersResult);
+        console.log('Users result before adding user back: ', usersResult)
 
         // @ts-ignore Update the search results and filter out the user that was removed to be an invited owner
         setUsersResult(
@@ -490,67 +490,67 @@ const EditCompany = () => {
             // @ts-ignore
             (user) => user._id !== response.data.receiverId,
           ),
-        );
+        )
       })
       .catch((error) => {
         enqueueSnackbar('Error canceling pending ownership invite', {
           variant: 'error',
           preventDuplicate: true,
-        });
-        console.log('ERROR in handleCancelPendingOwnershipInvite: ', error); // ! TODO: Remove console.log and write errors to logfile
-      });
-  };
+        })
+        console.log('ERROR in handleCancelPendingOwnershipInvite: ', error) // ! TODO: Remove console.log and write errors to logfile
+      })
+  }
 
   const handleRemoveUserAsCompanyOwner = (e) => {
-    console.log('handleRemoveUserAsCompanyOwner e.target.value: ', e.target.value); // ! TODO: Remove console.log
+    console.log('handleRemoveUserAsCompanyOwner e.target.value: ', e.target.value) // ! TODO: Remove console.log
 
     // @ts-ignore Set removed owners to show up in the search results again
-    setRemovedOwnersIds([...removedOwnersIds, e.target.value]);
+    setRemovedOwnersIds([...removedOwnersIds, e.target.value])
 
     axios
       .put(BACKEND_URL + '/companies/' + companyId + '/remove-owner/' + e.target.value)
       .then((response) => {
-        console.log('handleRemoveUserAsCompanyOwner response.data: ', response.data);
-        console.log('handleRemoveUserAsCompanyOwner response.data.owners: ', response.data.owners);
+        console.log('handleRemoveUserAsCompanyOwner response.data: ', response.data)
+        console.log('handleRemoveUserAsCompanyOwner response.data.owners: ', response.data.owners)
 
-        const userIds = [];
+        const userIds = []
         response.data.owners.forEach((owner) => {
-          userIds.push(owner.userId);
-        });
+          userIds.push(owner.userId)
+        })
 
         const ownerPromises = userIds.map((userId) =>
           axios.get(BACKEND_URL + '/users/user/' + userId),
-        );
+        )
 
         Promise.all(ownerPromises)
           .then((responses) => {
-            const ownersData = responses.map((response) => response.data);
-            console.log('ownersData in removeUserAsOwner function: ', ownersData);
+            const ownersData = responses.map((response) => response.data)
+            console.log('ownersData in removeUserAsOwner function: ', ownersData)
             // @ts-ignore Update the owners state
-            setOwners(ownersData);
+            setOwners(ownersData)
 
             // @ts-ignore Set removed owners to show up in the search results again
-            setRemovedOwnersIds([...removedOwnersIds, e.target.value]);
+            setRemovedOwnersIds([...removedOwnersIds, e.target.value])
           })
           .catch((error) => {
             enqueueSnackbar('Error removing user as owner', {
               variant: 'error',
               preventDuplicate: true,
-            });
+            })
 
             // Reset removed owners ids to before Promise
             const removedOwnersIdsFallback = [...removedOwnersIds].filter(
               // If the removed owner id is not equal to the removed owner id that was just removed
               (removedOwnerId) => removedOwnerId !== e.target.value,
-            );
+            )
 
             // @ts-ignore Update the removed owners ids state
-            setRemovedOwnersIds(removedOwnersIdsFallback);
+            setRemovedOwnersIds(removedOwnersIdsFallback)
 
-            console.log(error);
-          });
-      });
-  };
+            console.log(error)
+          })
+      })
+  }
 
   return (
     <Layout>
@@ -613,7 +613,7 @@ const EditCompany = () => {
                       )}
                     </div>
                   </div>
-                );
+                )
               })}
             </ul>
           </div>
@@ -672,7 +672,7 @@ const EditCompany = () => {
                           </button>
                         </div>
                       </div>
-                    );
+                    )
                   })}
                 </ul>
               </div>
@@ -875,7 +875,7 @@ const EditCompany = () => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default EditCompany;
+export default EditCompany

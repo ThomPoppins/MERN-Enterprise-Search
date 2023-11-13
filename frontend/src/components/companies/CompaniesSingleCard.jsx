@@ -1,40 +1,40 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { BiShow } from 'react-icons/bi';
-import { FcBriefcase } from 'react-icons/fc';
-import { FcBusinessman } from 'react-icons/fc';
-import { FcCellPhone } from 'react-icons/fc';
-import { FcAddressBook } from 'react-icons/fc';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { BsInfoCircle } from 'react-icons/bs';
-import { MdOutlineDelete } from 'react-icons/md';
-import { useState } from 'react';
-import CompanyModal from './CompanyModal';
-import DeleteCompanyModal from './DeleteCompanyModal';
-import { BACKEND_URL } from '../../../config';
+import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+import { BiShow } from 'react-icons/bi'
+import { FcBriefcase } from 'react-icons/fc'
+import { FcBusinessman } from 'react-icons/fc'
+import { FcCellPhone } from 'react-icons/fc'
+import { FcAddressBook } from 'react-icons/fc'
+import { AiOutlineEdit } from 'react-icons/ai'
+import { BsInfoCircle } from 'react-icons/bs'
+import { MdOutlineDelete } from 'react-icons/md'
+import { useState } from 'react'
+import CompanyModal from './CompanyModal'
+import DeleteCompanyModal from './DeleteCompanyModal'
+import { BACKEND_URL } from '../../../config'
 
 const CompaniesSingleCard = ({ company, updateCompanies }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [owners, setOwners] = useState([]);
+  const [showModal, setShowModal] = useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [owners, setOwners] = useState([])
 
   useEffect(() => {
     const ownerPromises = company.owners.map((owner) =>
       axios.get(BACKEND_URL + `/users/user/${owner.userId}`),
-    );
+    )
 
     Promise.all(ownerPromises)
       .then((responses) => {
-        const ownersData = responses.map((response) => response.data);
+        const ownersData = responses.map((response) => response.data)
         // @ts-ignore
-        setOwners(ownersData);
+        setOwners(ownersData)
       })
       .catch((error) => {
-        console.log(error);
-      });
-  }, [company.owners]);
+        console.log(error)
+      })
+  }, [company.owners])
 
   return (
     <div
@@ -66,7 +66,7 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
             {owners
               ?.map((owner) => {
                 // @ts-ignore
-                return owner.firstName + ' ' + owner.lastName;
+                return owner.firstName + ' ' + owner.lastName
               })
               .join(', ')}
           </span>
@@ -101,12 +101,12 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
         />
       ) : null}
     </div>
-  );
-};
+  )
+}
 
 CompaniesSingleCard.propTypes = {
   company: PropTypes.object.isRequired,
   updateCompanies: PropTypes.func.isRequired,
-};
+}
 
-export default CompaniesSingleCard;
+export default CompaniesSingleCard

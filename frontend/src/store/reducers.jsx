@@ -4,53 +4,53 @@ import {
   PENDING_RECIEVED_INVITES,
   USER,
   USER_ID,
-} from './actions.jsx';
+} from './actions.jsx'
 
 const booksListShowTypeReducer = (state = 'card', action) => {
   switch (action.type) {
     case BOOKS_LIST_SHOW_TYPE:
-      return action.payload;
+      return action.payload
     default:
-      return state;
+      return state
   }
-};
+}
 
 const companiesListShowTypeReducer = (state = 'card', action) => {
   switch (action.type) {
     case COMPANIES_LIST_SHOW_TYPE:
-      return action.payload;
+      return action.payload
     default:
-      return state;
+      return state
   }
-};
+}
 
 const userIdReducer = (state = null, action) => {
   switch (action.type) {
     case USER_ID:
-      return action.payload;
+      return action.payload
     default:
-      return state;
+      return state
   }
-};
+}
 
 // Save user details in redux store
 const userReducer = (state = null, action) => {
   switch (action.type) {
     case USER:
-      return action.payload;
+      return action.payload
     default:
-      return state;
+      return state
   }
-};
+}
 
 const pendingRecievedInvitesReducer = (state = null, action) => {
   switch (action.type) {
     case PENDING_RECIEVED_INVITES:
-      return action.payload;
+      return action.payload
     default:
-      return state;
+      return state
   }
-};
+}
 
 // Add additional reducers here to the object
 // Don't forget to import them at the top of the rootReducer.jsx file
@@ -61,4 +61,4 @@ export {
   userIdReducer,
   userReducer,
   pendingRecievedInvitesReducer,
-};
+}

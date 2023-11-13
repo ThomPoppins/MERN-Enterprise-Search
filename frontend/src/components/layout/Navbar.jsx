@@ -1,64 +1,53 @@
-import { HiOutlineCog, HiOutlineLogout, HiUser } from 'react-icons/hi';
-import { LuClipboardCheck, LuClipboardList } from 'react-icons/lu'; // ! TODO: Re
-import React, { useEffect, useState } from 'react';
-import { BACKEND_URL } from '../../../config';
-import { HiOutlineBriefcase } from 'react-icons/hi2';
-import { getPendingRecievedInvites } from '../../utils/invites/recievedInvitesUpdater';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { HiOutlineCog, HiOutlineLogout, HiUser } from 'react-icons/hi'
+import { LuClipboardCheck, LuClipboardList } from 'react-icons/lu'
+import React, { useEffect, useState } from 'react'
+import { BACKEND_URL } from '../../../config'
+import { HiOutlineBriefcase } from 'react-icons/hi2'
+import { getPendingRecievedInvites } from '../../utils/invites/recievedInvitesUpdater'
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
   // @ts-ignore
-  const userId = useSelector((state) => state.userId);
-  // @ts-ignore
-  const user = useSelector((state) => state.user);
-
-  const pendingRecievedInvites = useSelector(
+  const userId = useSelector((state) => state.userId),
     // @ts-ignore
-    (state) => state.pendingRecievedInvites,
-  );
-
-  const title = 'Vind-Expert';
-
-  // Should the active user be alerted about pending invites?
-  // ! DECIDE: Maybe ALL notifications should trigger a general notification state, maybe not.
-  const [inviteAlert, setInviteAlert] = useState(false);
+    user = useSelector((state) => state.user),
+    pendingRecievedInvites = useSelector(
+      // @ts-ignore
+      (state) => state.pendingRecievedInvites,
+    ),
+    // Should the active user be alerted about pending invites? (true/false)
+    [inviteAlert, setInviteAlert] = useState(false),
+    // Is the dropdown menu open?
+    [isDropdownOpen, setIsDropdownOpen] = useState(false),
+    // Toggle the dropdown menu open/closed
+    toggleDropdown = () => {
+      setIsDropdownOpen(!isDropdownOpen)
+    }
 
   // When the pending invites are available
   useEffect(() => {
     if (!pendingRecievedInvites || !userId) {
-      return;
+      return
     }
 
-    // Set the amount of pending invites
-    pendingRecievedInvites === null
-      ? setInviteAlert(false)
-      : pendingRecievedInvites.length > 0
-      ? setInviteAlert(true)
-      : setInviteAlert(false);
-  }, [user, userId, pendingRecievedInvites]);
+    const hasPendingInvites = pendingRecievedInvites && pendingRecievedInvites.length > 0
+    setInviteAlert(hasPendingInvites)
+  }, [user, userId, pendingRecievedInvites])
 
   useEffect(() => {
     if (!userId) {
-      return;
+      return
     }
 
     // Get pending recieved invites every 30 seconds
     const interval = setInterval(() => {
-      getPendingRecievedInvites(userId);
-    }, 30000);
+      getPendingRecievedInvites(userId)
+    }, 30000)
 
     // Cleanup the interval when the component unmounts
-    return () => clearInterval(interval);
-  }, [userId]);
-
-  // Is the dropdown menu open?
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  // Toggle the dropdown menu open/closed
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+    return () => clearInterval(interval)
+  }, [userId])
 
   return (
     <nav className='bg-gradient-to-r from-violet-950 to-purple-950 p-4 shadow-lg'>
@@ -71,10 +60,9 @@ const Navbar = () => {
         <div className='flex justify-between items-center'>
           <div className='text-white'>
             <Link to='/'>
-              <h1 className=' text-2xl font-bold'>{title}</h1>
+              <h1 className=' text-2xl font-bold'>Vind-Expert</h1>
             </Link>
           </div>
-
           <div className='flex space-x-4'>
             {userId ? (
               <div>
@@ -86,7 +74,7 @@ const Navbar = () => {
                       onClick={toggleDropdown}
                       onKeyDown={(event) => {
                         if (event.key === 'm') {
-                          toggleDropdown();
+                          toggleDropdown()
                         }
                       }}
                       role='button'
@@ -184,7 +172,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

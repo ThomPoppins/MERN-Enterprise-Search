@@ -1,11 +1,11 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux'
 import {
   booksListShowTypeReducer,
   companiesListShowTypeReducer,
   pendingRecievedInvitesReducer,
   userIdReducer,
   userReducer,
-} from './reducers.jsx';
+} from './reducers.jsx'
 
 const rootReducer = combineReducers({
   booksListShowType: booksListShowTypeReducer,
@@ -13,6 +13,6 @@ const rootReducer = combineReducers({
   userId: userIdReducer,
   user: userReducer,
   pendingRecievedInvites: pendingRecievedInvitesReducer,
-});
+})
 
-export default rootReducer;
+export default rootReducer

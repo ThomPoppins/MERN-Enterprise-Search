@@ -1,155 +1,155 @@
-import React, { useEffect, useState } from 'react';
-import BackButton from '../../components/BackButton';
-import Spinner from '../../components/Spinner';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { BACKEND_URL, TEST_KVK_API } from '../../../config.js';
-import { useSnackbar } from 'notistack';
-import companyNameValidator from '../../utils/validation/companyNameValidator';
-import emailValidator from '../../utils/validation/emailValidator';
-import phoneNumberValidator from '../../utils/validation/phoneNumberValidator';
-import kvkNumberValidator from '../../utils/validation/kvkNumberValidator';
-import companySloganValidator from '../../utils/validation/companySloganValidator';
-import companyDescriptionValidator from '../../utils/validation/companyDescriptionValidator';
-import startYearValidator from '../../utils/validation/startYearValidator';
-import { useSelector } from 'react-redux';
-import CompanyLogoModal from '../../components/companies/CompanyLogoModal';
-import Layout from '../../components/layout/Layout';
+import React, { useEffect, useState } from 'react'
+import BackButton from '../../components/BackButton'
+import Spinner from '../../components/Spinner'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { BACKEND_URL, TEST_KVK_API } from '../../../config.js'
+import { useSnackbar } from 'notistack'
+import companyNameValidator from '../../utils/validation/companyNameValidator'
+import emailValidator from '../../utils/validation/emailValidator'
+import phoneNumberValidator from '../../utils/validation/phoneNumberValidator'
+import kvkNumberValidator from '../../utils/validation/kvkNumberValidator'
+import companySloganValidator from '../../utils/validation/companySloganValidator'
+import companyDescriptionValidator from '../../utils/validation/companyDescriptionValidator'
+import startYearValidator from '../../utils/validation/startYearValidator'
+import { useSelector } from 'react-redux'
+import CompanyLogoModal from '../../components/companies/CompanyLogoModal'
+import Layout from '../../components/layout/Layout'
 
 const RegisterCompany = () => {
   // Input field values for registering a company as state
-  const [name, setName] = useState('');
-  const [logo, setLogo] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [kvkNumber, setKvkNumber] = useState('');
-  const [slogan, setSlogan] = useState('');
-  const [description, setDescription] = useState('');
-  const [startYear, setStartYear] = useState('');
+  const [name, setName] = useState('')
+  const [logo, setLogo] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [kvkNumber, setKvkNumber] = useState('')
+  const [slogan, setSlogan] = useState('')
+  const [description, setDescription] = useState('')
+  const [startYear, setStartYear] = useState('')
 
   // Error state for displaying error messages if the user enters invalid input
-  const [nameError, setNameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [phoneError, setPhoneError] = useState(false);
-  const [kvkNumberError, setKvkNumberError] = useState(false);
-  const [sloganError, setSloganError] = useState(false);
-  const [descriptionError, setDescriptionError] = useState(false);
-  const [startYearError, setStartYearError] = useState(false);
+  const [nameError, setNameError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
+  const [phoneError, setPhoneError] = useState(false)
+  const [kvkNumberError, setKvkNumberError] = useState(false)
+  const [sloganError, setSloganError] = useState(false)
+  const [descriptionError, setDescriptionError] = useState(false)
+  const [startYearError, setStartYearError] = useState(false)
 
   // Specific error messages to display when the user enters invalid input
-  const [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState('');
+  const [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState('')
 
   // Set showLogoModal to true to show the modal for uploading a company logo
-  const [showLogoModal, setShowLogoModal] = useState(false);
+  const [showLogoModal, setShowLogoModal] = useState(false)
 
   // Loading state for displaying a spinner while the request is being sent to the backend
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   // @ts-ignore Get the userId from the Redux store
-  const userId = useSelector((state) => state.userId);
+  const userId = useSelector((state) => state.userId)
 
   // useNavigate is a hook that returns a navigate function that we can use to navigate to a different page
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   // useSnackbar is a hook that allows us to show a snackbar https://www.npmjs.com/package/notistack https://iamhosseindhv.com/notistack/demos#use-snackbar
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar()
 
   // Validation functions for validating the input fields and put a red border around the input field if the input is invalid
   // and display an error message under the input field explaining the right format
   const validateCompanyName = () => {
     if (!companyNameValidator(name)) {
-      setNameError(true);
+      setNameError(true)
     } else {
-      setNameError(false);
+      setNameError(false)
     }
-  };
+  }
   const validateEmail = () => {
     if (!emailValidator(email)) {
-      setEmailError(true);
+      setEmailError(true)
     } else {
-      setEmailError(false);
+      setEmailError(false)
     }
-  };
+  }
   const validatePhone = () => {
     if (!phoneNumberValidator(phone, 'NL')) {
-      setPhoneError(true);
+      setPhoneError(true)
     } else {
-      setPhoneError(false);
+      setPhoneError(false)
     }
-  };
+  }
   const validateKvkNumber = async () => {
     if (!(await kvkNumberValidator(kvkNumber))) {
-      setKvkNumberError(true);
-      throw new Error('Invalid KVK number!');
+      setKvkNumberError(true)
+      throw new Error('Invalid KVK number!')
     } else {
-      setKvkNumberError(false);
+      setKvkNumberError(false)
     }
-  };
+  }
   const validateSlogan = () => {
     if (!companySloganValidator(slogan)) {
-      setSloganError(true);
+      setSloganError(true)
     } else {
-      setSloganError(false);
+      setSloganError(false)
     }
-  };
+  }
   const validateDescription = () => {
     if (!companyDescriptionValidator(description)) {
-      setDescriptionError(true);
+      setDescriptionError(true)
     } else {
-      setDescriptionError(false);
+      setDescriptionError(false)
     }
-  };
+  }
   const validateStartYear = () => {
     if (!startYearValidator(startYear)) {
-      setStartYearError(true);
+      setStartYearError(true)
     } else {
-      setStartYearError(false);
+      setStartYearError(false)
     }
-  };
+  }
 
   // Handle onChange events for all input fields
   const handleNameChange = (e) => {
-    setName(e.target.value);
+    setName(e.target.value)
     if (nameError) {
-      validateCompanyName();
+      validateCompanyName()
     }
-  };
+  }
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    setEmail(e.target.value)
     if (emailError) {
-      validateEmail();
+      validateEmail()
     }
-  };
+  }
   const handlePhoneChange = (e) => {
-    setPhone(e.target.value);
+    setPhone(e.target.value)
     if (phoneError) {
-      validatePhone();
+      validatePhone()
     }
-  };
+  }
   const handleKvkNumberChange = async (e) => {
-    setKvkNumber(e.target.value);
+    setKvkNumber(e.target.value)
     if (kvkNumberError) {
-      await validateKvkNumber();
+      await validateKvkNumber()
     }
-  };
+  }
   const handleSloganChange = (e) => {
-    setSlogan(e.target.value);
+    setSlogan(e.target.value)
     if (sloganError) {
-      validateSlogan();
+      validateSlogan()
     }
-  };
+  }
   const handleDescriptionChange = (e) => {
-    setDescription(e.target.value);
+    setDescription(e.target.value)
     if (descriptionError) {
-      validateDescription();
+      validateDescription()
     }
-  };
+  }
   const handleStartYearChange = (e) => {
-    setStartYear(e.target.value);
+    setStartYear(e.target.value)
     if (startYearError) {
-      validateStartYear();
+      validateStartYear()
     }
-  };
+  }
 
   // Display error messages if the user enters invalid input with useSnackbar
   useEffect(() => {
@@ -157,43 +157,43 @@ const RegisterCompany = () => {
       enqueueSnackbar('Company name is invalid!', {
         variant: 'error',
         preventDuplicate: true,
-      });
+      })
     }
     if (emailError) {
       enqueueSnackbar('Email is invalid!', {
         variant: 'error',
         preventDuplicate: true,
-      });
+      })
     }
     if (phoneError) {
       enqueueSnackbar('Phone number is invalid!', {
         variant: 'error',
         preventDuplicate: true,
-      });
+      })
     }
     if (kvkNumberError) {
       enqueueSnackbar('KVK number is invalid!', {
         variant: 'error',
         preventDuplicate: true,
-      });
+      })
     }
     if (sloganError) {
       enqueueSnackbar('Slogan is invalid!', {
         variant: 'error',
         preventDuplicate: true,
-      });
+      })
     }
     if (descriptionError) {
       enqueueSnackbar('Description is invalid!', {
         variant: 'error',
         preventDuplicate: true,
-      });
+      })
     }
     if (startYearError) {
       enqueueSnackbar('Start year is invalid!', {
         variant: 'error',
         preventDuplicate: true,
-      });
+      })
     }
   }, [
     nameError,
@@ -203,26 +203,26 @@ const RegisterCompany = () => {
     sloganError,
     descriptionError,
     startYearError,
-  ]);
+  ])
 
   const handleSaveCompany = async () => {
     // Validate all fields before sending the request to the backend, otherwise return
-    validateCompanyName();
-    validateEmail();
-    validatePhone();
+    validateCompanyName()
+    validateEmail()
+    validatePhone()
     try {
-      await validateKvkNumber();
+      await validateKvkNumber()
     } catch (error) {
       enqueueSnackbar('Error validating KVK number!', {
         variant: 'error',
         preventDuplicate: true,
-      });
-      console.log(error);
-      return;
+      })
+      console.log(error)
+      return
     }
-    validateSlogan();
-    validateDescription();
-    validateStartYear();
+    validateSlogan()
+    validateDescription()
+    validateStartYear()
     if (
       nameError ||
       emailError ||
@@ -240,8 +240,8 @@ const RegisterCompany = () => {
       enqueueSnackbar('Please fill in all fields correctly before saving this company!', {
         variant: 'error',
         preventDuplicate: true,
-      });
-      return;
+      })
+      return
     }
 
     const data = {
@@ -255,37 +255,37 @@ const RegisterCompany = () => {
       startYear: startYear,
       description: description,
       owners: [{ userId: userId }], // Make sure that the user that registers the company is added as an owner
-    };
-    setLoading(true);
+    }
+    setLoading(true)
     axios
       .post(BACKEND_URL + '/companies', data)
       .then(() => {
-        setLoading(false);
+        setLoading(false)
         enqueueSnackbar('Company registered successfully!', {
           variant: 'success',
           preventDuplicate: true,
-        });
-        navigate('/companies');
+        })
+        navigate('/companies')
       })
       .catch((error) => {
-        console.log('error.response', error.response);
+        console.log('error.response', error.response)
         if (error.response.status === 409) {
           enqueueSnackbar('Company with this KVK number already exists!', {
             variant: 'error',
             preventDuplicate: true,
-          });
-          setKvkNumberError(true);
-          setKvkNumberErrorMessage('Company with this KVK number already exists!');
+          })
+          setKvkNumberError(true)
+          setKvkNumberErrorMessage('Company with this KVK number already exists!')
         }
 
-        setLoading(false);
+        setLoading(false)
         enqueueSnackbar('Error registering company!', {
           variant: 'error',
           preventDuplicate: true,
-        });
-        console.log(error);
-      });
-  };
+        })
+        console.log(error)
+      })
+  }
 
   return (
     <Layout>
@@ -481,7 +481,7 @@ const RegisterCompany = () => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default RegisterCompany;
+export default RegisterCompany

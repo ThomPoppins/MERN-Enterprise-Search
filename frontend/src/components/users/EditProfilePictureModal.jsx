@@ -1,47 +1,47 @@
-import React, { useEffect, useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
-import { BACKEND_URL } from '../../../config';
-import store from '../../store/store.jsx';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { AiOutlineClose } from 'react-icons/ai'
+import { BACKEND_URL } from '../../../config'
+import store from '../../store/store.jsx'
+import axios from 'axios'
 
 // Modal to edit user profile picture
 const EditProfilePictureModal = ({ userId, onClose }) => {
-  const [selectedFile, setSelectedFile] = useState();
-  const [preview, setPreview] = useState('');
+  const [selectedFile, setSelectedFile] = useState()
+  const [preview, setPreview] = useState('')
 
   // Handle file select
   const onSelectFile = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
-      setSelectedFile(undefined);
-      return;
+      setSelectedFile(undefined)
+      return
     }
 
-    setSelectedFile(e.target.files[0]);
-  };
+    setSelectedFile(e.target.files[0])
+  }
 
   // Set the preview image
   useEffect(() => {
     if (!selectedFile) {
-      setPreview('');
-      return;
+      setPreview('')
+      return
     }
     // Convert the selected image to a Base64 string and save it to the preview state
-    const objectUrl = URL.createObjectURL(selectedFile);
-    setPreview(objectUrl);
+    const objectUrl = URL.createObjectURL(selectedFile)
+    setPreview(objectUrl)
 
     // Free memory when the preview is closed
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [selectedFile]);
+    return () => URL.revokeObjectURL(objectUrl)
+  }, [selectedFile])
 
   // Handle the form submit event
   const handleFormSubmit = (event) => {
     // Prevent the default form submit behavior
-    event.preventDefault();
+    event.preventDefault()
 
     // Create a new FormData object
-    const formData = new FormData();
+    const formData = new FormData()
     // Add the image data to the FormData object
-    formData.append('image', event.target.image.files[0]);
+    formData.append('image', event.target.image.files[0])
 
     // Send the image to the server
     axios
@@ -62,29 +62,29 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
               axios
                 .get(`${BACKEND_URL}/users/user/${userId}`)
                 .then((response) => {
-                  console.log('RESPONSE from /users/user/:id: ', response);
-                  const user = response.data;
+                  console.log('RESPONSE from /users/user/:id: ', response)
+                  const user = response.data
                   store.dispatch({
                     type: 'USER',
                     payload: user,
-                  });
+                  })
                 })
                 .catch((error) => {
-                  console.log('ERROR in EditProfilePictureModal from /users/user/:id: ', error);
-                });
+                  console.log('ERROR in EditProfilePictureModal from /users/user/:id: ', error)
+                })
 
               // Close the modal
-              onClose();
+              onClose()
             })
             .catch((error) => {
-              console.log('ERROR from /users/profile-picture: ', error);
-            });
+              console.log('ERROR from /users/profile-picture: ', error)
+            })
         }
       })
       .catch((error) => {
-        console.log('ERROR from /upload/image route: ', error);
-      });
-  };
+        console.log('ERROR from /upload/image route: ', error)
+      })
+  }
 
   return (
     <div
@@ -135,7 +135,7 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default EditProfilePictureModal;
+export default EditProfilePictureModal
