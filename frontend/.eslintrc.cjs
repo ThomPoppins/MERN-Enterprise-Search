@@ -34,6 +34,7 @@ module.exports = {
   plugins: ['react', 'react-hooks', 'jsx-a11y'],
   rules: {
     'consistent-return': 'off',
+    'default-param-last': 'off',
     'max-lines-per-function': 'off',
     'no-magic-numbers': 'off',
     'no-nested-ternary': 'off',

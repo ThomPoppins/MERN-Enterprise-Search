@@ -30,5 +30,6 @@ module.exports = {
     'sort-keys': 'off',
     'no-console': 'off',
     'multiline-comment-style': 'off',
+    'default-param-last': 'off',
   },
 }
