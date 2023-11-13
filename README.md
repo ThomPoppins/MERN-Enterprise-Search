@@ -13,7 +13,7 @@ Also I make use of a lot of different packages but only if they are complementar
 - [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
   - [Application Description](#application-description)
   - [Table of Contents](#table-of-contents)
-  - [Visual Demo (thus far)](#visual-demo-thus-far)
+  - [Visual Demo](#visual-demo)
     - [1. Homepage](#1-homepage)
     - [2. Profile page (with gender specific placeholder profile picture)](#2-profile-page-with-gender-specific-placeholder-profile-picture)
     - [3. Profile picture upload modal](#3-profile-picture-upload-modal)
@@ -24,7 +24,7 @@ Also I make use of a lot of different packages but only if they are complementar
       - [Listing page](#listing-page)
       - [Registration](#registration)
         - [KVK number validation](#kvk-number-validation)
-      - [Data structure](#data-structure)
+      - [`Company` document data structure](#company-document-data-structure)
       - [`Company` schema:](#company-schema)
       - [Edit company](#edit-company)
       - [Company ownership](#company-ownership)
@@ -69,9 +69,13 @@ Also I make use of a lot of different packages but only if they are complementar
 
 
 
-## Visual Demo (thus far)
+## Visual Demo
+
+Get a general impression of my application thus far.
 
 > **Note:** A video demonstration is in the making showing the application function in moving image. Also I will explain about the application more deeply like functionalities I build, strategy, choices, coding practices and about technologies I've been using. So come back later to check it out!
+
+> **Note:** This demo is interesting, but incomplete and unfinished. Also it is impossible to keep this demo completely up to date with the development progress. The main purpose is to give a general impression of the application. For complete understanding of the technical workings of each component of the application you're free to look into the source code and for any remaining questions you can ask me anything in a mail to [thompoppins@gmail.com](mailto:thompoppins@gmail.com).
 
 ### 1. Homepage
 
@@ -274,10 +278,10 @@ I've connected the backend application to the KvK test API for validation of com
 
 For now, only number validation is enough, but in the future also the company name, owners and other company details will be verified against this API to rule out the need for human verification as much as possible to safe costs and make the user experience a much faster because users can get started with their company in the application right away without having to wait for a manual verification of their business.
 
-**Subsidiary companies**:
-KvK numbers (for now) have to be unique so companies can't get registered more then once, in the future this uniqueness has to be combination between Kvk number and company name (and also maybe other company details) because companies can have subsidiary companies with the same number and these subsidiary companies should be able to be registered as valid companies to the application because for a regular user using the app to find a company they need, it is not important to know that a company has a parent company. If companies find it necessary to inform the regular user (and potential customer) about their subsidiarity of a parent company, then they should be able to inform users about that on their company profile page (in very early development).
+**Subsidiary companies:**:
+KvK numbers have to be unique so companies can't get registered more then once, in the future this uniqueness has to be combination between Kvk number and company name (and also maybe other company details) because companies can have subsidiary companies with the same number and these subsidiary companies should be able to be registered as valid companies to the application because for a regular user using the app to find a company they need, it is not important to know that a company has a parent company. If companies find it necessary to inform the regular user (and potential customer) about their subsidiarity of a parent company, then they should be able to inform users about that on their company profile page (in very early development).
 
-#### Data structure
+#### `Company` document data structure
 
 When I first got the business idea for building this application I decided to make companies the main central starting point to focus on, find out what is necessary to get companies on board with my application and want to register and pay for premium features. Almost the first thing I started building was a company model that has all required fields where companies would be dependent on realizing the ideas I have in mind for my application, resulting in a `Company` model with many fields. At this stage of development only a few of there defined fields are actually used and populated with data at the moment, but because it is not a requirement to populate every field with data before saving and editing `Company` documents in the database, I feel no need to simplify the model for the time being at all.
 
@@ -590,6 +594,8 @@ When a company owner clicks on the *pencil* icon on the companies listing page t
 Companies are automatically owned by the `User` that registers the company to the application.
 
 If a company has more than one owner, the company owners is able to invite other users for company ownership, giving the other co-owners the same admin level elevated access to the configuration of their company.
+
+*Find other users:*
 
 ![]()
 
