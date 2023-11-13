@@ -1,7 +1,3 @@
-
-//! TODO: Use: eslint-plugin-react-hooks (https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks)
-//! TODO: Use: eslint-plugin-jsx-a11y (https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
-
 module.exports = {
   'env': {
     'browser': true,
@@ -27,15 +23,6 @@ module.exports = {
         "Hyperlink",
         {"name": "Link", "linkAttribute": "to"}
       ]
-    },
-    'jsx-a11y': {
-      "polymorphicPropName": "as",
-      "components": {
-        "CityInput": "input",
-        "CustomButton": "button",
-        "MyButton": "button",
-        "RoundButton": "button"
-      }
     },
   },
   'overrides': [
@@ -81,7 +68,7 @@ module.exports = {
     'react/no-string-refs': 'error',
     'react/no-unescaped-entities': 'error',
     'react/no-unknown-property': 'error',
-    'react/prop-types': 'error', //! BE AWARE THAT YOU NEED TO KNOW HOW TO USE PROP TYPES
+    'react/prop-types': 'error',
     'react/react-in-jsx-scope': 'error',
     'react/require-render-return': 'error',
     "react-hooks/rules-of-hooks": "error",
@@ -90,8 +77,10 @@ module.exports = {
       "namedComponents": "arrow-function",
       "unnamedComponents": "arrow-function"
     }],
+    "react/jsx-max-depth": ["error", {"max": 5}],
     "react/jsx-no-bind": ["error", {"allowArrowFunctions": true}], // Allow arrow functions in JSX props (Remove this rule when performance becomes an issue)
-    "sort-imports": "warn",
-    "react/forbid-component-props": ["error", {"forbid": [], "allow": ["className"]}], 
-  },
+    "sort-imports": "off",
+    "react/forbid-component-props": ["error", {"forbid": [], "allow": ["className"]}],
+    "react/jsx-no-literals": "off", // TODO: [MERNSTACK-245] Turn "react/jsx-no-literals" rule back on when the translation system is in place
+    },
 };

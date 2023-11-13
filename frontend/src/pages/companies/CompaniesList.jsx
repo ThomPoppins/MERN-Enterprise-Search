@@ -37,7 +37,7 @@ const CompaniesList = () => {
             preventDuplicate: true,
           });
 
-          console.log(error); // ! TODO: Remove console.log and write errors to logfile
+          console.log(error);
 
           // TODO: Search for a pretty loading spinner animation
           setLoading(false);

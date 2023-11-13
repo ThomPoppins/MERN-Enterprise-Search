@@ -1,24 +1,16 @@
-// Navbar.tsx
-import React, { useEffect, useState } from 'react';
-import { BACKEND_URL } from '../../../config';
-import { getPendingRecievedInvites } from '../../utils/invites/recievedInvitesUpdater';
 import {
-  HiOutlineClipboard,
-  HiOutlineClipboardCheck,
-  HiOutlineClipboardCopy,
-  HiOutlineClipboardList,
   HiOutlineCog,
   HiOutlineLogout,
   HiUser,
-} from 'react-icons/hi'; // ! TODO: Remove unused icons
-import { HiOutlineBriefcase } from 'react-icons/hi2';
+} from 'react-icons/hi';
 import {
-  LuBell,
-  LuBellRing,
   LuClipboardCheck,
-  LuClipboardCopy,
   LuClipboardList,
-} from 'react-icons/lu'; // ! TODO: Remove unused icons
+} from 'react-icons/lu'; // ! TODO: Re
+import React, { useEffect, useState } from 'react';
+import { BACKEND_URL } from '../../../config';
+import { HiOutlineBriefcase } from 'react-icons/hi2';
+import { getPendingRecievedInvites } from '../../utils/invites/recievedInvitesUpdater';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -32,6 +24,8 @@ const Navbar = () => {
     // @ts-ignore
     (state) => state.pendingRecievedInvites,
   );
+
+  const title = "Vind-Expert";
 
   // Should the active user be alerted about pending invites?
   // ! DECIDE: Maybe ALL notifications should trigger a general notification state, maybe not.
@@ -47,8 +41,8 @@ const Navbar = () => {
     pendingRecievedInvites === null
       ? setInviteAlert(false)
       : pendingRecievedInvites.length > 0
-      ? setInviteAlert(true)
-      : setInviteAlert(false);
+        ? setInviteAlert(true)
+        : setInviteAlert(false);
   }, [user, userId, pendingRecievedInvites]);
 
   useEffect(() => {
@@ -84,7 +78,7 @@ const Navbar = () => {
         <div className='flex justify-between items-center'>
           <div className='text-white'>
             <Link to='/'>
-              <h1 className=' text-2xl font-bold'>Vind-Expert</h1>
+              <h1 className=' text-2xl font-bold'>{title}</h1>
             </Link>
           </div>
 
@@ -97,9 +91,12 @@ const Navbar = () => {
                       className='text-white cursor-pointer'
                       data-test-id='user-dropdown'
                       onClick={toggleDropdown}
+                      onKeyDown={(event) => { if (event.key === 'm') { toggleDropdown() } }}
+                      role="button"
+                      tabIndex={0}
                     >
                       <img
-                        alt='profile picture'
+                        alt='profile'
                         className='w-8 h-8 rounded-full ml-2 float-left mr-3 object-cover'
                         src={
                           user?.profilePictureURL
@@ -116,61 +113,60 @@ const Navbar = () => {
                     </div>
                     {/* TODO: [MERNSTACK-226] When you click somewhere else, the dropdown should close in Navbar.jsx*/}
                     {isDropdownOpen ? <div className='z-[100] absolute top-10 right-0 bg-violet-950/90 rounded-lg py-4'>
-                        {inviteAlert ? (
-                          <div className='w-[200px] pt-1 h-10 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-1 bg-gradient-to-r from-green-600 to-green-800'>
-                            <Link className='text-white ' to='/invites'>
-                              {inviteAlert ? (
-                                <div className='w-full h-full'>
-                                  <LuClipboardList className='text-xl w-[30px] float-left ml-2 mt-[-2px] mr-3 text-yellow-400 animate-waving-button' />
-                                  <div className='animate-bounce mt-2'>Invites</div>
-                                </div>
-                              ) : (
-                                ''
-                              )}
-                            </Link>
-                          </div>
-                        ) : (
-                          ''
-                        )}
+                      {inviteAlert ? (
+                        <div className='w-[200px] pt-1 h-10 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-1 bg-gradient-to-r from-green-600 to-green-800'>
+                          <Link className='text-white ' to='/invites'>
+                            {inviteAlert ? (
+                              <div className='w-full h-full'>
+                                <LuClipboardList className='text-xl w-[30px] float-left ml-2 mt-[-2px] mr-3 text-yellow-400 animate-waving-button' />
+                                <div className='animate-bounce mt-2'>Invites</div>
+                              </div>
+                            ) : (
+                              ''
+                            )}
+                          </Link>
+                        </div>
+                      ) : (
+                        ''
+                      )}
 
-                        <div
-                          className={`w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 ${
-                            inviteAlert ? 'mt-4 pt-1' : ''
+                      <div
+                        className={`w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 ${inviteAlert ? 'mt-4 pt-1' : ''
                           }}}`}
-                        >
-                          <Link className='text-white' to='/profile'>
-                            <div className='w-full h-full'>
-                              <HiUser className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
-                              Profile
-                            </div>
-                          </Link>
-                        </div>
+                      >
+                        <Link className='text-white' to='/profile'>
+                          <div className='w-full h-full'>
+                            <HiUser className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
+                            Profile
+                          </div>
+                        </Link>
+                      </div>
 
-                        <div className='w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4'>
-                          <Link className='text-white' to='/companies'>
-                            <div className='w-full h-full'>
-                              <HiOutlineBriefcase className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
-                              Companies
-                            </div>
-                          </Link>
-                        </div>
-                        <div className='w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4'>
-                          <Link className='text-white' to='/user/settings'>
-                            <div className='w-full h-full'>
-                              <HiOutlineCog className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
-                              Settings
-                            </div>
-                          </Link>
-                        </div>
-                        <div className='w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4'>
-                          <Link className='text-white' to='/logout'>
-                            <div className='w-full h-full'>
-                              <HiOutlineLogout className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
-                              Logout
-                            </div>
-                          </Link>
-                        </div>
-                      </div> : null}
+                      <div className='w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4'>
+                        <Link className='text-white' to='/companies'>
+                          <div className='w-full h-full'>
+                            <HiOutlineBriefcase className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
+                            Companies
+                          </div>
+                        </Link>
+                      </div>
+                      <div className='w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4'>
+                        <Link className='text-white' to='/user/settings'>
+                          <div className='w-full h-full'>
+                            <HiOutlineCog className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
+                            Settings
+                          </div>
+                        </Link>
+                      </div>
+                      <div className='w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4'>
+                        <Link className='text-white' to='/logout'>
+                          <div className='w-full h-full'>
+                            <HiOutlineLogout className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
+                            Logout
+                          </div>
+                        </Link>
+                      </div>
+                    </div> : null}
                   </div>
                 </div>
               </div>

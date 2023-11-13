@@ -6,7 +6,7 @@ A commercial *FullStack JavaScript* application in early development, building u
 
 Also I make use of a lot of different packages but only if they are complementary and necessary, I feel like less is more using external packages in my application  because I plan on making the application as stable and independent possible from external packages and sources (with updates).
 
-> **Note:** The exact business plan I have in mind for this application will remain secret, but if you read trough the [Visual Demo](#visual-demo-thus-far) section then you will have a general idea about the size of this project where this application is all about. I hope my idea will eventually start to snowball and turn in to something real, I dare to dream about that and to pursue a goal still far away, but it's a guarantee that I will grow in the process and that makes it worth to work on it either way.
+> **Note:** The exact business plan I have in mind for this application will remain secret, but if you read trough the [Visual Demo](#visual-demo) section then you will have a general idea about the size of this project where this application is all about. I hope my idea will eventually start to snowball and turn in to something real, I dare to dream about that and to pursue a goal still far away, but it's a guarantee that I will grow in the process and that makes it worth to work on it either way.
 
 ## Table of Contents
 
@@ -69,17 +69,17 @@ Also I make use of a lot of different packages but only if they are complementar
       - [Easy Integration with Frontend Frameworks](#easy-integration-with-frontend-frameworks)
       - [Expiration and Refresh Tokens](#expiration-and-refresh-tokens)
       - [Conclusion](#conclusion)
-    - [ES Lint for best code practices](#es-lint-for-best-code-practices)
-
-
+    - [ES Lint](#es-lint)
+      - [Frontend config:](#frontend-config)
+      - [Backend config:](#backend-config)
 
 ## Visual Demo
 
-Get a general impression of my application thus far.
-
 > **Note:** A video demonstration is in the making showing the application function in moving image. Also I will explain about the application more deeply like functionalities I build, strategy, choices, coding practices and about technologies I've been using. So come back later to check it out!
 
-> **Note:** This demo is interesting, but incomplete and unfinished. Also it is impossible to keep this demo completely up to date with the development progress. The main purpose is to give a general impression of the application. For complete understanding of the technical workings of each component of the application you're free to look into the source code and for any remaining questions you can ask me anything in a mail to [thompoppins@gmail.com](mailto:thompoppins@gmail.com).
+Get a general impression of my application.
+
+> **Note:** This demo is interesting, but incomplete and not final. Also it is impossible to keep this demo completely up to date with the development progress. The main purpose is to give a general impression of the application. For complete understanding of the technical workings of each component of the application you're free to look into the source code and for any remaining questions you can ask me anything in a mail to [thompoppins@gmail.com](mailto:thompoppins@gmail.com).
 
 ### 1. Homepage
 
@@ -95,7 +95,7 @@ Get a general impression of my application thus far.
 
 ### 3. Profile picture upload modal
 
-**After logging in for the first time, users can click on the`upload` button on the placeholder profile picture for uploading theur first profile picture. After clicking the button, a modal will pop up where you can upload a image file by clicking on the `browse...` button and select an image locally from their device.**
+**After logging in for the first time, users can click on the`upload` button on the placeholder profile picture for uploading their first profile picture. After clicking the button, a modal will pop up where you can upload a image file by clicking on the `browse...` button and select an image locally from their device.**
 
 ![Image Upload Modal Pop-Up](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/003.png?raw=true)
 
@@ -113,13 +113,13 @@ If the user wants can he/she still change their mind and choose a different one 
 
 The Base64 BLOB image is converted from the image file value in the form data and then the string is set to be the `src` value of the preview `img`.
 
-```javascript 
+```javascript
 <img src={blobValueString} />
 ```
 
 > **Source:** [/frontend/src/components/users/EditProfilePicture.jsx](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/src/components/users/EditProfilePictureModal.jsx)
 
-```javascript 
+```javascript
 // Modal to edit user profile picture
 const EditProfilePictureModal = ({ userId, onClose }) => {
   const [selectedFile, setSelectedFile] = useState();
@@ -173,7 +173,7 @@ export default EditProfilePictureModal;
 
 If the user is sure about it, he/she will click the upload button and now the image will be sent through a form-data object to the backend REST (ExpressJS hosted) POST image upload API end-point, where the image will be recieved by *ExpressJS*, using *Multer* middleware for disk storage configuration and file handling and saved in a special public static file directory, local on the server storage.
 
-After the image is uploaded and saved, a corresponding Image "document" (entry) with a filepath will be saved to the MongoDB database in the "images" collection. (A collection is like a databaser table.)
+After the image is uploaded and saved, a corresponding Image "document" (entry) with a filepath will be saved to the MongoDB database in the "images" collection. (A collection is like a database table.)
 
 > **Source:** [/backend/routes/uploadRoute.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/routes/uploadRoute.js)
 
@@ -235,7 +235,7 @@ router.post("/image", upload.single("image"), async (request, response) => {
     imageId: new mongoose.Types.ObjectId(),
   };
 
-  // Create Instance of Image model with the image path to safe as docyment in the MongoDB Image collection
+  // Create Instance of Image model with the image path to safe as document in the MongoDB Image collection
   const image = new Image({
     path: request.file.path,
   });
@@ -258,7 +258,7 @@ router.post("/image", upload.single("image"), async (request, response) => {
 export default router;
 ```
 
-After succesfully saving the new Image entry (document) to the database, MongoDB responds with the Image document ID, which will immidiatly be saved to the User document(of the currently logged in user of course) so it will be always be certain where the image is. Securely saved on the backend server with the file location saved to the database with it's Image ID saved in the corresponding User document.
+After successfully saving the new Image entry (document) to the database, MongoDB responds with the Image document ID, which will immediately be saved to the User document(of the currently logged in user of course) so it will be always be certain where the image is. Securely saved on the backend server with the file location saved to the database with it's Image ID saved in the corresponding User document.
 
 #### Express.static() as CDN
 
@@ -276,8 +276,6 @@ app.use(express.static('public'));
 > **Note:** All URL's to the files in the public directory have a similar URL structure. An image within the public static files directory with path **public_static_files_dir/uploads/images/137917151-1699497672476.jpg** can be accessed on URL *backend-server-domain.com/uploads/images/137917151-1699497672476.jpg*.
 
 ### 5. User profile page and data structure
-
-**Example serving the user profile picture, hosted as static image by the ExpressJS backend server but to be seen on the client profile page (and header)**
 
 *Profile page:*
 ![Profile Page With Profile Picture](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/005.png?raw=true)
@@ -325,7 +323,7 @@ At this point there are only a few details a user can set when registering a new
   - *Ref*: 'Image'
   - *Description:* This field is an ID reference to the image document in the database image collection, containing the file path local to the CDN (ExpressJS backend) server from which image file is being served. This allows for the image to be retrieved from the CDN (ExpressJS backend server) and displayed on the client-side application page based on a URL relative to the CDN server that can logically be generated from the image document's file path. This way no hard coded URLs are needed to be saved in MongoDB database and the image documents will be served independent of the backend server domain address making the image documents portable and reusable in different production and development environments and allowing easy migration of the image files to a different storage and host with a different URL/domain.
 
-*Aditional fields:*
+*Additional fields:*
 
 - **timestamps**
   - Type: Object
@@ -394,6 +392,7 @@ const userSchema = new mongoose.Schema(
 - When you use methods like User.create(), User.find(), or others, Mongoose ensures that the data aligns with the structure defined in the schema.
 
 > *[/backend/models/userModel.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/userModel.js):*
+
 ```javascript
 // Instantiate User model
 const User = mongoose.model('User', userSchema)
@@ -403,8 +402,7 @@ const User = mongoose.model('User', userSchema)
 
 #### Listing page
 
-On the /companies page the user can see all companies that he owns and has the choice between listing the companies in *card* view or in *table* view. The view of choice will be saved as a Redux state so the user preference will be kept as long as they are logged in. I am planning to save this configuration to the database so the user preference will never be lost and can be dispatched to the Redux state every time they log in to their account. 
-
+On the /companies page the user can see all companies that he owns and has the choice between listing the companies in *card* view or in *table* view. The view of choice will be saved as a Redux state so the user preference will be kept as long as they are logged in. I am planning to save this configuration to the database so the user preference will never be lost and can be dispatched to the Redux state every time they log in to their account.
 
 > **Note:** I opened the dropdown menu.
 
@@ -414,7 +412,7 @@ On the /companies page the user can see all companies that he owns and has the c
 *Table view:*
 ![Companies Listing Page Table View](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/006.png?raw=true)
 
-When the user clicks on the *eye* icon on a listed company, a modal will pop up that will display the main and most important public company information so the owner of the company can check the company current state quickly at a glance without having to navigate to another company specific details page and lose track of what they were doing or planning to do from the companies listing page. 
+When the user clicks on the *eye* icon on a listed company, a modal will pop up that will display the main and most important public company information so the owner of the company can check the company current state quickly at a glance without having to navigate to another company specific details page and lose track of what they were doing or planning to do from the companies listing page.
 
 > **Note:** At this stage in development, companies do not have that many details yet to show. There will be a lot of work to these pages yet and they do not reflect a final version.
 
@@ -561,7 +559,7 @@ When I first got the business idea for building this application I decided to ma
     - Type: Object
     - Required: false
     - Default: {}
-    - Description: Payment details for the company. Think about anything solely necessary for financial transactions in any direction. 
+    - Description: Payment details for the company. Think about anything solely necessary for financial transactions in any direction.
 
 20. **Start Year:**
     - Type: Number
@@ -721,7 +719,6 @@ When I first got the business idea for building this application I decided to ma
 
 **Schema:**
 
-
 ```javascript
 // Instantiate `Company` schema
 const companySchema = new mongoose.Schema(
@@ -763,7 +760,7 @@ When a user is invited by the owner for co-ownership the user "result" will be r
 
 ![User Invited On Edit Company Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/User-Invited.png?raw=true)
 
-> **Note:** In the future this `Invite` information will be the user details, but I have to make a future decision about where I want this data to be served from the backend to the client application, that's why it is only containing `ObjectId` information of the `Invite` document. See the `Invite` data structure [further down below](#invite-data-structure).
+> **Note:** In the future this `Invite` information will be the user details, but I have to make a future decision about where I want this data to be served from the backend to the client application, that's why it is only containing `ObjectId` information of the `Invite` document. See the `Invite` schema data structure [further down below](#invite-schema).
 
 When the `User` is invited to become co-owner of the company, that user will receive a invite notification in the navigation bar.
 
@@ -794,7 +791,7 @@ After accepting the invite, the *Owners* section of the *edit company* page is u
    - Reference: "User"
    - Description: The ID of the user sending the invitation.
 
-2. **Reciever ID:**
+2. **Receiver ID:**
    - Type: mongoose.Schema.Types.ObjectId
    - Reference: "User"
    - Description: The ID of the user receiving the invitation.
@@ -815,7 +812,6 @@ After accepting the invite, the *Owners* section of the *edit company* page is u
 
 6. **Timestamps:**
    - Type: Automatically generated timestamps for document creation and modification.
-
 
 **Mongoose:**
 
@@ -948,7 +944,6 @@ To run this application locally, follow these steps:
 
 Now you have the application up and running locally!
 
-
 ## Project Issue Progression
 
 > **NOTE:** The tags starting with [MERNSTACK-] are corresponding Jira issue identifiers.
@@ -1053,7 +1048,7 @@ Now you have the application up and running locally!
 - [x] [MERNSTACK-216] Use Multer for large image file upload.
 - [x] [MERNSTACK-217] Create a new routes file for file uploads. When the profile picture is uploaded, save the link/URL with the filepath in the database. ALSO return the path/fileId of the image as response to the client, so when the user registers the correct fileId/filepath will be saved to the new/edited user/company.
 - [x] [MERNSTACK-218] Make /backend server a CDN for static files like images.
-- [x] [MERNSTACK-202] FIX backend error: "PayloadTooLargeError: request entity too large" wanneer de afbeeldingdata te groot is voor ExpressJS (<https://www.webslesson.info/2022/05/upload-file-in-node-js-express-using-multer.html>) SOLVED using Multer for large image file uploads.
+- [x] [MERNSTACK-202] FIX backend error: "PayloadTooLargeError: request entity too large" for images too large ExpressJS (<https://www.webslesson.info/2022/05/upload-file-in-node-js-express-using-multer.html>) SOLVED using Multer for large image file uploads.
 - [x] [MERNSTACK-165] Create a schema and model for images.
 - [x] [MERNSTACK-219] Make first name and last name required on user registration. In the model, route, validator and frontend page form.
 - [ ] [MERNSTACK-220] After registration, log user in automatically and redirect to /account/onboarding page.
@@ -1066,13 +1061,13 @@ Now you have the application up and running locally!
 - [x] [MERNSTACK-225] If there is 1 or more pending invites, notify the user in the Navbar by making the "Invites" item bounce and give it a bright background color.
 - [ ] [MERNSTACK-228] The "Find" on the homepage has to transition between color using "color transitions" from TailwindCSS.
 - [x] [MERNSTACK-227] Dropdown menu items have to become clickable over the full width of the menu instead only the text and icon
-- [ ] [MERNSTACK-230] README.md: Finish tutorial about asynchronious JavaScript: <https://www.youtube.com/watch?v=ZYb_ZU8LNxs&ab_channel=freeCodeCamp.org>
+- [ ] [MERNSTACK-230] README.md: Finish tutorial about asynchronous JavaScript: <https://www.youtube.com/watch?v=ZYb_ZU8LNxs&ab_channel=freeCodeCamp.org>
 - [x] [MERNSTACK-131] Set state for all companies fields that can be edited in EditCompany.jsx
 - [x] [MERNSTACK-127] Add state for all companies fields that can be registered in RegisterCompany.jsx
 - [x] [MERNSTACK-128] In RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this
-- [ ] [MERNSTACK-231] Use useSnackbar to UNDO steps users have taken, to start, let a user uninvite a co-owner after sending a invite and let the user UNDO removing a owner from a company. (see: <https://notistack.com/features/basic#actions>)
-- [x] [MERNSTACK-232] Add a "data-test-id" attribute to all elements witn an onClick and onChange event handler.
-- [ ] [MERNSTACK-232] Find a pretty loading spinner animation to replace the ugly <Spinner />
+- [ ] [MERNSTACK-231] Use useSnackbar to UNDO steps users have taken, to start, let a user un-invite a co-owner after sending a invite and let the user UNDO removing a owner from a company. (see: <https://notistack.com/features/basic#actions>)
+- [x] [MERNSTACK-232] Add a "data-test-id" attribute to all elements with an onClick and onChange event handler.
+- [ ] [MERNSTACK-232] Find a pretty loading spinner animation to replace the ugly `<Spinner />`
 - [ ] [MERNSTACK-234] PRIO: Finish Google Docs doc about making webapp DEMO video of application.
 - [ ] [MERNSTACK-235] PRIO: Record first DEMO video briefly demonstrating what technology I use and what is the result.
 - [ ] [MERNSTACK-238] PRIO: Edit first DEMO video, make sure to add an explanation of the functionalities of the application and what kind of technologies were used. START OF with demonstrating the client side app and LATER technical explanation.
@@ -1084,7 +1079,6 @@ Now you have the application up and running locally!
 - [ ] [MERNSTACK-242] Fade dropdown menu in and out with quickly with customized animation defined in tailwind.config.js.
 - [ ] [MERNSTACK-243]  Implement localization library for multi-language support
 - [ ] [MERNSTACK-244] Clean up everything `Book` related.
-- [ ] 
 
 ## Versions
 
@@ -1092,14 +1086,11 @@ Now you have the application up and running locally!
 
 ### Find other users for co-ownership with search field
 
-When you are an owner of a company it is possible to search for any other users of the application and the search terms are matched against other registered users' email, username, first name and last name values. The search result is updated every change within the search input field (onChange). 
+When you are an owner of a company it is possible to search for any other users of the application and the search terms are matched against other registered users' email, username, first name and last name values. The search result is updated every change within the search input field (onChange).
 
 A list with up to 10 most relevant users that match the criteria will automatically render right below the search field input sorted by most relevant result on top to 10th relevant user last.
 
 ### Send invites to invite other users to get company co-owner
-
-
-
 
 ## v0.0.2
 
@@ -1266,8 +1257,133 @@ JWTs can be configured with expiration times, reducing the window of opportunity
 
 By implementing user authentication with JWTs, this repository ensures a robust and secure authentication mechanism. The stateless nature, data integrity, and ease of integration make JWTs an excellent choice for validating user authenticity. With careful implementation and adherence to best practices, this approach provides a reliable foundation for secure user authentication in my application.
 
-### ES Lint for best code practices
+### ES Lint
 
-I'm using **ES Lint** to get my code to the best code standards there are.
+I'm using **ES Lint** to get my code up-to-date with strict code standards. I am still busy working on my own personal configuration.
 
 ![ES Lint in VS Code](![Invite Accepted](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Using-ES-Lint.png?raw=true)
+
+#### Frontend config:
+
+> **Source:** [/frontend/.eslint.cjs](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/.eslintrc.cjs)
+
+```javascript
+module.exports = {
+  'env': {
+    'browser': true,
+    'es2021': true,
+  },
+  'extends': [
+    "eslint:recommended",
+    // "eslint:all",
+    // "plugin:react/recommended",
+    "plugin:react/all",
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended",
+    // "plugin:react-hooks/all",
+    // "plugin:jsx-a11y/recommended",
+    "plugin:jsx-a11y/strict",
+    'prettier',
+  ],
+  'settings': {
+    'react': {
+      'version': 'detect',
+      "linkComponents": [
+        // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
+        "Hyperlink",
+        {"name": "Link", "linkAttribute": "to"}
+      ]
+    },
+  },
+  'overrides': [
+    {
+      'env': {
+        'node': true,
+      },
+      'files': [
+        '.eslintrc.{js,cjs}',
+      ],
+      'parserOptions': {
+        'sourceType': 'script',
+      },
+    },
+  ],
+  'parserOptions': {
+    'ecmaFeatures': {
+      'jsx': true,
+    },
+    'ecmaVersion': 'latest',
+    'sourceType': 'module',
+  },
+  'plugins': [
+    'react',
+    'react-hooks',
+    "jsx-a11y",
+  ],
+  'rules': {
+    'react/jsx-uses-react': 'error',
+    'react/jsx-uses-vars': 'error',
+    'react/display-name': 'error',
+    'react/jsx-key': 'error',
+    'react/jsx-no-comment-textnodes': 'error',
+    'react/jsx-no-target-blank': 'error',
+    'react/jsx-no-undef': 'error',
+    'react/no-children-prop': 'error',
+    'react/no-danger-with-children': 'error',
+    'react/no-deprecated': 'error',
+    'react/no-direct-mutation-state': 'error',
+    'react/no-find-dom-node': 'error',
+    'react/no-is-mounted': 'error',
+    'react/no-render-return-value': 'error',
+    'react/no-string-refs': 'error',
+    'react/no-unescaped-entities': 'error',
+    'react/no-unknown-property': 'error',
+    'react/prop-types': 'error',
+    'react/react-in-jsx-scope': 'error',
+    'react/require-render-return': 'error',
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/function-component-definition": ["error", {
+      "namedComponents": "arrow-function",
+      "unnamedComponents": "arrow-function"
+    }],
+    "react/jsx-no-bind": ["error", {"allowArrowFunctions": true}], // Allow arrow functions in JSX props (Remove this rule when performance becomes an issue)
+    "sort-imports": "warn",
+    "react/forbid-component-props": ["error", {"forbid": [], "allow": ["className"]}], 
+  },
+};
+```
+
+#### Backend config:
+
+> **Source:** [/backend/.eslint.cjs](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/.eslintrc.cjs)
+
+```javascript
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: "eslint:recommended",
+  overrides: [
+    {
+      env: {
+        node: true,
+      },
+      files: [
+        '.eslintrc.{js,cjs}',
+      ],
+      parserOptions: {
+        sourceType: 'script',
+      },
+    },
+  ],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  rules: {
+    
+  },
+};
+```

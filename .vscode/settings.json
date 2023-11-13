@@ -64,12 +64,27 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "cSpell.words": [
+    "DBURL",
+    "devdocs",
+    "examplepasswork",
+    "exampleuser",
+    "Kamer",
+    "Kaya",
+    "Koophandel",
     "MERN",
+    "MERNSTACK",
     "notistack",
+    "originalname",
+    "perience",
+    "PRIO",
     "Recieved",
     "reduxjs",
     "stylelint",
-    "tailwindcss"
+    "tailwindcss",
+    "textnodes",
+    "Thom",
+    "xhvmidl",
+    "yoursecretkey"
   ],
   //! TODO: Enable when removing stylelint 
   "css.validate": false, 
