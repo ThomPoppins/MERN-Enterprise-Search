@@ -46,7 +46,7 @@ const ShowCompany = () => {
   return (
     <Layout>
       <div className='p-4'>
-        <BackButton destination="/companies" />
+        <BackButton destination='/companies' />
         <h1 className='text-3xl my-4'>Show Company</h1>
         {loading ? (
           <Spinner />

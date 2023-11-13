@@ -138,6 +138,6 @@ const LoginUser = () => {
       </div>
     </Layout>
   );
-}
+};
 
 export default LoginUser;

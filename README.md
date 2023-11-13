@@ -1405,4 +1405,3 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 **BUSY** issues are the issues I am working on and have higher priority to finish. A lot of the times other issues are dependent on the **BUSY** issues, that's the main reason I chose to add this swim lane.
 
 **DONE** issues are finished.
-

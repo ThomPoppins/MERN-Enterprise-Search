@@ -58,12 +58,16 @@ const CompaniesSingleRow = ({ company, updateCompanies }) => {
           />
         </div>
       </td>
-      {showModal ? <CompanyModal company={company} onClose={() => setShowModal(false)} owners={owners} /> : null}
-      {showDeleteModal ? <DeleteCompanyModal
+      {showModal ? (
+        <CompanyModal company={company} onClose={() => setShowModal(false)} owners={owners} />
+      ) : null}
+      {showDeleteModal ? (
+        <DeleteCompanyModal
           companyId={company._id}
           onClose={() => setShowDeleteModal(false)}
           updateCompanies={updateCompanies}
-        /> : null}
+        />
+      ) : null}
     </>
   );
 };

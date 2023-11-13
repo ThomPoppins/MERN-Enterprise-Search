@@ -724,7 +724,9 @@ const EditCompany = () => {
                   Upload Logo
                 </button>
               </div>
-              {showLogoModal ? <CompanyLogoModal onClose={() => setShowLogoModal(false)} setLogo={setLogo} /> : null}
+              {showLogoModal ? (
+                <CompanyLogoModal onClose={() => setShowLogoModal(false)} setLogo={setLogo} />
+              ) : null}
             </div>
           </div>
           {/* Comany Email input field */}

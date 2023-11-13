@@ -111,10 +111,12 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
-      {showEditProfilePictureModal ? <EditProfilePictureModal
+      {showEditProfilePictureModal ? (
+        <EditProfilePictureModal
           onClose={() => setShowEditProfilePictureModal(false)}
           userId={userId}
-        /> : null}{' '}
+        />
+      ) : null}{' '}
     </Layout>
   );
 };

@@ -332,7 +332,9 @@ const RegisterCompany = () => {
                   Upload Logo
                 </button>
               </div>
-              {showLogoModal ? <CompanyLogoModal onClose={() => setShowLogoModal(false)} setLogo={setLogo} /> : null}
+              {showLogoModal ? (
+                <CompanyLogoModal onClose={() => setShowLogoModal(false)} setLogo={setLogo} />
+              ) : null}
             </div>
           </div>
           <div className='my-4'>

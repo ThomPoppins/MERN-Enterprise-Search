@@ -93,5 +93,6 @@
   },
   "[javascriptreact]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
-  }
+  },
+  "linebreak-style": "unix",
 }

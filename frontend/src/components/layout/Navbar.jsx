@@ -1,12 +1,5 @@
-import {
-  HiOutlineCog,
-  HiOutlineLogout,
-  HiUser,
-} from 'react-icons/hi';
-import {
-  LuClipboardCheck,
-  LuClipboardList,
-} from 'react-icons/lu'; // ! TODO: Re
+import { HiOutlineCog, HiOutlineLogout, HiUser } from 'react-icons/hi';
+import { LuClipboardCheck, LuClipboardList } from 'react-icons/lu'; // ! TODO: Re
 import React, { useEffect, useState } from 'react';
 import { BACKEND_URL } from '../../../config';
 import { HiOutlineBriefcase } from 'react-icons/hi2';
@@ -25,7 +18,7 @@ const Navbar = () => {
     (state) => state.pendingRecievedInvites,
   );
 
-  const title = "Vind-Expert";
+  const title = 'Vind-Expert';
 
   // Should the active user be alerted about pending invites?
   // ! DECIDE: Maybe ALL notifications should trigger a general notification state, maybe not.
@@ -41,8 +34,8 @@ const Navbar = () => {
     pendingRecievedInvites === null
       ? setInviteAlert(false)
       : pendingRecievedInvites.length > 0
-        ? setInviteAlert(true)
-        : setInviteAlert(false);
+      ? setInviteAlert(true)
+      : setInviteAlert(false);
   }, [user, userId, pendingRecievedInvites]);
 
   useEffect(() => {
@@ -91,8 +84,12 @@ const Navbar = () => {
                       className='text-white cursor-pointer'
                       data-test-id='user-dropdown'
                       onClick={toggleDropdown}
-                      onKeyDown={(event) => { if (event.key === 'm') { toggleDropdown() } }}
-                      role="button"
+                      onKeyDown={(event) => {
+                        if (event.key === 'm') {
+                          toggleDropdown();
+                        }
+                      }}
+                      role='button'
                       tabIndex={0}
                     >
                       <img
@@ -112,61 +109,64 @@ const Navbar = () => {
                       )}
                     </div>
                     {/* TODO: [MERNSTACK-226] When you click somewhere else, the dropdown should close in Navbar.jsx*/}
-                    {isDropdownOpen ? <div className='z-[100] absolute top-10 right-0 bg-violet-950/90 rounded-lg py-4'>
-                      {inviteAlert ? (
-                        <div className='w-[200px] pt-1 h-10 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-1 bg-gradient-to-r from-green-600 to-green-800'>
-                          <Link className='text-white ' to='/invites'>
-                            {inviteAlert ? (
-                              <div className='w-full h-full'>
-                                <LuClipboardList className='text-xl w-[30px] float-left ml-2 mt-[-2px] mr-3 text-yellow-400 animate-waving-button' />
-                                <div className='animate-bounce mt-2'>Invites</div>
-                              </div>
-                            ) : (
-                              ''
-                            )}
+                    {isDropdownOpen ? (
+                      <div className='z-[100] absolute top-10 right-0 bg-violet-950/90 rounded-lg py-4'>
+                        {inviteAlert ? (
+                          <div className='w-[200px] pt-1 h-10 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-1 bg-gradient-to-r from-green-600 to-green-800'>
+                            <Link className='text-white ' to='/invites'>
+                              {inviteAlert ? (
+                                <div className='w-full h-full'>
+                                  <LuClipboardList className='text-xl w-[30px] float-left ml-2 mt-[-2px] mr-3 text-yellow-400 animate-waving-button' />
+                                  <div className='animate-bounce mt-2'>Invites</div>
+                                </div>
+                              ) : (
+                                ''
+                              )}
+                            </Link>
+                          </div>
+                        ) : (
+                          ''
+                        )}
+
+                        <div
+                          className={`w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 ${
+                            inviteAlert ? 'mt-4 pt-1' : ''
+                          }}}`}
+                        >
+                          <Link className='text-white' to='/profile'>
+                            <div className='w-full h-full'>
+                              <HiUser className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
+                              Profile
+                            </div>
                           </Link>
                         </div>
-                      ) : (
-                        ''
-                      )}
 
-                      <div
-                        className={`w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 ${inviteAlert ? 'mt-4 pt-1' : ''
-                          }}}`}
-                      >
-                        <Link className='text-white' to='/profile'>
-                          <div className='w-full h-full'>
-                            <HiUser className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
-                            Profile
-                          </div>
-                        </Link>
+                        <div className='w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4'>
+                          <Link className='text-white' to='/companies'>
+                            <div className='w-full h-full'>
+                              <HiOutlineBriefcase className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
+                              Companies
+                            </div>
+                          </Link>
+                        </div>
+                        <div className='w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4'>
+                          <Link className='text-white' to='/user/settings'>
+                            <div className='w-full h-full'>
+                              <HiOutlineCog className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
+                              Settings
+                            </div>
+                          </Link>
+                        </div>
+                        <div className='w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4'>
+                          <Link className='text-white' to='/logout'>
+                            <div className='w-full h-full'>
+                              <HiOutlineLogout className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
+                              Logout
+                            </div>
+                          </Link>
+                        </div>
                       </div>
-
-                      <div className='w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4'>
-                        <Link className='text-white' to='/companies'>
-                          <div className='w-full h-full'>
-                            <HiOutlineBriefcase className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
-                            Companies
-                          </div>
-                        </Link>
-                      </div>
-                      <div className='w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4'>
-                        <Link className='text-white' to='/user/settings'>
-                          <div className='w-full h-full'>
-                            <HiOutlineCog className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
-                            Settings
-                          </div>
-                        </Link>
-                      </div>
-                      <div className='w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4'>
-                        <Link className='text-white' to='/logout'>
-                          <div className='w-full h-full'>
-                            <HiOutlineLogout className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
-                            Logout
-                          </div>
-                        </Link>
-                      </div>
-                    </div> : null}
+                    ) : null}
                   </div>
                 </div>
               </div>
