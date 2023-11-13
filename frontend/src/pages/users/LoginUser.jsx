@@ -82,10 +82,13 @@ const LoginUser = () => {
       })
       .catch((error) => {
         setLoading(false)
-        enqueueSnackbar('Error logging in! Did you use the right credentials?', {
-          variant: 'error',
-          preventDuplicate: true,
-        })
+        enqueueSnackbar(
+          'Error logging in! Did you use the right credentials?',
+          {
+            variant: 'error',
+            preventDuplicate: true,
+          },
+        )
         console.log(error)
       })
   }
@@ -109,7 +112,9 @@ const LoginUser = () => {
               value={email}
             />
             {emailError ? (
-              <p className='text-red-500 text-sm'>Email must be a valid email address.</p>
+              <p className='text-red-500 text-sm'>
+                Email must be a valid email address.
+              </p>
             ) : (
               ''
             )}

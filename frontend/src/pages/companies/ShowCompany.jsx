@@ -93,7 +93,9 @@ const ShowCompany = () => {
               <span>{new Date(company.createdAt).toString()}</span>
             </div>
             <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Last Update Time</span>
+              <span className='text-xl mr-4 text-gray-500'>
+                Last Update Time
+              </span>
               {/* @ts-ignore */}
               <span>{new Date(company.updatedAt).toString()}</span>
             </div>

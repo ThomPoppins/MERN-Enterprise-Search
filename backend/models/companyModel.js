@@ -63,8 +63,10 @@ const companySchema = new mongoose.Schema(
       required: false,
       default: "",
     },
-    // company email address for correspondence directed to the company with this application.
-    // TODO: [MERNSTACK-134] Send confirmation e-mail to this address to verify the company email address.
+    /*
+     * Company email address for correspondence directed to the company with this application.
+     * TODO: [MERNSTACK-134] Send confirmation e-mail to this address to verify the company email address.
+     */
     email: {
       type: String,
       required: true,
@@ -82,13 +84,13 @@ const companySchema = new mongoose.Schema(
       unique: true,
       default: "",
     },
-    // kvk number is validated (with the correct owner and company name) by the KVK API. True or false.
+    // Kvk number is validated (with the correct owner and company name) by the KVK API. True or false.
     kvkValidated: {
       type: Boolean,
       required: true,
       default: false,
     },
-    // company slogan
+    // Company slogan
     slogan: {
       type: String,
       required: true,
@@ -100,23 +102,29 @@ const companySchema = new mongoose.Schema(
       required: true,
       default: "",
     },
-    // Registered address of the company.
-    // For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
+    /*
+     * Registered address of the company.
+     * For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
+     */
     address: {
       type: Object,
       required: false,
       default: {},
     },
-    // Adress to send invoices to.
-    // For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
+    /*
+     * Adress to send invoices to.
+     * For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
+     */
     billingAddress: {
       type: Object,
       required: false,
       default: {},
     },
-    // "addressFormat" will be used to format the address in the correct way for the country and regional address format.
-    // TODO: [MERNSTACK-13] Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
-    // For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: "" }, because there are not regional address format differences in the Netherlands.
+    /*
+     * "addressFormat" will be used to format the address in the correct way for the country and regional address format.
+     * TODO: [MERNSTACK-13] Create a new schema and model for address formats. Address formats will be linked to a company, based on an addressFormatId in the addressFormat model.
+     * For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: "" }, because there are not regional address format differences in the Netherlands.
+     */
     addressFormat: {
       type: mongoose.Schema.Types.ObjectId,
       required: false,
@@ -140,85 +148,95 @@ const companySchema = new mongoose.Schema(
       required: false,
       default: [],
     },
-    // TODO: [MERNSTACK-18] Create a new schema and model for companyAdmin users.
-    // TODO: [MERNSTACK-19] Admin users will be linked to a company, based on an adminUserId in the adminUser model.
-    // TODO: [MERNSTACK-20] `admins` array should contain admin objects with an adminUserId. (For example: { adminUserId = "1234", role = "owner" })
+    /*
+     * TODO: [MERNSTACK-18] Create a new schema and model for companyAdmin users.
+     * TODO: [MERNSTACK-19] Admin users will be linked to a company, based on an adminUserId in the adminUser model.
+     * TODO: [MERNSTACK-20] `admins` array should contain admin objects with an adminUserId. (For example: { adminUserId = "1234", role = "owner" })
+     */
     companyAdmins: {
       type: Array,
       required: false,
       default: [],
     },
-    // TODO: [MERNSTACK-21] Create a new schema and model for Role with an roleId and role. For example: { roleId: { type: Number, required: true }, role: { type: String, required: true } } (roleId = 1, role = "owner") (roleId = 2, role = "admin") (roleId = 3, role = "employee") (roleId = 4, role = "vendor") (roleId = 5, role = "customer") (roleId = 6, role = "guest")
-    // TODO: [MERNSTACK-22] Roles will be linked to company associated users like employees, vendors, customers, and more, based on an roleId in the role model.
-    // TODO: [MERNSTACK-71] companyModel.js: Create `junction` table between companies and the role users have in this many-to-many relationship with the companies. Users can get assigned more than 1 role per company.
-    // TODO: [MERNSTACK-72] Reconsider `employees` field if the role `junction` table is not the right place to store the `employee` data.
-    // employees: {
-    //   type: Array,
-    //   required: false,
-    // },
-    // TODO: [MERNSTACK-23] Create a new schema and model for address.
-    // TODO: [MERNSTACK-24] Locations will be linked to a company, based on an addressId in the address model.
-    // TODO: [MERNSTACK-25] "locations" array should contain address objects with all address field fields and addressId compatible with the configured addressFormat for the country and region.
+    /*
+     * TODO: [MERNSTACK-21] Create a new schema and model for Role with an roleId and role. For example: { roleId: { type: Number, required: true }, role: { type: String, required: true } } (roleId = 1, role = "owner") (roleId = 2, role = "admin") (roleId = 3, role = "employee") (roleId = 4, role = "vendor") (roleId = 5, role = "customer") (roleId = 6, role = "guest")
+     * TODO: [MERNSTACK-22] Roles will be linked to company associated users like employees, vendors, customers, and more, based on an roleId in the role model.
+     * TODO: [MERNSTACK-71] companyModel.js: Create `junction` table between companies and the role users have in this many-to-many relationship with the companies. Users can get assigned more than 1 role per company.
+     * TODO: [MERNSTACK-72] Reconsider `employees` field if the role `junction` table is not the right place to store the `employee` data.
+     * employees: {
+     *   type: Array,
+     *   required: false,
+     * },
+     * TODO: [MERNSTACK-23] Create a new schema and model for address.
+     * TODO: [MERNSTACK-24] Locations will be linked to a company, based on an addressId in the address model.
+     * TODO: [MERNSTACK-25] "locations" array should contain address objects with all address field fields and addressId compatible with the configured addressFormat for the country and region.
+     */
     locations: {
       type: Array,
       required: false,
       default: [],
     },
-    // Format of which payment options and details are required for the country or region.
-    // `businessConfigFormat` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the required payment details for that country or region.
-    // The required payment details will be booleans, true or false.
-    // The required payment details will be used to validate the payment details of a company.
-    // TODO: [MERNSTACK-26] Find out how to validate correct business and payment details.
-    // TODO: [MERNSTACK-27] Inform myself about the required payment details for each country or region. (First the Netherlands, then, maybe the rest of the world.)
-    // `businessConfigFormat` Object example (way to):
-    // {
-    //   "NL": {
-    //     "vatNumber": true,
-    //     "iban": true,
-    //     "bic": true,
-    //     "kvkNumber": true,
-    //     "btwNumber": true,
-    //     "taxNumber": true,
-    //     "taxOffice": true,
-    //     "taxOfficeAddress": true,
-    //     "taxOfficePostalCode": true,
-    //     "taxOfficeCity": true,
-    //     "taxOfficeCountry": true,
-    //     "taxOfficePhone": true,
-    //     "taxOfficeEmail": true,
-    //     "taxOfficeWebsite": true,
-    //     "taxOfficeContactPerson": true,
-    //     "taxOfficeContactPersonPhone": true,
-    //     "taxOfficeContactPersonEmail": true,
-    //     "taxOfficeContactPersonWebsite": true,
-    //     "taxOfficeContactPersonAddress": true,
-    //     "taxOfficeContactPersonPostalCode": true,
-    //     "taxOfficeContactPersonCity": true,
-    //     "taxOfficeContactPersonCountry": true,
-    //     "taxOfficeContactPersonRole": true,
-    //     "taxOfficeContactPersonDepartment": true,
-    //     "taxOfficeContactPersonFax": true,
-    //     "taxOfficeContactPersonMobile": true,
-    //     "taxOfficeContactPersonGender": true,
-    //     "taxOfficeContactPersonBirthDate": true,
-    //     }
-    // }
-    // `departments` is an array of objects with an departmentId. Many departments can be linked to a company. many-to-one relationship.
+    /*
+     * Format of which payment options and details are required for the country or region.
+     * `businessConfigFormat` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the required payment details for that country or region.
+     * The required payment details will be booleans, true or false.
+     * The required payment details will be used to validate the payment details of a company.
+     * TODO: [MERNSTACK-26] Find out how to validate correct business and payment details.
+     * TODO: [MERNSTACK-27] Inform myself about the required payment details for each country or region. (First the Netherlands, then, maybe the rest of the world.)
+     * `businessConfigFormat` Object example (way to):
+     * {
+     *   "NL": {
+     *     "vatNumber": true,
+     *     "iban": true,
+     *     "bic": true,
+     *     "kvkNumber": true,
+     *     "btwNumber": true,
+     *     "taxNumber": true,
+     *     "taxOffice": true,
+     *     "taxOfficeAddress": true,
+     *     "taxOfficePostalCode": true,
+     *     "taxOfficeCity": true,
+     *     "taxOfficeCountry": true,
+     *     "taxOfficePhone": true,
+     *     "taxOfficeEmail": true,
+     *     "taxOfficeWebsite": true,
+     *     "taxOfficeContactPerson": true,
+     *     "taxOfficeContactPersonPhone": true,
+     *     "taxOfficeContactPersonEmail": true,
+     *     "taxOfficeContactPersonWebsite": true,
+     *     "taxOfficeContactPersonAddress": true,
+     *     "taxOfficeContactPersonPostalCode": true,
+     *     "taxOfficeContactPersonCity": true,
+     *     "taxOfficeContactPersonCountry": true,
+     *     "taxOfficeContactPersonRole": true,
+     *     "taxOfficeContactPersonDepartment": true,
+     *     "taxOfficeContactPersonFax": true,
+     *     "taxOfficeContactPersonMobile": true,
+     *     "taxOfficeContactPersonGender": true,
+     *     "taxOfficeContactPersonBirthDate": true,
+     *     }
+     * }
+     * `departments` is an array of objects with an departmentId. Many departments can be linked to a company. many-to-one relationship.
+     */
     departments: {
       type: Array,
       required: false,
       default: [],
     },
-    // TODO: [MERNSTACK-28] Find out how to validate if the correct business and payment details are being used and the REAL "owner" is the only one authorized to change these details.
-    // Object of configurable settings that `company` owners and admins can change.
+    /*
+     * TODO: [MERNSTACK-28] Find out how to validate if the correct business and payment details are being used and the REAL "owner" is the only one authorized to change these details.
+     * Object of configurable settings that `company` owners and admins can change.
+     */
     businessConfig: {
       type: Object,
       required: false,
       default: {},
     },
-    // TODO:[MERNSTACK-75] Create paymentMethod schema and model.
-    // `paymentDetails` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the payment details for that country or region.
-    // For example: { paymentMethodId: 0, vatNumber: "", iban: "", creditCard: { number: "", securityCode: "" }, bic: "", kvkNumber: "", taxNumber: "", taxOffice: "Belastingdienst", taxOfficeAddress: "Parnassusweg 5", taxOfficePostalCode: "1077 DC", taxOfficeCity: "Amsterdam", taxOfficeCountry: "NL", taxOfficePhone: "", taxOfficeEmail: "", }
+    /*
+     * TODO:[MERNSTACK-75] Create paymentMethod schema and model.
+     * `paymentDetails` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the payment details for that country or region.
+     * For example: { paymentMethodId: 0, vatNumber: "", iban: "", creditCard: { number: "", securityCode: "" }, bic: "", kvkNumber: "", taxNumber: "", taxOffice: "Belastingdienst", taxOfficeAddress: "Parnassusweg 5", taxOfficePostalCode: "1077 DC", taxOfficeCity: "Amsterdam", taxOfficeCountry: "NL", taxOfficePhone: "", taxOfficeEmail: "", }
+     */
     paymentDetails: {
       type: Object,
       required: false,
@@ -236,22 +254,28 @@ const companySchema = new mongoose.Schema(
       required: false,
       default: true,
     },
-    // TODO: [MERNSTACK-29] Create a new schema and model for Industry. Industry will be linked to a company, based on an industryId in the industry model.
-    // TODO: [MERNSTACK-76] RECONSIDER: Maybe a `junction` table between companies and the industries they are in is the right place to store necessary data for the specific companyIndustry relationships This extra data might be data like metadata that can be used to improve the result listing order of companies when searched by user in frontend.
+    /*
+     * TODO: [MERNSTACK-29] Create a new schema and model for Industry. Industry will be linked to a company, based on an industryId in the industry model.
+     * TODO: [MERNSTACK-76] RECONSIDER: Maybe a `junction` table between companies and the industries they are in is the right place to store necessary data for the specific companyIndustry relationships This extra data might be data like metadata that can be used to improve the result listing order of companies when searched by user in frontend.
+     */
     industries: {
       type: Array,
       required: false,
       default: [],
     },
-    // Is the company public or private at THIS moment?
-    // TODO: [MERNSTACK-33] Make it possible to change this value in the user/owner settings.
+    /*
+     * Is the company public or private at THIS moment?
+     * TODO: [MERNSTACK-33] Make it possible to change this value in the user/owner settings.
+     */
     public: {
       type: Boolean,
       required: false,
       default: true,
     },
-    // TODO: [MERNSTACK-35] Reviews will be linked to a company, based on an reviewId in the review model. This model should contain the review text, rating, reviewer, timestamp and maybe more.
-    // TODO: [MERNSTACK-36] "reviews" array should contain review objects with an reviewId.
+    /*
+     * TODO: [MERNSTACK-35] Reviews will be linked to a company, based on an reviewId in the review model. This model should contain the review text, rating, reviewer, timestamp and maybe more.
+     * TODO: [MERNSTACK-36] "reviews" array should contain review objects with an reviewId.
+     */
     reviews: {
       type: Array,
       required: false,
@@ -265,15 +289,19 @@ const companySchema = new mongoose.Schema(
       max: 5,
       default: 0,
     },
-    // Users that want to be affiliated with the company so they can profit of special company's benefits in exchange for a review/rating or something else.
-    // `customers` is an array of objects with customerId corresponding with the `id` of the Customer model.
+    /*
+     * Users that want to be affiliated with the company so they can profit of special company's benefits in exchange for a review/rating or something else.
+     * `customers` is an array of objects with customerId corresponding with the `id` of the Customer model.
+     */
     customers: {
       type: Array,
       required: false,
       default: [],
     },
-    // "premium" will be the premiumTypeName "none" "bronze", "silver", "gold" or "platinum" corresponding with the premiumType model?
-    // `premium` is the id of the premium type in the corresponding premium type model.
+    /*
+     * "premium" will be the premiumTypeName "none" "bronze", "silver", "gold" or "platinum" corresponding with the premiumType model?
+     * `premium` is the id of the premium type in the corresponding premium type model.
+     */
     premium: {
       type: mongoose.Schema.Types.ObjectId,
       required: false,
@@ -285,11 +313,13 @@ const companySchema = new mongoose.Schema(
       required: false,
       default: null,
     },
-    // associatedVendors: {
-    //   type: Array,
-    //   required: false,
-    // },
-    // `employees` is an array of employee objects with an employeeId corresponding with the `id` in the Employee model.
+    /*
+     * AssociatedVendors: {
+     *   type: Array,
+     *   required: false,
+     * },
+     * `employees` is an array of employee objects with an employeeId corresponding with the `id` in the Employee model.
+     */
     employees: {
       type: Array,
       required: false,
@@ -377,7 +407,7 @@ const companySchema = new mongoose.Schema(
       required: false,
     },
   },
-  // enable timestamps
+  // Enable timestamps
   { timestamps: true }
 );
 

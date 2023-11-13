@@ -1,13 +1,15 @@
 import mongoose from "mongoose";
 
-// TODO: [MERNSTACK-43] Create a new schema and model for projects.
-// TODO: [MERNSTACK-63] Create a new schema and model for projects. Projects will be linked to a company, based on an projectId in the project model. (and maybe userId's? or employeeId's)
-// TODO: [MERNSTACK-64] Make it possible to create and design a project profile page, with a storyline of stories linked to companies, employees, associated customers, reviews, ratings and more. Authorize employees to change project settings. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
-// TODO: [MERNSTACK-65] Create functionalities for companies to automatically share costs for premium features, based on a percentage all associated companies have to agree on for this to work.
-// TODO: [MERNSTACK-66] Make functionalities so companies can share the revenue of a project's products and services, based on a percentage all associated companies have to agree on for this to work, or share revenue based on the assigned employees (from a specific company) that are associated to the delivered products and services.
-// TODO: [MERNSTACK-67] Make it possible for companies associated to projects to share revenue per service or product.
-// TODO: [MERNSTACK-68] Make it possible to configure revenue sharing per product, per service based on from which profile page the product or service was ordered.
-// TODO: [MERNSTACK-69] Make it possible to share revenue based on which company performs the service.
+/*
+ * TODO: [MERNSTACK-43] Create a new schema and model for projects.
+ * TODO: [MERNSTACK-63] Create a new schema and model for projects. Projects will be linked to a company, based on an projectId in the project model. (and maybe userId's? or employeeId's)
+ * TODO: [MERNSTACK-64] Make it possible to create and design a project profile page, with a storyline of stories linked to companies, employees, associated customers, reviews, ratings and more. Authorize employees to change project settings. (premium feature? Maybe "bronze": 2 employees, "silver": 5 employees, "gold": 10 employees, "platinum": 20 employees, "astronomical": unlimited, something like that.)
+ * TODO: [MERNSTACK-65] Create functionalities for companies to automatically share costs for premium features, based on a percentage all associated companies have to agree on for this to work.
+ * TODO: [MERNSTACK-66] Make functionalities so companies can share the revenue of a project's products and services, based on a percentage all associated companies have to agree on for this to work, or share revenue based on the assigned employees (from a specific company) that are associated to the delivered products and services.
+ * TODO: [MERNSTACK-67] Make it possible for companies associated to projects to share revenue per service or product.
+ * TODO: [MERNSTACK-68] Make it possible to configure revenue sharing per product, per service based on from which profile page the product or service was ordered.
+ * TODO: [MERNSTACK-69] Make it possible to share revenue based on which company performs the service.
+ */
 
 /**
  * Mongoose Schema for the Project Model
@@ -84,22 +86,28 @@ const projectSchema = new mongoose.Schema(
       required: true,
       default: "",
     },
-    // Registered address of the project.
-    // For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
+    /*
+     * Registered address of the project.
+     * For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
+     */
     address: {
       type: Object,
       required: false,
       default: {},
     },
-    // Adress to send invoices to.
-    // For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
+    /*
+     * Adress to send invoices to.
+     * For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }
+     */
     billingAddress: {
       type: Object,
       required: false,
       default: {},
     },
-    // "addressFormat" will be used to format the address in the correct way for the country and regional address format.
-    // For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: "" }, because there are not regional address format differences in the Netherlands.
+    /*
+     * "addressFormat" will be used to format the address in the correct way for the country and regional address format.
+     * For example: if the country is the Netherlands, the `addressFormat` should be { country: "NL", region: "" }, because there are not regional address format differences in the Netherlands.
+     */
     addressFormat: {
       type: Object,
       required: false,
@@ -122,53 +130,57 @@ const projectSchema = new mongoose.Schema(
       required: false,
       default: [],
     },
-    // employees: {
-    //   type: Array,
-    //   required: false,
-    // },
+    /*
+     * Employees: {
+     *   type: Array,
+     *   required: false,
+     * },
+     */
     locations: {
       type: Array,
       required: false,
       default: [],
     },
-    // Format of which payment options and details are required for the country or region.
-    // `businessConfigFormat` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the required payment details for that country or region.
-    // The required payment details will be booleans, true or false.
-    // The required payment details will be used to validate the payment details of a company.
-    // `businessConfigFormat` Object example (way to):
-    // {
-    //   "NL": {
-    //     "vatNumber": true,
-    //     "iban": true,
-    //     "bic": true,
-    //     "kvkNumber": true,
-    //     "btwNumber": true,
-    //     "taxNumber": true,
-    //     "taxOffice": true,
-    //     "taxOfficeAddress": true,
-    //     "taxOfficePostalCode": true,
-    //     "taxOfficeCity": true,
-    //     "taxOfficeCountry": true,
-    //     "taxOfficePhone": true,
-    //     "taxOfficeEmail": true,
-    //     "taxOfficeWebsite": true,
-    //     "taxOfficeContactPerson": true,
-    //     "taxOfficeContactPersonPhone": true,
-    //     "taxOfficeContactPersonEmail": true,
-    //     "taxOfficeContactPersonWebsite": true,
-    //     "taxOfficeContactPersonAddress": true,
-    //     "taxOfficeContactPersonPostalCode": true,
-    //     "taxOfficeContactPersonCity": true,
-    //     "taxOfficeContactPersonCountry": true,
-    //     "taxOfficeContactPersonRole": true,
-    //     "taxOfficeContactPersonDepartment": true,
-    //     "taxOfficeContactPersonFax": true,
-    //     "taxOfficeContactPersonMobile": true,
-    //     "taxOfficeContactPersonGender": true,
-    //     "taxOfficeContactPersonBirthDate": true,
-    //     }
-    // }
-    // `departments` is an array of objects with an departmentId. Many departments can be linked to a project. many-to-one relationship.
+    /*
+     * Format of which payment options and details are required for the country or region.
+     * `businessConfigFormat` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the required payment details for that country or region.
+     * The required payment details will be booleans, true or false.
+     * The required payment details will be used to validate the payment details of a company.
+     * `businessConfigFormat` Object example (way to):
+     * {
+     *   "NL": {
+     *     "vatNumber": true,
+     *     "iban": true,
+     *     "bic": true,
+     *     "kvkNumber": true,
+     *     "btwNumber": true,
+     *     "taxNumber": true,
+     *     "taxOffice": true,
+     *     "taxOfficeAddress": true,
+     *     "taxOfficePostalCode": true,
+     *     "taxOfficeCity": true,
+     *     "taxOfficeCountry": true,
+     *     "taxOfficePhone": true,
+     *     "taxOfficeEmail": true,
+     *     "taxOfficeWebsite": true,
+     *     "taxOfficeContactPerson": true,
+     *     "taxOfficeContactPersonPhone": true,
+     *     "taxOfficeContactPersonEmail": true,
+     *     "taxOfficeContactPersonWebsite": true,
+     *     "taxOfficeContactPersonAddress": true,
+     *     "taxOfficeContactPersonPostalCode": true,
+     *     "taxOfficeContactPersonCity": true,
+     *     "taxOfficeContactPersonCountry": true,
+     *     "taxOfficeContactPersonRole": true,
+     *     "taxOfficeContactPersonDepartment": true,
+     *     "taxOfficeContactPersonFax": true,
+     *     "taxOfficeContactPersonMobile": true,
+     *     "taxOfficeContactPersonGender": true,
+     *     "taxOfficeContactPersonBirthDate": true,
+     *     }
+     * }
+     * `departments` is an array of objects with an departmentId. Many departments can be linked to a project. many-to-one relationship.
+     */
     departments: {
       type: Array,
       required: false,
@@ -180,8 +192,10 @@ const projectSchema = new mongoose.Schema(
       required: false,
       default: {},
     },
-    // `paymentDetails` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the payment details for that country or region.
-    // For example: { paymentMethodId: 0, vatNumber: "", iban: "", creditCard: { number: "", securityCode: "" }, bic: "", kvkNumber: "", taxNumber: "", taxOffice: "Belastingdienst", taxOfficeAddress: "Parnassusweg 5", taxOfficePostalCode: "1077 DC", taxOfficeCity: "Amsterdam", taxOfficeCountry: "NL", taxOfficePhone: "", taxOfficeEmail: "", }
+    /*
+     * `paymentDetails` will be a object with property `countryCode`, for example `NL` for the Netherlands, and the value will be an object with the payment details for that country or region.
+     * For example: { paymentMethodId: 0, vatNumber: "", iban: "", creditCard: { number: "", securityCode: "" }, bic: "", kvkNumber: "", taxNumber: "", taxOffice: "Belastingdienst", taxOfficeAddress: "Parnassusweg 5", taxOfficePostalCode: "1077 DC", taxOfficeCity: "Amsterdam", taxOfficeCountry: "NL", taxOfficePhone: "", taxOfficeEmail: "", }
+     */
     paymentDetails: {
       type: Object,
       required: false,
@@ -223,15 +237,19 @@ const projectSchema = new mongoose.Schema(
       max: 5,
       default: 0,
     },
-    // Users that want to be affiliated with the company so they can profit of special company's benefits in exchange for a review/rating or something else.
-    // `customers` is an array of objects with customerId corresponding with the `id` of the Customer model.
+    /*
+     * Users that want to be affiliated with the company so they can profit of special company's benefits in exchange for a review/rating or something else.
+     * `customers` is an array of objects with customerId corresponding with the `id` of the Customer model.
+     */
     customers: {
       type: Array,
       required: false,
       default: [],
     },
-    // "premium" will be the premiumTypeName "none" "bronze", "silver", "gold" or "platinum" corresponding with the premiumType model?
-    // `premium` is the id of the premium type in the corresponding premium type model.
+    /*
+     * "premium" will be the premiumTypeName "none" "bronze", "silver", "gold" or "platinum" corresponding with the premiumType model?
+     * `premium` is the id of the premium type in the corresponding premium type model.
+     */
     premium: {
       type: String,
       required: false,
@@ -243,11 +261,13 @@ const projectSchema = new mongoose.Schema(
       required: false,
       default: {},
     },
-    // associatedVendors: {
-    //   type: Array,
-    //   required: false,
-    // },
-    // `employees` is an array of employee objects with an employeeId corresponding with the `id` in the Employee model.
+    /*
+     * AssociatedVendors: {
+     *   type: Array,
+     *   required: false,
+     * },
+     * `employees` is an array of employee objects with an employeeId corresponding with the `id` in the Employee model.
+     */
     employees: {
       type: Array,
       required: false,
@@ -335,11 +355,13 @@ const projectSchema = new mongoose.Schema(
       required: false,
     },
   },
-  // enable timestamps
+  // Enable timestamps
   { timestamps: true }
 );
-// Project model:
-// Create a new model using the companySchema.
-// A model is a class with which we construct documents.
-// In this case, a project will be a document in our MongoDB database.
+/*
+ * Project model:
+ * Create a new model using the companySchema.
+ * A model is a class with which we construct documents.
+ * In this case, a project will be a document in our MongoDB database.
+ */
 export const Project = mongoose.model("Project", projectSchema);

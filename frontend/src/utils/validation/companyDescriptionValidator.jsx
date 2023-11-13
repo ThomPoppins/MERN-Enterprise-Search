@@ -4,7 +4,11 @@
 function companyDescriptionValidator(description) {
   const regex = /^[a-zA-Z0-9\s!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/
 
-  return description.trim().length > 0 && description.length <= 280 && regex.test(description)
+  return (
+    description.trim().length > 0 &&
+    description.length <= 280 &&
+    regex.test(description)
+  )
 }
 
 export default companyDescriptionValidator

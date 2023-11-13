@@ -19,7 +19,9 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
 
     // Add the user as owner to the company
     await axios
-      .put(`${BACKEND_URL}/companies/${invite.companyId}/add-owner/${invite.receiverId}`)
+      .put(
+        `${BACKEND_URL}/companies/${invite.companyId}/add-owner/${invite.receiverId}`,
+      )
       .then((response) => {
         console.log('Added user to company: ', response)
 
@@ -27,7 +29,10 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
         updateInviteStatus(invite._id, 'accepted')
       })
       .catch((error) => {
-        console.log('ERROR in InviteOperations.jsx add user to company: ', error)
+        console.log(
+          'ERROR in InviteOperations.jsx add user to company: ',
+          error,
+        )
       })
 
     // Timeout for stopping the animation after 2 seconds
@@ -43,7 +48,9 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
       <span className='text-xl'>
         <button
           className={`bg-gradient-to-r from-green-600 to-green-700 hover:from-green-400 hover:to-green-500 rounded-lg w-[82px] float-left ml-1 ${
-            acceptButtonSpinning ? 'animate-spin-fast' : 'animate-bounce hover:animate-none'
+            acceptButtonSpinning
+              ? 'animate-spin-fast'
+              : 'animate-bounce hover:animate-none'
           }`}
           data-test-id='accept-button'
           onClick={handleAcceptInvite}

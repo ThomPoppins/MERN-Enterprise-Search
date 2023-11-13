@@ -75,8 +75,8 @@ const companyProjectSchema = new mongoose.Schema(
   {
     timestamps: true,
   }
-);
+),
 
-const CompanyProject = mongoose.model("CompanyProject", companyProjectSchema);
+ CompanyProject = mongoose.model("CompanyProject", companyProjectSchema);
 
 export default CompanyProject;

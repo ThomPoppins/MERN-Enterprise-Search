@@ -91,7 +91,11 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
         />
       </div>
       {showModal ? (
-        <CompanyModal company={company} onClose={() => setShowModal(false)} owners={owners} />
+        <CompanyModal
+          company={company}
+          onClose={() => setShowModal(false)}
+          owners={owners}
+        />
       ) : null}
       {showDeleteModal ? (
         <DeleteCompanyModal

@@ -15,7 +15,13 @@ const UploadAvatar = ({ setLogo, onClose }) => {
   return (
     <div>
       <div className='mb-4'>
-        <Avatar height={300} onClose={onClose} onCrop={onCrop} src='' width={300} />
+        <Avatar
+          height={300}
+          onClose={onClose}
+          onCrop={onCrop}
+          src=''
+          width={300}
+        />
       </div>
       <div className='flex justify-center'>
         <button

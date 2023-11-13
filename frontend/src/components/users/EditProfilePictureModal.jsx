@@ -70,7 +70,10 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
                   })
                 })
                 .catch((error) => {
-                  console.log('ERROR in EditProfilePictureModal from /users/user/:id: ', error)
+                  console.log(
+                    'ERROR in EditProfilePictureModal from /users/user/:id: ',
+                    error,
+                  )
                 })
 
               // Close the modal
@@ -120,7 +123,9 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
           ) : null}
           {!selectedFile && (
             <div className='mx-auto my-4  w-[350px] h-[350px] border-2 border-purple-900 rounded-lg'>
-              <p className='text-center text-white text-2xl mt-16'>No image selected</p>
+              <p className='text-center text-white text-2xl mt-16'>
+                No image selected
+              </p>
             </div>
           )}
           <div className='flex justify-center'>

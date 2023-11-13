@@ -10,11 +10,13 @@ const router = express.Router();
 
 // Route to get all pending invites from a specific sender
 router.get("/company/sender/pending", async (request, response) => {
-  // Get companyId from request headers
-  // @ts-ignore
-  const companyId = request.headers.companyid;
+  /*
+   * Get companyId from request headers
+   * @ts-ignore
+   */
+  const companyId = request.headers.companyid,
   // Get senderId from request headers
-  const senderId = request.headers.senderid;
+   senderId = request.headers.senderid;
 
   if (typeof senderId !== "string") {
     console.log("senderId is not a string.");
@@ -26,7 +28,7 @@ router.get("/company/sender/pending", async (request, response) => {
 
   try {
     // Get all invites with status "pending" and senderId equal to senderId
-    let invites = await Invite.find({
+    const invites = await Invite.find({
       senderId: new mongoose.Types.ObjectId(senderId),
       status: "pending",
     }).sort({ createdAt: -1 });
@@ -69,8 +71,10 @@ router.get("/reciever/:userId/pending", async (request, response) => {
       status: "pending",
     }).sort({ createdAt: -1 });
 
-    // Convert invites to plain JavaScript objects
-    // @ts-ignore
+    /*
+     * Convert invites to plain JavaScript objects
+     * @ts-ignore
+     */
     invites = invites.map((invite) => invite.toObject());
 
     console.log(
@@ -82,9 +86,11 @@ router.get("/reciever/:userId/pending", async (request, response) => {
     for (const invite of invites) {
       // Add sender info
       const sender = await User.findById(invite.senderId);
-      // Convert sender to plain JavaScript object
-      // @ts-ignore
-      invite["sender"] = sender.toObject();
+      /*
+       * Convert sender to plain JavaScript object
+       * @ts-ignore
+       */
+      invite.sender = sender.toObject();
 
       // @ts-ignore
       if (invite.sender.profilePicture) {
@@ -92,26 +98,32 @@ router.get("/reciever/:userId/pending", async (request, response) => {
         const senderProfilePicture = await Image.findById(
           // @ts-ignore
           invite.sender.profilePicture
-        );
+        ),
 
         // Get sender profile picture URL
-        const senderProfilePictureURL = getStaticFileURLFromPath(
+         senderProfilePictureURL = getStaticFileURLFromPath(
           // @ts-ignore
           senderProfilePicture.path
         );
 
-        // Add sender profile picture URL to sender object
-        // @ts-ignore
-        invite.sender["profilePictureURL"] = senderProfilePictureURL;
+        /*
+         * Add sender profile picture URL to sender object
+         * @ts-ignore
+         */
+        invite.sender.profilePictureURL = senderProfilePictureURL;
       }
 
-      // Add reciever info
-      // @ts-ignore
+      /*
+       * Add reciever info
+       * @ts-ignore
+       */
       const reciever = await User.findById(new mongoose.Types.ObjectId(userId))
         .then(
-          // Convert reciever to plain JavaScript object
-          // @ts-ignore
-          (userData) => (invite["reciever"] = userData.toObject())
+          /*
+           * Convert reciever to plain JavaScript object
+           * @ts-ignore
+           */
+          (userData) => (invite.reciever = userData.toObject())
         )
         .catch((error) =>
           console.log("ERROR in GET /reciever/:userId/pending route: ", error)
@@ -122,9 +134,11 @@ router.get("/reciever/:userId/pending", async (request, response) => {
         if (invite.companyId) {
           // Get company document
           const company = await Company.findById(invite.companyId);
-          // Convert company to plain JavaScript object and add it to invite object
-          // @ts-ignore
-          invite["company"] = company.toObject();
+          /*
+           * Convert company to plain JavaScript object and add it to invite object
+           * @ts-ignore
+           */
+          invite.company = company.toObject();
         }
       }
 
@@ -164,8 +178,10 @@ router.put("/status/:inviteId", async (request, response) => {
     // Update the invite status
     invite.status = request.body.status;
 
-    // Save the updated invite document
-    // @ts-ignore
+    /*
+     * Save the updated invite document
+     * @ts-ignore
+     */
     await invite.save();
 
     // Send status 200 response and the updated invite document as JSON response if successful

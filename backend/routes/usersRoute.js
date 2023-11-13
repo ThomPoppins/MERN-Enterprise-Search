@@ -32,9 +32,9 @@ router.post("/", async (request, response) => {
     /// Get user from database based on email
     const existingUserEmail = await User.findOne({
       email: request.body.email,
-    });
+    }),
     // Get user from the database based on username
-    const existingUsername = await User.findOne({
+     existingUsername = await User.findOne({
       username: request.body.username,
     });
     if (existingUserEmail && existingUsername) {
@@ -56,21 +56,21 @@ router.post("/", async (request, response) => {
     }
 
     // Hash the password using bcrypt
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(request.body.password, salt);
+    const salt = await bcrypt.genSalt(10),
+     hashedPassword = await bcrypt.hash(request.body.password, salt),
 
     // Create a new user document using the User model and the properties from the request body.
-    const newUser = {
+     newUser = {
       username: request.body.username,
       email: request.body.email,
-      hashedPassword: hashedPassword,
+      hashedPassword,
       firstName: request.body.firstName,
       lastName: request.body.lastName,
       gender: request.body.gender,
-    };
+    },
 
     // Create a new user document using the User model and the properties from the request body
-    const user = await User.create(newUser);
+     user = await User.create(newUser);
 
     // Send status 201 response and the newly created user to the client
     return response.status(201).send(user);
@@ -94,8 +94,10 @@ router.put("/profile-picture", async (request, response) => {
       .then((user) => {
         const imageObjectId = new mongoose.Types.ObjectId(imageId);
 
-        // Save the updated user to the database
-        // @ts-ignore
+        /*
+         * Save the updated user to the database
+         * @ts-ignore
+         */
         user
           .updateOne({ profilePicture: imageObjectId })
           .then((result) => {
@@ -163,10 +165,10 @@ router.post("/login", async (request, response) => {
     }
 
     // Generate a new token for the user to save as a cookie in the client browser
-    const token = generateToken(user);
+    const token = generateToken(user),
 
     // Add the token to the user object
-    const responseData = { user, token };
+     responseData = { user, token };
 
     // Send status 200 response and the user to the client
     return response.status(200).send(responseData);
@@ -194,20 +196,22 @@ router.get("/search/:searchTerm", async (request, response) => {
     }
 
     // Get the company id from the request headers
-    const companyId = request.headers.companyid;
+    const companyId = request.headers.companyid,
 
     // Get the owners of the company
-    const company = await Company.findById(companyId);
+     company = await Company.findById(companyId),
     // @ts-ignore
-    const ownerIds = company.owners.map(
+     ownerIds = company.owners.map(
       (owner) => new mongoose.Types.ObjectId(owner.userId)
-    );
+    ),
 
-    // Create the aggregation pipeline
-    // The results are sorted by relevance
-    // The relevance is calculated by the number of matches of the search term in the username, firstName, lastName and email fields
-    // The results are limited to 10 of the most relevant users
-    const pipeline = [
+    /*
+     * Create the aggregation pipeline
+     * The results are sorted by relevance
+     * The relevance is calculated by the number of matches of the search term in the username, firstName, lastName and email fields
+     * The results are limited to 10 of the most relevant users
+     */
+     pipeline = [
       {
         $match: {
           _id: { $nin: ownerIds },
@@ -261,11 +265,13 @@ router.get("/search/:searchTerm", async (request, response) => {
       },
       { $sort: { relevance: -1 } },
       { $limit: 10 },
-    ];
+    ],
 
-    // Get the users from the database using the aggregation pipeline
-    // @ts-ignore
-    const users = await User.aggregate(pipeline);
+    /*
+     * Get the users from the database using the aggregation pipeline
+     * @ts-ignore
+     */
+     users = await User.aggregate(pipeline);
 
     // Send status 200 response and the users to the client
     return response.status(200).json(users);
@@ -279,17 +285,17 @@ router.get("/search/:searchTerm", async (request, response) => {
 router.get("/user/:id", async (request, response) => {
   try {
     // Get the user id from the request parameters
-    const { id } = request.params;
+    const { id } = request.params,
 
-    const objectId = new mongoose.Types.ObjectId(id);
+     objectId = new mongoose.Types.ObjectId(id);
 
     let profilePictureURL = "";
 
     // Get user documents using the findById method
-    const userDocument = await User.findById(new mongoose.Types.ObjectId(id));
+    const userDocument = await User.findById(new mongoose.Types.ObjectId(id)),
 
     // @ts-ignore Convert the user document to a plain JavaScript object so I can add the profilePictureURL property
-    const user = userDocument.toObject();
+     user = userDocument.toObject();
 
     if (user.profilePicture) {
       // Get the profile picture document from the database
@@ -301,7 +307,7 @@ router.get("/user/:id", async (request, response) => {
     }
 
     // Add the profilePictureURL property to the user object
-    user["profilePictureURL"] = profilePictureURL;
+    user.profilePictureURL = profilePictureURL;
 
     // Count how mant invites the user has with status "pending"
     const pendingInvitesCount = await Invite.countDocuments({
@@ -310,7 +316,7 @@ router.get("/user/:id", async (request, response) => {
     });
 
     // Add the pendingInvitesCount property to the user object
-    user["pendingInvitesCount"] = pendingInvitesCount;
+    user.pendingInvitesCount = pendingInvitesCount;
 
     console.log("User in usersRoute.js GET /users/user/:id: ", user);
 

@@ -318,10 +318,13 @@ const EditCompany = () => {
       !description ||
       !startYear
     ) {
-      enqueueSnackbar('Please fill in all fields correctly before saving this company!', {
-        variant: 'error',
-        preventDuplicate: true,
-      })
+      enqueueSnackbar(
+        'Please fill in all fields correctly before saving this company!',
+        {
+          variant: 'error',
+          preventDuplicate: true,
+        },
+      )
       return
     }
 
@@ -353,7 +356,9 @@ const EditCompany = () => {
             preventDuplicate: true,
           })
           setKvkNumberError(true)
-          setKvkNumberErrorMessage('Company with this KVK number already exists!')
+          setKvkNumberErrorMessage(
+            'Company with this KVK number already exists!',
+          )
         }
 
         setLoading(false)
@@ -416,7 +421,10 @@ const EditCompany = () => {
         status: 'pending',
       })
       .then((response) => {
-        console.log('UserSearch.jsx response.data invite ownership: ', response.data) // ! TODO: Remove console.log and write errors to logfile
+        console.log(
+          'UserSearch.jsx response.data invite ownership: ',
+          response.data,
+        ) // ! TODO: Remove console.log and write errors to logfile
 
         // Filter the invited owner from the search results
         const newUsersResult = usersResult.filter(
@@ -440,7 +448,10 @@ const EditCompany = () => {
           preventDuplicate: true,
         })
 
-        console.log('ERROR in UserSearch.jsx invite owner API call: ', error.response.data) // ! TODO: Remove console.log and write errors to logfile
+        console.log(
+          'ERROR in UserSearch.jsx invite owner API call: ',
+          error.response.data,
+        ) // ! TODO: Remove console.log and write errors to logfile
       })
   }
 
@@ -454,7 +465,10 @@ const EditCompany = () => {
     // Get the id of the pending ownership invite to be canceled
     const inviteId = e.target.value
 
-    console.log('handleCancelPendingOwnershipInvite pendingOwnershipInviteId: ', inviteId) // ! TODO: Remove console.log
+    console.log(
+      'handleCancelPendingOwnershipInvite pendingOwnershipInviteId: ',
+      inviteId,
+    ) // ! TODO: Remove console.log
 
     // Make an API call to cancel the pending ownership invite
     axios
@@ -462,7 +476,10 @@ const EditCompany = () => {
         status: 'canceled',
       })
       .then((response) => {
-        console.log('handleCancelPendingOwnershipInvite response.data: ', response.data) // ! TODO: Remove console.log
+        console.log(
+          'handleCancelPendingOwnershipInvite response.data: ',
+          response.data,
+        ) // ! TODO: Remove console.log
 
         // Remove the canceled pending ownership invite from the pending ownership invites state
         const newPendingOwnershipInvites = pendingOwnershipInvites.filter(
@@ -502,16 +519,31 @@ const EditCompany = () => {
   }
 
   const handleRemoveUserAsCompanyOwner = (e) => {
-    console.log('handleRemoveUserAsCompanyOwner e.target.value: ', e.target.value) // ! TODO: Remove console.log
+    console.log(
+      'handleRemoveUserAsCompanyOwner e.target.value: ',
+      e.target.value,
+    ) // ! TODO: Remove console.log
 
     // @ts-ignore Set removed owners to show up in the search results again
     setRemovedOwnersIds([...removedOwnersIds, e.target.value])
 
     axios
-      .put(BACKEND_URL + '/companies/' + companyId + '/remove-owner/' + e.target.value)
+      .put(
+        BACKEND_URL +
+          '/companies/' +
+          companyId +
+          '/remove-owner/' +
+          e.target.value,
+      )
       .then((response) => {
-        console.log('handleRemoveUserAsCompanyOwner response.data: ', response.data)
-        console.log('handleRemoveUserAsCompanyOwner response.data.owners: ', response.data.owners)
+        console.log(
+          'handleRemoveUserAsCompanyOwner response.data: ',
+          response.data,
+        )
+        console.log(
+          'handleRemoveUserAsCompanyOwner response.data.owners: ',
+          response.data.owners,
+        )
 
         const userIds = []
         response.data.owners.forEach((owner) => {
@@ -525,7 +557,10 @@ const EditCompany = () => {
         Promise.all(ownerPromises)
           .then((responses) => {
             const ownersData = responses.map((response) => response.data)
-            console.log('ownersData in removeUserAsOwner function: ', ownersData)
+            console.log(
+              'ownersData in removeUserAsOwner function: ',
+              ownersData,
+            )
             // @ts-ignore Update the owners state
             setOwners(ownersData)
 
@@ -586,7 +621,8 @@ const EditCompany = () => {
                           </li>
                           <li>
                             {/* @ts-ignore */}
-                            <VscPerson className='inline' /> {owner.firstName} {/* @ts-ignore */}
+                            <VscPerson className='inline' /> {owner.firstName}{' '}
+                            {/* @ts-ignore */}
                             {owner.lastName}
                           </li>
                           <li>
@@ -630,7 +666,9 @@ const EditCompany = () => {
             <div className='my-4'>
               <div className='mb-8'>
                 <div className='mb-8'>
-                  <label className='text-2xl mr-4'>Pending Ownership Invites</label>
+                  <label className='text-2xl mr-4'>
+                    Pending Ownership Invites
+                  </label>
                 </div>
                 <ul className='mb-4'>
                   {pendingOwnershipInvites.map((invite, index) => {
@@ -654,7 +692,8 @@ const EditCompany = () => {
                                 {invite.receiverId}
                               </li>
                               <li>
-                                <VscMail className='inline' /> SENDER ID: {/* @ts-ignore */}
+                                <VscMail className='inline' /> SENDER ID:{' '}
+                                {/* @ts-ignore */}
                                 {invite.senderId}
                               </li>
                             </ul>
@@ -699,8 +738,9 @@ const EditCompany = () => {
             />
             {nameError ? (
               <p className='text-red-500 text-sm'>
-                Company name must be between 1 and 60 characters long and can only contain letters,
-                numbers, spaces, and the following characters: -, ', and .
+                Company name must be between 1 and 60 characters long and can
+                only contain letters, numbers, spaces, and the following
+                characters: -, ', and .
               </p>
             ) : (
               ''
@@ -712,7 +752,9 @@ const EditCompany = () => {
             <div className='w-full'>
               <div className='flex justify-center items-center my-4'>
                 <div className='flex justify-center'>
-                  {logo ? <img alt='Preview' height='200' src={logo} width='200' /> : null}
+                  {logo ? (
+                    <img alt='Preview' height='200' src={logo} width='200' />
+                  ) : null}
                 </div>
               </div>
               <div className='flex justify-center items-center mb-4 mt-8'>
@@ -725,7 +767,10 @@ const EditCompany = () => {
                 </button>
               </div>
               {showLogoModal ? (
-                <CompanyLogoModal onClose={() => setShowLogoModal(false)} setLogo={setLogo} />
+                <CompanyLogoModal
+                  onClose={() => setShowLogoModal(false)}
+                  setLogo={setLogo}
+                />
               ) : null}
             </div>
           </div>
@@ -743,7 +788,9 @@ const EditCompany = () => {
               value={email}
             />
             {emailError ? (
-              <p className='text-red-500 text-sm'>Email must be a valid email address.</p>
+              <p className='text-red-500 text-sm'>
+                Email must be a valid email address.
+              </p>
             ) : (
               ''
             )}
@@ -762,7 +809,9 @@ const EditCompany = () => {
               value={phone}
             />
             {phoneError ? (
-              <p className='text-red-500 text-sm'>Phone number must be a valid phone number.</p>
+              <p className='text-red-500 text-sm'>
+                Phone number must be a valid phone number.
+              </p>
             ) : (
               ''
             )}
@@ -817,8 +866,8 @@ const EditCompany = () => {
             />
             {sloganError ? (
               <p className='text-red-500 text-sm'>
-                This should be the motto of your company. It must be between 1 and 90 characters
-                long.
+                This should be the motto of your company. It must be between 1
+                and 90 characters long.
               </p>
             ) : (
               ''
@@ -837,8 +886,8 @@ const EditCompany = () => {
             />
             {descriptionError ? (
               <p className='text-red-500 text-sm'>
-                This should be the description of your company. It must be between 1 and 280
-                characters long.
+                This should be the description of your company. It must be
+                between 1 and 280 characters long.
               </p>
             ) : (
               ''
@@ -858,8 +907,9 @@ const EditCompany = () => {
             />
             {startYearError ? (
               <p className='text-red-500 text-sm'>
-                Start year must be a valid year and never can be later then the current year. If
-                company hasn't started yet, register company when it starts.
+                Start year must be a valid year and never can be later then the
+                current year. If company hasn't started yet, register company
+                when it starts.
               </p>
             ) : (
               ''

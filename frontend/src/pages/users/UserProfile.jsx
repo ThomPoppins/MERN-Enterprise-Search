@@ -13,9 +13,11 @@ const UserProfile = () => {
   // @ts-ignore userId is a string from the Redux store state
   const { userId, user } = useSelector((state) => state)
   // Placeholder for profile picture dependent on gender
-  const [profilePicturePlaceholderURL, setProfilePicturePlaceholderURL] = useState('')
+  const [profilePicturePlaceholderURL, setProfilePicturePlaceholderURL] =
+    useState('')
   // State for showing the edit profile picture modal
-  const [showEditProfilePictureModal, setShowEditProfilePictureModal] = useState(false)
+  const [showEditProfilePictureModal, setShowEditProfilePictureModal] =
+    useState(false)
   // Handle the edit profile picture button click event
   const handleEditProfilePicture = () => {
     setShowEditProfilePictureModal(true)
@@ -30,10 +32,14 @@ const UserProfile = () => {
     // Set placeholder image for when the user hasn't uploaded a profile picture yet
     if (user.gender === 'Woman') {
       // Female placeholder image
-      setProfilePicturePlaceholderURL(`${BACKEND_URL}${FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL}`)
+      setProfilePicturePlaceholderURL(
+        `${BACKEND_URL}${FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL}`,
+      )
     } else {
       // Male placeholder image
-      setProfilePicturePlaceholderURL(`${BACKEND_URL}${MALE_PROFILE_PICTURE_PLACEHOLDER_URL}`)
+      setProfilePicturePlaceholderURL(
+        `${BACKEND_URL}${MALE_PROFILE_PICTURE_PLACEHOLDER_URL}`,
+      )
     }
   }, [user])
 
@@ -44,7 +50,11 @@ const UserProfile = () => {
           <img
             alt='profile picture'
             className='w-64 h-64 mt-2 rounded-full mx-auto object-cover'
-            src={user?.profilePictureURL ? user?.profilePictureURL : profilePicturePlaceholderURL}
+            src={
+              user?.profilePictureURL
+                ? user?.profilePictureURL
+                : profilePicturePlaceholderURL
+            }
           />
           <div
             className='absolute bottom-3 right-6 bg-purple-600 pl-1 pr-2 flex items-center border-2 border-purple-900 rounded-lg cursor-pointer hover:bg-purple-700'
@@ -61,7 +71,9 @@ const UserProfile = () => {
             {user?.firstName} {user?.lastName}
           </h1>
 
-          <p className='text-blue-400 text-sm'>{user ? `@${user?.username}` : ''}</p>
+          <p className='text-blue-400 text-sm'>
+            {user ? `@${user?.username}` : ''}
+          </p>
 
           <div className='mx-auto mt-4 mb-3'>
             {!user?.profilePictureURL && (
@@ -105,8 +117,8 @@ const UserProfile = () => {
               </tbody>
             </table>
             <p className=''>
-              Visit the Companies link in the navigation bar to see some of this this
-              application&apos;s features in action.
+              Visit the Companies link in the navigation bar to see some of this
+              this application&apos;s features in action.
             </p>
           </div>
         </div>

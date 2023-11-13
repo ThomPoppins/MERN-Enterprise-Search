@@ -60,8 +60,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    // `profilePicture` is a id reference to the image document in the database.
-    // The image document contains the path to the image file.
+    /*
+     * `profilePicture` is a id reference to the image document in the database.
+     * The image document contains the path to the image file.
+     */
     profilePicture: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Image'

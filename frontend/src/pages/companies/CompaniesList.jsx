@@ -82,9 +82,15 @@ const CompaniesList = () => {
         {loading ? (
           <Spinner />
         ) : showType === 'table' ? (
-          <CompaniesTable companies={companies} updateCompanies={updateCompanies} />
+          <CompaniesTable
+            companies={companies}
+            updateCompanies={updateCompanies}
+          />
         ) : (
-          <CompaniesCard companies={companies} updateCompanies={updateCompanies} />
+          <CompaniesCard
+            companies={companies}
+            updateCompanies={updateCompanies}
+          />
         )}
       </div>
     </Layout>

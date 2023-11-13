@@ -48,8 +48,8 @@ const Home = () => {
                 <div className='relative'>
                   <div className='ml-0 mt-6 mb-3 w-1/2 float-left'>
                     <p className=''>
-                      Search any keywords to find the best relevant professionals in your area
-                      first.
+                      Search any keywords to find the best relevant
+                      professionals in your area first.
                     </p>
                   </div>
                   <div className='absolute top-[120px] left-[172px] w-full mt-6 mb-3'>
@@ -77,7 +77,9 @@ const Home = () => {
                       onClick={handleFindExpertsQuery}
                     >
                       <div className='mx-auto'>
-                        <div className='py-2 ml-7 text-xl float-left'>Find </div>
+                        <div className='py-2 ml-7 text-xl float-left'>
+                          Find{' '}
+                        </div>
                         <img
                           alt='Vind-Expert find button'
                           className='w-5 h-5 mt-[13px] mr-8 rounded-xs object-cover ml-2 float-right'
@@ -100,9 +102,10 @@ const Home = () => {
           <h1 className='text-3xl mb-6'>Home</h1>
 
           <p className=''>
-            Register and login to your account to see the features of this application in action.
-            Account data will only be saved to your own MongoDB database and your password will be
-            saved securely hashed by bcrypt.
+            Register and login to your account to see the features of this
+            application in action. Account data will only be saved to your own
+            MongoDB database and your password will be saved securely hashed by
+            bcrypt.
           </p>
         </div>
       </Layout>

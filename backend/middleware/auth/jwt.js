@@ -15,13 +15,13 @@ const generateToken = (user) => {
       expiresIn: "30d",
     }
   );
-};
+},
 
-const verifyToken = (token) => {
+ verifyToken = (token) => {
   try {
-    // console.log("JWT verification token in /middleware/auth/jwt.js: ", token);
+    // Console.log("JWT verification token in /middleware/auth/jwt.js: ", token);
     const decoded = jwt.verify(token, JWT_SECRET);
-    // console.log("JWT verification successful: ", decoded);
+    // Console.log("JWT verification successful: ", decoded);
     return decoded._id;
   } catch (error) {
     console.log("JWT verification error: ", error.message);

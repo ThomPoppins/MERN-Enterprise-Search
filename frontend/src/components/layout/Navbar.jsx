@@ -31,7 +31,8 @@ const Navbar = () => {
       return
     }
 
-    const hasPendingInvites = pendingRecievedInvites && pendingRecievedInvites.length > 0
+    const hasPendingInvites =
+      pendingRecievedInvites && pendingRecievedInvites.length > 0
     setInviteAlert(hasPendingInvites)
   }, [user, userId, pendingRecievedInvites])
 
@@ -105,7 +106,9 @@ const Navbar = () => {
                               {inviteAlert ? (
                                 <div className='w-full h-full'>
                                   <LuClipboardList className='text-xl w-[30px] float-left ml-2 mt-[-2px] mr-3 text-yellow-400 animate-waving-button' />
-                                  <div className='animate-bounce mt-2'>Invites</div>
+                                  <div className='animate-bounce mt-2'>
+                                    Invites
+                                  </div>
                                 </div>
                               ) : (
                                 ''

@@ -8,6 +8,9 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "copilot": "nodemon test.js",
+    "lint": "eslint -c ./.eslintrc.cjs --ignore-pattern 'node_modules/' ./**/*.{js,jsx,ts,tsx,json}",
+    "lint:fix": "eslint --fix -c ./.eslintrc.cjs --ignore-pattern 'node_modules/' ./**/*.{js,jsx,ts,tsx,json}",
+    "format": "prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json,scss} --config ./.prettierrc",
     "test": "mocha"
   },
   "keywords": [],
@@ -36,6 +39,6 @@
     "eslint-plugin-n": "^16.3.1",
     "eslint-plugin-promise": "^6.1.1",
     "mocha": "^10.2.0",
-    "prettier": "^2.5.1"
+    "prettier": "^2.8.8"
   }
 }

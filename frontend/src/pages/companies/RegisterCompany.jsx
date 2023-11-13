@@ -237,10 +237,13 @@ const RegisterCompany = () => {
       !slogan ||
       !startYear
     ) {
-      enqueueSnackbar('Please fill in all fields correctly before saving this company!', {
-        variant: 'error',
-        preventDuplicate: true,
-      })
+      enqueueSnackbar(
+        'Please fill in all fields correctly before saving this company!',
+        {
+          variant: 'error',
+          preventDuplicate: true,
+        },
+      )
       return
     }
 
@@ -275,7 +278,9 @@ const RegisterCompany = () => {
             preventDuplicate: true,
           })
           setKvkNumberError(true)
-          setKvkNumberErrorMessage('Company with this KVK number already exists!')
+          setKvkNumberErrorMessage(
+            'Company with this KVK number already exists!',
+          )
         }
 
         setLoading(false)
@@ -290,7 +295,9 @@ const RegisterCompany = () => {
   return (
     <Layout>
       <div className='p-4'>
-        <h1 className='flex justify-center text-3xl my-4 mb-6'>Register Company</h1>
+        <h1 className='flex justify-center text-3xl my-4 mb-6'>
+          Register Company
+        </h1>
         {loading ? <Spinner /> : ''}
         <div className='flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto'>
           <div className='my-4'>
@@ -307,8 +314,9 @@ const RegisterCompany = () => {
             />
             {nameError ? (
               <p className='text-red-500 text-sm'>
-                Company name must be between 1 and 60 characters long and can only contain letters,
-                numbers, spaces, and the following characters: &#45;, &apos;, and &#46;
+                Company name must be between 1 and 60 characters long and can
+                only contain letters, numbers, spaces, and the following
+                characters: &#45;, &apos;, and &#46;
               </p>
             ) : (
               ''
@@ -320,7 +328,9 @@ const RegisterCompany = () => {
             <div className='w-full'>
               <div className='flex justify-center items-center my-4'>
                 <div className='flex justify-center'>
-                  {logo ? <img alt='Preview' height='200' src={logo} width='200' /> : null}
+                  {logo ? (
+                    <img alt='Preview' height='200' src={logo} width='200' />
+                  ) : null}
                 </div>
               </div>
               <div className='flex justify-center items-center mb-4 mt-8'>
@@ -333,7 +343,10 @@ const RegisterCompany = () => {
                 </button>
               </div>
               {showLogoModal ? (
-                <CompanyLogoModal onClose={() => setShowLogoModal(false)} setLogo={setLogo} />
+                <CompanyLogoModal
+                  onClose={() => setShowLogoModal(false)}
+                  setLogo={setLogo}
+                />
               ) : null}
             </div>
           </div>
@@ -350,7 +363,9 @@ const RegisterCompany = () => {
               value={email}
             />
             {emailError ? (
-              <p className='text-red-500 text-sm'>Email must be a valid email address.</p>
+              <p className='text-red-500 text-sm'>
+                Email must be a valid email address.
+              </p>
             ) : (
               ''
             )}
@@ -369,7 +384,9 @@ const RegisterCompany = () => {
             />
           </div>
           {phoneError ? (
-            <p className='text-red-500 text-sm'>Phone number must be a valid phone number.</p>
+            <p className='text-red-500 text-sm'>
+              Phone number must be a valid phone number.
+            </p>
           ) : (
             ''
           )}
@@ -403,7 +420,9 @@ const RegisterCompany = () => {
             />
             {kvkNumberError ? (
               <p className='text-red-500 text-sm'>
-                {kvkNumberErrorMessage ? kvkNumberErrorMessage : 'Must be a valid KVK number.'}
+                {kvkNumberErrorMessage
+                  ? kvkNumberErrorMessage
+                  : 'Must be a valid KVK number.'}
               </p>
             ) : (
               ''
@@ -423,8 +442,8 @@ const RegisterCompany = () => {
             />
             {sloganError ? (
               <p className='text-red-500 text-sm'>
-                This should be the motto of your company. It must be between 1 and 90 characters
-                long.
+                This should be the motto of your company. It must be between 1
+                and 90 characters long.
               </p>
             ) : (
               ''
@@ -443,8 +462,8 @@ const RegisterCompany = () => {
             />
             {descriptionError ? (
               <p className='text-red-500 text-sm'>
-                This should be the description of your company. It must be between 1 and 280
-                characters long.
+                This should be the description of your company. It must be
+                between 1 and 280 characters long.
               </p>
             ) : (
               ''
@@ -464,8 +483,9 @@ const RegisterCompany = () => {
             />
             {startYearError ? (
               <p className='text-red-500 text-sm'>
-                Start year must be a valid year and never can be later then the current year. If
-                company hasn't started yet, register company when it starts.
+                Start year must be a valid year and never can be later then the
+                current year. If company hasn't started yet, register company
+                when it starts.
               </p>
             ) : (
               ''

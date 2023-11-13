@@ -54,7 +54,9 @@ const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
 
         {loading ? <Spinner /> : ''}
         <div className='flex flex-col items-center rounded-xl w-[500px] p-8 mx-auto'>
-          <h3 className='text-2xl text-gray-700'>Are you sure you want to delete this company?</h3>
+          <h3 className='text-2xl text-gray-700'>
+            Are you sure you want to delete this company?
+          </h3>
           <button
             className='p-4 bg-red-600 text-white m-8 w-full'
             data-test-id='delete-company-button'

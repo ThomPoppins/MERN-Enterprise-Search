@@ -5,7 +5,12 @@ import { BACKEND_URL } from '../../config'
 import { VscMail, VscMention, VscPerson } from 'react-icons/vsc'
 import { enqueueSnackbar } from 'notistack'
 
-const UserSearch = ({ companyId, addPendingOwnershipInvite, usersResult, setUsersResult }) => {
+const UserSearch = ({
+  companyId,
+  addPendingOwnershipInvite,
+  usersResult,
+  setUsersResult,
+}) => {
   const [searchTerm, setSearchTerm] = useState(''),
     handleSearch = (e) => {
       // if the search input is empty, clear the search results
@@ -18,7 +23,10 @@ const UserSearch = ({ companyId, addPendingOwnershipInvite, usersResult, setUser
       setSearchTerm(e.target.value)
       searchUsers(e.target.value)
 
-      console.log('handleSearch e.target.value in UserSearch.jsx: ', e.target.value)
+      console.log(
+        'handleSearch e.target.value in UserSearch.jsx: ',
+        e.target.value,
+      )
     },
     searchUsers = (searchTerm) => {
       axios
@@ -41,7 +49,10 @@ const UserSearch = ({ companyId, addPendingOwnershipInvite, usersResult, setUser
           })
 
           // ! TODO: Handle error in UI
-          console.log('ERROR in UserSearch.jsx get search results API call: ', error)
+          console.log(
+            'ERROR in UserSearch.jsx get search results API call: ',
+            error,
+          )
         })
     }
 
@@ -53,8 +64,9 @@ const UserSearch = ({ companyId, addPendingOwnershipInvite, usersResult, setUser
         </label>
         <div className='my-4'>
           <p className='text-gray-300'>
-            <strong>Note:</strong> Register more accounts if you want results, search query will
-            match on username, first name, last name and email.
+            <strong>Note:</strong> Register more accounts if you want results,
+            search query will match on username, first name, last name and
+            email.
           </p>
         </div>
 
@@ -77,7 +89,8 @@ const UserSearch = ({ companyId, addPendingOwnershipInvite, usersResult, setUser
               <li>
                 <VscMention className='inline' />
                 {userResult.username} <br />
-                <VscPerson className='inline' /> {userResult.firstName} {userResult.lastName} <br />
+                <VscPerson className='inline' /> {userResult.firstName}{' '}
+                {userResult.lastName} <br />
                 <VscMail className='inline' /> {userResult.email}
               </li>
             </div>

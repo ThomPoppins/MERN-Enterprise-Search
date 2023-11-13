@@ -23,10 +23,16 @@ const CompanyModal = ({ owners, company, onClose }) => {
           data-test-id='close-button'
           onClick={onClose}
         />
-        <h2 className='w-fit px-4 py-1 bg-purple-500 rounded-lg'>{company.startYear}</h2>
+        <h2 className='w-fit px-4 py-1 bg-purple-500 rounded-lg'>
+          {company.startYear}
+        </h2>
         <h4 className='my-2 text-gray-500'>KVK: {company.kvkNumber}</h4>
         <div className='flex justify-center items-center gap-x-2 mb-4'>
-          <img alt={company.name} className='w-[250px] h-[250px] rounded-full' src={company.logo} />
+          <img
+            alt={company.name}
+            className='w-[250px] h-[250px] rounded-full'
+            src={company.logo}
+          />
         </div>
         <div className='flex justify-start items-center gap-x-2'>
           <FcBriefcase className='text-red-300 text-2xl' />

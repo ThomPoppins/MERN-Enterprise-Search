@@ -10,20 +10,20 @@ const PATH_TO_KVK_API_CERTIFICATE_CHAIN_RELATIVE_TO_INDEX_APP =
 export const getKvkData = async (request, response) => {
   try {
     // Get the query from the request query parameters
-    const { kvkNumber } = request.query;
+    const { kvkNumber } = request.query,
 
     // Get the certificate chain from the file system
-    const certificateChain = fs.readFileSync(
+     certificateChain = fs.readFileSync(
       PATH_TO_KVK_API_CERTIFICATE_CHAIN_RELATIVE_TO_INDEX_APP,
       "utf8"
-    );
+    ),
 
-    const agent = new https.Agent({
+     agent = new https.Agent({
       ca: certificateChain,
-    });
+    }),
 
     // Get the data from the KVK API
-    const { data } = await axios.get(
+     { data } = await axios.get(
       `https://api.kvk.nl/test/api/v1/naamgevingen/kvknummer/${kvkNumber}`,
       {
         headers: {

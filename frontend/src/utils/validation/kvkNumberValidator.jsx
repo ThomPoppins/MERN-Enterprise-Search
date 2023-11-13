@@ -31,7 +31,10 @@ const kvkNumberValidator = async (kvkNumber) => {
         apiCallValidated = false
         return false
       }
-      console.log('ERROR from kvkNumberValidator Axios call to backend: ', error)
+      console.log(
+        'ERROR from kvkNumberValidator Axios call to backend: ',
+        error,
+      )
     })
 
   return validNumberFormat && apiCallValidated

@@ -36,9 +36,12 @@ const InvitesList = () => {
 
   // ! STATUS STATES: "pending", "accepted", "declined" and "canceled"
   const updateInviteStatus = async (inviteId, newStatus) => {
-    const response = await axios.put(`${BACKEND_URL}/invites/status/${inviteId}`, {
-      status: newStatus,
-    })
+    const response = await axios.put(
+      `${BACKEND_URL}/invites/status/${inviteId}`,
+      {
+        status: newStatus,
+      },
+    )
 
     console.log('Update invite status response: ', response)
 
@@ -77,7 +80,9 @@ const InvitesList = () => {
               <th className='border-4 border-purple-900 bg-violet-950/80 rounded-md w-[400px]'>
                 From
               </th>
-              <th className='border-4 border-purple-900 bg-violet-950/80 rounded-md pl-3'>Kind</th>
+              <th className='border-4 border-purple-900 bg-violet-950/80 rounded-md pl-3'>
+                Kind
+              </th>
               <th className='border-4 border-purple-900 bg-violet-950/80 rounded-md w-[175px] pl-3'>
                 Status
               </th>
@@ -138,7 +143,9 @@ const InvitesList = () => {
                     ) : invite.kind === 'friend_request' ? (
                       <span>Friend Request</span>
                     ) : (
-                      <span className='text-red-600 font-bold'>ERROR: Invite kind is unknown!</span>
+                      <span className='text-red-600 font-bold'>
+                        ERROR: Invite kind is unknown!
+                      </span>
                     )}
                   </span>
                 </td>
@@ -148,7 +155,10 @@ const InvitesList = () => {
                 </td>
                 <td className='border-purple-900 bg-violet-950/40'>
                   {/* InviteOperations component is responsible for updating the invite status */}
-                  <InviteOperations invite={invite} updateInviteStatus={updateInviteStatus} />
+                  <InviteOperations
+                    invite={invite}
+                    updateInviteStatus={updateInviteStatus}
+                  />
                 </td>
               </tr>
             ))}

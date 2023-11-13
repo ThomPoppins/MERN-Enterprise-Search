@@ -2,12 +2,14 @@ import express from "express";
 import { Company } from "../models/companyModel.js";
 import { v4 as uuidv4 } from "uuid";
 
-const router = express.Router();
+const router = express.Router(),
 
-// TODO: [MERNSTACK-112] Remove this function once the payment model has been fully implemented.
-// Generate a random payment id using the uuidv4 function.
-const generateRandomId = () => {
-  let paymentId = uuidv4();
+/*
+ * TODO: [MERNSTACK-112] Remove this function once the payment model has been fully implemented.
+ * Generate a random payment id using the uuidv4 function.
+ */
+ generateRandomId = () => {
+  const paymentId = uuidv4();
   return paymentId;
 };
 
@@ -58,10 +60,10 @@ router.post("/", async (request, response) => {
               id: generateRandomId(),
             },
           ],
-    };
+    },
 
     // Create a new company document using the Company model and the properties from the request body
-    const company = await Company.create(newCompany);
+     company = await Company.create(newCompany);
 
     // Send status 201 response and the newly created company to the client
     return response.status(201).send(company);
@@ -92,9 +94,9 @@ router.get("/", async (request, response) => {
 router.get("/owned-companies/:ownerUserId", async (request, response) => {
   try {
     // Get the  owners' userId from the request parameters
-    const { ownerUserId } = request.params;
+    const { ownerUserId } = request.params,
     // Get all company documents frm
-    const companies = await Company.find({
+     companies = await Company.find({
       owners: { $elemMatch: { userId: ownerUserId } },
     });
 
@@ -113,10 +115,10 @@ router.get("/owned-companies/:ownerUserId", async (request, response) => {
 router.get("/:id", async (request, response) => {
   try {
     // Get the company id from the request parameters
-    const { id } = request.params;
+    const { id } = request.params,
 
     // Get all company documents using the Company model's find method
-    const company = await Company.findById(id);
+     company = await Company.findById(id);
 
     // Send status 200 response and the companies to the client
     return response.status(200).json(company);
@@ -129,10 +131,10 @@ router.get("/:id", async (request, response) => {
 // Route to update one company in the database using the company's id
 router.put("/:id", async (request, response) => {
   try {
-    const { id } = request.params;
+    const { id } = request.params,
 
     // Check if the company kvkNumber is changed and if it changed, check if the new kvkNumber already exists in the database
-    const prevCompany = await Company.findById(id).exec();
+     prevCompany = await Company.findById(id).exec();
     if (prevCompany && request.body.kvkNumber !== prevCompany.kvkNumber) {
       const existingCompanyKvk = await Company.findOne({
         kvkNumber: request.body.kvkNumber,
@@ -167,10 +169,10 @@ router.put("/:id", async (request, response) => {
 // Route to delete one company from the database using the company's id
 router.delete("/:id", async (request, response) => {
   try {
-    const { id } = request.params;
+    const { id } = request.params,
 
     // Delete the company document using the Company model's findByIdAndDelete method
-    const result = await Company.findByIdAndDelete(id);
+     result = await Company.findByIdAndDelete(id);
 
     // If no company was found, send status 404 response and a (error) message to inform the client.
     if (!result) {
@@ -192,9 +194,9 @@ router.delete("/:id", async (request, response) => {
 // Add owner to company based on userId
 router.put("/:companyId/add-owner/:userId", async (request, response) => {
   try {
-    const { companyId, userId } = request.params;
+    const { companyId, userId } = request.params,
 
-    const company = await Company.findById(companyId);
+     company = await Company.findById(companyId);
 
     if (!company) {
       console.log(`Cannot find company with id=${companyId}.`);
@@ -204,7 +206,7 @@ router.put("/:companyId/add-owner/:userId", async (request, response) => {
     }
 
     const newOwner = {
-      userId: userId,
+      userId,
     };
 
     if (!company.owners) {
@@ -225,9 +227,9 @@ router.put("/:companyId/add-owner/:userId", async (request, response) => {
 // Remove owner from company based on companyId and userId
 router.put("/:companyId/remove-owner/:userId", async (request, response) => {
   try {
-    const { companyId, userId } = request.params;
+    const { companyId, userId } = request.params,
 
-    const company = await Company.findById(companyId);
+     company = await Company.findById(companyId);
 
     if (!company) {
       console.log(`Cannot find company with id=${companyId}.`);

@@ -299,7 +299,9 @@ const RegisterUser = () => {
               value={email}
             />
             {emailError ? (
-              <p className='text-red-500 text-sm'>Email must be a valid email address.</p>
+              <p className='text-red-500 text-sm'>
+                Email must be a valid email address.
+              </p>
             ) : (
               ''
             )}
@@ -318,8 +320,9 @@ const RegisterUser = () => {
             />
             {passwordError ? (
               <p className='text-red-500 text-sm'>
-                Password must be at least 8 characters long, contain at least one uppercase letter,
-                one lowercase letter, one digit and one special character.
+                Password must be at least 8 characters long, contain at least
+                one uppercase letter, one lowercase letter, one digit and one
+                special character.
               </p>
             ) : (
               ''
@@ -338,7 +341,9 @@ const RegisterUser = () => {
               value={confirmPassword}
             />
             {confirmPasswordError ? (
-              <p className='text-red-500 text-sm'>Confirm password does not match password.</p>
+              <p className='text-red-500 text-sm'>
+                Confirm password does not match password.
+              </p>
             ) : (
               ''
             )}
@@ -357,8 +362,8 @@ const RegisterUser = () => {
             />
             {firstNameError ? (
               <p className='text-red-500 text-sm'>
-                First name must be between at least 1 character long and can only contain letters,
-                dots, and spaces.
+                First name must be between at least 1 character long and can
+                only contain letters, dots, and spaces.
               </p>
             ) : (
               ''
@@ -378,8 +383,8 @@ const RegisterUser = () => {
             />
             {lastNameError ? (
               <p className='text-red-500 text-sm'>
-                Last name must be between at least 1 character long and can only contain letters and
-                spaces.
+                Last name must be between at least 1 character long and can only
+                contain letters and spaces.
               </p>
             ) : (
               ''
@@ -413,7 +418,13 @@ const RegisterUser = () => {
               />{' '}
               Other
             </div>
-            {genderError ? <p className='text-red-500 text-sm'>Gender is a required field.</p> : ''}
+            {genderError ? (
+              <p className='text-red-500 text-sm'>
+                Gender is a required field.
+              </p>
+            ) : (
+              ''
+            )}
             <br />
           </div>
           <button
