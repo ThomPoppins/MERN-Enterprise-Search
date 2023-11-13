@@ -18,6 +18,7 @@ Also I make use of a lot of different packages but only if they are complementar
     - [2. Profile page (with gender specific placeholder profile picture)](#2-profile-page-with-gender-specific-placeholder-profile-picture)
     - [3. Profile picture upload modal](#3-profile-picture-upload-modal)
     - [4. Profile picture preview before upload](#4-profile-picture-preview-before-upload)
+      - [BLOB image:](#blob-image)
     - [5. User profile page and data structure](#5-user-profile-page-and-data-structure)
       - [`User` schema:](#user-schema)
     - [6. Companies](#6-companies)
@@ -102,17 +103,158 @@ Get a general impression of my application thus far.
 
 ![Profile Picture Modal Preview](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/004.png?raw=true)
 
-If the user wants can he/she still change their mind and choose a different one or cancel the upload because the image is not yet uploaded. The image preview is a Base64 binary image Blob file locally in users' browser memory.
+If the user wants can he/she still change their mind and choose a different one or cancel the upload because the image is not yet uploaded. The image preview is a Base64 binary image **BLOB** file in the browser memory.
 
-If the user is sure about it, he/she will click the upload button and now the image will be sent through a form-data object to the backend REST (ExpressJS hosted) POST image upload API end-point, where the image will be recieved by ExpressJS, using Multer middle ware for diskstorage configuration and file handling and saved in a special public static file serving directory, local on the server disk storage.
+#### BLOB image:
+
+> **Definition:** A binary large object (BLOB or blob) is a collection of binary data stored as a single entity. Blobs are typically images, audio or other multimedia objects, though sometimes binary executable code is stored as a blob.
+
+The Base64 BLOB image is converted from the image file value in the form data and then the string is set to be the `src` value of the preview `img`.
+
+```javascript 
+<img src={blobValueString} />
+```
+
+> **Source:** [/frontend/src/components/users/EditProfilePicture.jsx](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/src/components/users/EditProfilePictureModal.jsx)
+
+```javascript 
+// Modal to edit user profile picture
+const EditProfilePictureModal = ({ userId, onClose }) => {
+  const [selectedFile, setSelectedFile] = useState();
+  const [preview, setPreview] = useState("");
+
+  // Handle file select
+  const onSelectFile = (e) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      setSelectedFile(undefined);
+      return;
+    }
+
+    setSelectedFile(e.target.files[0]);
+  };
+
+  // Set the preview image
+  useEffect(() => {
+    if (!selectedFile) {
+      setPreview("");
+      return;
+    }
+    // Convert the selected image to a Base64 string and save it to the preview state
+    const objectUrl = URL.createObjectURL(selectedFile);
+    setPreview(objectUrl);
+
+    // Free memory when the preview is closed
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedFile]);
+
+  // ... (rest of the component before it's return statement)
+  
+  return (
+
+    // ... (start return JSX)
+
+          {selectedFile ? <img
+            alt="Profile Picture"
+            className="mx-auto my-4 w-[350px] h-[350px] object-cover"
+            src={preview} // BLOB image string is set as img src as is.
+          /> : null}
+
+    // ... (end return JSX)
+
+  );
+};
+
+export default EditProfilePictureModal;
+```
+
+If the user is sure about it, he/she will click the upload button and now the image will be sent through a form-data object to the backend REST (ExpressJS hosted) POST image upload API end-point, where the image will be recieved by *ExpressJS*, using *Multer* middleware for disk storage configuration and file handling and saved in a special public static file directory, local on the server storage.
+
+```javascript
+import { Image } from "../models/imageModel.js";
+import express  from "express";
+import mongoose from "mongoose";
+import multer from "multer";
+
+const router = express.Router();
+
+
+// Create Multer storage configuration
+const storage = multer.diskStorage({
+  // `destination` is the folder where the uploaded file will be stored.
+   destination: function (request, file, callback) {
+    callback(null, "./public/uploads/images");
+  },
+
+  fileFilter: function (request, file, callback) {
+    // Accept images only.
+    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
+      // Send status 400 response if the file is not an image and a (error) message to inform the client.
+      return callback(new Error("Only images allowed!"));
+    }
+    // Image file is accepted. Pass `true` to the callback.
+    callback(null, true);
+  },
+
+  // filename is the name of the uploaded file.
+  filename: function (request, file, callback) {
+    // The file name will be the original name of the uploaded file with a timestamp.
+    const fileName = file.originalname.split(".")[0];
+    const fileExtension = file.originalname.split(".")[1];
+    const timestamp = Date.now();
+    // `callback` is used to pass the file name to multer.
+    callback(null, `${fileName}-${timestamp}.${fileExtension}`);
+  },
+});
+
+// Create multer instance with the storage configuration.
+const upload = multer({ storage: storage });
+
+// The POST image upload route uses Multer middleware as you can see, the Multer object is provided as second argument.
+// Multer will first process the request and pass on the result to the 3rd argument function of the route
+router.post("/image", upload.single("image"), async (request, response) => {
+  if (!request.file) {
+    console.log("No image file. `request`: ", request);
+
+    return response.status(400).send({
+      message: "No image uploaded.",
+    });
+  }
+
+  // Prepare response object to send to client with image path and database Image._id.
+  const responseObj = {
+    message: "Image uploaded successfully!",
+    imagePath: request.file.path,
+    imageId: new mongoose.Types.ObjectId(),
+  };
+
+  // Create Instance of Image model with the image path to safe as docyment in the MongoDB Image collection
+  const image = new Image({
+    path: request.file.path,
+  });
+
+  // Save new Image document to database
+  await image
+    .save()
+    .then((result) => {
+      responseObj["imageId"] = result._id;
+    })
+    .catch((error) => {
+      return response.status(500).send({
+        message: "Error saving image to database! " + error.message,
+      });
+    });
+
+  return response.status(200).send(responseObj);
+});
+
+export default router;
+```
 
 The image is served by ExpressJS which means this backend is also the CDN. Because of this intentional set up,the client server will always be clean of accumulating images and any other kind of files and trash and will the heavy duty of handling large file with a lot of data rest on the backend where a performance impact would have a lot less impact on the U(ser)X(perience).
 
 After the image is uploaded and saved, a corresponding Image "document" (entry) with a filepath will be saved to the MongoDB database in the "images" collection. (A collection is like a databaser table.)
 
 After succesfull saving the new Image entry (document) to the database, MongoDB responds with the Image document ID, which will immidiatly be saved to the User document(of the currently logged in user of course) so it will be always be certain where the image is. Securely saved on the backend server with the file location saved to the database with it's Image ID saved in the corresponding User document.
-
-
 
 ### 5. User profile page and data structure
 
@@ -179,7 +321,8 @@ User details like  `firstName`, `lastName`, `gender`and a reference field to the
 - The `User` schema is described and defined using Mongoose, a popular *Object Data Modeling (ODM)* library for MongoDB and Node.js.
 - The `User` schema is expected to extends with many fields when continued development will many more dependencies on user data when the application grows and complexity increases.
 
-> *[/backend/models/userModel.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/userModel.js):*
+> **Source:** [/backend/models/userModel.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/userModel.js):
+
 ```javascript
 // Instantiate User schema
 const userSchema = new mongoose.Schema(
