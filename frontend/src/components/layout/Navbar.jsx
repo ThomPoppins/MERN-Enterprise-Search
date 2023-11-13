@@ -117,7 +117,6 @@ const Navbar = () => {
                         <LuClipboardCheck className='text-xl mt-1 w-[30px] float-right ml-1 mr-3 text-green-400' />
                       )}
                     </div>
-                    {/* TODO: [MERNSTACK-226] When you click somewhere else, the dropdown should close in Navbar.jsx*/}
                     {isDropdownOpen ? (
                       <div
                         className='z-[100] absolute top-10 right-0 bg-violet-950/90 rounded-lg py-4'

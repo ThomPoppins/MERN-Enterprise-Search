@@ -1128,13 +1128,15 @@ Now you have the application up and running locally!
 - [ ] [MERNSTACK-235] PRIO: Record first DEMO video briefly demonstrating what technology I use and what is the result.
 - [ ] [MERNSTACK-238] PRIO: Edit first DEMO video, make sure to add an explanation of the functionalities of the application and what kind of technologies were used. START OF with demonstrating the client side app and LATER technical explanation.
 - [ ] [MERNSTACK-236] PRIO: Upload DEMO video to YouTube and link to the video's in README.md and Github profile.
-- [ ] [MERNSTACK-236] PRIO: Add DEMO links to new LinkedIn profile. Explain on LinkedIn profile that I also have another account and that I can't access it anymore.
+- [ ] [MERNSTACK-237] PRIO: Add DEMO links to new LinkedIn profile. Explain on LinkedIn profile that I also have another account and that I can't access it anymore.
 - [ ] [MERNSTACK-239] Implement ERROR logging to error log files everywhere console.log is used.
 - [ ] [MERNSTACK-240] Remove all debug data printing console.logs and keep useful error logs. Clean up the debug data flow.
 - [x] [MERNSTACK-241] PRIO: Evaluate all `Company` field descriptions and make them correct.
 - [ ] [MERNSTACK-242] Fade dropdown menu in and out with quickly with customized animation defined in tailwind.config.js.
 - [ ] [MERNSTACK-243] Implement localization library for multi-language support
 - [ ] [MERNSTACK-244] Clean up everything `Book` related.
+- [x] [MERNSTACK-226] When you click somewhere else besides the dropdown menu, the dropdown should close in Navbar.jsx
+- [ ] [MERNSTACK-246] Add useSnackbar notification after successful profile image upload
 
 ## Versions
 
