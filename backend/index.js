@@ -3,7 +3,6 @@ import express from 'express'
 import mongoose from 'mongoose'
 import { PORT, mongoDBURL } from './config.js'
 import authRoute from './routes/authRoute.js'
-import booksRoute from './routes/booksRoute.js'
 import companiesRoute from './routes/companiesRoute.js'
 import invitesRoute from './routes/invitesRoute.js'
 import kvkRoute from './routes/kvkRoute.js'
@@ -39,12 +38,11 @@ app.get('/', (request, response) => {
     .send(
       "<div style='padding: 30px; width: 100vw; height: 100vh; background-color: black; position:fixed; top: 0; left: 0;'>" +
         "<h1 style='color: white;'>Welcome to my MERN stack backend server with Express.js!</h1>" +
-        '</div>'
+        '</div>',
     )
 })
 
 // Use routers from /routes folder
-app.use('/books', booksRoute)
 app.use('/companies', companiesRoute)
 app.use('/users', usersRoute)
 app.use('/invites', invitesRoute)

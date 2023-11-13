@@ -442,6 +442,72 @@ Companies in the Netherlands (my home country) are always registered to the "Kam
 
 I've connected the backend application to the KvK test API for validation of company KvK numbers. When a user registers a company to my application and fills in the KvK number, when the input field loses focus (`onBlur()`), automatically there will be a request to the KvK (test) API for KvK number validation.
 
+**GET route to get KvK data:**
+
+> **Source:** [/backend/routes/kvkRoute.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/routes/kvkRoute.js)
+
+```javascript
+import { getKvkData } from '../controllers/kvkController.js'
+import express from 'express'
+import cors from 'cors'
+
+const router = express.Router()
+
+// GET route to get KvK data from the KvK API by KvK number
+router.get('/', cors(), getKvkData)
+
+export default router
+```
+
+**KvK controller for handling request:**
+
+> **Source:** [/backend/controllers/kvkController.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/controllers/kvkController.js)
+
+```javascript
+import axios from 'axios'
+import fs from 'fs'
+import https from 'https'
+import { KVK_TEST_API_KEY } from '../config.js'
+
+const PATH_TO_KVK_API_CERTIFICATE_CHAIN_RELATIVE_TO_INDEX_APP =
+  './certs/kvkApi/Private_G1_chain.pem'
+
+// Function to get data from the KVK API
+export const getKvkData = async (request, response) => {
+  try {
+    // Get the query from the request query parameters
+    const { kvkNumber } = request.query,
+      // Get the certificate chain from the file system
+      certificateChain = fs.readFileSync(
+        PATH_TO_KVK_API_CERTIFICATE_CHAIN_RELATIVE_TO_INDEX_APP,
+        'utf8',
+      ),
+      agent = new https.Agent({
+        ca: certificateChain,
+      }),
+      // Get the data from the KVK API
+      { data } = await axios.get(
+        `https://api.kvk.nl/test/api/v1/naamgevingen/kvknummer/${kvkNumber}`,
+        {
+          headers: {
+            apikey: KVK_TEST_API_KEY,
+          },
+          httpsAgent: agent,
+        },
+      )
+
+    // Send status 200 response and the data to the client
+    return response.status(200).json(data)
+  } catch (error) {
+    console.log('Error in GET /kvk: ', error)
+    if (error.response.status === 400) {
+      return response.status(400).send({ message: error.message })
+    }
+    return response.status(500).send({ message: error.message })
+  }
+}
+```
+
 For now, only number validation is enough, but in the future also the company name, owners and other company details will be verified against this API to rule out the need for human verification as much as possible to safe costs and make the user experience a much faster because users can get started with their company in the application right away without having to wait for a manual verification of their business.
 
 **Subsidiary companies:**:
@@ -1134,9 +1200,9 @@ Now you have the application up and running locally!
 - [x] [MERNSTACK-241] PRIO: Evaluate all `Company` field descriptions and make them correct.
 - [ ] [MERNSTACK-242] Fade dropdown menu in and out with quickly with customized animation defined in tailwind.config.js.
 - [ ] [MERNSTACK-243] Implement localization library for multi-language support
-- [ ] [MERNSTACK-244] Clean up everything `Book` related.
+- [x] [MERNSTACK-244] Clean up everything `Book` related.
 - [x] [MERNSTACK-226] When you click somewhere else besides the dropdown menu, the dropdown should close in Navbar.jsx
-- [ ] [MERNSTACK-246] Add useSnackbar notification after successful profile image upload
+- [x] [MERNSTACK-246] Add useSnackbar notification after successful profile image upload
 
 ## Versions
 
