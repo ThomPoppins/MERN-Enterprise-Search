@@ -13,92 +13,101 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
     // The preview image of the selected file (Base64 string)
     [preview, setPreview] = useState(''),
     // EnqueueSnackbar is used to show a snackbar notification
-    { enqueueSnackbar } = useSnackbar(),
-    // Handle file select
-    onSelectFile = (event) => {
-      if (!event.target.files || event.target.files.length === 0) {
-        // @ts-ignore Clear the selected file
-        setSelectedFile(null)
-        return
-      }
-      // Save the selected file to the selectedFile state
-      setSelectedFile(event.target.files[0])
-    },
-    // Handle the form submit event
-    handleFormSubmit = (event) => {
-      // Prevent the default form submit behavior
-      event.preventDefault()
-      // Create a new FormData object
-      const formData = new FormData()
-      // Add the image data to the FormData object
-      formData.append('image', event.target.image.files[0])
-      // Send the image to the server
-      axios
-        .post(`${BACKEND_URL}/upload/image`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-        .then((response) => {
-          if (response.data.imageId) {
-            // Save the image id of the profile picture to the user's document in the database
-            axios
-              .put(`${BACKEND_URL}/users/profile-picture`, {
-                imageId: response.data.imageId,
-                userId,
-              })
-              // eslint-disable-next-line no-shadow
-              .then((response) => {
-                // Get the user's updated document from the database and update the user state
-                axios
-                  .get(`${BACKEND_URL}/users/user/${userId}`)
-                  // eslint-disable-next-line no-shadow
-                  .then((response) => {
-                    const user = response.data
-                    store.dispatch({
-                      type: 'USER',
-                      payload: user,
-                    })
-                    // Show a snackbar notification
-                    enqueueSnackbar('Profile picture updated', {
-                      variant: 'success',
-                      preventDuplicate: true,
-                    })
-                  })
-                  .catch((error) => {
-                    console.log(
-                      'ERROR in EditProfilePictureModal from /users/user/:id: ',
-                      error,
-                      response,
-                    )
-                    // Show a snackbar notification
-                    enqueueSnackbar('Something went wrong', {
-                      variant: 'error',
-                      preventDuplicate: true,
-                    })
-                  })
-                // Close the modal
-                onClose()
-              })
-              .catch((error) => {
-                console.log('ERROR from /users/profile-picture: ', error)
-                // Show a snackbar notification
-                enqueueSnackbar('Something went wrong', {
-                  variant: 'error',
-                  preventDuplicate: true,
-                })
-              })
-          }
-        })
-        .catch((error) => {
-          console.log('ERROR from /upload/image route: ', error)
-          // Show a snackbar notification
-          enqueueSnackbar('Something went wrong', {
-            variant: 'error',
-            preventDuplicate: true,
-          })
-        })
+    { enqueueSnackbar } = useSnackbar()
+
+  // Handle file select
+  const onSelectFile = (event) => {
+    if (!event.target.files || event.target.files.length === 0) {
+      // @ts-ignore Clear the selected file
+      setSelectedFile(null)
+      return
     }
+    // Save the selected file to the selectedFile state
+    setSelectedFile(event.target.files[0])
+  }
+
+  // Handle the form submit event
+  const handleFormSubmit = (event) => {
+    // Prevent the default form submit behavior
+    event.preventDefault()
+
+    // Create a new FormData object
+    const formData = new FormData()
+
+    // Add the image data to the FormData object
+    formData.append('image', event.target.image.files[0])
+
+    // Send the image to the server
+    axios
+      .post(`${BACKEND_URL}/upload/image`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((response) => {
+        if (response.data.imageId) {
+          // Save the image id of the profile picture to the user's document in the database
+          axios
+            .put(`${BACKEND_URL}/users/profile-picture`, {
+              imageId: response.data.imageId,
+              userId,
+            })
+            // eslint-disable-next-line no-shadow
+            .then((response) => {
+              // Get the user's updated document from the database and update the user state
+              axios
+                .get(`${BACKEND_URL}/users/user/${userId}`)
+                // eslint-disable-next-line no-shadow
+                .then((response) => {
+                  const user = response.data
+                  store.dispatch({
+                    type: 'USER',
+                    payload: user,
+                  })
+
+                  // Show a snackbar notification
+                  enqueueSnackbar('Profile picture updated', {
+                    variant: 'success',
+                    preventDuplicate: true,
+                  })
+                })
+                .catch((error) => {
+                  console.log(
+                    'ERROR in EditProfilePictureModal from /users/user/:id: ',
+                    error,
+                    response,
+                  )
+
+                  // Show a snackbar notification
+                  enqueueSnackbar('Something went wrong', {
+                    variant: 'error',
+                    preventDuplicate: true,
+                  })
+                })
+              // Close the modal
+              onClose()
+            })
+            .catch((error) => {
+              console.log('ERROR from /users/profile-picture: ', error)
+
+              // Show a snackbar notification
+              enqueueSnackbar('Something went wrong', {
+                variant: 'error',
+                preventDuplicate: true,
+              })
+            })
+        }
+      })
+      .catch((error) => {
+        console.log('ERROR from /upload/image route: ', error)
+
+        // Show a snackbar notification
+        enqueueSnackbar('Something went wrong', {
+          variant: 'error',
+          preventDuplicate: true,
+        })
+      })
+  }
 
   // Set the preview image
   useEffect(() => {
