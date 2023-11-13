@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Instantiate `Invite` schema
 const inviteSchema = new mongoose.Schema(
   {
     // `sender` is a `User` object ID
@@ -35,4 +36,5 @@ const inviteSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Create `Invite` model from `inviteSchema`
 export const Invite = mongoose.model("Invite", inviteSchema);

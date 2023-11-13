@@ -23,11 +23,12 @@ Also I make use of a lot of different packages but only if they are complementar
     - [6. Companies](#6-companies)
       - [Listing page](#listing-page)
       - [Registration](#registration)
-        - [KVK number validation](#kvk-number-validation)
+        - [KVK number validation:](#kvk-number-validation)
       - [`Company` document data structure](#company-document-data-structure)
       - [`Company` schema:](#company-schema)
       - [Edit company](#edit-company)
       - [Company ownership](#company-ownership)
+      - [`Invite` schema:](#invite-schema)
   - [Get up and running:](#get-up-and-running)
   - [Project Issue Progression](#project-issue-progression)
   - [Versions](#versions)
@@ -97,7 +98,6 @@ Get a general impression of my application thus far.
 
 ### 4. Profile picture preview before upload
 
-|
 **After selecting a image local from their device, a preview will be shown of what image it would be.**
 
 ![Profile Picture Modal Preview](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/004.png?raw=true)
@@ -111,6 +111,8 @@ The image is served by ExpressJS which means this backend is also the CDN. Becau
 After the image is uploaded and saved, a corresponding Image "document" (entry) with a filepath will be saved to the MongoDB database in the "images" collection. (A collection is like a databaser table.)
 
 After succesfull saving the new Image entry (document) to the database, MongoDB responds with the Image document ID, which will immidiatly be saved to the User document(of the currently logged in user of course) so it will be always be certain where the image is. Securely saved on the backend server with the file location saved to the database with it's Image ID saved in the corresponding User document.
+
+
 
 ### 5. User profile page and data structure
 
@@ -268,13 +270,13 @@ An owner of a company can register his company in my application. On this compan
 ![Company Registration Form Top](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/008.1.png?raw=true)
 ![Company Registration Form Bottom](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/008.2.png?raw=true)
 
-##### KVK number validation
+##### KVK number validation:
+
+![Invalid KvK Number](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Invalid-KvK-Number.png?raw=true)
 
 Companies in the Netherlands (my home country) are always registered to the "Kamer van Koophandel" which is the Chamber of Commerce in the Netherlands. It is a government agency that plays a crucial role in the registration and documentation of businesses operating in my country.
 
 I've connected the backend application to the KvK test API for validation of company KvK numbers. When a user registers a company to my application and fills in the KvK number, when the input field loses focus (`onBlur()`), automatically there will be a request to the KvK (test) API for KvK number validation.
-
-![Invalid KvK Number](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Invalid-KvK-Number.png?raw=true)
 
 For now, only number validation is enough, but in the future also the company name, owners and other company details will be verified against this API to rule out the need for human verification as much as possible to safe costs and make the user experience a much faster because users can get started with their company in the application right away without having to wait for a manual verification of their business.
 
@@ -548,12 +550,10 @@ When I first got the business idea for building this application I decided to ma
     - Type: Array
     - Required: false
     - Description: An array of image objects associated with the company.
-  
-*Aditional fields:*
 
-- **timestamps**
-  - Type: Object
-  - Description: Automatically adds `createdAt` and `updatedAt` fields to the user doc
+44. **Timestamps:**
+    - Type: Object
+    - Description: Automatically adds `createdAt` and `updatedAt` fields to the user doc
   
 **Mongoose:**
 
@@ -565,7 +565,6 @@ When I first got the business idea for building this application I decided to ma
 
 
 ```javascript
-# Company Schema
 // Instantiate `Company` schema
 const companySchema = new mongoose.Schema(
   {
@@ -574,7 +573,6 @@ const companySchema = new mongoose.Schema(
   { timestamps: true }
 );
 ```
-
 
 > **Note:** To see the complete code of the `Company` schema instantiation with all fields [here](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/companyModel.js).
 
@@ -587,7 +585,10 @@ const Company = mongoose.model("Company", companySchema);
 
 #### Edit company
 
-When a company owner clicks on the *pencil* icon on the companies listing page the owner is able to edit the company. 
+When a company owner clicks on the *pencil* icon on the companies listing page the owner is able to edit the company.
+
+![Edit Company Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Edit-Company.png?raw=true)
+![Edit Company Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Edit-Company-2.png?raw=true)
 
 #### Company ownership
 
@@ -595,12 +596,114 @@ Companies are automatically owned by the `User` that registers the company to th
 
 If a company has more than one owner, the company owners is able to invite other users for company ownership, giving the other co-owners the same admin level elevated access to the configuration of their company.
 
-*Find other users:*
+*Find other users and invite them for co-ownership:*
+![Find Other Users For Company Co-ownership](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Find-Other-Users-For-Company-Co-ownership.png?raw=true)
 
-![]()
+A company owner can find users of the application with the search box on the "edit company" page and send them a invite by clicking the `invite` button.
+
+When a user is invited by the owner for co-ownership the user "result" will be removed from the search results list and a "Pending invites" section will appear with the invited user. I invited the user Kaya Lowe in this example.
+
+![User Invited On Edit Company Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/User-Invited.png?raw=true)
+
+> **Note:** In the future this `Invite` information will be the user details, but I have to make a future decision about where I want this data to be served from the backend to the client application, that's why it is only containing `ObjectId` information of the `Invite` document. See the `Invite` data structure [further down below](#invite-data-structure).
+
+When the `User` is invited to become co-owner of the company, that user will receive a invite notification in the navigation bar.
+
+![User Invited On Edit Company Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/User-Invited.png?raw=true)
+
+Clicking on the `Invites` dropdown menu item, the user will navigate to the invites page and be able to *Accept* or *Decline* the invite by clicking the buttons in the *Operations* section in the *Invites* table listing the pending invites.
+
+![Invites Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/User-Invited.png?raw=true)
+
+After clicking *Accept* or *Decline* and there is no pending invite left, the user will navigate to the companies listing page and the companies they accepted will be listed there with their name added as co-owner.
+
+![Invite Accepted](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/User-Invited.png?raw=true)
+
+> **Note:** The invite notification has disappeared, the *Invites* dropdown menu item isn't listing anymore.
+
+After accepting the invite, the *Owners* section of the *edit company* page is updated with the new owner and the *Pending invites* Section disappeared since there are no pending invites left.
+
+![Owners Section Updated](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Ownership-Section-Updated.png?raw=true)
+
+> **Note:** In React I use *conditional rendering* and *state management* to easily always keep the UI up-to-date with the current state of the application when the state (current data) has been changed.
+
+#### `Invite` schema:
+
+**Schema fields:**
+
+1. **Sender ID:**
+   - Type: mongoose.Schema.Types.ObjectId
+   - Reference: "User"
+   - Description: The ID of the user sending the invitation.
+
+2. **Reciever ID:**
+   - Type: mongoose.Schema.Types.ObjectId
+   - Reference: "User"
+   - Description: The ID of the user receiving the invitation.
+
+3. **Kind:**
+   - Type: String
+   - Description: Specifies the type of invitation, with possible values: "company_ownership", "friend", "other". Default value is "other".
+
+4. **Company ID:**
+   - Type: mongoose.Schema.Types.ObjectId
+   - Reference: "Company"
+   - Description: If the invitation is related to company ownership, this field contains the ID of the associated company.
+
+5. **Kind:**
+   - Type: String
+   - Default: "pending"
+   - Description: Represents the status of the invitation. Only four possible values: "pending", "accepted", "declined", and "canceled".
+
+6. **Timestamps:**
+   - Type: Automatically generated timestamps for document creation and modification.
 
 
+**Mongoose:**
 
+- The **Mongoose** schema establishes the data structure for the invite information within the database.
+
+**Schema:**
+
+```javascript
+// Instantiate `Invite` schema
+const inviteSchema = new mongoose.Schema(
+  {
+    senderId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    receiverId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    kind: {
+      type: String,
+      required: true,
+      default: "other",
+    },
+    companyId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company",
+    },
+    status: {
+      type: String,
+      required: true,
+      default: "pending",
+    },
+  },
+  { timestamps: true }
+);
+```
+
+**Model:**
+
+```javascript
+// Create `Invite` model from `inviteSchema`
+const Invite = mongoose.model("Invite", inviteSchema);
+```
 
 
 
