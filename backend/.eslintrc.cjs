@@ -22,7 +22,13 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'new-cap': 'off',
     'no-magic-numbers': 'off',
+    'one-var': 'off',
     'sort-imports': 'off',
+    'sort-vars': 'off',
+    'sort-keys': 'off',
+    'no-console': 'off',
+    'multiline-comment-style': 'off',
   },
 }

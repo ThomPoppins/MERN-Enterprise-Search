@@ -1402,35 +1402,21 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    "eslint:recommended",
-    // "eslint:all",
-    // "plugin:react/recommended",
-    "plugin:react/all",
-    "plugin:react/jsx-runtime",
-    "plugin:react-hooks/recommended",
-    // "plugin:react-hooks/all",
-    // "plugin:jsx-a11y/recommended",
-    "plugin:jsx-a11y/strict",
-    "prettier",
+    'eslint:all',
+    'plugin:react/all',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+    'plugin:jsx-a11y/strict',
+    'prettier',
   ],
-  settings: {
-    react: {
-      version: "detect",
-      linkComponents: [
-        // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
-        "Hyperlink",
-        { name: "Link", linkAttribute: "to" },
-      ],
-    },
-  },
   overrides: [
     {
       env: {
         node: true,
       },
-      files: [".eslintrc.{js,cjs}"],
+      files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
-        sourceType: "script",
+        sourceType: 'script',
       },
     },
   ],
@@ -1438,48 +1424,72 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: "latest",
-    sourceType: "module",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  plugins: ["react", "react-hooks", "jsx-a11y"],
+  plugins: ['react', 'react-hooks', 'jsx-a11y'],
   rules: {
-    "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error",
-    "react/display-name": "error",
-    "react/jsx-key": "error",
-    "react/jsx-no-comment-textnodes": "error",
-    "react/jsx-no-target-blank": "error",
-    "react/jsx-no-undef": "error",
-    "react/no-children-prop": "error",
-    "react/no-danger-with-children": "error",
-    "react/no-deprecated": "error",
-    "react/no-direct-mutation-state": "error",
-    "react/no-find-dom-node": "error",
-    "react/no-is-mounted": "error",
-    "react/no-render-return-value": "error",
-    "react/no-string-refs": "error",
-    "react/no-unescaped-entities": "error",
-    "react/no-unknown-property": "error",
-    "react/prop-types": "error",
-    "react/react-in-jsx-scope": "error",
-    "react/require-render-return": "error",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "react/function-component-definition": [
-      "error",
+    'consistent-return': 'off',
+    'max-lines-per-function': 'off',
+    'no-magic-numbers': 'off',
+    'no-nested-ternary': 'off',
+    'no-ternary': 'off',
+    'no-warning-comments': 'off',
+    'one-var': 'off',
+    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/rules-of-hooks': 'error',
+    'react/display-name': 'error',
+    'react/forbid-component-props': [
+      'error',
+      { allow: ['className'], forbid: [] },
+    ],
+    'react/function-component-definition': [
+      'error',
       {
-        namedComponents: "arrow-function",
-        unnamedComponents: "arrow-function",
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
       },
     ],
-    "react/jsx-no-bind": ["error", { allowArrowFunctions: true }], // Allow arrow functions in JSX props (Remove this rule when performance becomes an issue)
-    "sort-imports": "warn",
-    "react/forbid-component-props": [
-      "error",
-      { forbid: [], allow: ["className"] },
-    ],
+    'react/jsx-key': 'error',
+    'react/jsx-max-depth': ['error', { max: 5 }],
+    // Allow arrow functions in JSX props (Remove this rule when performance becomes an issue)
+    'react/jsx-no-bind': ['error', { allowArrowFunctions: true }],
+    'react/jsx-no-comment-textnodes': 'error',
+    'react/jsx-no-literals': 'off',
+    'react/jsx-no-target-blank': 'error',
+    'react/jsx-no-undef': 'error',
+    'react/jsx-uses-react': 'error',
+    'react/jsx-uses-vars': 'error',
+    'react/no-children-prop': 'error',
+    'react/no-danger-with-children': 'error',
+    'react/no-deprecated': 'error',
+    'react/no-direct-mutation-state': 'error',
+    'react/no-find-dom-node': 'error',
+    'react/no-is-mounted': 'error',
+    'react/no-render-return-value': 'error',
+    'react/no-string-refs': 'error',
+    'react/no-unescaped-entities': 'error',
+    'react/no-unknown-property': 'error',
+    'react/prop-types': 'error',
+    'react/react-in-jsx-scope': 'error',
+    'react/require-render-return': 'error',
+    'sort-imports': 'off',
+    'sort-vars': 'off',
+    'sort-keys': 'off',
+    // TODO: Set the no-console rule to error when going in to production
+    'no-console': 'warn',
   },
-};
+  settings: {
+    react: {
+      linkComponents: [
+        // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
+        'Hyperlink',
+        { linkAttribute: 'to', name: 'Link' },
+      ],
+      version: 'detect',
+    },
+  },
+}
 ```
 
 #### Backend config:
@@ -1487,6 +1497,8 @@ module.exports = {
 > **Source:** [/backend/.eslint.cjs](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/.eslintrc.cjs)
 
 ```javascript
+'use strict'
+
 module.exports = {
   env: {
     browser: true,
@@ -1509,8 +1521,14 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'new-cap': 'off',
     'no-magic-numbers': 'off',
+    'one-var': 'off',
     'sort-imports': 'off',
+    'sort-vars': 'off',
+    'sort-keys': 'off',
+    'no-console': 'off',
+    'multiline-comment-style': 'off',
   },
 }
 ```

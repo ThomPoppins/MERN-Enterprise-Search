@@ -39,6 +39,7 @@ module.exports = {
     'no-nested-ternary': 'off',
     'no-ternary': 'off',
     'no-warning-comments': 'off',
+    'one-var': 'off',
     'react-hooks/exhaustive-deps': 'warn',
     'react-hooks/rules-of-hooks': 'error',
     'react/display-name': 'error',
