@@ -211,13 +211,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: ''
     },
-    // `gender` can be Man, Woman, or Other
     gender: {
       type: String,
       required: true
     },
-    // `profilePicture` is a id reference to the image document in the database.
-    // The image document contains the path to the image file.
     profilePicture: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Image'
@@ -239,7 +236,6 @@ const userSchema = new mongoose.Schema(
 // Instantiate User model
 const User = mongoose.model('User', userSchema)
 ```
-
 
 ### 6. Companies
 
@@ -705,55 +701,7 @@ const inviteSchema = new mongoose.Schema(
 const Invite = mongoose.model("Invite", inviteSchema);
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+This was the visual demo for now, I will update this later on, so come back in a while to check it out!
 
 ## Get up and running:
 
