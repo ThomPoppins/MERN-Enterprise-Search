@@ -31,7 +31,7 @@ const App = () => {
       <Routes>
         {/* / route, render homepage*/}
         <Route element={<Home />} path='/' />
-        {/* TESTROUTE: test image uploading */}
+        {/* TEST ROUTE: test image uploading */}
         <Route element={<UploadImage />} path='/upload-image' />
         {/* User profile page route, render user profile page */}
         <Route element={<UserProfile />} path='/profile' />

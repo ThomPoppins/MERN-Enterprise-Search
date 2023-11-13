@@ -72,6 +72,8 @@ Also I make use of a lot of different packages but only if they are complementar
     - [ES Lint](#es-lint)
       - [Frontend config:](#frontend-config)
       - [Backend config:](#backend-config)
+  - [Project management](#project-management)
+    - [Jira](#jira)
 
 ## Visual Demo
 
@@ -1387,3 +1389,20 @@ module.exports = {
   },
 };
 ```
+
+## Project management
+
+### Jira
+
+Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to sort my project issues.
+
+![Jira Board](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Jira-Board.png?raw=true)
+
+**TODO** issues I haven't started working on yet.
+
+**IN PROGRESS** issues are in progress.
+
+**BUSY** issues are the issues I am working on and have higher priority to finish. A lot of the times other issues are dependent on the **BUSY** issues, that's the main reason I chose to add this swim lane.
+
+**DONE** issues are finished.
+
