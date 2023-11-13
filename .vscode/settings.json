@@ -1,6 +1,6 @@
 {
   "workbench.colorTheme": "Moxer",
-  "glassit.alpha": 240,
+  "glassit.alpha": 253,
   "terminal.integrated.defaultProfile.windows": "Git Bash",
   "js/ts.implicitProjectConfig.checkJs": true,
   "better-comments.highlightPlainText": true,

@@ -6,7 +6,7 @@ import multer from "multer";
 const router = express.Router();
 
 
-// The image is stored in the "uploads/images" folder.
+// Multer disk storage configuration.
 const storage = multer.diskStorage({
   // `destination` is the folder where the uploaded file will be stored.
    destination: function (request, file, callback) {

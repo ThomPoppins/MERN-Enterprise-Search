@@ -19,6 +19,8 @@ Also I make use of a lot of different packages but only if they are complementar
     - [3. Profile picture upload modal](#3-profile-picture-upload-modal)
     - [4. Profile picture preview before upload](#4-profile-picture-preview-before-upload)
       - [BLOB image:](#blob-image)
+      - [Save image to the backend server](#save-image-to-the-backend-server)
+      - [Express.static() as CDN](#expressstatic-as-cdn)
     - [5. User profile page and data structure](#5-user-profile-page-and-data-structure)
       - [`User` schema:](#user-schema)
     - [6. Companies](#6-companies)
@@ -167,7 +169,13 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
 export default EditProfilePictureModal;
 ```
 
+#### Save image to the backend server
+
 If the user is sure about it, he/she will click the upload button and now the image will be sent through a form-data object to the backend REST (ExpressJS hosted) POST image upload API end-point, where the image will be recieved by *ExpressJS*, using *Multer* middleware for disk storage configuration and file handling and saved in a special public static file directory, local on the server storage.
+
+After the image is uploaded and saved, a corresponding Image "document" (entry) with a filepath will be saved to the MongoDB database in the "images" collection. (A collection is like a databaser table.)
+
+> **Source:** [/backend/routes/uploadRoute.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/routes/uploadRoute.js)
 
 ```javascript
 import { Image } from "../models/imageModel.js";
@@ -250,11 +258,22 @@ router.post("/image", upload.single("image"), async (request, response) => {
 export default router;
 ```
 
+After succesfully saving the new Image entry (document) to the database, MongoDB responds with the Image document ID, which will immidiatly be saved to the User document(of the currently logged in user of course) so it will be always be certain where the image is. Securely saved on the backend server with the file location saved to the database with it's Image ID saved in the corresponding User document.
+
+#### Express.static() as CDN
+
 The image is served by ExpressJS which means this backend is also the CDN. Because of this intentional set up,the client server will always be clean of accumulating images and any other kind of files and trash and will the heavy duty of handling large file with a lot of data rest on the backend where a performance impact would have a lot less impact on the U(ser)X(perience).
 
-After the image is uploaded and saved, a corresponding Image "document" (entry) with a filepath will be saved to the MongoDB database in the "images" collection. (A collection is like a databaser table.)
+Express.js can serve static files using **Express.static("public_directory")**.
 
-After succesfull saving the new Image entry (document) to the database, MongoDB responds with the Image document ID, which will immidiatly be saved to the User document(of the currently logged in user of course) so it will be always be certain where the image is. Securely saved on the backend server with the file location saved to the database with it's Image ID saved in the corresponding User document.
+> **Source:** [/backend/index.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/index.js)
+
+```javascript
+// Use .static() and configure the /public folder for hosting static resources as CDN for images and other files.
+app.use(express.static('public'));
+```
+
+> **Note:** All URL's to the files in the public directory have a similar URL structure. An image within the public static files directory with path **public_static_files_dir/uploads/images/137917151-1699497672476.jpg** can be accessed on URL *backend-server-domain.com/uploads/images/137917151-1699497672476.jpg*.
 
 ### 5. User profile page and data structure
 

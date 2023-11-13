@@ -4,6 +4,7 @@ import { BACKEND_URL } from "../../../config";
 import store from "../../store/store.jsx";
 import axios from "axios";
 
+// Modal to edit user profile picture
 const EditProfilePictureModal = ({ userId, onClose }) => {
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState("");
@@ -24,7 +25,7 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
       setPreview("");
       return;
     }
-
+    // Convert the selected image to a Base64 string and save it to the preview state
     const objectUrl = URL.createObjectURL(selectedFile);
     setPreview(objectUrl);
 
@@ -114,10 +115,10 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
             type="file"
           />
           {selectedFile ? <img
-              alt="Profile Picture"
-              className="mx-auto my-4 w-[350px] h-[350px] object-cover"
-              src={preview}
-            /> : null}
+            alt="Profile Picture"
+            className="mx-auto my-4 w-[350px] h-[350px] object-cover"
+            src={preview}
+          /> : null}
           {!selectedFile && (
             <div className="mx-auto my-4  w-[350px] h-[350px] border-2 border-purple-900 rounded-lg">
               <p className="text-center text-white text-2xl mt-16">
@@ -127,10 +128,10 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
           )}
           <div className="flex justify-center">
             {selectedFile ? <input
-                className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2"
-                type="submit"
-                value="Upload"
-              /> : null}
+              className="bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2"
+              type="submit"
+              value="Upload"
+            /> : null}
           </div>
         </form>
       </div>
