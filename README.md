@@ -23,8 +23,11 @@ Also I make use of a lot of different packages but only if they are complementar
     - [6. Companies](#6-companies)
       - [Listing page](#listing-page)
       - [Registration](#registration)
+        - [KVK number validation](#kvk-number-validation)
       - [Data structure](#data-structure)
       - [`Company` schema:](#company-schema)
+      - [Edit company](#edit-company)
+      - [Company ownership](#company-ownership)
   - [Get up and running:](#get-up-and-running)
   - [Project Issue Progression](#project-issue-progression)
   - [Versions](#versions)
@@ -260,6 +263,19 @@ An owner of a company can register his company in my application. On this compan
 *Company registration form:*
 ![Company Registration Form Top](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/008.1.png?raw=true)
 ![Company Registration Form Bottom](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/008.2.png?raw=true)
+
+##### KVK number validation
+
+Companies in the Netherlands (my home country) are always registered to the "Kamer van Koophandel" which is the Chamber of Commerce in the Netherlands. It is a government agency that plays a crucial role in the registration and documentation of businesses operating in my country.
+
+I've connected the backend application to the KvK test API for validation of company KvK numbers. When a user registers a company to my application and fills in the KvK number, when the input field loses focus (`onBlur()`), automatically there will be a request to the KvK (test) API for KvK number validation.
+
+![Invalid KvK Number](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Invalid-KvK-Number.png?raw=true)
+
+For now, only number validation is enough, but in the future also the company name, owners and other company details will be verified against this API to rule out the need for human verification as much as possible to safe costs and make the user experience a much faster because users can get started with their company in the application right away without having to wait for a manual verification of their business.
+
+**Subsidiary companies**:
+KvK numbers (for now) have to be unique so companies can't get registered more then once, in the future this uniqueness has to be combination between Kvk number and company name (and also maybe other company details) because companies can have subsidiary companies with the same number and these subsidiary companies should be able to be registered as valid companies to the application because for a regular user using the app to find a company they need, it is not important to know that a company has a parent company. If companies find it necessary to inform the regular user (and potential customer) about their subsidiarity of a parent company, then they should be able to inform users about that on their company profile page (in very early development).
 
 #### Data structure
 
@@ -565,7 +581,17 @@ const companySchema = new mongoose.Schema(
 const Company = mongoose.model("Company", companySchema);
 ```
 
+#### Edit company
 
+When a company owner clicks on the *pencil* icon on the companies listing page the owner is able to edit the company. 
+
+#### Company ownership
+
+Companies are automatically owned by the `User` that registers the company to the application.
+
+If a company has more than one owner, the company owners is able to invite other users for company ownership, giving the other co-owners the same admin level elevated access to the configuration of their company.
+
+![]()
 
 
 
@@ -794,7 +820,7 @@ Now you have the application up and running locally!
 - [x] [MERNSTACK-146] Decide if the default values should be set in the model or in the route. Hint: Consider using the `default` property in the company schema. CONCLUSION: Set default values in the model.
 - [x] [MERNSTACK-109] Populate the company document with the properties from the request body if they exist in companiesRoute.js.
 - [x] [MERNSTACK-203] Make file upload possible as user profile image
-- [ ] [MERNSTACK-] Make file upload possible as company logo
+- [ ] [MERNSTACK-209] Make file upload possible as company logo
 - [x] [MERNSTACK-206] Set up a profile picture upload for the user
 - [x] [MERNSTACK-195] Define the invite model
 - [x] [MERNSTACK-207] Save the profile picture Base64 string to the database
@@ -836,7 +862,10 @@ Now you have the application up and running locally!
 - [ ] [MERNSTACK-239] Implement ERROR logging to error log files everywhere console.log is used.
 - [ ] [MERNSTACK-240] Remove all debug data printing console.logs and keep useful error logs. Clean up the debug data flow.
 - [x] [MERNSTACK-241] PRIO: Evaluate all `Company` field descriptions and make them correct.
-- [ ] [MERNSTACK-] Fade dropdown menu in and out with quickly with customized animation defined in tailwind.config.js.
+- [ ] [MERNSTACK-242] Fade dropdown menu in and out with quickly with customized animation defined in tailwind.config.js.
+- [ ] [MERNSTACK-243]  Implement localization library for multi-language support
+- [ ] [MERNSTACK-244] Clean up everything `Book` related.
+- [ ] 
 
 ## Versions
 

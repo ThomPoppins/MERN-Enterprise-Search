@@ -1,6 +1,6 @@
 {
   "workbench.colorTheme": "Moxer",
-  "glassit.alpha": 254,
+  "glassit.alpha": 240,
   "terminal.integrated.defaultProfile.windows": "Git Bash",
   "js/ts.implicitProjectConfig.checkJs": true,
   "better-comments.highlightPlainText": true,
@@ -75,5 +75,8 @@
   "css.validate": false, 
   "[css]": {
     "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   }
 }
