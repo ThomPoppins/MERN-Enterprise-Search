@@ -69,7 +69,7 @@ Also I make use of a lot of different packages but only if they are complementar
       - [Easy Integration with Frontend Frameworks](#easy-integration-with-frontend-frameworks)
       - [Expiration and Refresh Tokens](#expiration-and-refresh-tokens)
       - [Conclusion](#conclusion)
-    - [](#)
+    - [ES Lint for best code practices](#es-lint-for-best-code-practices)
 
 
 
@@ -1266,4 +1266,8 @@ JWTs can be configured with expiration times, reducing the window of opportunity
 
 By implementing user authentication with JWTs, this repository ensures a robust and secure authentication mechanism. The stateless nature, data integrity, and ease of integration make JWTs an excellent choice for validating user authenticity. With careful implementation and adherence to best practices, this approach provides a reliable foundation for secure user authentication in my application.
 
-###
+### ES Lint for best code practices
+
+I'm using **ES Lint** to get my code to the best code standards there are.
+
+![ES Lint in VS Code](![Invite Accepted](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Using-ES-Lint.png?raw=true)
