@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import Spinner from '../../components/Spinner'
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import store from '../../store/store.jsx'
 import { USER_ID } from '../../store/actions.jsx'
 import Layout from '../../components/layout/Layout'
+import Loader from '../../components/animated/Loader.jsx'
 
 const LogoutUser = () => {
   // Loading state for displaying a spinner while the request is being sent to the backend
@@ -36,7 +36,7 @@ const LogoutUser = () => {
   return (
     <Layout>
       <div className='flex flex-col justify-center h-screen'>
-        {loading ? <Spinner /> : ''}
+        {loading ? <Loader /> : ''}
         <div className='md:w-[600px] mx-auto h-[190px] border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-16'>
           <div className='flex justify-center pt-4'>
             <h3 className='text-2xl'>Are you sure you want to log out?</h3>

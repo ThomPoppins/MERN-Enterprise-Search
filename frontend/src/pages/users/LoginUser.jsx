@@ -4,11 +4,11 @@ import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import { useSnackbar } from 'notistack'
 import { BACKEND_URL } from '../../../config'
-import Spinner from '../../components/Spinner'
 import emailValidator from '../../utils/validation/emailValidator'
 import verifyToken from '../../utils/auth/verifyToken.jsx'
 import store from '../../store/store.jsx'
 import Layout from '../../components/layout/Layout'
+import Loader from '../../components/animated/Loader.jsx'
 
 const LoginUser = () => {
   // Input field values for logging in a user as state
@@ -97,7 +97,7 @@ const LoginUser = () => {
     <Layout>
       <div className='p-4'>
         <h1 className='flex justify-center text-3xl my-4 mb-6'>Login</h1>
-        {loading ? <Spinner /> : ''}
+        {loading ? <Loader /> : ''}
         <div className='flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto'>
           <div className='my-4'>
             <label className='text-xl mr-4'>Email</label>

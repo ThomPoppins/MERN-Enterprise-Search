@@ -2,36 +2,38 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { BACKEND_URL } from '../../config'
 import Layout from '../components/layout/Layout'
-import e from 'cors'
 import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
   // @ts-ignore
-  const userId = useSelector((state) => state.userId)
+  const userId = useSelector((state) => state.userId),
+    // Ping animation when the find button is clicked
+    [findButtonPing, setFindButtonPing] = useState(false),
+    // Search query state
+    [searchQuery, setSearchQuery] = useState(''),
+    [urlParams, setUrlParams] = useState(''),
+    // React router navigate hook
+    navigate = useNavigate()
 
-  // Ping animation when the find button is clicked
-  const [findButtonPing, setFindButtonPing] = useState(false)
-
-  const [searchQuery, setSearchQuery] = useState('')
-
-  const navigate = useNavigate()
-
-  const handleFindExpertsQuery = (e) => {
-    e.preventDefault()
+  // Find experts query handler
+  const handleFindExpertsQuery = (event) => {
+    event.preventDefault()
 
     setFindButtonPing(true)
 
-    // ! TODO: Remove this timeout when the query is implemented and redirects to the search page
-    setTimeout(() => {
-      setFindButtonPing(false)
-    }, 5000)
+    // format string to URL params
+    setUrlParams(searchQuery.replace(/ /g, '+'))
+
+    navigate(`/find?query=${urlParams}`)
   }
 
   // Search query input change handler
-  const handleSearchQueryChange = (e) => {
-    setSearchQuery(e.target.value)
+  const handleSearchQueryChange = (event) => {
+    setSearchQuery(event.target.value)
+    setUrlParams(event.target.value.replace(/ /g, '+'))
   }
 
+  // If user is logged in
   if (userId) {
     return (
       <Layout>
@@ -39,7 +41,7 @@ const Home = () => {
           <div className='mx-auto'>
             <div className='mx-auto min-h-[440px] lg:w-9/12 border border-purple-900 bg-violet-950/40 rounded-xl p-4 '>
               <img
-                alt='profile picture'
+                alt='profile'
                 className='w-32 h-32 mt-8 ml-3 mr-8 rounded-xl float-left object-cover'
                 src={`${BACKEND_URL}/logo/vind-expert-transparent.png`}
               />
@@ -70,11 +72,11 @@ const Home = () => {
                       className={`absolute top-[-41px] right-[195px] h-[50px] w-[160px] bg-gradient-to-r  rounded-lg m-8 pl-4  ${
                         findButtonPing
                           ? 'animate-ping-once bg-gradient-to-l from-green-500 to-green-400'
-                          : // : "animate-bounce hover:animate-none"
-                            'animate-bounce-fast  from-violet-500 to-violet-600 hover:bg-gradient-to-l hover:from-green-500 hover:to-green-400'
+                          : 'animate-bounce-fast  from-violet-500 to-violet-600 hover:bg-gradient-to-l hover:from-green-500 hover:to-green-400'
                       }`}
                       data-test-id='find-button'
                       onClick={handleFindExpertsQuery}
+                      type='button'
                     >
                       <div className='mx-auto'>
                         <div className='py-2 ml-7 text-xl float-left'>
@@ -95,22 +97,23 @@ const Home = () => {
         </div>
       </Layout>
     )
-  } else {
-    return (
-      <Layout>
-        <div className='mx-auto lg:w-9/12 border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-32'>
-          <h1 className='text-3xl mb-6'>Home</h1>
-
-          <p className=''>
-            Register and login to your account to see the features of this
-            application in action. Account data will only be saved to your own
-            MongoDB database and your password will be saved securely hashed by
-            bcrypt.
-          </p>
-        </div>
-      </Layout>
-    )
   }
+
+  // If no user is logged in
+  return (
+    <Layout>
+      <div className='mx-auto lg:w-9/12 border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-32'>
+        <h1 className='text-3xl mb-6'>Home</h1>
+
+        <p className=''>
+          Register and login to your account to see the features of this
+          application in action. Account data will only be saved to your own
+          MongoDB database and your password will be saved securely hashed by
+          bcrypt.
+        </p>
+      </div>
+    </Layout>
+  )
 }
 
 export default Home

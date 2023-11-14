@@ -10,10 +10,10 @@ import kvkNumberValidator from '../../utils/validation/kvkNumberValidator'
 import companySloganValidator from '../../utils/validation/companySloganValidator'
 import companyDescriptionValidator from '../../utils/validation/companyDescriptionValidator'
 import startYearValidator from '../../utils/validation/startYearValidator'
-import Spinner from '../../components/Spinner'
 import { useSelector } from 'react-redux'
 import CompanyLogoModal from '../../components/companies/CompanyLogoModal'
 import Layout from '../../components/layout/Layout'
+import Loader from '../../components/animated/Loader.jsx'
 
 const RegisterCompany = () => {
   // Input field values for registering a company as state
@@ -289,7 +289,7 @@ const RegisterCompany = () => {
         <h1 className='flex justify-center text-3xl my-4 mb-6'>
           Register Company
         </h1>
-        {loading ? <Spinner /> : ''}
+        {loading ? <Loader /> : ''}
         <div className='flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto'>
           <div className='my-4'>
             <label className='text-xl mr-4' htmlFor='company-name-input'>

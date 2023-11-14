@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Spinner from '../../components/Spinner'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 import { BACKEND_URL, TEST_KVK_API } from '../../../config.js'
@@ -18,6 +17,7 @@ import { PENDING_RECIEVED_INVITES } from '../../store/actions'
 import store from '../../store/store'
 import CompanyLogoModal from '../../components/companies/CompanyLogoModal'
 import Layout from '../../components/layout/Layout'
+import Loader from '../../components/animated/Loader.jsx'
 
 const EditCompany = () => {
   // ADD OWNERS TO COMPANY TICKETS:
@@ -596,7 +596,7 @@ const EditCompany = () => {
             <strong className='ml-2'> {name}</strong>
           </div>
         </h1>
-        {loading ? <Spinner /> : ''}
+        {loading ? <Loader /> : ''}
 
         <div className='flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto mb-4'>
           <div className='my-4'>

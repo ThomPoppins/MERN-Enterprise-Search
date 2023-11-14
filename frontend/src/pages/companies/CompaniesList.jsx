@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import Layout from '../../components/layout/Layout'
-import Spinner from '../../components/Spinner'
 import { Link } from 'react-router-dom'
 import { MdOutlineAddBox } from 'react-icons/md'
 import { BACKEND_URL } from '../../../config'
@@ -10,6 +9,7 @@ import CompaniesTable from '../../components/companies/CompaniesTable'
 import CompaniesCard from '../../components/companies/CompaniesCard'
 import { COMPANIES_LIST_SHOW_TYPE } from '../../store/actions'
 import { enqueueSnackbar } from 'notistack'
+import Loader from '../../components/animated/Loader'
 
 const CompaniesList = () => {
   // useDispatch() is a hook that returns the reference to the dispatch function from the Redux store.
@@ -80,7 +80,7 @@ const CompaniesList = () => {
           </Link>
         </div>
         {loading ? (
-          <Spinner />
+          <Loader />
         ) : showType === 'table' ? (
           <CompaniesTable
             companies={companies}

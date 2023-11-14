@@ -3,7 +3,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import { BACKEND_URL } from '../../../config'
 import axios from 'axios'
 import { useSnackbar } from 'notistack'
-import Spinner from '../Spinner'
+import Loader from '../animated/Loader'
 
 const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
   const [loading, setLoading] = useState(false)
@@ -52,7 +52,7 @@ const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
           onClick={onClose}
         />
 
-        {loading ? <Spinner /> : ''}
+        {loading ? <Loader /> : ''}
         <div className='flex flex-col items-center rounded-xl w-[500px] p-8 mx-auto'>
           <h3 className='text-2xl text-gray-700'>
             Are you sure you want to delete this company?

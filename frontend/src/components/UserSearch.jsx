@@ -11,50 +11,52 @@ const UserSearch = ({
   usersResult,
   setUsersResult,
 }) => {
-  const [searchTerm, setSearchTerm] = useState(''),
-    handleSearch = (e) => {
-      // if the search input is empty, clear the search results
-      if (e.target.value === '') {
-        setSearchTerm('')
-        setUsersResult([])
-        return
-      }
+  const [searchTerm, setSearchTerm] = useState('')
 
-      setSearchTerm(e.target.value)
-      searchUsers(e.target.value)
+  const searchUsers = (query) => {
+    axios
+      .get(`${BACKEND_URL}/users/search/${query}`, {
+        headers: {
+          companyid: companyId,
+        },
+      })
+      .then((response) => {
+        setUsersResult(response.data)
+        // console.log(response.data); //! TODO: Remove console.log and write errors to logfile
+      })
+      .catch((error) => {
+        if (error.status === 404) {
+          return
+        }
+        enqueueSnackbar('Error searching for users', {
+          variant: 'error',
+          preventDuplicate: true,
+        })
 
-      console.log(
-        'handleSearch e.target.value in UserSearch.jsx: ',
-        e.target.value,
-      )
-    },
-    searchUsers = (searchTerm) => {
-      axios
-        .get(BACKEND_URL + '/users/search/' + searchTerm, {
-          headers: {
-            companyid: companyId,
-          },
-        })
-        .then((response) => {
-          setUsersResult(response.data)
-          // console.log(response.data); //! TODO: Remove console.log and write errors to logfile
-        })
-        .catch((error) => {
-          if (error.status === 404) {
-            return
-          }
-          enqueueSnackbar('Error searching for users', {
-            variant: 'error',
-            preventDuplicate: true,
-          })
+        // ! TODO: Handle error in UI
+        console.log(
+          'ERROR in UserSearch.jsx get search results API call: ',
+          error,
+        )
+      })
+  }
 
-          // ! TODO: Handle error in UI
-          console.log(
-            'ERROR in UserSearch.jsx get search results API call: ',
-            error,
-          )
-        })
+  const handleSearch = (event) => {
+    // if the search input is empty, clear the search results
+    if (event.target.value === '') {
+      setSearchTerm('')
+      setUsersResult([])
+      return
     }
+
+    setSearchTerm(event.target.value)
+    searchUsers(event.target.value)
+
+    console.log(
+      'handleSearch e.target.value in UserSearch.jsx: ',
+      event.target.value,
+    )
+  }
 
   return (
     <div>

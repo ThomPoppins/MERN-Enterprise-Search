@@ -7,10 +7,10 @@ import lastNameValidator from '../../utils/validation/lastNameValidator'
 import Layout from '../../components/layout/Layout'
 import passwordValidator from '../../utils/validation/passwordValidator'
 import React, { useEffect, useState } from 'react'
-import Spinner from '../../components/Spinner'
 import { useNavigate } from 'react-router-dom'
 import { useSnackbar } from 'notistack'
 import usernameValidator from '../../utils/validation/usernameValidator'
+import Loader from '../../components/animated/Loader.jsx'
 
 const RegisterUser = () => {
   // Form input fields as state variables
@@ -259,7 +259,7 @@ const RegisterUser = () => {
     <Layout>
       <div className='p-4'>
         <h1 className='flex justify-center text-3xl my-4 mb-6'>Register</h1>
-        {loading ? <Spinner /> : ''}
+        {loading ? <Loader /> : ''}
         <div className='flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto'>
           {registerErrorMessage ? (
             <p className='text-red-500 text-sm'>{registerErrorMessage}</p>
