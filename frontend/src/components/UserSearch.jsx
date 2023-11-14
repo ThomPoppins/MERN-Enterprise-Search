@@ -10,6 +10,7 @@ const UserSearch = ({
   addPendingOwnershipInvite,
   usersResult,
   setUsersResult,
+  pendingOwnershipInvites,
 }) => {
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -21,8 +22,23 @@ const UserSearch = ({
         },
       })
       .then((response) => {
-        setUsersResult(response.data)
-        // console.log(response.data); //! TODO: Remove console.log and write errors to logfile
+        // filter out users that are already invited
+        const filteredUsers = response.data.filter((resultUser) => {
+          // check if the user is already invited by using find() on the pendingOwnershipInvites array
+          // find() iterates over the array and returns the first element that matches the condition
+          const isInvited = pendingOwnershipInvites.find(
+            // compare the user id of the pending ownership invite with the id of the user in the search results
+            (invite) => invite.receiverId === resultUser._id,
+          )
+
+          // if the user is already invited, return false, otherwise return true
+          return !isInvited
+        })
+
+        console.log('filteredUsers: ', filteredUsers) //! DELETE THIS ONE
+
+        setUsersResult(filteredUsers)
+        // setUsersResult(response.data) // DELETE THIS ONE
       })
       .catch((error) => {
         if (error.status === 404) {
@@ -120,12 +136,71 @@ UserSearch.propTypes = {
   addPendingOwnershipInvite: PropTypes.func.isRequired,
   // `companyId` is the id of the company.
   companyId: PropTypes.string.isRequired,
+  // `pendingOwnershipInvites` is an array of pending ownership invites.
+  pendingOwnershipInvites: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      senderId: PropTypes.string.isRequired,
+      sender: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+        gender: PropTypes.string.isRequired,
+        profilePicture: PropTypes.string,
+        profilePictureURL: PropTypes.string,
+        pendingInvitesCount: PropTypes.number.isRequired,
+      }),
+      receiverId: PropTypes.string.isRequired,
+      receiver: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+        gender: PropTypes.string.isRequired,
+        profilePicture: PropTypes.string,
+        profilePictureURL: PropTypes.string,
+        pendingInvitesCount: PropTypes.number,
+      }),
+      companyId: PropTypes.string.isRequired,
+      company: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        active: PropTypes.bool.isRequired,
+        name: PropTypes.string.isRequired,
+        slogan: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+        logo: PropTypes.string.isRequired,
+        phone: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        kvkNumber: PropTypes.string.isRequired,
+        startYear: PropTypes.number.isRequired,
+        createdAt: PropTypes.string.isRequired,
+        updatedAt: PropTypes.string.isRequired,
+      }),
+      status: PropTypes.string.isRequired,
+      kind: PropTypes.string.isRequired,
+      createdAt: PropTypes.string.isRequired,
+      updatedAt: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
   // `setUsersResult` is a function that sets the usersResult state.
   setUsersResult: PropTypes.func.isRequired,
-  // `userResult` is an array of users that match the search term.
-  userResult: PropTypes.array,
-  // `usersResult` is an array of users that match the search term.
-  usersResult: PropTypes.array.isRequired,
+  // `usersResult` is an array of users.
+  usersResult: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      username: PropTypes.string.isRequired,
+      email: PropTypes.string.isRequired,
+      firstName: PropTypes.string.isRequired,
+      lastName: PropTypes.string.isRequired,
+      gender: PropTypes.string.isRequired,
+      profilePicture: PropTypes.string.isRequired,
+      profilePictureURL: PropTypes.string.isRequired,
+      pendingInvitesCount: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
 }
 
 export default UserSearch

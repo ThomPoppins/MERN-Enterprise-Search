@@ -1876,12 +1876,11 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-279] Read article about performance and optimization of MERN stack [here](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-c429591d5b0f).
 - [ ] [MERNSTACK-280] Read article about [Node.js](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-5a3c7a6e854b).
 - [ ] [MERNSTACK-281] Read article about [MongoDB](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-a390d60d08fa).
-
-
 - [ ] [MERNSTACK-282] Read article about MERN stack [Security](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-b8e0ac68d087)
 - [ ] [MERNSTACK-283] Read MERN stack [CI/CD & deployment article](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-10699767f4b4)
-- [ ] [MERNSTACK-284] Add little profile picture of invited user next to their details in the "pending invites" section. 
-- [ ] [MERNSTACK-285] Add picture to search results searching for co-owners
+- [x] [MERNSTACK-284] Add little profile picture of invited user next to their details in the "pending invites" section. 
+- [ ] [MERNSTACK-285] Add picture to search results searching for co-owners.
+- [x] [MERNSTACK-286] Add picture to the list of owners in EditCompany
 
 ### Before production checklist
 

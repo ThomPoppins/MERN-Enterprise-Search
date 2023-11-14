@@ -381,13 +381,42 @@ const EditCompany = () => {
     })
   }
 
-  // getCompanyPendingOwnershipInvites()
+  // Get owners from company and update state
+  const updateCompanyOwners = async () => {
+    // Get owners from company
+    const companyData = await axios.get(`${BACKEND_URL}/companies/${companyId}`)
+    const userIds = []
+    companyData.data.owners.forEach((owner) => {
+      userIds.push(owner.userId)
+    })
+
+    // Get all owners data
+    const ownerPromises = userIds.map((ownerUserId) =>
+      axios.get(`${BACKEND_URL}/users/user/${ownerUserId}`),
+    )
+
+    // Resolve all promises to get owners user data
+    Promise.all(ownerPromises)
+      .then((responses) => {
+        const ownersData = responses.map(
+          (ownersResponse) => ownersResponse.data,
+        )
+
+        console.log('DELETE THIS OWNERS DATA: ', ownersData)
+
+        setOwners(ownersData)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 
   // Update pending ownership invites every 5 seconds
   useEffect(() => {
     // Set interval
     const interval = setInterval(() => {
       getCompanyPendingOwnershipInvites()
+      updateCompanyOwners()
     }, 5000)
 
     // Clear interval on unmount
@@ -585,49 +614,75 @@ const EditCompany = () => {
             </div>
             <ul className='mb-4' id='owners-list'>
               {owners.map((owner) => (
-                <div
-                  className='mb-4 flex justify-between items-center'
-                  //
-                  key={owner._id}
-                >
-                  <div>
-                    <li>
-                      <ul>
-                        <li>
-                          <VscMention className='inline' />
-                          {/*  */}
-                          {owner.username}
-                        </li>
-                        <li>
-                          {/*  */}
-                          <VscPerson className='inline' /> {owner.firstName}{' '}
-                          {/*  */}
-                          {owner.lastName}
-                        </li>
-                        <li>
-                          {/*  */}
-                          <VscMail className='inline' /> {owner.email}
-                        </li>
-                      </ul>
-                    </li>
+                <>
+                  <div className='float-left mt-3 mr-2'>
+                    <img
+                      alt='Profile'
+                      className='rounded-full h-16 w-16 mr-4'
+                      src={
+                        owner.profilePictureURL
+                          ? owner.profilePictureURL
+                          : owner.gender === 'Man'
+                          ? `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
+                          : `${BACKEND_URL}/placeholders/profile-picture-placeholder-woman.jpeg`
+                      }
+                    />
                   </div>
-                  <div>
-                    {/*  */}
-                    {owner._id === userId ? (
-                      ''
-                    ) : (
-                      <button
-                        className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
-                        data-test-id='remove-owner-button'
-                        onClick={handleRemoveUserAsCompanyOwner}
-                        type='button'
-                        value={owner._id}
-                      >
-                        Remove
-                      </button>
-                    )}
+                  <div
+                    className='mb-4 flex justify-between items-center'
+                    //
+                    key={owner._id}
+                  >
+                    <div>
+                      <table>
+                        <tbody>
+                          <li>
+                            <tr>
+                              <td>
+                                <VscMention className='inline' />
+                              </td>
+                              <td>{owner.username}</td>
+                            </tr>
+                          </li>
+                          <li>
+                            <tr>
+                              <td>
+                                <VscPerson className='inline' />
+                              </td>
+                              <td>
+                                {owner.firstName} {owner.lastName}
+                              </td>
+                            </tr>
+                          </li>
+                          <li>
+                            <tr>
+                              <td>
+                                <VscMail className='inline' />
+                              </td>
+                              <td>{owner.email}</td>
+                            </tr>
+                          </li>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div>
+                      {/*  */}
+                      {owner._id === userId ? (
+                        ''
+                      ) : (
+                        <button
+                          className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
+                          data-test-id='remove-owner-button'
+                          onClick={handleRemoveUserAsCompanyOwner}
+                          type='button'
+                          value={owner._id}
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
                   </div>
-                </div>
+                </>
               ))}
             </ul>
           </div>
@@ -635,6 +690,7 @@ const EditCompany = () => {
             //
             addPendingOwnershipInvite={addPendingOwnershipInvite}
             companyId={companyId}
+            pendingOwnershipInvites={pendingOwnershipInvites}
             setUsersResult={setUsersResult}
             usersResult={usersResult}
           />
