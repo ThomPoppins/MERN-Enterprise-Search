@@ -5,7 +5,7 @@ import Layout from '../components/layout/Layout'
 import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
-  // @ts-ignore
+  //
   const userId = useSelector((state) => state.userId),
     // Ping animation when the find button is clicked
     [findButtonPing, setFindButtonPing] = useState(false),
@@ -22,7 +22,7 @@ const Home = () => {
     setFindButtonPing(true)
 
     // format string to URL params
-    setUrlParams(searchQuery.replace(/ /g, '+'))
+    setUrlParams(searchQuery.replace(/ /gu, '+'))
 
     navigate(`/find?query=${urlParams}`)
   }
@@ -30,7 +30,7 @@ const Home = () => {
   // Search query input change handler
   const handleSearchQueryChange = (event) => {
     setSearchQuery(event.target.value)
-    setUrlParams(event.target.value.replace(/ /g, '+'))
+    setUrlParams(event.target.value.replace(/ /gu, '+'))
   }
 
   // If user is logged in
@@ -58,12 +58,12 @@ const Home = () => {
                     <input
                       className='absolute right-[400px] top-[-34px] h-[50px]  border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 py-2 px-4 mt-6 w-2/3'
                       data-test-id='find-expert-search-query-input'
-                      onBlur={(e) =>
-                        (e.target.placeholder =
+                      onBlur={(event) =>
+                        (event.target.placeholder =
                           'For example: plumber, electrician, gardener, developer, something else...')
                       }
                       onChange={handleSearchQueryChange}
-                      onFocus={(e) => (e.target.placeholder = '')}
+                      onFocus={(event) => (event.target.placeholder = '')}
                       placeholder='For example: plumber, electrician, gardener, developer, something else...'
                       type='text'
                       value={searchQuery}

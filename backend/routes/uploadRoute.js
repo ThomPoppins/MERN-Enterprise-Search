@@ -10,37 +10,27 @@ const router = express.Router(),
     destination(request, file, callback) {
       callback(null, './public/uploads/images')
     },
-    /*
-     *
-     * @ts-ignore
-     */
     fileFilter(request, file, callback) {
-      // Accept images only.
+      // eslint-disable-next-line
       if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
         // Send status 400 response if the file is not an image and a (error) message to inform the client.
         return callback(new Error('Only images allowed!'))
       }
 
       // Image file is accepted. Pass `true` to the callback.
-      callback(null, true)
+      return callback(null, true)
     },
     // Filename is the name of the uploaded file.
     filename(request, file, callback) {
-      // The file name will be the original name of the uploaded file with a timestamp.
-      const fileName = file.originalname.split('.')[0],
-        fileExtension = file.originalname.split('.')[1],
+      // Split the file name and extension.
+      const [fileName, fileExtension] = file.originalname.split('.'),
         timestamp = Date.now()
-      // @ts-ignore `callback` is used to pass the file name to multer.
+      // e file name to multer.
       callback(null, `${fileName}-${timestamp}.${fileExtension}`)
     },
   }),
   // Create multer instance with the storage configuration.
   upload = multer({ storage })
-
-/*
- * Use multer middleware to parse multipart/form-data requests.
- * router.use(upload.single("image")); //! TODO: REMOVE THIS
- */
 
 // POST image upload route, will be in the uploadRoute.js file if it works.
 router.post('/image', upload.single('image'), async (request, response) => {
@@ -77,10 +67,12 @@ router.post('/image', upload.single('image'), async (request, response) => {
       responseObj.imageId = result._id
     })
     .catch((error) => {
-      console.log('Error saving image to database: ', error) //! TODO: Remove console.log and log to error log file
+      //! TODO: Remove console.log and log to error log file
+      console.log('Error saving image to database: ', error)
 
+      //! TODO: REMOVE ERROR MESSAGE FROM RESPONSE OBJECT
       return response.status(500).send({
-        message: `Error saving image to database! ${error.message}`, //! TODO: REMOVE ERROR MESSAGE
+        message: `Error saving image to database! ${error.message}`,
       })
     })
 

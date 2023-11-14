@@ -9,9 +9,9 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
   const [acceptButtonSpinning, setAcceptButtonSpinning] = useState(false)
   const [declineButtonPing, setDeclineButtonPing] = useState(false)
 
-  // @ts-ignore
+  //
   const user = useSelector((state) => state.user)
-  // @ts-ignore
+  //
   const userId = useSelector((state) => state.userId)
 
   const handleAcceptInvite = async () => {

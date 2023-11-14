@@ -8,13 +8,13 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const Navbar = () => {
-  // @ts-ignore
+  //
   const userId = useSelector((state) => state.userId),
-    // @ts-ignore
+    //
     user = useSelector((state) => state.user),
     // The pending invites for the active user
     pendingRecievedInvites = useSelector(
-      // @ts-ignore
+      //
       (state) => state.pendingRecievedInvites,
     ),
     // Should the active user be alerted about pending invites? (true/false)
@@ -30,25 +30,28 @@ const Navbar = () => {
 
   // When the pending invites are available
   useEffect(() => {
+    // Return if no pending invites or userId is available
     if (!pendingRecievedInvites || !userId) {
       return
     }
-
+    // Check if the user has pending invites
     const hasPendingInvites =
       pendingRecievedInvites && pendingRecievedInvites.length > 0
+    // Set the invite alert state to true/false based on if the user has pending invites
     setInviteAlert(hasPendingInvites)
   }, [user, userId, pendingRecievedInvites])
 
+  // Get pending recieved invites every 5 seconds
   useEffect(() => {
+    // Return if no userId is available
     if (!userId) {
       return
     }
-
-    // Get pending recieved invites every 30 seconds
+    // Get pending recieved invites every 5 seconds
     const interval = setInterval(() => {
       getPendingRecievedInvites(userId)
-    }, 30000)
-
+      //! Increase interval time if the performance has become an issue
+    }, 5000)
     // Cleanup the interval when the component unmounts
     return () => clearInterval(interval)
   }, [userId])
@@ -56,7 +59,7 @@ const Navbar = () => {
   // Listen for clicks outside the dropdown menu and close it if it's open
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // @ts-ignore If the dropdownRef is set to the dropdown menu, and the click is outside the dropdown menu. (dropdownRef.current will be null if no dropdown menu is open)
+      //  If the dropdownRef is set to the dropdown menu, and the click is outside the dropdown menu. (dropdownRef.current will be null if no dropdown menu is open)
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false)
       }

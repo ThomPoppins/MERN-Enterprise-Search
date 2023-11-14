@@ -1540,7 +1540,7 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-225] If there is 1 or more pending invites, notify the user in the Navbar by making the "Invites" item bounce and give it a bright background color.
 - [ ] [MERNSTACK-228] The "Find" on the homepage has to transition between color using "color transitions" from TailwindCSS.
 - [x] [MERNSTACK-227] Dropdown menu items have to become clickable over the full width of the menu instead only the text and icon
-- [ ] [MERNSTACK-230] README.md: Finish tutorial about asynchronous JavaScript: <https://www.youtube.com/watch?v=ZYb_ZU8LNxs&ab_channel=freeCodeCamp.org>
+- [x] [MERNSTACK-230] README.md: Finish tutorial about asynchronous JavaScript: <https://www.youtube.com/watch?v=ZYb_ZU8LNxs&ab_channel=freeCodeCamp.org>
 - [x] [MERNSTACK-131] Set state for all companies fields that can be edited in EditCompany.jsx
 - [x] [MERNSTACK-127] Add state for all companies fields that can be registered in RegisterCompany.jsx
 - [x] [MERNSTACK-128] In RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this
@@ -1560,10 +1560,16 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-244] Clean up everything `Book` related.
 - [x] [MERNSTACK-226] When you click somewhere else besides the dropdown menu, the dropdown should close in Navbar.jsx
 - [x] [MERNSTACK-246] Add useSnackbar notification after successful profile image upload.
-- [ ] [MERNSTACK-248] Get search results if companies match.
+- [x] [MERNSTACK-248] Get search results if companies match.
 - [ ] [MERNSTACK-250] Add `Industry` to `Company` registration form and edit form.
-- [ ] [MERNSTACK-251] Create a find route in the backend for finding results when using the search input on the homepage
+- [x] [MERNSTACK-251] Create a find route in the backend for finding results when using the search input on the homepage
 - [ ] [MERNSTACK-252] Filter search results from users that already are in a pending invite
+- [x] [MERNSTACK-253] Remove `hashedPassword` from the user object before sending it to the frontend.
+- [ ] [MERNSTACK-254] Add phone number to `User` model routes and registration form.
+- [ ] [MERNSTACK-255] When user clicks logout, there should be a "Go back" or "Stay logged in"  option available on the /logout page.
+- [ ] [MERNSTACK-256] BUG: Related to MERNSTACK-257. Sometimes it is possible to accept a invite twice an you become owner of the company twice. Saving a new company owner should check that the owner not already is owner.
+- [ ] [MERNSTACK-257] BUG: Related to MERNSTACK-256. After becoming owner you can still get an invite for a company you already own, so the "received pending invites" have to check if the receiver isnt already owner and otherwise the invite should cancel.
+- [ ] 
 
 ## Technologies
 

@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import { PORT, mongoDBURL } from './config.js'
 import authRoute from './routes/authRoute.js'
 import companiesRoute from './routes/companiesRoute.js'
+import findRoute from './routes/findRoute.js'
 import invitesRoute from './routes/invitesRoute.js'
 import kvkRoute from './routes/kvkRoute.js'
 import uploadRoute from './routes/uploadRoute.js'
@@ -46,6 +47,7 @@ app.get('/', (request, response) => {
 app.use('/companies', companiesRoute)
 app.use('/users', usersRoute)
 app.use('/invites', invitesRoute)
+app.use('/find', findRoute)
 app.use('/auth', authRoute)
 app.use('/kvk', kvkRoute)
 app.use('/upload', uploadRoute)

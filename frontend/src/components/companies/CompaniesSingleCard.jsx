@@ -28,7 +28,7 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
     Promise.all(ownerPromises)
       .then((responses) => {
         const ownersData = responses.map((response) => response.data)
-        // @ts-ignore
+        //
         setOwners(ownersData)
       })
       .catch((error) => {
@@ -65,7 +65,7 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
           <span>
             {owners
               ?.map((owner) => {
-                // @ts-ignore
+                //
                 return owner.firstName + ' ' + owner.lastName
               })
               .join(', ')}

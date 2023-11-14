@@ -82,10 +82,10 @@ const UserSearch = ({
         />
       </div>
       <ul>
-        {usersResult.map((userResult, index) => (
+        {usersResult.map((userResult) => (
           <div
             className='search-result flex border-sky-400 rounded-xl mx-auto justify-between items-center'
-            key={userResult._id + index}
+            key={userResult._id}
           >
             <div className='mb-4'>
               <li>
@@ -101,6 +101,7 @@ const UserSearch = ({
                 className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
                 data-test-id='invite-owner-button'
                 onClick={addPendingOwnershipInvite}
+                type='button'
                 value={userResult._id}
               >
                 Invite

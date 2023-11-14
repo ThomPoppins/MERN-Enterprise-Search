@@ -14,9 +14,9 @@ import Loader from '../../components/animated/Loader'
 const CompaniesList = () => {
   // useDispatch() is a hook that returns the reference to the dispatch function from the Redux store.
   const dispatch = useDispatch(),
-    // @ts-ignore useSelector() is a hook that takes the current state as an argument and returns whatever data you want from it.
+    // current state as an argument and returns whatever data you want from it.
     showType = useSelector((state) => state.companiesListShowType),
-    // @ts-ignore userId is a string from the Redux store state
+    // edux store state
     userId = useSelector((state) => state.userId),
     // companies is an array of objects
     [companies, setCompanies] = useState([]),

@@ -128,7 +128,6 @@ const companySchema = new mongoose.Schema(
     addressFormat: {
       type: mongoose.Schema.Types.ObjectId,
       required: false,
-      default: null,
     },
     // Country of the company billing address. For example: "NL" for the Netherlands.
     country: {

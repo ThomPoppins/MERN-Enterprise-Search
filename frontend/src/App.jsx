@@ -4,6 +4,7 @@ import CompaniesList from './pages/companies/CompaniesList'
 import RegisterCompany from './pages/companies/RegisterCompany'
 import EditCompany from './pages/companies/EditCompany'
 import ShowCompany from './pages/companies/ShowCompany'
+import Results from './pages/find/Results'
 import LoginUser from './pages/users/LoginUser'
 import RegisterUser from './pages/users/RegisterUser'
 import LogoutUser from './pages/users/LogoutUser'
@@ -21,13 +22,12 @@ const App = () => {
   // Verify the JWT token
   verifyToken(token)
 
-  // @ts-ignore Get userId state from Redux store
+  //
   const userId = useSelector((state) => state.userId)
 
   // TODO: [MERNSTACK-163] Redirect user from routes other then /, /login and /register if user is not logged in
   if (userId) {
     // Get the pending invites for the user
-
     return (
       // Routes when the user is logged in
       <Routes>
@@ -39,6 +39,8 @@ const App = () => {
         <Route element={<UserProfile />} path='/profile' />
         {/* /logout route, render user logout page */}
         <Route element={<LogoutUser />} path='/logout' />
+        {/* /find route, render find page */}
+        <Route element={<Results />} path='/find' />
         {/* /companies/* routes */}
         <Route element={<CompaniesList />} path='/companies' />
         <Route element={<RegisterCompany />} path='/companies/register' />
@@ -48,19 +50,20 @@ const App = () => {
         <Route element={<InvitesList />} path='/invites' />
       </Routes>
     )
-  } else {
-    return (
-      // Routes when no user is logged in
-      <Routes>
-        {/* / route, render homepage*/}
-        <Route element={<Home />} path='/' />
-        {/* /login route, render user login page */}
-        <Route element={<LoginUser />} path='/login' />
-        {/* /register route, render user register page */}
-        <Route element={<RegisterUser />} path='/register' />
-      </Routes>
-    )
   }
+
+  // If no user is logged in
+  return (
+    // Routes when no user is logged in
+    <Routes>
+      {/* / route, render homepage*/}
+      <Route element={<Home />} path='/' />
+      {/* /login route, render user login page */}
+      <Route element={<LoginUser />} path='/login' />
+      {/* /register route, render user register page */}
+      <Route element={<RegisterUser />} path='/register' />
+    </Routes>
+  )
 }
 
 export default App

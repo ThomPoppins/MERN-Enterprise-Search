@@ -27,9 +27,9 @@ const EditCompany = () => {
   const { id } = useParams()
   const companyId = id
 
-  // @ts-ignore Get the userId from the Redux store
+  //
   const userId = useSelector((state) => state.userId)
-  // @ts-ignore Get the user from the Redux store
+  //
   const user = useSelector((state) => state.user)
 
   // Input field values for editing a company as state
@@ -265,7 +265,7 @@ const EditCompany = () => {
         Promise.all(ownerPromises)
           .then((responses) => {
             const ownersData = responses.map((response) => response.data)
-            // @ts-ignore Update the owners state
+            //
             setOwners(ownersData)
           })
           .catch((error) => {
@@ -396,7 +396,7 @@ const EditCompany = () => {
       })
 
     Promise.resolve(pendingInvites).then((response) => {
-      // @ts-ignore Set the pending ownership invites state
+      //  Set the pending ownership invites state
       setPendingOwnershipInvites(response.data)
     })
   }
@@ -428,13 +428,13 @@ const EditCompany = () => {
 
         // Filter the invited owner from the search results
         const newUsersResult = usersResult.filter(
-          // @ts-ignore
+          //
           (user) => user._id !== invitedOwnerId,
         )
-        // @ts-ignore  Update the search results
+        //   Update the search results
         setUsersResult(newUsersResult)
 
-        // @ts-ignore Add the pending ownership invite to the pending ownership invites state
+        //  Add the pending ownership invite to the pending ownership invites state
         setPendingOwnershipInvites([...pendingOwnershipInvites, response.data])
 
         enqueueSnackbar('Co-owner invited!', {
@@ -483,13 +483,13 @@ const EditCompany = () => {
 
         // Remove the canceled pending ownership invite from the pending ownership invites state
         const newPendingOwnershipInvites = pendingOwnershipInvites.filter(
-          // @ts-ignore
+          //
           (invite) => invite._id !== inviteId,
         )
 
-        // @ts-ignore Update the pending ownership invites state
+        //
         setPendingOwnershipInvites(
-          // @ts-ignore
+          //
           newPendingOwnershipInvites || [],
         )
 
@@ -501,10 +501,10 @@ const EditCompany = () => {
         // Add the user that was removed as an invited owner back to the search results
         console.log('Users result before adding user back: ', usersResult)
 
-        // @ts-ignore Update the search results and filter out the user that was removed to be an invited owner
+        //  Update the search results and filter out the user that was removed to be an invited owner
         setUsersResult(
           usersResult.filter(
-            // @ts-ignore
+            //
             (user) => user._id !== response.data.receiverId,
           ),
         )
@@ -524,7 +524,7 @@ const EditCompany = () => {
       e.target.value,
     ) // ! TODO: Remove console.log
 
-    // @ts-ignore Set removed owners to show up in the search results again
+    // to show up in the search results again
     setRemovedOwnersIds([...removedOwnersIds, e.target.value])
 
     axios
@@ -561,10 +561,10 @@ const EditCompany = () => {
               'ownersData in removeUserAsOwner function: ',
               ownersData,
             )
-            // @ts-ignore Update the owners state
+            // tate
             setOwners(ownersData)
 
-            // @ts-ignore Set removed owners to show up in the search results again
+            //  Set removed owners to show up in the search results again
             setRemovedOwnersIds([...removedOwnersIds, e.target.value])
           })
           .catch((error) => {
@@ -579,7 +579,7 @@ const EditCompany = () => {
               (removedOwnerId) => removedOwnerId !== e.target.value,
             )
 
-            // @ts-ignore Update the removed owners ids state
+            //  Update the removed owners ids state
             setRemovedOwnersIds(removedOwnersIdsFallback)
 
             console.log(error)
@@ -608,7 +608,7 @@ const EditCompany = () => {
                 return (
                   <div
                     className='mb-4 flex justify-between items-center'
-                    // @ts-ignore
+                    //
                     key={owner._id + index}
                   >
                     <div>
@@ -616,30 +616,30 @@ const EditCompany = () => {
                         <ul>
                           <li>
                             <VscMention className='inline' />
-                            {/* @ts-ignore */}
+                            {/*  */}
                             {owner.username}
                           </li>
                           <li>
-                            {/* @ts-ignore */}
+                            {/*  */}
                             <VscPerson className='inline' /> {owner.firstName}{' '}
-                            {/* @ts-ignore */}
+                            {/*  */}
                             {owner.lastName}
                           </li>
                           <li>
-                            {/* @ts-ignore */}
+                            {/*  */}
                             <VscMail className='inline' /> {owner.email}
                           </li>
                         </ul>
                       </li>
                     </div>
                     <div>
-                      {/* @ts-ignore */}
+                      {/*  */}
                       {owner._id !== userId ? (
                         <button
                           data-test-id='remove-owner-button'
                           onClick={handleRemoveUserAsCompanyOwner}
                           className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
-                          // @ts-ignore
+                          //
                           value={owner._id}
                         >
                           Remove
@@ -654,7 +654,7 @@ const EditCompany = () => {
             </ul>
           </div>
           <UserSearch
-            // @ts-ignore
+            //
             addPendingOwnershipInvite={addPendingOwnershipInvite}
             companyId={companyId}
             setUsersResult={setUsersResult}
@@ -675,7 +675,7 @@ const EditCompany = () => {
                     return (
                       <div
                         className='mb-4 flex justify-between items-center'
-                        // @ts-ignore
+                        //
                         key={invite._id + index}
                       >
                         <div>
@@ -683,17 +683,17 @@ const EditCompany = () => {
                             <ul>
                               <li>
                                 <VscMention className='inline' />
-                                {/* @ts-ignore */}
+                                {/*  */}
                                 INVITE ID: {invite._id}
                               </li>
                               <li>
-                                <VscPerson className='inline' /> RECIEVER ID:
-                                {/* @ts-ignore */}
+                                <VscPerson className='inline' /> receiver ID:
+                                {/*  */}
                                 {invite.receiverId}
                               </li>
                               <li>
                                 <VscMail className='inline' /> SENDER ID:{' '}
-                                {/* @ts-ignore */}
+                                {/*  */}
                                 {invite.senderId}
                               </li>
                             </ul>
@@ -704,7 +704,7 @@ const EditCompany = () => {
                             data-test-id='cancel-invite-button'
                             onClick={handleCancelPendingOwnershipInvite}
                             className='bg-gradient-to-r from-violet-600 to-purple-600 hover:from-red-700 hover:to-red-400 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
-                            // @ts-ignore
+                            //
                             value={invite._id}
                           >
                             Cancel

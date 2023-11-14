@@ -10,7 +10,7 @@ import Layout from '../../components/layout/Layout'
 import { useSelector } from 'react-redux'
 
 const UserProfile = () => {
-  // @ts-ignore userId is a string from the Redux store state
+  //  userId is a string from the Redux store state
   const { userId, user } = useSelector((state) => state)
   // Placeholder for profile picture dependent on gender
   const [profilePicturePlaceholderURL, setProfilePicturePlaceholderURL] =

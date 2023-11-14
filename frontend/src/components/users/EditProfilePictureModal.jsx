@@ -18,7 +18,7 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
   // Handle file select
   const onSelectFile = (event) => {
     if (!event.target.files || event.target.files.length === 0) {
-      // @ts-ignore Clear the selected file
+      //
       setSelectedFile(null)
       return
     }

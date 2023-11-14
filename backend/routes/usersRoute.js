@@ -94,7 +94,7 @@ router.put('/profile-picture', async (request, response) => {
 
         /*
          * Save the updated user to the database
-         * @ts-ignore
+         *
          */
         user
           .updateOne({ profilePicture: imageObjectId })
@@ -196,7 +196,6 @@ router.get('/search/:searchTerm', async (request, response) => {
     const companyId = request.headers.companyid,
       // Get the owners of the company
       company = await Company.findById(companyId),
-      // @ts-ignore
       ownerIds = company.owners.map(
         (owner) => new mongoose.Types.ObjectId(owner.userId),
       ),
@@ -263,7 +262,7 @@ router.get('/search/:searchTerm', async (request, response) => {
       ],
       /*
        * Get the users from the database using the aggregation pipeline
-       * @ts-ignore
+       *
        */
       users = await User.aggregate(pipeline)
 
@@ -286,7 +285,7 @@ router.get('/user/:id', async (request, response) => {
 
     // Get user documents using the findById method
     const userDocument = await User.findById(new mongoose.Types.ObjectId(id)),
-      // @ts-ignore Convert the user document to a plain JavaScript object so I can add the profilePictureURL property
+      //  Convert the user document to a plain JavaScript object so I can add the profilePictureURL property
       user = userDocument.toObject()
 
     if (user.profilePicture) {
@@ -294,11 +293,11 @@ router.get('/user/:id', async (request, response) => {
       const image = await Image.findById(user.profilePicture).catch((error) =>
         console.log('Error in GET /user/:id: ', error),
       )
-      // @ts-ignore Get the path to the profile picture file
+      //  Get the path to the profile picture file
       profilePictureURL = getStaticFileURLFromPath(image.path)
     }
 
-    // Add the profilePictureURL property to the user object
+    //  Add the profilePictureURL property to the user object
     user.profilePictureURL = profilePictureURL
 
     // Count how mant invites the user has with status "pending"
@@ -307,10 +306,11 @@ router.get('/user/:id', async (request, response) => {
       status: 'pending',
     })
 
-    // Add the pendingInvitesCount property to the user object
+    //  Add the pendingInvitesCount property to the user object
     user.pendingInvitesCount = pendingInvitesCount
 
-    console.log('User in usersRoute.js GET /users/user/:id: ', user)
+    // bject
+    delete user.hashedPassword
 
     // Send status 200 response and the companies to the client
     return response.status(200).json(user)

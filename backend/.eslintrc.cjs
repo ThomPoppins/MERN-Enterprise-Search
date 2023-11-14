@@ -36,5 +36,6 @@ module.exports = {
     'max-lines-per-function': 'off',
     'max-statements': 'off',
     'no-warning-comments': 'off',
+    'max-lines': 'off',
   },
 }

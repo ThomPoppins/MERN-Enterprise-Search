@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 const Layout = ({ children }) => {
   // Get userId state from Redux store
-  // @ts-ignore
+  //
   const userId = useSelector((state) => state.userId)
 
   // Get the pending invites for the user

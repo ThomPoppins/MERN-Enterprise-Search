@@ -14,14 +14,14 @@ const InvitesList = () => {
   // Navigation to other routes
   const navigate = useNavigate()
 
-  // @ts-ignore Get userId state from Redux store
+  //  Get userId state from Redux store
   const userId = useSelector((state) => state.userId)
-  // @ts-ignore Get user state from Redux store
+  //  Get user state from Redux store
   const user = useSelector((state) => state.user)
 
   // Get pending recieved invites from Redux store
   const pendingRecievedInvites = useSelector(
-    // @ts-ignore
+    //
     (state) => state.pendingRecievedInvites,
   )
 
@@ -50,7 +50,7 @@ const InvitesList = () => {
         console.log('InvitesList.jsx updateInviteStatus value: ', value)
 
         setTimeout(() => {
-          // @ts-ignore
+          //
           const filteredPendingRecievedInvites = pendingRecievedInvites.filter(
             (invite) => invite._id !== inviteId,
           )
@@ -64,7 +64,7 @@ const InvitesList = () => {
         }, 1000)
 
         // Filter out the invite that was updated
-        // @ts-ignore
+        //
       })
       .catch((error) => {
         console.log('ERROR in InvitesList.jsx updateInviteStatus: ', error)
@@ -96,37 +96,32 @@ const InvitesList = () => {
             {/* {console.log("Invites in JSX", invites)} */}
             {invites?.map((invite) => (
               <tr
-                id={
-                  'invite-row-' +
-                  // @ts-ignore
-                  invite._id
-                }
-                // @ts-ignore
+                id={`invite-row-${invite._id}`}
+                //
                 key={invite._id}
               >
                 <td className='border-purple-900 bg-violet-950/40'>
                   <img
-                    alt='profile picture'
+                    alt='profile'
                     className='rounded-full mr-4 float-left'
-                    width='50'
                     height='50'
-                    // @ts-ignore
                     src={invite.sender.profilePictureURL}
+                    width='50'
                   />
                   <div className='flex flex-col'>
                     <div>
                       <span className='mr-4'>
                         {
-                          // @ts-ignore
+                          //
                           invite.sender.firstName
                         }{' '}
-                        {/* @ts-ignore */}
+                        {/*  */}
                         {invite.sender.lastName}
                       </span>
                     </div>
                     <div>
                       <span className='mr-4 text-blue-400'>
-                        {/* @ts-ignore */}
+                        {/*  */}
                         &#64;{invite.sender.username}
                       </span>
                     </div>
@@ -134,12 +129,12 @@ const InvitesList = () => {
                 </td>
                 <td className='border-purple-900 bg-violet-950/40'>
                   <span className='mr-4'>
-                    {/* @ts-ignore */}
+                    {/*  */}
                     {invite.kind === 'company_ownership' ? (
                       <span>
-                        Invited for co-ownership of {/* @ts-ignore */}
+                        Invited for co-ownership of
                         <strong>{invite.company.name}</strong>
-                      </span> // @ts-ignore
+                      </span>
                     ) : invite.kind === 'friend_request' ? (
                       <span>Friend Request</span>
                     ) : (
@@ -150,7 +145,7 @@ const InvitesList = () => {
                   </span>
                 </td>
                 <td className='border-purple-900 bg-violet-950/40'>
-                  {/* @ts-ignore */}
+                  {/*  */}
                   <span className='mr-4'>{invite.status}</span>
                 </td>
                 <td className='border-purple-900 bg-violet-950/40'>

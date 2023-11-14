@@ -39,7 +39,7 @@ const RegisterCompany = () => {
     [showLogoModal, setShowLogoModal] = useState(false),
     // Loading state for displaying a spinner while the request is being sent to the backend
     [loading, setLoading] = useState(false),
-    // @ts-ignore Get the userId from the Redux store
+    //  Get the userId from the Redux store
     userId = useSelector((state) => state.userId),
     // useNavigate is a hook that returns a navigate function that we can use to navigate to a different page
     navigate = useNavigate(),
