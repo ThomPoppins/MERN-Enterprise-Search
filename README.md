@@ -1880,6 +1880,8 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 
 - [ ] [MERNSTACK-282] Read article about MERN stack [Security](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-b8e0ac68d087)
 - [ ] [MERNSTACK-283] Read MERN stack [CI/CD & deployment article](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-10699767f4b4)
+- [ ] [MERNSTACK-284] Add little profile picture of invited user next to their details in the "pending invites" section. 
+- [ ] [MERNSTACK-285] Add picture to search results searching for co-owners
 
 ### Before production checklist
 

@@ -381,6 +381,8 @@ const EditCompany = () => {
     })
   }
 
+  // getCompanyPendingOwnershipInvites()
+
   // Update pending ownership invites every 5 seconds
   useEffect(() => {
     // Set interval
@@ -468,10 +470,7 @@ const EditCompany = () => {
         )
 
         //
-        setPendingOwnershipInvites(
-          //
-          newPendingOwnershipInvites || [],
-        )
+        setPendingOwnershipInvites(newPendingOwnershipInvites || [])
 
         store.dispatch({
           type: PENDING_RECIEVED_INVITES,
@@ -641,7 +640,7 @@ const EditCompany = () => {
           />
         </div>
         {pendingOwnershipInvites.length > 0 ? (
-          <div className='flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto mb-4'>
+          <div className='flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 pl-9 mx-auto mb-4'>
             <div className='my-4'>
               <div className='mb-8'>
                 <div className='mb-8'>
@@ -654,41 +653,74 @@ const EditCompany = () => {
                 </div>
                 <ul className='mb-4' id='pending-ownership-invites'>
                   {pendingOwnershipInvites.map((invite) => (
-                    <div
-                      className='mb-4 flex justify-between items-center'
-                      key={invite._id}
-                    >
-                      <div>
-                        <li>
-                          <ul>
-                            <li>
-                              <VscMention className='inline' />
-                              {invite.receiver.username}
-                            </li>
-                            <li>
-                              <VscPerson className='inline' /> Name:{' '}
-                              {invite.receiver.firstName}{' '}
-                              {invite.receiver.lastName}
-                            </li>
-                            <li>
-                              <VscMail className='inline' /> Email:{' '}
-                              {invite.receiver.email}
-                            </li>
-                          </ul>
-                        </li>
+                    <>
+                      <div className='float-left mt-2 mr-2'>
+                        <img
+                          alt='Profile'
+                          className='rounded-full h-16 w-16 mr-4'
+                          src={
+                            invite.receiver.profilePictureURL
+                              ? invite.receiver.profilePictureURL
+                              : invite.receiver.gender === 'Man'
+                              ? `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
+                              : `${BACKEND_URL}/placeholders/profile-picture-placeholder-woman.jpeg`
+                          }
+                        />
                       </div>
-                      <div>
-                        <button
-                          className='bg-gradient-to-r from-violet-600 to-purple-600 hover:from-red-700 hover:to-red-400 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
-                          data-test-id='cancel-invite-button'
-                          onClick={handleCancelPendingOwnershipInvite}
-                          type='button'
-                          value={invite._id}
-                        >
-                          Cancel
-                        </button>
+                      <div
+                        className='mb-4 flex justify-between items-center'
+                        key={invite._id}
+                      >
+                        <div>
+                          <li>
+                            <ul>
+                              <table>
+                                <tbody>
+                                  <li>
+                                    <tr>
+                                      <td>
+                                        <VscMention className='inline' />
+                                      </td>
+                                      <td>{invite.receiver.username}</td>
+                                    </tr>
+                                  </li>
+                                  <li>
+                                    <tr>
+                                      <td>
+                                        <VscPerson className='inline' />
+                                      </td>
+                                      <td>
+                                        {invite.receiver.firstName}{' '}
+                                        {invite.receiver.lastName}
+                                      </td>
+                                    </tr>
+                                  </li>
+                                  <li>
+                                    <tr>
+                                      <td>
+                                        <VscMail className='inline' />
+                                      </td>
+                                      <td> {invite.receiver.email}</td>
+                                    </tr>
+                                  </li>
+                                </tbody>
+                              </table>
+                            </ul>
+                          </li>
+                        </div>
+                        <div>
+                          <button
+                            className='bg-gradient-to-r from-violet-600 to-purple-600 hover:from-red-700 hover:to-red-400 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
+                            data-test-id='cancel-invite-button'
+                            onClick={handleCancelPendingOwnershipInvite}
+                            type='button'
+                            value={invite._id}
+                          >
+                            Cancel
+                          </button>
+                        </div>
                       </div>
-                    </div>
+                    </>
                   ))}
                 </ul>
               </div>
