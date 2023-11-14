@@ -20,161 +20,144 @@ import Layout from '../../components/layout/Layout'
 import Loader from '../../components/animated/Loader.jsx'
 
 const EditCompany = () => {
-  // ADD OWNERS TO COMPANY TICKETS:
-  // TODO: [MERNSTACK-129] Add state for all companies fields that can be edited
-
   // Get the companyId from the URL
-  const { id } = useParams()
-  const companyId = id
+  const { id } = useParams(),
+    companyId = id,
+    userId = useSelector((state) => state.userId),
+    user = useSelector((state) => state.user),
+    // Input field values for editing a company as state
+    [name, setName] = useState(''),
+    [logo, setLogo] = useState(''),
+    [email, setEmail] = useState(''),
+    [phone, setPhone] = useState(''),
+    [kvkNumber, setKvkNumber] = useState(''),
+    [slogan, setSlogan] = useState(''),
+    [description, setDescription] = useState(''),
+    [startYear, setStartYear] = useState(0),
+    // Error state for displaying error messages if the user enters invalid input
+    [nameError, setNameError] = useState(false),
+    [emailError, setEmailError] = useState(false),
+    [phoneError, setPhoneError] = useState(false),
+    [kvkNumberError, setKvkNumberError] = useState(false),
+    [sloganError, setSloganError] = useState(false),
+    [descriptionError, setDescriptionError] = useState(false),
+    [startYearError, setStartYearError] = useState(false),
+    // Specific error messages to display when the user enters invalid input
+    [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState(''),
+    // Owners state
+    [owners, setOwners] = useState([]),
+    // Pending ownership invites state
+    [pendingOwnershipInvites, setPendingOwnershipInvites] = useState([]),
+    // Search results state for searching users to add as owners
+    [usersResult, setUsersResult] = useState([]),
+    // Removed owners ids
+    [removedOwnersIds, setRemovedOwnersIds] = useState([]),
+    // Set showLogoModal to true to show the modal for uploading a company logo
+    [showLogoModal, setShowLogoModal] = useState(false),
+    // Display a spinner when loading data from the backend
+    [loading, setLoading] = useState(false),
+    // useNavigate is a hook that allows us to navigate to a different page
+    navigate = useNavigate(),
+    // useSnackbar is a hook that allows us to show a snackbar https://www.npmjs.com/package/notistack https://iamhosseindhv.com/notistack/demos#use-snackbar
+    { enqueueSnackbar } = useSnackbar()
 
-  //
-  const userId = useSelector((state) => state.userId)
-  //
-  const user = useSelector((state) => state.user)
-
-  // Input field values for editing a company as state
-  const [name, setName] = useState('')
-  const [logo, setLogo] = useState('')
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [kvkNumber, setKvkNumber] = useState('')
-  const [slogan, setSlogan] = useState('')
-  const [description, setDescription] = useState('')
-  const [startYear, setStartYear] = useState(0)
-
-  // Error state for displaying error messages if the user enters invalid input
-  const [nameError, setNameError] = useState(false)
-  const [emailError, setEmailError] = useState(false)
-  const [phoneError, setPhoneError] = useState(false)
-  const [kvkNumberError, setKvkNumberError] = useState(false)
-  const [sloganError, setSloganError] = useState(false)
-  const [descriptionError, setDescriptionError] = useState(false)
-  const [startYearError, setStartYearError] = useState(false)
-
-  // Specific error messages to display when the user enters invalid input
-  const [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState('')
-
-  // Owners state
-  const [owners, setOwners] = useState([])
-
-  // Pending ownership invites state
-  const [pendingOwnershipInvites, setPendingOwnershipInvites] = useState([])
-
-  // Search results state for searching users to add as owners
-  const [usersResult, setUsersResult] = useState([])
-
-  // Removed owners ids
-  const [removedOwnersIds, setRemovedOwnersIds] = useState([])
-
-  // Set showLogoModal to true to show the modal for uploading a company logo
-  const [showLogoModal, setShowLogoModal] = useState(false)
-
-  // Display a spinner when loading data from the backend
-  const [loading, setLoading] = useState(false)
-
-  // useNavigate is a hook that allows us to navigate to a different page
-  const navigate = useNavigate()
-
-  // useSnackbar is a hook that allows us to show a snackbar https://www.npmjs.com/package/notistack https://iamhosseindhv.com/notistack/demos#use-snackbar
-  const { enqueueSnackbar } = useSnackbar()
-
-  // useEffect is a hook that runs a function when the component is rendered
-  useEffect(() => {
-    getPendingOwnershipInvites()
-  }, [companyId, userId, user])
+  // Get pending ownership invites from the sender
+  // useEffect(() => {
+  //   getSenderPendingOwnershipInvites()
+  // }, [companyId, userId, user])
 
   // Validation functions for validating the input fields and put a red border around the input field if the input is invalid
   // and display an error message under the input field explaining the right format
   const validateCompanyName = () => {
-    if (!companyNameValidator(name)) {
-      setNameError(true)
-    } else {
+    if (companyNameValidator(name)) {
       setNameError(false)
+    } else {
+      setNameError(true)
     }
   }
   const validateEmail = () => {
-    if (!emailValidator(email)) {
-      setEmailError(true)
-    } else {
+    if (emailValidator(email)) {
       setEmailError(false)
+    } else {
+      setEmailError(true)
     }
   }
   const validatePhone = () => {
-    if (!phoneNumberValidator(phone, 'NL')) {
-      setPhoneError(true)
-    } else {
+    if (phoneNumberValidator(phone, 'NL')) {
       setPhoneError(false)
+    } else {
+      setPhoneError(true)
     }
   }
   const validateKvkNumber = async () => {
-    if (!(await kvkNumberValidator(kvkNumber))) {
+    if (await kvkNumberValidator(kvkNumber)) {
+      setKvkNumberError(false)
+    } else {
       setKvkNumberError(true)
       throw new Error('Invalid KVK number!')
-    } else {
-      setKvkNumberError(false)
     }
   }
   const validateSlogan = () => {
-    if (!companySloganValidator(slogan)) {
-      setSloganError(true)
-    } else {
+    if (companySloganValidator(slogan)) {
       setSloganError(false)
+    } else {
+      setSloganError(true)
     }
   }
   const validateDescription = () => {
-    if (!companyDescriptionValidator(description)) {
-      setDescriptionError(true)
-    } else {
+    if (companyDescriptionValidator(description)) {
       setDescriptionError(false)
+    } else {
+      setDescriptionError(true)
     }
   }
   const validateStartYear = () => {
-    if (!startYearValidator(startYear)) {
-      setStartYearError(true)
-    } else {
+    if (startYearValidator(startYear)) {
       setStartYearError(false)
+    } else {
+      setStartYearError(true)
     }
   }
 
   // Handle onChange events for all input fields
-  const handleNameChange = (e) => {
-    setName(e.target.value)
+  const handleNameChange = (event) => {
+    setName(event.target.value)
     if (nameError) {
       validateCompanyName()
     }
   }
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value)
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value)
     if (emailError) {
       validateEmail()
     }
   }
-  const handlePhoneChange = (e) => {
-    setPhone(e.target.value)
+  const handlePhoneChange = (event) => {
+    setPhone(event.target.value)
     if (phoneError) {
       validatePhone()
     }
   }
-  const handleKvkNumberChange = async (e) => {
-    setKvkNumber(e.target.value)
+  const handleKvkNumberChange = async (event) => {
+    setKvkNumber(event.target.value)
     if (kvkNumberError) {
       await validateKvkNumber()
     }
   }
-  const handleSloganChange = (e) => {
-    setSlogan(e.target.value)
+  const handleSloganChange = (event) => {
+    setSlogan(event.target.value)
     if (sloganError) {
       validateSlogan()
     }
   }
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value)
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value)
     if (descriptionError) {
       validateDescription()
     }
   }
-  const handleStartYearChange = (e) => {
-    setStartYear(e.target.value)
+  const handleStartYearChange = (event) => {
+    setStartYear(event.target.value)
     if (startYearError) {
       validateStartYear()
     }
@@ -238,7 +221,7 @@ const EditCompany = () => {
   useEffect(() => {
     setLoading(true)
     axios
-      .get(BACKEND_URL + '/companies/' + companyId)
+      .get(`${BACKEND_URL}/companies/${companyId}`)
       .then((response) => {
         setLoading(false)
         setName(response.data.name)
@@ -257,14 +240,16 @@ const EditCompany = () => {
         })
 
         // Get all owners data
-        const ownerPromises = userIds.map((userId) => {
-          return axios.get(BACKEND_URL + '/users/user/' + userId)
-        })
+        const ownerPromises = userIds.map((ownerUserId) =>
+          axios.get(`${BACKEND_URL}/users/user/${ownerUserId}`),
+        )
 
         // Resolve all promises to get owners user data
         Promise.all(ownerPromises)
           .then((responses) => {
-            const ownersData = responses.map((response) => response.data)
+            const ownersData = responses.map(
+              (ownersResponse) => ownersResponse.data,
+            )
             //
             setOwners(ownersData)
           })
@@ -278,8 +263,8 @@ const EditCompany = () => {
           variant: 'error',
           preventDuplicate: true,
         })
-
-        console.log('ERROR fetching company in useEffect(): ', error) // ! TODO: Remove console.log and write errors to logfile
+        // ! TODO: Remove console.log and write errors to error log file
+        console.log('ERROR fetching company in useEffect(): ', error)
       })
   }, [])
 
@@ -340,7 +325,7 @@ const EditCompany = () => {
     }
     setLoading(true)
     axios
-      .put(BACKEND_URL + `/companies/${companyId}`, data)
+      .put(`${BACKEND_URL}/companies/${companyId}`, data)
       .then(() => {
         setLoading(false)
         enqueueSnackbar('Company edited successfully!', {
@@ -370,50 +355,46 @@ const EditCompany = () => {
       })
   }
 
-  const getPendingOwnershipInvites = async () => {
+  // Get company related pending ownership invites
+  const getCompanyPendingOwnershipInvites = async () => {
     if (!userId || !user || !companyId) {
       return
     }
-
-    // Get all pending ownership invites for the sender
+    // Get all pending ownership invites for this company
     const pendingInvites = await axios
-      .get(`${BACKEND_URL}/invites/company/sender/pending`, {
+      .get(`${BACKEND_URL}/invites/company/pending`, {
         headers: {
-          // Send the senders' user _id in the headers
-          senderid: userId,
           // Send the company id in the headers
           companyid: companyId,
         },
       })
       .catch((error) => {
-        // TODO: Handle error, write to file, and show error message to user with react-toastify
         enqueueSnackbar('Error fetching pending ownership invites', {
           variant: 'error',
           preventDuplicate: true,
         })
-
         console.log('ERROR in getPendingOwnershipInvites: ', error)
       })
-
     Promise.resolve(pendingInvites).then((response) => {
       //  Set the pending ownership invites state
       setPendingOwnershipInvites(response.data)
     })
   }
 
+  useEffect(() => {
+    getCompanyPendingOwnershipInvites()
+  }, [name])
+
   // Add pending ownership invite
-  const addPendingOwnershipInvite = async (e) => {
+  const addPendingOwnershipInvite = async (event) => {
     // Prevent the form from submitting
-    e.preventDefault()
-
+    event.preventDefault()
     // Get the id of the user to be invited as an owner
-    const invitedOwnerId = e.target.value
-
-    console.log('invitedOwnerId: ', invitedOwnerId) // ! TODO: Remove console.log and write errors to logfile
-
+    const invitedOwnerId = event.target.value
+    console.log('invitedOwnerId: ', invitedOwnerId)
     // Make an API call to invite the user as an owner
     await axios
-      .post(BACKEND_URL + '/invites', {
+      .post(`${BACKEND_URL}/invites`, {
         senderId: userId,
         receiverId: invitedOwnerId,
         companyId,
@@ -421,22 +402,19 @@ const EditCompany = () => {
         status: 'pending',
       })
       .then((response) => {
+        //! REMOVE console.log
         console.log(
           'UserSearch.jsx response.data invite ownership: ',
           response.data,
-        ) // ! TODO: Remove console.log and write errors to logfile
-
+        )
         // Filter the invited owner from the search results
         const newUsersResult = usersResult.filter(
-          //
-          (user) => user._id !== invitedOwnerId,
+          (userResult) => userResult._id !== invitedOwnerId,
         )
         //   Update the search results
         setUsersResult(newUsersResult)
-
         //  Add the pending ownership invite to the pending ownership invites state
         setPendingOwnershipInvites([...pendingOwnershipInvites, response.data])
-
         enqueueSnackbar('Co-owner invited!', {
           variant: 'success',
           preventDuplicate: true,
@@ -447,28 +425,24 @@ const EditCompany = () => {
           variant: 'error',
           preventDuplicate: true,
         })
-
         console.log(
           'ERROR in UserSearch.jsx invite owner API call: ',
           error.response.data,
-        ) // ! TODO: Remove console.log and write errors to logfile
+        )
       })
   }
 
-  // useEffect is a hook that runs a function when the component is rendered
-  useEffect(() => {}, [pendingOwnershipInvites])
-
-  const handleCancelPendingOwnershipInvite = (e) => {
+  const handleCancelPendingOwnershipInvite = (event) => {
     // Prevent the form from submitting
-    e.preventDefault()
+    event.preventDefault()
 
     // Get the id of the pending ownership invite to be canceled
-    const inviteId = e.target.value
+    const inviteId = event.target.value
 
     console.log(
       'handleCancelPendingOwnershipInvite pendingOwnershipInviteId: ',
       inviteId,
-    ) // ! TODO: Remove console.log
+    )
 
     // Make an API call to cancel the pending ownership invite
     axios
@@ -479,11 +453,10 @@ const EditCompany = () => {
         console.log(
           'handleCancelPendingOwnershipInvite response.data: ',
           response.data,
-        ) // ! TODO: Remove console.log
+        )
 
         // Remove the canceled pending ownership invite from the pending ownership invites state
         const newPendingOwnershipInvites = pendingOwnershipInvites.filter(
-          //
           (invite) => invite._id !== inviteId,
         )
 
@@ -504,8 +477,7 @@ const EditCompany = () => {
         //  Update the search results and filter out the user that was removed to be an invited owner
         setUsersResult(
           usersResult.filter(
-            //
-            (user) => user._id !== response.data.receiverId,
+            (userData) => userData._id !== response.data.receiverId,
           ),
         )
       })
@@ -514,26 +486,24 @@ const EditCompany = () => {
           variant: 'error',
           preventDuplicate: true,
         })
-        console.log('ERROR in handleCancelPendingOwnershipInvite: ', error) // ! TODO: Remove console.log and write errors to logfile
+        // ! TODO: Remove console.log and write errors to logfile
+        console.log('ERROR in handleCancelPendingOwnershipInvite: ', error)
       })
   }
 
-  const handleRemoveUserAsCompanyOwner = (e) => {
+  const handleRemoveUserAsCompanyOwner = (event) => {
+    // ! TODO: Remove console.log
     console.log(
       'handleRemoveUserAsCompanyOwner e.target.value: ',
-      e.target.value,
-    ) // ! TODO: Remove console.log
+      event.target.value,
+    )
 
     // to show up in the search results again
-    setRemovedOwnersIds([...removedOwnersIds, e.target.value])
+    setRemovedOwnersIds([...removedOwnersIds, event.target.value])
 
     axios
       .put(
-        BACKEND_URL +
-          '/companies/' +
-          companyId +
-          '/remove-owner/' +
-          e.target.value,
+        `${BACKEND_URL}/companies/${companyId}/remove-owner/${event.target.value}`,
       )
       .then((response) => {
         console.log(
@@ -550,13 +520,15 @@ const EditCompany = () => {
           userIds.push(owner.userId)
         })
 
-        const ownerPromises = userIds.map((userId) =>
-          axios.get(BACKEND_URL + '/users/user/' + userId),
+        const ownerPromises = userIds.map((ownerUserId) =>
+          axios.get(`${BACKEND_URL}/users/user/${ownerUserId}`),
         )
 
         Promise.all(ownerPromises)
           .then((responses) => {
-            const ownersData = responses.map((response) => response.data)
+            const ownersData = responses.map(
+              (ownerResponse) => ownerResponse.data,
+            )
             console.log(
               'ownersData in removeUserAsOwner function: ',
               ownersData,
@@ -565,7 +537,7 @@ const EditCompany = () => {
             setOwners(ownersData)
 
             //  Set removed owners to show up in the search results again
-            setRemovedOwnersIds([...removedOwnersIds, e.target.value])
+            setRemovedOwnersIds([...removedOwnersIds, event.target.value])
           })
           .catch((error) => {
             enqueueSnackbar('Error removing user as owner', {
@@ -576,7 +548,7 @@ const EditCompany = () => {
             // Reset removed owners ids to before Promise
             const removedOwnersIdsFallback = [...removedOwnersIds].filter(
               // If the removed owner id is not equal to the removed owner id that was just removed
-              (removedOwnerId) => removedOwnerId !== e.target.value,
+              (removedOwnerId) => removedOwnerId !== event.target.value,
             )
 
             //  Update the removed owners ids state
@@ -601,56 +573,56 @@ const EditCompany = () => {
         <div className='flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto mb-4'>
           <div className='my-4'>
             <div className='mb-4'>
-              <label className='text-xl mr-4'>Owners</label>
+              <label className='text-xl mr-4' htmlFor='owners-list'>
+                Owners
+              </label>
             </div>
-            <ul className='mb-4'>
-              {owners.map((owner, index) => {
-                return (
-                  <div
-                    className='mb-4 flex justify-between items-center'
-                    //
-                    key={owner._id + index}
-                  >
-                    <div>
-                      <li>
-                        <ul>
-                          <li>
-                            <VscMention className='inline' />
-                            {/*  */}
-                            {owner.username}
-                          </li>
-                          <li>
-                            {/*  */}
-                            <VscPerson className='inline' /> {owner.firstName}{' '}
-                            {/*  */}
-                            {owner.lastName}
-                          </li>
-                          <li>
-                            {/*  */}
-                            <VscMail className='inline' /> {owner.email}
-                          </li>
-                        </ul>
-                      </li>
-                    </div>
-                    <div>
-                      {/*  */}
-                      {owner._id !== userId ? (
-                        <button
-                          data-test-id='remove-owner-button'
-                          onClick={handleRemoveUserAsCompanyOwner}
-                          className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
-                          //
-                          value={owner._id}
-                        >
-                          Remove
-                        </button>
-                      ) : (
-                        ''
-                      )}
-                    </div>
+            <ul className='mb-4' id='owners-list'>
+              {owners.map((owner) => (
+                <div
+                  className='mb-4 flex justify-between items-center'
+                  //
+                  key={owner._id}
+                >
+                  <div>
+                    <li>
+                      <ul>
+                        <li>
+                          <VscMention className='inline' />
+                          {/*  */}
+                          {owner.username}
+                        </li>
+                        <li>
+                          {/*  */}
+                          <VscPerson className='inline' /> {owner.firstName}{' '}
+                          {/*  */}
+                          {owner.lastName}
+                        </li>
+                        <li>
+                          {/*  */}
+                          <VscMail className='inline' /> {owner.email}
+                        </li>
+                      </ul>
+                    </li>
                   </div>
-                )
-              })}
+                  <div>
+                    {/*  */}
+                    {owner._id === userId ? (
+                      ''
+                    ) : (
+                      <button
+                        className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
+                        data-test-id='remove-owner-button'
+                        onClick={handleRemoveUserAsCompanyOwner}
+                        type='button'
+                        value={owner._id}
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ))}
             </ul>
           </div>
           <UserSearch
@@ -666,53 +638,51 @@ const EditCompany = () => {
             <div className='my-4'>
               <div className='mb-8'>
                 <div className='mb-8'>
-                  <label className='text-2xl mr-4'>
+                  <label
+                    className='text-2xl mr-4'
+                    htmlFor='pending-ownership-invites'
+                  >
                     Pending Ownership Invites
                   </label>
                 </div>
-                <ul className='mb-4'>
-                  {pendingOwnershipInvites.map((invite, index) => {
-                    return (
-                      <div
-                        className='mb-4 flex justify-between items-center'
-                        //
-                        key={invite._id + index}
-                      >
-                        <div>
-                          <li>
-                            <ul>
-                              <li>
-                                <VscMention className='inline' />
-                                {/*  */}
-                                INVITE ID: {invite._id}
-                              </li>
-                              <li>
-                                <VscPerson className='inline' /> receiver ID:
-                                {/*  */}
-                                {invite.receiverId}
-                              </li>
-                              <li>
-                                <VscMail className='inline' /> SENDER ID:{' '}
-                                {/*  */}
-                                {invite.senderId}
-                              </li>
-                            </ul>
-                          </li>
-                        </div>
-                        <div>
-                          <button
-                            data-test-id='cancel-invite-button'
-                            onClick={handleCancelPendingOwnershipInvite}
-                            className='bg-gradient-to-r from-violet-600 to-purple-600 hover:from-red-700 hover:to-red-400 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
-                            //
-                            value={invite._id}
-                          >
-                            Cancel
-                          </button>
-                        </div>
+                <ul className='mb-4' id='pending-ownership-invites'>
+                  {pendingOwnershipInvites.map((invite) => (
+                    <div
+                      className='mb-4 flex justify-between items-center'
+                      key={invite._id}
+                    >
+                      <div>
+                        <li>
+                          <ul>
+                            <li>
+                              <VscMention className='inline' />
+                              {invite.receiver.username}
+                            </li>
+                            <li>
+                              <VscPerson className='inline' /> Name:{' '}
+                              {invite.receiver.firstName}{' '}
+                              {invite.receiver.lastName}
+                            </li>
+                            <li>
+                              <VscMail className='inline' /> Email:{' '}
+                              {invite.receiver.email}
+                            </li>
+                          </ul>
+                        </li>
                       </div>
-                    )
-                  })}
+                      <div>
+                        <button
+                          className='bg-gradient-to-r from-violet-600 to-purple-600 hover:from-red-700 hover:to-red-400 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
+                          data-test-id='cancel-invite-button'
+                          onClick={handleCancelPendingOwnershipInvite}
+                          type='button'
+                          value={invite._id}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -725,12 +695,15 @@ const EditCompany = () => {
           {/* TODO: [MERNSTACK-130] Add input fields for all editable company details. To achieve this, copy the outer div with class ".my-4". */}
           {/* Comany Name input field */}
           <div className='my-4'>
-            <label className='text-xl mr-4'>Name</label>
+            <label className='text-xl mr-4' htmlFor='name-input'>
+              Name
+            </label>
             <input
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 nameError ? 'border-red-500' : ''
               }`}
               data-test-id='name-input'
+              id='name-input'
               onBlur={validateCompanyName}
               onChange={handleNameChange}
               type='text'
@@ -740,7 +713,7 @@ const EditCompany = () => {
               <p className='text-red-500 text-sm'>
                 Company name must be between 1 and 60 characters long and can
                 only contain letters, numbers, spaces, and the following
-                characters: -, ', and .
+                characters: -, &apos;, and .
               </p>
             ) : (
               ''
@@ -748,10 +721,12 @@ const EditCompany = () => {
           </div>
           {/* Company logo */}
           <div className='my-4'>
-            <label className='text-xl mr-4'>Logo</label>
+            <label className='text-xl mr-4' htmlFor='image-preview'>
+              Logo
+            </label>
             <div className='w-full'>
               <div className='flex justify-center items-center my-4'>
-                <div className='flex justify-center'>
+                <div className='flex justify-center' id='image-preview'>
                   {logo ? (
                     <img alt='Preview' height='200' src={logo} width='200' />
                   ) : null}
@@ -762,6 +737,7 @@ const EditCompany = () => {
                   className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg'
                   data-test-id='upload-logo-button'
                   onClick={() => setShowLogoModal(true)}
+                  type='button'
                 >
                   Upload Logo
                 </button>
@@ -776,12 +752,15 @@ const EditCompany = () => {
           </div>
           {/* Comany Email input field */}
           <div className='my-4'>
-            <label className='text-xl mr-4'>Email</label>
+            <label className='text-xl mr-4' htmlFor='company-email-input'>
+              Email
+            </label>
             <input
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 emailError ? 'border-red-500' : ''
               }`}
               data-test-id='company-email-input'
+              id='company-email-input'
               onBlur={validateEmail}
               onChange={handleEmailChange}
               type='text'
@@ -797,12 +776,15 @@ const EditCompany = () => {
           </div>
           {/* Comany Phone Number input field */}
           <div className='my-4'>
-            <label className='text-xl mr-4'>Phone</label>
+            <label className='text-xl mr-4' htmlFor='company-phone-input'>
+              Phone
+            </label>
             <input
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 phoneError ? 'border-red-500' : ''
               }`}
               data-test-id='company-phone-input'
+              id='company-phone-input'
               onBlur={validatePhone}
               onChange={handlePhoneChange}
               type='text'
@@ -817,7 +799,9 @@ const EditCompany = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4'>KVK number</label>
+            <label className='text-xl mr-4' htmlFor='company-kvk-number-input'>
+              KVK number
+            </label>
             {TEST_KVK_API ? (
               <div className='mb-4'>
                 <p>
@@ -839,6 +823,7 @@ const EditCompany = () => {
                 kvkNumberError ? 'border-red-500' : ''
               }`}
               data-test-id='company-kvk-number-input'
+              id='company-kvk-number-input'
               onBlur={validateKvkNumber}
               onChange={handleKvkNumberChange}
               type='text'
@@ -853,12 +838,15 @@ const EditCompany = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4'>Slogan</label>
+            <label className='text-xl mr-4' htmlFor='company-slogan-input'>
+              Slogan
+            </label>
             <input
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 startYearError ? 'border-red-500' : ''
               }`}
               data-test-id='company-slogan-input'
+              id='company-slogan-input'
               onBlur={validateSlogan}
               onChange={handleSloganChange}
               type='text'
@@ -874,12 +862,15 @@ const EditCompany = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4'>Company Description</label>
+            <label className='text-xl mr-4' htmlFor='company-description-input'>
+              Company Description
+            </label>
             <textarea
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 startYearError ? 'border-red-500' : ''
               }`}
               data-test-id='company-description-input'
+              id='company-description-input'
               onBlur={validateDescription}
               onChange={handleDescriptionChange}
               value={description}
@@ -894,12 +885,15 @@ const EditCompany = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4'>Start Year</label>
+            <label className='text-xl mr-4' htmlFor='company-start-year-input'>
+              Start Year
+            </label>
             <input
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 startYearError ? 'border-red-500' : ''
               }`}
               data-test-id='company-start-year-input'
+              id='company-start-year-input'
               onBlur={validateStartYear}
               onChange={handleStartYearChange}
               type='number'
@@ -908,8 +902,8 @@ const EditCompany = () => {
             {startYearError ? (
               <p className='text-red-500 text-sm'>
                 Start year must be a valid year and never can be later then the
-                current year. If company hasn't started yet, register company
-                when it starts.
+                current year. If company hasn&apos;t started yet, register
+                company when it starts.
               </p>
             ) : (
               ''
@@ -919,6 +913,7 @@ const EditCompany = () => {
             className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
             data-test-id='save-edit-company-button'
             onClick={handleEditCompany}
+            type='button'
           >
             Save
           </button>

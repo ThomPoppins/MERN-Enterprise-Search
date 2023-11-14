@@ -35,6 +35,7 @@ module.exports = {
   rules: {
     'capitalized-comments': 'off',
     'consistent-return': 'off',
+    complexity: 'off',
     'default-param-last': 'off',
     'max-lines-per-function': 'off',
     'no-magic-numbers': 'off',

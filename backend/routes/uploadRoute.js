@@ -67,10 +67,9 @@ router.post('/image', upload.single('image'), async (request, response) => {
       responseObj.imageId = result._id
     })
     .catch((error) => {
-      //! TODO: Remove console.log and log to error log file
       console.log('Error saving image to database: ', error)
 
-      //! TODO: REMOVE ERROR MESSAGE FROM RESPONSE OBJECT
+      // TOGOLIVE: [MERNSTACK-260] Remove error message to the frontend before going into production
       return response.status(500).send({
         message: `Error saving image to database! ${error.message}`,
       })

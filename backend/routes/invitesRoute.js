@@ -8,56 +8,6 @@ import { getStaticFileURLFromPath } from '../middleware/files/staticFiles.js'
 
 const router = express.Router()
 
-// Route to get all pending invites from a specific sender
-router.get('/company/sender/pending', async (request, response) => {
-  /*
-   * Get companyId from request headers
-   */
-  const companyId = request.headers.companyid,
-    // Get senderId from request headers
-    senderId = request.headers.senderid
-
-  if (typeof senderId !== 'string') {
-    console.log('senderId is not a string.')
-
-    return response.status(400).json({
-      message: 'senderId is required.',
-    })
-  }
-
-  try {
-    // Get all invites with status "pending" and senderId equal to senderId
-    const invites = await Invite.find({
-      senderId: new mongoose.Types.ObjectId(senderId),
-      status: 'pending',
-    }).sort({ createdAt: -1 })
-
-    // Log the type of invites
-    console.log('LET OP!: The type of `invites` is: ', typeof invites)
-
-    // Log the constructor name of invites
-    console.log('LET OP!: The invites.constructor.name is: ', {
-      class: invites.constructor.name,
-    })
-
-    // Convert invites to plain JavaScript objects
-    console.log(
-      'invites in invitesRoute.js: /invites/company/sender/pending: ',
-      invites,
-    )
-
-    // Send status 200 response and the invites as JSON response if successful
-    return response.status(200).send(invites)
-  } catch (error) {
-    console.log('ERROR in GET /invites/sender/pending route: ', error)
-
-    // Send status 500 response and error message as JSON response if unsuccessful
-    return response.status(500).json({
-      message: error.message,
-    })
-  }
-})
-
 // Route to get all invites of a receiver
 router.get('/receiver/:userId/pending', async (request, response) => {
   // Get userId from URL
@@ -74,11 +24,6 @@ router.get('/receiver/:userId/pending', async (request, response) => {
      * Convert invites to plain JavaScript objects
      */
     invites = invites.map((invite) => invite.toObject())
-
-    console.log(
-      'invites in invitesRoute.js: /invites/receiver/:userId/pending: ',
-      invites,
-    )
 
     // Add sender, receiver and company info to invites
     const updatedInvites = await Promise.all(
@@ -128,17 +73,15 @@ router.get('/receiver/:userId/pending', async (request, response) => {
         let company = null
 
         // Add company info if invite kind is "company_ownership"
-        if (invite.kind === 'company_ownership') {
-          if (invite.companyId) {
-            // Get company document
-            company = await Company.findById(invite.companyId)
+        if (invite.kind === 'company_ownership' && invite.companyId) {
+          // Get company document
+          company = await Company.findById(invite.companyId)
 
-            /*
-             * Convert company to plain JavaScript object and add it to invite object
-             *
-             * */
-            company = company.toObject()
-          }
+          /*
+           * Convert company to plain JavaScript object and add it to invite object
+           *
+           * */
+          company = company.toObject()
         }
 
         // Add sender and receiver to invite object
@@ -160,6 +103,82 @@ router.get('/receiver/:userId/pending', async (request, response) => {
       message: error.message,
     })
   }
+})
+
+// Get all pending invites routes from a company
+router.get('/company/pending', async (request, response) => {
+  // Get the company id from the request headers
+  const companyId = request.headers.companyid
+
+  // Get the invites with status pending, kind company_ownership and companyId equal to companyId
+  let invites = await Invite.find({
+    status: 'pending',
+    kind: 'company_ownership',
+    companyId: new mongoose.Types.ObjectId(companyId),
+  }).sort({ createdAt: -1 })
+
+  invites = invites.map((invite) => invite.toObject())
+
+  // Add sender, receiver and company info to invites
+  const updatedInvites = await Promise.all(
+    invites.map(async (invite) => {
+      // Add sender info
+      let sender = await User.findById(invite.senderId)
+
+      // Add receiver info
+      let receiver = await User.findById(invite.receiverId)
+
+      // Convert sender to plain JavaScript object
+      sender = sender.toObject()
+
+      // Convert receiver to plain JavaScript object
+      receiver = receiver.toObject()
+
+      //  Add sender profile picture URL to sender object
+      if (sender.profilePicture) {
+        // Get sender profile picture
+        const senderProfilePictureImageDocument = await Image.findById(
+            sender.profilePicture,
+          ),
+          // Get sender profile picture URL
+          senderProfilePictureURL = getStaticFileURLFromPath(
+            senderProfilePictureImageDocument.path,
+          )
+
+        // Add sender profile picture URL to sender object
+        sender.profilePictureURL = senderProfilePictureURL
+      }
+
+      //  Add receiver profile picture URL to receiver object
+      if (receiver.profilePicture) {
+        // Get receiver profile picture
+        const receiverProfilePictureImageDocument = await Image.findById(
+            receiver.profilePicture,
+          ),
+          // Get receiver profile picture URL
+          receiverProfilePictureURL = getStaticFileURLFromPath(
+            receiverProfilePictureImageDocument.path,
+          )
+
+        // Add receiver profile picture URL to receiver object
+        receiver.profilePictureURL = receiverProfilePictureURL
+      }
+
+      // Get company document no if statement needed because the query
+      // already filters on companyId, status and kind = "company_ownership"
+      const company = await Company.findById(invite.companyId)
+        .then((companyDocument) => companyDocument.toObject())
+        .catch((error) => console.log('error: ', error))
+
+      // Add sender and receiver to invite object
+      return { ...invite, sender, receiver, company }
+    }),
+  )
+
+  console.log('ALL PENDING COMPANY INVITES: ', updatedInvites)
+
+  // Send status 200 response and the invites as JSON response if successful
+  return response.status(200).json(updatedInvites)
 })
 
 // Route for updating an invite status
@@ -222,5 +241,52 @@ router.post('/', async (request, response) => {
     })
   }
 })
+
+// // Route to get all pending invites from a specific sender
+// router.get('/company/sender/pending', async (request, response) => {
+//   const companyId = request.headers.companyid,
+//     // Get senderId from request headers
+//     senderId = request.headers.senderid
+
+//   if (typeof senderId !== 'string') {
+//     console.log('senderId is not a string.')
+
+//     return response.status(400).json({
+//       message: 'senderId is required.',
+//     })
+//   }
+
+//   try {
+//     // Get all invites with status "pending" and senderId equal to senderId
+//     const invites = await Invite.find({
+//       senderId: new mongoose.Types.ObjectId(senderId),
+//       status: 'pending',
+//     }).sort({ createdAt: -1 })
+
+//     // Log the type of invites
+//     console.log('LET OP!: The type of `invites` is: ', typeof invites)
+
+//     // Log the constructor name of invites
+//     console.log('LET OP!: The invites.constructor.name is: ', {
+//       class: invites.constructor.name,
+//     })
+
+//     // Convert invites to plain JavaScript objects
+//     console.log(
+//       'invites in invitesRoute.js: /invites/company/sender/pending: ',
+//       invites,
+//     )
+
+//     // Send status 200 response and the invites as JSON response if successful
+//     return response.status(200).send(invites)
+//   } catch (error) {
+//     console.log('ERROR in GET /invites/sender/pending route: ', error)
+
+//     // Send status 500 response and error message as JSON response if unsuccessful
+//     return response.status(500).json({
+//       message: error.message,
+//     })
+//   }
+// })
 
 export default router
