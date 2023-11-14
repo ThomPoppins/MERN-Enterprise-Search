@@ -1879,8 +1879,10 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-282] Read article about MERN stack [Security](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-b8e0ac68d087)
 - [ ] [MERNSTACK-283] Read MERN stack [CI/CD & deployment article](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-10699767f4b4)
 - [x] [MERNSTACK-284] Add little profile picture of invited user next to their details in the "pending invites" section. 
-- [ ] [MERNSTACK-285] Add picture to search results searching for co-owners.
+- [x] [MERNSTACK-285] Add picture to search results searching for co-owners.
 - [x] [MERNSTACK-286] Add picture to the list of owners in EditCompany
+- [ ] [MERNSTACK-287] Add image crop to application so everybody can crop their image till it fits the frame. [Almost perfect example, predefined aspect ratio](https://codesandbox.io/s/react-image-crop-demo-with-react-hooks-0h4db?file=/src/App.js), [After getting the first example done, this one might be interesting to investigate](https://codesandbox.io/s/react-image-crop-demo-with-react-hooks-q5lbkn?file=/src/App.tsx) [react-image-crop MANY examples page](https://codesandbox.io/examples/package/react-image-crop), [NPM Page react-image-crop](https://www.npmjs.com/package/react-image-crop).
+- [ ] [MERNSTACK-288] Upgrade ShowCompany to a nice profile page where companies can upload multiple images with titles. This is the start of the timeline or storyline that's it going to become. 
 
 ### Before production checklist
 

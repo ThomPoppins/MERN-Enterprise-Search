@@ -31,6 +31,7 @@ router.post('/', async (request, response) => {
       })
     }
 
+    // Check if the company already exists in the database using the kvkNumber
     const existingCompanyKvk = await Company.findOne({
       kvkNumber: request.body.kvkNumber,
     })
@@ -67,7 +68,7 @@ router.post('/', async (request, response) => {
     return response.status(201).send(company)
   } catch (error) {
     console.log('Error in POST /companies: ', error)
-    response.status(500).send({ message: error.message })
+    return response.status(500).send({ message: error.message })
   }
 })
 
@@ -84,7 +85,7 @@ router.get('/', async (request, response) => {
     })
   } catch (error) {
     console.log('Error in GET /companies: ', error)
-    response.status(500).send({ message: error.message })
+    return response.status(500).send({ message: error.message })
   }
 })
 
@@ -105,7 +106,7 @@ router.get('/owned-companies/:ownerUserId', async (request, response) => {
     })
   } catch (error) {
     console.log('Error in GET /owned-companies/:ownerUserId ', error)
-    response.status(500).send({ message: error.message })
+    return response.status(500).send({ message: error.message })
   }
 })
 
@@ -121,7 +122,7 @@ router.get('/:id', async (request, response) => {
     return response.status(200).json(company)
   } catch (error) {
     console.log('Error in GET /companies: ', error)
-    response.status(500).send({ message: error.message })
+    return response.status(500).send({ message: error.message })
   }
 })
 
@@ -158,7 +159,7 @@ router.put('/:id', async (request, response) => {
       .send({ message: 'Company updated successfully.' })
   } catch (error) {
     console.log('Error in PUT /companies: ', error)
-    response.status(500).send({ message: error.message })
+    return response.status(500).send({ message: error.message })
   }
 })
 
@@ -182,39 +183,56 @@ router.delete('/:id', async (request, response) => {
       .send({ message: 'Company deleted successfully.' })
   } catch (error) {
     console.log('Error in DELETE /companies: ', error)
-    response.status(500).send({ message: error.message })
+    return response.status(500).send({ message: error.message })
   }
 })
 
 // Add owner to company based on userId
 router.put('/:companyId/add-owner/:userId', async (request, response) => {
   try {
+    // Get the company id and user id from the request parameters
     const { companyId, userId } = request.params,
+      // Find the company document by id
       company = await Company.findById(companyId)
 
+    // If no company was found, send status 404 response and a (error) message to inform the client.
     if (!company) {
       console.log(`Cannot find company with id=${companyId}.`)
       return response.status(404).json({
         message: `Cannot find company with id=${companyId}.`,
       })
     }
-
+    //  If no user id was found, send status 404 response and a (error) message to inform the client.
     const newOwner = {
       userId,
     }
 
+    // If no owners were found, create an empty array
     if (!company.owners) {
       company.owners = []
     }
 
+    // Check if the owner already exists if so send status 409 response and a (error) message to inform the client.
+    company.owners.forEach((owner) => {
+      if (owner.userId === userId) {
+        return response.status(409).json({
+          message: `Owner with id=${userId} already exists in company with id=${companyId}.`,
+        })
+      }
+      return owner
+    })
+
+    // Add the new owner to the company
     company.owners.push(newOwner)
 
+    // Save the company with the new owner
     const updatedCompany = await company.save()
 
+    // Send status 200 response and the updated company to the client
     return response.status(200).json(updatedCompany)
   } catch (error) {
     console.log('Error in PUT /companies/add-owner/:userId: ', error)
-    response.status(500).send({ message: error.message })
+    return response.status(500).send({ message: error.message })
   }
 })
 
@@ -253,7 +271,7 @@ router.put('/:companyId/remove-owner/:userId', async (request, response) => {
       'Error in PUT /companies/:companyId/remove-owner/:userId: ',
       error,
     )
-    response.status(500).send({ message: error.message })
+    return response.status(500).send({ message: error.message })
   }
 })
 

@@ -88,10 +88,7 @@ router.get('/receiver/:userId/pending', async (request, response) => {
         return { ...invite, sender, receiver, company }
       }),
     )
-      .then((newInvites) => {
-        console.log('NEW INVITES:', newInvites)
-        return newInvites
-      })
+      .then((newInvites) => newInvites)
       .catch((error) => console.log('error: ', error))
 
     // Send status 200 response and the invites as JSON response if successful
@@ -174,8 +171,6 @@ router.get('/company/pending', async (request, response) => {
       return { ...invite, sender, receiver, company }
     }),
   )
-
-  console.log('ALL PENDING COMPANY INVITES: ', updatedInvites)
 
   // Send status 200 response and the invites as JSON response if successful
   return response.status(200).json(updatedInvites)

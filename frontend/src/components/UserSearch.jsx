@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { BACKEND_URL } from '../../config'
 import { VscMail, VscMention, VscPerson } from 'react-icons/vsc'
+import { AiOutlineWoman, AiOutlineMan } from 'react-icons/ai'
 import { enqueueSnackbar } from 'notistack'
 
 const UserSearch = ({
@@ -34,8 +35,6 @@ const UserSearch = ({
           // if the user is already invited, return false, otherwise return true
           return !isInvited
         })
-
-        console.log('filteredUsers: ', filteredUsers) //! DELETE THIS ONE
 
         setUsersResult(filteredUsers)
         // setUsersResult(response.data) // DELETE THIS ONE
@@ -99,31 +98,75 @@ const UserSearch = ({
       </div>
       <ul>
         {usersResult.map((userResult) => (
-          <div
-            className='search-result flex border-sky-400 rounded-xl mx-auto justify-between items-center'
-            key={userResult._id}
-          >
-            <div className='mb-4'>
-              <li>
-                <VscMention className='inline' />
-                {userResult.username} <br />
-                <VscPerson className='inline' /> {userResult.firstName}{' '}
-                {userResult.lastName} <br />
-                <VscMail className='inline' /> {userResult.email}
-              </li>
+          <>
+            <div className='float-left mt-3 mr-2'>
+              <img
+                alt='Profile'
+                className='rounded-full h-16 w-16 mr-4'
+                src={
+                  userResult.profilePictureURL
+                    ? userResult.profilePictureURL
+                    : userResult.gender === 'Man'
+                    ? `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
+                    : `${BACKEND_URL}/placeholders/profile-picture-placeholder-woman.jpeg`
+                }
+              />
             </div>
-            <div>
-              <button
-                className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
-                data-test-id='invite-owner-button'
-                onClick={addPendingOwnershipInvite}
-                type='button'
-                value={userResult._id}
-              >
-                Invite
-              </button>
+            <div
+              className='search-result flex border-sky-400 rounded-xl mx-auto justify-between items-center'
+              key={userResult._id}
+            >
+              <div className='mb-4'>
+                <table>
+                  <tbody>
+                    <li>
+                      <tr>
+                        <td>
+                          <VscMention className='inline' />
+                        </td>
+                        <td>{userResult.username}</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <VscPerson className='inline' />
+                        </td>
+                        <td>
+                          {userResult.firstName} {userResult.lastName}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <VscMail className='inline' />
+                        </td>
+                        <td>{userResult.email}</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          {userResult.gender === 'Woman' ? (
+                            <AiOutlineWoman className='inline' />
+                          ) : (
+                            <AiOutlineMan className='inline' />
+                          )}
+                        </td>
+                        <td>{userResult.gender}</td>
+                      </tr>
+                    </li>
+                  </tbody>
+                </table>
+              </div>
+              <div>
+                <button
+                  className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
+                  data-test-id='invite-owner-button'
+                  onClick={addPendingOwnershipInvite}
+                  type='button'
+                  value={userResult._id}
+                >
+                  Invite
+                </button>
+              </div>
             </div>
-          </div>
+          </>
         ))}
       </ul>
     </div>

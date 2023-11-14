@@ -259,15 +259,55 @@ router.get('/search/:searchTerm', async (request, response) => {
         },
         { $sort: { relevance: -1 } },
         { $limit: 10 },
-      ],
-      /*
-       * Get the users from the database using the aggregation pipeline
-       *
-       */
-      users = await User.aggregate(pipeline)
+      ]
+    /*
+     * Get the users from the database using the aggregation pipeline
+     *
+     */
+
+    const users = await User.aggregate(pipeline)
+
+    const updatedUsers = await Promise.all(
+      // Loop through the users
+      users.map(async (user) => {
+        // Do not send the hashed password to the client
+        delete user.hashedPassword
+
+        // Get the profile picture document from the database
+        const image = await Image.findById(user.profilePicture).catch((error) =>
+          console.log('Error in GET /user/:id: ', error),
+        )
+
+        // Count how mant invites the user has with status "pending"
+        const pendingInvitesCount = await Invite.countDocuments({
+          receiverId: user._id,
+          status: 'pending',
+        })
+
+        // Add the profilePictureURL property to the user object
+        const updatedUser = {
+          ...user,
+          pendingInvitesCount,
+        }
+
+        if (image === null) {
+          // Return the user
+          return updatedUser
+        }
+
+        //  Get the path to the profile picture file
+        const profilePictureURL = getStaticFileURLFromPath(image.path)
+
+        // Add the profilePictureURL property to the user object
+        updatedUser.profilePictureURL = profilePictureURL
+
+        // Return the updated user
+        return updatedUser
+      }),
+    )
 
     // Send status 200 response and the users to the client
-    return response.status(200).json(users)
+    return response.status(200).json(updatedUsers)
   } catch (error) {
     console.log('Error in GET /users/search/:searchTerm: ', error)
     response.status(500).send({ message: error.message })
