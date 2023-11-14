@@ -1546,7 +1546,7 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-128] In RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this
 - [ ] [MERNSTACK-231] Use useSnackbar to UNDO steps users have taken, to start, let a user un-invite a co-owner after sending a invite and let the user UNDO removing a owner from a company. (see: <https://notistack.com/features/basic#actions>)
 - [x] [MERNSTACK-232] Add a "data-test-id" attribute to all elements with an onClick and onChange event handler.
-- [ ] [MERNSTACK-232] Find a pretty loading spinner animation to replace the ugly `<Spinner />`
+- [x] [MERNSTACK-233] Find a pretty loading spinner animation to replace the ugly `<Spinner />`
 - [ ] [MERNSTACK-234] PRIO: Finish Google Docs doc about making webapp DEMO video of application.
 - [ ] [MERNSTACK-235] PRIO: Record first DEMO video briefly demonstrating what technology I use and what is the result.
 - [ ] [MERNSTACK-238] PRIO: Edit first DEMO video, make sure to add an explanation of the functionalities of the application and what kind of technologies were used. START OF with demonstrating the client side app and LATER technical explanation.
@@ -1560,6 +1560,10 @@ Upon successful registration and validation from the KVK API, the user will be r
 - [x] [MERNSTACK-244] Clean up everything `Book` related.
 - [x] [MERNSTACK-226] When you click somewhere else besides the dropdown menu, the dropdown should close in Navbar.jsx
 - [x] [MERNSTACK-246] Add useSnackbar notification after successful profile image upload.
+- [ ] [MERNSTACK-248] Get search results if companies match.
+- [ ] [MERNSTACK-250] Add `Industry` to `Company` registration form and edit form.
+- [ ] [MERNSTACK-251] Create a find route in the backend for finding results when using the search input on the homepage
+- [ ] [MERNSTACK-252] Filter search results from users that already are in a pending invite
 
 ## Technologies
 

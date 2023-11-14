@@ -57,7 +57,7 @@ module.exports = {
       },
     ],
     'react/jsx-key': 'error',
-    'react/jsx-max-depth': ['error', { max: 7 }],
+    'react/jsx-max-depth': ['error', { max: 10 }],
     // Allow arrow functions in JSX props (Remove this rule when performance becomes an issue)
     'react/jsx-no-bind': ['error', { allowArrowFunctions: true }],
     'react/jsx-no-comment-textnodes': 'error',
@@ -87,6 +87,7 @@ module.exports = {
     'multiline-comment-style': 'off',
     'max-statements': 'off',
     'max-lines': 'off',
+    'no-underscore-dangle': ['error', { allow: ['_id'] }],
   },
   settings: {
     react: {

@@ -31,5 +31,10 @@ module.exports = {
     'no-console': 'off',
     'multiline-comment-style': 'off',
     'default-param-last': 'off',
+    'capitalized-comments': 'off',
+    'no-underscore-dangle': ['error', { allow: ['_id'] }],
+    'max-lines-per-function': 'off',
+    'max-statements': 'off',
+    'no-warning-comments': 'off',
   },
 }
