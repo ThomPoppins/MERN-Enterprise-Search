@@ -1,101 +1,30 @@
 {
-  "workbench.colorTheme": "Moxer",
-  "glassit.alpha": 253,
-  "terminal.integrated.defaultProfile.windows": "Git Bash",
-  "js/ts.implicitProjectConfig.checkJs": true,
-  "better-comments.highlightPlainText": true,
-  "better-comments.multilineComments": true,
-  "editor.formatOnPaste": false, // required
-  "editor.formatOnType": false, // required
-  "editor.formatOnSaveMode": "file", // required to format on save
-  "files.autoSave": "onFocusChange", // optional but recommended
-  "better-comments.tags": [
-    {
-      "tag": "!",
-      "color": "#FF2D00",
-      "strikethrough": false,
-      "underline": false,
-      "backgroundColor": "transparent",
-      "bold": false,
-      "italic": false
-    },
-    {
-      "tag": "?",
-      "color": "#3498DB",
-      "strikethrough": false,
-      "underline": false,
-      "backgroundColor": "transparent",
-      "bold": false,
-      "italic": false
-    },
-    {
-      "tag": "//",
-      "color": "#474747",
-      "strikethrough": true,
-      "underline": false,
-      "backgroundColor": "transparent",
-      "bold": false,
-      "italic": false
-    },
-    {
-      "tag": "todo",
-      "color": "#FF8C00",
-      "strikethrough": false,
-      "underline": false,
-      "backgroundColor": "transparent",
-      "bold": false,
-      "italic": false
-    },
-    {
-      "tag": "*",
-      "color": "#98C379",
-      "strikethrough": false,
-      "underline": false,
-      "backgroundColor": "transparent",
-      "bold": false,
-      "italic": false
-    }
-  ],
-  "editor.tokenColorCustomizations": {
-    "comments": "#572e99" // replace #ff0000 with your desired color
-  },
-  "workbench.editor.enablePreview": false,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "cSpell.words": [
-    "apikey",
-    "DBURL",
-    "devdocs",
-    "examplepasswork",
-    "exampleuser",
-    "hasn",
-    "Kamer",
-    "Kaya",
-    "Koophandel",
-    "MERN",
-    "MERNSTACK",
-    "notistack",
-    "originalname",
-    "perience",
-    "PRIO",
-    "Recieved",
-    "reduxjs",
-    "stylelint",
-    "tailwindcss",
-    "textnodes",
-    "Thom",
-    "Vind",
-    "xhvmidl",
-    "yoursecretkey"
-  ],
-  "[css]": {
-    "editor.defaultFormatter": "stylelint.vscode-stylelint"
-  },
-  "files.eol": "\n",
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[markdown]": {
-    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
-  },
+    "cSpell.words": [
+        "apikey",
+        "DBURL",
+        "devdocs",
+        "examplepasswork",
+        "exampleuser",
+        "hasn",
+        "Kamer",
+        "Kaya",
+        "Koophandel",
+        "MERN",
+        "MERNSTACK",
+        "notistack",
+        "originalname",
+        "perience",
+        "PRIO",
+        "Recieved",
+        "reduxjs",
+        "stylelint",
+        "tailwindcss",
+        "textnodes",
+        "Thom",
+        "Vind",
+        "xhvmidl",
+        "yoursecretkey"
+      ],
+      "editor.formatOnSave": true,
+      "editor.tabSize": 2,
 }
