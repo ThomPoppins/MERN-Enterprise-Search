@@ -226,13 +226,75 @@ router.post('/', async (request, response) => {
   // Create a new invite document using the Invite model
   try {
     // Create a new invite document using the Invite model
-    const invite = new Invite(request.body)
+    let invite = new Invite(request.body)
 
     // Save the invite document
     await invite.save()
 
+    // Convert invite to plain JavaScript object
+    invite = invite.toObject()
+
+    // Add sender, receiver and company info to invite
+    // Add sender info
+    let sender = await User.findById(invite.senderId)
+
+    // Add receiver info
+    let receiver = await User.findById(invite.receiverId)
+
+    // Convert sender to plain JavaScript object
+    sender = sender.toObject()
+
+    // Convert receiver to plain JavaScript object
+    receiver = receiver.toObject()
+
+    //  Add sender profile picture URL to sender object
+    if (sender.profilePicture) {
+      // Get sender profile picture
+      const senderProfilePictureImageDocument = await Image.findById(
+          sender.profilePicture,
+        ),
+        // Get sender profile picture URL
+        senderProfilePictureURL = getStaticFileURLFromPath(
+          senderProfilePictureImageDocument.path,
+        )
+
+      // Add sender profile picture URL to sender object
+      sender.profilePictureURL = senderProfilePictureURL
+    }
+
+    //  Add receiver profile picture URL to receiver object
+    if (receiver.profilePicture) {
+      // Get receiver profile picture
+      const receiverProfilePictureImageDocument = await Image.findById(
+          receiver.profilePicture,
+        ),
+        // Get receiver profile picture URL
+        receiverProfilePictureURL = getStaticFileURLFromPath(
+          receiverProfilePictureImageDocument.path,
+        )
+
+      // Add receiver profile picture URL to receiver object
+      receiver.profilePictureURL = receiverProfilePictureURL
+    }
+
+    let company = null
+
+    // Add company info if invite kind is "company_ownership"
+    if (invite.kind === 'company_ownership' && invite.companyId) {
+      // Get company document
+      company = await Company.findById(invite.companyId)
+
+      /*
+       * Convert company to plain JavaScript object and add it to invite object
+       *
+       * */
+      company = company.toObject()
+    }
+
+    const updatedInvite = { ...invite, sender, receiver, company }
+
     // Send status 201 response and the new invite document as JSON response if successful
-    return response.status(201).json(invite)
+    return response.status(201).json(updatedInvite)
   } catch (error) {
     console.log('ERROR in POST /invites route: ', error)
     // Send status 500 response and error message as JSON response if unsuccessful

@@ -381,9 +381,16 @@ const EditCompany = () => {
     })
   }
 
+  // Update pending ownership invites every 5 seconds
   useEffect(() => {
-    getCompanyPendingOwnershipInvites()
-  }, [name])
+    // Set interval
+    const interval = setInterval(() => {
+      getCompanyPendingOwnershipInvites()
+    }, 5000)
+
+    // Clear interval on unmount
+    return () => clearInterval(interval)
+  }, [userId, user, companyId])
 
   // Add pending ownership invite
   const addPendingOwnershipInvite = async (event) => {
