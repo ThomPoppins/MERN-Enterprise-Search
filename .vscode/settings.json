@@ -88,8 +88,6 @@
     "xhvmidl",
     "yoursecretkey"
   ],
-  //! TODO: Enable when removing stylelint 
-  "css.validate": false,
   "[css]": {
     "editor.defaultFormatter": "stylelint.vscode-stylelint"
   },

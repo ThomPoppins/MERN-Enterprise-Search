@@ -479,7 +479,9 @@ const RegisterCompany = () => {
     // useSnackbar is a hook that allows us to show a notification that pops up in the left bottom corder (see image above)
     { enqueueSnackbar } = useSnackbar()
 
-  // Functions that will call the name and email validators and sets the error state dependent on the return value from the validators. This function is called directly by the onBlur event listener on the name and email input fields, so it is called when the input field loses focus.
+  // Functions that will call the name and email validators and sets the error state dependent on the return value from the validators. 
+  // This function is called directly by the onBlur event listener on the name and email input fields, so it is called when the input 
+  // field loses focus.
   const validateCompanyName = () => {
       if (companyNameValidator(name)) {
         setNameError(false)
@@ -518,7 +520,9 @@ const RegisterCompany = () => {
       // Set the name state to the current name input field value
       setName(event.target.value)
       if (nameError) {
-        // Only IF the name error state is ALREADY true, then validate name always onChange. This prevents a notification when the user hasn't completed his input and would otherwise already show after typing the first character in to the field. onBlur() calls the validateName function initially after losing focus the first time.
+        // Only IF the name error state is ALREADY true, then validate name always onChange. This prevents a notification when the user 
+        // hasn't completed his input and would otherwise already show after typing the first character in to the field. onBlur() 
+        //calls the validateName function initially after losing focus the first time.
         validateCompanyName()
       }
     },
@@ -550,7 +554,8 @@ const RegisterCompany = () => {
     }
     // ... (rest of the input field if statement whether to display a invalid value error notification)
   }, [
-    // This dependency array is set to the error states of the input fields. Every time a state value from this array changes, this useEffect hook function will trigger.
+    // This dependency array is set to the error states of the input fields. Every time a state value from this array changes, 
+    // this useEffect hook function will trigger.
     nameError,
     emailError,
     phoneError,
@@ -1277,7 +1282,8 @@ To run this application locally, follow these steps:
      // port for the server to listen on
      export const PORT = 5555;
 
-     // YOUR MongoDB database connection URL (if you want to test this application without creating your own database, contact me at thompoppins@gmail.com, I'll provide you with a database URL)
+     // YOUR MongoDB database connection URL (if you want to test this application without creating your own database, 
+     // contact me at thompoppins@gmail.com, I'll provide you with a database URL)
      export const mongoDBURL =
        "mongodb+srv://exampleuser:examplepasswork@example-mern-stack-project.xhvmidl.mongodb.net/?retryWrites=true&w=majority";
 
@@ -1300,7 +1306,8 @@ To run this application locally, follow these steps:
      ```javascript
      // frontend/config.js
      export const BACKEND_URL = "http://localhost:5555";
-     // Disable company validation by KVK API (If you want to test the KVK company validation, mail me at thompoppins@gmail.com for instructions how to set this up.)
+     // Disable company validation by KVK API (If you want to test the KVK company validation, mail me at thompoppins@gmail.com for 
+     // instructions how to set this up.)
      export const TEST_KVK_API = false;
      ```
 
