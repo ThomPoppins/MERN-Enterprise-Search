@@ -26,7 +26,7 @@ const CompaniesList = () => {
     updateCompanies = () => {
       setLoading(true)
       axios
-        .get(BACKEND_URL + '/companies/owned-companies/' + userId)
+        .get(`${BACKEND_URL  }/companies/owned-companies/${  userId}`)
         .then((response) => {
           setCompanies(response.data.data)
           setLoading(false)

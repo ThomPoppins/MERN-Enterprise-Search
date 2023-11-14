@@ -1,9 +1,5 @@
-const isAllLettersOrWhitespace = (str) => {
-  return /^[a-zA-Z\s]+$/.test(str)
-}
+const isAllLettersOrWhitespace = (str) => /^[a-zA-Z\s]+$/.test(str)
 
-const lastNameValidator = (lastName) => {
-  return lastName.length >= 1 && isAllLettersOrWhitespace(lastName)
-}
+const lastNameValidator = (lastName) => lastName.length >= 1 && isAllLettersOrWhitespace(lastName)
 
 export default lastNameValidator

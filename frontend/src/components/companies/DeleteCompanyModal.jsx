@@ -12,7 +12,7 @@ const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
   const handleDeleteCompany = () => {
     setLoading(true)
     axios
-      .delete(BACKEND_URL + `/companies/${companyId}`)
+      .delete(`${BACKEND_URL  }/companies/${companyId}`)
       .then(() => {
         setLoading(false)
         enqueueSnackbar('Company deleted successfully!', {

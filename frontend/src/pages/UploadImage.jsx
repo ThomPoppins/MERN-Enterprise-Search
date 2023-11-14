@@ -34,7 +34,7 @@ const UploadImage = () => {
           // Save the image id of the profile picture to the user's document in the database
           axios
             .put(`${BACKEND_URL}/users/profile-picture`, {
-              userId: userId,
+              userId,
               imageId: response.data.imageId,
             })
             .then((response) => {

@@ -15,12 +15,12 @@ const ShowCompany = () => {
   useEffect(() => {
     setLoading(true)
     axios
-      .get(BACKEND_URL + `/companies/${id}`)
+      .get(`${BACKEND_URL  }/companies/${id}`)
       .then((response) => {
         setCompany(response.data)
 
         const ownerPromises = response.data.owners.map((owner) =>
-          axios.get(BACKEND_URL + `/users/user/${owner.userId}`),
+          axios.get(`${BACKEND_URL  }/users/user/${owner.userId}`),
         )
 
         Promise.all(ownerPromises)
@@ -83,7 +83,7 @@ const ShowCompany = () => {
               <span>
                 {owners
                   //
-                  .map((owner) => owner.firstName + ' ' + owner.lastName)
+                  .map((owner) => `${owner.firstName  } ${  owner.lastName}`)
                   .join(', ')}
               </span>
             </div>

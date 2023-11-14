@@ -228,7 +228,7 @@ const RegisterUser = () => {
 
     // Send a POST request to the backend to save the user to the database
     axios
-      .post(BACKEND_URL + '/users', data)
+      .post(`${BACKEND_URL  }/users`, data)
       .then(() => {
         // Hide the spinner
         setLoading(false)

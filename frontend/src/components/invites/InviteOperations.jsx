@@ -44,7 +44,7 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
   }
 
   return (
-    <div id={'operations-' + invite._id} key={invite._id}>
+    <div id={`operations-${  invite._id}`} key={invite._id}>
       <span className='text-xl'>
         <button
           className={`bg-gradient-to-r from-green-600 to-green-700 hover:from-green-400 hover:to-green-500 rounded-lg w-[82px] float-left ml-1 ${

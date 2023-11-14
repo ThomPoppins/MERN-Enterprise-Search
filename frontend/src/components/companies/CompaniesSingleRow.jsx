@@ -16,7 +16,7 @@ const CompaniesSingleRow = ({ company, updateCompanies }) => {
 
   useEffect(() => {
     const ownerPromises = company.owners.map((owner) =>
-      axios.get(BACKEND_URL + `/users/user/${owner.userId}`),
+      axios.get(`${BACKEND_URL  }/users/user/${owner.userId}`),
     )
 
     Promise.all(ownerPromises)

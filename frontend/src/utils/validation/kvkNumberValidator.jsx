@@ -15,9 +15,9 @@ const kvkNumberValidator = async (kvkNumber) => {
 
   // TODO: Remove this line when API call is implemented
   await axios
-    .get(BACKEND_URL + '/kvk', {
+    .get(`${BACKEND_URL  }/kvk`, {
       params: {
-        kvkNumber: kvkNumber,
+        kvkNumber,
       },
     })
     .then((response) => {

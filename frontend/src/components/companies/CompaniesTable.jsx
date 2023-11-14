@@ -1,8 +1,7 @@
 import React from 'react'
 import CompaniesSingleRow from './CompaniesSingleRow'
 
-const CompaniesTable = ({ companies, updateCompanies }) => {
-  return (
+const CompaniesTable = ({ companies, updateCompanies }) => (
     <table className='w-full border-separate border-spacing-2'>
       <thead>
         <tr>
@@ -30,6 +29,5 @@ const CompaniesTable = ({ companies, updateCompanies }) => {
       </tbody>
     </table>
   )
-}
 
 export default CompaniesTable

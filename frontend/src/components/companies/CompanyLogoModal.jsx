@@ -2,8 +2,7 @@ import React from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import UploadAvatar from '../UploadAvatar'
 
-const CompanyLogoModal = ({ setLogo, onClose }) => {
-  return (
+const CompanyLogoModal = ({ setLogo, onClose }) => (
     <div
       className='fixed bg-black bg-opacity-60 top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center'
       data-test-id='company-logo-modal'
@@ -28,6 +27,5 @@ const CompanyLogoModal = ({ setLogo, onClose }) => {
       </div>
     </div>
   )
-}
 
 export default CompanyLogoModal
