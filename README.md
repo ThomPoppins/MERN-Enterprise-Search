@@ -14,18 +14,19 @@ Also I make use of a lot of different packages but only if they are complementar
   - [Application Description](#application-description)
   - [Table of Contents](#table-of-contents)
   - [Visual Demo](#visual-demo)
-    - [1. Homepage](#1-homepage)
-    - [2. Profile page (with gender specific placeholder profile picture)](#2-profile-page-with-gender-specific-placeholder-profile-picture)
-    - [3. Profile picture upload modal](#3-profile-picture-upload-modal)
-    - [4. Profile picture preview before upload](#4-profile-picture-preview-before-upload)
+    - [Homepage](#homepage)
+    - [Profile page (with gender specific placeholder profile picture)](#profile-page-with-gender-specific-placeholder-profile-picture)
+    - [Profile picture upload modal](#profile-picture-upload-modal)
+    - [Profile picture preview before upload](#profile-picture-preview-before-upload)
       - [BLOB image:](#blob-image)
       - [Save image to the backend server](#save-image-to-the-backend-server)
       - [Express.static() as CDN](#expressstatic-as-cdn)
-    - [5. User profile page and data structure](#5-user-profile-page-and-data-structure)
+    - [User profile page and data structure](#user-profile-page-and-data-structure)
       - [`User` schema:](#user-schema)
-    - [6. Companies](#6-companies)
+    - [Companies](#companies)
       - [Listing page](#listing-page)
       - [Registration](#registration)
+      - [Form field validation:](#form-field-validation)
         - [KVK number validation:](#kvk-number-validation)
       - [`Company` document data structure](#company-document-data-structure)
       - [`Company` schema:](#company-schema)
@@ -33,20 +34,20 @@ Also I make use of a lot of different packages but only if they are complementar
       - [Company ownership](#company-ownership)
       - [`Invite` schema:](#invite-schema)
   - [Get up and running:](#get-up-and-running)
-  - [Project Issue Progression](#project-issue-progression)
   - [Versions](#versions)
-  - [v0.0.3](#v003)
-    - [Find other users for co-ownership with search field](#find-other-users-for-co-ownership-with-search-field)
-    - [Send invites to invite other users to get company co-owner](#send-invites-to-invite-other-users-to-get-company-co-owner)
-  - [v0.0.2](#v002)
+    - [v0.0.3](#v003)
+      - [Find other users for co-ownership with search field](#find-other-users-for-co-ownership-with-search-field)
+      - [Send invites to invite other users to get company co-owner](#send-invites-to-invite-other-users-to-get-company-co-owner)
+    - [v0.0.2](#v002)
     - [Backend server CDN for static files](#backend-server-cdn-for-static-files)
     - [File upload](#file-upload)
-  - [v0.0.1](#v001)
+    - [v0.0.1](#v001)
     - [Registering an Account](#registering-an-account)
     - [Logging In](#logging-in)
   - [Company Registration and Ownership](#company-registration-and-ownership)
     - [How to Register a Company](#how-to-register-a-company)
     - [How to add a co-owner to a company](#how-to-add-a-co-owner-to-a-company)
+  - [Project Issue Progression](#project-issue-progression)
   - [Technologies](#technologies)
   - [Frontend](#frontend)
     - [React](#react)
@@ -84,25 +85,25 @@ Get a general impression of my application.
 
 > **Note:** This demo is interesting, but incomplete and not final. Also it is impossible to keep this demo completely up to date with the development progress. The main purpose is to give a general impression of the application. For complete understanding of the technical workings of each component of the application you're free to look into the source code and for any remaining questions you can ask me anything in a mail to [thompoppins@gmail.com](mailto:thompoppins@gmail.com).
 
-### 1. Homepage
+### Homepage
 
 **Homepage when user is logged in, will be a working search engine for finding professional people with an expertise.**
 
 ![Homepage Search Engine](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/001.png?raw=true)
 
-### 2. Profile page (with gender specific placeholder profile picture)
+### Profile page (with gender specific placeholder profile picture)
 
 **When you register an account your profile is very empty and your profile picture is a placeholder, a male for men and for women a female picture placeholder.**
 
 ![Profile Page Placeholder Profile Picture](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/002.png?raw=true)
 
-### 3. Profile picture upload modal
+### Profile picture upload modal
 
 **After logging in for the first time, users can click on the`upload` button on the placeholder profile picture for uploading their first profile picture. After clicking the button, a modal will pop up where you can upload a image file by clicking on the `browse...` button and select an image locally from their device.**
 
 ![Image Upload Modal Pop-Up](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/003.png?raw=true)
 
-### 4. Profile picture preview before upload
+### Profile picture preview before upload
 
 **After selecting a image local from their device, a preview will be shown of what image it would be.**
 
@@ -125,51 +126,51 @@ The Base64 BLOB image is converted from the image file value in the form data an
 ```javascript
 // Modal to edit user profile picture
 const EditProfilePictureModal = ({ userId, onClose }) => {
-  const [selectedFile, setSelectedFile] = useState();
-  const [preview, setPreview] = useState("");
+  const [selectedFile, setSelectedFile] = useState()
+  const [preview, setPreview] = useState('')
 
   // Handle file select
   const onSelectFile = (e) => {
     if (!e.target.files || e.target.files.length === 0) {
-      setSelectedFile(undefined);
-      return;
+      setSelectedFile(undefined)
+      return
     }
 
-    setSelectedFile(e.target.files[0]);
-  };
+    setSelectedFile(e.target.files[0])
+  }
 
   // Set the preview image
   useEffect(() => {
     if (!selectedFile) {
-      setPreview("");
-      return;
+      setPreview('')
+      return
     }
     // Convert the selected image to a Base64 string and save it to the preview state
-    const objectUrl = URL.createObjectURL(selectedFile);
-    setPreview(objectUrl);
+    const objectUrl = URL.createObjectURL(selectedFile)
+    setPreview(objectUrl)
 
     // Free memory when the preview is closed
-    return () => URL.revokeObjectURL(objectUrl);
-  }, [selectedFile]);
+    return () => URL.revokeObjectURL(objectUrl)
+  }, [selectedFile])
 
   // ... (rest of the component before it's return statement)
 
   return (
 
-    // ... (start return JSX)
+  // ... (start return JSX)
 
-          {selectedFile ? <img
-            alt="Profile Picture"
-            className="mx-auto my-4 w-[350px] h-[350px] object-cover"
-            src={preview} // BLOB image string is set as img src as is.
-          /> : null}
+  {selectedFile ? <img
+    alt="Profile Picture"
+    className="mx-auto my-4 w-[350px] h-[350px] object-cover"
+    src={preview} // BLOB image string is set as img src as is.
+  /> : null}
 
-    // ... (end return JSX)
+  // ... (end return JSX)
 
-  );
-};
+  )
+}
 
-export default EditProfilePictureModal;
+export default EditProfilePictureModal
 ```
 
 #### Save image to the backend server
@@ -181,83 +182,83 @@ After the image is uploaded and saved, a corresponding Image "document" (entry) 
 > **Source:** [/backend/routes/uploadRoute.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/routes/uploadRoute.js)
 
 ```javascript
-import { Image } from "../models/imageModel.js";
-import express from "express";
-import mongoose from "mongoose";
-import multer from "multer";
+import { Image } from '../models/imageModel.js'
+import express from 'express'
+import mongoose from 'mongoose'
+import multer from 'multer'
 
-const router = express.Router();
+const router = express.Router()
 
 // Create Multer storage configuration
 const storage = multer.diskStorage({
   // `destination` is the folder where the uploaded file will be stored.
-  destination: function (request, file, callback) {
-    callback(null, "./public/uploads/images");
+  destination(request, file, callback) {
+    callback(null, './public/uploads/images')
   },
 
-  fileFilter: function (request, file, callback) {
+  fileFilter(request, file, callback) {
     // Accept images only.
     if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
       // Send status 400 response if the file is not an image and a (error) message to inform the client.
-      return callback(new Error("Only images allowed!"));
+      return callback(new Error('Only images allowed!'))
     }
     // Image file is accepted. Pass `true` to the callback.
-    callback(null, true);
+    callback(null, true)
   },
 
-  // filename is the name of the uploaded file.
-  filename: function (request, file, callback) {
+  // Filename is the name of the uploaded file.
+  filename(request, file, callback) {
     // The file name will be the original name of the uploaded file with a timestamp.
-    const fileName = file.originalname.split(".")[0];
-    const fileExtension = file.originalname.split(".")[1];
-    const timestamp = Date.now();
+    const fileName = file.originalname.split('.')[0]
+    const fileExtension = file.originalname.split('.')[1]
+    const timestamp = Date.now()
     // `callback` is used to pass the file name to multer.
-    callback(null, `${fileName}-${timestamp}.${fileExtension}`);
+    callback(null, `${fileName}-${timestamp}.${fileExtension}`)
   },
-});
+})
 
 // Create multer instance with the storage configuration.
-const upload = multer({ storage: storage });
+const upload = multer({ storage })
 
 // The POST image upload route uses Multer middleware as you can see, the Multer object is provided as second argument.
 // Multer will first process the request and pass on the result to the 3rd argument function of the route
-router.post("/image", upload.single("image"), async (request, response) => {
+router.post('/image', upload.single('image'), async (request, response) => {
   if (!request.file) {
-    console.log("No image file. `request`: ", request);
+    console.log('No image file. `request`: ', request)
 
     return response.status(400).send({
-      message: "No image uploaded.",
-    });
+      message: 'No image uploaded.',
+    })
   }
 
   // Prepare response object to send to client with image path and database Image._id.
   const responseObj = {
-    message: "Image uploaded successfully!",
+    message: 'Image uploaded successfully!',
     imagePath: request.file.path,
     imageId: new mongoose.Types.ObjectId(),
-  };
+  }
 
   // Create Instance of Image model with the image path to safe as document in the MongoDB Image collection
   const image = new Image({
     path: request.file.path,
-  });
+  })
 
   // Save new Image document to database
   await image
     .save()
     .then((result) => {
-      responseObj["imageId"] = result._id;
+      responseObj.imageId = result._id
     })
-    .catch((error) => {
-      return response.status(500).send({
-        message: "Error saving image to database! " + error.message,
-      });
-    });
+    .catch((error) =>
+      response.status(500).send({
+        message: `Error saving image to database! ${error.message}`,
+      }),
+    )
 
-  return response.status(200).send(responseObj);
-});
+  return response.status(200).send(responseObj)
+})
 
-export default router;
+export default router
 ```
 
 After successfully saving the new Image entry (document) to the database, MongoDB responds with the Image document ID, which will immediately be saved to the User document(of the currently logged in user of course) so it will be always be certain where the image is. Securely saved on the backend server with the file location saved to the database with it's Image ID saved in the corresponding User document.
@@ -272,12 +273,12 @@ Express.js can serve static files using **Express.static("public_directory")**.
 
 ```javascript
 // Use .static() and configure the /public folder for hosting static resources as CDN for images and other files.
-app.use(express.static("public"));
+app.use(express.static("public"))
 ```
 
 > **Note:** All URL's to the files in the public directory have a similar URL structure. An image within the public static files directory with path **public_static_files_dir/uploads/images/137917151-1699497672476.jpg** can be accessed on URL _backend-server-domain.com/uploads/images/137917151-1699497672476.jpg_.
 
-### 5. User profile page and data structure
+### User profile page and data structure
 
 _Profile page:_
 ![Profile Page With Profile Picture](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/005.png?raw=true)
@@ -389,7 +390,7 @@ const userSchema = new mongoose.Schema(
     },
   },
   { timestamps: true }
-);
+)
 ```
 
 **Mongoose `User` model:**
@@ -403,10 +404,10 @@ const userSchema = new mongoose.Schema(
 
 ```javascript
 // Instantiate User model
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema)
 ```
 
-### 6. Companies
+### Companies
 
 #### Listing page
 
@@ -433,6 +434,272 @@ An owner of a company can register his company in my application. On this compan
 _Company registration form:_
 ![Company Registration Form Top](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/008.1.png?raw=true)
 ![Company Registration Form Bottom](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/008.2.png?raw=true)
+
+#### Form field validation:
+
+All form input fields in my application have to be validated. I've written my own validators for all fields. I've used regular expressions to make sure it is correct data as I expect to receive from the user input.
+
+**Example validator:**
+
+> **Source:** [/frontend/utils/validation/emailValidator.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/src/utils/validation/emailValidator.jsx)
+
+ ```javascript
+const emailValidator = (email) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/u
+  return regex.test(email)
+}
+
+export default emailValidator
+ ```
+
+**Invalid value notifications:**
+
+![Invalid Values Error Notifications](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Invalid-Form-Values.png?raw=true)
+
+**Code example communicating invalid values in the UI of company registration page:**
+
+> **Source:** [/frontend/src/pages/companies/RegisterCompany.jsx](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/src/pages/companies/RegisterCompany.jsx)
+
+ ```javascript
+ import React, { useEffect, useState } from 'react'
+ import axios from 'axios'
+ import { useSnackbar } from 'notistack'
+ import emailValidator from '../../utils/validation/emailValidator'
+// ... (and a lot of other imports and validator imports here)
+
+const RegisterCompany = () => {
+  const [name, setName] = useState(''),
+  // email form field input value
+    [email, setEmail] = useState(''),
+    // ... (states for all other form field values)
+    // If value is invalid, emailError would become true
+    [nameError, setNameError] = useState(false),
+    [emailError, setEmailError] = useState(false),
+    // ... (errors states for all form fields here)
+    // useSnackbar is a hook that allows us to show a notification that pops up in the left bottom corder (see image above)
+    { enqueueSnackbar } = useSnackbar()
+
+  // Functions that will call the name and email validators and sets the error state dependent on the return value from the validators. This function is called directly by the onBlur event listener on the name and email input fields, so it is called when the input field loses focus.
+  const validateCompanyName = () => {
+      if (companyNameValidator(name)) {
+        setNameError(false)
+      } else {
+        setNameError(true)
+      }
+    },
+    validateEmail = () => {
+      if (emailValidator(email)) {
+        setEmailError(false)
+      } else {
+        setEmailError(true)
+      }
+    },
+    // ... (a lot of other validateFormField() functions here)
+
+  // Handle onChange events for all input fields
+  const handleNameChange = (event) => {
+      setName(event.target.value)
+      if (nameError) {
+        validateCompanyName()
+      }
+    },
+    handleEmailChange = (event) => {
+      
+      setEmail(event.target.value)
+      
+      if (emailError) {
+        validateEmail()
+      }
+    },
+  // ... (a lot of input field change handlers here)
+
+  // Handle onChange events for all input fields
+  const handleNameChange = (event) => {
+      // Set the name state to the current name input field value
+      setName(event.target.value)
+      if (nameError) {
+        // Only IF the name error state is ALREADY true, then validate name always onChange. This prevents a notification when the user hasn't completed his input and would otherwise already show after typing the first character in to the field. onBlur() calls the validateName function initially after losing focus the first time.
+        validateCompanyName()
+      }
+    },
+    handleEmailChange = (event) => {
+      // Set the email state to the current email input field value
+      setEmail(event.target.value)
+      if (emailError) {
+        // Only IF the email error state is ALREADY true, then validate email always onChange. Initially called by onBlur like the name field.
+        validateEmail()
+      }
+    },
+    // ... (here all other onChange handler for the other input fields)
+
+  // Display error messages if the user enters invalid input with useSnackbar
+  useEffect(() => {
+    if (nameError) {
+      // Trigger snackbar notification
+      enqueueSnackbar('Company name is invalid!', {
+        variant: 'error', // Display notification in a red box
+        preventDuplicate: true, // Prevents notification spamming
+      })
+    }
+    // Trigger snackbar notification
+    if (emailError) {
+      enqueueSnackbar('Email is invalid!', {
+        variant: 'error', // Display notification in a red box
+        preventDuplicate: true, // Prevents notification spamming
+      })
+    }
+    // ... (rest of the input field if statement whether to display a invalid value error notification)
+  }, [
+    // This dependency array is set to the error states of the input fields. Every time a state value from this array changes, this useEffect hook function will trigger.
+    nameError,
+    emailError,
+    phoneError,
+    kvkNumberError,
+    sloganError,
+    descriptionError,
+    startYearError,
+  ])
+
+  // Function that is being called when the user presses the Save button.
+  const handleSaveCompany = async () => {
+    // Validate all fields before sending the request to the backend, otherwise return
+    validateCompanyName()
+    validateEmail()
+    // ... (validate other fields here)
+
+    // If there are any invalid form fields left, notify the active user and return without saving and without redirect.
+    if (
+      nameError ||
+      emailError ||
+      phoneError ||
+      kvkNumberError ||
+      sloganError ||
+      startYearError ||
+      !name ||
+      !email ||
+      !phone ||
+      !kvkNumber ||
+      !slogan ||
+      !startYear
+    ) {
+      enqueueSnackbar(
+        'Please fill in all fields correctly before saving this company!',
+        {
+          variant: 'error',
+          preventDuplicate: true,
+        },
+      )
+      return
+    }
+
+    // If all values are correct, prepare object for company save request
+    const data = {
+      name,
+      logo,
+      email,
+      phone,
+      kvkNumber,
+      slogan,
+      startYear,
+      description,
+      owners: [{ userId }],
+    }
+    // Render loading animation for as long as the request takes
+    setLoading(true)
+    axios
+      .post(`${BACKEND_URL}/companies`, data)
+      .then(() => {
+        // Saving company success
+        // Stop loading animation
+        setLoading(false)
+        // Notify the user about success
+        enqueueSnackbar('Company registered successfully!', {
+          variant: 'success',
+          preventDuplicate: true,
+        })
+        // Redirect back to companies listing page
+        navigate('/companies')
+      })
+      .catch((error) => {
+        // If request failed notify active user accordingly to the problem that occurred.
+        // Company with the KvK number already existed, is not unique
+        if (error.response.status === 409) {
+          enqueueSnackbar('Company with this KVK number already exists!', {
+            variant: 'error',
+            preventDuplicate: true,
+          })
+          // Set KvK error to true
+          setKvkNumberError(true)
+          // Display a more fitting message below the input field.
+          setKvkNumberErrorMessage(
+            'Company with this KVK number already exists!',
+          )
+        }
+        // Disable animation
+        setLoading(false)
+        // Always notify user saving company failed
+        enqueueSnackbar('Error registering company!', {
+          variant: 'error',
+          preventDuplicate: true,
+        })
+      })
+  }
+
+  return (
+    // ... (Top of the register page)
+
+      <div className='my-4'>
+        <label className='text-xl mr-4' htmlFor='company-name-input'>
+          Name
+        </label>
+        <input
+          className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+            nameError ? 'border-red-500' : ''
+          }`}
+          data-test-id='company-name-input'
+          id='company-name-input'
+          onBlur={validateCompanyName} // onBlur event validate name field function call
+          onChange={handleNameChange} // onChange event name field change handler function call
+          type='text'
+          value={name}
+        />
+        { /* Conditionally render the error notification text below the input field: */}
+        {nameError ? (
+          <p className='text-red-500 text-sm'>
+            Company name must be between 1 and 60 characters long and can
+            only contain letters, numbers, spaces, and the following
+            characters: &#45;, &apos;, and &#46;
+          </p>
+        ) : (
+          ''
+        )}
+      </div>
+      <div className='my-4'>
+        <label className='text-xl mr-4' htmlFor='company-email-input'>
+          Email
+        </label>
+        <input
+          className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+            emailError ? 'border-red-500' : ''
+          }`}
+          data-test-id='company-email-input'
+          id='company-email-input'
+          onBlur={validateEmail} // onBlur event validate email field function call
+          onChange={handleEmailChange} // onChange event email field change handler function call
+          type='text'
+          value={email}
+        />
+        { /* Conditionally render the error notification text below the input field: */}
+        {emailError ? (
+          <p className='text-red-500 text-sm'>
+            Email must be a valid email address.
+          </p>
+        ) : (
+          ''
+        )}
+      </div>
+  )
+ ```
 
 ##### KVK number validation:
 
@@ -847,7 +1114,7 @@ const companySchema = new mongoose.Schema(
     // ... (all schema fields are defined here)
   },
   { timestamps: true }
-);
+)
 ```
 
 > **Note:** To see the complete code of the `Company` schema instantiation with all fields [here](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/companyModel.js).
@@ -856,7 +1123,7 @@ const companySchema = new mongoose.Schema(
 
 ```javascript
 // Instantiate `Company` model
-const Company = mongoose.model("Company", companySchema);
+const Company = mongoose.model("Company", companySchema)
 ```
 
 #### Edit company
@@ -975,14 +1242,14 @@ const inviteSchema = new mongoose.Schema(
     },
   },
   { timestamps: true }
-);
+)
 ```
 
 **Model:**
 
 ```javascript
 // Create `Invite` model from `inviteSchema`
-const Invite = mongoose.model("Invite", inviteSchema);
+const Invite = mongoose.model("Invite", inviteSchema)
 ```
 
 This was the visual demo for now, I will update this later on, so come back in a while to check it out!
@@ -1069,6 +1336,85 @@ To run this application locally, follow these steps:
    - Visit the web application in your browser using the link printed by the Vite.js server after starting the frontend server.
 
 Now you have the application up and running locally!
+
+## Versions
+
+### v0.0.3
+
+#### Find other users for co-ownership with search field
+
+When you are an owner of a company it is possible to search for any other users of the application and the search terms are matched against other registered users' email, username, first name and last name values. The search result is updated every change within the search input field (onChange).
+
+A list with up to 10 most relevant users that match the criteria will automatically render right below the search field input sorted by most relevant result on top to 10th relevant user last.
+
+#### Send invites to invite other users to get company co-owner
+
+Users who own companies can send invites to other users to become co-owner.
+
+![Invite User To Become Co-owner](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/009.png?raw=true)
+
+The invited user will be notified when he is logged in. In the navigation bar will a animated icon wiggle and a menu item called `Invites` will appear. Clicking this menu item will navigate the user to a page where all pending invited are listed.
+
+![Invite Notification](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/013.png?raw=true)
+
+On the pending invites listing page, hte invite receiving user can either _Accept_ or _Decline_ the invitation. When they accept they are now co-owner of the company.
+
+![Invites Listing Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/014.png?raw=true)
+
+If the receiving user has answered to all invited and none are left, the user will be navigated to the /companies listing so they see the result of their actions directly because the companies they just got owner from are listed here. The notification in the navigation bar has disappeared and the `Invites` menu item as well.
+
+![Invites Listing Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Invite-Accepted.png?raw=true)
+
+### v0.0.2
+
+### Backend server CDN for static files
+
+The backend server is now a CDN for static files like images. This means that the backend server will serve the static files from the `/backend/public` folder. This way, the frontend application can access the images from the backend server without having to store the images in the frontend application. This also makes it possible to use the backend server as a CDN for other applications that need to access the images.
+
+### File upload
+
+Users can now upload a profile picture. The profile picture will be saved in the `/backend/public/uploads/images` folder and the path to the image will be saved in the database. The backend server will serve the image from the `/backend/public` folder. This way, the frontend application can access the image from the backend server and the image path is stored in the database.
+
+![Upload Profile Picture Modal Image Unselected](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/003.png?raw=true)
+
+![Upload Profile Picture Modal Image Selected](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/004.png?raw=true)
+
+![Profile Picture Uploaded](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/005.png?raw=true)
+
+### v0.0.1
+
+### Registering an Account
+
+Users can easily create an account by visiting the homepage of my application. The registration process is straightforward and requires users to provide basic information such as their email address, a secure password, and any additional required details. Once registered, users gain access to the full suite of functionalities offered by the application.
+
+### Logging In
+
+Registered users can log in to their accounts using their previously provided credentials. This allows them to access and utilize all features and services provided by the application. The login process is secure and ensures that only authorized users can access their accounts.
+
+When you log in a JWT token is generated and stored in the browser's local storage. This token is used to authenticate the user and to make sure that the user is authorized to access the application. The token is also used to make sure that the user is authorized to access certain resources in the application. For example, the user can only access his own company resources and not the company resources of other users.
+
+## Company Registration and Ownership
+
+Upon logging in to their account, users have the capability to register a company that they own. This action automatically designates the user as the owner of the registered company, granting them administrative privileges within the application.
+
+- **Ownership Privileges:** The user, upon registering a company, assumes the role of owner with full administrative control over the company's operations.
+
+### How to Register a Company
+
+1. Log in to your account.
+2. Navigate to Companies
+3. Click the plus icon to add a new company.
+4. Fill in company details with KVK-number and submit the registration form.
+
+Upon successful registration and validation from the KVK API, the user will be recognized as the owner of the company and will have access to all administrative functionalities associated with it.
+
+### How to add a co-owner to a company
+
+1. Log in to your account.
+2. Navigate to Companies
+3. Click the pencil icon to edit a company.
+4. Search for a user by name, username or email.
+5. Click the add button to add the user as a owner to the company.
 
 ## Project Issue Progression
 
@@ -1206,64 +1552,7 @@ Now you have the application up and running locally!
 - [ ] [MERNSTACK-243] Implement localization library for multi-language support
 - [x] [MERNSTACK-244] Clean up everything `Book` related.
 - [x] [MERNSTACK-226] When you click somewhere else besides the dropdown menu, the dropdown should close in Navbar.jsx
-- [x] [MERNSTACK-246] Add useSnackbar notification after successful profile image upload
-
-## Versions
-
-## v0.0.3
-
-### Find other users for co-ownership with search field
-
-When you are an owner of a company it is possible to search for any other users of the application and the search terms are matched against other registered users' email, username, first name and last name values. The search result is updated every change within the search input field (onChange).
-
-A list with up to 10 most relevant users that match the criteria will automatically render right below the search field input sorted by most relevant result on top to 10th relevant user last.
-
-### Send invites to invite other users to get company co-owner
-
-## v0.0.2
-
-### Backend server CDN for static files
-
-The backend server is now a CDN for static files like images. This means that the backend server will serve the static files from the `/backend/public` folder. This way, the frontend application can access the images from the backend server without having to store the images in the frontend application. This also makes it possible to use the backend server as a CDN for other applications that need to access the images.
-
-### File upload
-
-Users can now upload a profile picture. The profile picture will be saved in the `/backend/public/uploads/images` folder and the path to the image will be saved in the database. The backend server will serve the image from the `/backend/public` folder. This way, the frontend application can access the image from the backend server and the image path is stored in the database.
-
-## v0.0.1
-
-### Registering an Account
-
-Users can easily create an account by visiting the homepage of my application. The registration process is straightforward and requires users to provide basic information such as their email address, a secure password, and any additional required details. Once registered, users gain access to the full suite of functionalities offered by the application.
-
-### Logging In
-
-Registered users can log in to their accounts using their previously provided credentials. This allows them to access and utilize all features and services provided by the application. The login process is secure and ensures that only authorized users can access their accounts.
-
-When you log in a JWT token is generated and stored in the browser's local storage. This token is used to authenticate the user and to make sure that the user is authorized to access the application. The token is also used to make sure that the user is authorized to access certain resources in the application. For example, the user can only access his own company resources and not the company resources of other users.
-
-## Company Registration and Ownership
-
-Upon logging in to their account, users have the capability to register a company that they own. This action automatically designates the user as the owner of the registered company, granting them administrative privileges within the application.
-
-- **Ownership Privileges:** The user, upon registering a company, assumes the role of owner with full administrative control over the company's operations.
-
-### How to Register a Company
-
-1. Log in to your account.
-2. Navigate to Companies
-3. Click the plus icon to add a new company.
-4. Fill in company details with KVK-number and submit the registration form.
-
-Upon successful registration and validation from the KVK API, the user will be recognized as the owner of the company and will have access to all administrative functionalities associated with it.
-
-### How to add a co-owner to a company
-
-1. Log in to your account.
-2. Navigate to Companies
-3. Click the pencil icon to edit a company.
-4. Search for a user by name, username or email.
-5. Click the add button to add the user as a owner to the company.
+- [x] [MERNSTACK-246] Add useSnackbar notification after successful profile image upload.
 
 ## Technologies
 
