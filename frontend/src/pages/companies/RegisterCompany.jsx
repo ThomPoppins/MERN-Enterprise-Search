@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import BackButton from '../../components/BackButton'
-import Spinner from '../../components/Spinner'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { BACKEND_URL, TEST_KVK_API } from '../../../config.js'
@@ -12,144 +10,138 @@ import kvkNumberValidator from '../../utils/validation/kvkNumberValidator'
 import companySloganValidator from '../../utils/validation/companySloganValidator'
 import companyDescriptionValidator from '../../utils/validation/companyDescriptionValidator'
 import startYearValidator from '../../utils/validation/startYearValidator'
+import Spinner from '../../components/Spinner'
 import { useSelector } from 'react-redux'
 import CompanyLogoModal from '../../components/companies/CompanyLogoModal'
 import Layout from '../../components/layout/Layout'
 
 const RegisterCompany = () => {
   // Input field values for registering a company as state
-  const [name, setName] = useState('')
-  const [logo, setLogo] = useState('')
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
-  const [kvkNumber, setKvkNumber] = useState('')
-  const [slogan, setSlogan] = useState('')
-  const [description, setDescription] = useState('')
-  const [startYear, setStartYear] = useState('')
-
-  // Error state for displaying error messages if the user enters invalid input
-  const [nameError, setNameError] = useState(false)
-  const [emailError, setEmailError] = useState(false)
-  const [phoneError, setPhoneError] = useState(false)
-  const [kvkNumberError, setKvkNumberError] = useState(false)
-  const [sloganError, setSloganError] = useState(false)
-  const [descriptionError, setDescriptionError] = useState(false)
-  const [startYearError, setStartYearError] = useState(false)
-
-  // Specific error messages to display when the user enters invalid input
-  const [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState('')
-
-  // Set showLogoModal to true to show the modal for uploading a company logo
-  const [showLogoModal, setShowLogoModal] = useState(false)
-
-  // Loading state for displaying a spinner while the request is being sent to the backend
-  const [loading, setLoading] = useState(false)
-
-  // @ts-ignore Get the userId from the Redux store
-  const userId = useSelector((state) => state.userId)
-
-  // useNavigate is a hook that returns a navigate function that we can use to navigate to a different page
-  const navigate = useNavigate()
-
-  // useSnackbar is a hook that allows us to show a snackbar https://www.npmjs.com/package/notistack https://iamhosseindhv.com/notistack/demos#use-snackbar
-  const { enqueueSnackbar } = useSnackbar()
+  const [name, setName] = useState(''),
+    [logo, setLogo] = useState(''),
+    [email, setEmail] = useState(''),
+    [phone, setPhone] = useState(''),
+    [kvkNumber, setKvkNumber] = useState(''),
+    [slogan, setSlogan] = useState(''),
+    [description, setDescription] = useState(''),
+    [startYear, setStartYear] = useState(''),
+    // Error state for displaying error messages if the user enters invalid input
+    [nameError, setNameError] = useState(false),
+    [emailError, setEmailError] = useState(false),
+    [phoneError, setPhoneError] = useState(false),
+    [kvkNumberError, setKvkNumberError] = useState(false),
+    [sloganError, setSloganError] = useState(false),
+    [descriptionError, setDescriptionError] = useState(false),
+    [startYearError, setStartYearError] = useState(false),
+    // Specific error messages to display when the user enters invalid input
+    [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState(''),
+    // Set showLogoModal to true to show the modal for uploading a company logo
+    [showLogoModal, setShowLogoModal] = useState(false),
+    // Loading state for displaying a spinner while the request is being sent to the backend
+    [loading, setLoading] = useState(false),
+    // @ts-ignore Get the userId from the Redux store
+    userId = useSelector((state) => state.userId),
+    // useNavigate is a hook that returns a navigate function that we can use to navigate to a different page
+    navigate = useNavigate(),
+    // useSnackbar is a hook that allows us to show a snackbar https://www.npmjs.com/package/notistack https://iamhosseindhv.com/notistack/demos#use-snackbar
+    { enqueueSnackbar } = useSnackbar()
 
   // Validation functions for validating the input fields and put a red border around the input field if the input is invalid
   // and display an error message under the input field explaining the right format
   const validateCompanyName = () => {
-    if (!companyNameValidator(name)) {
-      setNameError(true)
-    } else {
-      setNameError(false)
+      if (companyNameValidator(name)) {
+        setNameError(false)
+      } else {
+        setNameError(true)
+      }
+    },
+    validateEmail = () => {
+      if (emailValidator(email)) {
+        setEmailError(false)
+      } else {
+        setEmailError(true)
+      }
+    },
+    validatePhone = () => {
+      if (phoneNumberValidator(phone, 'NL')) {
+        setPhoneError(false)
+      } else {
+        setPhoneError(true)
+      }
+    },
+    validateKvkNumber = async () => {
+      if (await kvkNumberValidator(kvkNumber)) {
+        setKvkNumberError(false)
+      } else {
+        setKvkNumberError(true)
+        throw new Error('Invalid KVK number!')
+      }
+    },
+    validateSlogan = () => {
+      if (companySloganValidator(slogan)) {
+        setSloganError(false)
+      } else {
+        setSloganError(true)
+      }
+    },
+    validateDescription = () => {
+      if (companyDescriptionValidator(description)) {
+        setDescriptionError(false)
+      } else {
+        setDescriptionError(true)
+      }
+    },
+    validateStartYear = () => {
+      if (startYearValidator(startYear)) {
+        setStartYearError(false)
+      } else {
+        setStartYearError(true)
+      }
     }
-  }
-  const validateEmail = () => {
-    if (!emailValidator(email)) {
-      setEmailError(true)
-    } else {
-      setEmailError(false)
-    }
-  }
-  const validatePhone = () => {
-    if (!phoneNumberValidator(phone, 'NL')) {
-      setPhoneError(true)
-    } else {
-      setPhoneError(false)
-    }
-  }
-  const validateKvkNumber = async () => {
-    if (!(await kvkNumberValidator(kvkNumber))) {
-      setKvkNumberError(true)
-      throw new Error('Invalid KVK number!')
-    } else {
-      setKvkNumberError(false)
-    }
-  }
-  const validateSlogan = () => {
-    if (!companySloganValidator(slogan)) {
-      setSloganError(true)
-    } else {
-      setSloganError(false)
-    }
-  }
-  const validateDescription = () => {
-    if (!companyDescriptionValidator(description)) {
-      setDescriptionError(true)
-    } else {
-      setDescriptionError(false)
-    }
-  }
-  const validateStartYear = () => {
-    if (!startYearValidator(startYear)) {
-      setStartYearError(true)
-    } else {
-      setStartYearError(false)
-    }
-  }
 
   // Handle onChange events for all input fields
-  const handleNameChange = (e) => {
-    setName(e.target.value)
-    if (nameError) {
-      validateCompanyName()
+  const handleNameChange = (event) => {
+      setName(event.target.value)
+      if (nameError) {
+        validateCompanyName()
+      }
+    },
+    handleEmailChange = (event) => {
+      setEmail(event.target.value)
+      if (emailError) {
+        validateEmail()
+      }
+    },
+    handlePhoneChange = (event) => {
+      setPhone(event.target.value)
+      if (phoneError) {
+        validatePhone()
+      }
+    },
+    handleKvkNumberChange = async (event) => {
+      setKvkNumber(event.target.value)
+      if (kvkNumberError) {
+        await validateKvkNumber()
+      }
+    },
+    handleSloganChange = (event) => {
+      setSlogan(event.target.value)
+      if (sloganError) {
+        validateSlogan()
+      }
+    },
+    handleDescriptionChange = (event) => {
+      setDescription(event.target.value)
+      if (descriptionError) {
+        validateDescription()
+      }
+    },
+    handleStartYearChange = (event) => {
+      setStartYear(event.target.value)
+      if (startYearError) {
+        validateStartYear()
+      }
     }
-  }
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value)
-    if (emailError) {
-      validateEmail()
-    }
-  }
-  const handlePhoneChange = (e) => {
-    setPhone(e.target.value)
-    if (phoneError) {
-      validatePhone()
-    }
-  }
-  const handleKvkNumberChange = async (e) => {
-    setKvkNumber(e.target.value)
-    if (kvkNumberError) {
-      await validateKvkNumber()
-    }
-  }
-  const handleSloganChange = (e) => {
-    setSlogan(e.target.value)
-    if (sloganError) {
-      validateSlogan()
-    }
-  }
-  const handleDescriptionChange = (e) => {
-    setDescription(e.target.value)
-    if (descriptionError) {
-      validateDescription()
-    }
-  }
-  const handleStartYearChange = (e) => {
-    setStartYear(e.target.value)
-    if (startYearError) {
-      validateStartYear()
-    }
-  }
 
   // Display error messages if the user enters invalid input with useSnackbar
   useEffect(() => {
@@ -248,20 +240,19 @@ const RegisterCompany = () => {
     }
 
     const data = {
-      // TODO: [MERNSTACK-132] Add all companies fields that can be registered
-      name: name,
-      logo: logo,
-      email: email,
-      phone: phone,
-      kvkNumber: kvkNumber,
-      slogan: slogan,
-      startYear: startYear,
-      description: description,
-      owners: [{ userId: userId }], // Make sure that the user that registers the company is added as an owner
+      name,
+      logo,
+      email,
+      phone,
+      kvkNumber,
+      slogan,
+      startYear,
+      description,
+      owners: [{ userId }],
     }
     setLoading(true)
     axios
-      .post(BACKEND_URL + '/companies', data)
+      .post(`${BACKEND_URL}/companies`, data)
       .then(() => {
         setLoading(false)
         enqueueSnackbar('Company registered successfully!', {
@@ -301,12 +292,15 @@ const RegisterCompany = () => {
         {loading ? <Spinner /> : ''}
         <div className='flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto'>
           <div className='my-4'>
-            <label className='text-xl mr-4'>Name</label>
+            <label className='text-xl mr-4' htmlFor='company-name-input'>
+              Name
+            </label>
             <input
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 nameError ? 'border-red-500' : ''
               }`}
               data-test-id='company-name-input'
+              id='company-name-input'
               onBlur={validateCompanyName}
               onChange={handleNameChange}
               type='text'
@@ -324,7 +318,7 @@ const RegisterCompany = () => {
           </div>
           {/* Company logo */}
           <div className='my-4'>
-            <label className='text-xl mr-4'>Logo</label>
+            <span className='text-xl mr-4'>Logo</span>
             <div className='w-full'>
               <div className='flex justify-center items-center my-4'>
                 <div className='flex justify-center'>
@@ -338,6 +332,7 @@ const RegisterCompany = () => {
                   className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
                   data-test-id='upload-logo-button'
                   onClick={() => setShowLogoModal(true)}
+                  type='button'
                 >
                   Upload Logo
                 </button>
@@ -351,12 +346,15 @@ const RegisterCompany = () => {
             </div>
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4'>Email</label>
+            <label className='text-xl mr-4' htmlFor='company-email-input'>
+              Email
+            </label>
             <input
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 emailError ? 'border-red-500' : ''
               }`}
               data-test-id='company-email-input'
+              id='company-email-input'
               onBlur={validateEmail}
               onChange={handleEmailChange}
               type='text'
@@ -371,12 +369,15 @@ const RegisterCompany = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4'>Phone</label>
+            <label className='text-xl mr-4' htmlFor='company-phone-input'>
+              Phone
+            </label>
             <input
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 phoneError ? 'border-red-500' : ''
               }`}
               data-test-id='company-phone-input'
+              id='company-phone-input'
               onBlur={validatePhone}
               onChange={handlePhoneChange}
               type='text'
@@ -391,7 +392,9 @@ const RegisterCompany = () => {
             ''
           )}
           <div className='my-4'>
-            <label className='text-xl mr-4'>KVK Number</label>
+            <label className='text-xl mr-4' htmlFor='company-kvk-number-input'>
+              KVK Number
+            </label>
             {TEST_KVK_API ? (
               <div className='mb-4'>
                 <p className='text-gray-400'>
@@ -413,6 +416,7 @@ const RegisterCompany = () => {
                 kvkNumberError ? 'border-red-500' : ''
               }`}
               data-test-id='company-kvk-number-input'
+              id='company-kvk-number-input'
               onBlur={validateKvkNumber}
               onChange={handleKvkNumberChange}
               type='text'
@@ -429,12 +433,15 @@ const RegisterCompany = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4'>Slogan</label>
+            <label className='text-xl mr-4' htmlFor='company-slogan-input'>
+              Slogan
+            </label>
             <input
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 sloganError ? 'border-red-500' : ''
               }`}
               data-test-id='company-slogan-input'
+              id='company-slogan-input'
               onBlur={validateSlogan}
               onChange={handleSloganChange}
               type='text'
@@ -450,12 +457,15 @@ const RegisterCompany = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4'>Company Description</label>
+            <label className='text-xl mr-4' htmlFor='company-description-input'>
+              Company Description
+            </label>
             <textarea
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 descriptionError ? 'border-red-500' : ''
               }`}
               data-test-id='company-description-input'
+              id='company-description-input'
               onBlur={validateDescription}
               onChange={handleDescriptionChange}
               value={description}
@@ -470,12 +480,15 @@ const RegisterCompany = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4'>Start Year</label>
+            <label className='text-xl mr-4' htmlFor='company-start-year-input'>
+              Start Year
+            </label>
             <input
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 startYearError ? 'border-red-500' : ''
               }`}
               data-test-id='company-start-year-input'
+              id='company-start-year-input'
               onBlur={validateStartYear}
               onChange={handleStartYearChange}
               type='number'
@@ -484,8 +497,8 @@ const RegisterCompany = () => {
             {startYearError ? (
               <p className='text-red-500 text-sm'>
                 Start year must be a valid year and never can be later then the
-                current year. If company hasn't started yet, register company
-                when it starts.
+                current year. If company hasn&apos;t started yet, register
+                company when it starts.
               </p>
             ) : (
               ''
@@ -495,6 +508,7 @@ const RegisterCompany = () => {
             className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
             data-test-id='save-register-company-button'
             onClick={handleSaveCompany}
+            type='button'
           >
             Save
           </button>

@@ -63,10 +63,12 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "cSpell.words": [
+    "apikey",
     "DBURL",
     "devdocs",
     "examplepasswork",
     "exampleuser",
+    "hasn",
     "Kamer",
     "Kaya",
     "Koophandel",

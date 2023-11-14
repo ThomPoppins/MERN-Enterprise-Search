@@ -33,6 +33,7 @@ module.exports = {
   },
   plugins: ['react', 'react-hooks', 'jsx-a11y'],
   rules: {
+    'capitalized-comments': 'off',
     'consistent-return': 'off',
     'default-param-last': 'off',
     'max-lines-per-function': 'off',
@@ -41,7 +42,7 @@ module.exports = {
     'no-ternary': 'off',
     'no-warning-comments': 'off',
     'one-var': 'off',
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react/display-name': 'error',
     'react/forbid-component-props': [
@@ -56,7 +57,7 @@ module.exports = {
       },
     ],
     'react/jsx-key': 'error',
-    'react/jsx-max-depth': ['error', { max: 5 }],
+    'react/jsx-max-depth': ['error', { max: 7 }],
     // Allow arrow functions in JSX props (Remove this rule when performance becomes an issue)
     'react/jsx-no-bind': ['error', { allowArrowFunctions: true }],
     'react/jsx-no-comment-textnodes': 'error',
@@ -83,6 +84,9 @@ module.exports = {
     'sort-keys': 'off',
     // TODO: Set the no-console rule to error when going in to production
     'no-console': 'warn',
+    'multiline-comment-style': 'off',
+    'max-statements': 'off',
+    'max-lines': 'off',
   },
   settings: {
     react: {
