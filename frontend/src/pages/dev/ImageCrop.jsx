@@ -1,6 +1,9 @@
+/* eslint-disable id-length */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useCallback, useRef, useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
+import ReactCrop from 'react-image-crop'
+import 'react-image-crop/dist/ReactCrop.css'
 
 // eslint-disable-next-line func-style
 function generateDownload(canvas, crop) {
@@ -98,7 +101,7 @@ const ImageCrop = () => {
         // Binary string of the file contents
         const binaryStr = reader.result
 
-        console.log('binaryStr: ', binaryStr)
+        setUpImg(binaryStr)
       }
       reader.readAsArrayBuffer(file)
     }, [])
@@ -123,18 +126,57 @@ const ImageCrop = () => {
   }, [completedCrop])
 
   return (
-    <div
-      {...getRootProps({
-        className: 'dropzone bg-purple-500 text-white p-4 rounded-lg mt-4 mx-4',
-      })}
-    >
-      <input {...getInputProps()} />
-      {isDragActive ? (
-        <p>Drop the files here ...</p>
-      ) : (
-        <p>Drag &apos;n&apos; drop some files here, or click to select files</p>
-      )}
-    </div>
+    <>
+      <div
+        {...getRootProps({
+          className:
+            'dropzone bg-purple-500 text-white p-4 rounded-lg mt-4 mx-4',
+        })}
+      >
+        <input
+          {...getInputProps({ accept: 'image/*', onChange: onSelectFile })}
+        />
+        {isDragActive ? (
+          <p>Drop the files here ...</p>
+        ) : (
+          <p>
+            Drag &apos;n&apos; drop some files here, or click to select files
+          </p>
+        )}
+      </div>
+      <ReactCrop
+        crop={crop}
+        onChange={(c) => setCrop(c)}
+        onComplete={(c) => setCompletedCrop(c)}
+        onImageLoaded={onLoad}
+        src={upImg}
+        style={{
+          maxWidth: '400px',
+          maxHeight: '400px',
+          objectFit: 'contain',
+        }}
+      />
+      <div>
+        {/* Canvas to display cropped image */}
+        <canvas
+          ref={previewCanvasRef}
+          // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
+          style={{
+            width: Math.round(completedCrop?.width ?? 0),
+            height: Math.round(completedCrop?.height ?? 0),
+          }}
+        />
+      </div>
+      <button
+        disabled={!completedCrop?.width || !completedCrop?.height}
+        onClick={() =>
+          generateDownload(previewCanvasRef.current, completedCrop)
+        }
+        type='button'
+      >
+        Download cropped image
+      </button>
+    </>
   )
 }
 
