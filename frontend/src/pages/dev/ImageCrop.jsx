@@ -1,9 +1,8 @@
 /* eslint-disable id-length */
-/* eslint-disable react/jsx-props-no-spreading */
-import React, { useCallback, useRef, useState, useEffect } from 'react'
-import { useDropzone } from 'react-dropzone'
+import React, { useState, useCallback, useRef, useEffect } from 'react'
 import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
+import { useDropzone } from 'react-dropzone'
 
 // eslint-disable-next-line func-style
 function generateDownload(canvas, crop) {
@@ -60,55 +59,17 @@ function setCanvasImage(image, canvas, crop) {
   )
 }
 
-const ImageCrop = () => {
-  // upImg is the image selected in base64 format
+// eslint-disable-next-line react/function-component-definition
+export default function ImageCrop() {
   const [upImg, setUpImg] = useState()
 
-  // Is the reference to the image uploaded
   const imgRef = useRef(null)
-  // Is the reference to the preview canvas
   const previewCanvasRef = useRef(null)
 
-  // Crop state
-  const [crop, setCrop] = useState({ unit: 'px', width: 300, aspect: 1 })
-  // Completed crop state
+  const [crop, setCrop] = useState({ unit: 'px', width: 30, aspect: 1 })
   const [completedCrop, setCompletedCrop] = useState(null)
 
-  // On image upload
-  const onDrop = useCallback((acceptedFiles) => {
-    console.log('acceptedFiles: ', acceptedFiles)
-
-    acceptedFiles.forEach((file) => {
-      // File reader to read the file
-      const reader = new FileReader()
-
-      // Read the file as a binary string
-      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsBinaryString
-      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader
-      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onload
-      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onerror
-      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onabort
-      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsArrayBuffer
-      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
-      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsText
-
-      // .onabort: A handler for the abort event. This event is triggered each time the reading operation is aborted.
-      reader.onabort = () => console.log('file reading was aborted')
-      // .onerror: A handler for the error event. This event is triggered each time the reading operation encounter an error.
-      reader.onerror = () => console.log('file reading has failed')
-      // .onload: A handler for the load event. This event is triggered each time the reading operation is successfully completed.
-      reader.onload = () => {
-        // Binary string of the file contents
-        const binaryStr = reader.result
-
-        setUpImg(binaryStr)
-      }
-      reader.readAsArrayBuffer(file)
-    }, [])
-  }, [])
-
-  const { getInputProps, getRootProps, isDragActive } = useDropzone({ onDrop })
-
+  // on selecting file we set load the image on to cropper
   const onSelectFile = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader()
@@ -126,23 +87,9 @@ const ImageCrop = () => {
   }, [completedCrop])
 
   return (
-    <>
-      <div
-        {...getRootProps({
-          className:
-            'dropzone bg-purple-500 text-white p-4 rounded-lg mt-4 mx-4',
-        })}
-      >
-        <input
-          {...getInputProps({ accept: 'image/*', onChange: onSelectFile })}
-        />
-        {isDragActive ? (
-          <p>Drop the files here ...</p>
-        ) : (
-          <p>
-            Drag &apos;n&apos; drop some files here, or click to select files
-          </p>
-        )}
+    <div className='App'>
+      <div>
+        <input accept='image/*' onChange={onSelectFile} type='file' />
       </div>
       <ReactCrop
         crop={crop}
@@ -150,11 +97,6 @@ const ImageCrop = () => {
         onComplete={(c) => setCompletedCrop(c)}
         onImageLoaded={onLoad}
         src={upImg}
-        style={{
-          maxWidth: '400px',
-          maxHeight: '400px',
-          objectFit: 'contain',
-        }}
       />
       <div>
         {/* Canvas to display cropped image */}
@@ -162,13 +104,17 @@ const ImageCrop = () => {
           ref={previewCanvasRef}
           // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
           style={{
-            width: '400px',
-            height: '400px',
+            width: Math.round(completedCrop?.width ?? 0),
+            height: Math.round(completedCrop?.height ?? 0),
           }}
         />
       </div>
+      <p>
+        Note that the download below won&apos;t work in this sandbox due to the
+        iframe missing &apos;allow-downloads&apos;. It&apos;s just for your
+        reference.
+      </p>
       <button
-        className='bg-purple-500 text-white p-4 rounded-lg mt-4 mx-4'
         disabled={!completedCrop?.width || !completedCrop?.height}
         onClick={() =>
           generateDownload(previewCanvasRef.current, completedCrop)
@@ -177,8 +123,6 @@ const ImageCrop = () => {
       >
         Download cropped image
       </button>
-    </>
+    </div>
   )
 }
-
-export default ImageCrop
