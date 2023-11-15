@@ -87,7 +87,7 @@ export default function ImageCrop() {
   }, [completedCrop])
 
   return (
-    <div className='App'>
+    <div className='w-[500px] h-[500px]'>
       <div>
         <input accept='image/*' onChange={onSelectFile} type='file' />
       </div>
@@ -115,6 +115,7 @@ export default function ImageCrop() {
         reference.
       </p>
       <button
+        className='bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded'
         disabled={!completedCrop?.width || !completedCrop?.height}
         onClick={() =>
           generateDownload(previewCanvasRef.current, completedCrop)
