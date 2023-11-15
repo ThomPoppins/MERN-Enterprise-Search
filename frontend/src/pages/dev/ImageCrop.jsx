@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable id-length */
 import React, { useState, useCallback, useRef, useEffect } from 'react'
 import ReactCrop from 'react-image-crop'
@@ -82,12 +83,39 @@ export default function ImageCrop() {
     imgRef.current = img
   }, [])
 
+  const onDrop = useCallback((acceptedFiles) => {
+    acceptedFiles.forEach((file) => {
+      const reader = new FileReader()
+
+      reader.onabort = () => console.log('file reading was aborted')
+      reader.onerror = () => console.log('file reading has failed')
+      reader.onload = () => {
+        // Do whatever you want with the file contents
+        const binaryStr = reader.result
+        console.log(binaryStr)
+      }
+      reader.readAsArrayBuffer(file)
+    })
+  }, [])
+
+  const { getRootProps, getInputProps } = useDropzone({ onDrop })
+
   useEffect(() => {
     setCanvasImage(imgRef.current, previewCanvasRef.current, completedCrop)
   }, [completedCrop])
 
   return (
     <div className='relative'>
+      <div
+        {...getRootProps({
+          className:
+            'dropzone w-[300px] h-[300px] bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded',
+          onDrop,
+        })}
+      >
+        <input {...getInputProps()} />
+        <p>Drag &apos;n&apos; drop some files here, or click to select files</p>
+      </div>
       <div>
         {/* Canvas to display cropped image */}
         <canvas
@@ -120,9 +148,9 @@ export default function ImageCrop() {
         />
       </div>
 
-      {/* <div>
+      <div>
         <input accept='image/*' onChange={onSelectFile} type='file' />
-      </div> */}
+      </div>
 
       <p>
         Note that the download below won&apos;t work in this sandbox due to the
