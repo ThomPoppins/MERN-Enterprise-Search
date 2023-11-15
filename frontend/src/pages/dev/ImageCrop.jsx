@@ -1,9 +1,77 @@
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useCallback } from 'react'
+import React, { useCallback, useRef, useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 
+// eslint-disable-next-line func-style
+function generateDownload(canvas, crop) {
+  if (!crop || !canvas) {
+    return
+  }
+
+  canvas.toBlob(
+    (blob) => {
+      const previewUrl = window.URL.createObjectURL(blob)
+
+      const anchor = document.createElement('a')
+      anchor.download = 'cropPreview.png'
+      anchor.href = URL.createObjectURL(blob)
+      anchor.click()
+
+      window.URL.revokeObjectURL(previewUrl)
+    },
+    'image/png',
+    1,
+  )
+}
+
+// eslint-disable-next-line func-style
+function setCanvasImage(image, canvas, crop) {
+  if (!crop || !canvas || !image) {
+    return
+  }
+
+  const scaleX = image.naturalWidth / image.width
+  const scaleY = image.naturalHeight / image.height
+  const ctx = canvas.getContext('2d')
+  // refer https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
+  const pixelRatio = window.devicePixelRatio
+
+  canvas.width = crop.width * pixelRatio * scaleX
+  canvas.height = crop.height * pixelRatio * scaleY
+
+  // refer https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setTransform
+  ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
+  ctx.imageSmoothingQuality = 'high'
+
+  // refer https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
+  ctx.drawImage(
+    image,
+    crop.x * scaleX,
+    crop.y * scaleY,
+    crop.width * scaleX,
+    crop.height * scaleY,
+    0,
+    0,
+    crop.width * scaleX,
+    crop.height * scaleY,
+  )
+}
+
 const ImageCrop = () => {
+  // upImg is the image selected in base64 format
+  const [upImg, setUpImg] = useState()
+
+  // Is the reference to the image uploaded
+  const imgRef = useRef(null)
+  // Is the reference to the preview canvas
+  const previewCanvasRef = useRef(null)
+
+  // Crop state
+  const [crop, setCrop] = useState({ unit: 'px', width: 300, aspect: 1 })
+  // Completed crop state
+  const [completedCrop, setCompletedCrop] = useState(null)
+
+  // On image upload
   const onDrop = useCallback((acceptedFiles) => {
     console.log('acceptedFiles: ', acceptedFiles)
 
@@ -37,6 +105,22 @@ const ImageCrop = () => {
   }, [])
 
   const { getInputProps, getRootProps, isDragActive } = useDropzone({ onDrop })
+
+  const onSelectFile = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const reader = new FileReader()
+      reader.addEventListener('load', () => setUpImg(reader.result))
+      reader.readAsDataURL(e.target.files[0])
+    }
+  }
+
+  const onLoad = useCallback((img) => {
+    imgRef.current = img
+  }, [])
+
+  useEffect(() => {
+    setCanvasImage(imgRef.current, previewCanvasRef.current, completedCrop)
+  }, [completedCrop])
 
   return (
     <div
