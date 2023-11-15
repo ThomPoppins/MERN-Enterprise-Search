@@ -24,6 +24,7 @@
     "react": "^18.2.0",
     "react-avatar-edit": "^1.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-icons": "^4.11.0",
     "react-image-crop": "^8.6.12",
     "react-redux": "^8.1.2",
@@ -33,6 +34,8 @@
     "redux-thunk": "^2.4.2"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.1.0",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",

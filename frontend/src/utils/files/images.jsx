@@ -7,6 +7,7 @@
 export function base64StringToFile(base64String, filename) {
   // eslint-disable-next-line no-var
   var arr = base64String.split(','),
+    // eslint-disable-next-line prefer-named-capture-group, require-unicode-regexp
     mime = arr[0].match(/:(.*?);/)[1],
     bstr = atob(arr[1]),
     // eslint-disable-next-line id-length

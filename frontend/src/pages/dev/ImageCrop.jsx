@@ -1,144 +1,56 @@
-import {
-  BACKEND_URL,
-  FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL,
-  MALE_PROFILE_PICTURE_PLACEHOLDER_URL,
-} from '../../../config'
-import React, { useEffect, useState } from 'react'
-import { BiPencil } from 'react-icons/bi'
-import DevEditProfilePictureModal from '../../components/dev/DevEditProfilePictureModal'
-import Layout from '../../components/layout/Layout'
-import { useSelector } from 'react-redux'
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useCallback } from 'react'
+import { useDropzone } from 'react-dropzone'
 
 const ImageCrop = () => {
-  //  userId is a string from the Redux store state
-  const { userId, user } = useSelector((state) => state)
-  // Placeholder for profile picture dependent on gender
-  const [profilePicturePlaceholderURL, setProfilePicturePlaceholderURL] =
-    useState('')
-  // State for showing the edit profile picture modal
-  const [showEditProfilePictureModal, setShowEditProfilePictureModal] =
-    useState(false)
-  // Handle the edit profile picture button click event
-  const handleEditProfilePicture = () => {
-    setShowEditProfilePictureModal(true)
-  }
+  const onDrop = useCallback((acceptedFiles) => {
+    console.log('acceptedFiles: ', acceptedFiles)
 
-  // When the user is available from the Redux store, set the profile picture placeholder URL
-  useEffect(() => {
-    if (!user) {
-      return
-    }
+    acceptedFiles.forEach((file) => {
+      // File reader to read the file
+      const reader = new FileReader()
 
-    // Set placeholder image for when the user hasn't uploaded a profile picture yet
-    if (user.gender === 'Woman') {
-      // Female placeholder image
-      setProfilePicturePlaceholderURL(
-        `${BACKEND_URL}${FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL}`,
-      )
-    } else {
-      // Male placeholder image
-      setProfilePicturePlaceholderURL(
-        `${BACKEND_URL}${MALE_PROFILE_PICTURE_PLACEHOLDER_URL}`,
-      )
-    }
-  }, [user])
+      // Read the file as a binary string
+      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsBinaryString
+      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader
+      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onload
+      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onerror
+      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/onabort
+      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsArrayBuffer
+      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsDataURL
+      // https://developer.mozilla.org/en-US/docs/Web/API/FileReader/readAsText
+
+      // .onabort: A handler for the abort event. This event is triggered each time the reading operation is aborted.
+      reader.onabort = () => console.log('file reading was aborted')
+      // .onerror: A handler for the error event. This event is triggered each time the reading operation encounter an error.
+      reader.onerror = () => console.log('file reading has failed')
+      // .onload: A handler for the load event. This event is triggered each time the reading operation is successfully completed.
+      reader.onload = () => {
+        // Binary string of the file contents
+        const binaryStr = reader.result
+
+        console.log('binaryStr: ', binaryStr)
+      }
+      reader.readAsArrayBuffer(file)
+    }, [])
+  }, [])
+
+  const { getInputProps, getRootProps, isDragActive } = useDropzone({ onDrop })
 
   return (
-    <Layout>
-      <div className='mx-auto p-5'>
-        <div className='relative w-[320px] mx-auto'>
-          <img
-            alt='profile'
-            className='w-64 h-64 mt-2 rounded-full mx-auto object-cover'
-            src={
-              user?.profilePictureURL
-                ? user?.profilePictureURL
-                : profilePicturePlaceholderURL
-            }
-          />
-          <img alt='preview' id='blob-preview' src='' />
-          <button
-            className='absolute bottom-3 right-6 bg-purple-600 pl-1 pr-2 flex items-center border-2 border-purple-900 rounded-lg cursor-pointer hover:bg-purple-700'
-            data-test-id='edit-profile-picture-button'
-            onClick={handleEditProfilePicture}
-            onKeyDown={(event) => {
-              if (event.key === 'Escape') {
-                setShowEditProfilePictureModal(false)
-              }
-            }}
-            tabIndex={0}
-            type='button'
-          >
-            <BiPencil className='float-left text-gray mr-1' />
-            {user?.profilePictureURL ? 'Edit' : 'Upload'}
-          </button>
-        </div>
-
-        <div className='mx-auto lg:w-9/12 border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-6'>
-          <h1 className='text-3xl my-2'>
-            {user?.firstName} {user?.lastName}
-          </h1>
-
-          <p className='text-blue-400 text-sm'>
-            {user ? `@${user?.username}` : ''}
-          </p>
-
-          <div className='mx-auto mt-4 mb-3'>
-            {!user?.profilePictureURL && (
-              <div className='flex space-x-2 text-xl '>
-                <p>
-                  You haven&apos;t set a profile picture yet!{' '}
-                  <button
-                    className='hover:text-green-400 text-blue-400 cursor-pointer'
-                    data-test-id='upload-profile-picture-button'
-                    onClick={handleEditProfilePicture}
-                    type='button'
-                  >
-                    Upload yours now!
-                  </button>
-                </p>
-              </div>
-            )}
-
-            <table>
-              <thead>
-                <tr>
-                  <th className='text-gray-400 text-2xl'>About Me</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <span className='text-gray-400'>Email </span>
-                  </td>
-                  <td>
-                    <span>{user?.email}</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <span className='text-gray-400'>Gender </span>
-                  </td>
-                  <td>
-                    <span>{user?.gender}</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <p className=''>
-              Visit the Companies link in the navigation bar to see some of this
-              this application&apos;s features in action.
-            </p>
-          </div>
-        </div>
-      </div>
-      {showEditProfilePictureModal ? (
-        <DevEditProfilePictureModal
-          onClose={() => setShowEditProfilePictureModal(false)}
-          userId={userId}
-        />
-      ) : null}{' '}
-    </Layout>
+    <div
+      {...getRootProps({
+        className: 'dropzone bg-purple-500 text-white p-4 rounded-lg mt-4 mx-4',
+      })}
+    >
+      <input {...getInputProps()} />
+      {isDragActive ? (
+        <p>Drop the files here ...</p>
+      ) : (
+        <p>Drag &apos;n&apos; drop some files here, or click to select files</p>
+      )}
+    </div>
   )
 }
 
