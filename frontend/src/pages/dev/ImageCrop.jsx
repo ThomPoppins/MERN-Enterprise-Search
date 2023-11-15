@@ -162,12 +162,13 @@ const ImageCrop = () => {
           ref={previewCanvasRef}
           // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
           style={{
-            width: Math.round(completedCrop?.width ?? 0),
-            height: Math.round(completedCrop?.height ?? 0),
+            width: '400px',
+            height: '400px',
           }}
         />
       </div>
       <button
+        className='bg-purple-500 text-white p-4 rounded-lg mt-4 mx-4'
         disabled={!completedCrop?.width || !completedCrop?.height}
         onClick={() =>
           generateDownload(previewCanvasRef.current, completedCrop)
