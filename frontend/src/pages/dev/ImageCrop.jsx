@@ -107,11 +107,11 @@ export default function ImageCrop() {
   }, [completedCrop])
 
   return (
-    <div className='relative'>
+    <div className=''>
       <div
         {...getRootProps({
           className:
-            'dropzone w-[300px] h-[300px] bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded',
+            'dropzone mx-auto mt-[200px] w-[300px] h-[300px] bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded',
         })}
       >
         <input
