@@ -87,28 +87,36 @@ export default function ImageCrop() {
   }, [completedCrop])
 
   return (
-    <div className='w-[500px] h-[500px]'>
+    <div className=''>
       <div>
-        <input accept='image/*' onChange={onSelectFile} type='file' />
+        <ReactCrop
+          crop={crop}
+          onChange={(c) => setCrop(c)}
+          onComplete={(c) => setCompletedCrop(c)}
+          onImageLoaded={onLoad}
+          src={upImg}
+          style={{
+            width: '500px',
+            height: '500px',
+            float: 'left',
+          }}
+        />
       </div>
-      <ReactCrop
-        crop={crop}
-        onChange={(c) => setCrop(c)}
-        onComplete={(c) => setCompletedCrop(c)}
-        onImageLoaded={onLoad}
-        src={upImg}
-      />
       <div>
         {/* Canvas to display cropped image */}
         <canvas
           ref={previewCanvasRef}
           // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
           style={{
-            width: Math.round(completedCrop?.width ?? 0),
-            height: Math.round(completedCrop?.height ?? 0),
+            width: '500px',
+            height: '500px',
           }}
         />
       </div>
+      {/* <div>
+        <input accept='image/*' onChange={onSelectFile} type='file' />
+      </div> */}
+
       <p>
         Note that the download below won&apos;t work in this sandbox due to the
         iframe missing &apos;allow-downloads&apos;. It&apos;s just for your
