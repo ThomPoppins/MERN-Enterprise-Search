@@ -87,7 +87,24 @@ export default function ImageCrop() {
   }, [completedCrop])
 
   return (
-    <div className=''>
+    <div className='relative'>
+      <div>
+        {/* Canvas to display cropped image */}
+        <canvas
+          className='rounded-full'
+          ref={previewCanvasRef}
+          // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
+          style={{
+            width: '300px',
+            height: '300px',
+            margin: '10px',
+            position: 'absolute',
+            top: '100px',
+            right: '300px',
+            border: '5px solid purple',
+          }}
+        />
+      </div>
       <div>
         <ReactCrop
           crop={crop}
@@ -98,24 +115,11 @@ export default function ImageCrop() {
           style={{
             width: '500px',
             height: '500px',
-            float: 'left',
             marginRight: '30px',
           }}
         />
       </div>
-      <div>
-        {/* Canvas to display cropped image */}
-        <canvas
-          className='rounded-full'
-          ref={previewCanvasRef}
-          // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
-          style={{
-            width: '500px',
-            height: '500px',
-            margin: '10px',
-          }}
-        />
-      </div>
+
       {/* <div>
         <input accept='image/*' onChange={onSelectFile} type='file' />
       </div> */}
