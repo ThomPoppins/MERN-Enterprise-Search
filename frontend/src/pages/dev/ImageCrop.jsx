@@ -91,10 +91,12 @@ export default function ImageCrop() {
       reader.onerror = () => console.log('file reading has failed')
       reader.onload = () => {
         // Do whatever you want with the file contents
-        const binaryStr = reader.result
-        console.log(binaryStr)
+        const dataURL = reader.result
+        console.log(dataURL)
+
+        setUpImg(dataURL)
       }
-      reader.readAsArrayBuffer(file)
+      reader.readAsDataURL(file)
     })
   }, [])
 
@@ -110,10 +112,14 @@ export default function ImageCrop() {
         {...getRootProps({
           className:
             'dropzone w-[300px] h-[300px] bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded',
-          onDrop,
         })}
       >
-        <input {...getInputProps()} />
+        <input
+          {...getInputProps({
+            accept: 'image/*',
+            onChange: onSelectFile,
+          })}
+        />
         <p>Drag &apos;n&apos; drop some files here, or click to select files</p>
       </div>
       <div>
