@@ -110,13 +110,11 @@ Get a general impression of my application.
 
 ![Profile Picture Modal Preview](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/004.png?raw=true)
 
-If the user wants can he/she still change their mind and choose a different one or cancel the upload because the image is not yet uploaded. The image preview is a Base64 binary image **BLOB** file in the browser memory.
+If the user wants can he/she still change their mind and choose a different one or cancel the upload because the image is not yet uploaded. The image preview is a Base64 URL encoded image.
 
 #### BLOB image
 
 > **Definition:** A binary large object (BLOB or blob) is a collection of binary data stored as a single entity. Blobs are typically images, audio or other multimedia objects, though sometimes binary executable code is stored as a blob.
-
-The Base64 BLOB image is converted from the image file value in the form data and then the string is set to be the `src` value of the preview `img`.
 
 ```javascript
 <img src={blobValueString} />
@@ -1879,7 +1877,7 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-281] Read article about [MongoDB](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-a390d60d08fa).
 - [ ] [MERNSTACK-282] Read article about MERN stack [Security](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-b8e0ac68d087)
 - [ ] [MERNSTACK-283] Read MERN stack [CI/CD & deployment article](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-10699767f4b4)
-- [ ] [MERNSTACK-287] Add image crop to application so everybody can crop their image till it fits the frame. [Almost perfect example, predefined aspect ratio](https://codesandbox.io/s/react-image-crop-demo-with-react-hooks-0h4db?file=/src/App.js), [After getting the first example done, this one might be interesting to investigate](https://codesandbox.io/s/react-image-crop-demo-with-react-hooks-q5lbkn?file=/src/App.tsx) [react-image-crop MANY examples page](https://codesandbox.io/examples/package/react-image-crop), [NPM Page react-image-crop](https://www.npmjs.com/package/react-image-crop).
+- [ ] [MERNSTACK-298] Add image crop to application so everybody can crop their image till it fits the frame. [Almost perfect example, predefined aspect ratio](https://codesandbox.io/s/react-image-crop-demo-with-react-hooks-0h4db?file=/src/App.js), [After getting the first example done, this one might be interesting to investigate](https://codesandbox.io/s/react-image-crop-demo-with-react-hooks-q5lbkn?file=/src/App.tsx) [react-image-crop MANY examples page](https://codesandbox.io/examples/package/react-image-crop), [NPM Page react-image-crop](https://www.npmjs.com/package/react-image-crop).
 - [ ] [MERNSTACK-288] Upgrade ShowCompany to a nice profile page where companies can upload multiple images with titles. This is the start of the timeline or storyline that's it going to become.
 - [ ] [MERNSTACK-289] Use React Dropzone for easy image file select or drag and drop when user uploads profile image.
 - [ ] [MERNSTACK-290] First make possible for the user to crop their profile image within a 1 / 1 aspect ratio so I can use this everywhere in the website UI.
@@ -1887,7 +1885,9 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-293] Get started with the `react-testing-library`. [React Testing Library Documentation](https://testing-library.com/docs/react-testing-library/intro/) [Repository README](https://github.com/testing-library/react-testing-library)
 - [ ] [MERNSTACK-294] Read about testing with `jest-dom` testing library has additional value. [Jest-DOM Repository README](https://github.com/testing-library/jest-dom)
 - [ ] [MERNSTACK-295] Let Jest automatically import tests. import '@testing-library/jest-dom' [Configure Jest to import test imports for you automatically. Learn more in the setup docs!](https://testing-library.com/docs/react-testing-library/setup#cleanup) [Source](https://github.com/testing-library/react-testing-library#basic-example)
-- [ ] [MERNSTACK-]
+- [x] [MERNSTACK-292] Correct the README.md file everywhere I talk about Base64 strings and Blob images. My understanding was wrong and that's why it needs to be corrected to actual information. Base64 is a binary-to-text encoding scheme. Blob stands for Binary Large Object and is used for storing binary data, my understanding was that those two were the same thing, but they are not, Blob is raw binary data and Base64 is a representation of binary data in an ASCII string format.
+- [ ] [MERNSTACK-296] Practice working with breakpoints in VS Code for 30 minutes.
+- [ ] [MERNSTACK-297] Read into Mock Service Worker to optimize testing to declaratively mock API communication in your tests instead of stubbing window.fetch, or relying on third-party adapters. <https://github.com/mswjs/msw>
 - [ ] [MERNSTACK-]
 
 ### Before production checklist
@@ -1907,5 +1907,5 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-278] Production: Establish monitoring and error tracking pre-production using tools like Prometheus, Grafana, and Sentry for enhanced visibility and issue resolution.
 - [ ] [MERNSTACK-269] Production: Address confidential issue, refer to Jira for details if you are involved.
 - [ ] [MERNSTACK-273] Production: Address confidential issue, refer to Jira for details if you are involved.
-- [ ] [MERNSTACK-292] Correct the README.md file everywhere I talk about Base64 strings and Blob images. My understanding was wrong and that's why it needs to be corrected to actual information. Base64 is a binary-to-text encoding scheme. Blob stands for Binary Large Object and is used for storing binary data, my understanding was that those two were the same thing, but they are not, Blob is raw binary data and Base64 is a representation of binary data in an ASCII string format.
+
 - [ ] [MERNSTACK-]
