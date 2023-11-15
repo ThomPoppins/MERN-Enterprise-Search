@@ -5,11 +5,11 @@ import {
 } from '../../../config'
 import React, { useEffect, useState } from 'react'
 import { BiPencil } from 'react-icons/bi'
-import EditProfilePictureModal from '../../components/users/EditProfilePictureModal'
+import DevEditProfilePictureModal from '../../components/dev/DevEditProfilePictureModal'
 import Layout from '../../components/layout/Layout'
 import { useSelector } from 'react-redux'
 
-const UserProfile = () => {
+const ImageCrop = () => {
   //  userId is a string from the Redux store state
   const { userId, user } = useSelector((state) => state)
   // Placeholder for profile picture dependent on gender
@@ -56,10 +56,17 @@ const UserProfile = () => {
                 : profilePicturePlaceholderURL
             }
           />
+          <img alt='preview' id='blob-preview' src='' />
           <button
             className='absolute bottom-3 right-6 bg-purple-600 pl-1 pr-2 flex items-center border-2 border-purple-900 rounded-lg cursor-pointer hover:bg-purple-700'
             data-test-id='edit-profile-picture-button'
             onClick={handleEditProfilePicture}
+            onKeyDown={(event) => {
+              if (event.key === 'Escape') {
+                setShowEditProfilePictureModal(false)
+              }
+            }}
+            tabIndex={0}
             type='button'
           >
             <BiPencil className='float-left text-gray mr-1' />
@@ -126,7 +133,7 @@ const UserProfile = () => {
         </div>
       </div>
       {showEditProfilePictureModal ? (
-        <EditProfilePictureModal
+        <DevEditProfilePictureModal
           onClose={() => setShowEditProfilePictureModal(false)}
           userId={userId}
         />
@@ -135,4 +142,4 @@ const UserProfile = () => {
   )
 }
 
-export default UserProfile
+export default ImageCrop

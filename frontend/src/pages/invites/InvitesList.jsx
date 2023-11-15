@@ -66,8 +66,8 @@ const InvitesList = () => {
         // Filter out the invite that was updated
         //
       })
-      .catch((error) => {
-        console.log('ERROR in InvitesList.jsx updateInviteStatus: ', error)
+      .catch(() => {
+        console.log(`No pending invites.`)
       })
   }
 

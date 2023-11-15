@@ -89,6 +89,7 @@ module.exports = {
     'max-statements': 'off',
     'max-lines': 'off',
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
+    'prefer-destructuring': ['error', { object: true, array: false }],
   },
   settings: {
     react: {

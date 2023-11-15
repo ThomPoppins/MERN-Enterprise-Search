@@ -11,6 +11,7 @@ import LogoutUser from './pages/users/LogoutUser'
 import UserProfile from './pages/users/UserProfile'
 import InvitesList from './pages/invites/InvitesList'
 import UploadImage from './pages/UploadImage'
+import ImageCrop from './pages/dev/ImageCrop.jsx'
 import Home from './pages/Home'
 import Cookies from 'js-cookie'
 import verifyToken from './utils/auth/verifyToken.jsx'
@@ -48,6 +49,8 @@ const App = () => {
         <Route element={<ShowCompany />} path='/companies/details/:id' />
         {/* /invites/* routes */}
         <Route element={<InvitesList />} path='/invites' />
+        {/* /dev route, render dev pages */}
+        <Route element={<ImageCrop />} path='/dev/image-crop' />
       </Routes>
     )
   }
