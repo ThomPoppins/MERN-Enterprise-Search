@@ -99,17 +99,20 @@ export default function ImageCrop() {
             width: '500px',
             height: '500px',
             float: 'left',
+            marginRight: '30px',
           }}
         />
       </div>
       <div>
         {/* Canvas to display cropped image */}
         <canvas
+          className='rounded-full'
           ref={previewCanvasRef}
           // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
           style={{
             width: '500px',
             height: '500px',
+            margin: '10px',
           }}
         />
       </div>
