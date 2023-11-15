@@ -9,7 +9,8 @@
     "lint": "eslint -c ./.eslintrc.cjs src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix -c ./.eslintrc.cjs src/**/*.{js,jsx,ts,tsx,json}",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json,scss} --config ./.prettierrc",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "env-dev": "cross-env NODE_ENV=development"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
@@ -40,6 +41,7 @@
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
     "autoprefixer": "^10.4.15",
+    "cross-env": "^7.0.3",
     "eslint": "^8.53.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-google": "^0.14.0",
@@ -51,6 +53,8 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "global-jsdom": "^9.1.0",
+    "jsdom": "^22.1.0",
     "postcss": "^8.4.29",
     "prettier": "3.0.3",
     "stylelint": "^15.11.0",
