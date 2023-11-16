@@ -16,7 +16,7 @@
   },
   "scripts": {
     "lint-two": "eslint src  --ext js,jsx -c ./.eslintrc.cjs --report-unused-disable-directives --max-warnings 0",
-    "test": "jest --coverage --watchAll --no-cache --verbose --reporters=default",
+    "test": "jest --coverage --watchAll --verbose --reporters=default --randomize",
     "test-detect-open-handles": "jest --detectOpenHandles --coverage --watchAll --no-cache --verbose --reporters=default",
     "dev": "vite",
     "build": "vite build",
@@ -34,6 +34,7 @@
     "eslint-plugin-prettier": "^5.0.1",
     "husky": "^8.0.3",
     "js-cookie": "^3.0.5",
+    "mongodb": "^6.2.0",
     "mongoose": "^8.0.1",
     "notistack": "^3.0.1",
     "prop-types": "^15.8.1",
