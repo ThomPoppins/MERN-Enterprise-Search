@@ -10,6 +10,17 @@ jest.mock('axios')
 
 const mockStore = configureStore([thunk])
 
+jest.mock('mongoose', () => {
+  const mongoose = jest.requireActual('mongoose')
+  return {
+    ...mongoose,
+    Types: {
+      ...mongoose.Types,
+      ObjectId: jest.fn(() => 'mocked-object-id'),
+    },
+  }
+})
+
 describe('InviteOperations component', () => {
   let store
   let updateInviteStatus
@@ -18,18 +29,29 @@ describe('InviteOperations component', () => {
 
   beforeEach(() => {
     store = mockStore({
-      user: 'test user',
+      user: {
+        _id: new mongoose.Types.ObjectId('j3b4kthwj5r2k5b3k'),
+        username: 'test user username',
+        email: 'test user email',
+        firstName: 'test user first name',
+        lastName: 'test user last name',
+        gender: 'Man',
+        profilePicture: new mongoose.Schema.Types.ObjectId('kh32g45vkhj2g'),
+      },
       userId: 'test user id',
     })
 
     updateInviteStatus = jest.fn()
 
     invite = {
-      _id: 'test invite id',
+      _id: new mongoose.Schema.Types.ObjectId('kh32g45vkhj2g'),
+      companyId: new mongoose.Schema.Types.ObjectId('kh32g45vkhj2g'),
+      receiverId: new mongoose.Schema.Types.ObjectId('kh32g45vkhj2g'),
+      kind: 'accepted',
       companyId: 'test company id',
-      receiverId: 'test receiver id',
+      companyName: 'test company name',
+      status: 'test status',
     }
-
     userId = 'test user id'
   })
 
@@ -65,7 +87,9 @@ describe('InviteOperations component', () => {
 
     fireEvent.click(getByTestId('accept-button'))
 
+    // Timeout for stopping the animation after 2 seconds
     expect(setTimeout).toHaveBeenCalledTimes(1)
+    // Timeout for stopping the animation after 2 seconds
     expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 2000)
 
     await waitFor(() => {

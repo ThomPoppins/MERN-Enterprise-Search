@@ -10,12 +10,14 @@
       "^.+\\.(css|less|scss)$": "identity-obj-proxy"
     },
     "setupFilesAfterEnv": [
-      "<rootDir>/setupTests.js"
+      "./setupTests.js",
+      "./jest.setup.js"
     ]
   },
   "scripts": {
     "lint-two": "eslint src  --ext js,jsx -c ./.eslintrc.cjs --report-unused-disable-directives --max-warnings 0",
-    "test": "jest",
+    "test": "jest --coverage --watchAll --no-cache --verbose --reporters=default",
+    "test-detect-open-handles": "jest --detectOpenHandles --coverage --watchAll --no-cache --verbose --reporters=default",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint -c ./.eslintrc.cjs src/**/*.{js,jsx,ts,tsx,json}",
@@ -32,6 +34,7 @@
     "eslint-plugin-prettier": "^5.0.1",
     "husky": "^8.0.3",
     "js-cookie": "^3.0.5",
+    "mongoose": "^8.0.1",
     "notistack": "^3.0.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -44,7 +47,8 @@
     "react-router-dom": "^6.15.0",
     "redux": "^4.2.1",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.4.2"
+    "redux-thunk": "^2.4.2",
+    "util": "^0.12.5"
   },
   "devDependencies": {
     "@babel/plugin-syntax-jsx": "^7.23.3",

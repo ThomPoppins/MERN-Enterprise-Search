@@ -10,22 +10,24 @@ export const getPendingRecievedInvites = (userId) => {
   }
 
   // Promise to get the recieved pending invites
-  const updateRecievedPendingInvitesPromise = new Promise((resolve, reject) => {
-    // Get the recieving pending invites for the user
-    axios
-      .get(`${BACKEND_URL}/invites/receiver/${userId}/pending`)
-      .then((response) => {
-        // console.log("Invites response: ", response); //! TODO: Remove
+  const updateRecievedPendingInvitesPromise = new Promise(
+    async (resolve, reject) => {
+      // Get the recieving pending invites for the user
+      await axios
+        .get(`${BACKEND_URL}/invites/receiver/${userId}/pending`)
+        .then((response) => {
+          // console.log("Invites response: ", response); //! TODO: Remove
 
-        if (response.data.length > 0) {
-          resolve(response.data)
-        }
-        reject(new Error('No pending invites'))
-      })
-      .catch((error) => {
-        console.log('ERROR in InvitesList.jsx get pending invites: ', error)
-      })
-  })
+          if (response.data.length > 0) {
+            resolve(response.data)
+          }
+          reject(new Error('No pending invites'))
+        })
+        .catch((error) => {
+          console.log('ERROR in InvitesList.jsx get pending invites: ', error)
+        })
+    },
+  )
 
   Promise.resolve(updateRecievedPendingInvitesPromise)
     .then((invites) => {
