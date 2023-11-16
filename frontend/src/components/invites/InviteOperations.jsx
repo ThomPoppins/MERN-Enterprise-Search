@@ -44,7 +44,7 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
   }
 
   return (
-    <div id={`operations-${  invite._id}`} key={invite._id}>
+    <div id={`operations-${invite._id}`} key={invite._id}>
       <span className='text-xl'>
         <button
           className={`bg-gradient-to-r from-green-600 to-green-700 hover:from-green-400 hover:to-green-500 rounded-lg w-[82px] float-left ml-1 ${
@@ -52,7 +52,7 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
               ? 'animate-spin-fast'
               : 'animate-bounce hover:animate-none'
           }`}
-          data-test-id='accept-button'
+          data-testid='accept-button'
           onClick={handleAcceptInvite}
         >
           Accept
@@ -62,7 +62,7 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
             className={`hover:bg-gradient-to-r bg-red-900/90 rounded-lg w-[82px] float-right mr-1 ${
               declineButtonPing ? 'animate-ping' : ''
             }`}
-            data-test-id='decline-button'
+            data-testid='decline-button'
             onClick={() => {
               setDeclineButtonPing(true)
               updateInviteStatus(invite._id, 'declined')

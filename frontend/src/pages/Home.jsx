@@ -57,7 +57,7 @@ const Home = () => {
                   <div className='absolute top-[120px] left-[172px] w-full mt-6 mb-3'>
                     <input
                       className='absolute right-[400px] top-[-34px] h-[50px]  border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 py-2 px-4 mt-6 w-2/3'
-                      data-test-id='find-expert-search-query-input'
+                      data-testid='find-expert-search-query-input'
                       onBlur={(event) =>
                         (event.target.placeholder =
                           'For example: plumber, electrician, gardener, developer, something else...')
@@ -74,7 +74,7 @@ const Home = () => {
                           ? 'animate-ping-once bg-gradient-to-l from-green-500 to-green-400'
                           : 'animate-bounce-fast  from-violet-500 to-violet-600 hover:bg-gradient-to-l hover:from-green-500 hover:to-green-400'
                       }`}
-                      data-test-id='find-button'
+                      data-testid='find-button'
                       onClick={handleFindExpertsQuery}
                       type='button'
                     >

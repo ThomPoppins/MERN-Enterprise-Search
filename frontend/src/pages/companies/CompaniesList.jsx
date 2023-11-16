@@ -26,7 +26,7 @@ const CompaniesList = () => {
     updateCompanies = () => {
       setLoading(true)
       axios
-        .get(`${BACKEND_URL  }/companies/owned-companies/${  userId}`)
+        .get(`${BACKEND_URL}/companies/owned-companies/${userId}`)
         .then((response) => {
           setCompanies(response.data.data)
           setLoading(false)
@@ -60,14 +60,14 @@ const CompaniesList = () => {
         <div className='flex justify-center items-center gap-x-4'>
           <button
             className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-gradient-to-l px-4 py-1 rounded-lg'
-            data-test-id='show-card-button'
+            data-testid='show-card-button'
             onClick={() => handleShowTypeChange('card')}
           >
             Card
           </button>
           <button
             className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg'
-            data-test-id='show-table-button'
+            data-testid='show-table-button'
             onClick={() => handleShowTypeChange('table')}
           >
             Table

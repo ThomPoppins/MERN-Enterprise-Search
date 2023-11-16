@@ -36,7 +36,7 @@ const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
   return (
     <div
       className='fixed bg-black/60 top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center'
-      data-test-id='company-delete-modal'
+      data-testid='company-delete-modal'
       onClick={onClose}
       onKeyDown={onClose}
       role='button'
@@ -47,7 +47,7 @@ const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
       {/* https://stackoverflow.com/questions/4616694/what-is-event-bubbling-and-capturing */}
       <div
         className='w-[600px] max-w-full h-[240px] bg-white rounded-xl p-4 flex flex-col items-center relative'
-        data-test-id='company-delete-modal'
+        data-='company-delete-modal'
         onClick={(event) => event.stopPropagation()}
         onKeyDown={(event) => event.stopPropagation()}
         role='button'
@@ -55,7 +55,7 @@ const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
       >
         <AiOutlineClose
           className='absolute right-6 top-6 text-3xl text-red-600 cursor-pointer'
-          data-test-id='close-button'
+          data-testid='close-button'
           onClick={onClose}
         />
 
@@ -66,7 +66,7 @@ const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
           </h3>
           <button
             className='p-4 bg-red-600 text-white m-8 w-full'
-            data-test-id='delete-company-button'
+            data-testid='delete-company-button'
             onClick={handleDeleteCompany}
             type='button'
           >

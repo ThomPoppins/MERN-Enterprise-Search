@@ -71,7 +71,7 @@
      return (
        <div>
          <p>Count: {props.count}</p>
-         <button onClick={props.increment} data-test-id="">
+         <button onClick={props.increment} data-testid="">
            Increment
          </button>
          <button onClick={props.decrement}>Decrement</button>

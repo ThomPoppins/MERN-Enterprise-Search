@@ -43,7 +43,7 @@ const CompaniesSingleRow = ({ company, updateCompanies }) => {
         <div className='flex justify-center gap-x-4'>
           <BiShow
             className='text-3xl text-white hover:text-green-300 cursor-pointer'
-            data-test-id='show-button'
+            data-testid='show-button'
             onClick={() => setShowModal(true)}
           />
           <Link to={`/companies/details/${company._id}`}>
@@ -54,7 +54,7 @@ const CompaniesSingleRow = ({ company, updateCompanies }) => {
           </Link>
           <MdOutlineDelete
             className='text-red-600 text-2xl hover:text-orange-600'
-            data-test-id='delete-button'
+            data-testid='delete-button'
             onClick={() => setShowDeleteModal(true)}
           />
         </div>

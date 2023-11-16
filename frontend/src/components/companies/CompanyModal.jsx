@@ -6,7 +6,7 @@ import { FcBriefcase, FcBusinessman } from 'react-icons/fc'
 const CompanyModal = ({ company, onClose, owners }) => (
   <div
     className='fixed bg-black/60 top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center'
-    data-test-id='company-modal-container'
+    data-testid='company-modal-container'
     onClick={onClose}
     onKeyDown={(event) => event.key === 'Escape' && onClose()}
     role='button'
@@ -16,14 +16,14 @@ const CompanyModal = ({ company, onClose, owners }) => (
     {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
     <div
       className='w-[600px] max-w-full h-auto border-2 border-purple-900 bg-violet-950/40 rounded-lg px-4 py-2 m-4 flex flex-col relative'
-      data-test-id='company-modal'
+      data-testid='company-modal'
       onClick={(event) => event.stopPropagation()}
       role='button'
       tabIndex={0}
     >
       <AiOutlineClose
         className='absolute right-6 top-6 text-3xl text-green-300 hover:text-red-500 cursor-pointer'
-        data-test-id='close-button'
+        data-testid='close-button'
         onClick={onClose}
       />
       <h2 className='w-fit px-4 py-1 bg-purple-500 rounded-lg'>

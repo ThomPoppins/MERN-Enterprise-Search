@@ -6,7 +6,7 @@ import UploadAvatar from '../UploadAvatar'
 const CompanyLogoModal = ({ setLogo, onClose }) => (
   <div
     className='fixed bg-black bg-opacity-60 top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center'
-    data-test-id='company-logo-modal'
+    daya-testid='company-logo-modal'
     onClick={onClose}
     onKeyDown={(event) => event.key === 'Escape' && onClose()}
     role='button'
@@ -17,7 +17,7 @@ const CompanyLogoModal = ({ setLogo, onClose }) => (
     {/* https://stackoverflow.com/questions/4616694/what-is-event-bubbling-and-capturing */}
     <div
       className='w-[600px] max-w-full h-auto bg-white rounded-xl p-4 flex flex-col relative'
-      data-test-id='company-logo-modal-content'
+      data-testid='company-logo-modal-content'
       onClick={(event) => event.stopPropagation()}
       onKeyDown={(event) => event.key === 'Escape' && onClose()}
       role='button'
@@ -25,7 +25,7 @@ const CompanyLogoModal = ({ setLogo, onClose }) => (
     >
       <AiOutlineClose
         className='absolute right-6 top-6 text-3xl text-red-600 cursor-pointer'
-        data-test-id='close-button'
+        data-testid='close-button'
         onClick={onClose}
       />
       <div className='flex justify-center items-center my-4'>

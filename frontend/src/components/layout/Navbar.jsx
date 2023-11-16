@@ -94,7 +94,7 @@ const Navbar = () => {
                   <div className='relative'>
                     <div
                       className='text-white cursor-pointer'
-                      data-test-id='user-dropdown'
+                      data-testid='user-dropdown'
                       onClick={toggleDropdown}
                       onKeyDown={(event) => {
                         if (event.key === 'm') {

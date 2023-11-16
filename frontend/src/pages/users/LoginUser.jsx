@@ -105,7 +105,7 @@ const LoginUser = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 emailError ? 'border-red-500' : ''
               }`}
-              data-test-id='user-email-input'
+              data-testid='user-email-input'
               onBlur={validateEmail}
               onChange={handleEmailChange}
               type='text'
@@ -123,7 +123,7 @@ const LoginUser = () => {
             <label className='text-xl mr-4'>Password</label>
             <input
               className='border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full'
-              data-test-id='user-password-input'
+              data-testid='user-password-input'
               onChange={(e) => setPassword(e.target.value)}
               onKeyDown={(e) => {
                 e.key === 'Enter' && handleLoginUser()
@@ -134,7 +134,7 @@ const LoginUser = () => {
           </div>
           <button
             className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
-            data-test-id='user-login-button'
+            data-testid='user-login-button'
             onClick={handleLoginUser}
           >
             Login

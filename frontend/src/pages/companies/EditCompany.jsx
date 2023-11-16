@@ -672,7 +672,7 @@ const EditCompany = () => {
                       ) : (
                         <button
                           className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
-                          data-test-id='remove-owner-button'
+                          data-testid='remove-owner-button'
                           onClick={handleRemoveUserAsCompanyOwner}
                           type='button'
                           value={owner._id}
@@ -767,7 +767,7 @@ const EditCompany = () => {
                         <div>
                           <button
                             className='bg-gradient-to-r from-violet-600 to-purple-600 hover:from-red-700 hover:to-red-400 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
-                            data-test-id='cancel-invite-button'
+                            data-testid='cancel-invite-button'
                             onClick={handleCancelPendingOwnershipInvite}
                             type='button'
                             value={invite._id}
@@ -797,7 +797,7 @@ const EditCompany = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 nameError ? 'border-red-500' : ''
               }`}
-              data-test-id='name-input'
+              data-testid='name-input'
               id='name-input'
               onBlur={validateCompanyName}
               onChange={handleNameChange}
@@ -830,7 +830,7 @@ const EditCompany = () => {
               <div className='flex justify-center items-center mb-4 mt-8'>
                 <button
                   className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg'
-                  data-test-id='upload-logo-button'
+                  data-testid='upload-logo-button'
                   onClick={() => setShowLogoModal(true)}
                   type='button'
                 >
@@ -854,7 +854,7 @@ const EditCompany = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 emailError ? 'border-red-500' : ''
               }`}
-              data-test-id='company-email-input'
+              data-testid='company-email-input'
               id='company-email-input'
               onBlur={validateEmail}
               onChange={handleEmailChange}
@@ -878,7 +878,7 @@ const EditCompany = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 phoneError ? 'border-red-500' : ''
               }`}
-              data-test-id='company-phone-input'
+              data-testid='company-phone-input'
               id='company-phone-input'
               onBlur={validatePhone}
               onChange={handlePhoneChange}
@@ -903,7 +903,7 @@ const EditCompany = () => {
                   <strong>Note:</strong> Use KVK numbers from{' '}
                   <a
                     className='text-blue-300'
-                    data-test-id='kvk-api-link'
+                    data-testid='kvk-api-link'
                     href='https://developers.kvk.nl/documentation/testing'
                   >
                     this page
@@ -917,7 +917,7 @@ const EditCompany = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 kvkNumberError ? 'border-red-500' : ''
               }`}
-              data-test-id='company-kvk-number-input'
+              data-testid='company-kvk-number-input'
               id='company-kvk-number-input'
               onBlur={validateKvkNumber}
               onChange={handleKvkNumberChange}
@@ -940,7 +940,7 @@ const EditCompany = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 startYearError ? 'border-red-500' : ''
               }`}
-              data-test-id='company-slogan-input'
+              data-testid='company-slogan-input'
               id='company-slogan-input'
               onBlur={validateSlogan}
               onChange={handleSloganChange}
@@ -964,7 +964,7 @@ const EditCompany = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 startYearError ? 'border-red-500' : ''
               }`}
-              data-test-id='company-description-input'
+              data-testid='company-description-input'
               id='company-description-input'
               onBlur={validateDescription}
               onChange={handleDescriptionChange}
@@ -987,7 +987,7 @@ const EditCompany = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 startYearError ? 'border-red-500' : ''
               }`}
-              data-test-id='company-start-year-input'
+              data-testid='company-start-year-input'
               id='company-start-year-input'
               onBlur={validateStartYear}
               onChange={handleStartYearChange}
@@ -1006,7 +1006,7 @@ const EditCompany = () => {
           </div>
           <button
             className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
-            data-test-id='save-edit-company-button'
+            data-testid='save-edit-company-button'
             onClick={handleEditCompany}
             type='button'
           >

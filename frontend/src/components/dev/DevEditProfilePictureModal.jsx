@@ -127,7 +127,7 @@ const DevEditProfilePictureModal = ({ userId, onClose }) => {
   return (
     <div
       className='fixed bg-black/60 top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center'
-      data-test-id='company-modal'
+      data-testid='company-modal'
       onClick={onClose}
       onKeyDown={(event) => {
         if (event.key === 'Escape') {
@@ -140,19 +140,19 @@ const DevEditProfilePictureModal = ({ userId, onClose }) => {
       {/* eslint-disable-next-line */}
       <div
         className='w-[600px] max-w-full h-[510px] border-2 border-purple-900 bg-violet-950/40 rounded-lg px-4 py-4 m-4 flex flex-col relative'
-        data-test-id='company-modal'
+        data-testid='company-modal'
         onClick={(event) => event.stopPropagation()}
       >
         <AiOutlineClose
           className='absolute right-6 top-6 text-3xl text-green-300 hover:text-red-500 cursor-pointer'
-          data-test-id='close-button'
+          data-testid='close-button'
           onClick={onClose}
         />
         <h1>Upload Profile Picture</h1>
 
         <form onSubmit={handleFormSubmit}>
           <input
-            data-test-id='profile-picture-image-input'
+            data-testid='profile-picture-image-input'
             name='image'
             onChange={onSelectFile}
             type='file'
