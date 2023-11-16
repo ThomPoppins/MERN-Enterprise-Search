@@ -6,15 +6,15 @@ import { USER, USER_ID } from '../../store/actions.jsx'
 const verifyToken = async (token) => {
   if (token) {
     await axios
-      .get(`${BACKEND_URL  }/auth/verify-token?token=${  token}`)
+      .get(`${BACKEND_URL}/auth/verify-token?token=${token}`)
       .then(async (response) => {
-        const {userId} = response.data
+        const { userId } = response.data
         store.dispatch({
           type: USER_ID,
           payload: userId,
         })
         await axios
-          .get(`${BACKEND_URL  }/users/user/${  userId}`)
+          .get(`${BACKEND_URL}/users/user/${userId}`)
           .then((response) => {
             const user = response.data
             store.dispatch({

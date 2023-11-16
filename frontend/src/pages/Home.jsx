@@ -5,7 +5,7 @@ import Layout from '../components/layout/Layout'
 import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
-  //
+  // The user ID from Redux state is the active user.
   const userId = useSelector((state) => state.userId),
     // Ping animation when the find button is clicked
     [findButtonPing, setFindButtonPing] = useState(false),

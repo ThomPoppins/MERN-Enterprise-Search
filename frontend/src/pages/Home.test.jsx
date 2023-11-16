@@ -1,14 +1,31 @@
 import React from 'react'
 import axios from 'axios'
+import { act } from 'react-dom/test-utils'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 import configureStore from 'redux-mock-store'
+import verifyToken from '../utils/verifyToken'
 import Home from './Home'
 import mongoose from 'mongoose'
 import { TextEncoder } from 'util'
+import Cookies from 'js-cookie'
+
+const crypto = require('crypto')
+
+// Generate a random 24 byte hex string to use as a user ID for testin with Mongoose.Types.ObjectId()
+const generateHexId = () => {
+  return crypto.randomBytes(12).toString('hex')
+}
 
 const mockStore = configureStore([])
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn(),
+}))
+
+// Get user ID from Redux state that dispatched from verifyToken
 
 describe('Home component', () => {
   jest.setTimeout(2000)
@@ -17,7 +34,7 @@ describe('Home component', () => {
   beforeEach(() => {
     store = mockStore({
       user: {
-        _id: 'test user id',
+        _id: new mongoose.Types.ObjectId(generateHexId()),
         username: 'test user username',
         email: 'test user email',
         firstName: 'test user first name',
@@ -25,25 +42,26 @@ describe('Home component', () => {
         gender: 'Man',
         profilePicture: 'test profile picture',
       },
-      userId: 'test user id',
+      userId: new mongoose.Types.ObjectId(generateHexId()),
       pendingRecievedInvites: [
         {
-          _id: new mongoose.Types.ObjectId('l32h5gj435vl5gb32lj5g2lj'),
+          _id: new mongoose.Types.ObjectId(generateHexId()),
           status: 'pending',
-          senderId: new mongoose.Types.ObjectId('25b4332kjh3k5643k'),
+          senderId: new mongoose.Types.ObjectId(generateHexId()),
           sender: {
-            _id: new mongoose.Types.ObjectId('lqn45vhljw5vgljgq43lqj54g'),
+            _id: new mongoose.Types.ObjectId(generateHexId()),
             firstName: 'test sender first name',
             lastName: 'test sender last name',
             username: 'test sender username',
             email: 'test sender email',
             gender: 'Man',
-            profilePicture: 'test sender profile image ID',
-            profilePictureURL: 'test sender profile picture URL',
+            profilePicture: new mongoose.Types.ObjectId(generateHexId()),
+            profilePictureURL:
+              'http://localhost:5555/placeholders/profile-picture-placeholder-man.jpeg',
           },
-          receiverId: new mongoose.Types.ObjectId('l32h5gj435vl5gb32lj5g2lj'),
+          receiverId: new mongoose.Types.ObjectId(generateHexId()),
           receiver: {
-            _id: new mongoose.Types.ObjectId('lqn45vhljw5vgljgq43lqj54g'),
+            _id: new mongoose.Types.ObjectId(generateHexId()),
             firstName: 'test receiver first name',
             lastName: 'test receiver last name',
             username: 'test receiver username',
@@ -52,7 +70,7 @@ describe('Home component', () => {
             profilePicture: 'test receiver profile image ID',
             profilePictureURL: 'test receiver profile picture URL',
             kind: 'company_ownership',
-            companyId: new mongoose.Types.ObjectId('l32h5gj435vl5gb32lj5g2lj'),
+            companyId: new mongoose.Types.ObjectId(generateHexId()),
             company: {
               name: 'test company name',
               logo: 'test company logo',
@@ -63,9 +81,7 @@ describe('Home component', () => {
               description: 'test company description',
               address: {},
               billingAddress: {},
-              addressFormat: new mongoose.Types.ObjectId(
-                'l32h5gj435vl5gb32lj5g2lj',
-              ),
+              addressFormat: 'NL',
               country: 'NL',
               region: '',
               owners: [
@@ -95,7 +111,7 @@ describe('Home component', () => {
               rating: 5,
               customerts: [],
               premium: 'platinum',
-              vendor: new mongoose.Types.ObjectId('l32h5gj435vl5gb32lj5g2lj'),
+              vendor: new mongoose.Types.ObjectId(generateHexId()),
               employees: [],
               stories: [],
               products: [],
@@ -109,9 +125,7 @@ describe('Home component', () => {
               invoices: [],
               orders: [],
               payments: [],
-              mainImageId: new mongoose.Types.ObjectId(
-                'l32h5gj435vl5gb32lj5g2lj',
-              ),
+              mainImageId: new mongoose.Types.ObjectId(generateHexId()),
               images: [],
               createdAt: '2021-05-01T12:00:00.000Z',
               updatedAt: '2021-05-01T12:00:00.000Z',
@@ -120,6 +134,22 @@ describe('Home component', () => {
         },
       ],
     })
+  })
+
+  // Mock the useNavigate hook
+
+  it('test getting the userId state from Redux after verifyToken has been run in App.jsx and generated a JWT token and set that as a `jwt` cookie.', () => {
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <Home />
+        </MemoryRouter>
+      </Provider>,
+    )
+
+    const userId = store.getState().userId
+
+    expect(userId).toBe('test user id')
   })
 
   it('renders the search input and find button when the user is logged in.', () => {
