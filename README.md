@@ -1889,6 +1889,7 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-296] Practice working with breakpoints in VS Code for 30 minutes.
 - [ ] [MERNSTACK-297] Read into Mock Service Worker to optimize testing to declaratively mock API communication in your tests instead of stubbing window.fetch, or relying on third-party adapters. <https://github.com/mswjs/msw>
 - [ ] [MERNSTACK-]
+  
 
 ### Before production checklist
 
@@ -1907,5 +1908,5 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-278] Production: Establish monitoring and error tracking pre-production using tools like Prometheus, Grafana, and Sentry for enhanced visibility and issue resolution.
 - [ ] [MERNSTACK-269] Production: Address confidential issue, refer to Jira for details if you are involved.
 - [ ] [MERNSTACK-273] Production: Address confidential issue, refer to Jira for details if you are involved.
-
-- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-302] Production: Remove data-testid attributes with babel plugin before going into production.[Babel plugin](https://www.npmjs.com/package/babel-plugin-react-remove-properties).
+- [ ] [MERNSTACK-] 
