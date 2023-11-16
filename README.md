@@ -1888,6 +1888,10 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [x] [MERNSTACK-292] Correct the README.md file everywhere I talk about Base64 strings and Blob images. My understanding was wrong and that's why it needs to be corrected to actual information. Base64 is a binary-to-text encoding scheme. Blob stands for Binary Large Object and is used for storing binary data, my understanding was that those two were the same thing, but they are not, Blob is raw binary data and Base64 is a representation of binary data in an ASCII string format.
 - [ ] [MERNSTACK-296] Practice working with breakpoints in VS Code for 30 minutes.
 - [ ] [MERNSTACK-297] Read into Mock Service Worker to optimize testing to declaratively mock API communication in your tests instead of stubbing window.fetch, or relying on third-party adapters. <https://github.com/mswjs/msw>
+- [ ] [MERNSTACK-] Try vite-jest to get started with testing [npm page](https://www.npmjs.com/package/vite-jest) Read on npm page how to use [es-module-lexer](https://www.npmjs.com/package/es-module-lexer) with vite-jest.
+- [ ] [MERNSTACK-] Try to implement [testing inside of the Vite app.](https://zaferayan.medium.com/how-to-setup-jest-and-react-testing-library-in-vite-project-2600f2d04bdd)
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-]
   
 
