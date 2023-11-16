@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { AiOutlineEdit } from 'react-icons/ai'
 import { BsInfoCircle } from 'react-icons/bs'
@@ -16,7 +17,7 @@ const CompaniesSingleRow = ({ company, updateCompanies }) => {
 
   useEffect(() => {
     const ownerPromises = company.owners.map((owner) =>
-      axios.get(`${BACKEND_URL  }/users/user/${owner.userId}`),
+      axios.get(`${BACKEND_URL}/users/user/${owner.userId}`),
     )
 
     Promise.all(ownerPromises)
@@ -74,6 +75,29 @@ const CompaniesSingleRow = ({ company, updateCompanies }) => {
       ) : null}
     </>
   )
+}
+
+CompaniesSingleRow.propTypes = {
+  company: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    active: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired,
+    slogan: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    logo: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    kvkNumber: PropTypes.string.isRequired,
+    owners: PropTypes.arrayOf(
+      PropTypes.shape({
+        userId: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
+    startYear: PropTypes.number.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    updatedAt: PropTypes.string.isRequired,
+  }).isRequired,
+  updateCompanies: PropTypes.func.isRequired,
 }
 
 export default CompaniesSingleRow

@@ -26,6 +26,11 @@ CompaniesCard.propTypes = {
       phone: PropTypes.string.isRequired,
       email: PropTypes.string.isRequired,
       kvkNumber: PropTypes.string.isRequired,
+      owners: PropTypes.arrayOf(
+        PropTypes.shape({
+          userId: PropTypes.string.isRequired,
+        }),
+      ).isRequired,
       startYear: PropTypes.number.isRequired,
       createdAt: PropTypes.string.isRequired,
       updatedAt: PropTypes.string.isRequired,

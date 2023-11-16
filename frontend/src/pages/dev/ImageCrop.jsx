@@ -108,20 +108,25 @@ export default function ImageCrop() {
 
   return (
     <div className=''>
-      <div
-        {...getRootProps({
-          className:
-            'dropzone mx-auto mt-[200px] w-[300px] h-[300px] bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded',
-        })}
-      >
-        <input
-          {...getInputProps({
-            accept: 'image/*',
-            onChange: onSelectFile,
+      <div className=''>
+        <div
+          {...getRootProps({
+            className:
+              'dropzone mx-auto  w-[300px] h-[300px] bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center',
           })}
-        />
-        <p>Drag &apos;n&apos; drop some files here, or click to select files</p>
+        >
+          <input
+            {...getInputProps({
+              accept: 'image/*',
+              onChange: onSelectFile,
+            })}
+          />
+          <p>
+            Drag &apos;n&apos; drop some files here, or click to select files
+          </p>
+        </div>
       </div>
+
       <div>
         {/* Canvas to display cropped image */}
         <canvas
