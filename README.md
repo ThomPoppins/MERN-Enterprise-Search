@@ -1893,6 +1893,15 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-305] Implement [Jest Snapshot](https://jestjs.io/docs/snapshot-testing) After gaining basic skills and knowledge of working and testing with Jest and react-testing-framework. With Jest snapshot testing you can keep track of all unexpected or any intended UI changes because Jest snapshot makes a snapshot of the rendered components in  [pretty-format](https://github.com/jestjs/jest/tree/main/packages/pretty-format) which is a conversion of all JavaScript to most readable format.
 - [ ] [MERNSTACK-306] Read into [pretty-format](https://github.com/jestjs/jest/tree/main/packages/pretty-format) and use it on console.log statements to make them more readable.
 - [ ] [MERNSTACK-307] Read about how to utilize Istanbul code coverage best. [Best basic introduction](https://medium.com/walmartglobaltech/do-you-have-100-code-coverage-10c09a44832b), [https://istanbul.js.org/](https://istanbul.js.org/), [Jesy, Istanbul and React](https://sergio.io/blog/reactjs-unit-test-and-code-coverage-with-jest)
+- [ ] [MERNSTACK-308] Write a Jest/react-testing-library test for the user login form, as good possible. [ARTICLE ABOUT REACT-TEST-LIBRARY LOGIN FORM TESTING](https://for-devs-by-devs.hashnode.dev/login-form-testing-using-react-testing-library)
+- [ ] [MERNSTACK-309] After [MERNSTACK-308], implement [Mock Service Worker](https://github.com/mswjs/msw) functionality in the login form test.
+- [ ] [MERNSTACK-310] Read into [core-js](https://www.jsdelivr.com/package/npm/core-js-bundle), see if that is something useful for me or not.
+- [ ] [MERNSTACK-] [Read about Vite](https://vitejs.dev/guide/why.html) about Vite has to offer. Get a more general understanding about the advantages of Vite are in comparison to the much more supported create-react-app and make a desicion about a possible migration. [Look through the interesting subsectionds of the Viteconf video](https://www.youtube.com/watch?v=veCxKeLl35A&t=120s&ab_channel=ViteConf)
+- [ ] [MERNSTACK-] Set up Jest in the /backend. 
+- [ ] [MERNSTACK-] Read into [Vite Storybook](https://storybook.js.org/docs/react/builders/vite) and see if it is useful. Also finish the [ViteConf Storybook video presentation](https://youtu.be/veCxKeLl35A?si=qyVnioYMo9KgphVh&t=8575). Storybook claims to be useful for developers for documentation, development and testing.
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
 
 ### Before production checklist
@@ -1912,4 +1921,8 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-269] Production: Address confidential issue, refer to Jira for details if you are involved.
 - [ ] [MERNSTACK-273] Production: Address confidential issue, refer to Jira for details if you are involved.
 - [ ] [MERNSTACK-302] Production: Remove data-testid attributes with babel plugin before going into production.[Babel plugin](https://www.npmjs.com/package/babel-plugin-react-remove-properties).
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
