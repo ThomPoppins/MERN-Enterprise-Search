@@ -1,12 +1,11 @@
 import React from 'react'
-import { render, fireEvent, waitFor } from '@testing-library/react'
+import mongoose from 'mongoose'
 import axios from 'axios'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import configureStore from 'redux-mock-store'
 import { useNavigate } from 'react-router-dom'
 import InvitesList from './InvitesList'
-import mongoose from 'mongoose'
 import { TextEncoder } from 'util'
 
 // Mock Axios

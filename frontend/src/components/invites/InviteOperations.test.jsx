@@ -3,23 +3,13 @@ import { render, fireEvent, waitFor } from '@testing-library/react'
 import axios from 'axios'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
+import mongoose from 'mongoose'
 import InviteOperations from './InviteOperations'
 import configureStore from 'redux-mock-store'
 
 jest.mock('axios')
 
 const mockStore = configureStore([thunk])
-
-jest.mock('mongoose', () => {
-  const mongoose = jest.requireActual('mongoose')
-  return {
-    ...mongoose,
-    Types: {
-      ...mongoose.Types,
-      ObjectId: jest.fn(() => 'mocked-object-id'),
-    },
-  }
-})
 
 describe('InviteOperations component', () => {
   let store

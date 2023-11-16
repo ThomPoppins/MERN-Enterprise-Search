@@ -1888,14 +1888,14 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [x] [MERNSTACK-292] Correct the README.md file everywhere I talk about Base64 strings and Blob images. My understanding was wrong and that's why it needs to be corrected to actual information. Base64 is a binary-to-text encoding scheme. Blob stands for Binary Large Object and is used for storing binary data, my understanding was that those two were the same thing, but they are not, Blob is raw binary data and Base64 is a representation of binary data in an ASCII string format.
 - [ ] [MERNSTACK-296] Practice working with breakpoints in VS Code for 30 minutes.
 - [ ] [MERNSTACK-297] Read into Mock Service Worker to optimize testing to declaratively mock API communication in your tests instead of stubbing window.fetch, or relying on third-party adapters. <https://github.com/mswjs/msw>
-- [ ] [MERNSTACK-] Try vite-jest to get started with testing [npm page](https://www.npmjs.com/package/vite-jest) Read on npm page how to use [es-module-lexer](https://www.npmjs.com/package/es-module-lexer) with vite-jest.
-- [ ] [MERNSTACK-] Try to implement [testing inside of the Vite app.](https://zaferayan.medium.com/how-to-setup-jest-and-react-testing-library-in-vite-project-2600f2d04bdd) [THE Guide to set up Jest on Vite 2023](https://zaferayan.medium.com/how-to-setup-jest-and-react-testing-library-in-vite-project-2600f2d04bdd) 
-- [ ] [MERNSTACK-]
-- [ ] [MERNSTACK-]
-  
+- [x] [MERNSTACK-303] Try vite-jest to get started with testing [npm page](https://www.npmjs.com/package/vite-jest) Read on npm page how to use [es-module-lexer](https://www.npmjs.com/package/es-module-lexer) with vite-jest.
+- [x] [MERNSTACK-304] Try to implement [testing inside of the Vite app.](https://zaferayan.medium.com/how-to-setup-jest-and-react-testing-library-in-vite-project-2600f2d04bdd) [THE Guide to set up Jest on Vite 2023](https://zaferayan.medium.com/how-to-setup-jest-and-react-testing-library-in-vite-project-2600f2d04bdd) 
+- [ ] [MERNSTACK-305] Implement [Jest Snapshot](https://jestjs.io/docs/snapshot-testing) After gaining basic skills and knowledge of working and testing with Jest and react-testing-framework. With Jest snapshot testing you can keep track of all unexpected or any intended UI changes because Jest snapshot makes a snapshot of the rendered components in  [pretty-format](https://github.com/jestjs/jest/tree/main/packages/pretty-format) which is a conversion of all JavaScript to most readable format.
+- [ ] [MERNSTACK-306] Read into [pretty-format](https://github.com/jestjs/jest/tree/main/packages/pretty-format) and use it on console.log statements to make them more readable.
+- [ ] [MERNSTACK-307] Read about how to utilize Istanbul code coverage best. [Best basic introduction](https://medium.com/walmartglobaltech/do-you-have-100-code-coverage-10c09a44832b), [https://istanbul.js.org/](https://istanbul.js.org/), [Jesy, Istanbul and React](https://sergio.io/blog/reactjs-unit-test-and-code-coverage-with-jest)
+- [ ] [MERNSTACK-] 
 
 ### Before production checklist
-
 - [ ] [MERNSTACK-261] Production: Remove all console logs in the frontend.
 - [ ] [MERNSTACK-262] Production: Evaluate and tighten ES Lint coding standard rules for complexity. Address and resolve any complexity issues currently disabled or configured less strict.
 - [ ] [MERNSTACK-263] Production: Review each file to adhere to coding standards, ensuring resolution of all ES Lint errors.
