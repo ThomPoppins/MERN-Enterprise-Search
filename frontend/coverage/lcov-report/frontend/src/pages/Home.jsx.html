@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90% </span>
+                <span class="strong">5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/20</span>
+                <span class='fraction'>1/20</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/6</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.47% </span>
+                <span class="strong">5.26% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/19</span>
+                <span class='fraction'>1/19</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -190,36 +190,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -284,7 +284,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -307,38 +307,38 @@ import { BACKEND_URL } from '../../config'
 import Layout from '../components/layout/Layout'
 import { useNavigate } from 'react-router-dom'
 &nbsp;
-const Home = () =&gt; {
+const Home = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
   //
-  const userId = useSelector((state) =&gt; state.userId),
+  const userId = <span class="cstat-no" title="statement not covered" >useSelector(<span class="fstat-no" title="function not covered" >(s</span>tate) =&gt; <span class="cstat-no" title="statement not covered" >state.userId)</span>,</span>
     // Ping animation when the find button is clicked
-    [findButtonPing, setFindButtonPing] = useState(false),
+    [findButtonPing, setFindButtonPing] = <span class="cstat-no" title="statement not covered" >useState(false),</span>
     // Search query state
-    [searchQuery, setSearchQuery] = useState(''),
-    [urlParams, setUrlParams] = useState(''),
+    [searchQuery, setSearchQuery] = <span class="cstat-no" title="statement not covered" >useState(''),</span>
+    [urlParams, setUrlParams] = <span class="cstat-no" title="statement not covered" >useState(''),</span>
     // React router navigate hook
-    navigate = useNavigate()
+    navigate = <span class="cstat-no" title="statement not covered" >useNavigate()</span>
 &nbsp;
   // Find experts query handler
-  const handleFindExpertsQuery = (event) =&gt; {
-    event.preventDefault()
+  const handleFindExpertsQuery = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>vent) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    event.preventDefault()</span>
 &nbsp;
-    setFindButtonPing(true)
+<span class="cstat-no" title="statement not covered" >    setFindButtonPing(true)</span>
 &nbsp;
     // format string to URL params
-    setUrlParams(searchQuery.replace(/ /gu, '+'))
+<span class="cstat-no" title="statement not covered" >    setUrlParams(searchQuery.replace(/ /gu, '+'))</span>
 &nbsp;
-    navigate(`/find?query=${urlParams}`)
+<span class="cstat-no" title="statement not covered" >    navigate(`/find?query=${urlParams}`)</span>
   }
 &nbsp;
   // Search query input change handler
-  const handleSearchQueryChange = (event) =&gt; {
-    setSearchQuery(event.target.value)
-    setUrlParams(event.target.value.replace(/ /gu, '+'))
+  const handleSearchQueryChange = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e</span>vent) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    setSearchQuery(event.target.value)</span>
+<span class="cstat-no" title="statement not covered" >    setUrlParams(event.target.value.replace(/ /gu, '+'))</span>
   }
 &nbsp;
   // If user is logged in
-  if (userId) {
-    return (
+<span class="cstat-no" title="statement not covered" >  if (userId) {</span>
+<span class="cstat-no" title="statement not covered" >    return (</span>
       &lt;Layout&gt;
         &lt;div className='mt-32'&gt;
           &lt;div className='mx-auto'&gt;
@@ -403,7 +403,7 @@ const Home = () =&gt; {
   }
 &nbsp;
   // If no user is logged in
-  return (
+<span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;Layout&gt;
       &lt;div className='mx-auto lg:w-9/12 border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-32'&gt;
         &lt;h1 className='text-3xl mb-6'&gt;Home&lt;/h1&gt;
@@ -427,7 +427,7 @@ export default Home
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-16T08:07:08.809Z
+                at 2023-11-16T11:04:30.518Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

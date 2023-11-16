@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1700122028837" clover="3.2.0">
-  <project timestamp="1700122028837" name="All files">
-    <metrics statements="154" coveredstatements="110" conditionals="67" coveredconditionals="42" methods="59" coveredmethods="38" elements="280" coveredelements="190" complexity="0" loc="154" ncloc="154" packages="10" files="16" classes="16"/>
+<coverage generated="1700132670543" clover="3.2.0">
+  <project timestamp="1700132670543" name="All files">
+    <metrics statements="128" coveredstatements="38" conditionals="61" coveredconditionals="15" methods="47" coveredmethods="9" elements="236" coveredelements="62" complexity="0" loc="128" ncloc="128" packages="9" files="15" classes="15"/>
     <package name="frontend">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="config.js" path="C:\Users\31616\Documents\Apps\MERN-stack-project\frontend\config.js">
@@ -28,15 +28,15 @@
       </file>
     </package>
     <package name="frontend.src.components.invites">
-      <metrics statements="19" coveredstatements="7" conditionals="4" coveredconditionals="2" methods="9" coveredmethods="3"/>
+      <metrics statements="19" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="9" coveredmethods="0"/>
       <file name="InviteOperations.jsx" path="C:\Users\31616\Documents\Apps\MERN-stack-project\frontend\src\components\invites\InviteOperations.jsx">
-        <metrics statements="19" coveredstatements="7" conditionals="4" coveredconditionals="2" methods="9" coveredmethods="3"/>
+        <metrics statements="19" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="9" coveredmethods="0"/>
         <line num="7" count="1" type="stmt"/>
-        <line num="9" count="4" type="stmt"/>
-        <line num="10" count="4" type="stmt"/>
-        <line num="13" count="8" type="stmt"/>
-        <line num="15" count="8" type="stmt"/>
-        <line num="17" count="4" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
@@ -45,7 +45,7 @@
         <line num="39" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
         <line num="42" count="0" type="stmt"/>
-        <line num="46" count="4" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
         <line num="67" count="0" type="stmt"/>
         <line num="68" count="0" type="stmt"/>
         <line num="69" count="0" type="stmt"/>
@@ -53,161 +53,129 @@
       </file>
     </package>
     <package name="frontend.src.components.layout">
-      <metrics statements="39" coveredstatements="33" conditionals="30" coveredconditionals="16" methods="17" coveredmethods="13"/>
+      <metrics statements="39" coveredstatements="2" conditionals="30" coveredconditionals="0" methods="17" coveredmethods="0"/>
       <file name="Layout.jsx" path="C:\Users\31616\Documents\Apps\MERN-stack-project\frontend\src\components\layout\Layout.jsx">
-        <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="4" coveredmethods="4"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="10" count="17" type="stmt"/>
-        <line num="13" count="11" type="stmt"/>
-        <line num="14" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="15" count="1" type="stmt"/>
-        <line num="18" count="5" type="stmt"/>
-        <line num="20" count="5" type="stmt"/>
-        <line num="24" count="11" type="stmt"/>
+        <metrics statements="8" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
       </file>
       <file name="Navbar.jsx" path="C:\Users\31616\Documents\Apps\MERN-stack-project\frontend\src\components\layout\Navbar.jsx">
-        <metrics statements="31" coveredstatements="25" conditionals="28" coveredconditionals="14" methods="13" coveredmethods="9"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="12" count="17" type="stmt"/>
-        <line num="14" count="17" type="stmt"/>
-        <line num="16" count="11" type="stmt"/>
-        <line num="18" count="17" type="stmt"/>
-        <line num="21" count="11" type="stmt"/>
-        <line num="23" count="11" type="stmt"/>
-        <line num="25" count="11" type="stmt"/>
+        <metrics statements="31" coveredstatements="1" conditionals="28" coveredconditionals="0" methods="13" coveredmethods="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
-        <line num="29" count="11" type="stmt"/>
-        <line num="32" count="11" type="stmt"/>
-        <line num="34" count="6" type="cond" truecount="4" falsecount="0"/>
-        <line num="35" count="4" type="stmt"/>
-        <line num="39" count="2" type="cond" truecount="2" falsecount="0"/>
-        <line num="41" count="2" type="stmt"/>
-        <line num="45" count="11" type="stmt"/>
-        <line num="47" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="51" count="5" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="34" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="39" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="45" count="0" type="stmt"/>
+        <line num="47" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
         <line num="52" count="0" type="stmt"/>
-        <line num="56" count="5" type="stmt"/>
-        <line num="60" count="11" type="stmt"/>
-        <line num="61" count="6" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
         <line num="63" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="64" count="0" type="stmt"/>
-        <line num="68" count="6" type="stmt"/>
-        <line num="71" count="6" type="stmt"/>
-        <line num="72" count="6" type="stmt"/>
-        <line num="76" count="11" type="stmt"/>
+        <line num="68" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="76" count="0" type="stmt"/>
         <line num="100" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="101" count="0" type="stmt"/>
       </file>
     </package>
     <package name="frontend.src.pages">
-      <metrics statements="19" coveredstatements="17" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="4"/>
+      <metrics statements="19" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="0"/>
       <file name="Home.jsx" path="C:\Users\31616\Documents\Apps\MERN-stack-project\frontend\src\pages\Home.jsx">
-        <metrics statements="19" coveredstatements="17" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="4"/>
+        <metrics statements="19" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="0"/>
         <line num="7" count="1" type="stmt"/>
-        <line num="9" count="11" type="stmt"/>
-        <line num="11" count="7" type="stmt"/>
-        <line num="13" count="7" type="stmt"/>
-        <line num="14" count="7" type="stmt"/>
-        <line num="16" count="7" type="stmt"/>
-        <line num="19" count="7" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="31" count="7" type="stmt"/>
-        <line num="32" count="2" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
-        <line num="37" count="7" type="cond" truecount="2" falsecount="0"/>
-        <line num="38" count="6" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="38" count="0" type="stmt"/>
         <line num="62" count="0" type="stmt"/>
         <line num="66" count="0" type="stmt"/>
-        <line num="103" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="frontend.src.pages.invites">
-      <metrics statements="26" coveredstatements="14" conditionals="6" coveredconditionals="3" methods="12" coveredmethods="7"/>
-      <file name="InvitesList.jsx" path="C:\Users\31616\Documents\Apps\MERN-stack-project\frontend\src\pages\invites\InvitesList.jsx">
-        <metrics statements="26" coveredstatements="14" conditionals="6" coveredconditionals="3" methods="12" coveredmethods="7"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="12" count="4" type="stmt"/>
-        <line num="15" count="4" type="stmt"/>
-        <line num="18" count="6" type="stmt"/>
-        <line num="20" count="6" type="stmt"/>
-        <line num="23" count="4" type="stmt"/>
-        <line num="25" count="6" type="stmt"/>
-        <line num="28" count="4" type="stmt"/>
-        <line num="30" count="2" type="stmt"/>
-        <line num="33" count="4" type="stmt"/>
-        <line num="34" count="2" type="stmt"/>
-        <line num="38" count="4" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="58" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="59" count="0" type="stmt"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="63" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="74" count="4" type="stmt"/>
-        <line num="98" count="4" type="stmt"/>
+        <line num="103" count="0" type="stmt"/>
       </file>
     </package>
     <package name="frontend.src.store">
       <metrics statements="22" coveredstatements="18" conditionals="12" coveredconditionals="8" methods="4" coveredmethods="4"/>
       <file name="actions.jsx" path="C:\Users\31616\Documents\Apps\MERN-stack-project\frontend\src\store\actions.jsx">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="7" count="2" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
       </file>
       <file name="reducers.jsx" path="C:\Users\31616\Documents\Apps\MERN-stack-project\frontend\src\store\reducers.jsx">
         <metrics statements="16" coveredstatements="12" conditionals="12" coveredconditionals="8" methods="4" coveredmethods="4"/>
-        <line num="8" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="9" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="8" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="9" count="3" type="cond" truecount="1" falsecount="1"/>
         <line num="11" count="0" type="stmt"/>
-        <line num="13" count="6" type="stmt"/>
-        <line num="16" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="17" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="16" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="17" count="3" type="cond" truecount="1" falsecount="1"/>
         <line num="19" count="0" type="stmt"/>
-        <line num="21" count="6" type="stmt"/>
-        <line num="25" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="26" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="25" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="26" count="3" type="cond" truecount="1" falsecount="1"/>
         <line num="28" count="0" type="stmt"/>
-        <line num="30" count="6" type="stmt"/>
-        <line num="33" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="34" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="30" count="3" type="stmt"/>
+        <line num="33" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="34" count="3" type="cond" truecount="1" falsecount="1"/>
         <line num="36" count="0" type="stmt"/>
-        <line num="38" count="6" type="stmt"/>
+        <line num="38" count="3" type="stmt"/>
       </file>
       <file name="rootReducer.jsx" path="C:\Users\31616\Documents\Apps\MERN-stack-project\frontend\src\store\rootReducer.jsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="9" count="2" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
       </file>
       <file name="store.jsx" path="C:\Users\31616\Documents\Apps\MERN-stack-project\frontend\src\store\store.jsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="8" count="2" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
       </file>
     </package>
     <package name="frontend.src.utils.invites">
-      <metrics statements="14" coveredstatements="6" conditionals="4" coveredconditionals="2" methods="6" coveredmethods="2"/>
+      <metrics statements="14" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="0"/>
       <file name="recievedInvitesUpdater.jsx" path="C:\Users\31616\Documents\Apps\MERN-stack-project\frontend\src\utils\invites\recievedInvitesUpdater.jsx">
-        <metrics statements="14" coveredstatements="6" conditionals="4" coveredconditionals="2" methods="6" coveredmethods="2"/>
-        <line num="7" count="2" type="stmt"/>
-        <line num="8" count="7" type="cond" truecount="2" falsecount="0"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="13" count="5" type="stmt"/>
-        <line num="16" count="5" type="stmt"/>
+        <metrics statements="14" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="6" coveredmethods="0"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
         <line num="21" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="22" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
-        <line num="32" count="5" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
         <line num="41" count="0" type="stmt"/>
         <line num="47" count="0" type="stmt"/>
