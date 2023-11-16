@@ -89,7 +89,7 @@ const UserSearch = ({
 
         <input
           className='border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full'
-          data-test-id='search-input'
+          data-testid='search-input'
           id='searchInput'
           onChange={handleSearch}
           type='text'
@@ -157,7 +157,7 @@ const UserSearch = ({
               <div>
                 <button
                   className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
-                  data-test-id='invite-owner-button'
+                  data-testid='invite-owner-button'
                   onClick={addPendingOwnershipInvite}
                   type='button'
                   value={userResult._id}

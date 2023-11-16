@@ -110,13 +110,11 @@ Get a general impression of my application.
 
 ![Profile Picture Modal Preview](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/004.png?raw=true)
 
-If the user wants can he/she still change their mind and choose a different one or cancel the upload because the image is not yet uploaded. The image preview is a Base64 binary image **BLOB** file in the browser memory.
+If the user wants can he/she still change their mind and choose a different one or cancel the upload because the image is not yet uploaded. The image preview is a Base64 URL encoded image.
 
 #### BLOB image
 
 > **Definition:** A binary large object (BLOB or blob) is a collection of binary data stored as a single entity. Blobs are typically images, audio or other multimedia objects, though sometimes binary executable code is stored as a blob.
-
-The Base64 BLOB image is converted from the image file value in the form data and then the string is set to be the `src` value of the preview `img`.
 
 ```javascript
 <img src={blobValueString} />
@@ -1879,7 +1877,7 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-281] Read article about [MongoDB](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-a390d60d08fa).
 - [ ] [MERNSTACK-282] Read article about MERN stack [Security](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-b8e0ac68d087)
 - [ ] [MERNSTACK-283] Read MERN stack [CI/CD & deployment article](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-10699767f4b4)
-- [ ] [MERNSTACK-287] Add image crop to application so everybody can crop their image till it fits the frame. [Almost perfect example, predefined aspect ratio](https://codesandbox.io/s/react-image-crop-demo-with-react-hooks-0h4db?file=/src/App.js), [After getting the first example done, this one might be interesting to investigate](https://codesandbox.io/s/react-image-crop-demo-with-react-hooks-q5lbkn?file=/src/App.tsx) [react-image-crop MANY examples page](https://codesandbox.io/examples/package/react-image-crop), [NPM Page react-image-crop](https://www.npmjs.com/package/react-image-crop).
+- [ ] [MERNSTACK-298] Add image crop to application so everybody can crop their image till it fits the frame. [Almost perfect example, predefined aspect ratio](https://codesandbox.io/s/react-image-crop-demo-with-react-hooks-0h4db?file=/src/App.js), [After getting the first example done, this one might be interesting to investigate](https://codesandbox.io/s/react-image-crop-demo-with-react-hooks-q5lbkn?file=/src/App.tsx) [react-image-crop MANY examples page](https://codesandbox.io/examples/package/react-image-crop), [NPM Page react-image-crop](https://www.npmjs.com/package/react-image-crop).
 - [ ] [MERNSTACK-288] Upgrade ShowCompany to a nice profile page where companies can upload multiple images with titles. This is the start of the timeline or storyline that's it going to become.
 - [ ] [MERNSTACK-289] Use React Dropzone for easy image file select or drag and drop when user uploads profile image.
 - [ ] [MERNSTACK-290] First make possible for the user to crop their profile image within a 1 / 1 aspect ratio so I can use this everywhere in the website UI.
@@ -1887,11 +1885,26 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-293] Get started with the `react-testing-library`. [React Testing Library Documentation](https://testing-library.com/docs/react-testing-library/intro/) [Repository README](https://github.com/testing-library/react-testing-library)
 - [ ] [MERNSTACK-294] Read about testing with `jest-dom` testing library has additional value. [Jest-DOM Repository README](https://github.com/testing-library/jest-dom)
 - [ ] [MERNSTACK-295] Let Jest automatically import tests. import '@testing-library/jest-dom' [Configure Jest to import test imports for you automatically. Learn more in the setup docs!](https://testing-library.com/docs/react-testing-library/setup#cleanup) [Source](https://github.com/testing-library/react-testing-library#basic-example)
-- [ ] [MERNSTACK-]
-- [ ] [MERNSTACK-]
+- [x] [MERNSTACK-292] Correct the README.md file everywhere I talk about Base64 strings and Blob images. My understanding was wrong and that's why it needs to be corrected to actual information. Base64 is a binary-to-text encoding scheme. Blob stands for Binary Large Object and is used for storing binary data, my understanding was that those two were the same thing, but they are not, Blob is raw binary data and Base64 is a representation of binary data in an ASCII string format.
+- [ ] [MERNSTACK-296] Practice working with breakpoints in VS Code for 30 minutes.
+- [ ] [MERNSTACK-297] Read into Mock Service Worker to optimize testing to declaratively mock API communication in your tests instead of stubbing window.fetch, or relying on third-party adapters. <https://github.com/mswjs/msw>
+- [x] [MERNSTACK-303] Try vite-jest to get started with testing [npm page](https://www.npmjs.com/package/vite-jest) Read on npm page how to use [es-module-lexer](https://www.npmjs.com/package/es-module-lexer) with vite-jest.
+- [x] [MERNSTACK-304] Try to implement [testing inside of the Vite app.](https://zaferayan.medium.com/how-to-setup-jest-and-react-testing-library-in-vite-project-2600f2d04bdd) [THE Guide to set up Jest on Vite 2023](https://zaferayan.medium.com/how-to-setup-jest-and-react-testing-library-in-vite-project-2600f2d04bdd) 
+- [ ] [MERNSTACK-305] Implement [Jest Snapshot](https://jestjs.io/docs/snapshot-testing) After gaining basic skills and knowledge of working and testing with Jest and react-testing-framework. With Jest snapshot testing you can keep track of all unexpected or any intended UI changes because Jest snapshot makes a snapshot of the rendered components in  [pretty-format](https://github.com/jestjs/jest/tree/main/packages/pretty-format) which is a conversion of all JavaScript to most readable format.
+- [ ] [MERNSTACK-306] Read into [pretty-format](https://github.com/jestjs/jest/tree/main/packages/pretty-format) and use it on console.log statements to make them more readable.
+- [ ] [MERNSTACK-307] Read about how to utilize Istanbul code coverage best. [Best basic introduction](https://medium.com/walmartglobaltech/do-you-have-100-code-coverage-10c09a44832b), [https://istanbul.js.org/](https://istanbul.js.org/), [Jesy, Istanbul and React](https://sergio.io/blog/reactjs-unit-test-and-code-coverage-with-jest)
+- [ ] [MERNSTACK-308] Write a Jest/react-testing-library test for the user login form, as good possible. [ARTICLE ABOUT REACT-TEST-LIBRARY LOGIN FORM TESTING](https://for-devs-by-devs.hashnode.dev/login-form-testing-using-react-testing-library)
+- [ ] [MERNSTACK-309] After [MERNSTACK-308], implement [Mock Service Worker](https://github.com/mswjs/msw) functionality in the login form test.
+- [ ] [MERNSTACK-310] Read into [core-js](https://www.jsdelivr.com/package/npm/core-js-bundle), see if that is something useful for me or not.
+- [ ] [MERNSTACK-] [Read about Vite](https://vitejs.dev/guide/why.html) about Vite has to offer. Get a more general understanding about the advantages of Vite are in comparison to the much more supported create-react-app and make a desicion about a possible migration. [Look through the interesting subsectionds of the Viteconf video](https://www.youtube.com/watch?v=veCxKeLl35A&t=120s&ab_channel=ViteConf)
+- [ ] [MERNSTACK-] Set up Jest in the /backend. 
+- [ ] [MERNSTACK-] Read into [Vite Storybook](https://storybook.js.org/docs/react/builders/vite) and see if it is useful. Also finish the [ViteConf Storybook video presentation](https://youtu.be/veCxKeLl35A?si=qyVnioYMo9KgphVh&t=8575). Storybook claims to be useful for developers for documentation, development and testing.
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
 
 ### Before production checklist
-
 - [ ] [MERNSTACK-261] Production: Remove all console logs in the frontend.
 - [ ] [MERNSTACK-262] Production: Evaluate and tighten ES Lint coding standard rules for complexity. Address and resolve any complexity issues currently disabled or configured less strict.
 - [ ] [MERNSTACK-263] Production: Review each file to adhere to coding standards, ensuring resolution of all ES Lint errors.
@@ -1907,5 +1920,9 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-278] Production: Establish monitoring and error tracking pre-production using tools like Prometheus, Grafana, and Sentry for enhanced visibility and issue resolution.
 - [ ] [MERNSTACK-269] Production: Address confidential issue, refer to Jira for details if you are involved.
 - [ ] [MERNSTACK-273] Production: Address confidential issue, refer to Jira for details if you are involved.
-- [ ] [MERNSTACK-292] Correct the README.md file everywhere I talk about Base64 strings and Blob images. My understanding was wrong and that's why it needs to be corrected to actual information. Base64 is a binary-to-text encoding scheme. Blob stands for Binary Large Object and is used for storing binary data, my understanding was that those two were the same thing, but they are not, Blob is raw binary data and Base64 is a representation of binary data in an ASCII string format.
-- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-302] Production: Remove data-testid attributes with babel plugin before going into production.[Babel plugin](https://www.npmjs.com/package/babel-plugin-react-remove-properties).
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 

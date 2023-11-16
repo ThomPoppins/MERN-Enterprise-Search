@@ -299,7 +299,7 @@ const RegisterCompany = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 nameError ? 'border-red-500' : ''
               }`}
-              data-test-id='company-name-input'
+              data-testid='company-name-input'
               id='company-name-input'
               onBlur={validateCompanyName}
               onChange={handleNameChange}
@@ -330,7 +330,7 @@ const RegisterCompany = () => {
               <div className='flex justify-center items-center mb-4 mt-8'>
                 <button
                   className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
-                  data-test-id='upload-logo-button'
+                  data-testid='upload-logo-button'
                   onClick={() => setShowLogoModal(true)}
                   type='button'
                 >
@@ -353,7 +353,7 @@ const RegisterCompany = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 emailError ? 'border-red-500' : ''
               }`}
-              data-test-id='company-email-input'
+              data-testid='company-email-input'
               id='company-email-input'
               onBlur={validateEmail}
               onChange={handleEmailChange}
@@ -376,7 +376,7 @@ const RegisterCompany = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 phoneError ? 'border-red-500' : ''
               }`}
-              data-test-id='company-phone-input'
+              data-testid='company-phone-input'
               id='company-phone-input'
               onBlur={validatePhone}
               onChange={handlePhoneChange}
@@ -401,7 +401,7 @@ const RegisterCompany = () => {
                   <strong>Note:</strong> Use KVK numbers from{' '}
                   <a
                     className='text-blue-600'
-                    data-test-id='kvk-api-link'
+                    data-testid='kvk-api-link'
                     href='https://developers.kvk.nl/documentation/testing'
                   >
                     this page
@@ -415,7 +415,7 @@ const RegisterCompany = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 kvkNumberError ? 'border-red-500' : ''
               }`}
-              data-test-id='company-kvk-number-input'
+              data-testid='company-kvk-number-input'
               id='company-kvk-number-input'
               onBlur={validateKvkNumber}
               onChange={handleKvkNumberChange}
@@ -440,7 +440,7 @@ const RegisterCompany = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 sloganError ? 'border-red-500' : ''
               }`}
-              data-test-id='company-slogan-input'
+              data-testid='company-slogan-input'
               id='company-slogan-input'
               onBlur={validateSlogan}
               onChange={handleSloganChange}
@@ -464,7 +464,7 @@ const RegisterCompany = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 descriptionError ? 'border-red-500' : ''
               }`}
-              data-test-id='company-description-input'
+              data-testid='company-description-input'
               id='company-description-input'
               onBlur={validateDescription}
               onChange={handleDescriptionChange}
@@ -487,7 +487,7 @@ const RegisterCompany = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 startYearError ? 'border-red-500' : ''
               }`}
-              data-test-id='company-start-year-input'
+              data-testid='company-start-year-input'
               id='company-start-year-input'
               onBlur={validateStartYear}
               onChange={handleStartYearChange}
@@ -506,7 +506,7 @@ const RegisterCompany = () => {
           </div>
           <button
             className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
-            data-test-id='save-register-company-button'
+            data-testid='save-register-company-button'
             onClick={handleSaveCompany}
             type='button'
           >

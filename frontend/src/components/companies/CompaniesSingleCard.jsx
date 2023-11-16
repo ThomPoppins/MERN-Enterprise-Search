@@ -1,16 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { BiShow } from 'react-icons/bi'
-import { FcBriefcase } from 'react-icons/fc'
-import { FcBusinessman } from 'react-icons/fc'
-import { FcCellPhone } from 'react-icons/fc'
-import { FcAddressBook } from 'react-icons/fc'
+import {
+  FcCellPhone,
+  FcBusinessman,
+  FcAddressBook,
+  FcBriefcase,
+} from 'react-icons/fc'
 import { AiOutlineEdit } from 'react-icons/ai'
 import { BsInfoCircle } from 'react-icons/bs'
 import { MdOutlineDelete } from 'react-icons/md'
-import { useState } from 'react'
 import CompanyModal from './CompanyModal'
 import DeleteCompanyModal from './DeleteCompanyModal'
 import { BACKEND_URL } from '../../../config'
@@ -22,7 +23,7 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
 
   useEffect(() => {
     const ownerPromises = company.owners.map((owner) =>
-      axios.get(`${BACKEND_URL  }/users/user/${owner.userId}`),
+      axios.get(`${BACKEND_URL}/users/user/${owner.userId}`),
     )
 
     Promise.all(ownerPromises)
@@ -64,9 +65,10 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
         <h2>
           <span>
             {owners
-              ?.map((owner) => 
-                //
-                 `${owner.firstName  } ${  owner.lastName}`
+              ?.map(
+                (owner) =>
+                  //
+                  `${owner.firstName} ${owner.lastName}`,
               )
               .join(', ')}
           </span>
@@ -109,7 +111,25 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
 }
 
 CompaniesSingleCard.propTypes = {
-  company: PropTypes.object.isRequired,
+  company: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    active: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired,
+    slogan: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    logo: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    kvkNumber: PropTypes.string.isRequired,
+    owners: PropTypes.arrayOf(
+      PropTypes.shape({
+        userId: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
+    startYear: PropTypes.number.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    updatedAt: PropTypes.string.isRequired,
+  }).isRequired,
   updateCompanies: PropTypes.func.isRequired,
 }
 

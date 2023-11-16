@@ -3,14 +3,28 @@
   "private": true,
   "version": "v0.0.2",
   "type": "module",
+  "jest": {
+    "testEnvironment": "jsdom",
+    "moduleNameMapper": {
+      "^.+\\.svg$": "jest-svg-transformer",
+      "^.+\\.(css|less|scss)$": "identity-obj-proxy"
+    },
+    "setupFilesAfterEnv": [
+      "./setupTests.js",
+      "./jest.setup.js"
+    ]
+  },
   "scripts": {
+    "lint-two": "eslint src  --ext js,jsx -c ./.eslintrc.cjs --report-unused-disable-directives --max-warnings 0",
+    "test": "jest --coverage --watchAll --verbose --reporters=default --randomize",
+    "test-detect-open-handles": "jest --detectOpenHandles --coverage --watchAll --no-cache --verbose --reporters=default",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint -c ./.eslintrc.cjs src/**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix -c ./.eslintrc.cjs src/**/*.{js,jsx,ts,tsx,json}",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json,scss} --config ./.prettierrc",
     "preview": "vite preview",
-    "env-dev": "cross-env NODE_ENV=development"
+    "test-two": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll --no-cache  --config ./jest.config.js --coverage --verbose"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
@@ -20,6 +34,8 @@
     "eslint-plugin-prettier": "^5.0.1",
     "husky": "^8.0.3",
     "js-cookie": "^3.0.5",
+    "mongodb": "^6.2.0",
+    "mongoose": "^8.0.1",
     "notistack": "^3.0.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -32,16 +48,20 @@
     "react-router-dom": "^6.15.0",
     "redux": "^4.2.1",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.4.2"
+    "redux-thunk": "^2.4.2",
+    "util": "^0.12.5"
   },
   "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.23.3",
+    "@babel/preset-env": "^7.23.3",
+    "@babel/preset-react": "^7.23.3",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.1.0",
+    "@testing-library/user-event": "^14.5.1",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
     "autoprefixer": "^10.4.15",
-    "cross-env": "^7.0.3",
     "eslint": "^8.53.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-google": "^0.14.0",
@@ -53,10 +73,14 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "global-jsdom": "^9.1.0",
-    "jsdom": "^22.1.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jest-svg-transformer": "^1.0.0",
     "postcss": "^8.4.29",
     "prettier": "3.0.3",
+    "react-test-renderer": "^18.2.0",
+    "redux-mock-store": "^1.5.4",
     "stylelint": "^15.11.0",
     "stylelint-config-recommended": "^13.0.0",
     "stylelint-config-standard": "^34.0.0",

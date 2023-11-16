@@ -1,8 +1,12 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable id-length */
 import React, { useState, useCallback, useRef, useEffect } from 'react'
 import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
+import { useDropzone } from 'react-dropzone'
 
-const generateDownload = (canvas, crop) => {
+// eslint-disable-next-line func-style
+function generateDownload(canvas, crop) {
   if (!crop || !canvas) {
     return
   }
@@ -23,7 +27,8 @@ const generateDownload = (canvas, crop) => {
   )
 }
 
-const setCanvasImage = (image, canvas, crop) => {
+// eslint-disable-next-line func-style
+function setCanvasImage(image, canvas, crop) {
   if (!crop || !canvas || !image) {
     return
   }
@@ -55,7 +60,8 @@ const setCanvasImage = (image, canvas, crop) => {
   )
 }
 
-const ImageCrop = () => {
+// eslint-disable-next-line react/function-component-definition
+export default function ImageCrop() {
   const [upImg, setUpImg] = useState()
 
   const imgRef = useRef(null)
@@ -63,8 +69,6 @@ const ImageCrop = () => {
 
   const [crop, setCrop] = useState({ unit: 'px', width: 30, aspect: 1 })
   const [completedCrop, setCompletedCrop] = useState(null)
-
-  console.log(crop)
 
   // on selecting file we set load the image on to cropper
   const onSelectFile = (e) => {
@@ -79,43 +83,90 @@ const ImageCrop = () => {
     imgRef.current = img
   }, [])
 
+  const onDrop = useCallback((acceptedFiles) => {
+    acceptedFiles.forEach((file) => {
+      const reader = new FileReader()
+
+      reader.onabort = () => console.log('file reading was aborted')
+      reader.onerror = () => console.log('file reading has failed')
+      reader.onload = () => {
+        // Do whatever you want with the file contents
+        const dataURL = reader.result
+        console.log(dataURL)
+
+        setUpImg(dataURL)
+      }
+      reader.readAsDataURL(file)
+    })
+  }, [])
+
+  const { getRootProps, getInputProps } = useDropzone({ onDrop })
+
   useEffect(() => {
     setCanvasImage(imgRef.current, previewCanvasRef.current, completedCrop)
   }, [completedCrop])
 
   return (
-    <div className='App'>
+    <div className=''>
+      <div className=''>
+        <div
+          {...getRootProps({
+            className:
+              'dropzone mx-auto  w-[300px] h-[300px] bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center',
+          })}
+        >
+          <input
+            {...getInputProps({
+              accept: 'image/*',
+              onChange: onSelectFile,
+            })}
+          />
+          <p>
+            Drag &apos;n&apos; drop some files here, or click to select files
+          </p>
+        </div>
+      </div>
+
+      <div>
+        {/* Canvas to display cropped image */}
+        <canvas
+          className='rounded-full'
+          ref={previewCanvasRef}
+          // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
+          style={{
+            width: '300px',
+            height: '300px',
+            margin: '10px',
+            position: 'absolute',
+            top: '100px',
+            right: '300px',
+            border: '5px solid purple',
+          }}
+        />
+      </div>
+      <div>
+        <ReactCrop
+          crop={crop}
+          onChange={(c) => setCrop(c)}
+          onComplete={(c) => setCompletedCrop(c)}
+          onImageLoaded={onLoad}
+          src={upImg}
+          style={{
+            width: '500px',
+            height: '500px',
+            marginRight: '30px',
+          }}
+        />
+      </div>
+
       <div>
         <input accept='image/*' onChange={onSelectFile} type='file' />
       </div>
 
-      <div className='flex justify-center'>
-        <div>
-          <ReactCrop
-            className='h-[500px] w-[500px]'
-            crop={crop}
-            onChange={(c) => setCrop(c)}
-            onComplete={(c) => setCompletedCrop(c)}
-            onImageLoaded={onLoad}
-            src={upImg}
-          />
-        </div>
-        <div>
-          <canvas
-            className='rounded-full'
-            ref={previewCanvasRef}
-            // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
-            style={{
-              width: '300px',
-              height: '300px',
-            }}
-          />
-        </div>
-        {/* Canvas to display cropped image */}
-      </div>
       <p>
-        Note that the download below won't work in this sandbox due to the
-        iframe missing 'allow-downloads'. It's just for your reference.
+        Note that the download below won&apos;t work in this sandbox due to the
+        iframe missing &apos;allow-downloads&apos;. It&apos;s just for your
+        reference.
       </p>
       <button
         className='bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded'
@@ -130,5 +181,3 @@ const ImageCrop = () => {
     </div>
   )
 }
-
-export default ImageCrop

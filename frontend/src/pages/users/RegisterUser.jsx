@@ -228,7 +228,7 @@ const RegisterUser = () => {
 
     // Send a POST request to the backend to save the user to the database
     axios
-      .post(`${BACKEND_URL  }/users`, data)
+      .post(`${BACKEND_URL}/users`, data)
       .then(() => {
         // Hide the spinner
         setLoading(false)
@@ -272,7 +272,7 @@ const RegisterUser = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 usernameError ? 'border-red-500' : ''
               }`}
-              data-test-id='user-username-input'
+              data-testid='user-username-input'
               onBlur={validateUsername}
               onChange={handleUsernameChange}
               type='text'
@@ -292,7 +292,7 @@ const RegisterUser = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 emailError ? 'border-red-500' : ''
               }`}
-              data-test-id='user-email-input'
+              data-testid='user-email-input'
               onBlur={validateEmail}
               onChange={handleEmailChange}
               type='text'
@@ -312,7 +312,7 @@ const RegisterUser = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 passwordError ? 'border-red-500' : ''
               }`}
-              data-test-id='user-password-input'
+              data-testid='user-password-input'
               onBlur={validatePassword}
               onChange={handlePasswordChange}
               type='password'
@@ -334,7 +334,7 @@ const RegisterUser = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 confirmPasswordError ? 'border-red-500' : ''
               }`}
-              data-test-id='user-confirm-password-input'
+              data-testid='user-confirm-password-input'
               onBlur={validateConfirmPassword}
               onChange={handleConfirmPasswordChange}
               type='password'
@@ -354,7 +354,7 @@ const RegisterUser = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 firstNameError ? 'border-red-500' : ''
               }`}
-              data-test-id='user-first-name-input'
+              data-testid='user-first-name-input'
               onBlur={validateFirstName}
               onChange={handleFirstNameChange}
               type='text'
@@ -375,7 +375,7 @@ const RegisterUser = () => {
               className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
                 lastNameError ? 'border-red-500' : ''
               }`}
-              data-test-id='user-last-name-input'
+              data-testid='user-last-name-input'
               onBlur={validateLastName}
               onChange={handleLastNameChange}
               type='text'
@@ -394,7 +394,7 @@ const RegisterUser = () => {
             <label className='text-xl mr-4'>Gender</label> <br />
             <div className='flex flex-row justify-center space-x-16'>
               <input
-                data-test-id='user-gender-input-male'
+                data-testid='user-gender-input-male'
                 name='gender'
                 onChange={handleGenderChange}
                 type='radio'
@@ -402,7 +402,7 @@ const RegisterUser = () => {
               />{' '}
               Man
               <input
-                data-test-id='user-gender-input-female'
+                data-testid='user-gender-input-female'
                 name='gender'
                 onChange={handleGenderChange}
                 type='radio'
@@ -410,7 +410,7 @@ const RegisterUser = () => {
               />{' '}
               Woman
               <input
-                data-test-id='user-gender-input-other'
+                data-testid='user-gender-input-other'
                 name='gender'
                 onChange={handleGenderChange}
                 type='radio'
@@ -429,7 +429,7 @@ const RegisterUser = () => {
           </div>
           <button
             className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
-            data-test-id='user-register-button'
+            data-testid='user-register-button'
             onClick={handleSaveUser}
           >
             Save

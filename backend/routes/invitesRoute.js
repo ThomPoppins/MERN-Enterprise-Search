@@ -150,15 +150,18 @@ router.get('/company/pending', async (request, response) => {
       if (receiver.profilePicture) {
         // Get receiver profile picture
         const receiverProfilePictureImageDocument = await Image.findById(
-            receiver.profilePicture,
-          ),
+          receiver.profilePicture,
+        )
+
+        if (receiverProfilePictureImageDocument) {
           // Get receiver profile picture URL
-          receiverProfilePictureURL = getStaticFileURLFromPath(
+          const receiverProfilePictureURL = getStaticFileURLFromPath(
             receiverProfilePictureImageDocument.path,
           )
 
-        // Add receiver profile picture URL to receiver object
-        receiver.profilePictureURL = receiverProfilePictureURL
+          // Add receiver profile picture URL to receiver object
+          receiver.profilePictureURL = receiverProfilePictureURL
+        }
       }
 
       // Get company document no if statement needed because the query
@@ -246,30 +249,40 @@ router.post('/', async (request, response) => {
     if (sender.profilePicture) {
       // Get sender profile picture
       const senderProfilePictureImageDocument = await Image.findById(
-          sender.profilePicture,
-        ),
+        sender.profilePicture,
+      )
+
+      if (senderProfilePictureImageDocument) {
         // Get sender profile picture URL
-        senderProfilePictureURL = getStaticFileURLFromPath(
+        const senderProfilePictureURL = getStaticFileURLFromPath(
           senderProfilePictureImageDocument.path,
         )
 
-      // Add sender profile picture URL to sender object
-      sender.profilePictureURL = senderProfilePictureURL
+        // Add sender profile picture URL to sender object
+        sender.profilePictureURL = senderProfilePictureURL
+      } else {
+        sender.profilePictureURL = null
+      }
     }
 
     //  Add receiver profile picture URL to receiver object
     if (receiver.profilePicture) {
       // Get receiver profile picture
       const receiverProfilePictureImageDocument = await Image.findById(
-          receiver.profilePicture,
-        ),
+        receiver.profilePicture,
+      )
+
+      if (receiverProfilePictureImageDocument) {
         // Get receiver profile picture URL
-        receiverProfilePictureURL = getStaticFileURLFromPath(
+        const receiverProfilePictureURL = getStaticFileURLFromPath(
           receiverProfilePictureImageDocument.path,
         )
 
-      // Add receiver profile picture URL to receiver object
-      receiver.profilePictureURL = receiverProfilePictureURL
+        // Add receiver profile picture URL to receiver object
+        receiver.profilePictureURL = receiverProfilePictureURL
+      } else {
+        receiver.profilePictureURL = null
+      }
     }
 
     let company = null
@@ -279,10 +292,6 @@ router.post('/', async (request, response) => {
       // Get company document
       company = await Company.findById(invite.companyId)
 
-      /*
-       * Convert company to plain JavaScript object and add it to invite object
-       *
-       * */
       company = company.toObject()
     }
 
