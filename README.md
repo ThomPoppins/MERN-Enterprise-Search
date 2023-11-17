@@ -1896,10 +1896,26 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-308] Write a Jest/react-testing-library test for the user login form, as good possible. [ARTICLE ABOUT REACT-TEST-LIBRARY LOGIN FORM TESTING](https://for-devs-by-devs.hashnode.dev/login-form-testing-using-react-testing-library)
 - [ ] [MERNSTACK-309] After [MERNSTACK-308], implement [Mock Service Worker](https://github.com/mswjs/msw) functionality in the login form test.
 - [ ] [MERNSTACK-310] Read into [core-js](https://www.jsdelivr.com/package/npm/core-js-bundle), see if that is something useful for me or not.
-- [ ] [MERNSTACK-] [Read about Vite](https://vitejs.dev/guide/why.html) about Vite has to offer. Get a more general understanding about the advantages of Vite are in comparison to the much more supported create-react-app and make a desicion about a possible migration. [Look through the interesting subsectionds of the Viteconf video](https://www.youtube.com/watch?v=veCxKeLl35A&t=120s&ab_channel=ViteConf)
-- [ ] [MERNSTACK-] Set up Jest in the /backend. 
-- [ ] [MERNSTACK-] Read into [Vite Storybook](https://storybook.js.org/docs/react/builders/vite) and see if it is useful. Also finish the [ViteConf Storybook video presentation](https://youtu.be/veCxKeLl35A?si=qyVnioYMo9KgphVh&t=8575). Storybook claims to be useful for developers for documentation, development and testing. [Introduction video to Storybook](https://www.youtube.com/watch?v=x-x47qHq3nY&ab_channel=newline)
-- [ ] [MERNSTACK-] Transform all comments to [JSDoc format](https://jsdoc.app/).
+- [ ] [MERNSTACK-314] [Read about Vite](https://vitejs.dev/guide/why.html) about Vite has to offer and add to documentation. Get a more general understanding about the advantages of Vite are in comparison to the much more supported create-react-app and make a desicion about a possible migration. [Look through the interesting subsectionds of the Viteconf video](https://www.youtube.com/watch?v=veCxKeLl35A&t=120s&ab_channel=ViteConf)
+- [ ] [MERNSTACK-315] Set up Jest in the /backend.
+- [ ] [MERNSTACK-316] Read into [Vite Storybook](https://storybook.js.org/docs/react/builders/vite) and see if it is useful. Also finish the [ViteConf Storybook video presentation](https://youtu.be/veCxKeLl35A?si=qyVnioYMo9KgphVh&t=8575). Storybook claims to be useful for developers for documentation, development and testing. [Introduction video to Storybook](https://www.youtube.com/watch?v=x-x47qHq3nY&ab_channel=newline)
+- [ ] [MERNSTACK-317] Transform all comments to [JSDoc format](https://jsdoc.app/).
+- [ ] [MERNSTACK-318] Read about the [Storybook ES Lint plugin](https://github.com/storybookjs/eslint-plugin-storybook#readme) and start using it in Storybook.
+- [ ] [MERNSTACK-319] Learn about [Storybook tools from this page](https://storybook.js.org/docs/react/essentials/toolbars-and-globals#global-types-toolbar-annotations) and about how to configure global values.
+- [ ] [MERNSTACK-320] Learn about how to use [MDX](https://storybook.js.org/docs/react/writing-docs/doc-blocks) and [Doc blocks](https://storybook.js.org/docs/react/writing-docs/doc-blocks)
+- [ ] [MERNSTACK-321] [Integrate Figma into Storybook](https://storybook.js.org/docs/react/sharing/design-integrations#figma) and if it does not take too many time, get started with Figma in [the community section](https://www.figma.com/community) and design some component to use Figma in Storybook and after doing that write a piece of documentation for the project README file.
+- [ ] [MERNSTACK-322] [Learn about testing using Storybook.](https://storybook.js.org/docs/react/writing-tests/introduction)
+- [ ] [MERNSTACK-323] Break down search engine functionality of [my MERN_STACK_PROJ. documentation](https://nextra-docs-template.vercel.app/). Read [Nextra documentation](https://nextra.site/) for this.
+- [ ] [MERNSTACK-324] Move all information of this project README file to [the documentation website hosted by Vercel](https://mern-stack-proj.vercel.app/). [Nextra documentation here](https://nextra.site/docs).
+- [ ] [MERNSTACK-325] Add Storybook section to [documentation]((https://mern-stack-proj.vercel.app/).
+- [ ] [MERNSTACK-] Add contact form to [documentation]((https://mern-stack-proj.vercel.app/) that will send a email. [Documentation here.](https://herotofu.com/solutions/guides/react-send-email)
+- [ ] [MERNSTACK-] Add useful [Storybook tutorials](https://storybook.js.org/tutorials/) as Jira issues.
+- [ ] [MERNSTACK-] Finish [Intro to Storybook tutorial](https://storybook.js.org/tutorials/intro-to-storybook/) [Continue here](https://storybook.js.org/tutorials/intro-to-storybook/react/en/simple-component/) 
+- [ ] [MERNSTACK-] Read about [Mock Service Worker](https://storybook.js.org/addons/msw-storybook-addon/) integration into Storybook for handling mock data.
+- [ ] [MERNSTACK-] Select [integrations (addons)](https://storybook.js.org/integrations) for Storybook that are useful without losing productivity.
+- [ ] [MERNSTACK-] Set up [Dependabot](https://docs.github.com/en/code-security/getting-started/dependabot-quickstart-guide) in repository and write about it in the [documentation]((https://mern-stack-proj.vercel.app/).
+- [ ] [MERNSTACK-] Write a section about [Component-Driven Development](https://storybook.js.org/tutorials/intro-to-storybook/react/en/simple-component/) in [documentation]((https://mern-stack-proj.vercel.app/).
+- [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
