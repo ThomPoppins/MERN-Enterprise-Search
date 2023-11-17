@@ -12,8 +12,7 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/strict',
     'prettier',
-    'react-app',
-    'react-app/jest',
+    'plugin:storybook/recommended',
   ],
   overrides: [
     {
