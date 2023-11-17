@@ -1898,8 +1898,8 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-310] Read into [core-js](https://www.jsdelivr.com/package/npm/core-js-bundle), see if that is something useful for me or not.
 - [ ] [MERNSTACK-] [Read about Vite](https://vitejs.dev/guide/why.html) about Vite has to offer. Get a more general understanding about the advantages of Vite are in comparison to the much more supported create-react-app and make a desicion about a possible migration. [Look through the interesting subsectionds of the Viteconf video](https://www.youtube.com/watch?v=veCxKeLl35A&t=120s&ab_channel=ViteConf)
 - [ ] [MERNSTACK-] Set up Jest in the /backend. 
-- [ ] [MERNSTACK-] Read into [Vite Storybook](https://storybook.js.org/docs/react/builders/vite) and see if it is useful. Also finish the [ViteConf Storybook video presentation](https://youtu.be/veCxKeLl35A?si=qyVnioYMo9KgphVh&t=8575). Storybook claims to be useful for developers for documentation, development and testing.
-- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] Read into [Vite Storybook](https://storybook.js.org/docs/react/builders/vite) and see if it is useful. Also finish the [ViteConf Storybook video presentation](https://youtu.be/veCxKeLl35A?si=qyVnioYMo9KgphVh&t=8575). Storybook claims to be useful for developers for documentation, development and testing. [Introduction video to Storybook](https://www.youtube.com/watch?v=x-x47qHq3nY&ab_channel=newline)
+- [ ] [MERNSTACK-] Transform all comments to [JSDoc format](https://jsdoc.app/).
 - [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
