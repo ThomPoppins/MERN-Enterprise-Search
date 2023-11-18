@@ -33,7 +33,7 @@ Also I make use of a lot of different packages but only if they are complementar
       - [Edit company](#edit-company)
       - [Company ownership](#company-ownership)
       - [`Invite` schema](#invite-schema)
-  - [Get up and running](#get-up-and-running)
+  - [Quick Start](#quick-start)
   - [Versions](#versions)
     - [v0.0.3](#v003)
       - [Find other users for co-ownership with search field](#find-other-users-for-co-ownership-with-search-field)
@@ -76,7 +76,7 @@ Also I make use of a lot of different packages but only if they are complementar
   - [Project management](#project-management)
     - [Jira](#jira)
   - [Project Issue Progression](#project-issue-progression)
-    - [Before production checklist](#before-production-checklist)
+  - [Production checklist](#production-checklist)
 
 ## Visual Demo
 
@@ -1258,7 +1258,7 @@ const Invite = mongoose.model("Invite", inviteSchema)
 
 This was the visual demo for now, I will update this later on, so come back in a while to check it out!
 
-## Get up and running
+## Quick Start
 
 To run this application locally, follow these steps:
 
@@ -1915,12 +1915,19 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-] Select [integrations (addons)](https://storybook.js.org/integrations) for Storybook that are useful without losing productivity.
 - [ ] [MERNSTACK-] Set up [Dependabot](https://docs.github.com/en/code-security/getting-started/dependabot-quickstart-guide) in repository and write about it in the [documentation]((https://mern-stack-proj.vercel.app/).
 - [ ] [MERNSTACK-] Write a section about [Component-Driven Development](https://storybook.js.org/tutorials/intro-to-storybook/react/en/simple-component/) in [documentation]((https://mern-stack-proj.vercel.app/).
+- [ ] [MERNSTACK-] Destructure all component object type parameters to define all keys used in the component like the first parameter of this example: `function Task = ({ task: { id, title, state }, onArchiveTask, onPinTask }) => {}` 
+- [ ] [MERNSTACK-] Write a piece [Component Story Format 3]() in the Storybook section of the [documentation]((https://mern-stack-proj.vercel.app/).
+- [ ] [MERNSTACK-] Write about Component Driven Development in the [documentation]((https://mern-stack-proj.vercel.app/) [(Storybook source)] in a "Design practice" or "Strategies" kinda section.
+- [ ] [MERNSTACK-326] Add [Rocket Icon](https://fontawesome.com/icons/rocket?f=classic&s=solid) to documentation website title. 
+- [ ] [MERNSTACK-] In the [Interactive demo](http://localhost:3000/interactive-demo) section, make as interactive as possible using components of the application.
+- [ ] [MERNSTACK-] Replace all codeblocks on documentation website with the codeblock like in /examples/codeblock.mdx
+- [ ] [MERNSTACK-] Redecorate all code blocks on the new documentation website.
 - [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
 
-### Before production checklist
+## Production checklist
 - [ ] [MERNSTACK-261] Production: Remove all console logs in the frontend.
 - [ ] [MERNSTACK-262] Production: Evaluate and tighten ES Lint coding standard rules for complexity. Address and resolve any complexity issues currently disabled or configured less strict.
 - [ ] [MERNSTACK-263] Production: Review each file to adhere to coding standards, ensuring resolution of all ES Lint errors.
@@ -1937,8 +1944,8 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-269] Production: Address confidential issue, refer to Jira for details if you are involved.
 - [ ] [MERNSTACK-273] Production: Address confidential issue, refer to Jira for details if you are involved.
 - [ ] [MERNSTACK-302] Production: Remove data-testid attributes with babel plugin before going into production.[Babel plugin](https://www.npmjs.com/package/babel-plugin-react-remove-properties).
-- [ ] [MERNSTACK-] 
-- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] Capitalize all titles using [The Chicago Manual of Style](https://title.sh/). (First find out where titles are and change them all)
+- [ ] [MERNSTACK-] Read [flexsearch documentation](https://github.com/nextapps-de/flexsearch), maybe this is a good search package. [See this list for more optional search packages](https://github.com/nextapps-de/flexsearch#performance-benchmark-ranking)
 - [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 

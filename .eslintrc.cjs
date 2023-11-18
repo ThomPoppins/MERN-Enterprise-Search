@@ -1,35 +1,35 @@
-'use strict';
+/* eslint-disable sort-keys */
+'use strict'
 
 module.exports = {
-    'env': {
-        'browser': true,
-        'es2021': true
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: ['eslint:all'],
+  overrides: [
+    {
+      env: {
+        node: true,
+      },
+      files: ['.eslintrc.{js,cjs}'],
+      parserOptions: {
+        sourceType: 'script',
+      },
     },
-    'extends': ['eslint:all'],
-    'overrides': [
-        {
-            'env': {
-                'node': true
-            },
-            'files': ['.eslintrc.{js,cjs}'],
-            'parserOptions': {
-                'sourceType': 'script'
-            }
-        }
-    ],
-    'parserOptions': {
-        'ecmaFeatures': {
-            'jsx': true
-        },
-        'ecmaVersion': 'latest',
-        'sourceType': 'module'
+  ],
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
     },
-    'plugins': [],
-    'rules': {
-        'quotes': [
-            'error',
-            'single'
-        ]
-    },
-    'settings': {}
-};
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  plugins: [],
+  rules: {
+    'no-unused-vars': ['error', { varsIgnorePattern: '^React$' }],
+    quotes: ['error', 'single'],
+    'one-var': ['error', 'never'],
+  },
+  settings: {},
+}
