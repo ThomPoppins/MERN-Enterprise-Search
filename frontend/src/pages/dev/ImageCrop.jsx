@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable id-length */
 import React, { useState, useCallback, useRef, useEffect } from 'react'
+import { useDropzone } from 'react-dropzone'
 import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
-import { useDropzone } from 'react-dropzone'
 
 // eslint-disable-next-line func-style
 function generateDownload(canvas, crop) {

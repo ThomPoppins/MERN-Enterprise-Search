@@ -6,13 +6,7 @@
     "jest/globals": true,
     "node": true
   },
-  "plugins": [
-    "react",
-    "jsx-a11y",
-    "jest",
-    "import",
-    "unused-imports"
-  ],
+  "plugins": ["react", "jsx-a11y", "jest", "import", "unused-imports"],
   "extends": [
     "airbnb",
     "airbnb/hooks",
@@ -30,9 +24,7 @@
   },
   "overrides": [
     {
-      "files": [
-        "src/**/*.{js,jsx}"
-      ],
+      "files": ["src/**/*.{js,jsx}"],
       "rules": {
         "react/prop-types": "off",
         "import/order": [
@@ -42,10 +34,7 @@
               "builtin",
               "external",
               "internal",
-              [
-                "parent",
-                "sibling"
-              ],
+              ["parent", "sibling"],
               "index",
               "object",
               "type"
@@ -57,9 +46,7 @@
                 "position": "after"
               }
             ],
-            "pathGroupsExcludedImportTypes": [
-              "builtin"
-            ],
+            "pathGroupsExcludedImportTypes": ["builtin"],
             "alphabetize": {
               "order": "asc",
               "caseInsensitive": true
@@ -75,14 +62,11 @@
     "jsx-a11y/click-events-have-key-events": "warn",
     "jsx-a11y/label-has-associated-control": "warn",
     "jsx-a11y/no-noninteractive-element-interactions": "warn",
-    "jsx-quotes": [
-      "error",
-      "prefer-double"
-    ],
+    "jsx-quotes": ["error", "prefer-single"],
     "no-unused-vars": "warn",
     "react/function-component-definition": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "warn",
-    "semi": "error"
+    "semi": ["error", "never"]
   }
 }

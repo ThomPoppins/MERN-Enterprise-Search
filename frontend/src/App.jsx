@@ -1,21 +1,24 @@
+import Cookies from 'js-cookie'
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
+
 import CompaniesList from './pages/companies/CompaniesList'
-import RegisterCompany from './pages/companies/RegisterCompany'
 import EditCompany from './pages/companies/EditCompany'
+import RegisterCompany from './pages/companies/RegisterCompany'
 import ShowCompany from './pages/companies/ShowCompany'
+import ImageCrop from './pages/dev/ImageCrop'
+import ReactLive from './pages/dev/ReactLive'
 import Results from './pages/find/Results'
-import LoginUser from './pages/users/LoginUser'
-import RegisterUser from './pages/users/RegisterUser'
-import LogoutUser from './pages/users/LogoutUser'
-import UserProfile from './pages/users/UserProfile'
+import Home from './pages/Home'
 import InvitesList from './pages/invites/InvitesList'
 import UploadImage from './pages/UploadImage'
-import ImageCrop from './pages/dev/ImageCrop.jsx'
-import Home from './pages/Home'
-import Cookies from 'js-cookie'
-import verifyToken from './utils/auth/verifyToken.jsx'
-import { useSelector } from 'react-redux'
+import LoginUser from './pages/users/LoginUser'
+import LogoutUser from './pages/users/LogoutUser'
+import RegisterUser from './pages/users/RegisterUser'
+import UserProfile from './pages/users/UserProfile'
+import verifyToken from './utils/auth/verifyToken'
+import LiveProviderDemo from './components/code/live/LiveProviderDemo'
 
 const App = () => {
   // Get the JWT token from the cookies
@@ -32,7 +35,7 @@ const App = () => {
     return (
       // Routes when the user is logged in
       <Routes>
-        {/* / route, render homepage*/}
+        {/* / route, render homepage */}
         <Route element={<Home />} path='/' />
         {/* TEST ROUTE: test image uploading */}
         <Route element={<UploadImage />} path='/upload-image' />
@@ -51,6 +54,7 @@ const App = () => {
         <Route element={<InvitesList />} path='/invites' />
         {/* /dev route, render dev pages */}
         <Route element={<ImageCrop />} path='/dev/image-crop' />
+        <Route element={<LiveProviderDemo />} path='/dev/react-live' />
       </Routes>
     )
   }
@@ -59,7 +63,7 @@ const App = () => {
   return (
     // Routes when no user is logged in
     <Routes>
-      {/* / route, render homepage*/}
+      {/* / route, render homepage */}
       <Route element={<Home />} path='/' />
       {/* /login route, render user login page */}
       <Route element={<LoginUser />} path='/login' />

@@ -1936,13 +1936,20 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-] [Checkout this awesome-vite repository](https://github.com/vitejs/awesome-vite#templates) full of options to try out any project scaffolding you want.
 - [ ] [MERNSTACK-] Nextra uses [Prismjs](https://prismjs.com/) for code highlighting, Find out how to use it because highlighting can make an example much more understandable and the reader has his attention drawn to the important lines.
 - [ ] [MERNSTACK-] Capitalize all titles using [The Chicago Manual of Style](https://title.sh/). (First find out where titles are and change them all)
+- [ ] [MERNSTACK-] Use [Code Highlighting](https://sci.rs/features/mdx#code-highlighting) in the code examples in the documentation.
+- [ ] [MERNSTACK-] Write a piece about Storybook once you've worked with it enough to tell about it, and tell about the ES Lint rule that forbids to use [prop spreading](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-props-no-spreading.md). Tell about how much I agree with this rule, waiting for errors once you start changing around related components and am convinced that is this context I can not see any benefit on the long term. 
+- [ ] [MERNSTACK-] Transforming documentation website to "Thom Veldpaus" instead of "MERN_STACK_PROJ." primarily to blog about progress and document technology that excites me.
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
 
 
 
 
-- [ ] [MERNSTACK-] Use [Code Highlighting](https://sci.rs/features/mdx#code-highlighting) in the code examples in the documentation. 
+- [ ] 
 
 ## Production checklist
 - [ ] [MERNSTACK-261] Production: Remove all console logs in the frontend.
