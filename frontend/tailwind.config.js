@@ -1,7 +1,10 @@
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false,
+module.exports = {
+  content: [
+    './src/components/**/*.jsx',
+    './src/pages/**/*.jsx',
+    './src/**/*.jsx',
+    './src/index.html',
+  ],
   theme: {
     extend: {
       keyframes: {
