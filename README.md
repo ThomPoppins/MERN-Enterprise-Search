@@ -1919,13 +1919,30 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-] Write a piece [Component Story Format 3]() in the Storybook section of the [documentation]((https://mern-stack-proj.vercel.app/).
 - [ ] [MERNSTACK-] Write about Component Driven Development in the [documentation]((https://mern-stack-proj.vercel.app/) [(Storybook source)] in a "Design practice" or "Strategies" kinda section.
 - [ ] [MERNSTACK-326] Add [Rocket Icon](https://fontawesome.com/icons/rocket?f=classic&s=solid) to documentation website title. 
+- [ ] [MERNSTACK-327] IMPORTANT: [Implement Formidable Inline Executable codeblocks](https://formidable.com/open-source/react-live/) examples in the documentation.
 - [ ] [MERNSTACK-] In the [Interactive demo](http://localhost:3000/interactive-demo) section, make as interactive as possible using components of the application.
 - [ ] [MERNSTACK-] Replace all codeblocks on documentation website with the codeblock like in /examples/codeblock.mdx
 - [ ] [MERNSTACK-] Redecorate all code blocks on the new documentation website.
+- [ ] [MERNSTACK-] Read [flexsearch documentation](https://github.com/nextapps-de/flexsearch), maybe this is a good search package. [See this list for more optional search packages](https://github.com/nextapps-de/flexsearch#performance-benchmark-ranking)
+- [ ] [MERNSTACK-] Build search component on the homepage in Storybook.
+- [ ] [MERNSTACK-] Learn about [JavaScript design patters](https://javascriptpatterns.vercel.app/patterns)
+- [ ] [MERNSTACK-] [Configuration of META data]() on Next.js documentation site.
+- [ ] [MERNSTACK-] See if [react-live](https://github.com/FormidableLabs/react-live) is compatible with Nextra. 
+- [ ] [MERNSTACK-] See if I can use [mermaid.js](https://mermaid.js.org/intro/) on Nextra. [docs](https://mermaid.js.org/intro/)
+- [ ] [MERNSTACK-] OPTONAL SEARCH ENGINE: [Algolia Docsearch](https://docsearch.algolia.com/)
+- [ ] [MERNSTACK-] Watch [freeCodeCamp TypeScript React Video tutorial](https://www.youtube.com/watch?v=FJDVKeh7RJI&ab_channel=freeCodeCamp.org) about how to use TypeScript in React.
+- [ ] [MERNSTACK-] [Watch this video](https://sci.rs/docs/built-in-components) if you want to get inspired by someone with a interesting view on how data and UI design are intertwined and designers need to realize that.
+- [ ] [MERNSTACK-] Make all buttons on the /quick-start page of documentation seem like a light turns on like the `Download` and `Get Git` button.
+- [ ] [MERNSTACK-] [Checkout this awesome-vite repository](https://github.com/vitejs/awesome-vite#templates) full of options to try out any project scaffolding you want.
+- [ ] [MERNSTACK-] Nextra uses [Prismjs](https://prismjs.com/) for code highlighting, Find out how to use it because highlighting can make an example much more understandable and the reader has his attention drawn to the important lines.
+- [ ] [MERNSTACK-] Capitalize all titles using [The Chicago Manual of Style](https://title.sh/). (First find out where titles are and change them all)
 - [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
-- [ ] [MERNSTACK-] 
-- [ ] [MERNSTACK-] 
+
+
+
+
+- [ ] [MERNSTACK-] Use [Code Highlighting](https://sci.rs/features/mdx#code-highlighting) in the code examples in the documentation. 
 
 ## Production checklist
 - [ ] [MERNSTACK-261] Production: Remove all console logs in the frontend.
@@ -1944,8 +1961,8 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-269] Production: Address confidential issue, refer to Jira for details if you are involved.
 - [ ] [MERNSTACK-273] Production: Address confidential issue, refer to Jira for details if you are involved.
 - [ ] [MERNSTACK-302] Production: Remove data-testid attributes with babel plugin before going into production.[Babel plugin](https://www.npmjs.com/package/babel-plugin-react-remove-properties).
-- [ ] [MERNSTACK-] Capitalize all titles using [The Chicago Manual of Style](https://title.sh/). (First find out where titles are and change them all)
-- [ ] [MERNSTACK-] Read [flexsearch documentation](https://github.com/nextapps-de/flexsearch), maybe this is a good search package. [See this list for more optional search packages](https://github.com/nextapps-de/flexsearch#performance-benchmark-ranking)
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
 - [ ] [MERNSTACK-] 
