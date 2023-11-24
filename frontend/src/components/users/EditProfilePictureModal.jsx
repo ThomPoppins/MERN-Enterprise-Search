@@ -8,7 +8,6 @@ import { AiOutlineClose } from 'react-icons/ai'
 import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 import { useSelector } from 'react-redux'
-
 import { BACKEND_URL } from '../../../config'
 import store from '../../store/store'
 
