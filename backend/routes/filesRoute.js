@@ -1,12 +1,13 @@
 import express from 'express'
 import { Image } from '../models/imageModel.js'
 import { getURLSuffixFromPath } from '../middleware/files/staticFiles.js'
+import apiLimiter from '../middleware/rate-limiter/apiLimiter.js'
 import mongoose from 'mongoose'
 
 const router = express.Router()
 
 // Route to get URL for image document
-router.get('/image-url/:id', async (request, response) => {
+router.get('/image-url/:id', apiLimiter, async (request, response) => {
   try {
     const objectId = new mongoose.Types.ObjectId(request.params.id)
 
