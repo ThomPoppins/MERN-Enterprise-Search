@@ -1,6 +1,5 @@
 import express from 'express'
 import { Company } from '../models/companyModel.js'
-import { Image } from '../models/imageModel.js'
 import { v4 as uuidv4 } from 'uuid'
 
 const router = express.Router(),

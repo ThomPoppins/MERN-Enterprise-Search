@@ -1854,7 +1854,7 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [x] [MERNSTACK-284] Add little profile picture of invited user next to their details in the "pending invites" section.
 - [x] [MERNSTACK-285] Add picture to search results searching for co-owners.
 - [x] [MERNSTACK-286] Add picture to the list of owners in EditCompany
-- [ ] [MERNSTACK-209] Make file upload possible as company logo
+- [x] [MERNSTACK-209] Make file upload possible as company logo
 - [ ] [MERNSTACK-212] Create account edit page for account settings/configurations.
 - [ ] [MERNSTACK-220] After registration, log user in automatically and redirect to /account/onboarding page.
 - [ ] [MERNSTACK-228] The "Find" on the homepage has to transition between color using "color transitions" from TailwindCSS.
