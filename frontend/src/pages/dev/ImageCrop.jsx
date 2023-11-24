@@ -39,8 +39,10 @@ function setCanvasImage(image, canvas, crop) {
   // refer https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
   const pixelRatio = window.devicePixelRatio
 
+  /* eslint-disable no-param-reassign */
   canvas.width = crop.width * pixelRatio * scaleX
   canvas.height = crop.height * pixelRatio * scaleY
+  /* eslint-enable no-param-reassign */
 
   // refer https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setTransform
   ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
@@ -109,75 +111,75 @@ export default function ImageCrop() {
   return (
     <div className=''>
       <div className=''>
-        <div
-          {...getRootProps({
-            className:
-              'dropzone mx-auto  w-[300px] h-[300px] bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center',
-          })}
-        >
-          <input
-            {...getInputProps({
-              accept: 'image/*',
-              onChange: onSelectFile,
+        {upImg && (
+          <div className='mx-auto text-center'>
+            <div className=''>
+              {/* Canvas to display cropped image */}
+              <canvas
+                className='rounded-full'
+                ref={previewCanvasRef}
+                // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
+                style={{
+                  width: '300px',
+                  height: '300px',
+                  margin: '10px',
+                  position: 'absolute',
+                  top: '100px',
+                  right: '300px',
+                  border: '5px solid purple',
+                }}
+              />
+            </div>
+            <div className=''>
+              <ReactCrop
+                crop={crop}
+                onChange={(c) => setCrop(c)}
+                onComplete={(c) => setCompletedCrop(c)}
+                onImageLoaded={onLoad}
+                src={upImg}
+                style={{
+                  width: '300px',
+                  height: '300px',
+                }}
+              />
+            </div>
+
+            <p>
+              Note that the download below won&apos;t work in this sandbox due
+              to the iframe missing &apos;allow-downloads&apos;. It&apos;s just
+              for your reference.
+            </p>
+            <button
+              className='rounded bg-purple-500 px-4 py-2 font-bold text-white hover:bg-purple-700'
+              disabled={!completedCrop?.width || !completedCrop?.height}
+              onClick={() =>
+                generateDownload(previewCanvasRef.current, completedCrop)
+              }
+              type='button'
+            >
+              Download cropped image
+            </button>
+          </div>
+        )}
+        {!upImg && (
+          <div
+            {...getRootProps({
+              className:
+                'dropzone mx-auto w-[300px] h-[300px] bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center',
             })}
-          />
-          <p>
-            Drag &apos;n&apos; drop some files here, or click to select files
-          </p>
-        </div>
+          >
+            <input
+              {...getInputProps({
+                accept: 'image/*',
+                onChange: onSelectFile,
+              })}
+            />
+            <p>
+              Drag &apos;n&apos; drop some files here, or click to select files
+            </p>
+          </div>
+        )}
       </div>
-
-      <div>
-        {/* Canvas to display cropped image */}
-        <canvas
-          className='rounded-full'
-          ref={previewCanvasRef}
-          // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
-          style={{
-            width: '300px',
-            height: '300px',
-            margin: '10px',
-            position: 'absolute',
-            top: '100px',
-            right: '300px',
-            border: '5px solid purple',
-          }}
-        />
-      </div>
-      <div>
-        <ReactCrop
-          crop={crop}
-          onChange={(c) => setCrop(c)}
-          onComplete={(c) => setCompletedCrop(c)}
-          onImageLoaded={onLoad}
-          src={upImg}
-          style={{
-            width: '500px',
-            height: '500px',
-            marginRight: '30px',
-          }}
-        />
-      </div>
-
-      <div>
-        <input accept='image/*' onChange={onSelectFile} type='file' />
-      </div>
-
-      <p>
-        Note that the download below won&apos;t work in this sandbox due to the
-        iframe missing &apos;allow-downloads&apos;. It&apos;s just for your
-        reference.
-      </p>
-      <button
-        className='bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded'
-        disabled={!completedCrop?.width || !completedCrop?.height}
-        onClick={() =>
-          generateDownload(previewCanvasRef.current, completedCrop)
-        }
-        type='button'
-      >
-        Download cropped image
-      </button>
     </div>
   )
 }

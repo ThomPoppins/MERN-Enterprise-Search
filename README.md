@@ -10,7 +10,7 @@ Also I make use of a lot of different packages but only if they are complementar
 
 ## Table of Contents
 
-- [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
+- [MERN_STACK_PROJ. :rocket:](#mern_stack_proj-rocket)
   - [Application Description](#application-description)
   - [Table of Contents](#table-of-contents)
   - [Visual Demo](#visual-demo)
@@ -272,7 +272,7 @@ Express.js can serve static files using **Express.static("public_directory")**.
 
 ```javascript
 // Use .static() and configure the /public folder for hosting static resources as CDN for images and other files.
-app.use(express.static("public"))
+app.use(express.static('public'))
 ```
 
 > **Note:** All URL's to the files in the public directory have a similar URL structure. An image within the public static files directory with path **public_static_files_dir/uploads/images/137917151-1699497672476.jpg** can be accessed on URL _backend-server-domain.com/uploads/images/137917151-1699497672476.jpg_.
@@ -356,28 +356,28 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      default: "",
+      default: '',
     },
     email: {
       type: String,
       required: true,
       unique: true,
-      default: "",
+      default: '',
     },
     hashedPassword: {
       type: String,
       required: true,
-      default: "",
+      default: '',
     },
     firstName: {
       type: String,
       required: true,
-      default: "",
+      default: '',
     },
     lastName: {
       type: String,
       required: true,
-      default: "",
+      default: '',
     },
     gender: {
       type: String,
@@ -385,10 +385,10 @@ const userSchema = new mongoose.Schema(
     },
     profilePicture: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Image",
+      ref: 'Image',
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 )
 ```
 
@@ -403,7 +403,7 @@ const userSchema = new mongoose.Schema(
 
 ```javascript
 // Instantiate User model
-const User = mongoose.model("User", userSchema)
+const User = mongoose.model('User', userSchema)
 ```
 
 ### Companies
@@ -442,14 +442,14 @@ All form input fields in my application have to be validated. I've written my ow
 
 > **Source:** [/frontend/utils/validation/emailValidator.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/src/utils/validation/emailValidator.jsx)
 
- ```javascript
+```javascript
 const emailValidator = (email) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/u
   return regex.test(email)
 }
 
 export default emailValidator
- ```
+```
 
 **Invalid value notifications:**
 
@@ -459,251 +459,251 @@ export default emailValidator
 
 > **Source:** [/frontend/src/pages/companies/RegisterCompany.jsx](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/src/pages/companies/RegisterCompany.jsx)
 
- ```javascript
- import React, { useEffect, useState } from 'react'
- import axios from 'axios'
- import { useSnackbar } from 'notistack'
- import emailValidator from '../../utils/validation/emailValidator'
+```javascript
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useSnackbar } from 'notistack'
+import emailValidator from '../../utils/validation/emailValidator'
 // ... (and a lot of other imports and validator imports here)
 
 const RegisterCompany = () => {
-  const [name, setName] = useState(''),
-  // email form field input value
-    [email, setEmail] = useState(''),
-    // ... (states for all other form field values)
-    // If value is invalid, emailError would become true
-    [nameError, setNameError] = useState(false),
-    [emailError, setEmailError] = useState(false),
-    // ... (errors states for all form fields here)
-    // useSnackbar is a hook that allows us to show a notification that pops up in the left bottom corder (see image above)
-    { enqueueSnackbar } = useSnackbar()
+ const [name, setName] = useState(''),
+ // email form field input value
+   [email, setEmail] = useState(''),
+   // ... (states for all other form field values)
+   // If value is invalid, emailError would become true
+   [nameError, setNameError] = useState(false),
+   [emailError, setEmailError] = useState(false),
+   // ... (errors states for all form fields here)
+   // useSnackbar is a hook that allows us to show a notification that pops up in the left bottom corder (see image above)
+   { enqueueSnackbar } = useSnackbar()
 
-  // Functions that will call the name and email validators and sets the error state dependent on the return value from the validators. 
-  // This function is called directly by the onBlur event listener on the name and email input fields, so it is called when the input 
-  // field loses focus.
-  const validateCompanyName = () => {
-      if (companyNameValidator(name)) {
-        setNameError(false)
-      } else {
-        setNameError(true)
-      }
-    },
-    validateEmail = () => {
-      if (emailValidator(email)) {
-        setEmailError(false)
-      } else {
-        setEmailError(true)
-      }
-    },
-    // ... (a lot of other validateFormField() functions here)
+ // Functions that will call the name and email validators and sets the error state dependent on the return value from the validators.
+ // This function is called directly by the onBlur event listener on the name and email input fields, so it is called when the input
+ // field loses focus.
+ const validateCompanyName = () => {
+     if (companyNameValidator(name)) {
+       setNameError(false)
+     } else {
+       setNameError(true)
+     }
+   },
+   validateEmail = () => {
+     if (emailValidator(email)) {
+       setEmailError(false)
+     } else {
+       setEmailError(true)
+     }
+   },
+   // ... (a lot of other validateFormField() functions here)
 
-  // Handle onChange events for all input fields
-  const handleNameChange = (event) => {
-      setName(event.target.value)
-      if (nameError) {
-        validateCompanyName()
-      }
-    },
-    handleEmailChange = (event) => {
-      
-      setEmail(event.target.value)
-      
-      if (emailError) {
-        validateEmail()
-      }
-    },
-  // ... (a lot of input field change handlers here)
+ // Handle onChange events for all input fields
+ const handleNameChange = (event) => {
+     setName(event.target.value)
+     if (nameError) {
+       validateCompanyName()
+     }
+   },
+   handleEmailChange = (event) => {
 
-  // Handle onChange events for all input fields
-  const handleNameChange = (event) => {
-      // Set the name state to the current name input field value
-      setName(event.target.value)
-      if (nameError) {
-        // Only IF the name error state is ALREADY true, then validate name always onChange. This prevents a notification when the user 
-        // hasn't completed his input and would otherwise already show after typing the first character in to the field. onBlur() 
-        //calls the validateName function initially after losing focus the first time.
-        validateCompanyName()
-      }
-    },
-    handleEmailChange = (event) => {
-      // Set the email state to the current email input field value
-      setEmail(event.target.value)
-      if (emailError) {
-        // Only IF the email error state is ALREADY true, then validate email always onChange. Initially called by onBlur like the name field.
-        validateEmail()
-      }
-    },
-    // ... (here all other onChange handler for the other input fields)
+     setEmail(event.target.value)
 
-  // Display error messages if the user enters invalid input with useSnackbar
-  useEffect(() => {
-    if (nameError) {
-      // Trigger snackbar notification
-      enqueueSnackbar('Company name is invalid!', {
-        variant: 'error', // Display notification in a red box
-        preventDuplicate: true, // Prevents notification spamming
-      })
-    }
-    // Trigger snackbar notification
-    if (emailError) {
-      enqueueSnackbar('Email is invalid!', {
-        variant: 'error', // Display notification in a red box
-        preventDuplicate: true, // Prevents notification spamming
-      })
-    }
-    // ... (rest of the input field if statement whether to display a invalid value error notification)
-  }, [
-    // This dependency array is set to the error states of the input fields. Every time a state value from this array changes, 
-    // this useEffect hook function will trigger.
-    nameError,
-    emailError,
-    phoneError,
-    kvkNumberError,
-    sloganError,
-    descriptionError,
-    startYearError,
-  ])
+     if (emailError) {
+       validateEmail()
+     }
+   },
+ // ... (a lot of input field change handlers here)
 
-  // Function that is being called when the user presses the Save button.
-  const handleSaveCompany = async () => {
-    // Validate all fields before sending the request to the backend, otherwise return
-    validateCompanyName()
-    validateEmail()
-    // ... (validate other fields here)
+ // Handle onChange events for all input fields
+ const handleNameChange = (event) => {
+     // Set the name state to the current name input field value
+     setName(event.target.value)
+     if (nameError) {
+       // Only IF the name error state is ALREADY true, then validate name always onChange. This prevents a notification when the user
+       // hasn't completed his input and would otherwise already show after typing the first character in to the field. onBlur()
+       //calls the validateName function initially after losing focus the first time.
+       validateCompanyName()
+     }
+   },
+   handleEmailChange = (event) => {
+     // Set the email state to the current email input field value
+     setEmail(event.target.value)
+     if (emailError) {
+       // Only IF the email error state is ALREADY true, then validate email always onChange. Initially called by onBlur like the name field.
+       validateEmail()
+     }
+   },
+   // ... (here all other onChange handler for the other input fields)
 
-    // If there are any invalid form fields left, notify the active user and return without saving and without redirect.
-    if (
-      nameError ||
-      emailError ||
-      phoneError ||
-      kvkNumberError ||
-      sloganError ||
-      startYearError ||
-      !name ||
-      !email ||
-      !phone ||
-      !kvkNumber ||
-      !slogan ||
-      !startYear
-    ) {
-      enqueueSnackbar(
-        'Please fill in all fields correctly before saving this company!',
-        {
-          variant: 'error',
-          preventDuplicate: true,
-        },
-      )
-      return
-    }
+ // Display error messages if the user enters invalid input with useSnackbar
+ useEffect(() => {
+   if (nameError) {
+     // Trigger snackbar notification
+     enqueueSnackbar('Company name is invalid!', {
+       variant: 'error', // Display notification in a red box
+       preventDuplicate: true, // Prevents notification spamming
+     })
+   }
+   // Trigger snackbar notification
+   if (emailError) {
+     enqueueSnackbar('Email is invalid!', {
+       variant: 'error', // Display notification in a red box
+       preventDuplicate: true, // Prevents notification spamming
+     })
+   }
+   // ... (rest of the input field if statement whether to display a invalid value error notification)
+ }, [
+   // This dependency array is set to the error states of the input fields. Every time a state value from this array changes,
+   // this useEffect hook function will trigger.
+   nameError,
+   emailError,
+   phoneError,
+   kvkNumberError,
+   sloganError,
+   descriptionError,
+   startYearError,
+ ])
 
-    // If all values are correct, prepare object for company save request
-    const data = {
-      name,
-      logo,
-      email,
-      phone,
-      kvkNumber,
-      slogan,
-      startYear,
-      description,
-      owners: [{ userId }],
-    }
-    // Render loading animation for as long as the request takes
-    setLoading(true)
-    axios
-      .post(`${BACKEND_URL}/companies`, data)
-      .then(() => {
-        // Saving company success
-        // Stop loading animation
-        setLoading(false)
-        // Notify the user about success
-        enqueueSnackbar('Company registered successfully!', {
-          variant: 'success',
-          preventDuplicate: true,
-        })
-        // Redirect back to companies listing page
-        navigate('/companies')
-      })
-      .catch((error) => {
-        // If request failed notify active user accordingly to the problem that occurred.
-        // Company with the KvK number already existed, is not unique
-        if (error.response.status === 409) {
-          enqueueSnackbar('Company with this KVK number already exists!', {
-            variant: 'error',
-            preventDuplicate: true,
-          })
-          // Set KvK error to true
-          setKvkNumberError(true)
-          // Display a more fitting message below the input field.
-          setKvkNumberErrorMessage(
-            'Company with this KVK number already exists!',
-          )
-        }
-        // Disable animation
-        setLoading(false)
-        // Always notify user saving company failed
-        enqueueSnackbar('Error registering company!', {
-          variant: 'error',
-          preventDuplicate: true,
-        })
-      })
-  }
+ // Function that is being called when the user presses the Save button.
+ const handleSaveCompany = async () => {
+   // Validate all fields before sending the request to the backend, otherwise return
+   validateCompanyName()
+   validateEmail()
+   // ... (validate other fields here)
 
-  return (
-    // ... (Top of the register page)
+   // If there are any invalid form fields left, notify the active user and return without saving and without redirect.
+   if (
+     nameError ||
+     emailError ||
+     phoneError ||
+     kvkNumberError ||
+     sloganError ||
+     startYearError ||
+     !name ||
+     !email ||
+     !phone ||
+     !kvkNumber ||
+     !slogan ||
+     !startYear
+   ) {
+     enqueueSnackbar(
+       'Please fill in all fields correctly before saving this company!',
+       {
+         variant: 'error',
+         preventDuplicate: true,
+       },
+     )
+     return
+   }
 
-      <div className='my-4'>
-        <label className='text-xl mr-4' htmlFor='company-name-input'>
-          Name
-        </label>
-        <input
-          className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
-            nameError ? 'border-red-500' : ''
-          }`}
-          data-test-id='company-name-input'
-          id='company-name-input'
-          onBlur={validateCompanyName} // onBlur event validate name field function call
-          onChange={handleNameChange} // onChange event name field change handler function call
-          type='text'
-          value={name}
-        />
-        { /* Conditionally render the error notification text below the input field: */}
-        {nameError ? (
-          <p className='text-red-500 text-sm'>
-            Company name must be between 1 and 60 characters long and can
-            only contain letters, numbers, spaces, and the following
-            characters: &#45;, &apos;, and &#46;
-          </p>
-        ) : (
-          ''
-        )}
-      </div>
-      <div className='my-4'>
-        <label className='text-xl mr-4' htmlFor='company-email-input'>
-          Email
-        </label>
-        <input
-          className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
-            emailError ? 'border-red-500' : ''
-          }`}
-          data-test-id='company-email-input'
-          id='company-email-input'
-          onBlur={validateEmail} // onBlur event validate email field function call
-          onChange={handleEmailChange} // onChange event email field change handler function call
-          type='text'
-          value={email}
-        />
-        { /* Conditionally render the error notification text below the input field: */}
-        {emailError ? (
-          <p className='text-red-500 text-sm'>
-            Email must be a valid email address.
-          </p>
-        ) : (
-          ''
-        )}
-      </div>
-  )
- ```
+   // If all values are correct, prepare object for company save request
+   const data = {
+     name,
+     logo,
+     email,
+     phone,
+     kvkNumber,
+     slogan,
+     startYear,
+     description,
+     owners: [{ userId }],
+   }
+   // Render loading animation for as long as the request takes
+   setLoading(true)
+   axios
+     .post(`${BACKEND_URL}/companies`, data)
+     .then(() => {
+       // Saving company success
+       // Stop loading animation
+       setLoading(false)
+       // Notify the user about success
+       enqueueSnackbar('Company registered successfully!', {
+         variant: 'success',
+         preventDuplicate: true,
+       })
+       // Redirect back to companies listing page
+       navigate('/companies')
+     })
+     .catch((error) => {
+       // If request failed notify active user accordingly to the problem that occurred.
+       // Company with the KvK number already existed, is not unique
+       if (error.response.status === 409) {
+         enqueueSnackbar('Company with this KVK number already exists!', {
+           variant: 'error',
+           preventDuplicate: true,
+         })
+         // Set KvK error to true
+         setKvkNumberError(true)
+         // Display a more fitting message below the input field.
+         setKvkNumberErrorMessage(
+           'Company with this KVK number already exists!',
+         )
+       }
+       // Disable animation
+       setLoading(false)
+       // Always notify user saving company failed
+       enqueueSnackbar('Error registering company!', {
+         variant: 'error',
+         preventDuplicate: true,
+       })
+     })
+ }
+
+ return (
+   // ... (Top of the register page)
+
+     <div className='my-4'>
+       <label className='text-xl mr-4' htmlFor='company-name-input'>
+         Name
+       </label>
+       <input
+         className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+           nameError ? 'border-red-500' : ''
+         }`}
+         data-test-id='company-name-input'
+         id='company-name-input'
+         onBlur={validateCompanyName} // onBlur event validate name field function call
+         onChange={handleNameChange} // onChange event name field change handler function call
+         type='text'
+         value={name}
+       />
+       { /* Conditionally render the error notification text below the input field: */}
+       {nameError ? (
+         <p className='text-red-500 text-sm'>
+           Company name must be between 1 and 60 characters long and can
+           only contain letters, numbers, spaces, and the following
+           characters: &#45;, &apos;, and &#46;
+         </p>
+       ) : (
+         ''
+       )}
+     </div>
+     <div className='my-4'>
+       <label className='text-xl mr-4' htmlFor='company-email-input'>
+         Email
+       </label>
+       <input
+         className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+           emailError ? 'border-red-500' : ''
+         }`}
+         data-test-id='company-email-input'
+         id='company-email-input'
+         onBlur={validateEmail} // onBlur event validate email field function call
+         onChange={handleEmailChange} // onChange event email field change handler function call
+         type='text'
+         value={email}
+       />
+       { /* Conditionally render the error notification text below the input field: */}
+       {emailError ? (
+         <p className='text-red-500 text-sm'>
+           Email must be a valid email address.
+         </p>
+       ) : (
+         ''
+       )}
+     </div>
+ )
+```
 
 ##### KVK number validation
 
@@ -1117,7 +1117,7 @@ const companySchema = new mongoose.Schema(
   {
     // ... (all schema fields are defined here)
   },
-  { timestamps: true }
+  { timestamps: true },
 )
 ```
 
@@ -1127,7 +1127,7 @@ const companySchema = new mongoose.Schema(
 
 ```javascript
 // Instantiate `Company` model
-const Company = mongoose.model("Company", companySchema)
+const Company = mongoose.model('Company', companySchema)
 ```
 
 #### Edit company
@@ -1222,30 +1222,30 @@ const inviteSchema = new mongoose.Schema(
   {
     senderId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
     receiverId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
     kind: {
       type: String,
       required: true,
-      default: "other",
+      default: 'other',
     },
     companyId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Company",
+      ref: 'Company',
     },
     status: {
       type: String,
       required: true,
-      default: "pending",
+      default: 'pending',
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 )
 ```
 
@@ -1253,7 +1253,7 @@ const inviteSchema = new mongoose.Schema(
 
 ```javascript
 // Create `Invite` model from `inviteSchema`
-const Invite = mongoose.model("Invite", inviteSchema)
+const Invite = mongoose.model('Invite', inviteSchema)
 ```
 
 This was the visual demo for now, I will update this later on, so come back in a while to check it out!
@@ -1279,21 +1279,21 @@ To run this application locally, follow these steps:
      ```javascript
      // backend/config.js
      // port for the server to listen on
-     export const PORT = 5555;
+     export const PORT = 5555
 
-     // YOUR MongoDB database connection URL (if you want to test this application without creating your own database, 
+     // YOUR MongoDB database connection URL (if you want to test this application without creating your own database,
      // contact me at thompoppins@gmail.com, I'll provide you with a database URL)
      export const mongoDBURL =
-       "mongodb+srv://exampleuser:examplepasswork@example-mern-stack-project.xhvmidl.mongodb.net/?retryWrites=true&w=majority";
+       'mongodb+srv://exampleuser:examplepasswork@example-mern-stack-project.xhvmidl.mongodb.net/?retryWrites=true&w=majority'
 
      // Secret key for JWT signing and encryption (just generate a random string or keep it like it is for testing purposes)
-     export const JWT_SECRET = "yoursecretkey";
+     export const JWT_SECRET = 'yoursecretkey'
 
      // TEST API key for KVK API (also required)
-     export const KVK_TEST_API_KEY = "l7xx1f2691f2520d487b902f4e0b57a0b197";
+     export const KVK_TEST_API_KEY = 'l7xx1f2691f2520d487b902f4e0b57a0b197'
 
      // PROD API key for KVK API (also required)
-     export const KVK_PROD_API_KEY = "";
+     export const KVK_PROD_API_KEY = ''
      ```
 
 3. **Set Up Frontend Configuration**:
@@ -1304,10 +1304,10 @@ To run this application locally, follow these steps:
 
      ```javascript
      // frontend/config.js
-     export const BACKEND_URL = "http://localhost:5555";
-     // Disable company validation by KVK API (If you want to test the KVK company validation, mail me at thompoppins@gmail.com for 
+     export const BACKEND_URL = 'http://localhost:5555'
+     // Disable company validation by KVK API (If you want to test the KVK company validation, mail me at thompoppins@gmail.com for
      // instructions how to set this up.)
-     export const TEST_KVK_API = false;
+     export const TEST_KVK_API = false
      ```
 
 4. **Install Dependencies**:
@@ -1726,6 +1726,10 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 
 ## Project Issue Progression
 
+
+
+
+
 - [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
 - [ ] [MERNSTACK-62] Create `junction` table between `Company` and `Project`. This table will be used because of the many-to-many relationship and additional properties that are needed to link a company to a project. (see backend devdocs folder)
 - [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers) CONSIDER: Saving users as customers to `company` model instead of creating a `junction` table. This will allow to associate each Company document with multiple User documents. No need for a `junction` table that will make it more complex without any use for it.
@@ -1870,7 +1874,7 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-250] Add `Industry` to `Company` registration form and edit form.
 - [ ] [MERNSTACK-252] Filter search results from users that already are in a pending invite
 - [ ] [MERNSTACK-254] Add phone number to `User` model routes and registration form.
-- [ ] [MERNSTACK-255] When user clicks logout, there should be a "Go back" or "Stay logged in"  option available on the /logout page.
+- [ ] [MERNSTACK-255] When user clicks logout, there should be a "Go back" or "Stay logged in" option available on the /logout page.
 - [ ] [MERNSTACK-259] Finish basic structure and design for Result.jsx page. (Search results page)
 - [ ] [MERNSTACK-279] Read article about performance and optimization of MERN stack [here](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-c429591d5b0f).
 - [ ] [MERNSTACK-280] Read article about [Node.js](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-5a3c7a6e854b).
@@ -1889,8 +1893,8 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-296] Practice working with breakpoints in VS Code for 30 minutes.
 - [ ] [MERNSTACK-297] Read into Mock Service Worker to optimize testing to declaratively mock API communication in your tests instead of stubbing window.fetch, or relying on third-party adapters. <https://github.com/mswjs/msw>
 - [x] [MERNSTACK-303] Try vite-jest to get started with testing [npm page](https://www.npmjs.com/package/vite-jest) Read on npm page how to use [es-module-lexer](https://www.npmjs.com/package/es-module-lexer) with vite-jest.
-- [x] [MERNSTACK-304] Try to implement [testing inside of the Vite app.](https://zaferayan.medium.com/how-to-setup-jest-and-react-testing-library-in-vite-project-2600f2d04bdd) [THE Guide to set up Jest on Vite 2023](https://zaferayan.medium.com/how-to-setup-jest-and-react-testing-library-in-vite-project-2600f2d04bdd) 
-- [ ] [MERNSTACK-305] Implement [Jest Snapshot](https://jestjs.io/docs/snapshot-testing) After gaining basic skills and knowledge of working and testing with Jest and react-testing-framework. With Jest snapshot testing you can keep track of all unexpected or any intended UI changes because Jest snapshot makes a snapshot of the rendered components in  [pretty-format](https://github.com/jestjs/jest/tree/main/packages/pretty-format) which is a conversion of all JavaScript to most readable format.
+- [x] [MERNSTACK-304] Try to implement [testing inside of the Vite app.](https://zaferayan.medium.com/how-to-setup-jest-and-react-testing-library-in-vite-project-2600f2d04bdd) [THE Guide to set up Jest on Vite 2023](https://zaferayan.medium.com/how-to-setup-jest-and-react-testing-library-in-vite-project-2600f2d04bdd)
+- [ ] [MERNSTACK-305] Implement [Jest Snapshot](https://jestjs.io/docs/snapshot-testing) After gaining basic skills and knowledge of working and testing with Jest and react-testing-framework. With Jest snapshot testing you can keep track of all unexpected or any intended UI changes because Jest snapshot makes a snapshot of the rendered components in [pretty-format](https://github.com/jestjs/jest/tree/main/packages/pretty-format) which is a conversion of all JavaScript to most readable format.
 - [ ] [MERNSTACK-306] Read into [pretty-format](https://github.com/jestjs/jest/tree/main/packages/pretty-format) and use it on console.log statements to make them more readable.
 - [ ] [MERNSTACK-307] Read about how to utilize Istanbul code coverage best. [Best basic introduction](https://medium.com/walmartglobaltech/do-you-have-100-code-coverage-10c09a44832b), [https://istanbul.js.org/](https://istanbul.js.org/), [Jesy, Istanbul and React](https://sergio.io/blog/reactjs-unit-test-and-code-coverage-with-jest)
 - [ ] [MERNSTACK-308] Write a Jest/react-testing-library test for the user login form, as good possible. [ARTICLE ABOUT REACT-TEST-LIBRARY LOGIN FORM TESTING](https://for-devs-by-devs.hashnode.dev/login-form-testing-using-react-testing-library)
@@ -1910,15 +1914,15 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-325] Add Storybook section to [documentation]((https://mern-stack-proj.vercel.app/).
 - [ ] [MERNSTACK-] Add contact form to [documentation]((https://mern-stack-proj.vercel.app/) that will send a email. [Documentation here.](https://herotofu.com/solutions/guides/react-send-email)
 - [ ] [MERNSTACK-] Add useful [Storybook tutorials](https://storybook.js.org/tutorials/) as Jira issues.
-- [ ] [MERNSTACK-] Finish [Intro to Storybook tutorial](https://storybook.js.org/tutorials/intro-to-storybook/) [Continue here](https://storybook.js.org/tutorials/intro-to-storybook/react/en/simple-component/) 
+- [ ] [MERNSTACK-] Finish [Intro to Storybook tutorial](https://storybook.js.org/tutorials/intro-to-storybook/) [Continue here](https://storybook.js.org/tutorials/intro-to-storybook/react/en/simple-component/)
 - [ ] [MERNSTACK-] Read about [Mock Service Worker](https://storybook.js.org/addons/msw-storybook-addon/) integration into Storybook for handling mock data.
 - [ ] [MERNSTACK-] Select [integrations (addons)](https://storybook.js.org/integrations) for Storybook that are useful without losing productivity.
 - [ ] [MERNSTACK-] Set up [Dependabot](https://docs.github.com/en/code-security/getting-started/dependabot-quickstart-guide) in repository and write about it in the [documentation]((https://mern-stack-proj.vercel.app/).
 - [ ] [MERNSTACK-] Write a section about [Component-Driven Development](https://storybook.js.org/tutorials/intro-to-storybook/react/en/simple-component/) in [documentation]((https://mern-stack-proj.vercel.app/).
-- [ ] [MERNSTACK-] Destructure all component object type parameters to define all keys used in the component like the first parameter of this example: `function Task = ({ task: { id, title, state }, onArchiveTask, onPinTask }) => {}` 
+- [ ] [MERNSTACK-] Destructure all component object type parameters to define all keys used in the component like the first parameter of this example: `function Task = ({ task: { id, title, state }, onArchiveTask, onPinTask }) => {}`
 - [ ] [MERNSTACK-] Write a piece [Component Story Format 3]() in the Storybook section of the [documentation]((https://mern-stack-proj.vercel.app/).
 - [ ] [MERNSTACK-] Write about Component Driven Development in the [documentation]((https://mern-stack-proj.vercel.app/) [(Storybook source)] in a "Design practice" or "Strategies" kinda section.
-- [ ] [MERNSTACK-326] Add [Rocket Icon](https://fontawesome.com/icons/rocket?f=classic&s=solid) to documentation website title. 
+- [ ] [MERNSTACK-326] Add [Rocket Icon](https://fontawesome.com/icons/rocket?f=classic&s=solid) to documentation website title.
 - [ ] [MERNSTACK-327] IMPORTANT: [Implement Formidable Inline Executable codeblocks](https://formidable.com/open-source/react-live/) examples in the documentation.
 - [ ] [MERNSTACK-] In the [Interactive demo](http://localhost:3000/interactive-demo) section, make as interactive as possible using components of the application.
 - [ ] [MERNSTACK-] Replace all codeblocks on documentation website with the codeblock like in /examples/codeblock.mdx
@@ -1927,7 +1931,7 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-] Build search component on the homepage in Storybook.
 - [ ] [MERNSTACK-] Learn about [JavaScript design patters](https://javascriptpatterns.vercel.app/patterns)
 - [ ] [MERNSTACK-] [Configuration of META data]() on Next.js documentation site.
-- [ ] [MERNSTACK-] See if [react-live](https://github.com/FormidableLabs/react-live) is compatible with Nextra. 
+- [ ] [MERNSTACK-] See if [react-live](https://github.com/FormidableLabs/react-live) is compatible with Nextra.
 - [ ] [MERNSTACK-] See if I can use [mermaid.js](https://mermaid.js.org/intro/) on Nextra. [docs](https://mermaid.js.org/intro/)
 - [ ] [MERNSTACK-] OPTONAL SEARCH ENGINE: [Algolia Docsearch](https://docsearch.algolia.com/)
 - [ ] [MERNSTACK-] Watch [freeCodeCamp TypeScript React Video tutorial](https://www.youtube.com/watch?v=FJDVKeh7RJI&ab_channel=freeCodeCamp.org) about how to use TypeScript in React.
@@ -1937,21 +1941,51 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-] Nextra uses [Prismjs](https://prismjs.com/) for code highlighting, Find out how to use it because highlighting can make an example much more understandable and the reader has his attention drawn to the important lines.
 - [ ] [MERNSTACK-] Capitalize all titles using [The Chicago Manual of Style](https://title.sh/). (First find out where titles are and change them all)
 - [ ] [MERNSTACK-] Use [Code Highlighting](https://sci.rs/features/mdx#code-highlighting) in the code examples in the documentation.
-- [ ] [MERNSTACK-] Write a piece about Storybook once you've worked with it enough to tell about it, and tell about the ES Lint rule that forbids to use [prop spreading](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-props-no-spreading.md). Tell about how much I agree with this rule, waiting for errors once you start changing around related components and am convinced that is this context I can not see any benefit on the long term. 
+- [ ] [MERNSTACK-] Write a piece about Storybook once you've worked with it enough to tell about it, and tell about the ES Lint rule that forbids to use [prop spreading](https://github.com/jsx-eslint/eslint-plugin-react/blob/master/docs/rules/jsx-props-no-spreading.md). Tell about how much I agree with this rule, waiting for errors once you start changing around related components and am convinced that is this context I can not see any benefit on the long term.
 - [ ] [MERNSTACK-] Transforming documentation website to "Thom Veldpaus" instead of "MERN_STACK_PROJ." primarily to blog about progress and document technology that excites me.
-- [ ] [MERNSTACK-] 
-- [ ] [MERNSTACK-] 
-- [ ] [MERNSTACK-] 
-- [ ] [MERNSTACK-] 
-- [ ] [MERNSTACK-] 
-- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] [Test this scaffolding repository for a potential upgrade!](https://github.com/The24thDS/vite-reactts18-chakra-jest-husky) Read into [Charkra UI](https://chakra-ui.com/getting-started) and find out if there are costs.
+- [ ] [MERNSTACK-] [Follow THIS on installing Nextra](https://www.ycpranchu.com/Web-Design/nextjs_nextra) [Install Nextra with JSX](https://medium.com/@ycpin/web-design-create-a-next-js-nextra-blog-d9ea95f9b631) after install of Next.js
+- [ ] [MERNSTACK-] Try [Nextra 2.0.0 beta.](https://github.com/shuding/nextra/discussions/257) [MDX v2](https://mdxjs.com/migrating/v2/) [Nextra Blog Post About Update](https://mdxjs.com/blog/v2/)
+- [ ] [MERNSTACK-] [Nextra site generator](https://github.com/shuding/nextra) also tool for theming!
+- [ ] [MERNSTACK-] Very nice code example blocks by Nextra. [See more over here.](https://nextra.site/docs/guide/advanced/npm2yarn)
+- [ ] [MERNSTACK-] AFMAKEN RESPONSE VANUIT SERVER NAAR CLIENT/BROWSER packages\nextra-theme-docs\server.ts
+- [ ] [MERNSTACK-] Break down the following advice from [DocsGPT](https://docsgpt.arc53.com/) into separate issues:
 
+# DocsGPT:
 
+Absolutely! Nextra is a great choice for building an informational website. To provide an interactive experience and keep your readers entertained, here are some suggestions:
 
+1. **Embed Interactive Widgets**: You can embed interactive widgets such as maps, charts, sliders, or calculators to make the content more engaging. Tools like Google Maps API, Chart.js, and React Slider can be helpful for this purpose.
 
-- [ ] 
+2. **Add Animations**: Animations can add visual interest to your website. Use libraries like React Spring or Framer Motion to easily incorporate animations into different elements such as text, images, or buttons.
+
+3. **Include Interactive Quizzes or Surveys**: Integrate interactive quizzes or surveys within your website to make it more interactive. Tools like Typeform or Google Forms can help you create and embed interactive forms.
+
+4. **Implement Interactive Code Examples**: If you are writing about code or programming concepts, consider using code playgrounds like CodePen or CodeSandbox to provide interactive code examples that users can modify and execute directly on your website.
+
+5. **Integrate Social Media Feeds**: Display social media feeds related to your application or topic to provide real-time updates and encourage user engagement. You can use APIs provided by popular social media platforms like Twitter, Instagram, or Facebook to fetch and display the feeds.
+
+6. **Include Interactive Infographics**: Infographics can present complex information in a visually appealing way. Use tools like Infogram or Canva to create interactive infographics and embed them into your website.
+
+7. **Incorporate Gamification Elements**: Gamify your website by adding interactive features like badges, points, or progress bars. Users can earn rewards for completing certain actions or reaching milestones on your website.
+
+Remember to consider your target audience and the purpose of your website while incorporating interactive elements. Too many or overly complex interactive features may distract users from the main content. Strive for a balance between interactivity and readability to enhance the overall user experience.
+
+- [ ] [MERNSTACK-] [Get the Apollo VSCode extension up and running](https://www.apollographql.com/docs/devtools/editor-plugins/), simply follow the steps in the extension description.
+- [ ] [MERNSTACK-] Implement [this GraohQL interactive playground component](https://github.com/remorses/mini-graphiql-playground) on to a page of my website.
+- [ ] [MERNSTACK-] [Start NOW with project management of your ALREADY EXISTING PROJECT on GraphQL Hive](https://the-guild.dev/graphql/hive/docs/management/projects).
+- [ ] [MERNSTACK-] [Introduction to Hive](https://the-guild.dev/graphql/hive/docs) Start now and only when you are completely set up for basic project management, only then start the next task.
+- [ ] [Get started with introduction tutorial](https://www.apollographql.com/tutorials/lift-off-part1) and implement the interactive component on my documentation website.
+- [ ] [Get GraphQL certified](https://www.apollographql.com/tutorials/certifications/apollo-graph-associate)
+- [ ] [Start building schema's by the MERN_STACK_PROJ. application](https://www.apollographql.com/blog/backend/architecture/modernize-your-mern-stack-with-graphql-and-graphos/) For routes and models, pages data transfer, everything.\
+- [ ] [MERNSTACK-] [Have a better life from now on and discover the most useful things](https://the-guild.dev/) [(https://the-guild.dev/](https://the-guild.dev/) has to offer. 
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
 
 ## Production checklist
+
 - [ ] [MERNSTACK-261] Production: Remove all console logs in the frontend.
 - [ ] [MERNSTACK-262] Production: Evaluate and tighten ES Lint coding standard rules for complexity. Address and resolve any complexity issues currently disabled or configured less strict.
 - [ ] [MERNSTACK-263] Production: Review each file to adhere to coding standards, ensuring resolution of all ES Lint errors.
@@ -1968,8 +2002,8 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-269] Production: Address confidential issue, refer to Jira for details if you are involved.
 - [ ] [MERNSTACK-273] Production: Address confidential issue, refer to Jira for details if you are involved.
 - [ ] [MERNSTACK-302] Production: Remove data-testid attributes with babel plugin before going into production.[Babel plugin](https://www.npmjs.com/package/babel-plugin-react-remove-properties).
-- [ ] [MERNSTACK-] 
-- [ ] [MERNSTACK-] 
-- [ ] [MERNSTACK-] 
-- [ ] [MERNSTACK-] 
-- [ ] [MERNSTACK-] 
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]

@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import { AiOutlineClose } from 'react-icons/ai'
-import { BACKEND_URL } from '../../../config'
-import store from '../../store/store.jsx'
 import axios from 'axios'
 import { useSnackbar } from 'notistack'
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
+import { AiOutlineClose } from 'react-icons/ai'
+
+import { BACKEND_URL } from '../../../config'
+import store from '../../store/store'
 
 // Modal to edit user profile picture
 const EditProfilePictureModal = ({ userId, onClose }) => {
   // The selected file
-  const [selectedFile, setSelectedFile] = useState(),
-    // The preview image of the selected file (Base64 string)
-    [preview, setPreview] = useState(''),
-    // EnqueueSnackbar is used to show a snackbar notification
-    { enqueueSnackbar } = useSnackbar()
+  const [selectedFile, setSelectedFile] = useState()
+  // The preview image of the selected file (Base64 string)
+  const [preview, setPreview] = useState('')
+  // EnqueueSnackbar is used to show a snackbar notification
+  const { enqueueSnackbar } = useSnackbar()
 
   // Handle file select
   const onSelectFile = (event) => {
@@ -113,7 +114,7 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
   useEffect(() => {
     if (!selectedFile) {
       setPreview('')
-      return
+      return () => {}
     }
 
     // Convert the selected image to a Base64 string and save it to the preview state
@@ -126,7 +127,7 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
 
   return (
     <div
-      className='fixed bg-black/60 top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center'
+      className='fixed bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-black/60'
       data-testid='company-modal'
       onClick={onClose}
       onKeyDown={(event) => {
@@ -139,12 +140,12 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
     >
       {/* eslint-disable-next-line */}
       <div
-        className='w-[600px] max-w-full h-[510px] border-2 border-purple-900 bg-violet-950/40 rounded-lg px-4 py-4 m-4 flex flex-col relative'
+        className='relative m-4 flex h-[510px] w-[600px] max-w-full flex-col rounded-lg border-2 border-purple-900 bg-violet-950/40 px-4 py-4'
         data-testid='company-modal'
         onClick={(event) => event.stopPropagation()}
       >
         <AiOutlineClose
-          className='absolute right-6 top-6 text-3xl text-green-300 hover:text-red-500 cursor-pointer'
+          className='absolute right-6 top-6 cursor-pointer text-3xl text-green-300 hover:text-red-500'
           data-testid='close-button'
           onClick={onClose}
         />
@@ -160,13 +161,13 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
           {selectedFile ? (
             <img
               alt='Profile'
-              className='mx-auto my-4 w-[350px] h-[350px] object-cover'
+              className='mx-auto my-4 h-[350px] w-[350px] object-cover'
               src={preview}
             />
           ) : null}
           {!selectedFile && (
-            <div className='mx-auto my-4  w-[350px] h-[350px] border-2 border-purple-900 rounded-lg'>
-              <p className='text-center text-white text-2xl mt-16'>
+            <div className='mx-auto my-4  h-[350px] w-[350px] rounded-lg border-2 border-purple-900'>
+              <p className='mt-16 text-center text-2xl text-white'>
                 No image selected
               </p>
             </div>
@@ -174,7 +175,7 @@ const EditProfilePictureModal = ({ userId, onClose }) => {
           <div className='flex justify-center'>
             {selectedFile ? (
               <input
-                className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2'
+                className='rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 p-2 hover:bg-purple-700 hover:bg-gradient-to-l'
                 type='submit'
                 value='Upload'
               />
