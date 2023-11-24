@@ -9,6 +9,7 @@ import invitesRoute from './routes/invitesRoute.js'
 import kvkRoute from './routes/kvkRoute.js'
 import uploadRoute from './routes/uploadRoute.js'
 import usersRoute from './routes/usersRoute.js'
+import filesRoute from './routes/filesRoute.js'
 
 const app = express()
 
@@ -48,6 +49,7 @@ app.use('/companies', companiesRoute)
 app.use('/users', usersRoute)
 app.use('/invites', invitesRoute)
 app.use('/find', findRoute)
+app.use('/files', filesRoute)
 app.use('/auth', authRoute)
 app.use('/kvk', kvkRoute)
 app.use('/upload', uploadRoute)
