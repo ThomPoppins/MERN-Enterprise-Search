@@ -337,7 +337,7 @@ const RegisterCompany = () => {
                       alt='Preview'
                       className='rounded-full'
                       height='200'
-                      src={logoPreview}
+                      src={`${BACKEND_URL}${logoPreview}`}
                       width='200'
                     />
                   ) : null}

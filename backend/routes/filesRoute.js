@@ -1,6 +1,6 @@
 import express from 'express'
 import { Image } from '../models/imageModel.js'
-import { getStaticFileURLFromPath } from '../middleware/files/staticFiles.js'
+import { getURLSuffixFromPath } from '../middleware/files/staticFiles.js'
 import mongoose from 'mongoose'
 
 const router = express.Router()
@@ -19,7 +19,7 @@ router.get('/image-url/:id', async (request, response) => {
     }
 
     // Get the URL for the image document
-    const imageURL = getStaticFileURLFromPath(imageDocument.path)
+    const imageURL = getURLSuffixFromPath(imageDocument.path)
 
     // Send the URL to the client
     return response.status(200).send({ imageURL })

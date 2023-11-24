@@ -73,6 +73,7 @@ router.post(
         console.log('Result saving image call: ', result)
 
         responseObj.imageId = result._id
+        responseObj.imageUrl = result.url
       })
       .catch((error) => {
         console.log('Error saving image to database: ', error)
