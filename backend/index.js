@@ -9,6 +9,7 @@ import invitesRoute from './routes/invitesRoute.js'
 import kvkRoute from './routes/kvkRoute.js'
 import uploadRoute from './routes/uploadRoute.js'
 import usersRoute from './routes/usersRoute.js'
+import filesRoute from './routes/filesRoute.js'
 
 const app = express()
 
@@ -37,9 +38,8 @@ app.get('/', (request, response) => {
     // eslint-disable-next-line no-magic-numbers
     .status(200)
     .send(
-      "<div style='padding: 30px; width: 100vw; height: 100vh; background-color: black; position:fixed; top: 0; left: 0;'>" +
-        "<h1 style='color: white;'>Welcome to my MERN stack backend server with Express.js!</h1>" +
-        '</div>',
+      // eslint-disable-next-line quotes
+      "<div style='padding: 30px; width: 100vw; height: 100vh; background-color: black; position:fixed; top: 0; left: 0;'><h1 style='color: white;'>Welcome to my MERN stack backend server with Express.js!</h1></div>",
     )
 })
 
@@ -48,6 +48,7 @@ app.use('/companies', companiesRoute)
 app.use('/users', usersRoute)
 app.use('/invites', invitesRoute)
 app.use('/find', findRoute)
+app.use('/files', filesRoute)
 app.use('/auth', authRoute)
 app.use('/kvk', kvkRoute)
 app.use('/upload', uploadRoute)

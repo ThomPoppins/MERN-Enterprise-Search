@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   syntax: 'postcss-scss',
   plugins: {
     tailwindcss: {},

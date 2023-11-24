@@ -65,11 +65,11 @@ const Home = () => {
   // If no user is logged in
   return (
     <Layout>
-      <div className='mx-auto lg:w-9/12 border border-purple-900 bg-violet-950/40 rounded-xl p-4 mt-32'>
-        <h1 className='text-3xl mb-6'>Home</h1>
+      <div className='mx-auto mt-32 rounded-xl border border-purple-900 bg-violet-950/40 p-4 lg:w-9/12'>
+        <h1 className='mb-6 text-3xl'>Home</h1>
 
         <p className=''>
-          Register and login to your account to see the features of this
+          Sign up and login to your account to see the features of this
           application in action. Account data will only be saved to your own
           MongoDB database and your password will be saved securely hashed by
           bcrypt.

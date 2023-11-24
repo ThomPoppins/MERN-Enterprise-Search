@@ -12,7 +12,7 @@ import { useSnackbar } from 'notistack'
 import usernameValidator from '../../utils/validation/usernameValidator'
 import Loader from '../../components/animated/Loader.jsx'
 
-const RegisterUser = () => {
+const SignUpUser = () => {
   // Form input fields as state variables
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
@@ -258,28 +258,31 @@ const RegisterUser = () => {
   return (
     <Layout>
       <div className='p-4'>
-        <h1 className='flex justify-center text-3xl my-4 mb-6'>Register</h1>
+        <h1 className='my-4 mb-6 flex justify-center text-3xl'>Sign Up</h1>
         {loading ? <Loader /> : ''}
-        <div className='flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto'>
+        <div className='mx-auto flex w-[600px] flex-col rounded-xl border-2 border-purple-900 bg-violet-950/40 px-8 py-4'>
           {registerErrorMessage ? (
-            <p className='text-red-500 text-sm'>{registerErrorMessage}</p>
+            <p className='text-sm text-red-500'>{registerErrorMessage}</p>
           ) : (
             ''
           )}
           <div className='my-4'>
-            <label className='text-xl mr-4'>Username</label>
+            <label className='mr-4 text-xl' htmlFor='user-username-input'>
+              Username
+            </label>
             <input
-              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+              className={`w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white ${
                 usernameError ? 'border-red-500' : ''
               }`}
               data-testid='user-username-input'
+              id='user-username-input'
               onBlur={validateUsername}
               onChange={handleUsernameChange}
               type='text'
               value={username}
             />
             {usernameError ? (
-              <p className='text-red-500 text-sm'>
+              <p className='text-sm text-red-500'>
                 Username must be at least 1 alphanumeric character long.
               </p>
             ) : (
@@ -287,19 +290,22 @@ const RegisterUser = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4'>Email</label>
+            <label className='mr-4 text-xl' htmlFor='user-email-input'>
+              Email
+            </label>
             <input
-              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+              className={`w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white ${
                 emailError ? 'border-red-500' : ''
               }`}
               data-testid='user-email-input'
+              id='user-email-input'
               onBlur={validateEmail}
               onChange={handleEmailChange}
               type='text'
               value={email}
             />
             {emailError ? (
-              <p className='text-red-500 text-sm'>
+              <p className='text-sm text-red-500'>
                 Email must be a valid email address.
               </p>
             ) : (
@@ -307,19 +313,22 @@ const RegisterUser = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4'>Password</label>
+            <label className='mr-4 text-xl' htmlFor='user-password-input'>
+              Password
+            </label>
             <input
-              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+              className={`w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white ${
                 passwordError ? 'border-red-500' : ''
               }`}
               data-testid='user-password-input'
+              id='user-password-input'
               onBlur={validatePassword}
               onChange={handlePasswordChange}
               type='password'
               value={password}
             />
             {passwordError ? (
-              <p className='text-red-500 text-sm'>
+              <p className='text-sm text-red-500'>
                 Password must be at least 8 characters long, contain at least
                 one uppercase letter, one lowercase letter, one digit and one
                 special character.
@@ -329,19 +338,25 @@ const RegisterUser = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4'>Confirm Password</label>
+            <label
+              className='mr-4 text-xl'
+              htmlFor='user-confirm-password-input'
+            >
+              Confirm Password
+            </label>
             <input
-              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+              className={`w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white ${
                 confirmPasswordError ? 'border-red-500' : ''
               }`}
               data-testid='user-confirm-password-input'
+              id='user-confirm-password-input'
               onBlur={validateConfirmPassword}
               onChange={handleConfirmPasswordChange}
               type='password'
               value={confirmPassword}
             />
             {confirmPasswordError ? (
-              <p className='text-red-500 text-sm'>
+              <p className='text-sm text-red-500'>
                 Confirm password does not match password.
               </p>
             ) : (
@@ -349,19 +364,22 @@ const RegisterUser = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4'>First Name</label>
+            <label className='mr-4 text-xl' htmlFor='user-first-name-input'>
+              First Name
+            </label>
             <input
-              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+              className={`w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white ${
                 firstNameError ? 'border-red-500' : ''
               }`}
               data-testid='user-first-name-input'
+              id='user-first-name-input'
               onBlur={validateFirstName}
               onChange={handleFirstNameChange}
               type='text'
               value={firstName}
             />
             {firstNameError ? (
-              <p className='text-red-500 text-sm'>
+              <p className='text-sm text-red-500'>
                 First name must be between at least 1 character long and can
                 only contain letters, dots, and spaces.
               </p>
@@ -370,19 +388,22 @@ const RegisterUser = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4 '>Last Name</label>
+            <label className='mr-4 text-xl ' htmlFor='user-last-name-input'>
+              Last Name
+            </label>
             <input
-              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+              className={`w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white ${
                 lastNameError ? 'border-red-500' : ''
               }`}
               data-testid='user-last-name-input'
+              id='user-last-name-input'
               onBlur={validateLastName}
               onChange={handleLastNameChange}
               type='text'
               value={lastName}
             />
             {lastNameError ? (
-              <p className='text-red-500 text-sm'>
+              <p className='text-sm text-red-500'>
                 Last name must be between at least 1 character long and can only
                 contain letters and spaces.
               </p>
@@ -391,7 +412,10 @@ const RegisterUser = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4'>Gender</label> <br />
+            <label className='mr-4 text-xl' htmlFor='gender'>
+              Gender
+            </label>{' '}
+            <br />
             <div className='flex flex-row justify-center space-x-16'>
               <input
                 data-testid='user-gender-input-male'
@@ -419,7 +443,7 @@ const RegisterUser = () => {
               Other
             </div>
             {genderError ? (
-              <p className='text-red-500 text-sm'>
+              <p className='text-sm text-red-500'>
                 Gender is a required field.
               </p>
             ) : (
@@ -428,9 +452,10 @@ const RegisterUser = () => {
             <br />
           </div>
           <button
-            className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
+            className='m-8 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 p-2 hover:bg-purple-700 hover:bg-gradient-to-l'
             data-testid='user-register-button'
             onClick={handleSaveUser}
+            type='submit'
           >
             Save
           </button>
@@ -440,4 +465,4 @@ const RegisterUser = () => {
   )
 }
 
-export default RegisterUser
+export default SignUpUser

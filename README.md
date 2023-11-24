@@ -1726,10 +1726,6 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 
 ## Project Issue Progression
 
-
-
-
-
 - [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
 - [ ] [MERNSTACK-62] Create `junction` table between `Company` and `Project`. This table will be used because of the many-to-many relationship and additional properties that are needed to link a company to a project. (see backend devdocs folder)
 - [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers) CONSIDER: Saving users as customers to `company` model instead of creating a `junction` table. This will allow to associate each Company document with multiple User documents. No need for a `junction` table that will make it more complex without any use for it.
@@ -1780,6 +1776,7 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [x] [MERNSTACK-128] In RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this
 - [x] [MERNSTACK-129] Add state for all companies fields that can be edited in EditCompany.jsx
 - [x] [MERNSTACK-131] Set state for all companies fields that can be edited in EditCompany.jsx
+- [x] [MERNSTACK-133] ShowCompany.jsx: Add all fields of the company model here. Copy paste outer div with ".my-4" class below to achieve this.
 - [x] [MERNSTACK-138] Create user register page and functionality, save with bcrypt hashed password in database.
 - [x] [MERNSTACK-139] Create a user login page and functionality, validate user password has with bcrypt and compare hashed password on login.
 - [x] [MERNSTACK-140] Make it possible for a user to register a company and automatically become first company owner.
@@ -1857,7 +1854,7 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [x] [MERNSTACK-284] Add little profile picture of invited user next to their details in the "pending invites" section.
 - [x] [MERNSTACK-285] Add picture to search results searching for co-owners.
 - [x] [MERNSTACK-286] Add picture to the list of owners in EditCompany
-- [ ] [MERNSTACK-209] Make file upload possible as company logo
+- [x] [MERNSTACK-209] Make file upload possible as company logo
 - [ ] [MERNSTACK-212] Create account edit page for account settings/configurations.
 - [ ] [MERNSTACK-220] After registration, log user in automatically and redirect to /account/onboarding page.
 - [ ] [MERNSTACK-228] The "Find" on the homepage has to transition between color using "color transitions" from TailwindCSS.
@@ -1881,11 +1878,11 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-281] Read article about [MongoDB](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-a390d60d08fa).
 - [ ] [MERNSTACK-282] Read article about MERN stack [Security](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-b8e0ac68d087)
 - [ ] [MERNSTACK-283] Read MERN stack [CI/CD & deployment article](https://medium.com/@ashfaqe.sa12/building-production-ready-high-performance-web-applications-with-the-mern-stack-how-to-unleash-10699767f4b4)
-- [ ] [MERNSTACK-298] Add image crop to application so everybody can crop their image till it fits the frame. [Almost perfect example, predefined aspect ratio](https://codesandbox.io/s/react-image-crop-demo-with-react-hooks-0h4db?file=/src/App.js), [After getting the first example done, this one might be interesting to investigate](https://codesandbox.io/s/react-image-crop-demo-with-react-hooks-q5lbkn?file=/src/App.tsx) [react-image-crop MANY examples page](https://codesandbox.io/examples/package/react-image-crop), [NPM Page react-image-crop](https://www.npmjs.com/package/react-image-crop).
+- [x] [MERNSTACK-298] Add image crop to application so everybody can crop their image till it fits the frame. [Almost perfect example, predefined aspect ratio](https://codesandbox.io/s/react-image-crop-demo-with-react-hooks-0h4db?file=/src/App.js), [After getting the first example done, this one might be interesting to investigate](https://codesandbox.io/s/react-image-crop-demo-with-react-hooks-q5lbkn?file=/src/App.tsx) [react-image-crop MANY examples page](https://codesandbox.io/examples/package/react-image-crop), [NPM Page react-image-crop](https://www.npmjs.com/package/react-image-crop).
 - [ ] [MERNSTACK-288] Upgrade ShowCompany to a nice profile page where companies can upload multiple images with titles. This is the start of the timeline or storyline that's it going to become.
-- [ ] [MERNSTACK-289] Use React Dropzone for easy image file select or drag and drop when user uploads profile image.
-- [ ] [MERNSTACK-290] First make possible for the user to crop their profile image within a 1 / 1 aspect ratio so I can use this everywhere in the website UI.
-- [ ] [MERNSTACK-291] After cropping the image all left is a Base64 coded binary string, convert that string back to an image file and upload that image file to the backend server. (+ CDN) [Read this info page about how to work with file conversion in JavaScript with clear examples](https://www.codingforentrepreneurs.com/blog/a-few-javascript-methods-for-images-files/).
+- [x] [MERNSTACK-289] Use React Dropzone for easy image file select or drag and drop when user uploads profile image.
+- [x] [MERNSTACK-290] First make possible for the user to crop their profile image within a 1 / 1 aspect ratio so I can use this everywhere in the website UI.
+- [x] [MERNSTACK-291] After cropping the image all left is a Base64 coded binary string, convert that string back to an image file and upload that image file to the backend server. (+ CDN) [Read this info page about how to work with file conversion in JavaScript with clear examples](https://www.codingforentrepreneurs.com/blog/a-few-javascript-methods-for-images-files/).
 - [ ] [MERNSTACK-293] Get started with the `react-testing-library`. [React Testing Library Documentation](https://testing-library.com/docs/react-testing-library/intro/) [Repository README](https://github.com/testing-library/react-testing-library)
 - [ ] [MERNSTACK-294] Read about testing with `jest-dom` testing library has additional value. [Jest-DOM Repository README](https://github.com/testing-library/jest-dom)
 - [ ] [MERNSTACK-295] Let Jest automatically import tests. import '@testing-library/jest-dom' [Configure Jest to import test imports for you automatically. Learn more in the setup docs!](https://testing-library.com/docs/react-testing-library/setup#cleanup) [Source](https://github.com/testing-library/react-testing-library#basic-example)
@@ -1949,6 +1946,22 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-] [Nextra site generator](https://github.com/shuding/nextra) also tool for theming!
 - [ ] [MERNSTACK-] Very nice code example blocks by Nextra. [See more over here.](https://nextra.site/docs/guide/advanced/npm2yarn)
 - [ ] [MERNSTACK-] AFMAKEN RESPONSE VANUIT SERVER NAAR CLIENT/BROWSER packages\nextra-theme-docs\server.ts
+- [ ] [MERNSTACK-] [Get the Apollo VSCode extension up and running](https://www.apollographql.com/docs/devtools/editor-plugins/), simply follow the steps in the extension description.
+- [ ] [MERNSTACK-] Implement [this GraohQL interactive playground component](https://github.com/remorses/mini-graphiql-playground) on to a page of my website.
+- [ ] [MERNSTACK-] [Start NOW with project management of your ALREADY EXISTING PROJECT on GraphQL Hive](https://the-guild.dev/graphql/hive/docs/management/projects).
+- [ ] [MERNSTACK-] [Introduction to Hive](https://the-guild.dev/graphql/hive/docs) Start now and only when you are completely set up for basic project management, only then start the next task.
+- [ ] [Get started with introduction tutorial](https://www.apollographql.com/tutorials/lift-off-part1) and implement the interactive component on my documentation website.
+- [ ] [Get GraphQL certified](https://www.apollographql.com/tutorials/certifications/apollo-graph-associate)
+- [ ] [Start building schema's by the MERN_STACK_PROJ. application](https://www.apollographql.com/blog/backend/architecture/modernize-your-mern-stack-with-graphql-and-graphos/) For routes and models, pages data transfer, everything.\
+- [ ] [MERNSTACK-] [Have a better life from now on and discover the most useful things](https://the-guild.dev/) [(https://the-guild.dev/](https://the-guild.dev/) has to offer.
+- [ ] [MERNSTACK-] Add explanation about MongoDB query for finding other users in EditCompany page to documentation website.
+- [ ] [MERNSTACK-] Render search result components when main search results.
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-] Break down the following advice from [DocsGPT](https://docsgpt.arc53.com/) into separate issues:
 
 # DocsGPT:
@@ -1970,19 +1983,6 @@ Absolutely! Nextra is a great choice for building an informational website. To p
 7. **Incorporate Gamification Elements**: Gamify your website by adding interactive features like badges, points, or progress bars. Users can earn rewards for completing certain actions or reaching milestones on your website.
 
 Remember to consider your target audience and the purpose of your website while incorporating interactive elements. Too many or overly complex interactive features may distract users from the main content. Strive for a balance between interactivity and readability to enhance the overall user experience.
-
-- [ ] [MERNSTACK-] [Get the Apollo VSCode extension up and running](https://www.apollographql.com/docs/devtools/editor-plugins/), simply follow the steps in the extension description.
-- [ ] [MERNSTACK-] Implement [this GraohQL interactive playground component](https://github.com/remorses/mini-graphiql-playground) on to a page of my website.
-- [ ] [MERNSTACK-] [Start NOW with project management of your ALREADY EXISTING PROJECT on GraphQL Hive](https://the-guild.dev/graphql/hive/docs/management/projects).
-- [ ] [MERNSTACK-] [Introduction to Hive](https://the-guild.dev/graphql/hive/docs) Start now and only when you are completely set up for basic project management, only then start the next task.
-- [ ] [Get started with introduction tutorial](https://www.apollographql.com/tutorials/lift-off-part1) and implement the interactive component on my documentation website.
-- [ ] [Get GraphQL certified](https://www.apollographql.com/tutorials/certifications/apollo-graph-associate)
-- [ ] [Start building schema's by the MERN_STACK_PROJ. application](https://www.apollographql.com/blog/backend/architecture/modernize-your-mern-stack-with-graphql-and-graphos/) For routes and models, pages data transfer, everything.\
-- [ ] [MERNSTACK-] [Have a better life from now on and discover the most useful things](https://the-guild.dev/) [(https://the-guild.dev/](https://the-guild.dev/) has to offer. 
-- [ ] [MERNSTACK-] 
-- [ ] [MERNSTACK-] 
-- [ ] [MERNSTACK-]
-- [ ] [MERNSTACK-]
 
 ## Production checklist
 

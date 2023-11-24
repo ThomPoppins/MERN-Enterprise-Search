@@ -7,9 +7,7 @@ import { useDropzone } from 'react-dropzone'
 import { AiOutlineClose } from 'react-icons/ai'
 import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
-import { useSelector } from 'react-redux'
 import { BACKEND_URL } from '../../../config'
-import store from '../../store/store'
 
 // eslint-disable-next-line func-style
 function generateDownload(canvas, crop) {
@@ -68,13 +66,11 @@ function setCanvasImage(image, canvas, crop) {
   )
 }
 
-const EditProfilePictureModal = ({ onClose }) => {
+const EditCompanyLogoModal = ({ onClose, setLogoId }) => {
   const [upImg, setUpImg] = useState()
 
   const imgRef = useRef(null)
   const previewCanvasRef = useRef(null)
-
-  const { userId } = useSelector((state) => state)
 
   const [crop, setCrop] = useState({ unit: 'px', width: 30, aspect: 1 })
   const [completedCrop, setCompletedCrop] = useState(null)
@@ -122,12 +118,10 @@ const EditProfilePictureModal = ({ onClose }) => {
         const formData = new FormData()
 
         // Make the blob into a file
-        const file = new File([blob], 'profile-picture.png')
+        const file = new File([blob], 'company-logo.png')
 
         // Add the image data to the FormData object
         formData.append('image', file)
-
-        console.log(formData)
 
         // Send the image to the server
         axios
@@ -139,33 +133,9 @@ const EditProfilePictureModal = ({ onClose }) => {
           .then((response) => {
             if (response.data.imageId) {
               // Save the image id of the profile picture to the user's document in the database
-              axios
-                .put(`${BACKEND_URL}/users/profile-picture`, {
-                  imageId: response.data.imageId,
-                  userId,
-                })
-                // eslint-disable-next-line no-shadow
-                .then(() => {
-                  // Get the user's updated document from the database and update the user state
-                  axios
-                    .get(`${BACKEND_URL}/users/user/${userId}`)
-                    // eslint-disable-next-line no-shadow
-                    .then((response) => {
-                      const userData = response.data
+              setLogoId(response.data.imageId)
 
-                      console.log('user DATA', userData)
-
-                      // Update the user state
-                      store.dispatch({ type: 'USER', payload: userData })
-                      onClose()
-                    })
-                    .catch((error) => {
-                      console.log(error)
-                    })
-                })
-                .catch((error) => {
-                  console.log(error)
-                })
+              onClose()
             }
           })
           .catch((error) => {
@@ -208,7 +178,7 @@ const EditProfilePictureModal = ({ onClose }) => {
           onClick={onClose}
         />
         <div>
-          <h1>Upload Profile Picture</h1>
+          <h1>Upload Company Logo</h1>
         </div>
 
         {upImg ? (
@@ -291,8 +261,9 @@ const EditProfilePictureModal = ({ onClose }) => {
   )
 }
 
-EditProfilePictureModal.propTypes = {
+EditCompanyLogoModal.propTypes = {
   onClose: PropTypes.func.isRequired,
+  setLogoId: PropTypes.func.isRequired,
 }
 
-export default EditProfilePictureModal
+export default EditCompanyLogoModal

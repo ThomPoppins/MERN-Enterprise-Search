@@ -1,11 +1,12 @@
 import React from 'react'
+import { BACKEND_URL } from '../../../config'
 import PropTypes from 'prop-types'
 import { AiOutlineClose } from 'react-icons/ai'
 import { FcBriefcase, FcBusinessman } from 'react-icons/fc'
 
 const CompanyModal = ({ company, onClose, owners }) => (
   <div
-    className='fixed bg-black/60 top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center'
+    className='fixed bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-black/60'
     data-testid='company-modal-container'
     onClick={onClose}
     onKeyDown={(event) => event.key === 'Escape' && onClose()}
@@ -15,34 +16,34 @@ const CompanyModal = ({ company, onClose, owners }) => (
     {/* stopPropagation() prevents the modal to close when user clicks inside the Modal but it closes when user clicks outside of the modal. */}
     {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
     <div
-      className='w-[600px] max-w-full h-auto border-2 border-purple-900 bg-violet-950/40 rounded-lg px-4 py-2 m-4 flex flex-col relative'
+      className='relative m-4 flex h-auto w-[600px] max-w-full flex-col rounded-lg border-2 border-purple-900 bg-violet-950/40 px-4 py-2'
       data-testid='company-modal'
       onClick={(event) => event.stopPropagation()}
       role='button'
       tabIndex={0}
     >
       <AiOutlineClose
-        className='absolute right-6 top-6 text-3xl text-green-300 hover:text-red-500 cursor-pointer'
+        className='absolute right-6 top-6 cursor-pointer text-3xl text-green-300 hover:text-red-500'
         data-testid='close-button'
         onClick={onClose}
       />
-      <h2 className='w-fit px-4 py-1 bg-purple-500 rounded-lg'>
+      <h2 className='w-fit rounded-lg bg-purple-500 px-4 py-1'>
         {company.startYear}
       </h2>
       <h4 className='my-2 text-gray-500'>KVK: {company.kvkNumber}</h4>
-      <div className='flex justify-center items-center gap-x-2 mb-4'>
+      <div className='mb-4 flex items-center justify-center gap-x-2'>
         <img
           alt={company.name}
-          className='w-[250px] h-[250px] rounded-full'
-          src={company.logo}
+          className='h-[250px] w-[250px] rounded-full'
+          src={company.logoUrl ? `${BACKEND_URL}${company.logoUrl}` : ''}
         />
       </div>
-      <div className='flex justify-start items-center gap-x-2'>
-        <FcBriefcase className='text-red-300 text-2xl' />
+      <div className='flex items-center justify-start gap-x-2'>
+        <FcBriefcase className='text-2xl text-red-300' />
         <h2 className='my-1'>{company.name}</h2>
       </div>
-      <div className='flex justify-start items-center gap-x-2'>
-        <FcBusinessman className='text-red-300 text-2xl' />
+      <div className='flex items-center justify-start gap-x-2'>
+        <FcBusinessman className='text-2xl text-red-300' />
         <h2 className='my-1'>
           {owners?.map((owner) => `${owner.firstName} ${owner.lastName}`)}
         </h2>
@@ -54,7 +55,6 @@ const CompanyModal = ({ company, onClose, owners }) => (
     </div>
   </div>
 )
-
 CompanyModal.propTypes = {
   company: PropTypes.shape({
     _id: PropTypes.string.isRequired,
@@ -62,7 +62,8 @@ CompanyModal.propTypes = {
     name: PropTypes.string.isRequired,
     slogan: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    logo: PropTypes.string.isRequired,
+    logoId: PropTypes.string.isRequired,
+    logoUrl: PropTypes.string.isRequired,
     phone: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
     kvkNumber: PropTypes.string.isRequired,

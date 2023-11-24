@@ -6,7 +6,7 @@ import { BsArrowLeft } from 'react-icons/bs'
 const BackButton = ({ destination }) => (
   <div className='flex'>
     <Link
-      className='bg-sky-800 text-white px-4 py-1 rounded-lg w-fit'
+      className='w-fit rounded-lg bg-gradient-to-r from-violet-500 to-violet-600 px-4 py-1 text-white hover:bg-gradient-to-l hover:from-green-500 hover:to-green-400'
       to={destination}
     >
       <BsArrowLeft className='text-2xl' />

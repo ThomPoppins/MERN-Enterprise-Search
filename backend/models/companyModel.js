@@ -57,8 +57,12 @@ const companySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // `logo` is the company logo in Base64 format.
-    logo: {
+    // `logo` is a id reference to the image document in the database.
+    logoId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Image',
+    },
+    logoUrl: {
       type: String,
       required: false,
       default: '',

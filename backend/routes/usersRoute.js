@@ -74,7 +74,7 @@ router.post('/', async (request, response) => {
     return response.status(201).send(user)
   } catch (error) {
     console.log('Error in POST /users: ', error)
-    response.status(500).send({
+    return response.status(500).send({
       message:
         'Error registering your account! (Developers, check backend console.log output for error details.)',
     })
@@ -82,7 +82,7 @@ router.post('/', async (request, response) => {
 })
 
 // Route to add profile picture to user
-router.put('/profile-picture', async (request, response) => {
+router.put('/profile-picture', (request, response) => {
   try {
     // Get the user id from the request body
     const { userId, imageId } = request.body
@@ -173,7 +173,7 @@ router.post('/login', async (request, response) => {
     return response.status(200).send(responseData)
   } catch (error) {
     console.log('Error in GET /users/login: ', error)
-    response.status(500).send({ message: error.message })
+    return response.status(500).send({ message: error.message })
   }
 })
 
@@ -187,7 +187,7 @@ router.get('/search/:searchTerm', async (request, response) => {
     }
 
     // Split the search term into search terms by whitespace
-    const searchTerms = searchTerm.split(/\s+/)
+    const searchTerms = searchTerm.split(/\s+/u)
 
     // If searchTerm is empty, return an empty array
     if (!searchTerm) {
@@ -312,7 +312,7 @@ router.get('/search/:searchTerm', async (request, response) => {
     return response.status(200).json(updatedUsers)
   } catch (error) {
     console.log('Error in GET /users/search/:searchTerm: ', error)
-    response.status(500).send({ message: error.message })
+    return response.status(500).send({ message: error.message })
   }
 })
 
@@ -358,7 +358,7 @@ router.get('/user/:id', async (request, response) => {
     return response.status(200).json(user)
   } catch (error) {
     console.log('Error in GET /user/:id: ', error)
-    response.status(500).send({ message: error.message })
+    return response.status(500).send({ message: error.message })
   }
 })
 

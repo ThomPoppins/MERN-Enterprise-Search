@@ -1,4 +1,5 @@
 import { Image } from '../models/imageModel.js'
+import { getURLSuffixFromPath } from '../middleware/files/staticFiles.js'
 import express from 'express'
 import mongoose from 'mongoose'
 import multer from 'multer'
@@ -49,11 +50,13 @@ router.post('/image', upload.single('image'), async (request, response) => {
   const responseObj = {
       message: 'Image uploaded successfully!',
       imagePath: request.file.path,
+      url: getURLSuffixFromPath(request.file.path),
       imageId: new mongoose.Types.ObjectId(),
     },
     // Create Instance of Image model with the image path to safe as docyment in the MongoDB Image collection
     image = new Image({
       path: request.file.path,
+      url: getURLSuffixFromPath(request.file.path),
     })
 
   // Save new Image document to database
@@ -79,11 +82,5 @@ router.post('/image', upload.single('image'), async (request, response) => {
 
   return response.status(200).send(responseObj)
 })
-
-/*
- * POST method to upload a image to the server.
- * The image is stored in the "uploads/images" folder.
- */
-router.post('/image', (request, response) => response.status(200).send({}))
 
 export default router
