@@ -1776,6 +1776,7 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [x] [MERNSTACK-128] In RegisterCompany.jsx: Add form inputs of all fields that the owner should fill in to register a company. Copy paste the following outer div with .my-4 class to achieve this
 - [x] [MERNSTACK-129] Add state for all companies fields that can be edited in EditCompany.jsx
 - [x] [MERNSTACK-131] Set state for all companies fields that can be edited in EditCompany.jsx
+- [x] [MERNSTACK-133] ShowCompany.jsx: Add all fields of the company model here. Copy paste outer div with ".my-4" class below to achieve this.
 - [x] [MERNSTACK-138] Create user register page and functionality, save with bcrypt hashed password in database.
 - [x] [MERNSTACK-139] Create a user login page and functionality, validate user password has with bcrypt and compare hashed password on login.
 - [x] [MERNSTACK-140] Make it possible for a user to register a company and automatically become first company owner.
@@ -1945,6 +1946,22 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-] [Nextra site generator](https://github.com/shuding/nextra) also tool for theming!
 - [ ] [MERNSTACK-] Very nice code example blocks by Nextra. [See more over here.](https://nextra.site/docs/guide/advanced/npm2yarn)
 - [ ] [MERNSTACK-] AFMAKEN RESPONSE VANUIT SERVER NAAR CLIENT/BROWSER packages\nextra-theme-docs\server.ts
+- [ ] [MERNSTACK-] [Get the Apollo VSCode extension up and running](https://www.apollographql.com/docs/devtools/editor-plugins/), simply follow the steps in the extension description.
+- [ ] [MERNSTACK-] Implement [this GraohQL interactive playground component](https://github.com/remorses/mini-graphiql-playground) on to a page of my website.
+- [ ] [MERNSTACK-] [Start NOW with project management of your ALREADY EXISTING PROJECT on GraphQL Hive](https://the-guild.dev/graphql/hive/docs/management/projects).
+- [ ] [MERNSTACK-] [Introduction to Hive](https://the-guild.dev/graphql/hive/docs) Start now and only when you are completely set up for basic project management, only then start the next task.
+- [ ] [Get started with introduction tutorial](https://www.apollographql.com/tutorials/lift-off-part1) and implement the interactive component on my documentation website.
+- [ ] [Get GraphQL certified](https://www.apollographql.com/tutorials/certifications/apollo-graph-associate)
+- [ ] [Start building schema's by the MERN_STACK_PROJ. application](https://www.apollographql.com/blog/backend/architecture/modernize-your-mern-stack-with-graphql-and-graphos/) For routes and models, pages data transfer, everything.\
+- [ ] [MERNSTACK-] [Have a better life from now on and discover the most useful things](https://the-guild.dev/) [(https://the-guild.dev/](https://the-guild.dev/) has to offer.
+- [ ] [MERNSTACK-] Add explanation about MongoDB query for finding other users in EditCompany page to documentation website.
+- [ ] [MERNSTACK-] Render search result components when main search results.
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-] Break down the following advice from [DocsGPT](https://docsgpt.arc53.com/) into separate issues:
 
 # DocsGPT:
@@ -1966,19 +1983,6 @@ Absolutely! Nextra is a great choice for building an informational website. To p
 7. **Incorporate Gamification Elements**: Gamify your website by adding interactive features like badges, points, or progress bars. Users can earn rewards for completing certain actions or reaching milestones on your website.
 
 Remember to consider your target audience and the purpose of your website while incorporating interactive elements. Too many or overly complex interactive features may distract users from the main content. Strive for a balance between interactivity and readability to enhance the overall user experience.
-
-- [ ] [MERNSTACK-] [Get the Apollo VSCode extension up and running](https://www.apollographql.com/docs/devtools/editor-plugins/), simply follow the steps in the extension description.
-- [ ] [MERNSTACK-] Implement [this GraohQL interactive playground component](https://github.com/remorses/mini-graphiql-playground) on to a page of my website.
-- [ ] [MERNSTACK-] [Start NOW with project management of your ALREADY EXISTING PROJECT on GraphQL Hive](https://the-guild.dev/graphql/hive/docs/management/projects).
-- [ ] [MERNSTACK-] [Introduction to Hive](https://the-guild.dev/graphql/hive/docs) Start now and only when you are completely set up for basic project management, only then start the next task.
-- [ ] [Get started with introduction tutorial](https://www.apollographql.com/tutorials/lift-off-part1) and implement the interactive component on my documentation website.
-- [ ] [Get GraphQL certified](https://www.apollographql.com/tutorials/certifications/apollo-graph-associate)
-- [ ] [Start building schema's by the MERN_STACK_PROJ. application](https://www.apollographql.com/blog/backend/architecture/modernize-your-mern-stack-with-graphql-and-graphos/) For routes and models, pages data transfer, everything.\
-- [ ] [MERNSTACK-] [Have a better life from now on and discover the most useful things](https://the-guild.dev/) [(https://the-guild.dev/](https://the-guild.dev/) has to offer.
-- [ ] [MERNSTACK-]
-- [ ] [MERNSTACK-]
-- [ ] [MERNSTACK-]
-- [ ] [MERNSTACK-]
 
 ## Production checklist
 
