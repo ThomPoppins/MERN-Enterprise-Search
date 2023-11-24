@@ -319,7 +319,7 @@ const Home = () =&gt; {
     navigate = useNavigate()
 &nbsp;
   // Find experts query handler
-  const handleFindExpertsQuery = (event) =&gt; {
+  const handleFind = (event) =&gt; {
     event.preventDefault()
 &nbsp;
     setFindButtonPing(true)
@@ -378,7 +378,7 @@ const Home = () =&gt; {
                           : 'animate-bounce-fast  from-violet-500 to-violet-600 hover:bg-gradient-to-l hover:from-green-500 hover:to-green-400'
                       }`}
                       data-testid='find-button'
-                      onClick={handleFindExpertsQuery}
+                      onClick={handleFind}
                       type='button'
                     &gt;
                       &lt;div className='mx-auto'&gt;

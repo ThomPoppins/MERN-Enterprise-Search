@@ -92,6 +92,8 @@ router.put('/profile-picture', async (request, response) => {
       .then((user) => {
         const imageObjectId = new mongoose.Types.ObjectId(imageId)
 
+        console.log('User: ', user)
+
         /*
          * Save the updated user to the database
          *
