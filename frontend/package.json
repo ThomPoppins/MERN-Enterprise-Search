@@ -1,6 +1,7 @@
 {
   "name": "starter-vite-react",
   "private": true,
+  "type": "module",
   "version": "1.0.0",
   "description": "Opinionated Vite starter template with ESLint, Prettier, Stylelint and more.",
   "repository": {

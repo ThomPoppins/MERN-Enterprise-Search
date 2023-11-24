@@ -12,10 +12,7 @@ import EditProfilePictureModal from '../../components/users/EditProfilePictureMo
 
 const UserProfile = () => {
   //  userId is a string from the Redux store state
-  // const { userId, user } = useSelector((state) => state)
-
-  const userId = useSelector((state) => state.userId)
-  const user = useSelector((state) => state.user)
+  const { user } = useSelector((state) => state)
 
   // Placeholder for profile picture dependent on gender
   const [profilePicturePlaceholderURL, setProfilePicturePlaceholderURL] =
@@ -134,7 +131,6 @@ const UserProfile = () => {
       {showEditProfilePictureModal ? (
         <EditProfilePictureModal
           onClose={() => setShowEditProfilePictureModal(false)}
-          userId={userId}
         />
       ) : null}{' '}
     </Layout>

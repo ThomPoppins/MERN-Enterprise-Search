@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable id-length */
-import axios from 'axios'
 import React, { useState, useCallback, useRef, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import axios from 'axios'
 import { useDropzone } from 'react-dropzone'
 import { AiOutlineClose } from 'react-icons/ai'
 import ReactCrop from 'react-image-crop'
@@ -68,7 +69,7 @@ function setCanvasImage(image, canvas, crop) {
   )
 }
 
-const ImageCrop = ({ onClose, uploadImage }) => {
+const ImageCrop = ({ onClose }) => {
   const [upImg, setUpImg] = useState()
 
   const imgRef = useRef(null)
@@ -145,7 +146,7 @@ const ImageCrop = ({ onClose, uploadImage }) => {
                   userId,
                 })
                 // eslint-disable-next-line no-shadow
-                .then((response) => {
+                .then(() => {
                   // Get the user's updated document from the database and update the user state
                   axios
                     .get(`${BACKEND_URL}/users/user/${userId}`)
@@ -211,7 +212,7 @@ const ImageCrop = ({ onClose, uploadImage }) => {
           <h1>Upload Profile Picture</h1>
         </div>
 
-        {upImg && (
+        {upImg ? (
           <div className='mx-auto mt-12 text-center'>
             <div className=''>
               {/* Canvas to display cropped image */}
@@ -269,7 +270,7 @@ const ImageCrop = ({ onClose, uploadImage }) => {
               </button>
             </div>
           </div>
-        )}
+        ) : null}
         {!upImg && (
           <div
             {...getRootProps({
@@ -291,6 +292,10 @@ const ImageCrop = ({ onClose, uploadImage }) => {
       </div>
     </div>
   )
+}
+
+ImageCrop.propTypes = {
+  onClose: PropTypes.func.isRequired,
 }
 
 export default ImageCrop
