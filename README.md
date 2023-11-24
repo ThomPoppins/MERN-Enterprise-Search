@@ -1909,6 +1909,8 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-323] Break down search engine functionality of [my MERN_STACK_PROJ. documentation](https://nextra-docs-template.vercel.app/). Read [Nextra documentation](https://nextra.site/) for this.
 - [ ] [MERNSTACK-324] Move all information of this project README file to [the documentation website hosted by Vercel](https://mern-stack-proj.vercel.app/). [Nextra documentation here](https://nextra.site/docs).
 - [ ] [MERNSTACK-325] Add Storybook section to [documentation]((https://mern-stack-proj.vercel.app/).
+- [ ] [MERNSTACK-329] Apply rate limit to all API end points.
+- [ ] [MERNSTACK-330] Implement [this GraohQL interactive playground component](https://github.com/remorses/mini-graphiql-playground) on to a page of my website.
 - [ ] [MERNSTACK-] Add contact form to [documentation]((https://mern-stack-proj.vercel.app/) that will send a email. [Documentation here.](https://herotofu.com/solutions/guides/react-send-email)
 - [ ] [MERNSTACK-] Add useful [Storybook tutorials](https://storybook.js.org/tutorials/) as Jira issues.
 - [ ] [MERNSTACK-] Finish [Intro to Storybook tutorial](https://storybook.js.org/tutorials/intro-to-storybook/) [Continue here](https://storybook.js.org/tutorials/intro-to-storybook/react/en/simple-component/)
@@ -1947,7 +1949,7 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-] Very nice code example blocks by Nextra. [See more over here.](https://nextra.site/docs/guide/advanced/npm2yarn)
 - [ ] [MERNSTACK-] AFMAKEN RESPONSE VANUIT SERVER NAAR CLIENT/BROWSER packages\nextra-theme-docs\server.ts
 - [ ] [MERNSTACK-] [Get the Apollo VSCode extension up and running](https://www.apollographql.com/docs/devtools/editor-plugins/), simply follow the steps in the extension description.
-- [ ] [MERNSTACK-] Implement [this GraohQL interactive playground component](https://github.com/remorses/mini-graphiql-playground) on to a page of my website.
+
 - [ ] [MERNSTACK-] [Start NOW with project management of your ALREADY EXISTING PROJECT on GraphQL Hive](https://the-guild.dev/graphql/hive/docs/management/projects).
 - [ ] [MERNSTACK-] [Introduction to Hive](https://the-guild.dev/graphql/hive/docs) Start now and only when you are completely set up for basic project management, only then start the next task.
 - [ ] [Get started with introduction tutorial](https://www.apollographql.com/tutorials/lift-off-part1) and implement the interactive component on my documentation website.
@@ -1956,6 +1958,20 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-] [Have a better life from now on and discover the most useful things](https://the-guild.dev/) [(https://the-guild.dev/](https://the-guild.dev/) has to offer.
 - [ ] [MERNSTACK-] Add explanation about MongoDB query for finding other users in EditCompany page to documentation website.
 - [ ] [MERNSTACK-] Render search result components when main search results.
+- [ ] [MERNSTACK-] Read [The Valley of Code VS Code](https://thevalleyofcode.com/vscode)
+- [ ] [MERNSTACK-] Read [The Valley of Code Github](https://thevalleyofcode.com/github)
+- [ ] [MERNSTACK-] Read [The Valley of Code ]()
+- [ ] [MERNSTACK-] Read [The Valley of Code ]()
+- [ ] [MERNSTACK-] Read [The Valley of Code ]()
+- [ ] [MERNSTACK-] Read [The Valley of Code ]()
+- [ ] [MERNSTACK-] Read [The Valley of Code ]()
+- [ ] [MERNSTACK-] Read [The Valley of Code ]()
+- [ ] [MERNSTACK-] Read [The Valley of Code ]()
+- [ ] [MERNSTACK-] Investigate [Git Large File Storage (LFS)](https://vercel.com/docs/projects/overview#git-large-file-storage-lfs) and figure out if it needs to be enabled in the Vercel deployment settings.
+- [ ] [MERNSTACK-] [DOCS here](https://app.meticulous.ai/docs). Check out [Meticulous](https://app.meticulous.ai/organizations/Vind-Expert) and try to get it running when login is possible with useraccount on documentation website. MAYBE if possible to frontend only login in MERN_STACK_PROJ. then deploy and test that one with Meticulous. 
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-]

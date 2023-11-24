@@ -3,19 +3,21 @@ import { Company } from '../models/companyModel.js'
 import { Image } from '../models/imageModel.js'
 import mongoose from 'mongoose'
 import { v4 as uuidv4 } from 'uuid'
+import apiLimiter from '../middleware/rate-limiter/apiLimiter.js'
 
-const router = express.Router(),
-  /*
-   * TODO: [MERNSTACK-112] Remove this function once the payment model has been fully implemented.
-   * Generate a random payment id using the uuidv4 function.
-   */
-  generateRandomId = () => {
-    const paymentId = uuidv4()
-    return paymentId
-  }
+const router = express.Router()
+
+/*
+ * TODO: [MERNSTACK-112] Remove this function once the payment model has been fully implemented.
+ * Generate a random payment id using the uuidv4 function.
+ */
+const generateRandomId = () => {
+  const paymentId = uuidv4()
+  return paymentId
+}
 
 // Route to save a new Company
-router.post('/', async (request, response) => {
+router.post('/', apiLimiter, async (request, response) => {
   // Create a new company document using the Company model
   try {
     if (
@@ -89,7 +91,7 @@ router.post('/', async (request, response) => {
 })
 
 // Route to get all companies
-router.get('/', async (request, response) => {
+router.get('/', apiLimiter, async (request, response) => {
   try {
     // Get all company documents using the Company model's find method
     const companies = await Company.find({})
@@ -106,29 +108,34 @@ router.get('/', async (request, response) => {
 })
 
 // Route to get all companies from certain owner
-router.get('/owned-companies/:ownerUserId', async (request, response) => {
-  try {
-    // Get the  owners' userId from the request parameters
-    const { ownerUserId } = request.params,
-      // Get all company documents frm
-      companies = await Company.find({
-        owners: { $elemMatch: { userId: ownerUserId } },
-      })
+router.get(
+  '/owned-companies/:ownerUserId',
+  apiLimiter,
+  async (request, response) => {
+    try {
+      // Get the  owners' userId from the request parameters
+      const { ownerUserId } = request.params,
+        // Get all company documents frm
+        companies = await Company.find({
+          owners: { $elemMatch: { userId: ownerUserId } },
+        })
 
-    // Send status 200 response and the companies to the client
-    return response.status(200).json({
-      count: companies.length,
-      data: companies,
-    })
-  } catch (error) {
-    console.log('Error in GET /owned-companies/:ownerUserId ', error)
-    return response.status(500).send({ message: error.message })
-  }
-})
+      // Send status 200 response and the companies to the client
+      return response.status(200).json({
+        count: companies.length,
+        data: companies,
+      })
+    } catch (error) {
+      console.log('Error in GET /owned-companies/:ownerUserId ', error)
+      return response.status(500).send({ message: error.message })
+    }
+  },
+)
 
 // Route to get one company from database using the company's id
 router
-  .get('/:id', async (request, response) => {
+  .get('/:id', apiLimiter, async (request, response) => {
+    console.log('request.ip', request.ip)
     try {
       // Get the company id from the request parameters
       const { id } = request.params,
@@ -143,24 +150,28 @@ router
     }
   })
 
-  .get('/:companyId/:userId/isMember', async (request, response) => {
-    const { companyId, userId } = request.params
+  .get(
+    '/:companyId/:userId/isMember',
+    apiLimiter,
+    async (request, response) => {
+      const { companyId, userId } = request.params
 
-    const companyDocument = await Company.findById(companyId)
+      const companyDocument = await Company.findById(companyId)
 
-    if (companyDocument.owners.length > 0) {
-      const isMember = companyDocument.owners.some(
-        (owner) => owner.userId === userId,
-      )
+      if (companyDocument.owners.length > 0) {
+        const isMember = companyDocument.owners.some(
+          (owner) => owner.userId === userId,
+        )
 
-      return response.status(200).json({ isMember })
-    }
+        return response.status(200).json({ isMember })
+      }
 
-    return response.status(200).json({ isMember: false })
-  })
+      return response.status(200).json({ isMember: false })
+    },
+  )
 
 // Route to update one company in the database using the company's id
-router.put('/:id', async (request, response) => {
+router.put('/:id', apiLimiter, async (request, response) => {
   try {
     const { id } = request.params,
       // Check if the company kvkNumber is changed and if it changed, check if the new kvkNumber already exists in the database
@@ -197,7 +208,7 @@ router.put('/:id', async (request, response) => {
 })
 
 // Route to delete one company from the database using the company's id
-router.delete('/:id', async (request, response) => {
+router.delete('/:id', apiLimiter, async (request, response) => {
   try {
     const { id } = request.params,
       // Delete the company document using the Company model's findByIdAndDelete method
@@ -221,91 +232,99 @@ router.delete('/:id', async (request, response) => {
 })
 
 // Add owner to company based on userId
-router.put('/:companyId/add-owner/:userId', async (request, response) => {
-  try {
-    // Get the company id and user id from the request parameters
-    const { companyId, userId } = request.params,
-      // Find the company document by id
-      company = await Company.findById(companyId)
+router.put(
+  '/:companyId/add-owner/:userId',
+  apiLimiter,
+  async (request, response) => {
+    try {
+      // Get the company id and user id from the request parameters
+      const { companyId, userId } = request.params,
+        // Find the company document by id
+        company = await Company.findById(companyId)
 
-    // If no company was found, send status 404 response and a (error) message to inform the client.
-    if (!company) {
-      console.log(`Cannot find company with id=${companyId}.`)
-      return response.status(404).json({
-        message: `Cannot find company with id=${companyId}.`,
-      })
-    }
-    //  If no user id was found, send status 404 response and a (error) message to inform the client.
-    const newOwner = {
-      userId,
-    }
-
-    // If no owners were found, create an empty array
-    if (!company.owners) {
-      company.owners = []
-    }
-
-    // Check if the owner already exists if so send status 409 response and a (error) message to inform the client.
-    company.owners.forEach((owner) => {
-      if (owner.userId === userId) {
-        return response.status(409).json({
-          message: `Owner with id=${userId} already exists in company with id=${companyId}.`,
+      // If no company was found, send status 404 response and a (error) message to inform the client.
+      if (!company) {
+        console.log(`Cannot find company with id=${companyId}.`)
+        return response.status(404).json({
+          message: `Cannot find company with id=${companyId}.`,
         })
       }
-      return owner
-    })
+      //  If no user id was found, send status 404 response and a (error) message to inform the client.
+      const newOwner = {
+        userId,
+      }
 
-    // Add the new owner to the company
-    company.owners.push(newOwner)
+      // If no owners were found, create an empty array
+      if (!company.owners) {
+        company.owners = []
+      }
 
-    // Save the company with the new owner
-    const updatedCompany = await company.save()
+      // Check if the owner already exists if so send status 409 response and a (error) message to inform the client.
+      company.owners.forEach((owner) => {
+        if (owner.userId === userId) {
+          return response.status(409).json({
+            message: `Owner with id=${userId} already exists in company with id=${companyId}.`,
+          })
+        }
+        return owner
+      })
 
-    // Send status 200 response and the updated company to the client
-    return response.status(200).json(updatedCompany)
-  } catch (error) {
-    console.log('Error in PUT /companies/add-owner/:userId: ', error)
-    return response.status(500).send({ message: error.message })
-  }
-})
+      // Add the new owner to the company
+      company.owners.push(newOwner)
+
+      // Save the company with the new owner
+      const updatedCompany = await company.save()
+
+      // Send status 200 response and the updated company to the client
+      return response.status(200).json(updatedCompany)
+    } catch (error) {
+      console.log('Error in PUT /companies/add-owner/:userId: ', error)
+      return response.status(500).send({ message: error.message })
+    }
+  },
+)
 
 // Remove owner from company based on companyId and userId
-router.put('/:companyId/remove-owner/:userId', async (request, response) => {
-  try {
-    const { companyId, userId } = request.params,
-      company = await Company.findById(companyId)
+router.put(
+  '/:companyId/remove-owner/:userId',
+  apiLimiter,
+  async (request, response) => {
+    try {
+      const { companyId, userId } = request.params,
+        company = await Company.findById(companyId)
 
-    if (!company) {
-      console.log(`Cannot find company with id=${companyId}.`)
-      return response.status(404).json({
-        message: `Cannot find company with id=${companyId}.`,
-      })
+      if (!company) {
+        console.log(`Cannot find company with id=${companyId}.`)
+        return response.status(404).json({
+          message: `Cannot find company with id=${companyId}.`,
+        })
+      }
+
+      if (!company.owners) {
+        console.log(`Cannot find owners in company with id=${companyId}.`)
+        return response.status(404).json({
+          message: `Cannot find owners in company with id=${companyId}.`,
+        })
+      }
+
+      // Filter out the owner with the userId to save the company without the owner
+      const updatedOwners = company.owners.filter(
+        (owner) => owner.userId !== userId,
+      )
+
+      company.owners = updatedOwners
+
+      const updatedCompany = await company.save()
+
+      return response.status(200).json(updatedCompany)
+    } catch (error) {
+      console.log(
+        'Error in PUT /companies/:companyId/remove-owner/:userId: ',
+        error,
+      )
+      return response.status(500).send({ message: error.message })
     }
-
-    if (!company.owners) {
-      console.log(`Cannot find owners in company with id=${companyId}.`)
-      return response.status(404).json({
-        message: `Cannot find owners in company with id=${companyId}.`,
-      })
-    }
-
-    // Filter out the owner with the userId to save the company without the owner
-    const updatedOwners = company.owners.filter(
-      (owner) => owner.userId !== userId,
-    )
-
-    company.owners = updatedOwners
-
-    const updatedCompany = await company.save()
-
-    return response.status(200).json(updatedCompany)
-  } catch (error) {
-    console.log(
-      'Error in PUT /companies/:companyId/remove-owner/:userId: ',
-      error,
-    )
-    return response.status(500).send({ message: error.message })
-  }
-})
+  },
+)
 
 export default router
