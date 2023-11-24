@@ -7,11 +7,12 @@ import { getStaticFileURLFromPath } from '../middleware/files/staticFiles.js'
 import bcrypt from 'bcryptjs'
 import { generateToken } from '../middleware/auth/jwt.js'
 import mongoose from 'mongoose'
+import apiLimiter from '../middleware/rate-limiter/apiLimiter.js'
 
 const router = express.Router()
 
 // Route to register a new User
-router.post('/', async (request, response) => {
+router.post('/', apiLimiter, async (request, response) => {
   // Create a new user document using the User model
   try {
     if (
@@ -82,7 +83,7 @@ router.post('/', async (request, response) => {
 })
 
 // Route to add profile picture to user
-router.put('/profile-picture', (request, response) => {
+router.put('/profile-picture', apiLimiter, (request, response) => {
   try {
     // Get the user id from the request body
     const { userId, imageId } = request.body
@@ -128,7 +129,7 @@ router.put('/profile-picture', (request, response) => {
 })
 
 // Route to login a user
-router.post('/login', async (request, response) => {
+router.post('/login', apiLimiter, async (request, response) => {
   try {
     if (
       !request.body.email ||
@@ -178,7 +179,7 @@ router.post('/login', async (request, response) => {
 })
 
 // Find user by username, name or email search term
-router.get('/search/:searchTerm', async (request, response) => {
+router.get('/search/:searchTerm', apiLimiter, async (request, response) => {
   try {
     const { searchTerm } = request.params
 
@@ -317,7 +318,7 @@ router.get('/search/:searchTerm', async (request, response) => {
 })
 
 // Route to get one user from database using the user's id
-router.get('/user/:id', async (request, response) => {
+router.get('/user/:id', apiLimiter, async (request, response) => {
   try {
     // Get the user id from the request parameters
     const { id } = request.params,
