@@ -10,7 +10,18 @@ const ShowCompany = () => {
   const [company, setCompany] = useState({})
   const [owners, setOwners] = useState([])
   const [loading, setLoading] = useState(false)
+  const [logoUrl, setLogoUrl] = useState('')
   const { id } = useParams()
+
+  useEffect(() => {
+    if (company.logoId) {
+      axios
+        .get(`${BACKEND_URL}/files/image-url/${company.logoId}`)
+        .then((response) => {
+          setLogoUrl(response.data.imageURL)
+        })
+    }
+  }, [company])
 
   useEffect(() => {
     setLoading(true)
@@ -53,7 +64,7 @@ const ShowCompany = () => {
           <img
             alt='profile'
             className='mx-auto mt-2 h-64 w-64 rounded-full object-cover'
-            src={company?.logo ? company?.logo : ''}
+            src={logoUrl ? logoUrl : ''}
           />
         </div>
         {loading ? (
