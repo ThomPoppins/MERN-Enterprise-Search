@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -15,6 +16,7 @@ export default {
     handleSearchQueryChange: { action: 'changed' },
     searchQuery: { control: 'text' },
   },
+  tags: ['autodocs'],
 }
 
 // Export default story

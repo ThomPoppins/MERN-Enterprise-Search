@@ -283,9 +283,7 @@ const ImageCrop = ({ onClose }) => {
                 onChange: onSelectFile,
               })}
             />
-            <p>
-              Drag &apos;n&apos; drop some files here, or click to select files
-            </p>
+            <p>Drag &apos;n&apos; drop image here, or click to select image</p>
           </div>
         )}
       </div>

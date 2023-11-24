@@ -81,7 +81,7 @@ const UserProfile = () => {
 
           <div className='mx-auto mb-3 mt-4'>
             {!user?.profilePictureURL && (
-              <div className='flex space-x-2 text-xl '>
+              <div className='my-8 flex space-x-2 text-xl'>
                 <p>
                   You haven&apos;t set a profile picture yet!{' '}
                   <button
@@ -99,7 +99,9 @@ const UserProfile = () => {
             <table>
               <thead>
                 <tr>
-                  <th className='text-2xl text-gray-400'>About Me</th>
+                  <th className='pb-2 text-left text-2xl' colSpan='2'>
+                    About Me:
+                  </th>
                 </tr>
               </thead>
               <tbody>

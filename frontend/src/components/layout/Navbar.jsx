@@ -78,10 +78,10 @@ const Navbar = () => {
       <div className='container mx-auto'>
         <img
           alt='Vind-Expert logo'
-          className='w-7 h-7 mt-1 rounded-xs float-left object-cover mr-2'
+          className='rounded-xs float-left mr-2 mt-1 h-7 w-7 object-cover'
           src={`${BACKEND_URL}/logo/vind-expert-transparent.png`}
         />
-        <div className='flex justify-between items-center'>
+        <div className='flex items-center justify-between'>
           <div className='text-white'>
             <Link to='/'>
               <h1 className=' text-2xl font-bold'>Vind-Expert</h1>
@@ -93,7 +93,7 @@ const Navbar = () => {
                 <div className='flex items-center space-x-2'>
                   <div className='relative'>
                     <div
-                      className='text-white cursor-pointer'
+                      className='cursor-pointer text-white'
                       data-testid='user-dropdown'
                       onClick={toggleDropdown}
                       onKeyDown={(event) => {
@@ -106,7 +106,7 @@ const Navbar = () => {
                     >
                       <img
                         alt='profile'
-                        className='w-8 h-8 rounded-full ml-2 float-left mr-3 object-cover'
+                        className='float-left ml-2 mr-3 h-8 w-8 rounded-full object-cover'
                         src={
                           user?.profilePictureURL
                             ? user?.profilePictureURL
@@ -115,23 +115,23 @@ const Navbar = () => {
                       />
                       {user?.firstName}
                       {inviteAlert ? (
-                        <LuClipboardList className='text-xl mt-1 w-[30px] float-right ml-1 mr-3 text-yellow-400 animate-waving-button' />
+                        <LuClipboardList className='float-right ml-1 mr-3 mt-1 w-[30px] animate-waving-button text-xl text-yellow-400' />
                       ) : (
-                        <LuClipboardCheck className='text-xl mt-1 w-[30px] float-right ml-1 mr-3 text-green-400' />
+                        <LuClipboardCheck className='float-right ml-1 mr-3 mt-1 w-[30px] text-xl text-green-400' />
                       )}
                     </div>
                     {isDropdownOpen ? (
                       <div
-                        className='z-[100] absolute top-10 right-0 bg-violet-950/90 rounded-lg py-4'
+                        className='absolute right-0 top-10 z-[100] rounded-lg bg-violet-950/90 py-4'
                         ref={dropdownRef}
                       >
                         {inviteAlert ? (
-                          <div className='w-[200px] pt-1 h-10 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-1 bg-gradient-to-r from-green-600 to-green-800'>
+                          <div className='mt-1 h-10 w-[200px] bg-gradient-to-r from-green-600 to-green-800 pt-1 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600'>
                             <Link className='text-white ' to='/invites'>
                               {inviteAlert ? (
-                                <div className='w-full h-full'>
-                                  <LuClipboardList className='text-xl w-[30px] float-left ml-2 mt-[-2px] mr-3 text-yellow-400 animate-waving-button' />
-                                  <div className='animate-bounce mt-2'>
+                                <div className='h-full w-full'>
+                                  <LuClipboardList className='float-left ml-2 mr-3 mt-[-2px] w-[30px] animate-waving-button text-xl text-yellow-400' />
+                                  <div className='mt-2 animate-bounce'>
                                     Invites
                                   </div>
                                 </div>
@@ -145,38 +145,38 @@ const Navbar = () => {
                         )}
 
                         <div
-                          className={`w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 ${
+                          className={`h-8 w-[200px] pt-1 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 ${
                             inviteAlert ? 'mt-4 pt-1' : ''
                           }}}`}
                         >
                           <Link className='text-white' to='/profile'>
-                            <div className='w-full h-full'>
-                              <HiUser className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
+                            <div className='h-full w-full'>
+                              <HiUser className='float-left ml-2 mr-3 mt-1 w-[30px] text-xl' />
                               Profile
                             </div>
                           </Link>
                         </div>
 
-                        <div className='w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4'>
+                        <div className='mt-4 h-8 w-[200px] pt-1 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600'>
                           <Link className='text-white' to='/companies'>
-                            <div className='w-full h-full'>
-                              <HiOutlineBriefcase className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
+                            <div className='h-full w-full'>
+                              <HiOutlineBriefcase className='float-left ml-2 mr-3 mt-1 w-[30px] text-xl' />
                               Companies
                             </div>
                           </Link>
                         </div>
-                        <div className='w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4'>
+                        <div className='mt-4 h-8 w-[200px] pt-1 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600'>
                           <Link className='text-white' to='/user/settings'>
-                            <div className='w-full h-full'>
-                              <HiOutlineCog className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
+                            <div className='h-full w-full'>
+                              <HiOutlineCog className='float-left ml-2 mr-3 mt-1 w-[30px] text-xl' />
                               Settings
                             </div>
                           </Link>
                         </div>
-                        <div className='w-[200px] pt-1 h-8 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600 mt-4'>
+                        <div className='mt-4 h-8 w-[200px] pt-1 hover:bg-gradient-to-r hover:from-green-400 hover:to-green-600'>
                           <Link className='text-white' to='/logout'>
-                            <div className='w-full h-full'>
-                              <HiOutlineLogout className='text-xl mt-1 w-[30px] float-left ml-2 mr-3' />
+                            <div className='h-full w-full'>
+                              <HiOutlineLogout className='float-left ml-2 mr-3 mt-1 w-[30px] text-xl' />
                               Logout
                             </div>
                           </Link>

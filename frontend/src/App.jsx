@@ -8,14 +8,13 @@ import EditCompany from './pages/companies/EditCompany'
 import RegisterCompany from './pages/companies/RegisterCompany'
 import ShowCompany from './pages/companies/ShowCompany'
 import ImageCrop from './pages/dev/ImageCrop'
-import ReactLive from './pages/dev/ReactLive'
 import Results from './pages/find/Results'
 import Home from './pages/Home'
 import InvitesList from './pages/invites/InvitesList'
 import UploadImage from './pages/UploadImage'
 import LoginUser from './pages/users/LoginUser'
 import LogoutUser from './pages/users/LogoutUser'
-import RegisterUser from './pages/users/RegisterUser'
+import SignUpUser from './pages/users/SignUpUser'
 import UserProfile from './pages/users/UserProfile'
 import verifyToken from './utils/auth/verifyToken'
 import LiveProviderDemo from './components/code/live/LiveProviderDemo'
@@ -29,7 +28,7 @@ const App = () => {
   //
   const userId = useSelector((state) => state.userId)
 
-  // TODO: [MERNSTACK-163] Redirect user from routes other then /, /login and /register if user is not logged in
+  // TODO: [MERNSTACK-163] Redirect user from routes other then /, /login and /sign-up if user is not logged in
   if (userId) {
     // Get the pending invites for the user
     return (
@@ -67,8 +66,8 @@ const App = () => {
       <Route element={<Home />} path='/' />
       {/* /login route, render user login page */}
       <Route element={<LoginUser />} path='/login' />
-      {/* /register route, render user register page */}
-      <Route element={<RegisterUser />} path='/register' />
+      {/* /sign-up route, render user sign up page */}
+      <Route element={<SignUpUser />} path='/sign-up' />
     </Routes>
   )
 }

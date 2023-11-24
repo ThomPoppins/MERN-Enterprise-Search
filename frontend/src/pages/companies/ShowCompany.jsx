@@ -15,17 +15,19 @@ const ShowCompany = () => {
   useEffect(() => {
     setLoading(true)
     axios
-      .get(`${BACKEND_URL  }/companies/${id}`)
+      .get(`${BACKEND_URL}/companies/${id}`)
       .then((response) => {
         setCompany(response.data)
 
         const ownerPromises = response.data.owners.map((owner) =>
-          axios.get(`${BACKEND_URL  }/users/user/${owner.userId}`),
+          axios.get(`${BACKEND_URL}/users/user/${owner.userId}`),
         )
 
         Promise.all(ownerPromises)
           .then((responses) => {
-            const ownersData = responses.map((response) => response.data)
+            const ownersData = responses.map(
+              (ownersResponse) => ownersResponse.data,
+            )
             //
             setOwners(ownersData)
             setLoading(false)
@@ -45,60 +47,68 @@ const ShowCompany = () => {
 
   return (
     <Layout>
-      <div className='p-4'>
+      <div className='mx-auto p-5'>
         <BackButton destination='/companies' />
-        <h1 className='text-3xl my-4'>Show Company</h1>
+        <div className='relative mx-auto w-[320px]'>
+          <img
+            alt='profile'
+            className='mx-auto mt-2 h-64 w-64 rounded-full object-cover'
+            src={company?.logo ? company?.logo : ''}
+          />
+        </div>
         {loading ? (
           <Loader />
         ) : (
-          <div className='flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4'>
-            {/* TODO: [MERNSTACK-133] Add all fields of the company model here. Copy paste outer div with ".my-4" class below to achieve this. */}
-            <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>KVK</span>
-              {/*  */}
-              <span>{company.kvkNumber}</span>
-            </div>
-            <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Name</span>
-              {/*  */}
-              <span>{company.name}</span>
-            </div>
-            <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Email</span>
-              {/*  */}
-              <span>{company.email}</span>
-            </div>
-            <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Phone</span>
-              {/*  */}
-              <span>{company.phone}</span>
-            </div>
-            <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Start Year</span>
-              {/*  */}
-              <span>{company.startYear}</span>
-            </div>
-            <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Owners</span>
-              <span>
-                {owners
-                  //
-                  .map((owner) => `${owner.firstName  } ${  owner.lastName}`)
-                  .join(', ')}
-              </span>
-            </div>
-            <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>Create Time</span>
-              {/*  */}
-              <span>{new Date(company.createdAt).toString()}</span>
-            </div>
-            <div className='my-4'>
-              <span className='text-xl mr-4 text-gray-500'>
-                Last Update Time
-              </span>
-              {/*  */}
-              <span>{new Date(company.updatedAt).toString()}</span>
-            </div>
+          <div className='mx-auto mt-6 rounded-xl border border-purple-900 bg-violet-950/40 p-4 lg:w-9/12'>
+            <table>
+              <thead>
+                <tr>
+                  <th className='pb-2 text-left text-2xl' colSpan='2'>
+                    About {company.name}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className='pr-4 text-xl text-gray-500'>KVK</td>
+                  <td>{company.kvkNumber}</td>
+                </tr>
+                <tr>
+                  <td className='pr-4 text-xl text-gray-500'>Name</td>
+                  <td>{company.name}</td>
+                </tr>
+                <tr>
+                  <td className='pr-4 text-xl text-gray-500'>Email</td>
+                  <td>{company.email}</td>
+                </tr>
+                <tr>
+                  <td className='pr-4 text-xl text-gray-500'>Phone</td>
+                  <td>{company.phone}</td>
+                </tr>
+                <tr>
+                  <td className='pr-4 text-xl text-gray-500'>Start Year</td>
+                  <td>{company.startYear}</td>
+                </tr>
+                <tr>
+                  <td className='pr-4 text-xl text-gray-500'>Owners</td>
+                  <td>
+                    {owners
+                      .map((owner) => `${owner.firstName} ${owner.lastName}`)
+                      .join(', ')}
+                  </td>
+                </tr>
+                <tr>
+                  <td className='pr-4 text-xl text-gray-500'>Create Time</td>
+                  <td>{new Date(company.createdAt).toString()}</td>
+                </tr>
+                <tr>
+                  <td className='pr-4 text-xl text-gray-500'>
+                    Last Update Time
+                  </td>
+                  <td>{new Date(company.updatedAt).toString()}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         )}
       </div>
