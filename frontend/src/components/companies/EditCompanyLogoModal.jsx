@@ -68,7 +68,7 @@ function setCanvasImage(image, canvas, crop) {
   )
 }
 
-const EditProfilePictureModal = ({ onClose }) => {
+const EditCompanyLogoModal = ({ onClose, setLogoId }) => {
   const [upImg, setUpImg] = useState()
 
   const imgRef = useRef(null)
@@ -122,12 +122,10 @@ const EditProfilePictureModal = ({ onClose }) => {
         const formData = new FormData()
 
         // Make the blob into a file
-        const file = new File([blob], 'profile-picture.png')
+        const file = new File([blob], 'company-logo.png')
 
         // Add the image data to the FormData object
         formData.append('image', file)
-
-        console.log(formData)
 
         // Send the image to the server
         axios
@@ -139,33 +137,9 @@ const EditProfilePictureModal = ({ onClose }) => {
           .then((response) => {
             if (response.data.imageId) {
               // Save the image id of the profile picture to the user's document in the database
-              axios
-                .put(`${BACKEND_URL}/users/profile-picture`, {
-                  imageId: response.data.imageId,
-                  userId,
-                })
-                // eslint-disable-next-line no-shadow
-                .then(() => {
-                  // Get the user's updated document from the database and update the user state
-                  axios
-                    .get(`${BACKEND_URL}/users/user/${userId}`)
-                    // eslint-disable-next-line no-shadow
-                    .then((response) => {
-                      const userData = response.data
+              setLogoId(response.data.imageId)
 
-                      console.log('user DATA', userData)
-
-                      // Update the user state
-                      store.dispatch({ type: 'USER', payload: userData })
-                      onClose()
-                    })
-                    .catch((error) => {
-                      console.log(error)
-                    })
-                })
-                .catch((error) => {
-                  console.log(error)
-                })
+              onClose()
             }
           })
           .catch((error) => {
@@ -208,7 +182,7 @@ const EditProfilePictureModal = ({ onClose }) => {
           onClick={onClose}
         />
         <div>
-          <h1>Upload Profile Picture</h1>
+          <h1>Upload Company Logo</h1>
         </div>
 
         {upImg ? (
@@ -291,8 +265,8 @@ const EditProfilePictureModal = ({ onClose }) => {
   )
 }
 
-EditProfilePictureModal.propTypes = {
+EditCompanyLogoModal.propTypes = {
   onClose: PropTypes.func.isRequired,
 }
 
-export default EditProfilePictureModal
+export default EditCompanyLogoModal

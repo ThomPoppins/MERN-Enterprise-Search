@@ -15,51 +15,52 @@ import { VscMail, VscMention, VscPerson } from 'react-icons/vsc'
 import { useSelector } from 'react-redux'
 import { PENDING_RECIEVED_INVITES } from '../../store/actions'
 import store from '../../store/store'
-import CompanyLogoModal from '../../components/companies/CompanyLogoModal'
+import EditCompanyLogoModal from '../../components/companies/EditCompanyLogoModal'
 import Layout from '../../components/layout/Layout'
 import Loader from '../../components/animated/Loader.jsx'
 
 const EditCompany = () => {
   // Get the companyId from the URL
-  const { id } = useParams(),
-    companyId = id,
-    userId = useSelector((state) => state.userId),
-    user = useSelector((state) => state.user),
-    // Input field values for editing a company as state
-    [name, setName] = useState(''),
-    [logo, setLogo] = useState(''),
-    [email, setEmail] = useState(''),
-    [phone, setPhone] = useState(''),
-    [kvkNumber, setKvkNumber] = useState(''),
-    [slogan, setSlogan] = useState(''),
-    [description, setDescription] = useState(''),
-    [startYear, setStartYear] = useState(0),
-    // Error state for displaying error messages if the user enters invalid input
-    [nameError, setNameError] = useState(false),
-    [emailError, setEmailError] = useState(false),
-    [phoneError, setPhoneError] = useState(false),
-    [kvkNumberError, setKvkNumberError] = useState(false),
-    [sloganError, setSloganError] = useState(false),
-    [descriptionError, setDescriptionError] = useState(false),
-    [startYearError, setStartYearError] = useState(false),
-    // Specific error messages to display when the user enters invalid input
-    [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState(''),
-    // Owners state
-    [owners, setOwners] = useState([]),
-    // Pending ownership invites state
-    [pendingOwnershipInvites, setPendingOwnershipInvites] = useState([]),
-    // Search results state for searching users to add as owners
-    [usersResult, setUsersResult] = useState([]),
-    // Removed owners ids
-    [removedOwnersIds, setRemovedOwnersIds] = useState([]),
-    // Set showLogoModal to true to show the modal for uploading a company logo
-    [showLogoModal, setShowLogoModal] = useState(false),
-    // Display a spinner when loading data from the backend
-    [loading, setLoading] = useState(false),
-    // useNavigate is a hook that allows us to navigate to a different page
-    navigate = useNavigate(),
-    // useSnackbar is a hook that allows us to show a snackbar https://www.npmjs.com/package/notistack https://iamhosseindhv.com/notistack/demos#use-snackbar
-    { enqueueSnackbar } = useSnackbar()
+  const { id } = useParams()
+  const companyId = id
+  const userId = useSelector((state) => state.userId)
+  const user = useSelector((state) => state.user)
+  // Input field values for editing a company as state
+  const [name, setName] = useState('')
+  const [logoId, setLogoId] = useState('')
+  const [logoPreview, setLogoPreview] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [kvkNumber, setKvkNumber] = useState('')
+  const [slogan, setSlogan] = useState('')
+  const [description, setDescription] = useState('')
+  const [startYear, setStartYear] = useState(0)
+  // Error state for displaying error messages if the user enters invalid input
+  const [nameError, setNameError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
+  const [phoneError, setPhoneError] = useState(false)
+  const [kvkNumberError, setKvkNumberError] = useState(false)
+  const [sloganError, setSloganError] = useState(false)
+  const [descriptionError, setDescriptionError] = useState(false)
+  const [startYearError, setStartYearError] = useState(false)
+  // Specific error messages to display when the user enters invalid input
+  const [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState('')
+  // Owners state
+  const [owners, setOwners] = useState([])
+  // Pending ownership invites state
+  const [pendingOwnershipInvites, setPendingOwnershipInvites] = useState([])
+  // Search results state for searching users to add as owners
+  const [usersResult, setUsersResult] = useState([])
+  // Removed owners ids
+  const [removedOwnersIds, setRemovedOwnersIds] = useState([])
+  // Set showLogoModal to true to show the modal for uploading a company logo
+  const [showLogoModal, setShowLogoModal] = useState(false)
+  // Display a spinner when loading data from the backend
+  const [loading, setLoading] = useState(false)
+  // useNavigate is a hook that allows us to navigate to a different page
+  const navigate = useNavigate()
+  // useSnackbar is a hook that allows us to show a snackbar https://www.npmjs.com/package/notistack https://iamhosseindhv.com/notistack/demos#use-snackbar
+  const { enqueueSnackbar } = useSnackbar()
 
   // Get pending ownership invites from the sender
   // useEffect(() => {
@@ -225,7 +226,7 @@ const EditCompany = () => {
       .then((response) => {
         setLoading(false)
         setName(response.data.name)
-        setLogo(response.data.logo)
+        setLogoId(response.data.logoId)
         setEmail(response.data.email)
         setPhone(response.data.phone)
         setKvkNumber(response.data.kvkNumber)
@@ -315,7 +316,7 @@ const EditCompany = () => {
 
     const data = {
       name,
-      logo,
+      logoId,
       email,
       phone,
       kvkNumber,
@@ -594,10 +595,19 @@ const EditCompany = () => {
       })
   }
 
+  useEffect(() => {
+    if (logoId) {
+      // Get image URL from backend
+      axios.get(`${BACKEND_URL}/files/image-url/${logoId}`).then((response) => {
+        setLogoPreview(response.data.imageURL)
+      })
+    }
+  }, [logoId])
+
   return (
     <Layout>
       <div className='p-4'>
-        <h1 className='flex justify-center text-3xl my-4 mb-6'>
+        <h1 className='my-4 mb-6 flex justify-center text-3xl'>
           Edit{' '}
           <div>
             <strong className='ml-2'> {name}</strong>
@@ -605,20 +615,20 @@ const EditCompany = () => {
         </h1>
         {loading ? <Loader /> : ''}
 
-        <div className='flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto mb-4'>
+        <div className='mx-auto mb-4 flex w-[600px] flex-col rounded-xl border-2 border-purple-900 bg-violet-950/40 px-8 py-4'>
           <div className='my-4'>
             <div className='mb-4'>
-              <label className='text-xl mr-4' htmlFor='owners-list'>
+              <label className='mr-4 text-xl' htmlFor='owners-list'>
                 Owners
               </label>
             </div>
             <ul className='mb-4' id='owners-list'>
               {owners.map((owner) => (
                 <>
-                  <div className='float-left mt-3 mr-2'>
+                  <div className='float-left mr-2 mt-3'>
                     <img
                       alt='Profile'
-                      className='rounded-full h-16 w-16 mr-4'
+                      className='mr-4 h-16 w-16 rounded-full'
                       src={
                         owner.profilePictureURL
                           ? owner.profilePictureURL
@@ -629,7 +639,7 @@ const EditCompany = () => {
                     />
                   </div>
                   <div
-                    className='mb-4 flex justify-between items-center'
+                    className='mb-4 flex items-center justify-between'
                     //
                     key={owner._id}
                   >
@@ -671,7 +681,7 @@ const EditCompany = () => {
                         ''
                       ) : (
                         <button
-                          className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
+                          className='mx-auto mb-4 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 px-4 py-1 hover:bg-purple-700 hover:bg-gradient-to-l'
                           data-testid='remove-owner-button'
                           onClick={handleRemoveUserAsCompanyOwner}
                           type='button'
@@ -696,12 +706,12 @@ const EditCompany = () => {
           />
         </div>
         {pendingOwnershipInvites.length > 0 ? (
-          <div className='flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 pl-9 mx-auto mb-4'>
+          <div className='mx-auto mb-4 flex w-[600px] flex-col rounded-xl border-2 border-purple-900 bg-violet-950/40 px-8 py-4 pl-9'>
             <div className='my-4'>
               <div className='mb-8'>
                 <div className='mb-8'>
                   <label
-                    className='text-2xl mr-4'
+                    className='mr-4 text-2xl'
                     htmlFor='pending-ownership-invites'
                   >
                     Pending Ownership Invites
@@ -710,10 +720,10 @@ const EditCompany = () => {
                 <ul className='mb-4' id='pending-ownership-invites'>
                   {pendingOwnershipInvites.map((invite) => (
                     <>
-                      <div className='float-left mt-2 mr-2'>
+                      <div className='float-left mr-2 mt-2'>
                         <img
                           alt='Profile'
-                          className='rounded-full h-16 w-16 mr-4'
+                          className='mr-4 h-16 w-16 rounded-full'
                           src={
                             invite.receiver.profilePictureURL
                               ? invite.receiver.profilePictureURL
@@ -724,7 +734,7 @@ const EditCompany = () => {
                         />
                       </div>
                       <div
-                        className='mb-4 flex justify-between items-center'
+                        className='mb-4 flex items-center justify-between'
                         key={invite._id}
                       >
                         <div>
@@ -766,7 +776,7 @@ const EditCompany = () => {
                         </div>
                         <div>
                           <button
-                            className='bg-gradient-to-r from-violet-600 to-purple-600 hover:from-red-700 hover:to-red-400 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
+                            className='mx-auto mb-4 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 px-4 py-1 hover:bg-gradient-to-l hover:from-red-700 hover:to-red-400'
                             data-testid='cancel-invite-button'
                             onClick={handleCancelPendingOwnershipInvite}
                             type='button'
@@ -786,15 +796,15 @@ const EditCompany = () => {
           ''
         )}
         {/* TODO: [MERNSTACK-194] Make <CompanyRegisterEditForm company={company} /> component and use it in EditCompany.jsx and RegisterCompany.jsx */}
-        <div className='flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto'>
+        <div className='mx-auto flex w-[600px] flex-col rounded-xl border-2 border-purple-900 bg-violet-950/40 px-8 py-4'>
           {/* TODO: [MERNSTACK-130] Add input fields for all editable company details. To achieve this, copy the outer div with class ".my-4". */}
           {/* Comany Name input field */}
           <div className='my-4'>
-            <label className='text-xl mr-4' htmlFor='name-input'>
+            <label className='mr-4 text-xl' htmlFor='name-input'>
               Name
             </label>
             <input
-              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+              className={`w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white ${
                 nameError ? 'border-red-500' : ''
               }`}
               data-testid='name-input'
@@ -805,7 +815,7 @@ const EditCompany = () => {
               value={name}
             />
             {nameError ? (
-              <p className='text-red-500 text-sm'>
+              <p className='text-sm text-red-500'>
                 Company name must be between 1 and 60 characters long and can
                 only contain letters, numbers, spaces, and the following
                 characters: -, &apos;, and .
@@ -816,20 +826,26 @@ const EditCompany = () => {
           </div>
           {/* Company logo */}
           <div className='my-4'>
-            <label className='text-xl mr-4' htmlFor='image-preview'>
+            <label className='mr-4 text-xl' htmlFor='image-preview'>
               Logo
             </label>
             <div className='w-full'>
-              <div className='flex justify-center items-center my-4'>
+              <div className='my-4 flex items-center justify-center'>
                 <div className='flex justify-center' id='image-preview'>
-                  {logo ? (
-                    <img alt='Preview' height='200' src={logo} width='200' />
+                  {logoPreview ? (
+                    <img
+                      alt='Preview'
+                      className='rounded-full'
+                      height='200'
+                      src={logoPreview}
+                      width='200'
+                    />
                   ) : null}
                 </div>
               </div>
-              <div className='flex justify-center items-center mb-4 mt-8'>
+              <div className='mb-4 mt-8 flex items-center justify-center'>
                 <button
-                  className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg'
+                  className='rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 px-4 py-1 hover:bg-purple-700 hover:bg-gradient-to-l'
                   data-testid='upload-logo-button'
                   onClick={() => setShowLogoModal(true)}
                   type='button'
@@ -838,20 +854,22 @@ const EditCompany = () => {
                 </button>
               </div>
               {showLogoModal ? (
-                <CompanyLogoModal
-                  onClose={() => setShowLogoModal(false)}
-                  setLogo={setLogo}
+                <EditCompanyLogoModal
+                  onClose={() => {
+                    setShowLogoModal(false)
+                  }}
+                  setLogoId={setLogoId}
                 />
               ) : null}
             </div>
           </div>
           {/* Comany Email input field */}
           <div className='my-4'>
-            <label className='text-xl mr-4' htmlFor='company-email-input'>
+            <label className='mr-4 text-xl' htmlFor='company-email-input'>
               Email
             </label>
             <input
-              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+              className={`w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white ${
                 emailError ? 'border-red-500' : ''
               }`}
               data-testid='company-email-input'
@@ -862,7 +880,7 @@ const EditCompany = () => {
               value={email}
             />
             {emailError ? (
-              <p className='text-red-500 text-sm'>
+              <p className='text-sm text-red-500'>
                 Email must be a valid email address.
               </p>
             ) : (
@@ -871,11 +889,11 @@ const EditCompany = () => {
           </div>
           {/* Comany Phone Number input field */}
           <div className='my-4'>
-            <label className='text-xl mr-4' htmlFor='company-phone-input'>
+            <label className='mr-4 text-xl' htmlFor='company-phone-input'>
               Phone
             </label>
             <input
-              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+              className={`w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white ${
                 phoneError ? 'border-red-500' : ''
               }`}
               data-testid='company-phone-input'
@@ -886,7 +904,7 @@ const EditCompany = () => {
               value={phone}
             />
             {phoneError ? (
-              <p className='text-red-500 text-sm'>
+              <p className='text-sm text-red-500'>
                 Phone number must be a valid phone number.
               </p>
             ) : (
@@ -894,7 +912,7 @@ const EditCompany = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4' htmlFor='company-kvk-number-input'>
+            <label className='mr-4 text-xl' htmlFor='company-kvk-number-input'>
               KVK number
             </label>
             {TEST_KVK_API ? (
@@ -914,7 +932,7 @@ const EditCompany = () => {
               ''
             )}
             <input
-              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+              className={`w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white ${
                 kvkNumberError ? 'border-red-500' : ''
               }`}
               data-testid='company-kvk-number-input'
@@ -925,7 +943,7 @@ const EditCompany = () => {
               value={kvkNumber}
             />
             {kvkNumberError ? (
-              <p className='text-red-500 text-sm'>
+              <p className='text-sm text-red-500'>
                 {kvkNumberErrorMessage || 'Must be a valid KVK number.'}
               </p>
             ) : (
@@ -933,11 +951,11 @@ const EditCompany = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4' htmlFor='company-slogan-input'>
+            <label className='mr-4 text-xl' htmlFor='company-slogan-input'>
               Slogan
             </label>
             <input
-              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+              className={`w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white ${
                 startYearError ? 'border-red-500' : ''
               }`}
               data-testid='company-slogan-input'
@@ -948,7 +966,7 @@ const EditCompany = () => {
               value={slogan}
             />
             {sloganError ? (
-              <p className='text-red-500 text-sm'>
+              <p className='text-sm text-red-500'>
                 This should be the motto of your company. It must be between 1
                 and 90 characters long.
               </p>
@@ -957,11 +975,11 @@ const EditCompany = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4' htmlFor='company-description-input'>
+            <label className='mr-4 text-xl' htmlFor='company-description-input'>
               Company Description
             </label>
             <textarea
-              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+              className={`w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white ${
                 startYearError ? 'border-red-500' : ''
               }`}
               data-testid='company-description-input'
@@ -971,7 +989,7 @@ const EditCompany = () => {
               value={description}
             />
             {descriptionError ? (
-              <p className='text-red-500 text-sm'>
+              <p className='text-sm text-red-500'>
                 This should be the description of your company. It must be
                 between 1 and 280 characters long.
               </p>
@@ -980,11 +998,11 @@ const EditCompany = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4' htmlFor='company-start-year-input'>
+            <label className='mr-4 text-xl' htmlFor='company-start-year-input'>
               Start Year
             </label>
             <input
-              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+              className={`w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white ${
                 startYearError ? 'border-red-500' : ''
               }`}
               data-testid='company-start-year-input'
@@ -995,7 +1013,7 @@ const EditCompany = () => {
               value={startYear}
             />
             {startYearError ? (
-              <p className='text-red-500 text-sm'>
+              <p className='text-sm text-red-500'>
                 Start year must be a valid year and never can be later then the
                 current year. If company hasn&apos;t started yet, register
                 company when it starts.
@@ -1005,7 +1023,7 @@ const EditCompany = () => {
             )}
           </div>
           <button
-            className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
+            className='m-8 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 p-2 hover:bg-purple-700 hover:bg-gradient-to-l'
             data-testid='save-edit-company-button'
             onClick={handleEditCompany}
             type='button'
