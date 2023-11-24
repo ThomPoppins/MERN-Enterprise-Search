@@ -1,5 +1,6 @@
 import express from 'express'
 import { Company } from '../models/companyModel.js'
+import { Image } from '../models/imageModel.js'
 import { v4 as uuidv4 } from 'uuid'
 
 const router = express.Router(),
@@ -45,7 +46,7 @@ router.post('/', async (request, response) => {
     // Create a new company document using the Company model and the properties from the request body.
     const newCompany = {
         name: request.body.name,
-        logo: request.body.logo,
+        logoId: request.body.logoId,
         email: request.body.email,
         phone: request.body.phone,
         kvkNumber: request.body.kvkNumber,

@@ -818,7 +818,7 @@ const EditCompany = () => {
               <p className='text-sm text-red-500'>
                 Company name must be between 1 and 60 characters long and can
                 only contain letters, numbers, spaces, and the following
-                characters: -, &apos;, and .
+                characters: {`!"#$%&'()*+,-./:;<=>?@[\\]^_\`{|}~`}
               </p>
             ) : (
               ''

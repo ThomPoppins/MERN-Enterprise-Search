@@ -7,9 +7,7 @@ import { useDropzone } from 'react-dropzone'
 import { AiOutlineClose } from 'react-icons/ai'
 import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
-import { useSelector } from 'react-redux'
 import { BACKEND_URL } from '../../../config'
-import store from '../../store/store'
 
 // eslint-disable-next-line func-style
 function generateDownload(canvas, crop) {
@@ -73,8 +71,6 @@ const EditCompanyLogoModal = ({ onClose, setLogoId }) => {
 
   const imgRef = useRef(null)
   const previewCanvasRef = useRef(null)
-
-  const { userId } = useSelector((state) => state)
 
   const [crop, setCrop] = useState({ unit: 'px', width: 30, aspect: 1 })
   const [completedCrop, setCompletedCrop] = useState(null)
@@ -267,6 +263,7 @@ const EditCompanyLogoModal = ({ onClose, setLogoId }) => {
 
 EditCompanyLogoModal.propTypes = {
   onClose: PropTypes.func.isRequired,
+  setLogoId: PropTypes.func.isRequired,
 }
 
 export default EditCompanyLogoModal

@@ -38,9 +38,8 @@ app.get('/', (request, response) => {
     // eslint-disable-next-line no-magic-numbers
     .status(200)
     .send(
-      "<div style='padding: 30px; width: 100vw; height: 100vh; background-color: black; position:fixed; top: 0; left: 0;'>" +
-        "<h1 style='color: white;'>Welcome to my MERN stack backend server with Express.js!</h1>" +
-        '</div>',
+      // eslint-disable-next-line quotes
+      "<div style='padding: 30px; width: 100vw; height: 100vh; background-color: black; position:fixed; top: 0; left: 0;'><h1 style='color: white;'>Welcome to my MERN stack backend server with Express.js!</h1></div>",
     )
 })
 
