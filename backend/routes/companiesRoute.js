@@ -1,5 +1,7 @@
 import express from 'express'
 import { Company } from '../models/companyModel.js'
+import { Image } from '../models/imageModel.js'
+import mongoose from 'mongoose'
 import { v4 as uuidv4 } from 'uuid'
 
 const router = express.Router(),
@@ -42,10 +44,24 @@ router.post('/', async (request, response) => {
       })
     }
 
+    let logoImageDocument = {}
+
+    if (request.body.logoId) {
+      const logoObjectId = new mongoose.Types.ObjectId(request.body.logoId)
+
+      // Get company logo image document
+      logoImageDocument = await Image.findOne({ _id: logoObjectId })
+        .then((document) => document)
+        .catch((error) => {
+          console.log('Error in GET /companies: ', error)
+        })
+    }
+
     // Create a new company document using the Company model and the properties from the request body.
     const newCompany = {
         name: request.body.name,
         logoId: request.body.logoId,
+        logoUrl: logoImageDocument.url ? logoImageDocument.url : null,
         email: request.body.email,
         phone: request.body.phone,
         kvkNumber: request.body.kvkNumber,
@@ -111,20 +127,37 @@ router.get('/owned-companies/:ownerUserId', async (request, response) => {
 })
 
 // Route to get one company from database using the company's id
-router.get('/:id', async (request, response) => {
-  try {
-    // Get the company id from the request parameters
-    const { id } = request.params,
-      // Get all company documents using the Company model's find method
-      company = await Company.findById(id)
+router
+  .get('/:id', async (request, response) => {
+    try {
+      // Get the company id from the request parameters
+      const { id } = request.params,
+        // Get all company documents using the Company model's find method
+        company = await Company.findById(id)
 
-    // Send status 200 response and the companies to the client
-    return response.status(200).json(company)
-  } catch (error) {
-    console.log('Error in GET /companies: ', error)
-    return response.status(500).send({ message: error.message })
-  }
-})
+      // Send status 200 response and the companies to the client
+      return response.status(200).json(company)
+    } catch (error) {
+      console.log('Error in GET /companies: ', error)
+      return response.status(500).send({ message: error.message })
+    }
+  })
+
+  .get('/:companyId/:userId/isMember', async (request, response) => {
+    const { companyId, userId } = request.params
+
+    const companyDocument = await Company.findById(companyId)
+
+    if (companyDocument.owners.length > 0) {
+      const isMember = companyDocument.owners.some(
+        (owner) => owner.userId === userId,
+      )
+
+      return response.status(200).json({ isMember })
+    }
+
+    return response.status(200).json({ isMember: false })
+  })
 
 // Route to update one company in the database using the company's id
 router.put('/:id', async (request, response) => {

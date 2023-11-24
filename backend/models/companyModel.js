@@ -62,6 +62,11 @@ const companySchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Image',
     },
+    logoUrl: {
+      type: String,
+      required: false,
+      default: '',
+    },
     /*
      * Company email address for correspondence directed to the company with this application.
      * TODO: [MERNSTACK-134] Send confirmation e-mail to this address to verify the company email address.

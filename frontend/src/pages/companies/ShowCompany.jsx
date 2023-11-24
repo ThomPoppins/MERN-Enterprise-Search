@@ -5,23 +5,17 @@ import BackButton from '../../components/BackButton'
 import { BACKEND_URL } from '../../../config.js'
 import Layout from '../../components/layout/Layout'
 import Loader from '../../components/animated/Loader.jsx'
+import { useSelector } from 'react-redux'
 
 const ShowCompany = () => {
   const [company, setCompany] = useState({})
   const [owners, setOwners] = useState([])
   const [loading, setLoading] = useState(false)
-  const [logoUrl, setLogoUrl] = useState('')
   const { id } = useParams()
 
-  useEffect(() => {
-    if (company.logoId) {
-      axios
-        .get(`${BACKEND_URL}/files/image-url/${company.logoId}`)
-        .then((response) => {
-          setLogoUrl(response.data.imageURL)
-        })
-    }
-  }, [company])
+  const { userId } = useSelector((state) => state)
+
+  const [currentUserIsMember, setCurrentUserIsMember] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -54,6 +48,23 @@ const ShowCompany = () => {
       })
   }, [id])
 
+  useEffect(() => {
+    // check if current user is member of company, owner or admin or employee etc.
+    axios
+      .get(`${BACKEND_URL}/companies/${id}/${userId}/isMember`)
+      .then((response) => {
+        if (response.data.isMember === true) {
+          setCurrentUserIsMember(true)
+          return
+        }
+        setCurrentUserIsMember(false)
+      })
+      .catch((error) => {
+        console.log(error)
+        setCurrentUserIsMember(false)
+      })
+  }, [company, userId])
+
   //
 
   return (
@@ -64,7 +75,7 @@ const ShowCompany = () => {
           <img
             alt='profile'
             className='mx-auto mt-2 h-64 w-64 rounded-full object-cover'
-            src={logoUrl ? logoUrl : ''}
+            src={company.logoUrl ? `${BACKEND_URL}${company.logoUrl}` : ''}
           />
         </div>
         {loading ? (
@@ -88,26 +99,32 @@ const ShowCompany = () => {
                   <td className='pr-4 text-xl text-gray-500'>Name</td>
                   <td>{company.name}</td>
                 </tr>
-                <tr>
-                  <td className='pr-4 text-xl text-gray-500'>Email</td>
-                  <td>{company.email}</td>
-                </tr>
-                <tr>
-                  <td className='pr-4 text-xl text-gray-500'>Phone</td>
-                  <td>{company.phone}</td>
-                </tr>
+                {currentUserIsMember ? (
+                  <tr>
+                    <td className='pr-4 text-xl text-gray-500'>Email</td>
+                    <td>{company.email}</td>
+                  </tr>
+                ) : null}
+                {currentUserIsMember ? (
+                  <tr>
+                    <td className='pr-4 text-xl text-gray-500'>Phone</td>
+                    <td>{company.phone}</td>
+                  </tr>
+                ) : null}
                 <tr>
                   <td className='pr-4 text-xl text-gray-500'>Start Year</td>
                   <td>{company.startYear}</td>
                 </tr>
-                <tr>
-                  <td className='pr-4 text-xl text-gray-500'>Owners</td>
-                  <td>
-                    {owners
-                      .map((owner) => `${owner.firstName} ${owner.lastName}`)
-                      .join(', ')}
-                  </td>
-                </tr>
+                {currentUserIsMember ? (
+                  <tr>
+                    <td className='pr-4 text-xl text-gray-500'>Owners</td>
+                    <td>
+                      {owners
+                        .map((owner) => `${owner.firstName} ${owner.lastName}`)
+                        .join(', ')}
+                    </td>
+                  </tr>
+                ) : null}
                 <tr>
                   <td className='pr-4 text-xl text-gray-500'>Create Time</td>
                   <td>{new Date(company.createdAt).toString()}</td>
