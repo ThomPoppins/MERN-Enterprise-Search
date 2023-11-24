@@ -1,9 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable id-length */
+import axios from 'axios'
 import React, { useState, useCallback, useRef, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
+import { AiOutlineClose } from 'react-icons/ai'
 import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
+import { useSelector } from 'react-redux'
+
+import { BACKEND_URL } from '../../../config'
+import store from '../../store/store'
 
 // eslint-disable-next-line func-style
 function generateDownload(canvas, crop) {
@@ -62,12 +68,13 @@ function setCanvasImage(image, canvas, crop) {
   )
 }
 
-// eslint-disable-next-line react/function-component-definition
-export default function ImageCrop() {
+const ImageCrop = ({ onClose, uploadImage }) => {
   const [upImg, setUpImg] = useState()
 
   const imgRef = useRef(null)
   const previewCanvasRef = useRef(null)
+
+  const { userId } = useSelector((state) => state)
 
   const [crop, setCrop] = useState({ unit: 'px', width: 30, aspect: 1 })
   const [completedCrop, setCompletedCrop] = useState(null)
@@ -102,6 +109,67 @@ export default function ImageCrop() {
     })
   }, [])
 
+  const saveProfileImage = (canvas, completedCrop) => {
+    if (!completedCrop || !canvas) {
+      console.log(completedCrop)
+      return
+    }
+
+    canvas.toBlob(
+      (blob) => {
+        // Create a new FormData object
+        const formData = new FormData()
+
+        // Add the image data to the FormData object
+        formData.append('image', blob)
+
+        console.log(formData)
+
+        // Send the image to the server
+        axios
+          .post(`${BACKEND_URL}/upload/image`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          })
+          .then((response) => {
+            if (response.data.imageId) {
+              // Save the image id of the profile picture to the user's document in the database
+              axios
+                .put(`${BACKEND_URL}/users/profile-picture`, {
+                  imageId: response.data.imageId,
+                  userId,
+                })
+                // eslint-disable-next-line no-shadow
+                .then((response) => {
+                  // Get the user's updated document from the database and update the user state
+                  axios
+                    .get(`${BACKEND_URL}/users/user/${userId}`)
+                    // eslint-disable-next-line no-shadow
+                    .then((response) => {
+                      const user = response.data
+
+                      // Update the user state
+                      store.dispatch({ type: 'SET_USER', payload: user })
+                    })
+                    .catch((error) => {
+                      console.log(error)
+                    })
+                })
+                .catch((error) => {
+                  console.log(error)
+                })
+            }
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      },
+      'image/png',
+      1,
+    )
+  }
+
   const { getRootProps, getInputProps } = useDropzone({ onDrop })
 
   useEffect(() => {
@@ -109,8 +177,31 @@ export default function ImageCrop() {
   }, [completedCrop])
 
   return (
-    <div className=''>
-      <div className=''>
+    <div
+      className='fixed bottom-0 left-0 right-0 top-0 z-50 flex items-center justify-center bg-black/60'
+      data-testid='company-modal'
+      onClick={onClose}
+      onKeyDown={(event) => {
+        if (event.key === 'Escape') {
+          onClose()
+        }
+      }}
+      role='button'
+      tabIndex={0}
+    >
+      {/* eslint-disable-next-line */}
+      <div
+        className='relative m-4 flex h-[510px] w-[600px] max-w-full flex-col rounded-lg border-2 border-purple-900 bg-violet-950/40 px-4 py-4'
+        data-testid='company-modal'
+        onClick={(event) => event.stopPropagation()}
+      >
+        <AiOutlineClose
+          className='absolute right-6 top-6 cursor-pointer text-3xl text-green-300 hover:text-red-500'
+          data-testid='close-button'
+          onClick={onClose}
+        />
+        <h1>Upload Profile Picture</h1>
+
         {upImg && (
           <div className='mx-auto text-center'>
             <div className=''>
@@ -122,10 +213,9 @@ export default function ImageCrop() {
                 style={{
                   width: '300px',
                   height: '300px',
-                  margin: '10px',
                   position: 'absolute',
-                  top: '100px',
-                  right: '300px',
+                  top: '50px',
+                  right: '-320px',
                   border: '5px solid purple',
                 }}
               />
@@ -159,6 +249,16 @@ export default function ImageCrop() {
             >
               Download cropped image
             </button>
+            <button
+              className='rounded bg-purple-500 px-4 py-2 font-bold text-white hover:bg-purple-700'
+              disabled={!completedCrop?.width || !completedCrop?.height}
+              onClick={() =>
+                saveProfileImage(previewCanvasRef.current, completedCrop)
+              }
+              type='button'
+            >
+              Upload
+            </button>
           </div>
         )}
         {!upImg && (
@@ -183,3 +283,5 @@ export default function ImageCrop() {
     </div>
   )
 }
+
+export default ImageCrop
