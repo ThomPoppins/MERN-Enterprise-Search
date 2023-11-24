@@ -60,12 +60,13 @@ const MainSearch = ({
 
         <div className='mr-3 mt-8 block md:mt-0 md:inline-block'>
           <button
-            className={`ml-2 h-[50px] w-[160px] rounded-lg bg-gradient-to-r pl-4 ${
+            className={`ml-2 h-[50px] w-[160px] rounded-lg bg-gradient-to-r pl-4 disabled:animate-none disabled:from-gray-500 disabled:to-gray-400 ${
               findButtonPing
                 ? 'animate-ping-once bg-gradient-to-l from-green-500 to-green-400'
                 : 'animate-bounce-fast  from-violet-500 to-violet-600 hover:bg-gradient-to-l hover:from-green-500 hover:to-green-400'
             }`}
             data-testid='find-button'
+            disabled={searchQuery.length < 1}
             onClick={handleFind}
             type='button'
           >

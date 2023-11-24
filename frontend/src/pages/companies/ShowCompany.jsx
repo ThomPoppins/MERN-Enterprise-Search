@@ -12,10 +12,20 @@ const ShowCompany = () => {
   const [owners, setOwners] = useState([])
   const [loading, setLoading] = useState(false)
   const { id } = useParams()
+  const [backbuttonLink, setBackbuttonLink] = useState('/companies')
+
+  const referrer = new URLSearchParams(window.location.search).get('referrer')
+
+  useEffect(() => {
+    if (!referrer) {
+      return
+    }
+    setBackbuttonLink(`/find?query=${referrer}`)
+  }, [referrer])
 
   const { userId } = useSelector((state) => state)
 
-  const [currentUserIsMember, setCurrentUserIsMember] = useState(false)
+  const [userIsMember, setUserIsMember] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -54,14 +64,14 @@ const ShowCompany = () => {
       .get(`${BACKEND_URL}/companies/${id}/${userId}/isMember`)
       .then((response) => {
         if (response.data.isMember === true) {
-          setCurrentUserIsMember(true)
+          setUserIsMember(true)
           return
         }
-        setCurrentUserIsMember(false)
+        setUserIsMember(false)
       })
       .catch((error) => {
         console.log(error)
-        setCurrentUserIsMember(false)
+        setUserIsMember(false)
       })
   }, [company, userId])
 
@@ -69,8 +79,8 @@ const ShowCompany = () => {
 
   return (
     <Layout>
-      <div className='mx-auto p-5'>
-        <BackButton destination='/companies' />
+      <div className='p-5'>
+        <BackButton destination={backbuttonLink} />
         <div className='relative mx-auto w-[320px]'>
           <img
             alt='profile'
@@ -99,13 +109,13 @@ const ShowCompany = () => {
                   <td className='pr-4 text-xl text-gray-500'>Name</td>
                   <td>{company.name}</td>
                 </tr>
-                {currentUserIsMember ? (
+                {userIsMember ? (
                   <tr>
                     <td className='pr-4 text-xl text-gray-500'>Email</td>
                     <td>{company.email}</td>
                   </tr>
                 ) : null}
-                {currentUserIsMember ? (
+                {userIsMember ? (
                   <tr>
                     <td className='pr-4 text-xl text-gray-500'>Phone</td>
                     <td>{company.phone}</td>
@@ -115,7 +125,7 @@ const ShowCompany = () => {
                   <td className='pr-4 text-xl text-gray-500'>Start Year</td>
                   <td>{company.startYear}</td>
                 </tr>
-                {currentUserIsMember ? (
+                {userIsMember ? (
                   <tr>
                     <td className='pr-4 text-xl text-gray-500'>Owners</td>
                     <td>
