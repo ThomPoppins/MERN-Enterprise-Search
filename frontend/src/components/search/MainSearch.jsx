@@ -11,7 +11,7 @@ const MainSearch = ({
   searchQuery,
 }) => {
   const descriptionText = isDisabled ? (
-    <div>
+    <span>
       <a className='text-blue-400 hover:text-purple-500' href='/sign-up'>
         Sign up
       </a>{' '}
@@ -20,12 +20,12 @@ const MainSearch = ({
         login
       </a>{' '}
       to your account to find the best professionals in your area!
-    </div>
+    </span>
   ) : (
-    <div>
+    <span>
       Search any keywords, could be a profession, a skill, a hobby, a product or
       industry.
-    </div>
+    </span>
   )
 
   return (

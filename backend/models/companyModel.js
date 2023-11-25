@@ -106,6 +106,13 @@ const companySchema = new mongoose.Schema(
       required: true,
       default: '',
     },
+    // Array of profession objectIds corresponding with the Profession model.
+    professionsIds: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Profession',
+      },
+    ],
     /*
      * Registered address of the company.
      * For example: { street: "Dr Poletlaan", number: "67-006", postalCode: "5626NC", city: "Eindhoven", country: "NL" }

@@ -7,3 +7,5 @@ pnpm-debug.log*
 node_modules
 dist
 public
+.env
+config.js.BACKUP

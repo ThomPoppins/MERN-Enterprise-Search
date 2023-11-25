@@ -10,6 +10,7 @@ backend/public/uploads/*
 # Environment variables
 backend/.env
 frontend/.env
+frontend/config.js.BACKUP
 
 # KVK Api certificate chain
 /backend/certs/*

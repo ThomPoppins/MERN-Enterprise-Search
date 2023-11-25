@@ -1958,8 +1958,12 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-] [Have a better life from now on and discover the most useful things](https://the-guild.dev/) [(https://the-guild.dev/](https://the-guild.dev/) has to offer.
 - [ ] [MERNSTACK-] Add explanation about MongoDB query for finding other users in EditCompany page to documentation website.
 - [ ] [MERNSTACK-] Render search result components when main search results.
+
 - [ ] [MERNSTACK-] Read [The Valley of Code VS Code](https://thevalleyofcode.com/vscode)
 - [ ] [MERNSTACK-] Read [The Valley of Code Github](https://thevalleyofcode.com/github)
+- [ ] [MERNSTACK-] Read [The Valley of Code The Internet From Here](https://thevalleyofcode.com/the-internet/4-the-tcp-protocol)
+- [ ] [MERNSTACK-] Read [The Valley of Code HTTP Protocol](https://thevalleyofcode.com/the-web/1-the-http-protocol)
+- [ ] [MERNSTACK-] Read [The Valley of Code Netlify](https://thevalleyofcode.com/netlify)
 - [ ] [MERNSTACK-] Read [The Valley of Code ]()
 - [ ] [MERNSTACK-] Read [The Valley of Code ]()
 - [ ] [MERNSTACK-] Read [The Valley of Code ]()
@@ -1967,8 +1971,9 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-] Read [The Valley of Code ]()
 - [ ] [MERNSTACK-] Read [The Valley of Code ]()
 - [ ] [MERNSTACK-] Read [The Valley of Code ]()
+
 - [ ] [MERNSTACK-] Investigate [Git Large File Storage (LFS)](https://vercel.com/docs/projects/overview#git-large-file-storage-lfs) and figure out if it needs to be enabled in the Vercel deployment settings.
-- [ ] [MERNSTACK-] [DOCS here](https://app.meticulous.ai/docs). Check out [Meticulous](https://app.meticulous.ai/organizations/Vind-Expert) and try to get it running when login is possible with useraccount on documentation website. MAYBE if possible to frontend only login in MERN_STACK_PROJ. then deploy and test that one with Meticulous. 
+- [ ] [MERNSTACK-] [DOCS here](https://app.meticulous.ai/docs). Check out [Meticulous](https://app.meticulous.ai/organizations/Vind-Expert) and try to get it running when login is possible with useraccount on documentation website. MAYBE if possible to frontend only login in MERN_STACK_PROJ. then deploy and test that one with Meticulous.
 - [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-]

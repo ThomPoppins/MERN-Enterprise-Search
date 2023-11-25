@@ -1,6 +1,7 @@
 import express from 'express'
 import { Company } from '../models/companyModel.js'
 import { Image } from '../models/imageModel.js'
+import { Profession } from '../models/professionModel.js'
 import mongoose from 'mongoose'
 import { v4 as uuidv4 } from 'uuid'
 import apiLimiter from '../middleware/rate-limiter/apiLimiter.js'
@@ -59,6 +60,10 @@ router.post('/', apiLimiter, async (request, response) => {
         })
     }
 
+    const professionsObjectIds = request.body.professionsIds.map(
+      (professionId) => new mongoose.Types.ObjectId(professionId),
+    )
+
     // Create a new company document using the Company model and the properties from the request body.
     const newCompany = {
         name: request.body.name,
@@ -69,6 +74,7 @@ router.post('/', apiLimiter, async (request, response) => {
         kvkNumber: request.body.kvkNumber,
         slogan: request.body.slogan,
         description: request.body.description,
+        professionsIds: professionsObjectIds,
         startYear: request.body.startYear,
         owners: request.body.owners,
         payments: request.body.payments
@@ -103,6 +109,78 @@ router.get('/', apiLimiter, async (request, response) => {
     })
   } catch (error) {
     console.log('Error in GET /companies: ', error)
+    return response.status(500).send({ message: error.message })
+  }
+})
+
+// Get profession by profession name
+router.get(
+  '/professionId/:professionName',
+  apiLimiter,
+  async (request, response) => {
+    const { professionName } = request.params
+
+    try {
+      const profession = await Profession.findOne({ name: professionName })
+
+      if (!profession) {
+        return response.status(400).json({})
+      }
+      return response.status(200).json(profession)
+    } catch (error) {
+      console.log('Error in GET /professionId: ', error)
+      return response.status(500).send({ message: error.message })
+    }
+  },
+)
+
+// Route to save a new profession
+router.post('/profession', apiLimiter, async (request, response) => {
+  console.log('request.body POST profession: ', request.body)
+  console.log('request.body.name POST profession: ', request.body.name)
+
+  try {
+    if (!request.body.name) {
+      // Send status 400 response if data fields are missing and a (error) message to inform the client.
+      return response.status(400).send({
+        message: 'Data fields missing, need at least a profession name.',
+      })
+    }
+
+    const professionName = request.body.name.trim()
+
+    // Check if the profession already exists in the database using the name
+    const existingProfession = await Profession.findOne({
+      name: professionName,
+    })
+    if (existingProfession) {
+      // Send status 409 response if the profession already exists and a (error) message to inform the client.
+      return response.status(201).send(existingProfession)
+    }
+
+    // Create a new profession document using the Profession model and the properties from the request body.
+    const newProfessionData = {
+      name: professionName,
+    }
+    // Create a new profession document using the Profession model and the properties from the request body
+    await Profession.create(newProfessionData)
+      .then((document) => {
+        console.log('new Profession document: ', document)
+        const responseData = {
+          name: document.name,
+          _id: document._id,
+          createdAt: document.createdAt,
+          updatedAt: document.updatedAt,
+        }
+        return response.status(201).send(responseData)
+      })
+      .catch((error) => {
+        console.log('Error in POST /profession: ', error)
+        return response.status(500).send({ message: error.message })
+      })
+    // Send status 201 response and the newly created profession to the client
+  } catch (error) {
+    console.log('Error in POST /profession: ', error)
     return response.status(500).send({ message: error.message })
   }
 })
