@@ -39,7 +39,7 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
 
   return (
     <div
-      className='border-2 border-purple-900 bg-violet-950/40 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl truncate'
+      className='border-2 border-purple-900 bg-violet-950/40 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl'
       key={`companies=single-card-${company._id}`}
     >
       <h2 className='absolute top-1 right-2 px-4 py-1 bg-purple-500 rounded-lg'>

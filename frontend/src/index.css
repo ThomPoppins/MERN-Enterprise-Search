@@ -38,6 +38,10 @@ strong {
   background-attachment: fixed;
 }
 
+.word-wrap {
+  word-wrap: break-word;
+}
+
 /* Import TailwindCSS */
 @tailwind base;
 @tailwind components;

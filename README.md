@@ -10,7 +10,7 @@ Also I make use of a lot of different packages but only if they are complementar
 
 ## Table of Contents
 
-- [MERN_STACK_PROJ. :rocket:](#mern_stack_proj-rocket)
+- [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
   - [Application Description](#application-description)
   - [Table of Contents](#table-of-contents)
   - [Visual Demo](#visual-demo)
@@ -34,14 +34,22 @@ Also I make use of a lot of different packages but only if they are complementar
       - [Company ownership](#company-ownership)
       - [`Invite` schema](#invite-schema)
   - [Quick Start](#quick-start)
-  - [Versions](#versions)
-    - [v0.0.3](#v003)
-      - [Find other users for co-ownership with search field](#find-other-users-for-co-ownership-with-search-field)
-      - [Send invites to invite other users to get company co-owner](#send-invites-to-invite-other-users-to-get-company-co-owner)
-    - [v0.0.2](#v002)
+- [Version v0.0.3 Release Notes](#version-v003-release-notes)
+  - [New Features](#new-features)
+    - [Basic Search Functionality](#basic-search-functionality)
+    - [Image Cropping](#image-cropping)
+    - [Company Logo Cropping](#company-logo-cropping)
+    - [Professions in Company Profile](#professions-in-company-profile)
+    - [Storybook Integration](#storybook-integration)
+    - [Testing](#testing)
+    - [Animations](#animations)
+    - [Co-Ownership Invites](#co-ownership-invites)
+    - [ES Lint and Prettier configuration](#es-lint-and-prettier-configuration)
+  - [Pending Tasks](#pending-tasks)
+    - [Version v0.0.2 Release Notes](#version-v002-release-notes)
     - [Backend server CDN for static files](#backend-server-cdn-for-static-files)
     - [File upload](#file-upload)
-    - [v0.0.1](#v001)
+    - [Version v0.0.1 Release Notes](#version-v001-release-notes)
     - [Registering an Account](#registering-an-account)
     - [Logging In](#logging-in)
   - [Company Registration and Ownership](#company-registration-and-ownership)
@@ -77,6 +85,8 @@ Also I make use of a lot of different packages but only if they are complementar
     - [Jira](#jira)
   - [Project Issue Progression](#project-issue-progression)
   - [Production checklist](#production-checklist)
+    - [Issues to be created in Jira:](#issues-to-be-created-in-jira)
+- [DocsGPT:](#docsgpt)
 
 ## Visual Demo
 

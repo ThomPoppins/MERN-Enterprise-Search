@@ -1,5 +1,5 @@
 /* eslint-disable sort-keys */
-'use strict'
+'use strict';
 
 module.exports = {
   env: {
@@ -32,4 +32,4 @@ module.exports = {
     'one-var': ['error', 'never'],
   },
   settings: {},
-}
+};

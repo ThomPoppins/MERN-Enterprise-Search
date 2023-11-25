@@ -156,7 +156,7 @@ const UserSearch = ({
               </div>
               <div>
                 <button
-                  className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
+                  className='bg-gradient-to-r from-violet-600 to-purple-600 hover:from-green-600 hover:to-green-500 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
                   data-testid='invite-owner-button'
                   onClick={addPendingOwnershipInvite}
                   type='button'

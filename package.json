@@ -8,12 +8,12 @@
   },
   "private": false,
   "type": "module",
-  "version": "v0.0.3",
+  "version": "v0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "changeset:all": "cd frontend && npm run changeset && cd ../backend && npm run changeset",
-    "changeset:root": "changeset version"
+    "changeset:all": "cd frontend && npm run changeset && cd ../backend && npm run changeset && cd .. && npm run changeset:root",
+    "changeset:root": "changeset version v0.0.3"
   },
   "keywords": [],
   "author": "",
