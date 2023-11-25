@@ -1347,29 +1347,69 @@ Now you have the application up and running locally!
 
 ### v0.0.3
 
-#### Find other users for co-ownership with search field
+# Version v0.0.3 Release Notes
 
-When you are an owner of a company it is possible to search for any other users of the application and the search terms are matched against other registered users' email, username, first name and last name values. The search result is updated every change within the search input field (onChange).
+## New Features
 
-A list with up to 10 most relevant users that match the criteria will automatically render right below the search field input sorted by most relevant result on top to 10th relevant user last.
+### Basic Search Functionality
 
-#### Send invites to invite other users to get company co-owner
+- Users can now search for companies by name.
+- Search results are listed in a grid with company images.
+- Clicking on a company navigates the user to the company details page (Company Profile).
 
-Users who own companies can send invites to other users to become co-owner.
+### Image Cropping
 
-![Invite User To Become Co-owner](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/009.png?raw=true)
+- Users can upload an image and crop it via drag-n-drop or file selection.
+- Preview canvas shows the user how the crop will be in a round circled shape.
+- The cropped image is displayed as the default profile picture.
+- After cropping, users can download the cropped file.
+- Cropped base64 binary images are converted into BLOB and uploaded to the Express.js server as `png` file.
+- Images are served as static files by /backend Express.js server and it acts as a images/files CDN for the frontend application.
 
-The invited user will be notified when he is logged in. In the navigation bar will a animated icon wiggle and a menu item called `Invites` will appear. Clicking this menu item will navigate the user to a page where all pending invited are listed.
+### Company Logo Cropping
 
-![Invite Notification](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/013.png?raw=true)
+- Implemented image crop functionality for company logos in the register and edit company pages.
+- Company logos are displayed in a circle-shaped <img/> frame throughout the application, when cropping the logo image, companies can see how the logo will look within the circle shaped border.
 
-On the pending invites listing page, hte invite receiving user can either _Accept_ or _Decline_ the invitation. When they accept they are now co-owner of the company.
+### Professions in Company Profile
 
-![Invites Listing Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/014.png?raw=true)
+- Added a new field to the company model for professions.
+- Companies can add professions to their profiles during registration.
 
-If the receiving user has answered to all invited and none are left, the user will be navigated to the /companies listing so they see the result of their actions directly because the companies they just got owner from are listed here. The notification in the navigation bar has disappeared and the `Invites` menu item as well.
+### Storybook Integration
 
-![Invites Listing Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Invite-Accepted.png?raw=true)
+- Installed Storybook for component development.
+- Added a few initial components to Storybook.
+
+### Testing
+
+- Jest and React-Testing-Library installed and functional.
+
+### Animations
+
+- Added subtle animations for a more interactive user experience. Notification animations, when user has a pending 'Invite' the icon in the navigation bar right to their name turns yellow and starts wiggeling, asking the user for attention. Dropdown has a `Invites` menu item on top with jumping letters to get the user attention to the `Invites` page after clicking `Invites` in the dropdown menu.
+
+### Co-Ownership Invites
+
+- Notification icon wiggles when a user is invited for co-ownership of a company.
+- "Invites" menu item is dynamically added to the dropdown menu.
+- The menu item jumps to draw attention to pending co-ownership invites.
+- Users can accept or decline co-ownership invites.
+- After accepting or declining all pending invites (so no pending invites are left), user gets redirected to /companies page where all companies are listed that the user now (co-)owns.
+- Safety measures implemented that prevents users from being invited twice, ensuring a unique co-owner status and no duplicate ownership registrations.
+
+### ES Lint and Prettier configuration
+
+- Configured ES Lint and Prettier now optimal for my wished code style wise.
+
+## Pending Tasks
+
+- Edit company professions feature is still pending.
+- More components need to be added to Storybook.
+- Ongoing work on writing tests for components.
+- Work in progress on writing tests with Jest and react-test-library
+- Editing company professions is still pending.
+- After implementing professions in Edit company page, main search functionality will use professions as second value to match on.
 
 ### v0.0.2
 
