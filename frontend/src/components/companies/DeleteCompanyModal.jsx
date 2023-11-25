@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { AiOutlineClose } from 'react-icons/ai'
-import { BACKEND_URL } from '../../../config'
 import axios from 'axios'
 import { useSnackbar } from 'notistack'
 import Loader from '../animated/Loader'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const CompanyModal = ({ companyId, updateCompanies, onClose }) => {
   const [loading, setLoading] = useState(false)

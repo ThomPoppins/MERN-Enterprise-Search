@@ -14,7 +14,8 @@ import { BsInfoCircle } from 'react-icons/bs'
 import { MdOutlineDelete } from 'react-icons/md'
 import CompanyModal from './CompanyModal'
 import DeleteCompanyModal from './DeleteCompanyModal'
-import { BACKEND_URL } from '../../../config'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const CompaniesSingleCard = ({ company, updateCompanies }) => {
   const [showModal, setShowModal] = useState(false)

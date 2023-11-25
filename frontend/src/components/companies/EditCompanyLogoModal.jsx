@@ -7,7 +7,8 @@ import { useDropzone } from 'react-dropzone'
 import { AiOutlineClose } from 'react-icons/ai'
 import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
-import { BACKEND_URL } from '../../../config'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 // eslint-disable-next-line func-style
 function generateDownload(canvas, crop) {

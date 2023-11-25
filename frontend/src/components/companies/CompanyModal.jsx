@@ -1,8 +1,9 @@
 import React from 'react'
-import { BACKEND_URL } from '../../../config'
 import PropTypes from 'prop-types'
 import { AiOutlineClose } from 'react-icons/ai'
 import { FcBriefcase, FcBusinessman } from 'react-icons/fc'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const CompanyModal = ({ company, onClose, owners }) => (
   <div
