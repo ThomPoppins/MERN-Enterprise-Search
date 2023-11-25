@@ -272,7 +272,7 @@ const RegisterCompany = () => {
                 '+',
               )}`,
             )
-            .then(async (res) => {
+            .then((res) => {
               if (res.data.length > 0) {
                 return resolve(res.data)
               }
