@@ -1343,10 +1343,6 @@ To run this application locally, follow these steps:
 
 Now you have the application up and running locally!
 
-## Versions
-
-### v0.0.3
-
 # Version v0.0.3 Release Notes
 
 ## New Features
@@ -1411,7 +1407,7 @@ Now you have the application up and running locally!
 - Editing company professions is still pending.
 - After implementing professions in Edit company page, main search functionality will use professions as second value to match on.
 
-### v0.0.2
+### Version v0.0.2 Release Notes
 
 ### Backend server CDN for static files
 
@@ -1427,7 +1423,7 @@ Users can now upload a profile picture. The profile picture will be saved in the
 
 ![Profile Picture Uploaded](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/005.png?raw=true)
 
-### v0.0.1
+### Version v0.0.1 Release Notes
 
 ### Registering an Account
 

@@ -6,7 +6,7 @@
     "node": true,
     "jest": true
   },
-  "private": true,
+  "private": false,
   "type": "module",
   "version": "v0.0.3",
   "description": "Opinionated Vite starter template with ESLint, Prettier, Stylelint and more.",
@@ -22,6 +22,7 @@
   ],
   "scripts": {
     "dev": "vite",
+    "changeset": "changeset version", 
     "build": "vite build --emptyOutDir",
     "serve": "vite preview",
     "start": "vite preview",
@@ -40,7 +41,6 @@
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.6.2",
     "chai": "^4.3.10",
-    "changeset": "^0.2.6",
     "dotenv": "^16.3.1",
     "js-cookie": "^3.0.5",
     "mongoose": "^8.0.1",
@@ -65,6 +65,7 @@
   "devDependencies": {
     "@babel/core": "^7.18.13",
     "@babel/preset-react": "latest",
+    "@changesets/cli": "^2.26.2",
     "@emotion/babel-plugin": "^11.10.2",
     "@emotion/babel-preset-css-prop": "^11.10.0",
     "@namics/stylelint-bem": "^7.0.0",
@@ -86,6 +87,7 @@
     "@vitejs/plugin-react": "^2.0.1",
     "autoprefixer": "^10.4.16",
     "babel-loader": "^8.2.5",
+    "changeset": "^0.2.6",
     "eslint": "^8.23.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
