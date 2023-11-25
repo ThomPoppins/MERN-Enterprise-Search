@@ -11,6 +11,9 @@ devDependencies:
   changeset:
     specifier: ^0.2.6
     version: 0.2.6
+  chromatic:
+    specifier: ^9.1.0
+    version: 9.1.0
 
 packages:
 
@@ -433,6 +436,11 @@ packages:
 
   /chardet@0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
+    dev: true
+
+  /chromatic@9.1.0:
+    resolution: {integrity: sha512-9ib8k4LIfg/88kKufxz1N8vgCB7nlLhJqmx+Vx55cM/6DCB/M6oqroirVRXfdeC7qaZuhyUemPF2QHxBh7GXtQ==}
+    hasBin: true
     dev: true
 
   /ci-info@3.9.0:

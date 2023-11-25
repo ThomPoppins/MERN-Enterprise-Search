@@ -7,6 +7,7 @@
     "jest": true
   },
   "private": false,
+  "main": "src/index.jsx",
   "type": "module",
   "version": "v0.0.2",
   "description": "Opinionated Vite starter template with ESLint, Prettier, Stylelint and more.",
@@ -22,7 +23,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "changeset": "changeset version v0.0.3", 
+    "changeset": "changeset version v0.0.3",
     "build": "vite build --emptyOutDir",
     "serve": "vite preview",
     "start": "vite preview",
@@ -88,6 +89,7 @@
     "autoprefixer": "^10.4.16",
     "babel-loader": "^8.2.5",
     "changeset": "^0.2.6",
+    "chromatic": "^9.1.0",
     "eslint": "^8.23.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",

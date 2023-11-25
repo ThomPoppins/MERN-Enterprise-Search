@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { BACKEND_URL } from '../../config'
 import { VscMail, VscMention, VscPerson } from 'react-icons/vsc'
 import { AiOutlineWoman, AiOutlineMan } from 'react-icons/ai'
 import { enqueueSnackbar } from 'notistack'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const UserSearch = ({
   companyId,
