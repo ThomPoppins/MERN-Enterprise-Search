@@ -16,7 +16,7 @@ const CompanyModal = ({ company, onClose, owners }) => (
     {/* stopPropagation() prevents the modal to close when user clicks inside the Modal but it closes when user clicks outside of the modal. */}
     {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
     <div
-      className='relative m-4 flex h-auto w-[600px] max-w-full flex-col rounded-lg border-2 border-purple-900 bg-violet-950/40 px-4 py-2'
+      className='relative m-4 flex w-[600px] max-w-full flex-col rounded-lg border-2 border-purple-900 bg-violet-950/40 px-4 py-2'
       data-testid='company-modal'
       onClick={(event) => event.stopPropagation()}
       role='button'
@@ -48,10 +48,12 @@ const CompanyModal = ({ company, onClose, owners }) => (
           {owners?.map((owner) => `${owner.firstName} ${owner.lastName}`)}
         </h2>
       </div>
-      <p className='mt-4'>
-        <strong>{company.slogan}</strong>
-      </p>
-      <p className='my-2'>{company.description}</p>
+      <div className='w-full'>
+        <p className='mt-4'>
+          <strong>{company.slogan}</strong>
+        </p>
+        <p className='my-2 break-all'>{company.description}</p>
+      </div>
     </div>
   </div>
 )

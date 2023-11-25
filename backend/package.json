@@ -1,12 +1,16 @@
 {
   "name": "backend",
-  "version": "v0.0.3",
+  "version": "v0.0.2",
+  "env": {
+    "es6": true,
+    "node": true
+  },
   "description": "",
   "type": "module",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "changeset": "changeset version",
+    "changeset": "changeset version v0.0.3",
     "dev": "nodemon index.js",
     "copilot": "nodemon test.js",
     "lint": "eslint -c ./.eslintrc.cjs --ignore-pattern 'node_modules/' ./**/*.{js,jsx,ts,tsx,json}",

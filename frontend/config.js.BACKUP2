@@ -1,0 +1,6 @@
+export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+export const TEST_KVK_API = import.meta.env.VITE_TEST_KVK_API === 'true'
+export const FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL = import.meta.env
+  .VITE_FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL
+export const MALE_PROFILE_PICTURE_PLACEHOLDER_URL = import.meta.env
+  .VITE_MALE_PROFILE_PICTURE_PLACEHOLDER_URL
