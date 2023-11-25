@@ -1,7 +1,8 @@
 import axios from 'axios'
 import store from '../../store/store'
 import { PENDING_RECIEVED_INVITES } from '../../store/actions'
-import { BACKEND_URL } from '../../../config'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 // Get pending recieved invites from Redux store
 export const getPendingRecievedInvites = (userId) => {

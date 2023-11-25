@@ -1,8 +1,9 @@
 import React from 'react'
 import Layout from '../components/layout/Layout'
 import { useSelector } from 'react-redux'
-import { BACKEND_URL } from '../../config'
 import axios from 'axios'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const UploadImage = () => {
   // Get the user id from the Redux store

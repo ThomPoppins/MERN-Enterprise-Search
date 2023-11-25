@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { BACKEND_URL } from '../../../config.js'
 import emailValidator from '../../utils/validation/emailValidator'
 import firstNameValidator from '../../utils/validation/firstNameValidator'
 import genderValidator from '../../utils/validation/genderValidator'
@@ -11,6 +10,8 @@ import { useNavigate } from 'react-router-dom'
 import { useSnackbar } from 'notistack'
 import usernameValidator from '../../utils/validation/usernameValidator'
 import Loader from '../../components/animated/Loader.jsx'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const SignUpUser = () => {
   // Form input fields as state variables

@@ -4,12 +4,13 @@ import axios from 'axios'
 import Layout from '../../components/layout/Layout'
 import { Link } from 'react-router-dom'
 import { MdOutlineAddBox } from 'react-icons/md'
-import { BACKEND_URL } from '../../../config'
 import CompaniesTable from '../../components/companies/CompaniesTable'
 import CompaniesCard from '../../components/companies/CompaniesCard'
 import { COMPANIES_LIST_SHOW_TYPE } from '../../store/actions'
 import { enqueueSnackbar } from 'notistack'
 import Loader from '../../components/animated/Loader'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const CompaniesList = () => {
   // useDispatch() is a hook that returns the reference to the dispatch function from the Redux store.

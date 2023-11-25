@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { BACKEND_URL, TEST_KVK_API } from '../../../config.js'
 import { useSnackbar } from 'notistack'
 import companyNameValidator from '../../utils/validation/companyNameValidator'
 import emailValidator from '../../utils/validation/emailValidator'
@@ -15,6 +14,9 @@ import { useSelector } from 'react-redux'
 import EditCompanyLogoModal from '../../components/companies/EditCompanyLogoModal'
 import Layout from '../../components/layout/Layout'
 import Loader from '../../components/animated/Loader.jsx'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+const TEST_KVK_API = import.meta.env.VITE_TEST_KVK_API
 
 const RegisterCompany = () => {
   // Input field values for registering a company as state

@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { BiPencil } from 'react-icons/bi'
 import { useSelector } from 'react-redux'
 
-import {
-  BACKEND_URL,
-  FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL,
-  MALE_PROFILE_PICTURE_PLACEHOLDER_URL,
-} from '../../../config'
 import Layout from '../../components/layout/Layout'
 import EditProfilePictureModal from '../../components/users/EditProfilePictureModal'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+
+const FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL = import.meta.env
+  .VITE_FEMALE_PROFILE_PICTURE_PLACEHOLDER_URL
+
+const MALE_PROFILE_PICTURE_PLACEHOLDER_URL = import.meta.env
+  .VITE_MALE_PROFILE_PICTURE_PLACEHOLDER_URL
 
 const UserProfile = () => {
   //  userId is a string from the Redux store state
