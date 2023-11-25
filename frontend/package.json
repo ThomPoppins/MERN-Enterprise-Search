@@ -8,7 +8,7 @@
   },
   "private": false,
   "type": "module",
-  "version": "v0.0.3",
+  "version": "v0.0.2",
   "description": "Opinionated Vite starter template with ESLint, Prettier, Stylelint and more.",
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "changeset": "changeset version", 
+    "changeset": "changeset version v0.0.3", 
     "build": "vite build --emptyOutDir",
     "serve": "vite preview",
     "start": "vite preview",
