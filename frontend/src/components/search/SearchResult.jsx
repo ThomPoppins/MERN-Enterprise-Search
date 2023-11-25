@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FcBriefcase } from 'react-icons/fc'
-import { BACKEND_URL } from '../../../config'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const SearchResult = ({ navigateToCompanyDetails, result }) => (
   // eslint-disable-next-line jsx-a11y/click-events-have-key-events

@@ -1,7 +1,8 @@
 import axios from 'axios'
-import { BACKEND_URL } from '../../../config.js'
 import store from '../../store/store.jsx'
 import { USER, USER_ID } from '../../store/actions.jsx'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const verifyToken = async (token) => {
   if (token) {

@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { getPendingRecievedInvites } from '../../utils/invites/recievedInvitesUpdater'
 import axios from 'axios'
-import { BACKEND_URL } from '../../../config'
 import InviteOperations from '../../components/invites/InviteOperations'
 import Layout from '../../components/layout/Layout'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const InvitesList = () => {
   // The invites in the list

@@ -1,8 +1,11 @@
 import axios from 'axios'
-import { BACKEND_URL, TEST_KVK_API } from '../../../config.js'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+
+const TEST_KVK_API = import.meta.env.VITE_TEST_KVK_API
 
 const kvkNumberValidator = async (kvkNumber) => {
-  const regex = /^[0-9]{8}$/
+  const regex = /^[0-9]{8}$/u
   const validNumberFormat = regex.test(kvkNumber)
   let apiCallValidated = false
 
@@ -15,7 +18,7 @@ const kvkNumberValidator = async (kvkNumber) => {
 
   // TODO: Remove this line when API call is implemented
   await axios
-    .get(`${BACKEND_URL  }/kvk`, {
+    .get(`${BACKEND_URL}/kvk`, {
       params: {
         kvkNumber,
       },

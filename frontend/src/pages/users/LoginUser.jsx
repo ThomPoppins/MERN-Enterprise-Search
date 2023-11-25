@@ -3,12 +3,13 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import { useNavigate } from 'react-router-dom'
 import { useSnackbar } from 'notistack'
-import { BACKEND_URL } from '../../../config'
 import emailValidator from '../../utils/validation/emailValidator'
 import verifyToken from '../../utils/auth/verifyToken.jsx'
 import store from '../../store/store.jsx'
 import Layout from '../../components/layout/Layout'
 import Loader from '../../components/animated/Loader.jsx'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const LoginUser = () => {
   // Input field values for logging in a user as state

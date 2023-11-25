@@ -1726,6 +1726,27 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 
 ## Project Issue Progression
 
+## Production checklist
+
+- [ ] [MERNSTACK-261] Production: Remove all console logs in the frontend.
+- [ ] [MERNSTACK-262] Production: Evaluate and tighten ES Lint coding standard rules for complexity. Address and resolve any complexity issues currently disabled or configured less strict.
+- [ ] [MERNSTACK-263] Production: Review each file to adhere to coding standards, ensuring resolution of all ES Lint errors.
+- [ ] [MERNSTACK-264] Production: Implement (unit) tests for comprehensive application stability monitoring. Ensure that updates meet specified security standards before going live.
+- [ ] [MERNSTACK-265] Production: Develop a secure financial plan, accounting for potential unforeseen circumstances.
+- [ ] [MERNSTACK-270] Production: Optimize and ensure optimal performance. Develop a scalable plan to handle unexpected increases in traffic, aiming for a user experience as fast, stable, and reliable as leading platforms like Google and Facebook.
+- [ ] [MERNSTACK-268] Production: Create a mobile version compatible with Android and iPhone platforms.
+- [ ] [MERNSTACK-272] Production: Review error messages in routes and controllers to be user-friendly. Eliminate debug data to enhance security and prevent data leaks.
+- [ ] [MERNSTACK-274] Production: Establish environment configuration for development, staging, and production phases. Ensure that environments are operational for a significant duration during development to thoroughly test and stabilize the setup, preventing unforeseen issues upon production deployment.
+- [ ] [MERNSTACK-275] Production: Optimize assets by compressing images for faster loading on various devices. Additionally, consider minifying JS and CSS, exploring the applicability of these practices within the MERN stack.
+- [ ] [MERNSTACK-276] Production: Conduct a security audit to identify and address potential security vulnerabilities, fortifying the application's security pre-deployment. For insights, refer to external resources such as: 1. [Asper Brothers - Website Security Audit](https://asperbrothers.com/blog/website-security-audit/), 2. [Hostinger - Website Security Audit](https://www.hostinger.com/tutorials/website-security-audit/), 3. [Webscoot - Website Security Audit](https://webscoot.io/blog/website-security-audit/).
+- [ ] [MERNSTACK-277] Production: Implement Continuous Integration and Continuous Deployment (CI/CD). 1. Continuous Integration (CI): Automate build and unit testing for every committed revision. Utilize tools like Jenkins, GitLab CI, or GitHub Actions. 2. Continuous Deployment (CD): Automate code release to the production environment upon passing predefined tests. Ensure the system pushes updates to users once tests are successful. 3. Testing Automation: Set up automated testing, including unit tests, integration tests, and end-to-end tests, to guarantee application stability and functionality before deployment.
+- [ ] [MERNSTACK-278] Production: Establish monitoring and error tracking pre-production using tools like Prometheus, Grafana, and Sentry for enhanced visibility and issue resolution.
+- [ ] [MERNSTACK-269] Production: Address confidential issue, refer to Jira for details if you are involved.
+- [ ] [MERNSTACK-273] Production: Address confidential issue, refer to Jira for details if you are involved.
+- [ ] [MERNSTACK-302] Production: Remove data-testid attributes with babel plugin before going into production.[Babel plugin](https://www.npmjs.com/package/babel-plugin-react-remove-properties).
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+
 - [ ] [MERNSTACK-57] Create Owner model. Owner schema should set up a one-to-one relationship with the User schema by using a `userId` field in the Owner schema that references the `_id` field of the User schema. This will allow to associate each Owner document with a single User document.
 - [ ] [MERNSTACK-62] Create `junction` table between `Company` and `Project`. This table will be used because of the many-to-many relationship and additional properties that are needed to link a company to a project. (see backend devdocs folder)
 - [ ] [MERNSTACK-63] Create `junction` table between `User` and `Company`. (also a many-to-many relationship, user would be customer of companies and companies would have move then one customers) CONSIDER: Saving users as customers to `company` model instead of creating a `junction` table. This will allow to associate each Company document with multiple User documents. No need for a `junction` table that will make it more complex without any use for it.
@@ -1909,14 +1930,30 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-323] Break down search engine functionality of [my MERN_STACK_PROJ. documentation](https://nextra-docs-template.vercel.app/). Read [Nextra documentation](https://nextra.site/) for this.
 - [ ] [MERNSTACK-324] Move all information of this project README file to [the documentation website hosted by Vercel](https://mern-stack-proj.vercel.app/). [Nextra documentation here](https://nextra.site/docs).
 - [ ] [MERNSTACK-325] Add Storybook section to [documentation]((https://mern-stack-proj.vercel.app/).
-- [ ] [MERNSTACK-329] Apply rate limit to all API end points.
+- [x] [MERNSTACK-329] Apply rate limit to all API end points.
 - [ ] [MERNSTACK-330] Implement [this GraohQL interactive playground component](https://github.com/remorses/mini-graphiql-playground) on to a page of my website.
-- [ ] [MERNSTACK-] Add contact form to [documentation]((https://mern-stack-proj.vercel.app/) that will send a email. [Documentation here.](https://herotofu.com/solutions/guides/react-send-email)
+- [ ] [MERNSTACK-331] Implement dotenv for [deployment on Netlify](https://app.netlify.com/sites/relaxed-choux-01fbdc/deploys/656140a2da7efa00080622f8) REPLACE config.js.
+- [ ] [MERNSTACK-332] Update [Quick Start guide](https://mern-stack-proj-documentation.vercel.app/quick-start) using dotenv .env instead of config.js.
+- [x] [MERNSTACK-333] README.md: Add `Profession`s to `Company` registration form
+- [ ] [MERNSTACK-334] README.md: Add `Profession`s to `Company` edit form
+- [ ] [MERNSTACK-335] [On the GraphQLConf 2023 sessions page](https://graphql.org/conf/sessions/) Continue from: "Streamlining Access to NASA Earth Science Data with GraphQL - Ryan Abbott, Element 84" to add the rest of the interesting sounding / useful topics to the bookmarks folder.
+- [ ] [MERNSTACK-336] Add contact form to [documentation]((https://mern-stack-proj.vercel.app/) that will send a email. [Documentation here.](https://herotofu.com/solutions/guides/react-send-email)
+- [ ] [MERNSTACK-337] Set up [Dependabot](https://docs.github.com/en/code-security/getting-started/dependabot-quickstart-guide) in repository and write about it in the [documentation]((https://mern-stack-proj.vercel.app/).
+- [ ] [MERNSTACK-338] [Get started with Ollama AI](https://ollama.ai/download/linux), try to install on Linux subsystem Ubuntu.
+- [ ] [MERNSTACK-339] AFTER INSTALL: [1. Run Code Llama locally](https://ollama.ai/blog/run-code-llama-locally)
+- [ ] [MERNSTACK-340] (NOTE BEFORE START: READ ALL FORM PAGES FIRST BEFORE STARTING TO EDIT THE FORMS IN CODE! IF NECESSARY CREATE JIRA ISSUES FOR EVERYTHING THAT NEEDS TO BE DONE!) PRIO: Improve all forms based on the information in [1. The Valley of Code: Forms: Forms 101](https://thevalleyofcode.com/forms) [2. The Valley of Code: Forms: Form Fields](https://thevalleyofcode.com/form-fields) [3. Forms and JavaScript](https://thevalleyofcode.com/forms-js)
+- [ ] [MERNSTACK-341] (NOTE BEFORE START: READ ALL FORM PAGES FIRST BEFORE STARTING TO EDIT THE FORMS IN CODE! IF NECESSARY CREATE JIRA ISSUES FOR EVERYTHING THAT NEEDS TO BE DONE!) PRIO: Make Jira Issues for everything I need to improve to get my code up to [The Standards of Flavio Copes in The Valley of Code: UI libraries: React + Vite](https://thevalleyofcode.com/react)
+- [ ] [MERNSTACK-342] Read [The Valley of Code: Frameworks: Astro](https://thevalleyofcode.com/astro)
+
+### Issues to be created in Jira:
+
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-] Add useful [Storybook tutorials](https://storybook.js.org/tutorials/) as Jira issues.
 - [ ] [MERNSTACK-] Finish [Intro to Storybook tutorial](https://storybook.js.org/tutorials/intro-to-storybook/) [Continue here](https://storybook.js.org/tutorials/intro-to-storybook/react/en/simple-component/)
 - [ ] [MERNSTACK-] Read about [Mock Service Worker](https://storybook.js.org/addons/msw-storybook-addon/) integration into Storybook for handling mock data.
 - [ ] [MERNSTACK-] Select [integrations (addons)](https://storybook.js.org/integrations) for Storybook that are useful without losing productivity.
-- [ ] [MERNSTACK-] Set up [Dependabot](https://docs.github.com/en/code-security/getting-started/dependabot-quickstart-guide) in repository and write about it in the [documentation]((https://mern-stack-proj.vercel.app/).
+- [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-] Write a section about [Component-Driven Development](https://storybook.js.org/tutorials/intro-to-storybook/react/en/simple-component/) in [documentation]((https://mern-stack-proj.vercel.app/).
 - [ ] [MERNSTACK-] Destructure all component object type parameters to define all keys used in the component like the first parameter of this example: `function Task = ({ task: { id, title, state }, onArchiveTask, onPinTask }) => {}`
 - [ ] [MERNSTACK-] Write a piece [Component Story Format 3]() in the Storybook section of the [documentation]((https://mern-stack-proj.vercel.app/).
@@ -1958,19 +1995,37 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-] [Have a better life from now on and discover the most useful things](https://the-guild.dev/) [(https://the-guild.dev/](https://the-guild.dev/) has to offer.
 - [ ] [MERNSTACK-] Add explanation about MongoDB query for finding other users in EditCompany page to documentation website.
 - [ ] [MERNSTACK-] Render search result components when main search results.
-
+- [ ] [MERNSTACK-] PRIO: Read [The Valley of Code Asynchronous](https://thevalleyofcode.com/js-async)
 - [ ] [MERNSTACK-] Read [The Valley of Code VS Code](https://thevalleyofcode.com/vscode)
 - [ ] [MERNSTACK-] Read [The Valley of Code Github](https://thevalleyofcode.com/github)
 - [ ] [MERNSTACK-] Read [The Valley of Code The Internet From Here](https://thevalleyofcode.com/the-internet/4-the-tcp-protocol)
 - [ ] [MERNSTACK-] Read [The Valley of Code HTTP Protocol](https://thevalleyofcode.com/the-web/1-the-http-protocol)
 - [ ] [MERNSTACK-] Read [The Valley of Code Netlify](https://thevalleyofcode.com/netlify)
-- [ ] [MERNSTACK-] Read [The Valley of Code ]()
-- [ ] [MERNSTACK-] Read [The Valley of Code ]()
-- [ ] [MERNSTACK-] Read [The Valley of Code ]()
-- [ ] [MERNSTACK-] Read [The Valley of Code ]()
-- [ ] [MERNSTACK-] Read [The Valley of Code ]()
-- [ ] [MERNSTACK-] Read [The Valley of Code ]()
-- [ ] [MERNSTACK-] Read [The Valley of Code ]()
+- [ ] [MERNSTACK-] Read [The Valley of Code TypeScript](https://thevalleyofcode.com/typescript)
+- [ ] [MERNSTACK-] Read [The Valley of Code CSS Grid](https://thevalleyofcode.com/css-grid)
+- [ ] [MERNSTACK-] Read [The Valley of Code Flexbox](https://thevalleyofcode.com/css-flexbox)
+- [ ] [MERNSTACK-] Read [The Valley of Code TailwindCSS](https://thevalleyofcode.com/tailwind-css)
+- [ ] [MERNSTACK-] Read [The Valley of Code JavaScript from: 5. Arrays + functions: find() and findIndex()](https://thevalleyofcode.com/js-array-functions/5-find-and-findindex)
+- [ ] [MERNSTACK-] Read [The Valley of Code OOP in JS](https://thevalleyofcode.com/js-oop)
+- [ ] [MERNSTACK-] Read [The Valley of Code JavaScript The event loop](https://thevalleyofcode.com/js-scope-hoisting-event-loop/8-the-event-loop)
+- [ ] [MERNSTACK-] Read [The Valley of Code ES Modules](https://thevalleyofcode.com/js-es-modules)
+- [ ] [MERNSTACK-] Read [The Valley of Code Errors and exceptions](https://thevalleyofcode.com/js-errors)
+- [ ] [MERNSTACK-] Read [The Valley of Code JavaScript Built-in objects](https://thevalleyofcode.com/js-built-in-objects)
+- [ ] [MERNSTACK-] Read [The Valley of Code JavaScript More operators](https://thevalleyofcode.com/js-more-operators)
+- [ ] [MERNSTACK-] Read [The Valley of Code The DOM](https://thevalleyofcode.com/dom)
+- [ ] [MERNSTACK-] Read [The Valley of Code Browser Events](https://thevalleyofcode.com/browser-events)
+- [ ] [MERNSTACK-] Read [The Valley of Code: Networking: HTTP](https://thevalleyofcode.com/http)
+- [ ] [MERNSTACK-] Read [The Valley of Code: Networking: Fetch](https://thevalleyofcode.com/fetch)
+- [ ] [MERNSTACK-] Read [The Valley of Code: Server Runtimes: Node.js](https://thevalleyofcode.com/nodejs)
+- [ ] [MERNSTACK-] Read [The Valley of Code: Server Runtimes: Bun](https://thevalleyofcode.com/bun)
+- [ ] [MERNSTACK-] Read [The Valley of Code: HTTP Servers: Express](https://thevalleyofcode.com/express)
+- [ ] [MERNSTACK-] Read [The Valley of Code: HTTP Servers: Hono ](https://thevalleyofcode.com/hono)
+- [ ] [MERNSTACK-] LOW PRIO: Read [The Valley of Code: Databases: Kysely](https://thevalleyofcode.com/kysely)
+
+- [ ] [MERNSTACK-] Read [The Valley of Code: ]()
+- [ ] [MERNSTACK-] Read [The Valley of Code: ]()
+- [ ] [MERNSTACK-] Read [The Valley of Code: ]()
+- [ ] [MERNSTACK-] Read [The Valley of Code: ]()
 
 - [ ] [MERNSTACK-] Investigate [Git Large File Storage (LFS)](https://vercel.com/docs/projects/overview#git-large-file-storage-lfs) and figure out if it needs to be enabled in the Vercel deployment settings.
 - [ ] [MERNSTACK-] [DOCS here](https://app.meticulous.ai/docs). Check out [Meticulous](https://app.meticulous.ai/organizations/Vind-Expert) and try to get it running when login is possible with useraccount on documentation website. MAYBE if possible to frontend only login in MERN_STACK_PROJ. then deploy and test that one with Meticulous.
@@ -2004,27 +2059,3 @@ Absolutely! Nextra is a great choice for building an informational website. To p
 7. **Incorporate Gamification Elements**: Gamify your website by adding interactive features like badges, points, or progress bars. Users can earn rewards for completing certain actions or reaching milestones on your website.
 
 Remember to consider your target audience and the purpose of your website while incorporating interactive elements. Too many or overly complex interactive features may distract users from the main content. Strive for a balance between interactivity and readability to enhance the overall user experience.
-
-## Production checklist
-
-- [ ] [MERNSTACK-261] Production: Remove all console logs in the frontend.
-- [ ] [MERNSTACK-262] Production: Evaluate and tighten ES Lint coding standard rules for complexity. Address and resolve any complexity issues currently disabled or configured less strict.
-- [ ] [MERNSTACK-263] Production: Review each file to adhere to coding standards, ensuring resolution of all ES Lint errors.
-- [ ] [MERNSTACK-264] Production: Implement (unit) tests for comprehensive application stability monitoring. Ensure that updates meet specified security standards before going live.
-- [ ] [MERNSTACK-265] Production: Develop a secure financial plan, accounting for potential unforeseen circumstances.
-- [ ] [MERNSTACK-270] Production: Optimize and ensure optimal performance. Develop a scalable plan to handle unexpected increases in traffic, aiming for a user experience as fast, stable, and reliable as leading platforms like Google and Facebook.
-- [ ] [MERNSTACK-268] Production: Create a mobile version compatible with Android and iPhone platforms.
-- [ ] [MERNSTACK-272] Production: Review error messages in routes and controllers to be user-friendly. Eliminate debug data to enhance security and prevent data leaks.
-- [ ] [MERNSTACK-274] Production: Establish environment configuration for development, staging, and production phases. Ensure that environments are operational for a significant duration during development to thoroughly test and stabilize the setup, preventing unforeseen issues upon production deployment.
-- [ ] [MERNSTACK-275] Production: Optimize assets by compressing images for faster loading on various devices. Additionally, consider minifying JS and CSS, exploring the applicability of these practices within the MERN stack.
-- [ ] [MERNSTACK-276] Production: Conduct a security audit to identify and address potential security vulnerabilities, fortifying the application's security pre-deployment. For insights, refer to external resources such as: 1. [Asper Brothers - Website Security Audit](https://asperbrothers.com/blog/website-security-audit/), 2. [Hostinger - Website Security Audit](https://www.hostinger.com/tutorials/website-security-audit/), 3. [Webscoot - Website Security Audit](https://webscoot.io/blog/website-security-audit/).
-- [ ] [MERNSTACK-277] Production: Implement Continuous Integration and Continuous Deployment (CI/CD). 1. Continuous Integration (CI): Automate build and unit testing for every committed revision. Utilize tools like Jenkins, GitLab CI, or GitHub Actions. 2. Continuous Deployment (CD): Automate code release to the production environment upon passing predefined tests. Ensure the system pushes updates to users once tests are successful. 3. Testing Automation: Set up automated testing, including unit tests, integration tests, and end-to-end tests, to guarantee application stability and functionality before deployment.
-- [ ] [MERNSTACK-278] Production: Establish monitoring and error tracking pre-production using tools like Prometheus, Grafana, and Sentry for enhanced visibility and issue resolution.
-- [ ] [MERNSTACK-269] Production: Address confidential issue, refer to Jira for details if you are involved.
-- [ ] [MERNSTACK-273] Production: Address confidential issue, refer to Jira for details if you are involved.
-- [ ] [MERNSTACK-302] Production: Remove data-testid attributes with babel plugin before going into production.[Babel plugin](https://www.npmjs.com/package/babel-plugin-react-remove-properties).
-- [ ] [MERNSTACK-]
-- [ ] [MERNSTACK-]
-- [ ] [MERNSTACK-]
-- [ ] [MERNSTACK-]
-- [ ] [MERNSTACK-]

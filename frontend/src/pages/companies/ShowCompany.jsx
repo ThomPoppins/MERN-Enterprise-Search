@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import BackButton from '../../components/BackButton'
-import { BACKEND_URL } from '../../../config.js'
 import Layout from '../../components/layout/Layout'
 import Loader from '../../components/animated/Loader.jsx'
 import { useSelector } from 'react-redux'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const ShowCompany = () => {
   const [company, setCompany] = useState({})

@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Loader from '../../components/animated/Loader'
 import Layout from '../../components/layout/Layout'
-import { BACKEND_URL } from '../../../config'
 import BackButton from '../../components/BackButton'
 import SearchResult from '../../components/search/SearchResult'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const Results = () => {
   const [results, setResults] = useState([])
