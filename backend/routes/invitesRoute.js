@@ -5,105 +5,110 @@ import { User } from '../models/userModel.js'
 import { Company } from '../models/companyModel.js'
 import { Image } from '../models/imageModel.js'
 import { getStaticFileURLFromPath } from '../middleware/files/staticFiles.js'
+import apiLimiter from '../middleware/rate-limiter/apiLimiter.js'
 
 const router = express.Router()
 
 // Route to get all invites of a receiver
-router.get('/receiver/:userId/pending', async (request, response) => {
-  // Get userId from URL
-  const { userId } = request.params
+router.get(
+  '/receiver/:userId/pending',
+  apiLimiter,
+  async (request, response) => {
+    // Get userId from URL
+    const { userId } = request.params
 
-  try {
-    // Get all invites with status "pending" and receiverId equal to userId
-    let invites = await Invite.find({
-      receiverId: new mongoose.Types.ObjectId(userId),
-      status: 'pending',
-    }).sort({ createdAt: -1 })
+    try {
+      // Get all invites with status "pending" and receiverId equal to userId
+      let invites = await Invite.find({
+        receiverId: new mongoose.Types.ObjectId(userId),
+        status: 'pending',
+      }).sort({ createdAt: -1 })
 
-    /*
-     * Convert invites to plain JavaScript objects
-     */
-    invites = invites.map((invite) => invite.toObject())
+      /*
+       * Convert invites to plain JavaScript objects
+       */
+      invites = invites.map((invite) => invite.toObject())
 
-    // Add sender, receiver and company info to invites
-    const updatedInvites = await Promise.all(
-      invites.map(async (invite) => {
-        // Add sender info
-        let sender = await User.findById(invite.senderId)
+      // Add sender, receiver and company info to invites
+      const updatedInvites = await Promise.all(
+        invites.map(async (invite) => {
+          // Add sender info
+          let sender = await User.findById(invite.senderId)
 
-        // Get receiver user data from User model
-        let receiver = await User.findById(invite.receiverId)
+          // Get receiver user data from User model
+          let receiver = await User.findById(invite.receiverId)
 
-        // Convert sender to plain JavaScript object
-        sender = sender.toObject()
+          // Convert sender to plain JavaScript object
+          sender = sender.toObject()
 
-        // Convert receiver to plain JavaScript object
-        receiver = receiver.toObject()
+          // Convert receiver to plain JavaScript object
+          receiver = receiver.toObject()
 
-        //  Add sender profile picture URL to sender object
-        if (sender.profilePicture) {
-          // Get sender profile picture
-          const senderProfilePictureImageDocument = await Image.findById(
-              sender.profilePicture,
-            ),
-            // Get sender profile picture URL
-            senderProfilePictureURL = getStaticFileURLFromPath(
-              senderProfilePictureImageDocument.path,
-            )
+          //  Add sender profile picture URL to sender object
+          if (sender.profilePicture) {
+            // Get sender profile picture
+            const senderProfilePictureImageDocument = await Image.findById(
+                sender.profilePicture,
+              ),
+              // Get sender profile picture URL
+              senderProfilePictureURL = getStaticFileURLFromPath(
+                senderProfilePictureImageDocument.path,
+              )
 
-          // Add sender profile picture URL to sender object
-          sender.profilePictureURL = senderProfilePictureURL
-        }
+            // Add sender profile picture URL to sender object
+            sender.profilePictureURL = senderProfilePictureURL
+          }
 
-        //  Add receiver profile picture URL to receiver object
-        if (receiver.profilePicture) {
-          // Get receiver profile picture
-          const receiverProfilePictureImageDocument = await Image.findById(
-              receiver.profilePicture,
-            ),
-            // Get receiver profile picture URL
-            receiverProfilePictureURL = getStaticFileURLFromPath(
-              receiverProfilePictureImageDocument.path,
-            )
+          //  Add receiver profile picture URL to receiver object
+          if (receiver.profilePicture) {
+            // Get receiver profile picture
+            const receiverProfilePictureImageDocument = await Image.findById(
+                receiver.profilePicture,
+              ),
+              // Get receiver profile picture URL
+              receiverProfilePictureURL = getStaticFileURLFromPath(
+                receiverProfilePictureImageDocument.path,
+              )
 
-          // Add receiver profile picture URL to receiver object
-          receiver.profilePictureURL = receiverProfilePictureURL
-        }
+            // Add receiver profile picture URL to receiver object
+            receiver.profilePictureURL = receiverProfilePictureURL
+          }
 
-        let company = null
+          let company = null
 
-        // Add company info if invite kind is "company_ownership"
-        if (invite.kind === 'company_ownership' && invite.companyId) {
-          // Get company document
-          company = await Company.findById(invite.companyId)
+          // Add company info if invite kind is "company_ownership"
+          if (invite.kind === 'company_ownership' && invite.companyId) {
+            // Get company document
+            company = await Company.findById(invite.companyId)
 
-          /*
-           * Convert company to plain JavaScript object and add it to invite object
-           *
-           * */
-          company = company.toObject()
-        }
+            /*
+             * Convert company to plain JavaScript object and add it to invite object
+             *
+             * */
+            company = company.toObject()
+          }
 
-        // Add sender and receiver to invite object
-        return { ...invite, sender, receiver, company }
-      }),
-    )
-      .then((newInvites) => newInvites)
-      .catch((error) => console.log('error: ', error))
+          // Add sender and receiver to invite object
+          return { ...invite, sender, receiver, company }
+        }),
+      )
+        .then((newInvites) => newInvites)
+        .catch((error) => console.log('error: ', error))
 
-    // Send status 200 response and the invites as JSON response if successful
-    return response.status(200).json(updatedInvites)
-  } catch (error) {
-    console.log('ERROR in GET /receiver/:userId/pending route: ', error)
-    // Send status 500 response and error message as JSON response if unsuccessful
-    return response.status(500).json({
-      message: error.message,
-    })
-  }
-})
+      // Send status 200 response and the invites as JSON response if successful
+      return response.status(200).json(updatedInvites)
+    } catch (error) {
+      console.log('ERROR in GET /receiver/:userId/pending route: ', error)
+      // Send status 500 response and error message as JSON response if unsuccessful
+      return response.status(500).json({
+        message: error.message,
+      })
+    }
+  },
+)
 
 // Get all pending invites routes from a company
-router.get('/company/pending', async (request, response) => {
+router.get('/company/pending', apiLimiter, async (request, response) => {
   // Get the company id from the request headers
   const companyId = request.headers.companyid
 
@@ -180,7 +185,7 @@ router.get('/company/pending', async (request, response) => {
 })
 
 // Route for updating an invite status
-router.put('/status/:inviteId', async (request, response) => {
+router.put('/status/:inviteId', apiLimiter, async (request, response) => {
   const { inviteId } = request.params
 
   try {
@@ -220,7 +225,7 @@ router.put('/status/:inviteId', async (request, response) => {
 })
 
 // Route to save a new invite
-router.post('/', async (request, response) => {
+router.post('/', apiLimiter, async (request, response) => {
   // Create a new invite document using the Invite model
   try {
     // Create a new invite document using the Invite model

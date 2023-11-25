@@ -77,14 +77,14 @@ const Navbar = () => {
     <nav className='bg-gradient-to-r from-violet-950 to-purple-950 p-4 shadow-lg'>
       <div className='container mx-auto'>
         <img
-          alt='Vind-Expert logo'
+          alt="Best-Pro's logo"
           className='rounded-xs float-left mr-2 mt-1 h-7 w-7 object-cover'
-          src={`${BACKEND_URL}/logo/vind-expert-transparent.png`}
+          src={`${BACKEND_URL}/logo/find-best-pro-transparent.png`}
         />
         <div className='flex items-center justify-between'>
           <div className='text-white'>
             <Link to='/'>
-              <h1 className=' text-2xl font-bold'>Vind-Expert</h1>
+              <h1 className=' text-2xl font-bold'>Best-Pro&apos;s</h1>
             </Link>
           </div>
           <div className='flex space-x-4'>

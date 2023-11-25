@@ -66,7 +66,7 @@ function setCanvasImage(image, canvas, crop) {
   )
 }
 
-const EditCompanyLogoModal = ({ onClose, setLogoId }) => {
+const EditCompanyLogoModal = ({ onClose, setLogoId, setLogoUrl }) => {
   const [upImg, setUpImg] = useState()
 
   const imgRef = useRef(null)
@@ -113,7 +113,7 @@ const EditCompanyLogoModal = ({ onClose, setLogoId }) => {
     }
 
     canvas.toBlob(
-      (blob) => {
+      async (blob) => {
         // Create a new FormData object
         const formData = new FormData()
 
@@ -124,7 +124,7 @@ const EditCompanyLogoModal = ({ onClose, setLogoId }) => {
         formData.append('image', file)
 
         // Send the image to the server
-        axios
+        await axios
           .post(`${BACKEND_URL}/upload/image`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data',
@@ -132,8 +132,11 @@ const EditCompanyLogoModal = ({ onClose, setLogoId }) => {
           })
           .then((response) => {
             if (response.data.imageId) {
-              // Save the image id of the profile picture to the user's document in the database
+              // Save the image id of the profile picture to the user's document in the database's
+              console.log('RESPOOONSE.DATA IMAGE UPLOAD:', response.data)
+
               setLogoId(response.data.imageId)
+              setLogoUrl(response.data.imageUrl)
 
               onClose()
             }
@@ -264,6 +267,11 @@ const EditCompanyLogoModal = ({ onClose, setLogoId }) => {
 EditCompanyLogoModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   setLogoId: PropTypes.func.isRequired,
+  setLogoUrl: PropTypes.func,
+}
+
+EditCompanyLogoModal.defaultProps = {
+  setLogoUrl: (url) => url,
 }
 
 export default EditCompanyLogoModal

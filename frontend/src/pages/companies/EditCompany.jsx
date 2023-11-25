@@ -28,6 +28,7 @@ const EditCompany = () => {
   // Input field values for editing a company as state
   const [name, setName] = useState('')
   const [logoId, setLogoId] = useState('')
+  const [logoUrl, setLogoUrl] = useState('')
   const [logoPreview, setLogoPreview] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
@@ -227,6 +228,7 @@ const EditCompany = () => {
         setLoading(false)
         setName(response.data.name)
         setLogoId(response.data.logoId)
+        setLogoUrl(response.data.logoUrl)
         setEmail(response.data.email)
         setPhone(response.data.phone)
         setKvkNumber(response.data.kvkNumber)
@@ -317,6 +319,7 @@ const EditCompany = () => {
     const data = {
       name,
       logoId,
+      logoUrl,
       email,
       phone,
       kvkNumber,
@@ -600,9 +603,10 @@ const EditCompany = () => {
       // Get image URL from backend
       axios.get(`${BACKEND_URL}/files/image-url/${logoId}`).then((response) => {
         setLogoPreview(response.data.imageURL)
+        setLogoUrl(response.data.imageURL)
       })
     }
-  }, [logoId])
+  }, [logoId, logoUrl])
 
   return (
     <Layout>
@@ -837,7 +841,7 @@ const EditCompany = () => {
                       alt='Preview'
                       className='rounded-full'
                       height='200'
-                      src={logoPreview}
+                      src={`${BACKEND_URL}${logoPreview}`}
                       width='200'
                     />
                   ) : null}
@@ -859,6 +863,7 @@ const EditCompany = () => {
                     setShowLogoModal(false)
                   }}
                   setLogoId={setLogoId}
+                  setLogoUrl={setLogoUrl}
                 />
               ) : null}
             </div>

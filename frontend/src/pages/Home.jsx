@@ -40,6 +40,16 @@ const Home = () => {
   }
 
   useEffect(() => {
+    const inputFind = new URLSearchParams(window.location.search).get(
+      'inputFind',
+    )
+
+    if (inputFind) {
+      setSearchQuery(inputFind.replace(/\+/gu, ' '))
+    }
+  }, [])
+
+  useEffect(() => {
     // When urlParams is set in handleFindExperts (asynchronous because it is a state being set),
     // then navigate to /find?query=${urlParams}
   }, [urlParams])
@@ -48,15 +58,14 @@ const Home = () => {
   if (userId) {
     return (
       <Layout>
-        <div className='mt-32'>
-          <div className='mx-auto'>
-            <MainSearch
-              findButtonPing={findButtonPing}
-              handleFind={handleFind}
-              handleSearchQueryChange={handleSearchQueryChange}
-              searchQuery={searchQuery}
-            />
-          </div>
+        <div className='mt-32 mx-auto'>
+          <MainSearch
+            findButtonPing={findButtonPing}
+            handleFind={handleFind}
+            handleSearchQueryChange={handleSearchQueryChange}
+            isDisabled={false}
+            searchQuery={searchQuery}
+          />
         </div>
       </Layout>
     )
@@ -65,15 +74,14 @@ const Home = () => {
   // If no user is logged in
   return (
     <Layout>
-      <div className='mx-auto mt-32 rounded-xl border border-purple-900 bg-violet-950/40 p-4 lg:w-9/12'>
-        <h1 className='mb-6 text-3xl'>Home</h1>
-
-        <p className=''>
-          Sign up and login to your account to see the features of this
-          application in action. Account data will only be saved to your own
-          MongoDB database and your password will be saved securely hashed by
-          bcrypt.
-        </p>
+      <div className='mt-32 mx-auto'>
+        <MainSearch
+          findButtonPing={findButtonPing}
+          handleFind={handleFind}
+          handleSearchQueryChange={handleSearchQueryChange}
+          isDisabled
+          searchQuery={searchQuery}
+        />
       </div>
     </Layout>
   )

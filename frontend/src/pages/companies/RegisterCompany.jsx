@@ -9,6 +9,7 @@ import phoneNumberValidator from '../../utils/validation/phoneNumberValidator'
 import kvkNumberValidator from '../../utils/validation/kvkNumberValidator'
 import companySloganValidator from '../../utils/validation/companySloganValidator'
 import companyDescriptionValidator from '../../utils/validation/companyDescriptionValidator'
+import companyProfessionsInputValidator from '../../utils/validation/companyProfessionsInputValidator'
 import startYearValidator from '../../utils/validation/startYearValidator'
 import { useSelector } from 'react-redux'
 import EditCompanyLogoModal from '../../components/companies/EditCompanyLogoModal'
@@ -25,6 +26,7 @@ const RegisterCompany = () => {
   const [kvkNumber, setKvkNumber] = useState('')
   const [slogan, setSlogan] = useState('')
   const [description, setDescription] = useState('')
+  const [professionsInput, setProfessionsInput] = useState('')
   const [startYear, setStartYear] = useState('')
   // Error state for displaying error messages if the user enters invalid input
   const [nameError, setNameError] = useState(false)
@@ -33,6 +35,7 @@ const RegisterCompany = () => {
   const [kvkNumberError, setKvkNumberError] = useState(false)
   const [sloganError, setSloganError] = useState(false)
   const [descriptionError, setDescriptionError] = useState(false)
+  const [professionsError, setProfessionsError] = useState(false)
   const [startYearError, setStartYearError] = useState(false)
   // Specific error messages to display when the user enters invalid input
   const [kvkNumberErrorMessage, setKvkNumberErrorMessage] = useState('')
@@ -92,6 +95,13 @@ const RegisterCompany = () => {
         setDescriptionError(true)
       }
     },
+    validateProfessionsInput = () => {
+      if (companyProfessionsInputValidator(professionsInput)) {
+        setProfessionsError(false)
+      } else {
+        setProfessionsError(true)
+      }
+    },
     validateStartYear = () => {
       if (startYearValidator(startYear)) {
         setStartYearError(false)
@@ -102,47 +112,53 @@ const RegisterCompany = () => {
 
   // Handle onChange events for all input fields
   const handleNameChange = (event) => {
-      setName(event.target.value)
-      if (nameError) {
-        validateCompanyName()
-      }
-    },
-    handleEmailChange = (event) => {
-      setEmail(event.target.value)
-      if (emailError) {
-        validateEmail()
-      }
-    },
-    handlePhoneChange = (event) => {
-      setPhone(event.target.value)
-      if (phoneError) {
-        validatePhone()
-      }
-    },
-    handleKvkNumberChange = async (event) => {
-      setKvkNumber(event.target.value)
-      if (kvkNumberError) {
-        await validateKvkNumber()
-      }
-    },
-    handleSloganChange = (event) => {
-      setSlogan(event.target.value)
-      if (sloganError) {
-        validateSlogan()
-      }
-    },
-    handleDescriptionChange = (event) => {
-      setDescription(event.target.value)
-      if (descriptionError) {
-        validateDescription()
-      }
-    },
-    handleStartYearChange = (event) => {
-      setStartYear(event.target.value)
-      if (startYearError) {
-        validateStartYear()
-      }
+    setName(event.target.value)
+    if (nameError) {
+      validateCompanyName()
     }
+  }
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value)
+    if (emailError) {
+      validateEmail()
+    }
+  }
+  const handlePhoneChange = (event) => {
+    setPhone(event.target.value)
+    if (phoneError) {
+      validatePhone()
+    }
+  }
+  const handleKvkNumberChange = async (event) => {
+    setKvkNumber(event.target.value)
+    if (kvkNumberError) {
+      await validateKvkNumber()
+    }
+  }
+  const handleSloganChange = (event) => {
+    setSlogan(event.target.value)
+    if (sloganError) {
+      validateSlogan()
+    }
+  }
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value)
+    if (descriptionError) {
+      validateDescription()
+    }
+  }
+  const handleProfessionsInputChange = (event) => {
+    setProfessionsInput(event.target.value)
+    if (professionsError) {
+      validateProfessionsInput()
+    }
+  }
+  const handleStartYearChange = (event) => {
+    setStartYear(event.target.value)
+    if (startYearError) {
+      validateStartYear()
+    }
+  }
 
   // Display error messages if the user enters invalid input with useSnackbar
   useEffect(() => {
@@ -215,6 +231,7 @@ const RegisterCompany = () => {
     }
     validateSlogan()
     validateDescription()
+    validateProfessionsInput()
     validateStartYear()
     if (
       nameError ||
@@ -222,12 +239,15 @@ const RegisterCompany = () => {
       phoneError ||
       kvkNumberError ||
       sloganError ||
+      descriptionError ||
+      professionsError ||
       startYearError ||
       !name ||
       !email ||
       !phone ||
       !kvkNumber ||
       !slogan ||
+      !description ||
       !startYear
     ) {
       enqueueSnackbar(
@@ -240,6 +260,71 @@ const RegisterCompany = () => {
       return
     }
 
+    const professionsPromises = professionsInput.split(',').map(
+      (professionName) =>
+        // Check if profession already exists in database, if not, add it
+        new Promise((resolve, reject) => {
+          // Return the Promise and correct the order of resolve and reject
+          axios
+            .get(
+              `${BACKEND_URL}/companies/professionId/${professionName.replace(
+                / /u,
+                '+',
+              )}`,
+            )
+            .then((res) => {
+              if (res.data.length > 0) {
+                return resolve(res.data)
+              }
+              return resolve(res.data)
+            })
+            .catch(async (error) => {
+              console.log(error)
+
+              await axios
+                .post(`${BACKEND_URL}/companies/profession`, {
+                  name: professionName,
+                })
+                .then((postProfessionResponse) => {
+                  console.log(
+                    'postProfessionResponse: ',
+                    postProfessionResponse,
+                  )
+                  return resolve(postProfessionResponse.data)
+                })
+                .catch((postError) => {
+                  console.log(
+                    'POST /companies/professions: save new profession error',
+                    postError,
+                  )
+                  return reject(postError)
+                })
+            })
+            .finally(() => {
+              console.log('Finished getting profession')
+            })
+        }),
+    )
+
+    let professionsResponseDocuments = []
+
+    await Promise.all(professionsPromises)
+      .then((proffesionsResponses) => {
+        console.log('proffesionsResponses: ', proffesionsResponses)
+
+        professionsResponseDocuments = proffesionsResponses
+
+        return proffesionsResponses
+      })
+
+      .catch((error) => {
+        console.log('error: ', error)
+      })
+
+    const professionsIds = professionsResponseDocuments.map(
+      (profession) => profession._id,
+    )
+
     const data = {
       name,
       logoId,
@@ -247,6 +332,7 @@ const RegisterCompany = () => {
       phone,
       kvkNumber,
       slogan,
+      professionsIds,
       startYear,
       description,
       owners: [{ userId }],
@@ -337,7 +423,7 @@ const RegisterCompany = () => {
                       alt='Preview'
                       className='rounded-full'
                       height='200'
-                      src={logoPreview}
+                      src={`${BACKEND_URL}${logoPreview}`}
                       width='200'
                     />
                   ) : null}
@@ -413,7 +499,7 @@ const RegisterCompany = () => {
             </label>
             {TEST_KVK_API ? (
               <div className='mb-4'>
-                <p className='text-gray-400'>
+                <p className='text-gray-300'>
                   <strong>Note:</strong> Use KVK numbers from{' '}
                   <a
                     className='text-blue-600'
@@ -495,6 +581,35 @@ const RegisterCompany = () => {
               ''
             )}
           </div>
+          <div className='my-4'>
+            <label className='mr-4 text-xl' htmlFor='company-professions-input'>
+              Professions
+            </label>
+            <p className='text-gray-300 mb-4'>
+              Add multyple professions seperated by a comma.
+            </p>
+            <input
+              className={`w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white ${
+                descriptionError ? 'border-red-500' : ''
+              }`}
+              data-testid='company-professions-input'
+              id='company-professions-input'
+              onBlur={validateProfessionsInput}
+              onChange={handleProfessionsInputChange}
+              type='text'
+              value={professionsInput}
+            />
+            {professionsError ? (
+              <p className='text-sm text-red-500'>
+                Professions must be between 1 and 280 characters long and can
+                only contain letters and spaces. Use a comma to seperate
+                multiple professions.
+              </p>
+            ) : (
+              ''
+            )}
+          </div>
+
           <div className='my-4'>
             <label className='mr-4 text-xl' htmlFor='company-start-year-input'>
               Start Year

@@ -39,6 +39,7 @@ const App = () => {
         {/* TEST ROUTE: test image uploading */}
         <Route element={<UploadImage />} path='/upload-image' />
         {/* User profile page route, render user profile page */}
+        <Route element={<UserProfile />} path='/profile/:id' />
         <Route element={<UserProfile />} path='/profile' />
         {/* /logout route, render user logout page */}
         <Route element={<LogoutUser />} path='/logout' />

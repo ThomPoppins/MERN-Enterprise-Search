@@ -1,11 +1,12 @@
 import express from 'express'
 import { Company } from '../models/companyModel.js'
+import apiLimiter from '../middleware/rate-limiter/apiLimiter.js'
 
 const router = express.Router()
 
 // TODO: Add more fields for companies to match on in the search results
 // Route to find companies by name and industry.
-router.get('/experts/:searchTerm', async (request, response) => {
+router.get('/experts/:searchTerm', apiLimiter, async (request, response) => {
   try {
     const { searchTerm } = request.params
 

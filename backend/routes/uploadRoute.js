@@ -3,6 +3,7 @@ import { getURLSuffixFromPath } from '../middleware/files/staticFiles.js'
 import express from 'express'
 import mongoose from 'mongoose'
 import multer from 'multer'
+import apiLimiter from '../middleware/rate-limiter/apiLimiter.js'
 
 const router = express.Router(),
   // Multer disk storage configuration.
@@ -34,53 +35,59 @@ const router = express.Router(),
   upload = multer({ storage })
 
 // POST image upload route, will be in the uploadRoute.js file if it works.
-router.post('/image', upload.single('image'), async (request, response) => {
-  // If the file upload was successful, the file will be stored in the "uploads/images" folder.
-  console.log('REQUEST FILE: ', request.file)
+router.post(
+  '/image',
+  apiLimiter,
+  upload.single('image'),
+  async (request, response) => {
+    // If the file upload was successful, the file will be stored in the "uploads/images" folder.
+    console.log('REQUEST FILE: ', request.file)
 
-  if (!request.file) {
-    console.log('No image file. `request`: ', request)
+    if (!request.file) {
+      console.log('No image file. `request`: ', request)
 
-    return response.status(400).send({
-      message: 'No image uploaded.',
-    })
-  }
-
-  // Prepare response object to send to client with image path and database Image._id.
-  const responseObj = {
-      message: 'Image uploaded successfully!',
-      imagePath: request.file.path,
-      url: getURLSuffixFromPath(request.file.path),
-      imageId: new mongoose.Types.ObjectId(),
-    },
-    // Create Instance of Image model with the image path to safe as docyment in the MongoDB Image collection
-    image = new Image({
-      path: request.file.path,
-      url: getURLSuffixFromPath(request.file.path),
-    })
-
-  // Save new Image document to database
-  await image
-    .save()
-    .then((result) => {
-      console.log('Image saved to database!')
-
-      console.log('Result saving image call: ', result)
-
-      responseObj.imageId = result._id
-    })
-    .catch((error) => {
-      console.log('Error saving image to database: ', error)
-
-      // TOGOLIVE: [MERNSTACK-260] Remove error message to the frontend before going into production
-      return response.status(500).send({
-        message: `Error saving image to database! ${error.message}`,
+      return response.status(400).send({
+        message: 'No image uploaded.',
       })
-    })
+    }
 
-  console.log('Response object: ', responseObj)
+    // Prepare response object to send to client with image path and database Image._id.
+    const responseObj = {
+        message: 'Image uploaded successfully!',
+        imagePath: request.file.path,
+        url: getURLSuffixFromPath(request.file.path),
+        imageId: new mongoose.Types.ObjectId(),
+      },
+      // Create Instance of Image model with the image path to safe as docyment in the MongoDB Image collection
+      image = new Image({
+        path: request.file.path,
+        url: getURLSuffixFromPath(request.file.path),
+      })
 
-  return response.status(200).send(responseObj)
-})
+    // Save new Image document to database
+    await image
+      .save()
+      .then((result) => {
+        console.log('Image saved to database!')
+
+        console.log('Result saving image call: ', result)
+
+        responseObj.imageId = result._id
+        responseObj.imageUrl = result.url
+      })
+      .catch((error) => {
+        console.log('Error saving image to database: ', error)
+
+        // TOGOLIVE: [MERNSTACK-260] Remove error message to the frontend before going into production
+        return response.status(500).send({
+          message: `Error saving image to database! ${error.message}`,
+        })
+      })
+
+    console.log('Response object: ', responseObj)
+
+    return response.status(200).send(responseObj)
+  },
+)
 
 export default router
