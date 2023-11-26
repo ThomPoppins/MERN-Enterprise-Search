@@ -12,8 +12,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "changeset:all": "cd frontend && npm run changeset && cd ../backend && npm run changeset && cd .. && npm run changeset:root",
-    "changeset:root": "changeset version v0.0.3"
+    "changeset:patch:all": "cd frontend && npm run changeset:patch && cd ../backend && npm run changeset:patch && cd .. && npm run changeset:root",
+    "changeset:root": "changeset version patch"
   },
   "keywords": [],
   "author": "",
