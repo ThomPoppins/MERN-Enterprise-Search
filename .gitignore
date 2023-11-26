@@ -14,3 +14,5 @@ frontend/config.js.BACKUP
 
 # KVK Api certificate chain
 /backend/certs/*
+
+/software/
