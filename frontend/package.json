@@ -23,8 +23,8 @@
   ],
   "scripts": {
     "dev": "vite",
-    "changeset": "changeset version v0.0.3",
-    "build": "vite build --emptyOutDir",
+    "changeset:patch": "changeset version patch",
+    "build": "vite build",
     "serve": "vite preview",
     "start": "vite preview",
     "lint:eslint": "eslint . --ext .js,.jsx",

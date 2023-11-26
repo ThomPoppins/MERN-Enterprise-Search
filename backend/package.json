@@ -10,7 +10,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "changeset": "changeset version v0.0.3",
+    "changeset:patch": "changeset version patch",
     "dev": "nodemon index.js",
     "copilot": "nodemon test.js",
     "lint": "eslint -c ./.eslintrc.cjs --ignore-pattern 'node_modules/' ./**/*.{js,jsx,ts,tsx,json}",
