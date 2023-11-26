@@ -1,0 +1,105 @@
+name: PKGBUILD
+
+on:
+  workflow_call:
+    inputs:
+      name:
+        description: 'Name of the package/tool, to be appended to artifact names.'
+        required: true
+        type: string
+      matrix:
+        description: 'JSON list of systems to build and test the tool on.'
+        required: true
+        type: string
+      path:
+        description: 'Location of the PKGBUILD recipe, relative to the root of the repository.'
+        required: true
+        type: string
+      test:
+        description: 'Commands to test the tool after installing the package.'
+        required: true
+        type: string
+
+jobs:
+
+
+  win-makepkg:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJson(inputs.matrix) }}
+    name: 🚧${{ matrix.icon }} ${{ matrix.sys }} | makepkg
+    defaults:
+      run:
+        shell: msys2 {0}
+    env:
+      MINGW_ARCH: ${{ matrix.sys }}
+    steps:
+
+    - name: '⚙️ git config'
+      run: git config --global core.autocrlf input
+      shell: bash
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: '${{ matrix.icon }} Setup MSYS2'
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: ${{ matrix.sys }}
+        update: true
+        install: git base-devel tree
+        pacboy: toolchain:p
+
+    - name: '🚧 Build package'
+      run: |
+        cd ${{ inputs.path }}
+        makepkg-mingw --noconfirm --noprogressbar -sCLf
+
+    - name: '📤 Upload artifact: package'
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.sys }}-${{ inputs.name }}
+        path: ${{ inputs.path }}/*.zst
+
+    - name: '🔍 Show package content'
+      run: |
+        mkdir tmp
+        cd tmp
+        tar -xf ../${{ inputs.path }}/*.zst
+        tree .
+
+
+  win-test:
+    needs: win-makepkg
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJson(inputs.matrix) }}
+    name: 🚦${{ matrix.icon }} ${{ matrix.sys }} | test
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+
+    - name: '${{ matrix.icon }} Setup MSYS2'
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: ${{ matrix.sys }}
+        update: true
+
+    - name: '📥 Download artifact: package'
+      uses: actions/download-artifact@v3
+      with:
+        path: .
+        name: ${{ matrix.sys }}-${{ inputs.name }}
+
+    - name: '🛠️ Install package'
+      run: pacman -U --noconfirm --noprogressbar *.zst
+
+    - name: '🚦 Test package'
+      run: ${{ inputs.test }}
