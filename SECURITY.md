@@ -1,20 +1,17 @@
+Here's the corrected version:
+
 # Security Policy
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+Use this section to inform people about which versions of your project are currently being supported with security updates.
 
 | Version  | Supported           |
 | -------  | ------------------ |
-| v0.0.3   | :x:                |
-| v0.0.2   | :x: |
-| v0.0.1   | :x:                |
+| v0.0.3   | ❌                |
+| v0.0.2   | ❌                |
+| v0.0.1   | ❌                |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
-
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+Please create an issue in this repository if you know about any vulnerabilities.
