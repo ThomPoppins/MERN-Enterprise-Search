@@ -86,6 +86,15 @@ Also I make use of a lot of different packages but only if they are complementar
   - [Project Issue Progression](#project-issue-progression)
   - [Production checklist](#production-checklist)
     - [Issues to be created in Jira:](#issues-to-be-created-in-jira)
+    - [Prerequisites:](#prerequisites)
+    - [Steps:](#steps)
+      - [Step 1: Record Your Screen](#step-1-record-your-screen)
+      - [Step 2: Edit the Recording (if needed)](#step-2-edit-the-recording-if-needed)
+      - [Step 3: Convert Video to GIF with FFmpeg](#step-3-convert-video-to-gif-with-ffmpeg)
+      - [Step 4: Optimize GIF with Gifski](#step-4-optimize-gif-with-gifski)
+      - [Step 5: Check File Size](#step-5-check-file-size)
+      - [Step 6: Repeat if Necessary](#step-6-repeat-if-necessary)
+      - [Step 7: Upload to GitHub](#step-7-upload-to-github)
 - [DocsGPT:](#docsgpt)
 
 ## Visual Demo
@@ -1993,10 +2002,56 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 
 ### Issues to be created in Jira:
 
-- [ ] [MERNSTACK-]
-- [ ] [MERNSTACK-]
-- [ ] [MERNSTACK-]
-- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-] Read into [Voy](https://github.com/tantaraio/voy) and see if that can improve a search esperience.
+- [ ] [MERNSTACK-] Implement [Ollama into frontend application like this example.](https://ollama.ai/blog/building-llm-powered-web-apps)
+- [ ] [MERNSTACK-] Generate GIF files from screen records, follow these instructions:
+**START INSTRUCTIONS:**
+****Creating a high-quality GIF within the constraints of a 100MB file size for GitHub involves a balance between duration, quality, and compression. Here's a guide using FFmpeg and Gifski:
+
+### Prerequisites:
+- [FFmpeg](https://ffmpeg.org/download.html)
+- [Gifski](https://gif.ski/)
+
+### Steps:
+
+#### Step 1: Record Your Screen
+Use a screen recording tool to capture the content you want. OBS Studio, ShareX, or QuickTime (on macOS) are good options.
+
+#### Step 2: Edit the Recording (if needed)
+Trim unnecessary portions from your recording using video editing software.
+
+#### Step 3: Convert Video to GIF with FFmpeg
+Open a command prompt or terminal and use FFmpeg to convert your video to GIF. Adjust the parameters to achieve the desired quality and file size:
+
+```bash
+ffmpeg -i input.mp4 -vf "fps=15,scale=640:-1:flags=lanczos" -c:v gif output.gif
+```
+
+- `fps`: Adjust the frame rate (e.g., 15 frames per second).
+- `scale`: Set the width to 640 pixels (adjust as needed).
+
+#### Step 4: Optimize GIF with Gifski
+Use Gifski to optimize and compress the GIF:
+
+```bash
+gifski -o output.gif input.mp4
+```
+
+This command will compress the GIF while maintaining high quality.
+
+#### Step 5: Check File Size
+Ensure the resulting GIF is smaller than 100MB. If it's still too large, consider adjusting parameters or shortening the duration.
+
+#### Step 6: Repeat if Necessary
+If the GIF is still too large, you may need to compromise on quality, reduce resolution, or shorten the duration further.
+
+#### Step 7: Upload to GitHub
+Once satisfied with the quality and size, upload the GIF to your GitHub repository.
+
+Remember to test the GIF on GitHub to ensure it meets the platform's requirements. If necessary, further optimization may be needed.
+**END INSTRUCTIONS**
+
+- [ ] [MERNSTACK-] Find out if it is possible to run [ONNX Runtime](https://onnxruntime.ai/docs/tutorials/web/build-web-app.html) in the browser as AI model server. Read [0. Get Started Steps](https://onnxruntime.ai/getting-started), [0.5 Install ONNX runtime and read Get Started section](https://onnxruntime.ai/docs/install/)   [1. Build a web application with ONNX Runtime](https://onnxruntime.ai/docs/tutorials/web/build-web-app.html), [2. How to add machine learning to your web application with ONNX Runtime](https://onnxruntime.ai/docs/tutorials/web/) [3. ]()
 - [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-]
