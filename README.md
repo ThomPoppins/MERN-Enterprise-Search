@@ -1999,6 +1999,13 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-340] (NOTE BEFORE START: READ ALL FORM PAGES FIRST BEFORE STARTING TO EDIT THE FORMS IN CODE! IF NECESSARY CREATE JIRA ISSUES FOR EVERYTHING THAT NEEDS TO BE DONE!) PRIO: Improve all forms based on the information in [1. The Valley of Code: Forms: Forms 101](https://thevalleyofcode.com/forms) [2. The Valley of Code: Forms: Form Fields](https://thevalleyofcode.com/form-fields) [3. Forms and JavaScript](https://thevalleyofcode.com/forms-js)
 - [ ] [MERNSTACK-341] (NOTE BEFORE START: READ ALL FORM PAGES FIRST BEFORE STARTING TO EDIT THE FORMS IN CODE! IF NECESSARY CREATE JIRA ISSUES FOR EVERYTHING THAT NEEDS TO BE DONE!) PRIO: Make Jira Issues for everything I need to improve to get my code up to [The Standards of Flavio Copes in The Valley of Code: UI libraries: React + Vite](https://thevalleyofcode.com/react)
 - [ ] [MERNSTACK-342] Read [The Valley of Code: Frameworks: Astro](https://thevalleyofcode.com/astro)
+- [ ] [MERNSTACK-] Implement [The Interaction Code flow authentication from Okta](https://developer.okta.com/docs/concepts/interaction-code/#overview) Implement [OAuth 2.0 and OpenID Connect](https://developer.okta.com/docs/concepts/oauth-openid/) for user authentication. Use [embedded deployment model](https://developer.okta.com/docs/concepts/redirect-vs-embedded/#embedded-authentication) for authentication process instead of redirect. Use [Okta Customer Identity Cloud](https://www.okta.com/free-trial/customer-identity/)
+- [ ] [MERNSTACK-] Read into [Indexing Strategies In MongoDB Database](https://www.mongodb.com/docs/manual/applications/indexes/) for redicing query calls optimization. Best to get started with is implementing [The ESR (Equality, Sort, Range) Rule](https://www.mongodb.com/docs/manual/tutorial/equality-sort-range-rule/#std-label-esr-indexing-rule)
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-]
 
 ### Issues to be created in Jira:
 
