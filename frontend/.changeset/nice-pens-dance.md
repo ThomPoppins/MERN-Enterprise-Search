@@ -3,6 +3,7 @@
 ---
 
 - [Version v0.0.3 Release Notes](#version-v003-release-notes)
+  - [Funtional Demo:](#funtional-demo)
   - [New Features](#new-features)
     - [Basic Search Functionality](#basic-search-functionality)
     - [Image Cropping](#image-cropping)
@@ -25,6 +26,10 @@
 
 
 # Version v0.0.3 Release Notes
+
+## Funtional Demo:
+
+![Demo](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
 
 ## New Features
 
