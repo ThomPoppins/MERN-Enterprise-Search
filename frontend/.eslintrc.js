@@ -1,6 +1,4 @@
-'use strict'
-
-module.exports = {
+export default  {
   env: {
     browser: true,
     es2021: true,
@@ -14,17 +12,6 @@ module.exports = {
     'prettier',
     'plugin:storybook/recommended',
   ],
-  overrides: [
-    {
-      env: {
-        node: true,
-      },
-      files: ['.eslintrc.{js,cjs}'],
-      parserOptions: {
-        sourceType: 'script',
-      },
-    },
-  ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -32,7 +19,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', 'react-hooks', 'jsx-a11y'],
+  plugins: ['react', 'react-hooks', 'jsx-a11y', 'prettier', 'storybook'],
   rules: {
     'capitalized-comments': 'off',
     'consistent-return': 'off',
@@ -60,7 +47,6 @@ module.exports = {
     ],
     'react/jsx-key': 'error',
     'react/jsx-max-depth': ['error', { max: 10 }],
-    // Allow arrow functions in JSX props (Remove this rule when performance becomes an issue)
     'react/jsx-no-bind': ['error', { allowArrowFunctions: true }],
     'react/jsx-no-comment-textnodes': 'error',
     'react/jsx-no-literals': 'off',
@@ -84,7 +70,6 @@ module.exports = {
     'sort-imports': 'off',
     'sort-vars': 'off',
     'sort-keys': 'off',
-    // TODO: Set the no-console rule to error when going in to production
     'no-console': 'warn',
     'multiline-comment-style': 'off',
     'max-statements': 'off',
