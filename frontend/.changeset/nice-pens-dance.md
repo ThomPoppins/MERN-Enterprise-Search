@@ -3,7 +3,7 @@
 ---
 
 - [Version v0.0.3 Release Notes](#version-v003-release-notes)
-  - [Funtional Demo:](#funtional-demo)
+  - [Funtional Demo](#funtional-demo)
   - [New Features](#new-features)
     - [Basic Search Functionality](#basic-search-functionality)
     - [Image Cropping](#image-cropping)
@@ -24,21 +24,20 @@
       - [How to Register a Company](#how-to-register-a-company)
       - [How to Add a Co-owner to a Company](#how-to-add-a-co-owner-to-a-company)
 
-
 # Version v0.0.3 Release Notes
 
-## Funtional Demo:
+## Funtional Demo
 
 ![Demo](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
 
 ## New Features
 
 ### Basic Search Functionality
+
 - Users can now search for companies by name.
 - Search results are listed in a grid with company images.
 - Clicking on a company navigates the user to the company details page (Company Profile).
 - If the current logged in user is a member (owner, employee, admin etc.) of the company, private details will be shown on the company profile page.
-
 
 > Find button is disabled if no search input value is given:
 ![Search Field](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/search-001-empty-input.png?raw=true)
@@ -46,7 +45,6 @@
 > **Search is ready to find pro's!**
 
 ![Search Query Ready To Find](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/search-002-search-machine-ready.png?raw=true)
-
 
 > **CSS Grid used for structuring the Result components (the clickable company specific rectangle that redirects to their profile/details page)**
 
@@ -58,12 +56,12 @@
 
 ![Company Profile/Details Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/search-005-company-profile.png?raw=true)
 
-
 > **Private details hidden, user not member of this company:**
 
 ![Company Private Details Hidden](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/lifeguard003-company-profile-details-with-private-details-hidden-for-general-user-who-is-not-member-of-company.png?raw=true)
 
 ### Image Cropping
+
 - Users can upload an image and crop it via drag-n-drop or file selection.
 - Preview canvas shows the user how the crop will be in a round circled shape.
 - The cropped image is displayed as the default profile picture.
@@ -354,6 +352,7 @@ export default router
 ![Upload Cropped Image Button Click](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/image-crop-009-profile-image-set.png?raw=true)
 
 ### Company Logo Cropping
+
 - Implemented image crop functionality for company logos in the register and edit company pages.
 - Company logos are displayed in a circle-shaped frame throughout the application.
 - When cropping the logo image, companies can see how the logo will look within the circle-shaped border.
@@ -374,26 +373,28 @@ export default router
 
 ![Company Modal](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/image-crop-012-company-details-modal.png?raw=true)
 
-
 ### Professions in Company Schema
+
 - Added a new field to the company model for professions.
 - Companies can add professions to their profiles during registration.
 - Registereing companies professions will help the search result to become more relevant and dynamic.
 
 ### Storybook Integration
+
 - Installed Storybook for component development.
 - Added a few initial components to Storybook.
 
-
-
 ### Testing
+
 - Jest and React-Testing-Library installed and functional.
 - Ongoing work on writing tests for almost every component.
 
 ### Animations
+
 - Added subtle animations for a more interactive user experience.
 
 > /frontend/tailwind.config.js
+
 ```javascript file=/frontend/tailwind.config.js
 // Subtle edit of Tailwind preinstalled animations making it a lot more joyful and grabs the user attention better:
 export default {
@@ -453,6 +454,7 @@ export default {
 - Dropdown has an "Invites" menu item on top with jumping letters to get the user's attention to the Invites page after clicking "Invites" in the dropdown menu.
 
 ### Co-Ownership Invites
+
 - Notification icon wiggles when a user is invited for co-ownership of a company.
 - "Invites" menu item is dynamically added to the dropdown menu.
 - The menu item jumps to draw attention to pending co-ownership invites.
@@ -461,6 +463,7 @@ export default {
 - Safety measures implemented to prevent users from being invited twice, ensuring a unique co-owner status and no duplicate ownership registrations.
 
 ## Pending Tasks
+
 - Edit company professions feature is still pending.
 - More components need to be added to Storybook.
 - Ongoing work on writing tests for components.
@@ -470,12 +473,14 @@ export default {
 # Version v0.0.2 Release Notes
 
 ## Backend server CDN for static files
+
 - The backend server now acts as a CDN for static files like images.
 - The backend server serves static files from the /backend/public folder.
 - This enables the frontend application to access images from the backend server without storing them in the frontend application.
 - It also allows using the backend server as a CDN for other applications needing to access the images.
 
 ## File Upload
+
 - Users can upload a profile picture.
 - The profile picture is saved in the /backend/public/uploads/images folder.
 - The image path is saved in the database.
@@ -485,21 +490,25 @@ export default {
 ## Version v0.0.1 Release Notes
 
 ### Registering an Account
+
 - Users can easily create an account by visiting the homepage of the application.
 - The registration process requires basic information such as email address, a secure password, and additional required details.
 - Once registered, users gain access to the full suite of functionalities.
 
 ### Logging In
+
 - Registered users can log in using their provided credentials.
 - The login process is secure, ensuring only authorized users access their accounts.
 - Upon login, a JWT token is generated and stored in the browser's local storage for authentication.
 
 ### Company Registration and Ownership
+
 - Users can register a company upon logging in, automatically designating them as the owner.
 - Ownership privileges grant full administrative control over the company's operations.
 - Co-ownership functionality allows users to add co-owners to a company.
 
 #### How to Register a Company
+
 1. Log in to your account.
 2. Navigate to Companies.
 3. Click the plus icon to add a new company.
@@ -507,6 +516,7 @@ export default {
 5. Upon successful registration and KVK API validation, the user becomes the owner with access to all administrative functionalities.
 
 #### How to Add a Co-owner to a Company
+
 1. Log in to your account.
 2. Navigate to Companies.
 3. Click the pencil icon to edit a company.

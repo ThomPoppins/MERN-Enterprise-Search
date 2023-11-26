@@ -13,7 +13,8 @@ Also I make use of a lot of different packages but only if they are complementar
 - [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
   - [Application Description](#application-description)
   - [Table of Contents](#table-of-contents)
-  - [Visual Demo](#visual-demo)
+  - [Visual Tour Trought The Application](#visual-tour-trought-the-application)
+    - [Demo: Functional Application Screen Recording](#demo-functional-application-screen-recording)
     - [Homepage](#homepage)
     - [Profile page (with gender specific placeholder profile picture)](#profile-page-with-gender-specific-placeholder-profile-picture)
     - [Profile picture upload modal](#profile-picture-upload-modal)
@@ -34,60 +35,46 @@ Also I make use of a lot of different packages but only if they are complementar
       - [Company ownership](#company-ownership)
       - [`Invite` schema](#invite-schema)
   - [Quick Start](#quick-start)
-- [Version v0.0.3 Release Notes](#version-v003-release-notes)
-  - [New Features](#new-features)
-    - [Basic Search Functionality](#basic-search-functionality)
-    - [Image Cropping](#image-cropping)
-    - [Company Logo Cropping](#company-logo-cropping)
-    - [Professions in Company Profile](#professions-in-company-profile)
-    - [Storybook Integration](#storybook-integration)
-    - [Testing](#testing)
-    - [Animations](#animations)
-    - [Co-Ownership Invites](#co-ownership-invites)
-    - [ES Lint and Prettier configuration](#es-lint-and-prettier-configuration)
-  - [Pending Tasks](#pending-tasks)
+  - [Version v0.0.3 Release Notes](#version-v003-release-notes)
+    - [New Features](#new-features)
+      - [Basic Search Functionality](#basic-search-functionality)
+      - [Image Crop](#image-crop)
+      - [Company Logo Cropping](#company-logo-cropping)
+      - [Professions in Company Profile](#professions-in-company-profile)
+      - [Storybook Integration](#storybook-integration)
+      - [Testing](#testing)
+      - [Animations](#animations)
+      - [Co-Ownership Invites](#co-ownership-invites)
+      - [ES Lint and Prettier configuration](#es-lint-and-prettier-configuration)
+      - [Upcoming features](#upcoming-features)
     - [Version v0.0.2 Release Notes](#version-v002-release-notes)
-    - [Backend server CDN for static files](#backend-server-cdn-for-static-files)
-    - [File upload](#file-upload)
+      - [Backend server CDN for static files](#backend-server-cdn-for-static-files)
+      - [File upload](#file-upload)
     - [Version v0.0.1 Release Notes](#version-v001-release-notes)
-    - [Registering an Account](#registering-an-account)
-    - [Logging In](#logging-in)
-  - [Company Registration and Ownership](#company-registration-and-ownership)
-    - [How to Register a Company](#how-to-register-a-company)
-    - [How to add a co-owner to a company](#how-to-add-a-co-owner-to-a-company)
-  - [Technologies](#technologies)
-  - [Frontend](#frontend)
-    - [React](#react)
-    - [Redux](#redux)
-    - [Vite.js](#vitejs)
-  - [Backend](#backend)
-    - [Express.js](#expressjs)
-      - [Efficient Routing](#efficient-routing)
-      - [Middleware Support](#middleware-support)
-      - [Streamlined Database Interactions](#streamlined-database-interactions)
-      - [Asynchronous Request Handling](#asynchronous-request-handling)
-      - [Cross-Origin Resource Sharing (CORS)](#cross-origin-resource-sharing-cors)
+      - [Registering an Account](#registering-an-account)
+      - [Logging In](#logging-in)
+      - [Company Registration and Ownership](#company-registration-and-ownership)
+        - [How to Register a Company](#how-to-register-a-company)
+        - [How to add a co-owner to a company](#how-to-add-a-co-owner-to-a-company)
+  - [Technical description:](#technical-description)
+    - [Frontend](#frontend)
+      - [Vite](#vite)
+      - [React](#react)
+      - [Redux](#redux)
+    - [Backend](#backend)
+      - [Express.js](#expressjs)
     - [MongoDB and Mongoose](#mongodb-and-mongoose)
-      - [Many-to-Many Relationships](#many-to-many-relationships)
-    - [Secure User Authentication with JWT](#secure-user-authentication-with-jwt)
-      - [Stateless Nature](#stateless-nature)
-      - [Data Integrity and Confidentiality](#data-integrity-and-confidentiality)
-      - [Cross-Origin Resource Sharing (CORS) Support](#cross-origin-resource-sharing-cors-support)
-      - [Granular Permissions](#granular-permissions)
-      - [Easy Integration with Frontend Frameworks](#easy-integration-with-frontend-frameworks)
-      - [Expiration and Refresh Tokens](#expiration-and-refresh-tokens)
-      - [Conclusion](#conclusion)
-    - [ES Lint](#es-lint)
-      - [Frontend config](#frontend-config)
+    - [ES Lint and Prettier](#es-lint-and-prettier)
+      - [ES Lint config:](#es-lint-config)
       - [Backend config](#backend-config)
     - [Prettier code formatter](#prettier-code-formatter)
   - [Project management](#project-management)
     - [Jira](#jira)
   - [Project Issue Progression](#project-issue-progression)
   - [Production checklist](#production-checklist)
-    - [Issues to be created in Jira:](#issues-to-be-created-in-jira)
-    - [Prerequisites:](#prerequisites)
-    - [Steps:](#steps)
+    - [Issues to be created in Jira](#issues-to-be-created-in-jira)
+    - [Prerequisites](#prerequisites)
+    - [Steps](#steps)
       - [Step 1: Record Your Screen](#step-1-record-your-screen)
       - [Step 2: Edit the Recording (if needed)](#step-2-edit-the-recording-if-needed)
       - [Step 3: Convert Video to GIF with FFmpeg](#step-3-convert-video-to-gif-with-ffmpeg)
@@ -95,15 +82,21 @@ Also I make use of a lot of different packages but only if they are complementar
       - [Step 5: Check File Size](#step-5-check-file-size)
       - [Step 6: Repeat if Necessary](#step-6-repeat-if-necessary)
       - [Step 7: Upload to GitHub](#step-7-upload-to-github)
-- [DocsGPT:](#docsgpt)
+- [DocsGPT](#docsgpt)
 
-## Visual Demo
+## Visual Tour Trought The Application
 
 > **Note:** A video demonstration is in the making showing the application function in moving image. Also I will explain about the application more deeply like functionalities I build, strategy, choices, coding practices and about technologies I've been using. So come back later to check it out!
 
 Get a general impression of my application.
 
 > **Note:** This demo is interesting, but incomplete and not final. Also it is impossible to keep this demo completely up to date with the development progress. The main purpose is to give a general impression of the application. For complete understanding of the technical workings of each component of the application you're free to look into the source code and for any remaining questions you can ask me anything in a mail to [thompoppins@gmail.com](mailto:thompoppins@gmail.com).
+
+### Demo: Functional Application Screen Recording
+
+> If below this text no image is displaying, wait a couple of seconds, it's demontration in form of a moving GIF image, the file has a size of almost 100MB.
+
+![Demo](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
 
 ### Homepage
 
@@ -139,7 +132,7 @@ If the user wants can he/she still change their mind and choose a different one 
 <img src={blobValueString} />
 ```
 
-> **Source:** [/frontend/src/components/users/EditProfilePicture.jsx](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/src/components/users/EditProfilePictureModal.jsx)
+**Source:** _[/frontend/src/components/users/EditProfilePicture.jsx](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/src/components/users/EditProfilePictureModal.jsx)_
 
 ```javascript
 // Modal to edit user profile picture
@@ -197,7 +190,7 @@ If the user is sure about it, he/she will click the upload button and now the im
 
 After the image is uploaded and saved, a corresponding Image "document" (entry) with a filepath will be saved to the MongoDB database in the "images" collection. (A collection is like a database table.)
 
-> **Source:** [/backend/routes/uploadRoute.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/routes/uploadRoute.js)
+**Source:** _[/backend/routes/uploadRoute.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/routes/uploadRoute.js)_
 
 ```javascript
 import { Image } from '../models/imageModel.js'
@@ -287,7 +280,7 @@ The image is served by ExpressJS which means this backend is also the CDN. Becau
 
 Express.js can serve static files using **Express.static("public_directory")**.
 
-> **Source:** [/backend/index.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/index.js)
+**Source:** _[/backend/index.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/index.js)_
 
 ```javascript
 // Use .static() and configure the /public folder for hosting static resources as CDN for images and other files.
@@ -365,7 +358,7 @@ _Additional fields:_
 - The `User` schema is described and defined using Mongoose, a popular _Object Data Modeling (ODM)_ library for MongoDB and Node.js.
 - The `User` schema is expected to extends with many fields when continued development will many more dependencies on user data when the application grows and complexity increases.
 
-> **Source:** [/backend/models/userModel.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/userModel.js):
+**Source:** _[/backend/models/userModel.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/userModel.js)_
 
 ```javascript
 // Instantiate User schema
@@ -459,7 +452,7 @@ All form input fields in my application have to be validated. I've written my ow
 
 **Example validator:**
 
-> **Source:** [/frontend/utils/validation/emailValidator.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/src/utils/validation/emailValidator.jsx)
+**Source:** _[/frontend/utils/validation/emailValidator.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/src/utils/validation/emailValidator.jsx)_
 
 ```javascript
 const emailValidator = (email) => {
@@ -476,7 +469,7 @@ export default emailValidator
 
 **Code example communicating invalid values in the UI of company registration page:**
 
-> **Source:** [/frontend/src/pages/companies/RegisterCompany.jsx](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/src/pages/companies/RegisterCompany.jsx)
+**Source:** _[/frontend/src/pages/companies/RegisterCompany.jsx](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/src/pages/companies/RegisterCompany.jsx)_
 
 ```javascript
 import React, { useEffect, useState } from 'react'
@@ -734,7 +727,7 @@ I've connected the backend application to the KvK test API for validation of com
 
 **GET route to get KvK data:**
 
-> **Source:** [/backend/routes/kvkRoute.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/routes/kvkRoute.js)
+**Source:** _[/backend/routes/kvkRoute.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/routes/kvkRoute.js)_
 
 ```javascript
 import { getKvkData } from '../controllers/kvkController.js'
@@ -751,7 +744,7 @@ export default router
 
 **KvK controller for handling request:**
 
-> **Source:** [/backend/controllers/kvkController.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/controllers/kvkController.js)
+**Source:** _[/backend/controllers/kvkController.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/controllers/kvkController.js)_
 
 ```javascript
 import axios from 'axios'
@@ -1362,17 +1355,17 @@ To run this application locally, follow these steps:
 
 Now you have the application up and running locally!
 
-# Version v0.0.3 Release Notes
+## Version v0.0.3 Release Notes
 
-## New Features
+### New Features
 
-### Basic Search Functionality
+#### Basic Search Functionality
 
 - Users can now search for companies by name.
 - Search results are listed in a grid with company images.
 - Clicking on a company navigates the user to the company details page (Company Profile).
 
-### Image Cropping
+#### Image Crop
 
 - Users can upload an image and crop it via drag-n-drop or file selection.
 - Preview canvas shows the user how the crop will be in a round circled shape.
@@ -1381,30 +1374,30 @@ Now you have the application up and running locally!
 - Cropped base64 binary images are converted into BLOB and uploaded to the Express.js server as `png` file.
 - Images are served as static files by /backend Express.js server and it acts as a images/files CDN for the frontend application.
 
-### Company Logo Cropping
+#### Company Logo Cropping
 
 - Implemented image crop functionality for company logos in the register and edit company pages.
 - Company logos are displayed in a circle-shaped <img/> frame throughout the application, when cropping the logo image, companies can see how the logo will look within the circle shaped border.
 
-### Professions in Company Profile
+#### Professions in Company Profile
 
 - Added a new field to the company model for professions.
 - Companies can add professions to their profiles during registration.
 
-### Storybook Integration
+#### Storybook Integration
 
 - Installed Storybook for component development.
 - Added a few initial components to Storybook.
 
-### Testing
+#### Testing
 
 - Jest and React-Testing-Library installed and functional.
 
-### Animations
+#### Animations
 
 - Added subtle animations for a more interactive user experience. Notification animations, when user has a pending 'Invite' the icon in the navigation bar right to their name turns yellow and starts wiggeling, asking the user for attention. Dropdown has a `Invites` menu item on top with jumping letters to get the user attention to the `Invites` page after clicking `Invites` in the dropdown menu.
 
-### Co-Ownership Invites
+#### Co-Ownership Invites
 
 - Notification icon wiggles when a user is invited for co-ownership of a company.
 - "Invites" menu item is dynamically added to the dropdown menu.
@@ -1413,11 +1406,11 @@ Now you have the application up and running locally!
 - After accepting or declining all pending invites (so no pending invites are left), user gets redirected to /companies page where all companies are listed that the user now (co-)owns.
 - Safety measures implemented that prevents users from being invited twice, ensuring a unique co-owner status and no duplicate ownership registrations.
 
-### ES Lint and Prettier configuration
+#### ES Lint and Prettier configuration
 
 - Configured ES Lint and Prettier now optimal for my wished code style wise.
 
-## Pending Tasks
+#### Upcoming features
 
 - Edit company professions feature is still pending.
 - More components need to be added to Storybook.
@@ -1428,11 +1421,11 @@ Now you have the application up and running locally!
 
 ### Version v0.0.2 Release Notes
 
-### Backend server CDN for static files
+#### Backend server CDN for static files
 
 The backend server is now a CDN for static files like images. This means that the backend server will serve the static files from the `/backend/public` folder. This way, the frontend application can access the images from the backend server without having to store the images in the frontend application. This also makes it possible to use the backend server as a CDN for other applications that need to access the images.
 
-### File upload
+#### File upload
 
 Users can now upload a profile picture. The profile picture will be saved in the `/backend/public/uploads/images` folder and the path to the image will be saved in the database. The backend server will serve the image from the `/backend/public` folder. This way, the frontend application can access the image from the backend server and the image path is stored in the database.
 
@@ -1444,23 +1437,23 @@ Users can now upload a profile picture. The profile picture will be saved in the
 
 ### Version v0.0.1 Release Notes
 
-### Registering an Account
+#### Registering an Account
 
 Users can easily create an account by visiting the homepage of my application. The registration process is straightforward and requires users to provide basic information such as their email address, a secure password, and any additional required details. Once registered, users gain access to the full suite of functionalities offered by the application.
 
-### Logging In
+#### Logging In
 
 Registered users can log in to their accounts using their previously provided credentials. This allows them to access and utilize all features and services provided by the application. The login process is secure and ensures that only authorized users can access their accounts.
 
 When you log in a JWT token is generated and stored in the browser's local storage. This token is used to authenticate the user and to make sure that the user is authorized to access the application. The token is also used to make sure that the user is authorized to access certain resources in the application. For example, the user can only access his own company resources and not the company resources of other users.
 
-## Company Registration and Ownership
+#### Company Registration and Ownership
 
 Upon logging in to their account, users have the capability to register a company that they own. This action automatically designates the user as the owner of the registered company, granting them administrative privileges within the application.
 
 - **Ownership Privileges:** The user, upon registering a company, assumes the role of owner with full administrative control over the company's operations.
 
-### How to Register a Company
+##### How to Register a Company
 
 1. Log in to your account.
 2. Navigate to Companies
@@ -1469,7 +1462,7 @@ Upon logging in to their account, users have the capability to register a compan
 
 Upon successful registration and validation from the KVK API, the user will be recognized as the owner of the company and will have access to all administrative functionalities associated with it.
 
-### How to add a co-owner to a company
+##### How to add a co-owner to a company
 
 1. Log in to your account.
 2. Navigate to Companies
@@ -1477,37 +1470,13 @@ Upon successful registration and validation from the KVK API, the user will be r
 4. Search for a user by name, username or email.
 5. Click the add button to add the user as a owner to the company.
 
-## Technologies
+## Technical description:
 
-## Frontend
+### Frontend
 
-On the frontend, I've chosen React for building user interfaces and Redux for state management. For those less familiar with these technologies, here's why implementing Redux in React is a game-changer:
+On the frontend, I've chosen to install React with Vite (_Next Generation Frontend Tooling_) for building user interfaces and Redux for state management.
 
-### React
-
-React is a popular JavaScript library for building user interfaces. It provides a declarative syntax for defining UI components, and uses a virtual DOM to efficiently update the UI in response to changes in state. Some of the main advantages of React include:
-
-- **Declarative syntax:** React provides a simple and intuitive syntax for defining UI components, making it easy to reason about the structure and behavior of your application.
-
-- **Efficient updates:** React uses a virtual DOM to efficiently update the UI in response to changes in state, minimizing the number of DOM manipulations required.
-
-- **Component reusability:** React components are modular and reusable, making it easy to build complex UIs from simple building blocks.
-
-- **Large ecosystem:** React has a large and active ecosystem of libraries and tools, making it easy to find solutions to common problems and integrate with other technologies.
-
-### Redux
-
-Redux is a state management library that is often used in conjunction with React. It provides a centralized store for managing application state, and uses a unidirectional data flow to ensure that state changes are predictable and easy to reason about. Some of the main advantages of using Redux with React include:
-
-- **Centralized state management:** Redux provides a centralized store for managing application state, making it easy to manage and reason about complex state interactions.
-
-- **Predictable state changes:** Redux uses a unidirectional data flow to ensure that state changes are predictable and easy to reason about, making it easier to debug and maintain your application.
-
-- **Time-travel debugging:** Redux provides a powerful debugging tool called "time-travel debugging", which allows you to step through state changes and see how your application state evolves over time.
-
-- **Ecosystem integration:** React and Redux have large and active ecosystems of libraries and tools, making it easy to integrate with other technologies and solve common problems.
-
-### Vite.js
+#### Vite
 
 The React frontend application was installed using Vite.js, a modern build tool that provides fast development server and efficient build process.
 
@@ -1519,32 +1488,54 @@ The React frontend application was installed using Vite.js, a modern build tool 
 
 - **Plugin ecosystem:** Vite.js has a growing ecosystem of plugins that can be used to extend its functionality. This includes plugins for things like CSS preprocessing, image optimization, and more.
 
-## Backend
+#### React
+
+React is a popular JavaScript library for building user interfaces. It provides a declarative syntax for defining UI components, and uses a virtual DOM to efficiently update the UI in response to changes in state. Some of the main advantages of React include:
+
+- **Declarative syntax:** React provides a simple and intuitive syntax for defining UI components, making it easy to reason about the structure and behavior of your application.
+
+- **Efficient updates:** React uses a virtual DOM to efficiently update the UI in response to changes in state, minimizing the number of DOM manipulations required.
+
+- **Component reusability:** React components are modular and reusable, making it easy to build complex UIs from simple building blocks.
+
+- **Large ecosystem:** React has a large and active ecosystem of libraries and tools, making it easy to find solutions to common problems and integrate with other technologies.
+
+#### Redux
+
+Redux is a state management library that is often used in conjunction with React. It provides a centralized store for managing application state, and uses a unidirectional data flow to ensure that state changes are predictable and easy to reason about. Some of the main advantages of using Redux with React include:
+
+- **Centralized state management:** Redux provides a centralized store for managing application state, making it easy to manage and reason about complex state interactions.
+
+- **Predictable state changes:** Redux uses a unidirectional data flow to ensure that state changes are predictable and easy to reason about, making it easier to debug and maintain your application.
+
+- **Time-travel debugging:** Redux provides a powerful debugging tool called "time-travel debugging", which allows you to step through state changes and see how your application state evolves over time.
+
+- **Ecosystem integration:** React and Redux have large and active ecosystems of libraries and tools, making it easy to integrate with other technologies and solve common problems.
+
+
+### Backend
 
 In the backend, I've set up RESTful API endpoints to create, read, update, and delete documents from collections. These collections are defined and configured in the `/backend/models` folder, ensuring a structured and organized approach to data management.
 
-### Express.js
+#### Express.js
 
-#### Efficient Routing
-
+**Efficient Routing:**
 Express.js provides a robust routing system, making it seamless to define endpoints for handling various HTTP methods like GET, POST, PUT, and DELETE. This helps in organizing the backend logic effectively, ensuring clean and maintainable code.
 
-#### Middleware Support
+**Middleware Support:**
 
 Express.js offers a wide range of middleware options that can be easily integrated into the application's request-response cycle. This enables functionalities like request parsing, authentication, logging, and error handling, enhancing the security and performance of the backend.
 
-#### Streamlined Database Interactions
-
+**Streamlined Database Interactions:**
 When combined with database libraries like Mongoose (for MongoDB), Express.js simplifies the process of interacting with the database. This allows for smooth retrieval, creation, updating, and deletion of data, which is essential for building a robust API.
 
-#### Asynchronous Request Handling
-
+**Asynchronous Request Handling:**
 Express.js supports asynchronous programming paradigms, allowing for non-blocking I/O operations. This is crucial for handling multiple concurrent requests efficiently, ensuring optimal performance even under heavy loads.
 
-#### Cross-Origin Resource Sharing (CORS)
-
+**Cross-Origin Resource Sharing (CORS)**
 Cross-Origin Resource Sharing (CORS) is a critical security feature that safeguards my application from unwanted sources attempting to access your resources. Express.js provides built-in support for CORS, making it easy to configure and enforce CORS policies. This helps in preventing malicious attacks like cross-site scripting (XSS) and cross-site request forgery (CSRF). It also helps in preventing unauthorized access to sensitive data.
 
+**Static files server (functioning kind of like a CDN):**
 Overall, Express.js provides a robust and secure foundation for building RESTful APIs.
 
 ### MongoDB and Mongoose
@@ -1559,60 +1550,43 @@ Overall, Express.js provides a robust and secure foundation for building RESTful
 
 Overall, **Mongoose** provides a convenient and flexible way to interact with **MongoDB**, and it is widely used in the Node.js community for this purpose.
 
-#### Many-to-Many Relationships
-
-One interesting aspect of this project is handling many-to-many relationships between companies and projects. In real-world scenarios, companies often take part in multiple projects, and a single project can involve multiple companies. To achieve this, I'll be using a `junction` collection in MongoDB.
-
-The main advantage of using a `junction` collection is that it simplifies the management of these relationships. For instance, consider a scenario where Company A and Company B collaborate on Project X. Instead of duplicating data or creating complex nested structures, the `junction` collection allows us to create a clear and efficient link between Company A, Company B, and Project X. This makes it easy to track participation and configure revenue sharing settings dynamically when all parties agree.
-
-### Secure User Authentication with JWT
-
+**Secure User Authentication with JWT:**
 In this repository, I implement secure user authentication using JSON Web Tokens (JWT). This approach offers several advantages over traditional session-based authentication methods. Below are key reasons why JWT-based authentication is a safe and effective choice:
 
-#### Stateless Nature
-
+**Stateless Nature:**
 JWTs are stateless, meaning they do not require server-side storage of session data. This eliminates the need for server-side sessions or database queries to validate user authenticity. Instead, the server can validate the token by checking its signature and expiration date, resulting in improved scalability and reduced server load.
 
-#### Data Integrity and Confidentiality
-
+**Data Integrity and Confidentiality:**
 JWTs are digitally signed using a secret key known only to the server. This signature ensures that the token's content has not been tampered with during transmission. Additionally, sensitive information can be encrypted within the token, providing an extra layer of security.
-
-#### Cross-Origin Resource Sharing (CORS) Support
-
-JWTs can be easily integrated with Cross-Origin Resource Sharing (CORS) policies. This allows for secure communication between the client and server even when they reside on different domains, without compromising security.
-
-#### Granular Permissions
 
 JWTs can include custom claims, allowing for fine-grained control over user permissions. This means you can specify which resources or actions a user is allowed to access, providing a robust authorization mechanism.
 
-#### Easy Integration with Frontend Frameworks
+**Cross-Origin Resource Sharing (CORS) Support:**
+JWTs can be easily integrated with Cross-Origin Resource Sharing (CORS) policies. This allows for secure communication between the client and server even when they reside on different domains, without compromising security.
 
+**Easy Integration with Frontend Frameworks:**
 JWTs can be conveniently stored on the client side, typically in browser cookies or local storage. This facilitates seamless integration with frontend frameworks and libraries (like React), enabling a smooth user experience.
 
-#### Expiration and Refresh Tokens
-
+**Expiration and Refresh Tokens:**
 JWTs can be configured with expiration times, reducing the window of opportunity for potential attackers. Additionally, you can implement refresh tokens to obtain new JWTs without requiring users to re-enter their credentials.
 
-#### Conclusion
-
+**Conclusion:**
 By implementing user authentication with JWTs, this repository ensures a robust and secure authentication mechanism. The stateless nature, data integrity, and ease of integration make JWTs an excellent choice for validating user authenticity. With careful implementation and adherence to best practices, this approach provides a reliable foundation for secure user authentication in my application.
 
-### ES Lint
+### ES Lint and Prettier
 
-I'm using **ES Lint** to get my code up-to-date with strict code standards. I am still busy working on my own personal configuration.
+**ES Lint:**
+I'm using **ES Lint** to get my code up-to-date with strict code standards as much as is tolerable and logical (most strict setting is not a logical configuration). The VS Code ES Lint extension has some cool features like auto-fixing a lot of errors like the rule to enforce sorting props alphabetically so props will always be in the same order as parameter of a components as the place where the components is used in the JSX.
 
 ![ES Lint in VS Code](![Invite Accepted](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Using-ES-Lint.png?raw=true)
 
-#### Frontend config
+#### ES Lint config:
 
-> **Source:** [/frontend/.eslint.cjs](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/.eslintrc.cjs)
+**Frontend (Vite application with React):**
+
+**Source:** _[/frontend/.eslint.cjs](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/.eslintrc.cjs)_
 
 ```javascript
-module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
   extends: [
     'eslint:all',
     'plugin:react/all',
@@ -1706,7 +1680,7 @@ module.exports = {
 
 #### Backend config
 
-> **Source:** [/backend/.eslint.cjs](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/.eslintrc.cjs)
+**Source:** _[/backend/.eslint.cjs](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/.eslintrc.cjs)_
 
 ```javascript
 'use strict'
@@ -1749,7 +1723,7 @@ module.exports = {
 
 I use Prettier code formatter to format my code in a way I find most readable.
 
-> **Source:** [/frontend/.prettierrc](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/.prettierrc) and [/backend/.prettierrc](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/.prettierrc)
+**Source:** _[/frontend/.prettierrc](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/.prettierrc) and [/backend/.prettierrc](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/.prettierrc)_
 
 ```json
 {
@@ -1984,7 +1958,7 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-322] [Learn about testing using Storybook.](https://storybook.js.org/docs/react/writing-tests/introduction)
 - [ ] [MERNSTACK-323] Break down search engine functionality of [my MERN_STACK_PROJ. documentation](https://nextra-docs-template.vercel.app/). Read [Nextra documentation](https://nextra.site/) for this.
 - [ ] [MERNSTACK-324] Move all information of this project README file to [the documentation website hosted by Vercel](https://mern-stack-proj.vercel.app/). [Nextra documentation here](https://nextra.site/docs).
-- [ ] [MERNSTACK-325] Add Storybook section to [documentation]((https://mern-stack-proj.vercel.app/).
+- [ ] [MERNSTACK-325] Add Storybook section to [documentation]((<https://mern-stack-proj.vercel.app/>).
 - [x] [MERNSTACK-329] Apply rate limit to all API end points.
 - [ ] [MERNSTACK-330] Implement [this GraohQL interactive playground component](https://github.com/remorses/mini-graphiql-playground) on to a page of my website.
 - [ ] [MERNSTACK-331] Implement dotenv for [deployment on Netlify](https://app.netlify.com/sites/relaxed-choux-01fbdc/deploys/656140a2da7efa00080622f8) REPLACE config.js.
@@ -1992,8 +1966,8 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [x] [MERNSTACK-333] README.md: Add `Profession`s to `Company` registration form
 - [ ] [MERNSTACK-334] README.md: Add `Profession`s to `Company` edit form
 - [ ] [MERNSTACK-335] [On the GraphQLConf 2023 sessions page](https://graphql.org/conf/sessions/) Continue from: "Streamlining Access to NASA Earth Science Data with GraphQL - Ryan Abbott, Element 84" to add the rest of the interesting sounding / useful topics to the bookmarks folder.
-- [ ] [MERNSTACK-336] Add contact form to [documentation]((https://mern-stack-proj.vercel.app/) that will send a email. [Documentation here.](https://herotofu.com/solutions/guides/react-send-email)
-- [ ] [MERNSTACK-337] Set up [Dependabot](https://docs.github.com/en/code-security/getting-started/dependabot-quickstart-guide) in repository and write about it in the [documentation]((https://mern-stack-proj.vercel.app/).
+- [ ] [MERNSTACK-336] Add contact form to [documentation]((<https://mern-stack-proj.vercel.app/>) that will send a email. [Documentation here.](https://herotofu.com/solutions/guides/react-send-email)
+- [ ] [MERNSTACK-337] Set up [Dependabot](https://docs.github.com/en/code-security/getting-started/dependabot-quickstart-guide) in repository and write about it in the [documentation]((<https://mern-stack-proj.vercel.app/>).
 - [ ] [MERNSTACK-338] [Get started with Ollama AI](https://ollama.ai/download/linux), try to install on Linux subsystem Ubuntu.
 - [ ] [MERNSTACK-339] AFTER INSTALL: [1. Run Code Llama locally](https://ollama.ai/blog/run-code-llama-locally)
 - [ ] [MERNSTACK-340] (NOTE BEFORE START: READ ALL FORM PAGES FIRST BEFORE STARTING TO EDIT THE FORMS IN CODE! IF NECESSARY CREATE JIRA ISSUES FOR EVERYTHING THAT NEEDS TO BE DONE!) PRIO: Improve all forms based on the information in [1. The Valley of Code: Forms: Forms 101](https://thevalleyofcode.com/forms) [2. The Valley of Code: Forms: Form Fields](https://thevalleyofcode.com/form-fields) [3. Forms and JavaScript](https://thevalleyofcode.com/forms-js)
@@ -2007,7 +1981,7 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-]
 
-### Issues to be created in Jira:
+### Issues to be created in Jira
 
 - [ ] [MERNSTACK-] Read into [Voy](https://github.com/tantaraio/voy) and see if that can improve a search esperience.
 - [ ] [MERNSTACK-] Implement [Ollama into frontend application like this example.](https://ollama.ai/blog/building-llm-powered-web-apps)
@@ -2015,19 +1989,23 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 **START INSTRUCTIONS:**
 ****Creating a high-quality GIF within the constraints of a 100MB file size for GitHub involves a balance between duration, quality, and compression. Here's a guide using FFmpeg and Gifski:
 
-### Prerequisites:
+### Prerequisites
+
 - [FFmpeg](https://ffmpeg.org/download.html)
 - [Gifski](https://gif.ski/)
 
-### Steps:
+### Steps
 
 #### Step 1: Record Your Screen
+
 Use a screen recording tool to capture the content you want. OBS Studio, ShareX, or QuickTime (on macOS) are good options.
 
 #### Step 2: Edit the Recording (if needed)
+
 Trim unnecessary portions from your recording using video editing software.
 
 #### Step 3: Convert Video to GIF with FFmpeg
+
 Open a command prompt or terminal and use FFmpeg to convert your video to GIF. Adjust the parameters to achieve the desired quality and file size:
 
 ```bash
@@ -2038,6 +2016,7 @@ ffmpeg -i input.mp4 -vf "fps=15,scale=640:-1:flags=lanczos" -c:v gif output.gif
 - `scale`: Set the width to 640 pixels (adjust as needed).
 
 #### Step 4: Optimize GIF with Gifski
+
 Use Gifski to optimize and compress the GIF:
 
 ```bash
@@ -2047,18 +2026,21 @@ gifski -o output.gif input.mp4
 This command will compress the GIF while maintaining high quality.
 
 #### Step 5: Check File Size
+
 Ensure the resulting GIF is smaller than 100MB. If it's still too large, consider adjusting parameters or shortening the duration.
 
 #### Step 6: Repeat if Necessary
+
 If the GIF is still too large, you may need to compromise on quality, reduce resolution, or shorten the duration further.
 
 #### Step 7: Upload to GitHub
+
 Once satisfied with the quality and size, upload the GIF to your GitHub repository.
 
 Remember to test the GIF on GitHub to ensure it meets the platform's requirements. If necessary, further optimization may be needed.
 **END INSTRUCTIONS**
 
-- [ ] [MERNSTACK-] Find out if it is possible to run [ONNX Runtime](https://onnxruntime.ai/docs/tutorials/web/build-web-app.html) in the browser as AI model server. Read [0. Get Started Steps](https://onnxruntime.ai/getting-started), [0.5 Install ONNX runtime and read Get Started section](https://onnxruntime.ai/docs/install/)   [1. Build a web application with ONNX Runtime](https://onnxruntime.ai/docs/tutorials/web/build-web-app.html), [2. How to add machine learning to your web application with ONNX Runtime](https://onnxruntime.ai/docs/tutorials/web/) [3. ]()
+- [ ] [MERNSTACK-] Find out if it is possible to run [ONNX Runtime](https://onnxruntime.ai/docs/tutorials/web/build-web-app.html) in the browser as AI model server. Read [0. Get Started Steps](https://onnxruntime.ai/getting-started), [0.5 Install ONNX runtime and read Get Started section](https://onnxruntime.ai/docs/install/)   [1. Build a web application with ONNX Runtime](https://onnxruntime.ai/docs/tutorials/web/build-web-app.html), [2. How to add machine learning to your web application with ONNX Runtime](https://onnxruntime.ai/docs/tutorials/web/) [3. ](info url), [4. ](info url)
 - [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-]
@@ -2071,10 +2053,10 @@ Remember to test the GIF on GitHub to ensure it meets the platform's requirement
 - [ ] [MERNSTACK-] Read about [Mock Service Worker](https://storybook.js.org/addons/msw-storybook-addon/) integration into Storybook for handling mock data.
 - [ ] [MERNSTACK-] Select [integrations (addons)](https://storybook.js.org/integrations) for Storybook that are useful without losing productivity.
 - [ ] [MERNSTACK-]
-- [ ] [MERNSTACK-] Write a section about [Component-Driven Development](https://storybook.js.org/tutorials/intro-to-storybook/react/en/simple-component/) in [documentation]((https://mern-stack-proj.vercel.app/).
+- [ ] [MERNSTACK-] Write a section about [Component-Driven Development](https://storybook.js.org/tutorials/intro-to-storybook/react/en/simple-component/) in [documentation]((<https://mern-stack-proj.vercel.app/>).
 - [ ] [MERNSTACK-] Destructure all component object type parameters to define all keys used in the component like the first parameter of this example: `function Task = ({ task: { id, title, state }, onArchiveTask, onPinTask }) => {}`
-- [ ] [MERNSTACK-] Write a piece [Component Story Format 3]() in the Storybook section of the [documentation]((https://mern-stack-proj.vercel.app/).
-- [ ] [MERNSTACK-] Write about Component Driven Development in the [documentation]((https://mern-stack-proj.vercel.app/) [(Storybook source)] in a "Design practice" or "Strategies" kinda section.
+- [ ] [MERNSTACK-] Write a piece [Component Story Format 3](https://storybook.js.org/blog/component-story-format-3-0/) in the Storybook section of the [documentation]((<https://mern-stack-proj.vercel.app/>).
+- [ ] [MERNSTACK-] Write about Component Driven Development in the [documentation]((<https://mern-stack-proj.vercel.app/>) [(Storybook source)] in a "Design practice" or "Strategies" kinda section.
 - [ ] [MERNSTACK-326] Add [Rocket Icon](https://fontawesome.com/icons/rocket?f=classic&s=solid) to documentation website title.
 - [ ] [MERNSTACK-327] IMPORTANT: [Implement Formidable Inline Executable codeblocks](https://formidable.com/open-source/react-live/) examples in the documentation.
 - [ ] [MERNSTACK-] In the [Interactive demo](http://localhost:3000/interactive-demo) section, make as interactive as possible using components of the application.
@@ -2083,7 +2065,7 @@ Remember to test the GIF on GitHub to ensure it meets the platform's requirement
 - [ ] [MERNSTACK-] Read [flexsearch documentation](https://github.com/nextapps-de/flexsearch), maybe this is a good search package. [See this list for more optional search packages](https://github.com/nextapps-de/flexsearch#performance-benchmark-ranking)
 - [ ] [MERNSTACK-] Build search component on the homepage in Storybook.
 - [ ] [MERNSTACK-] Learn about [JavaScript design patters](https://javascriptpatterns.vercel.app/patterns)
-- [ ] [MERNSTACK-] [Configuration of META data]() on Next.js documentation site.
+- [ ] [MERNSTACK-] [Configuration of META data](https://github.com/ThomPoppins/mern-stack-proj-documentation/blob/main/theme.config.jsx) on Next.js documentation site.
 - [ ] [MERNSTACK-] See if [react-live](https://github.com/FormidableLabs/react-live) is compatible with Nextra.
 - [ ] [MERNSTACK-] See if I can use [mermaid.js](https://mermaid.js.org/intro/) on Nextra. [docs](https://mermaid.js.org/intro/)
 - [ ] [MERNSTACK-] OPTONAL SEARCH ENGINE: [Algolia Docsearch](https://docsearch.algolia.com/)
@@ -2135,7 +2117,7 @@ Remember to test the GIF on GitHub to ensure it meets the platform's requirement
 - [ ] [MERNSTACK-] Read [The Valley of Code: Server Runtimes: Node.js](https://thevalleyofcode.com/nodejs)
 - [ ] [MERNSTACK-] Read [The Valley of Code: Server Runtimes: Bun](https://thevalleyofcode.com/bun)
 - [ ] [MERNSTACK-] Read [The Valley of Code: HTTP Servers: Express](https://thevalleyofcode.com/express)
-- [ ] [MERNSTACK-] Read [The Valley of Code: HTTP Servers: Hono ](https://thevalleyofcode.com/hono)
+- [ ] [MERNSTACK-] Read [The Valley of Code: HTTP Servers: Hono](https://thevalleyofcode.com/hono)
 - [ ] [MERNSTACK-] LOW PRIO: Read [The Valley of Code: Databases: Kysely](https://thevalleyofcode.com/kysely)
 - [ ] [MERNSTACK-] Investigate [Git Large File Storage (LFS)](https://vercel.com/docs/projects/overview#git-large-file-storage-lfs) and figure out if it needs to be enabled in the Vercel deployment settings.
 - [ ] [MERNSTACK-] [DOCS here](https://app.meticulous.ai/docs). Check out [Meticulous](https://app.meticulous.ai/organizations/Vind-Expert) and try to get it running when login is possible with useraccount on documentation website. MAYBE if possible to frontend only login in MERN_STACK_PROJ. then deploy and test that one with Meticulous.
@@ -2150,7 +2132,7 @@ Remember to test the GIF on GitHub to ensure it meets the platform's requirement
 - [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-] Break down the following advice from [DocsGPT](https://docsgpt.arc53.com/) into separate issues:
 
-# DocsGPT:
+# DocsGPT
 
 Absolutely! Nextra is a great choice for building an informational website. To provide an interactive experience and keep your readers entertained, here are some suggestions:
 

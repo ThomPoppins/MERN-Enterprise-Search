@@ -1,5 +1,5 @@
 {
-  "name": "starter-vite-react",
+  "name": "MERN-STACK-PROJ Frontend Application",
   "env": {
     "browser": true,
     "es6": true,
@@ -10,10 +10,10 @@
   "main": "src/index.jsx",
   "type": "module",
   "version": "v0.0.2",
-  "description": "Opinionated Vite starter template with ESLint, Prettier, Stylelint and more.",
+  "description": "Frontend application is a Vite app with React, Redux and TailwindCSS",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fabgrel10/vite-react-starter"
+    "url": "https://github.com/MERN-STACK-PROJ/MERN-STACK-PROJ"
   },
   "keywords": [
     "vite",
