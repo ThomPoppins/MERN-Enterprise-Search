@@ -4,7 +4,8 @@ Here's the corrected version:
 
 ## Supported Versions
 
-Use this section to inform people about which versions of your project are currently being supported with security updates.
+Implementation of real-time security patches is not a top priority yet, but I like to develop with reccomended security measures in place.
+
 
 | Version  | Supported           |
 | -------  | ------------------ |
@@ -14,4 +15,4 @@ Use this section to inform people about which versions of your project are curre
 
 ## Reporting a Vulnerability
 
-Please create an issue in this repository if you know about any vulnerabilities.
+Please create an issue in this repository if you know about any vulnerabilities or send me a mail at thompoppins@gmail.com.
