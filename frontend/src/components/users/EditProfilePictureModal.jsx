@@ -12,31 +12,21 @@ import store from '../../store/store'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
-/*
- * Function to create a blob from canvas (the crop preview) and download it as png file.
- */
 // eslint-disable-next-line func-style
 function generateDownload(canvas, crop) {
   if (!crop || !canvas) {
     return
   }
 
-  // toBlob() is not supported by IE11.
-  // toBlob() is a method from the canvas API that converts the canvas image to a blob.
-  // A blob is a file-like object of immutable, raw data.
   canvas.toBlob(
     (blob) => {
-      // The blob is then converted to a URL using URL.createObjectURL().
       const previewUrl = window.URL.createObjectURL(blob)
 
       const anchor = document.createElement('a')
       anchor.download = 'cropPreview.png'
-      // The URL is then used to create a link element with the download attribute.
       anchor.href = URL.createObjectURL(blob)
-      // The link element is then clicked to download the file.
       anchor.click()
 
-      // The URL is then revoked to free up memory.
       window.URL.revokeObjectURL(previewUrl)
     },
     'image/png',
@@ -44,50 +34,24 @@ function generateDownload(canvas, crop) {
   )
 }
 
-/*
- * Function that sets the preview canvas image to the cropped image.
-
-  * The canvas is the preview canvas.
-  * The image is the image that is being cropped.
-  * The setCanvasImage function is called when the user completes the crop.
-  * The (completed) crop is the crop object that contains the crop dimensions (of a completed crop).
-  * The (completed) crop object is passed in as a prop to the ReactCrop component.
-  * The (completed) crop object is updated when the user completes a change to the crop dimensions.
-  * The (completed) crop object is passed in as a prop to the setCanvasImage function.
- */
 // eslint-disable-next-line func-style
 function setCanvasImage(image, canvas, crop) {
   if (!crop || !canvas || !image) {
     return
   }
 
-  // scaleX and scaleY are used to scale the crop dimensions to the image dimensions.
-  // The crop dimensions are in pixels.
-  // The image dimensions are in pixels.
-  // The image natural dimensions are in pixels.
-  // The image natural dimensions are the dimensions of the image before it is scaled.
-  // The image dimensions are the dimensions of the image after it is scaled.
-  // The image is scaled to fit the ReactCrop component.
-  // The image is scaled to fit the ReactCrop component by setting the width and height of the image to 100%
   const scaleX = image.naturalWidth / image.width
   const scaleY = image.naturalHeight / image.height
-  // The canvas is scaled to fit the ReactCrop component.
   const ctx = canvas.getContext('2d')
-
-  // The pixelRatio is used to scale the canvas dimensions to the image dimensions.
   // refer https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
   const pixelRatio = window.devicePixelRatio
 
-  // The canvas dimensions are set to the image dimensions.
-  // The canvas dimensions are set to the image dimensions by multiplying the image dimensions by the pixelRatio.
-  // The canvas dimensions are set to the image dimensions by multiplying the image dimensions by the pixelRatio because the canvas is scaled to fit the ReactCrop component.
-  canvas.width = 300
-  canvas.height = 300
+  /* eslint-disable no-param-reassign */
+  canvas.width = crop.width * pixelRatio * scaleX
+  canvas.height = crop.height * pixelRatio * scaleY
+  /* eslint-enable no-param-reassign */
 
   // refer https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/setTransform
-  // refer https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/imageSmoothingQuality
-  // refer https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
-  // The canvas is scaled to fit the ReactCrop component.
   ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0)
   ctx.imageSmoothingQuality = 'high'
 
@@ -235,7 +199,7 @@ const EditProfilePictureModal = ({ onClose }) => {
     >
       {/* eslint-disable-next-line */}
       <div
-        className='relative m-4 flex h-auto w-[600px] max-w-full flex-col rounded-lg border-2 border-purple-900 bg-violet-950/40 px-4 py-4'
+        className='relative m-4 flex h-[510px] w-[600px] max-w-full flex-col rounded-lg border-2 border-purple-900 bg-violet-950/40 px-4 py-4'
         data-testid='company-modal'
         onClick={(event) => event.stopPropagation()}
       >
@@ -275,7 +239,7 @@ const EditProfilePictureModal = ({ onClose }) => {
                 src={upImg}
                 style={{
                   width: '300px',
-                  height: 'auto',
+                  height: '300px',
                   objectFit: 'contain',
                 }}
               />

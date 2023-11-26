@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
-import { use } from 'chai'
 import { useSelector } from 'react-redux'
-import { BACKEND_URL } from '../../../config'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const InviteOperations = ({ invite, updateInviteStatus }) => {
   // Spin accept button (after click Find)

@@ -373,9 +373,7 @@ export default router
 ### Professions in Company Schema
 - Added a new field to the company model for professions.
 - Companies can add professions to their profiles during registration.
-
-
-
+- Registereing companies professions will help the search result to become more relevant and dynamic.
 
 ### Storybook Integration
 - Installed Storybook for component development.

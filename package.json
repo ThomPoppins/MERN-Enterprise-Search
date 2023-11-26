@@ -20,6 +20,7 @@
   "license": "ISC",
   "devDependencies": {
     "@changesets/cli": "^2.26.2",
-    "changeset": "^0.2.6"
+    "changeset": "^0.2.6",
+    "chromatic": "^9.1.0"
   }
 }

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { AiOutlineClose } from 'react-icons/ai'
-import { BACKEND_URL } from '../../../config'
 import store from '../../store/store.jsx'
 import axios from 'axios'
 import { useSnackbar } from 'notistack'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 // Modal to edit user profile picture
 const DevEditProfilePictureModal = ({ userId, onClose }) => {

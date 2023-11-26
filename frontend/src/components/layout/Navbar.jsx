@@ -1,11 +1,12 @@
 import { HiOutlineCog, HiOutlineLogout, HiUser } from 'react-icons/hi'
 import { LuClipboardCheck, LuClipboardList } from 'react-icons/lu'
 import React, { useEffect, useState, useRef } from 'react'
-import { BACKEND_URL } from '../../../config'
 import { HiOutlineBriefcase } from 'react-icons/hi2'
 import { getPendingRecievedInvites } from '../../utils/invites/recievedInvitesUpdater'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const Navbar = () => {
   //

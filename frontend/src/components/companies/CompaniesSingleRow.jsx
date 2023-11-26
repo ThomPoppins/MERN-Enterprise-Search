@@ -8,7 +8,8 @@ import { BiShow } from 'react-icons/bi'
 import CompanyModal from './CompanyModal'
 import DeleteCompanyModal from './DeleteCompanyModal'
 import axios from 'axios'
-import { BACKEND_URL } from '../../../config'
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const CompaniesSingleRow = ({ company, updateCompanies }) => {
   const [showModal, setShowModal] = useState(false)
