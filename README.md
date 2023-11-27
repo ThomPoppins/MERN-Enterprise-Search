@@ -1,4 +1,4 @@
-# MERN-Enterprise-Search :rocket:
+# :rocket: MERN-Enterprise-Search 
 
 ## Application Description
 
