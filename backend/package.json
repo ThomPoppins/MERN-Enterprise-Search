@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "Mern-Search-Enterprise-Backend-Application",
   "version": "v0.0.2",
   "env": {
     "es6": true,

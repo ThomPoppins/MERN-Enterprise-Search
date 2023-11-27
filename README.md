@@ -10,7 +10,7 @@ Also I make use of a lot of different packages but only if they are complementar
 
 ## Table of Contents
 
-- [MERN\_STACK\_PROJ. :rocket:](#mern_stack_proj-rocket)
+- [:rocket: MERN-Enterprise-Search](#rocket-mern-enterprise-search)
   - [Application Description](#application-description)
   - [Table of Contents](#table-of-contents)
   - [Visual Tour Trought The Application](#visual-tour-trought-the-application)
@@ -2123,7 +2123,7 @@ Remember to test the GIF on GitHub to ensure it meets the platform's requirement
 - [ ] [MERNSTACK-] [DOCS here](https://app.meticulous.ai/docs). Check out [Meticulous](https://app.meticulous.ai/organizations/Vind-Expert) and try to get it running when login is possible with useraccount on documentation website. MAYBE if possible to frontend only login in MERN_STACK_PROJ. then deploy and test that one with Meticulous.
 - [ ] [MERNSTACK-] Investigate [JS Deliver](https://www.jsdelivr.com/) which claims to be a free CDN for open-source projects, is it useful for me?
 - [ ] [MERNSTACK-] Read [The Open Collective Website](https://docs.opencollective.com/help/about/introduction)
-- [ ] [MERNSTACK-]
+- [ ] [MERNSTACK-] [Read this and improve the projectg README.md](https://the-turing-way.netlify.app/project-design/project-repo/project-repo-readme.html)
 - [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-]
@@ -2151,3 +2151,4 @@ Absolutely! Nextra is a great choice for building an informational website. To p
 7. **Incorporate Gamification Elements**: Gamify your website by adding interactive features like badges, points, or progress bars. Users can earn rewards for completing certain actions or reaching milestones on your website.
 
 Remember to consider your target audience and the purpose of your website while incorporating interactive elements. Too many or overly complex interactive features may distract users from the main content. Strive for a balance between interactivity and readability to enhance the overall user experience.
+
