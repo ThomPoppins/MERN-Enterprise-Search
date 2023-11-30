@@ -64,6 +64,8 @@ router.post(
         url: getURLSuffixFromPath(request.file.path),
       })
 
+    console.log(`HERE THE URL IS: ${getURLSuffixFromPath(request.file.path)}`)
+
     // Save new Image document to database
     await image
       .save()

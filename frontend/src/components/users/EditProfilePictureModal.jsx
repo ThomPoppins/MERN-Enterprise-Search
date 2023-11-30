@@ -161,11 +161,11 @@ const EditProfilePictureModal = ({ onClose }) => {
                       onClose()
                     })
                     .catch((error) => {
-                      console.log(error)
+                      console.log("THIS IS THE ERROR 1", error)
                     })
                 })
                 .catch((error) => {
-                  console.log(error)
+                  console.log("THIS IS THE ERROR 2", error)
                 })
             }
           })

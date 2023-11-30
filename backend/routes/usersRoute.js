@@ -3,7 +3,7 @@ import { Company } from '../models/companyModel.js'
 import { Image } from '../models/imageModel.js'
 import { User } from '../models/userModel.js'
 import { Invite } from '../models/inviteModel.js'
-import { getStaticFileURLFromPath } from '../middleware/files/staticFiles.js'
+import { getURLSuffixFromPath } from '../middleware/files/staticFiles.js'
 import bcrypt from 'bcryptjs'
 import { generateToken } from '../middleware/auth/jwt.js'
 import mongoose from 'mongoose'
@@ -299,7 +299,8 @@ router.get('/search/:searchTerm', apiLimiter, async (request, response) => {
         }
 
         //  Get the path to the profile picture file
-        const profilePictureURL = getStaticFileURLFromPath(image.path)
+
+        const profilePictureURL = getURLSuffixFromPath(image.path)
 
         // Add the profilePictureURL property to the user object
         updatedUser.profilePictureURL = profilePictureURL
@@ -337,7 +338,7 @@ router.get('/user/:id', apiLimiter, async (request, response) => {
         console.log('Error in GET /user/:id: ', error),
       )
       //  Get the path to the profile picture file
-      profilePictureURL = getStaticFileURLFromPath(image.path)
+      profilePictureURL = getURLSuffixFromPath(image.path)
     }
 
     //  Add the profilePictureURL property to the user object
