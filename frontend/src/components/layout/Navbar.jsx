@@ -192,8 +192,8 @@ const Navbar = () => {
                 <Link className='text-white' to='/login'>
                   Login
                 </Link>
-                <Link className='text-white' to='/register'>
-                  Register
+                <Link className='text-white' to='/sign-up'>
+                  Sign Up
                 </Link>
               </div>
             )}

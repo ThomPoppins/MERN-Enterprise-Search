@@ -17,3 +17,5 @@ frontend/config.js.BACKUP
 /backend/certs/*
 
 /software/
+
+.history
