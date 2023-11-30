@@ -12,10 +12,3 @@ updates:
   labels:
     - "npm dependencies"
     - "frontend"
-
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/backend" # Location of package manifests
-    schedule:
-      interval: "weekly"
-    - "npm dependencies"
-    - "backend"
