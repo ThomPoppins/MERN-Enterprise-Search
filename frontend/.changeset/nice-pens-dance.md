@@ -3,7 +3,7 @@
 ---
 
 - [Version v0.0.3 Release Notes](#version-v003-release-notes)
-  - [Funtional Demo](#funtional-demo)
+  - [Get a small impression](#get-a-small-impression)
   - [New Features](#new-features)
     - [Basic Search Functionality](#basic-search-functionality)
     - [Image Cropping](#image-cropping)
@@ -26,7 +26,9 @@
 
 # Version v0.0.3 Release Notes
 
-## Funtional Demo
+## Get a small impression
+
+_**Note:** Below this line a GIF image of 75 MB is loading in, if you **wait for a moment** for the image to load you will see a small demo of the application live screenrecorded._
 
 ![Demo](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
 
@@ -392,11 +394,14 @@ export default router
 ### Animations
 
 - Added subtle animations for a more interactive user experience.
+- Notification animations: when a user has a pending 'Invite,' the icon in the navigation bar right to their name turns yellow and starts wiggling, asking the user for attention.
+- Dropdown has an "Invites" menu item on top with jumping letters to get the user's attention to the Invites page after clicking "Invites" in the dropdown menu.
 
+**Subtle edit of Tailwind preinstalled animations making it a lot more joyful and grabs the user attention better:**
 > /frontend/tailwind.config.js
 
 ```javascript file=/frontend/tailwind.config.js
-// Subtle edit of Tailwind preinstalled animations making it a lot more joyful and grabs the user attention better:
+// 
 export default {
   content: [
     './src/components/**/*.jsx',
@@ -450,8 +455,7 @@ export default {
 }
 ```
 
-- Notification animations: when a user has a pending 'Invite,' the icon in the navigation bar right to their name turns yellow and starts wiggling, asking the user for attention.
-- Dropdown has an "Invites" menu item on top with jumping letters to get the user's attention to the Invites page after clicking "Invites" in the dropdown menu.
+
 
 ### Co-Ownership Invites
 

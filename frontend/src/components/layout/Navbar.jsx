@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
+console.log('BACKEND_URL: ', BACKEND_URL)
+
 const Navbar = () => {
   //
   const userId = useSelector((state) => state.userId),
@@ -110,7 +112,7 @@ const Navbar = () => {
                         className='float-left ml-2 mr-3 h-8 w-8 rounded-full object-cover'
                         src={
                           user?.profilePictureURL
-                            ? user?.profilePictureURL
+                            ? `${BACKEND_URL}${user?.profilePictureURL}`
                             : `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
                         }
                       />

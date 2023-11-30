@@ -58,7 +58,7 @@ const UserProfile = () => {
             className='mx-auto mt-2 h-64 w-64 rounded-full object-cover'
             src={
               user?.profilePictureURL
-                ? user?.profilePictureURL
+                ? `${BACKEND_URL}${user?.profilePictureURL}`
                 : profilePicturePlaceholderURL
             }
           />
