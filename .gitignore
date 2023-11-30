@@ -9,6 +9,7 @@ backend/public/uploads/*
 
 # Environment variables
 backend/.env
+backend/config.js.BACKUP
 frontend/.env
 frontend/config.js.BACKUP
 

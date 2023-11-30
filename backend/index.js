@@ -1,7 +1,8 @@
+import dotenv from 'dotenv'
+dotenv.config()
 import cors from 'cors'
 import express from 'express'
 import mongoose from 'mongoose'
-import { PORT, mongoDBURL } from './config.js'
 import authRoute from './routes/authRoute.js'
 import companiesRoute from './routes/companiesRoute.js'
 import findRoute from './routes/findRoute.js'
@@ -10,6 +11,8 @@ import kvkRoute from './routes/kvkRoute.js'
 import uploadRoute from './routes/uploadRoute.js'
 import usersRoute from './routes/usersRoute.js'
 import filesRoute from './routes/filesRoute.js'
+
+const { PORT, MONGODB_URL } = process.env
 
 const app = express()
 
@@ -53,12 +56,14 @@ app.use('/auth', authRoute)
 app.use('/kvk', kvkRoute)
 app.use('/upload', uploadRoute)
 
+console.log('MONGODB_URL:', process.env.MONGODB_URL)
+
 /*
  * Connect to MongoDB database
  * If connection is successful, start Express.js backend server and listen to PORT
  */
 mongoose
-  .connect(mongoDBURL)
+  .connect(MONGODB_URL)
   .then(() => {
     // eslint-disable-next-line no-console
     console.log('App connected successfully to the database!')
