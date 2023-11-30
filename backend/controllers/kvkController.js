@@ -1,7 +1,8 @@
 import axios from 'axios'
 import fs from 'fs'
 import https from 'https'
-import { KVK_TEST_API_KEY } from '../config.js'
+
+const { KVK_TEST_API_KEY } = process.env
 
 const PATH_TO_KVK_API_CERTIFICATE_CHAIN_RELATIVE_TO_INDEX_APP =
   './certs/kvkApi/Private_G1_chain.pem'

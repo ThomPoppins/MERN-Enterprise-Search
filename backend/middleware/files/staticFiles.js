@@ -1,4 +1,4 @@
-import { BACKEND_URL } from '../../config.js'
+const { BACKEND_URL } = process.env
 
 export const getStaticFileURLFromPath = (filePath) => {
   // Remove the first part of the path, which is "public".

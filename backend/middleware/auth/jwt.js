@@ -1,5 +1,6 @@
-import { JWT_SECRET } from '../../config.js'
 import jwt from 'jsonwebtoken'
+
+const { JWT_SECRET } = process.env
 
 const generateToken = (user) => {
     const { _id, username, email, hashedPassword } = user
