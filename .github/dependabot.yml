@@ -3,7 +3,7 @@
 # Please see the documentation for all configuration options:
 # https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
-version: c0.0.3
+version: v0.0.2
 updates:
   - package-ecosystem: "pnpm" # See documentation for possible values
     directory: "/" # Location of package manifests
