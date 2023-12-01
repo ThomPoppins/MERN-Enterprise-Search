@@ -35,5 +35,5 @@
   ],
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
-  "workbench.editor.dragToOpenWindow": false,
+  "workbench.editor.dragToOpenWindow": false
 }

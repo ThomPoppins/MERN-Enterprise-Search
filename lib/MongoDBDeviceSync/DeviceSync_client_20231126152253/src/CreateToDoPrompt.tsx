@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Text, Input, Button} from 'react-native-elements';
-import {COLORS} from './Colors';
+import React, { useState } from 'react'
+import { StyleSheet, View } from 'react-native'
+import { Text, Input, Button } from 'react-native-elements'
+import { COLORS } from './Colors'
 
 type Props = {
-  onSubmit: ({summary}: {summary: string}) => void;
-};
+  onSubmit: ({ summary }: { summary: string }) => void
+}
 
 export function CreateToDoPrompt(props: Props): React.ReactElement<Props> {
-  const {onSubmit} = props;
-  const [summary, setSummary] = useState('');
+  const { onSubmit } = props
+  const [summary, setSummary] = useState('')
 
   return (
     <View style={styles.modalWrapper}>
@@ -17,17 +17,17 @@ export function CreateToDoPrompt(props: Props): React.ReactElement<Props> {
         Add To-Do Item
       </Text>
       <Input
-        placeholder="What do you want to do?"
+        placeholder='What do you want to do?'
         onChangeText={(text: string) => setSummary(text)}
         autoCompleteType={undefined}
       />
       <Button
-        title="Save"
+        title='Save'
         buttonStyle={styles.saveButton}
-        onPress={() => onSubmit({summary})}
+        onPress={() => onSubmit({ summary })}
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
     width: 280,
     backgroundColor: COLORS.primary,
   },
-});
+})

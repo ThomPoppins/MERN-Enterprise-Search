@@ -1,4 +1,4 @@
-# :rocket: MERN-Enterprise-Search 
+# :rocket: MERN-Enterprise-Search
 
 ## Application Description
 
@@ -1512,7 +1512,6 @@ Redux is a state management library that is often used in conjunction with React
 
 - **Ecosystem integration:** React and Redux have large and active ecosystems of libraries and tools, making it easy to integrate with other technologies and solve common problems.
 
-
 ### Backend
 
 In the backend, I've set up RESTful API endpoints to create, read, update, and delete documents from collections. These collections are defined and configured in the `/backend/models` folder, ensuring a structured and organized approach to data management.
@@ -1986,8 +1985,8 @@ Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to
 - [ ] [MERNSTACK-] Read into [Voy](https://github.com/tantaraio/voy) and see if that can improve a search esperience.
 - [ ] [MERNSTACK-] Implement [Ollama into frontend application like this example.](https://ollama.ai/blog/building-llm-powered-web-apps)
 - [ ] [MERNSTACK-] Generate GIF files from screen records, follow these instructions:
-**START INSTRUCTIONS:**
-****Creating a high-quality GIF within the constraints of a 100MB file size for GitHub involves a balance between duration, quality, and compression. Here's a guide using FFmpeg and Gifski:
+      **START INSTRUCTIONS:**
+      \*\*\*\*Creating a high-quality GIF within the constraints of a 100MB file size for GitHub involves a balance between duration, quality, and compression. Here's a guide using FFmpeg and Gifski:
 
 ### Prerequisites
 
@@ -2040,7 +2039,7 @@ Once satisfied with the quality and size, upload the GIF to your GitHub reposito
 Remember to test the GIF on GitHub to ensure it meets the platform's requirements. If necessary, further optimization may be needed.
 **END INSTRUCTIONS**
 
-- [ ] [MERNSTACK-] Find out if it is possible to run [ONNX Runtime](https://onnxruntime.ai/docs/tutorials/web/build-web-app.html) in the browser as AI model server. Read [0. Get Started Steps](https://onnxruntime.ai/getting-started), [0.5 Install ONNX runtime and read Get Started section](https://onnxruntime.ai/docs/install/)   [1. Build a web application with ONNX Runtime](https://onnxruntime.ai/docs/tutorials/web/build-web-app.html), [2. How to add machine learning to your web application with ONNX Runtime](https://onnxruntime.ai/docs/tutorials/web/) [3. ](info url), [4. ](info url)
+- [ ] [MERNSTACK-] Find out if it is possible to run [ONNX Runtime](https://onnxruntime.ai/docs/tutorials/web/build-web-app.html) in the browser as AI model server. Read [0. Get Started Steps](https://onnxruntime.ai/getting-started), [0.5 Install ONNX runtime and read Get Started section](https://onnxruntime.ai/docs/install/) [1. Build a web application with ONNX Runtime](https://onnxruntime.ai/docs/tutorials/web/build-web-app.html), [2. How to add machine learning to your web application with ONNX Runtime](https://onnxruntime.ai/docs/tutorials/web/) [3. ](info url), [4. ](info url)
 - [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-]
 - [ ] [MERNSTACK-]
@@ -2151,4 +2150,3 @@ Absolutely! Nextra is a great choice for building an informational website. To p
 7. **Incorporate Gamification Elements**: Gamify your website by adding interactive features like badges, points, or progress bars. Users can earn rewards for completing certain actions or reaching milestones on your website.
 
 Remember to consider your target audience and the purpose of your website while incorporating interactive elements. Too many or overly complex interactive features may distract users from the main content. Strive for a balance between interactivity and readability to enhance the overall user experience.
-

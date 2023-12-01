@@ -2,7 +2,7 @@
 /* eslint-disable no-implicit-coercion */
 /* eslint-disable line-comment-position */
 /* eslint-disable no-inline-comments */
-module.exports = {
+export default {
   testEnvironment: 'jest-environment-jsdom',
   moduleDirectories: [
     'node_modules',
@@ -13,4 +13,4 @@ module.exports = {
     +__dirname, // the root directory
   ],
   // ... other options ...
-}
+};

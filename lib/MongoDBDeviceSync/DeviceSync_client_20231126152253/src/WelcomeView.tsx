@@ -1,45 +1,45 @@
-import React, {useCallback, useState} from 'react';
-import Realm from 'realm';
-import {useApp} from '@realm/react';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {StyleSheet, Text, View, Alert} from 'react-native';
-import {Input, Button, Icon} from 'react-native-elements';
-import {COLORS} from './Colors';
+import React, { useCallback, useState } from 'react'
+import Realm from 'realm'
+import { useApp } from '@realm/react'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { StyleSheet, Text, View, Alert } from 'react-native'
+import { Input, Button, Icon } from 'react-native-elements'
+import { COLORS } from './Colors'
 
 export function WelcomeView(): React.ReactElement {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   // state values for toggable visibility of features in the UI
-  const [passwordHidden, setPasswordHidden] = useState(true);
-  const [isInSignUpMode, setIsInSignUpMode] = useState(true);
+  const [passwordHidden, setPasswordHidden] = useState(true)
+  const [isInSignUpMode, setIsInSignUpMode] = useState(true)
 
-  const app = useApp();
+  const app = useApp()
 
   // signIn() uses the emailPassword authentication provider to log in
   const signIn = useCallback(async () => {
-    const creds = Realm.Credentials.emailPassword(email, password);
-    await app.logIn(creds);
-  }, [app, email, password]);
+    const creds = Realm.Credentials.emailPassword(email, password)
+    await app.logIn(creds)
+  }, [app, email, password])
 
   // onPressSignIn() uses the emailPassword authentication provider to log in
   const onPressSignIn = useCallback(async () => {
     try {
-      await signIn();
+      await signIn()
     } catch (error: any) {
-      Alert.alert(`Failed to sign in: ${error?.message}`);
+      Alert.alert(`Failed to sign in: ${error?.message}`)
     }
-  }, [signIn]);
+  }, [signIn])
 
   // onPressSignUp() registers the user and then calls signIn to log the user in
   const onPressSignUp = useCallback(async () => {
     try {
-      await app.emailPasswordAuth.registerUser({email, password});
-      await signIn();
+      await app.emailPasswordAuth.registerUser({ email, password })
+      await signIn()
     } catch (error: any) {
-      Alert.alert(`Failed to sign up: ${error?.message}`);
+      Alert.alert(`Failed to sign up: ${error?.message}`)
     }
-  }, [signIn, app, email, password]);
+  }, [signIn, app, email, password])
 
   return (
     <SafeAreaProvider>
@@ -50,21 +50,21 @@ export function WelcomeView(): React.ReactElement {
           separate from your Atlas Cloud login.
         </Text>
         <Input
-          placeholder="email"
+          placeholder='email'
           onChangeText={setEmail}
-          autoCapitalize="none"
+          autoCapitalize='none'
           autoCompleteType={undefined}
         />
         <Input
-          placeholder="password"
+          placeholder='password'
           onChangeText={setPassword}
           secureTextEntry={passwordHidden}
           rightIcon={
             <Icon
-              type="material-community"
+              type='material-community'
               name={passwordHidden ? 'eye-off-outline' : 'eye-outline'}
               size={12}
-              color="black"
+              color='black'
               onPress={() => setPasswordHidden(!passwordHidden)}
               tvParallaxProperties={undefined}
             />
@@ -74,13 +74,13 @@ export function WelcomeView(): React.ReactElement {
         {isInSignUpMode ? (
           <>
             <Button
-              title="Create Account"
+              title='Create Account'
               buttonStyle={styles.mainButton}
               onPress={onPressSignUp}
             />
             <Button
-              title="Already have an account? Log In"
-              type="clear"
+              title='Already have an account? Log In'
+              type='clear'
               titleStyle={styles.secondaryButton}
               onPress={() => setIsInSignUpMode(!isInSignUpMode)}
             />
@@ -88,13 +88,13 @@ export function WelcomeView(): React.ReactElement {
         ) : (
           <>
             <Button
-              title="Log In"
+              title='Log In'
               buttonStyle={styles.mainButton}
               onPress={onPressSignIn}
             />
             <Button
               title="Don't have an account? Create Account"
-              type="clear"
+              type='clear'
               titleStyle={styles.secondaryButton}
               onPress={() => setIsInSignUpMode(!isInSignUpMode)}
             />
@@ -102,7 +102,7 @@ export function WelcomeView(): React.ReactElement {
         )}
       </View>
     </SafeAreaProvider>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -127,4 +127,4 @@ const styles = StyleSheet.create({
   secondaryButton: {
     color: COLORS.primary,
   },
-});
+})

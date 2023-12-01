@@ -6,12 +6,11 @@ Here's the corrected version:
 
 Implementation of real-time security patches is not a top priority yet, but I like to develop with reccomended security measures in place.
 
-
-| Version  | Supported           |
-| -------  | ------------------ |
-| v0.0.3   | ❌                |
-| v0.0.2   | ❌                |
-| v0.0.1   | ❌                |
+| Version | Supported |
+| ------- | --------- |
+| v0.0.3  | ❌        |
+| v0.0.2  | ❌        |
+| v0.0.1  | ❌        |
 
 ## Reporting a Vulnerability
 
