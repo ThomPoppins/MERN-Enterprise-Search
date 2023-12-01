@@ -1,5 +1,5 @@
 {
-  "name": "Mern-Search-Enterprise-Frontend-Application",
+  "name": "MERN-Enterprise-Search-Client",
   "env": {
     "browser": true,
     "es6": true,
