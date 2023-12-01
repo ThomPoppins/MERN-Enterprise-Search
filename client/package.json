@@ -32,6 +32,7 @@
     "fix:eslint": "eslint --fix  . --ext .js,.jsx",
     "lint:stylelint": "stylelint **/*.{css,scss,jsx}",
     "fix:stylelint": "stylelint --fix  ./src/**/*.{css, scss,jsx}",
+    "install": "yarn",
     "test": "jest",
     "build-css": "postcss src/index.css -o src/tailwindStorybook.css",
     "storybook": "storybook dev -p 6006",
