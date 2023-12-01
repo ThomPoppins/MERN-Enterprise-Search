@@ -30,7 +30,7 @@
 
 _**Note:** Below this line a GIF image of 75 MB is loading in, if you **wait for a moment** for the image to load you will see a small demo of the application live screenrecorded._
 
-![Demo](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
+![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
 
 ## New Features
 
@@ -465,6 +465,8 @@ export default {
 - Users can accept or decline co-ownership invites.
 - After accepting or declining all pending invites (so no pending invites are left), the user gets redirected to the /companies page where all companies are listed that the user now (co-)owns.
 - Safety measures implemented to prevent users from being invited twice, ensuring a unique co-owner status and no duplicate ownership registrations.
+
+![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/Invites-animation.gif?raw=true)
 
 ## Pending Tasks
 
