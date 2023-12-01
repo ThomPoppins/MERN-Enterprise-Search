@@ -1,29 +1,18 @@
 {
-  "name": "MERN-STACK-PROJ",
-  "env": {
-    "browser": true,
-    "es6": true,
-    "node": true,
-    "jest": true
+  "name": "MERN-Enterprise-Search",
+  "workspaces": {
+    "client": "client/*",
+    "server": "server/*"
   },
-  "private": false,
-  "type": "module",
-  "version": "v0.0.2",
-  "description": "",
+  "version": "v0.0.3",
   "main": "index.js",
-  "scripts": {
-    "changeset:patch:all": "cd frontend && npm run changeset:patch && cd ../backend && npm run changeset:patch && cd .. && npm run changeset:root",
-    "changeset:root": "changeset version patch"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@changesets/cli": "^2.26.2",
-    "changeset": "^0.2.6",
-    "chromatic": "^9.1.0"
-  },
-  "dependencies": {
-    "dotenv": "^16.3.1"
+  "repository": "git@github.com:ThomPoppins/MERN-Enterprise-Search.git",
+  "author": "Thom Veldpaus <thompoppins@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "bolt": {
+    "workspaces": [
+      "packages/*"
+    ]
   }
 }
