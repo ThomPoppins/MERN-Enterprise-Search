@@ -108,8 +108,8 @@ const UserSearch = ({
                   userResult.profilePictureURL
                     ? userResult.profilePictureURL
                     : userResult.gender === 'Man'
-                      ? `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
-                      : `${BACKEND_URL}/placeholders/profile-picture-placeholder-woman.jpeg`
+                    ? `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
+                    : `${BACKEND_URL}/placeholders/profile-picture-placeholder-woman.jpeg`
                 }
               />
             </div>

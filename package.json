@@ -20,7 +20,7 @@
     "server": "npm run start --prefix server",
     "build": "npm run build --prefix client",
     "heroku-postbuild": "npm run build --prefix client",
-    "postinstall": "prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json,scss} && eslint --fix ./**/*.{js,jsx,ts,tsx} && npm run changesets"
+    "postinstall": "eslint --fix . && prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json,scss} && eslint --fix ./**/*.{js,jsx,ts,tsx} && npm run changesets"
   },
   "private": false,
   "bolt": {
@@ -33,6 +33,7 @@
     "@changesets/cli": "^2.27.1",
     "changeset": "^0.2.6",
     "changesets": "^1.0.2",
+    "dotenv": "^16.3.1",
     "eslint": "^8.54.0",
     "nodemon": "^3.0.1",
     "prettier": "^3.1.0"
