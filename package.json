@@ -22,6 +22,7 @@
     ]
   },
   "dependencies": {
+    "@changesets/cli": "^2.27.1",
     "nodemon": "^3.0.1"
   }
 }
