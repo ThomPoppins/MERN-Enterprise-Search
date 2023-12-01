@@ -102,25 +102,25 @@ Get a general impression of my application.
 
 **Homepage when user is logged in, will be a working search engine for finding professional people with an expertise.**
 
-![Homepage Search Engine](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/001.png?raw=true)
+![Homepage Search Engine](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/001.png?raw=true)
 
 ### Profile page (with gender specific placeholder profile picture)
 
 **When you register an account your profile is very empty and your profile picture is a placeholder, a male for men and for women a female picture placeholder.**
 
-![Profile Page Placeholder Profile Picture](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/002.png?raw=true)
+![Profile Page Placeholder Profile Picture](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/002.png?raw=true)
 
 ### Profile picture upload modal
 
 **After logging in for the first time, users can click on the`upload` button on the placeholder profile picture for uploading their first profile picture. After clicking the button, a modal will pop up where you can upload a image file by clicking on the `browse...` button and select an image locally from their device.**
 
-![Image Upload Modal Pop-Up](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/003.png?raw=true)
+![Image Upload Modal Pop-Up](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/003.png?raw=true)
 
 ### Profile picture preview before upload
 
 **After selecting a image local from their device, a preview will be shown of what image it would be.**
 
-![Profile Picture Modal Preview](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/004.png?raw=true)
+![Profile Picture Modal Preview](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/004.png?raw=true)
 
 If the user wants can he/she still change their mind and choose a different one or cancel the upload because the image is not yet uploaded. The image preview is a Base64 URL encoded image.
 
@@ -132,7 +132,7 @@ If the user wants can he/she still change their mind and choose a different one 
 <img src={blobValueString} />
 ```
 
-**Source:** _[/frontend/src/components/users/EditProfilePicture.jsx](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/src/components/users/EditProfilePictureModal.jsx)_
+**Source:** _[/frontend/src/components/users/EditProfilePicture.jsx](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/frontend/src/components/users/EditProfilePictureModal.jsx)_
 
 ```javascript
 // Modal to edit user profile picture
@@ -190,7 +190,7 @@ If the user is sure about it, he/she will click the upload button and now the im
 
 After the image is uploaded and saved, a corresponding Image "document" (entry) with a filepath will be saved to the MongoDB database in the "images" collection. (A collection is like a database table.)
 
-**Source:** _[/backend/routes/uploadRoute.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/routes/uploadRoute.js)_
+**Source:** _[/backend/routes/uploadRoute.js](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/backend/routes/uploadRoute.js)_
 
 ```javascript
 import { Image } from '../models/imageModel.js'
@@ -280,7 +280,7 @@ The image is served by ExpressJS which means this backend is also the CDN. Becau
 
 Express.js can serve static files using **Express.static("public_directory")**.
 
-**Source:** _[/backend/index.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/index.js)_
+**Source:** _[/backend/index.js](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/backend/index.js)_
 
 ```javascript
 // Use .static() and configure the /public folder for hosting static resources as CDN for images and other files.
@@ -292,7 +292,7 @@ app.use(express.static('public'))
 ### User profile page and data structure
 
 _Profile page:_
-![Profile Page With Profile Picture](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/005.png?raw=true)
+![Profile Page With Profile Picture](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/005.png?raw=true)
 
 At this point there are only a few details a user can set when registering a new account. Of course this will be expend (largely) in the future. For now in this stage of the development process of the application, it's useful to keep minimalistic, clean and keep everything simple now there is not any dependency on yet and over complicate everything. Dependencies for users details could be a detailed profile pages, location/address information, media, posts on a timeline (or feed) or many other things users would want to save personally to their account eventually.
 
@@ -354,11 +354,11 @@ _Additional fields:_
 - The **Mongoose** schema establishes the data structure for the user information within the database.
 - It enforces uniqueness for each user's username and email to prevent double sign-ups and ensuring secure storage of their hashed password.
   User details like `firstName`, `lastName`, `gender`and a reference field to the profile picture image document called `profilePicture`.
-- The `User` schema describing the data structure of the MongoDB `User` documents in the `users` collection is defined in the [backend server](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/userModel.js).
+- The `User` schema describing the data structure of the MongoDB `User` documents in the `users` collection is defined in the [backend server](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/backend/models/userModel.js).
 - The `User` schema is described and defined using Mongoose, a popular _Object Data Modeling (ODM)_ library for MongoDB and Node.js.
 - The `User` schema is expected to extends with many fields when continued development will many more dependencies on user data when the application grows and complexity increases.
 
-**Source:** _[/backend/models/userModel.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/userModel.js)_
+**Source:** _[/backend/models/userModel.js](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/backend/models/userModel.js)_
 
 ```javascript
 // Instantiate User schema
@@ -411,7 +411,7 @@ const userSchema = new mongoose.Schema(
 - The model (`User`) is directly tied to the schema (`userSchema`).
 - When you use methods like User.create(), User.find(), or others, Mongoose ensures that the data aligns with the structure defined in the schema.
 
-> _[/backend/models/userModel.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/userModel.js):_
+> _[/backend/models/userModel.js](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/backend/models/userModel.js):_
 
 ```javascript
 // Instantiate User model
@@ -427,24 +427,24 @@ On the /companies page the user can see all companies that he owns and has the c
 > **Note:** I opened the dropdown menu.
 
 _Card view:_
-![Companies Listing Page Card View](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/007.png?raw=true)
+![Companies Listing Page Card View](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/007.png?raw=true)
 
 _Table view:_
-![Companies Listing Page Table View](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/006.png?raw=true)
+![Companies Listing Page Table View](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/006.png?raw=true)
 
 When the user clicks on the _eye_ icon on a listed company, a modal will pop up that will display the main and most important public company information so the owner of the company can check the company current state quickly at a glance without having to navigate to another company specific details page and lose track of what they were doing or planning to do from the companies listing page.
 
 > **Note:** At this stage in development, companies do not have that many details yet to show. There will be a lot of work to these pages yet and they do not reflect a final version.
 
-![Show Company Details Modal](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/008.png?raw=true)
+![Show Company Details Modal](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/008.png?raw=true)
 
 #### Registration
 
 An owner of a company can register his company in my application. On this companies listing page you see a green `+` icon in the top right corner. When a user clicks on that, he will navigate to the company register page where the user can register a new company that hasn't registered yet by filling in a company registration form.
 
 _Company registration form:_
-![Company Registration Form Top](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/008.1.png?raw=true)
-![Company Registration Form Bottom](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/008.2.png?raw=true)
+![Company Registration Form Top](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/008.1.png?raw=true)
+![Company Registration Form Bottom](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/008.2.png?raw=true)
 
 #### Form field validation
 
@@ -452,7 +452,7 @@ All form input fields in my application have to be validated. I've written my ow
 
 **Example validator:**
 
-**Source:** _[/frontend/utils/validation/emailValidator.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/src/utils/validation/emailValidator.jsx)_
+**Source:** _[/frontend/utils/validation/emailValidator.js](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/frontend/src/utils/validation/emailValidator.jsx)_
 
 ```javascript
 const emailValidator = (email) => {
@@ -465,11 +465,11 @@ export default emailValidator
 
 **Invalid value notifications:**
 
-![Invalid Values Error Notifications](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Invalid-Form-Values.png?raw=true)
+![Invalid Values Error Notifications](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/Invalid-Form-Values.png?raw=true)
 
 **Code example communicating invalid values in the UI of company registration page:**
 
-**Source:** _[/frontend/src/pages/companies/RegisterCompany.jsx](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/src/pages/companies/RegisterCompany.jsx)_
+**Source:** _[/frontend/src/pages/companies/RegisterCompany.jsx](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/frontend/src/pages/companies/RegisterCompany.jsx)_
 
 ```javascript
 import React, { useEffect, useState } from 'react'
@@ -719,7 +719,7 @@ const RegisterCompany = () => {
 
 ##### KVK number validation
 
-![Invalid KvK Number](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Invalid-KvK-Number.png?raw=true)
+![Invalid KvK Number](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/Invalid-KvK-Number.png?raw=true)
 
 Companies in the Netherlands (my home country) are always registered to the "Kamer van Koophandel" which is the Chamber of Commerce in the Netherlands. It is a government agency that plays a crucial role in the registration and documentation of businesses operating in my country.
 
@@ -727,7 +727,7 @@ I've connected the backend application to the KvK test API for validation of com
 
 **GET route to get KvK data:**
 
-**Source:** _[/backend/routes/kvkRoute.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/routes/kvkRoute.js)_
+**Source:** _[/backend/routes/kvkRoute.js](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/backend/routes/kvkRoute.js)_
 
 ```javascript
 import { getKvkData } from '../controllers/kvkController.js'
@@ -744,7 +744,7 @@ export default router
 
 **KvK controller for handling request:**
 
-**Source:** _[/backend/controllers/kvkController.js](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/controllers/kvkController.js)_
+**Source:** _[/backend/controllers/kvkController.js](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/backend/controllers/kvkController.js)_
 
 ```javascript
 import axios from 'axios'
@@ -1133,7 +1133,7 @@ const companySchema = new mongoose.Schema(
 )
 ```
 
-> **Note:** To see the complete code of the `Company` schema instantiation with all fields [here](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/models/companyModel.js).
+> **Note:** To see the complete code of the `Company` schema instantiation with all fields [here](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/backend/models/companyModel.js).
 
 **Model:**
 
@@ -1146,8 +1146,8 @@ const Company = mongoose.model('Company', companySchema)
 
 When a company owner clicks on the _pencil_ icon on the companies listing page the owner is able to edit the company.
 
-![Edit Company Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Edit-Company.png?raw=true)
-![Edit Company Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Edit-Company-2.png?raw=true)
+![Edit Company Page](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/Edit-Company.png?raw=true)
+![Edit Company Page](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/Edit-Company-2.png?raw=true)
 
 #### Company ownership
 
@@ -1156,33 +1156,33 @@ Companies are automatically owned by the `User` that registers the company to th
 If a company has more than one owner, the company owners is able to invite other users for company ownership, giving the other co-owners the same admin level elevated access to the configuration of their company.
 
 _Find other users and invite them for co-ownership:_
-![Find Other Users For Company Co-ownership](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Find-Other-Users-For-Company-Co-ownership.png?raw=true)
+![Find Other Users For Company Co-ownership](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/Find-Other-Users-For-Company-Co-ownership.png?raw=true)
 
 A company owner can find users of the application with the search box on the "edit company" page and send them a invite by clicking the `invite` button.
 
 When a user is invited by the owner for co-ownership the user "result" will be removed from the search results list and a "Pending invites" section will appear with the invited user. I invited the user Kaya Lowe in this example.
 
-![User Invited On Edit Company Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/User-Invited.png?raw=true)
+![User Invited On Edit Company Page](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/User-Invited.png?raw=true)
 
 > **Note:** In the future this `Invite` information will be the user details, but I have to make a future decision about where I want this data to be served from the backend to the client application, that's why it is only containing `ObjectId` information of the `Invite` document. See the `Invite` schema data structure [further down below](#invite-schema).
 
 When the `User` is invited to become co-owner of the company, that user will receive a invite notification in the navigation bar.
 
-![User Invited On Edit Company Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Invite-Notification.png?raw=true)
+![User Invited On Edit Company Page](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/Invite-Notification.png?raw=true)
 
 Clicking on the `Invites` dropdown menu item, the user will navigate to the invites page and be able to _Accept_ or _Decline_ the invite by clicking the buttons in the _Operations_ section in the _Invites_ table listing the pending invites.
 
-![Invites Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Invites-Page.png?raw=true)
+![Invites Page](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/Invites-Page.png?raw=true)
 
 After clicking _Accept_ or _Decline_ and there is no pending invite left, the user will navigate to the companies listing page and the companies they accepted will be listed there with their name added as co-owner.
 
-![Invite Accepted](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Invite-Accepted.png?raw=true)
+![Invite Accepted](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/Invite-Accepted.png?raw=true)
 
 > **Note:** The invite notification has disappeared, the _Invites_ dropdown menu item isn't listing anymore.
 
 After accepting the invite, the _Owners_ section of the _edit company_ page is updated with the new owner and the _Pending invites_ Section disappeared since there are no pending invites left.
 
-![Owners Section Updated](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Ownership-Section-Updated.png?raw=true)
+![Owners Section Updated](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/Ownership-Section-Updated.png?raw=true)
 
 > **Note:** In React I use _conditional rendering_ and _state management_ to easily always keep the UI up-to-date with the current state of the application when the state (current data) has been changed.
 
@@ -1429,11 +1429,11 @@ The backend server is now a CDN for static files like images. This means that th
 
 Users can now upload a profile picture. The profile picture will be saved in the `/backend/public/uploads/images` folder and the path to the image will be saved in the database. The backend server will serve the image from the `/backend/public` folder. This way, the frontend application can access the image from the backend server and the image path is stored in the database.
 
-![Upload Profile Picture Modal Image Unselected](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/003.png?raw=true)
+![Upload Profile Picture Modal Image Unselected](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/003.png?raw=true)
 
-![Upload Profile Picture Modal Image Selected](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/004.png?raw=true)
+![Upload Profile Picture Modal Image Selected](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/004.png?raw=true)
 
-![Profile Picture Uploaded](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/005.png?raw=true)
+![Profile Picture Uploaded](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/005.png?raw=true)
 
 ### Version v0.0.1 Release Notes
 
@@ -1578,13 +1578,13 @@ By implementing user authentication with JWTs, this repository ensures a robust 
 **ES Lint:**
 I'm using **ES Lint** to get my code up-to-date with strict code standards as much as is tolerable and logical (most strict setting is not a logical configuration). The VS Code ES Lint extension has some cool features like auto-fixing a lot of errors like the rule to enforce sorting props alphabetically so props will always be in the same order as parameter of a components as the place where the components is used in the JSX.
 
-![ES Lint in VS Code](![Invite Accepted](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Using-ES-Lint.png?raw=true)
+![ES Lint in VS Code](![Invite Accepted](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/Using-ES-Lint.png?raw=true)
 
 #### ES Lint config:
 
 **Frontend (Vite application with React):**
 
-**Source:** _[/frontend/.eslint.cjs](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/.eslintrc.cjs)_
+**Source:** _[/frontend/.eslint.cjs](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/frontend/.eslintrc.cjs)_
 
 ```javascript
   extends: [
@@ -1680,7 +1680,7 @@ I'm using **ES Lint** to get my code up-to-date with strict code standards as mu
 
 #### Backend config
 
-**Source:** _[/backend/.eslint.cjs](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/.eslintrc.cjs)_
+**Source:** _[/backend/.eslint.cjs](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/backend/.eslintrc.cjs)_
 
 ```javascript
 'use strict'
@@ -1723,7 +1723,7 @@ module.exports = {
 
 I use Prettier code formatter to format my code in a way I find most readable.
 
-**Source:** _[/frontend/.prettierrc](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/frontend/.prettierrc) and [/backend/.prettierrc](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/backend/.prettierrc)_
+**Source:** _[/frontend/.prettierrc](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/frontend/.prettierrc) and [/backend/.prettierrc](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/backend/.prettierrc)_
 
 ```json
 {
@@ -1743,7 +1743,7 @@ I use Prettier code formatter to format my code in a way I find most readable.
 
 Im using a **Jira** board with 4 swim lanes: TODO, IN PROGRESS, BUSY and DONE to sort my project issues.
 
-![Jira Board](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/Jira-Board.png?raw=true)
+![Jira Board](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/Jira-Board.png?raw=true)
 
 **TODO** issues I haven't started working on yet.
 

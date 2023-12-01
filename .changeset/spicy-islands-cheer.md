@@ -41,25 +41,25 @@
 
 > Find button is disabled if no search input value is given:
 
-![Search Field](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/search-001-empty-input.png?raw=true)
+![Search Field](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/search-001-empty-input.png?raw=true)
 
 > **Search is ready to find pro's!**
 
-![Search Query Ready To Find](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/search-002-search-machine-ready.png?raw=true)
+![Search Query Ready To Find](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/search-002-search-machine-ready.png?raw=true)
 
 > **CSS Grid used for structuring the Result components (the clickable company specific rectangle that redirects to their profile/details page)**
 
-![Search Results Grid](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/search-003-results.png?raw=true)
+![Search Results Grid](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/search-003-results.png?raw=true)
 
-![Click Company Result](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/search-004-click-result.png?raw=true)
+![Click Company Result](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/search-004-click-result.png?raw=true)
 
 > **Current user is member (owner) of this company, private details revealed:**
 
-![Company Profile/Details Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/search-005-company-profile.png?raw=true)
+![Company Profile/Details Page](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/search-005-company-profile.png?raw=true)
 
 > **Private details hidden, user not member of this company:**
 
-![Company Private Details Hidden](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/lifeguard003-company-profile-details-with-private-details-hidden-for-general-user-who-is-not-member-of-company.png?raw=true)
+![Company Private Details Hidden](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/lifeguard003-company-profile-details-with-private-details-hidden-for-general-user-who-is-not-member-of-company.png?raw=true)
 
 ### Image Cropping
 
@@ -72,15 +72,15 @@
 
 > /profile Profile page from a new user that has not uploaded a profile image yet.
 
-![New User Profile Page](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/image-crop-001-new-user.png?raw=true)
+![New User Profile Page](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-001-new-user.png?raw=true)
 
 > Clicking the 'Upload' button on the placeholder
 
-![Click Upload Button](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/image-crop-002-edit-button.png?raw=true)
+![Click Upload Button](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-002-edit-button.png?raw=true)
 
 > Drop an image file on the square
 
-![Drop Image File In Dropzone](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/image-crop-003-drag-n-drop-image-file-.png?raw=true)
+![Drop Image File In Dropzone](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-003-drag-n-drop-image-file-.png?raw=true)
 
 > **frontend\src\components\users\EditProfilePictureModal.jsx: Implementing image file-drop zone with react-dropzone.**
 
@@ -132,11 +132,11 @@ return (
 
 > **After dropping the image in the dropzone a ReactCrop component is rendered and a preview canvas:**
 
-![Crop Profile Picture](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/image-crop-005-Custom-cropping-and-preview-.png?raw=true)
+![Crop Profile Picture](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-005-Custom-cropping-and-preview-.png?raw=true)
 
 > Setting the crop I wish to download a PNG file of.
 
-![Set Crop To Download](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/image-crop-006-Generate-Downloadable-File-From-Blob.png?raw=true)
+![Set Crop To Download](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-006-Generate-Downloadable-File-From-Blob.png?raw=true)
 
 > **After clicking the 'Download Cropped Image' button, a blob file is created from the canvas preview using the canvas API that converts a base64 binary string into a raw Blob data file.**
 >
@@ -177,11 +177,11 @@ function generateDownload(canvas, crop) {
 
 > **I zoomed in too much on purpose so it's very clear the cropped image base64 image preview converted into a Blob raw data object, then that raw data saved to file with PNG format.**
 
-![Download PNG Cropped Image Result](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/image-crop-007-result-downloaded-cropped-image-png.png?raw=true)
+![Download PNG Cropped Image Result](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-007-result-downloaded-cropped-image-png.png?raw=true)
 
 > **When you have selected the crop you wish, the user can click the 'Upload' button:**
 
-![Upload Cropped Image Button Click](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/image-crop-008-upload-cropped-profile-image.png?raw=true)
+![Upload Cropped Image Button Click](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-008-upload-cropped-profile-image.png?raw=true)
 
 > **When the user clicks Upload after cropping, Blob binary (raw data) object is generated and written to a image file with PNG extension. Then the File is uploaded to the /backend Express.js server that will serve the static image file.
 
@@ -350,7 +350,7 @@ export default router
 
 > **As you can see is the profile picture now updated and used:**
 
-![Upload Cropped Image Button Click](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/image-crop-009-profile-image-set.png?raw=true)
+![Upload Cropped Image Button Click](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-009-profile-image-set.png?raw=true)
 
 ### Company Logo Cropping
 
@@ -360,19 +360,19 @@ export default router
 
 > **Company "logo's" can get cropped the same way as profile pictures with 1 / 1 aspect ratio:**
 
-![Upload Company Logo Button](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/image-crop-010-company-logo-upload.png?raw=true)
+![Upload Company Logo Button](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-010-company-logo-upload.png?raw=true)
 
 > **Select crop:**
 
-![Crop Logo Modal](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/image-crop-011-company-logo-upload.png?raw=true)
+![Crop Logo Modal](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-011-company-logo-upload.png?raw=true)
 
 > **Upload image:**
 
-![Crop Logo Modal](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/image-crop-011-company-logo-upload.png?raw=true)
+![Crop Logo Modal](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-011-company-logo-upload.png?raw=true)
 
 > After saving the edited or registered company, the cropped image served by Express.js is used everywhere where the main company logo should be displayed.
 
-![Company Modal](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/image-crop-012-company-details-modal.png?raw=true)
+![Company Modal](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-012-company-details-modal.png?raw=true)
 
 ### Professions in Company Schema
 
