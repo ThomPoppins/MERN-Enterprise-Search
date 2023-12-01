@@ -9,7 +9,8 @@
   "private": false,
   "bolt": {
     "workspaces": [
-      "packages/*"
+      "client/*",
+      "server/*"
     ]
   }
 }
