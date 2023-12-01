@@ -6,8 +6,8 @@
     "stylelint-config-prettier-scss"
   ],
   "rules": {
-  "font-family-name-quotes": null,
-   "plugin/stylelint-bem-namics": {
+    "font-family-name-quotes": null,
+    "plugin/stylelint-bem-namics": {
       "patternPrefixes": [],
       "helperPrefixes": []
     },
@@ -18,7 +18,6 @@
       }
     ],
     "selector-class-pattern": null
-
   },
   "overrides": [
     {

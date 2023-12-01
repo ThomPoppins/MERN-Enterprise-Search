@@ -96,10 +96,10 @@ After creating the production build, run:
 
 <!-- 👤 **Fabricio** -->
 
-| &nbsp;       | &nbsp;                                               |
-| ------------ | ---------------------------------------------------- |
+| &nbsp;       | &nbsp;                                           |
+| ------------ | ------------------------------------------------ |
 | **GitHub**   | [@fabri4c](https://github.com/fabri4c)           |
-| **Twitter**  | [@fabri_4c](https://twitter.com/fabri_4c)          |
+| **Twitter**  | [@fabri_4c](https://twitter.com/fabri_4c)        |
 | **LinkedIn** | [@fabri4c](https://www.linkedin.com/in/fabri4c/) |
 
 ## Show your support

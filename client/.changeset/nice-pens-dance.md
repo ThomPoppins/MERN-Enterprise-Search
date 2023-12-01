@@ -42,7 +42,7 @@ _**Note:** Below this line a GIF image of 75 MB is loading in, if you **wait for
 - If the current logged in user is a member (owner, employee, admin etc.) of the company, private details will be shown on the company profile page.
 
 > Find button is disabled if no search input value is given:
-![Search Field](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/search-001-empty-input.png?raw=true)
+> ![Search Field](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/search-001-empty-input.png?raw=true)
 
 > **Search is ready to find pro's!**
 
@@ -184,71 +184,71 @@ function generateDownload(canvas, crop) {
 
 ![Upload Cropped Image Button Click](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-008-upload-cropped-profile-image.png?raw=true)
 
-> **When the user clicks Upload after cropping, Blob binary (raw data) object is generated and written to a image file with PNG extension. Then the File is uploaded to the /backend Express.js server that will serve the static image file.
+> \*\*When the user clicks Upload after cropping, Blob binary (raw data) object is generated and written to a image file with PNG extension. Then the File is uploaded to the /backend Express.js server that will serve the static image file.
 
 ```jsx
-  const saveProfileImage = (canvas, completedCrop) => {
-    if (!completedCrop || !canvas) {
-      console.log(completedCrop)
-      return
-    }
-
-    canvas.toBlob(
-      (blob) => {
-        // Create a new FormData object
-        const formData = new FormData()
-
-        // Make the blob into a file
-        const file = new File([blob], 'profile-picture.png')
-
-        // Add the image data to the FormData object
-        formData.append('image', file)
-
-        // Send the image to the server with FormData header set so the image can be send
-        axios
-          .post(`${BACKEND_URL}/upload/image`, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          })
-          .then((response) => {
-            if (response.data.imageId) {
-              // Save the image id of the profile picture to the user's document in the database
-              axios
-                .put(`${BACKEND_URL}/users/profile-picture`, {
-                  imageId: response.data.imageId,
-                  userId,
-                })
-                .then(() => {
-                  // Get the user's updated document from the database and update the user state
-                  axios
-                    .get(`${BACKEND_URL}/users/user/${userId}`)
-                    .then((response) => {
-                      const userData = response.data
-
-                      console.log('user DATA', userData)
-
-                      // Update the user state
-                      store.dispatch({ type: 'USER', payload: userData })
-                      onClose()
-                    })
-                    .catch((error) => {
-                      console.log(error)
-                    })
-                })
-                .catch((error) => {
-                  console.log(error)
-                })
-            }
-          })
-          .catch((error) => {
-            console.log(error)
-          })
-      },
-      'image/png',
-      1,
-    )
+const saveProfileImage = (canvas, completedCrop) => {
+  if (!completedCrop || !canvas) {
+    console.log(completedCrop)
+    return
   }
+
+  canvas.toBlob(
+    (blob) => {
+      // Create a new FormData object
+      const formData = new FormData()
+
+      // Make the blob into a file
+      const file = new File([blob], 'profile-picture.png')
+
+      // Add the image data to the FormData object
+      formData.append('image', file)
+
+      // Send the image to the server with FormData header set so the image can be send
+      axios
+        .post(`${BACKEND_URL}/upload/image`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((response) => {
+          if (response.data.imageId) {
+            // Save the image id of the profile picture to the user's document in the database
+            axios
+              .put(`${BACKEND_URL}/users/profile-picture`, {
+                imageId: response.data.imageId,
+                userId,
+              })
+              .then(() => {
+                // Get the user's updated document from the database and update the user state
+                axios
+                  .get(`${BACKEND_URL}/users/user/${userId}`)
+                  .then((response) => {
+                    const userData = response.data
+
+                    console.log('user DATA', userData)
+
+                    // Update the user state
+                    store.dispatch({ type: 'USER', payload: userData })
+                    onClose()
+                  })
+                  .catch((error) => {
+                    console.log(error)
+                  })
+              })
+              .catch((error) => {
+                console.log(error)
+              })
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    'image/png',
+    1,
+  )
+}
 ```
 
 > **/backend/routes/uploadRoute.js: Here the file will get received by the POST /upload/image end-point, using Multer for handling the File, naming it and giving it a destination, the /backend/public/uploads/images folder. (The /public folder is the served static files directory of Express.js by calling `app.use(Express.static('public'))` in /backend/index.js)**
@@ -398,10 +398,11 @@ export default router
 - Dropdown has an "Invites" menu item on top with jumping letters to get the user's attention to the Invites page after clicking "Invites" in the dropdown menu.
 
 **Subtle edit of Tailwind preinstalled animations making it a lot more joyful and grabs the user attention better:**
+
 > /frontend/tailwind.config.js
 
 ```javascript file=/frontend/tailwind.config.js
-// 
+//
 export default {
   content: [
     './src/components/**/*.jsx',
@@ -455,8 +456,6 @@ export default {
 }
 ```
 
-
-
 ### Co-Ownership Invites
 
 - Notification icon wiggles when a user is invited for co-ownership of a company.
@@ -475,8 +474,6 @@ export default {
 - Ongoing work on writing tests for components.
 - Editing company professions is still pending.
 - After implementing professions in the Edit company page, the main search functionality will use professions as the second value to match on.
-
-
 
 # Version v0.0.2 Release Notes
 

@@ -27,6 +27,7 @@
     "build": "vite build",
     "serve": "vite preview",
     "start": "vite preview",
+    "format": "prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json,scss} --config ./.prettierrc",
     "lint:eslint": "eslint . --ext .js,.jsx",
     "fix:eslint": "eslint --fix  . --ext .js,.jsx",
     "lint:stylelint": "stylelint **/*.{css,scss,jsx}",

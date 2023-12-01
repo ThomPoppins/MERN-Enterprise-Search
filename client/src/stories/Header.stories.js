@@ -1,4 +1,4 @@
-import { Header } from './Header';
+import { Header } from './Header'
 
 export default {
   title: 'Example/Header',
@@ -9,7 +9,7 @@ export default {
     // More on how to position stories at: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'fullscreen',
   },
-};
+}
 
 export const LoggedIn = {
   args: {
@@ -17,6 +17,6 @@ export const LoggedIn = {
       name: 'Jane Doe',
     },
   },
-};
+}
 
-export const LoggedOut = {};
+export const LoggedOut = {}
