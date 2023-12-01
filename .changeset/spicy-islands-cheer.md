@@ -28,7 +28,7 @@
 
 ## Funtional Demo
 
-![Demo](https://github.com/ThomPoppins/MERN_STACK_PROJ./blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
+![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
 
 ## New Features
 
