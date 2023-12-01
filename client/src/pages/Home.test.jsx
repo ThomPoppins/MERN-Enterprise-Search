@@ -10,9 +10,7 @@ import Home from './Home'
 import mongoose from 'mongoose'
 import { TextEncoder } from 'util'
 import Cookies from 'js-cookie'
-
-const crypto = require('crypto')
-
+import crypto from 'crypto'
 // Generate a random 24 byte hex string to use as a user ID for testin with Mongoose.Types.ObjectId()
 const generateHexId = () => {
   return crypto.randomBytes(12).toString('hex')

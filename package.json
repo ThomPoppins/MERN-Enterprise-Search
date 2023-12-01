@@ -6,13 +6,21 @@
   "repository": "git@github.com:ThomPoppins/MERN-Enterprise-Search.git",
   "author": "Thom Veldpaus <thompoppins@gmail.com>",
   "license": "MIT",
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "type": "module",
   "scripts": {
     "start": "node server/server.js",
+    "changesets": "changesets version",
     "dev": "nodemon server/server.js",
     "client": "npm run start --prefix client",
+    "install-packages": "yarn'",
     "server": "npm run start --prefix server",
     "build": "npm run build --prefix client",
-    "heroku-postbuild": "npm run build --prefix client"
+    "heroku-postbuild": "npm run build --prefix client",
+    "postinstall": "prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json,scss} --config ./.prettierrc"
   },
   "private": false,
   "bolt": {
