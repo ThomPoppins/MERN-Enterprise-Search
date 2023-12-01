@@ -3,17 +3,17 @@ import CompaniesSingleRow from './CompaniesSingleRow'
 import PropTypes from 'prop-types'
 
 const CompaniesTable = ({ companies, updateCompanies }) => (
-  <table className='w-full border-separate border-spacing-2'>
+  <table className='border-spacing-2 w-full border-separate'>
     <thead>
       <tr>
-        <th className='border-4 border-purple-900 bg-violet-950/80 rounded-md w-[150px]'>
+        <th className='bg-violet-950/80 w-[150px] rounded-md border-4 border-purple-900'>
           KVK Number
         </th>
-        <th className='border-4 border-purple-900 bg-violet-950/80 rounded-md text-left pl-3'>
+        <th className='bg-violet-950/80 rounded-md border-4 border-purple-900 pl-3 text-left'>
           Name
         </th>
         {/* max-md:hidden hides this column on mobile devices and tablets */}
-        <th className='border-4 border-purple-900 bg-violet-950/80 rounded-md w-[180px]'>
+        <th className='bg-violet-950/80 w-[180px] rounded-md border-4 border-purple-900'>
           Operations
         </th>
       </tr>

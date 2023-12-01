@@ -97,13 +97,13 @@ const LoginUser = () => {
   return (
     <Layout>
       <div className='p-4'>
-        <h1 className='flex justify-center text-3xl my-4 mb-6'>Login</h1>
+        <h1 className='my-4 mb-6 flex justify-center text-3xl'>Login</h1>
         {loading ? <Loader /> : ''}
-        <div className='flex flex-col border-2 border-purple-900 bg-violet-950/40 rounded-xl w-[600px] py-4 px-8 mx-auto'>
+        <div className='bg-violet-950/40 mx-auto flex w-[600px] flex-col rounded-xl border-2 border-purple-900 py-4 px-8'>
           <div className='my-4'>
-            <label className='text-xl mr-4'>Email</label>
+            <label className='mr-4 text-xl'>Email</label>
             <input
-              className={`border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full ${
+              className={`w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white ${
                 emailError ? 'border-red-500' : ''
               }`}
               data-testid='user-email-input'
@@ -113,7 +113,7 @@ const LoginUser = () => {
               value={email}
             />
             {emailError ? (
-              <p className='text-red-500 text-sm'>
+              <p className='text-sm text-red-500'>
                 Email must be a valid email address.
               </p>
             ) : (
@@ -121,9 +121,9 @@ const LoginUser = () => {
             )}
           </div>
           <div className='my-4'>
-            <label className='text-xl mr-4'>Password</label>
+            <label className='mr-4 text-xl'>Password</label>
             <input
-              className='border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full'
+              className='w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white'
               data-testid='user-password-input'
               onChange={(e) => setPassword(e.target.value)}
               onKeyDown={(e) => {
@@ -134,7 +134,7 @@ const LoginUser = () => {
             />
           </div>
           <button
-            className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2 m-8'
+            className='m-8 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 p-2 hover:bg-purple-700 hover:bg-gradient-to-l'
             data-testid='user-login-button'
             onClick={handleLoginUser}
           >

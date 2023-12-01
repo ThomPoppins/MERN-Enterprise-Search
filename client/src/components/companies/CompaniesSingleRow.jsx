@@ -34,16 +34,16 @@ const CompaniesSingleRow = ({ company, updateCompanies }) => {
 
   return (
     <>
-      <td className='border border-purple-900 bg-violet-950/40 rounded-md text-center'>
+      <td className='bg-violet-950/40 rounded-md border border-purple-900 text-center'>
         {company.kvkNumber}
       </td>
-      <td className='border border-purple-900 bg-violet-950/40 rounded-md text-left pl-3'>
+      <td className='bg-violet-950/40 rounded-md border border-purple-900 pl-3 text-left'>
         {company.name}
       </td>
-      <td className='border border-purple-900 bg-violet-950/40 rounded-md text-center'>
+      <td className='bg-violet-950/40 rounded-md border border-purple-900 text-center'>
         <div className='flex justify-center gap-x-4'>
           <BiShow
-            className='text-3xl text-white hover:text-green-300 cursor-pointer'
+            className='cursor-pointer text-3xl text-white hover:text-green-300'
             data-testid='show-button'
             onClick={() => setShowModal(true)}
           />
@@ -54,7 +54,7 @@ const CompaniesSingleRow = ({ company, updateCompanies }) => {
             <AiOutlineEdit className='text-2xl text-white hover:text-green-300' />
           </Link>
           <MdOutlineDelete
-            className='text-red-600 text-2xl hover:text-orange-600'
+            className='text-2xl text-red-600 hover:text-orange-600'
             data-testid='delete-button'
             onClick={() => setShowDeleteModal(true)}
           />

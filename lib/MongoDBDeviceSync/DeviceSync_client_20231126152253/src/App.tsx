@@ -1,34 +1,28 @@
-import React from 'react'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
-import {
-  StyleSheet,
-  Linking,
-  Text,
-  View,
-  ActivityIndicator,
-} from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import { AppProvider, UserProvider } from '@realm/react'
+import React from 'react';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {StyleSheet, Linking, Text, View, ActivityIndicator} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {AppProvider, UserProvider} from '@realm/react';
 
-import { appId, baseUrl, dataExplorerLink } from '../atlasConfig.json'
-import { LogoutButton } from './LogoutButton'
-import { WelcomeView } from './WelcomeView'
-import { ItemListView } from './ItemListView'
-import { realmContext } from './RealmContext'
-import { OfflineModeButton } from './OfflineModeButton'
+import {appId, baseUrl, dataExplorerLink} from '../atlasConfig.json';
+import {LogoutButton} from './LogoutButton';
+import {WelcomeView} from './WelcomeView';
+import {ItemListView} from './ItemListView';
+import {realmContext} from './RealmContext';
+import {OfflineModeButton} from './OfflineModeButton';
 
 // If you're getting this app code by cloning the repository at
 // https://github.com/mongodb/ template-app-react-native-todo,
 // it does not contain the data explorer link. Download the
 // app template from the Atlas UI to view a link to your data
-const dataExplorerMessage = `View your data in MongoDB Atlas: ${dataExplorerLink}.`
+const dataExplorerMessage = `View your data in MongoDB Atlas: ${dataExplorerLink}.`;
 
-console.log(dataExplorerMessage)
+console.log(dataExplorerMessage);
 
-const { RealmProvider } = realmContext
+const {RealmProvider} = realmContext;
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
 const AppWrapper = () => {
   return (
@@ -37,24 +31,24 @@ const AppWrapper = () => {
         <App />
       </UserProvider>
     </AppProvider>
-  )
-}
+  );
+};
 
 const LoadingIndicator = () => {
   return (
     <View style={styles.activityContainer}>
-      <ActivityIndicator size='large' />
+      <ActivityIndicator size="large" />
     </View>
-  )
-}
+  );
+};
 
 const headerRight = () => {
-  return <OfflineModeButton />
-}
+  return <OfflineModeButton />;
+};
 
 const headerLeft = () => {
-  return <LogoutButton />
-}
+  return <LogoutButton />;
+};
 
 const App = () => {
   return (
@@ -64,16 +58,15 @@ const App = () => {
           flexible: true,
           onError: (_, error) => {
             // Show sync errors in the console
-            console.error(error)
+            console.error(error);
           },
         }}
-        fallback={LoadingIndicator}
-      >
+        fallback={LoadingIndicator}>
         <SafeAreaProvider>
           <NavigationContainer>
             <Stack.Navigator>
               <Stack.Screen
-                name='Your To-Do List'
+                name="Your To-Do List"
                 component={ItemListView}
                 options={{
                   headerTitleAlign: 'center',
@@ -93,16 +86,15 @@ const App = () => {
             </Text>
             <Text
               style={[styles.footerText, styles.hyperlink]}
-              onPress={() => Linking.openURL(dataExplorerLink)}
-            >
+              onPress={() => Linking.openURL(dataExplorerLink)}>
               {dataExplorerLink}.
             </Text>
           </View>
         </SafeAreaProvider>
       </RealmProvider>
     </>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   footerText: {
@@ -123,6 +115,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     padding: 10,
   },
-})
+});
 
-export default AppWrapper
+export default AppWrapper;

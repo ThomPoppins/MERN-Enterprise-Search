@@ -7,7 +7,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 const SearchResult = ({ navigateToCompanyDetails, result }) => (
   // eslint-disable-next-line jsx-a11y/click-events-have-key-events
   <div
-    className='m-4 mx-auto flex h-auto w-[600px] max-w-full flex-col rounded-lg border-2 border-purple-900 bg-violet-950/40 px-4 py-2'
+    className='bg-violet-950/40 m-4 mx-auto flex h-auto w-[600px] max-w-full flex-col rounded-lg border-2 border-purple-900 px-4 py-2'
     data-testid='search-result'
     key={result._id}
     onClick={(event) => navigateToCompanyDetails(event, result._id)}

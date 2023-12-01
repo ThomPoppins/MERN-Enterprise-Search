@@ -40,14 +40,14 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
 
   return (
     <div
-      className='border-2 border-purple-900 bg-violet-950/40 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl'
+      className='bg-violet-950/40 relative m-4 rounded-lg border-2 border-purple-900 px-4 py-2 hover:shadow-xl'
       key={`companies=single-card-${company._id}`}
     >
-      <h2 className='absolute top-1 right-2 px-4 py-1 bg-purple-500 rounded-lg'>
+      <h2 className='absolute top-1 right-2 rounded-lg bg-purple-500 px-4 py-1'>
         {company.startYear}
       </h2>
       <h4 className='my-2 text-gray-300'>KVK: {company.kvkNumber}</h4>
-      <div className='flex justify-start items-center gap-x-2'>
+      <div className='flex items-center justify-start gap-x-2'>
         <FcBriefcase className='text-2xl' />
         <h2 className='my-1'>
           {company.name.substring(0, 28)}
@@ -55,7 +55,7 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
         </h2>
       </div>
       {/* TODO: [MERNSTACK-136] Find fitting email icon from react-icons and replace the following icon with it */}
-      <div className='flex justify-start items-center gap-x-2'>
+      <div className='flex items-center justify-start gap-x-2'>
         <FcAddressBook className='text-2xl' />
         <h2 className='my-1'>
           {company.email.substring(0, 28)}
@@ -63,11 +63,11 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
         </h2>
       </div>
       {/* TODO: [MERNSTACK-137] Find fitting phone icon from react-icons and replace the following icon with it */}
-      <div className='flex justify-start items-center gap-x-2'>
+      <div className='flex items-center justify-start gap-x-2'>
         <FcCellPhone className='text-2xl' />
         <h2 className='my-1'>{company.phone}</h2>
       </div>
-      <div className='flex justify-start items-center gap-x-2'>
+      <div className='flex items-center justify-start gap-x-2'>
         <FcBusinessman className='text-2xl' />
         <h2>
           <span>
@@ -81,20 +81,20 @@ const CompaniesSingleCard = ({ company, updateCompanies }) => {
           </span>
         </h2>
       </div>
-      <div className='flex justify-between items-center gap-x-2 mt-4 p-4'>
+      <div className='mt-4 flex items-center justify-between gap-x-2 p-4'>
         <BiShow
-          className='text-3xl text-white hover:text-green-300 cursor-pointer'
+          className='cursor-pointer text-3xl text-white hover:text-green-300'
           data-test-id='show-button'
           onClick={() => setShowModal(true)}
         />
         <Link to={`/companies/details/${company._id}`}>
-          <BsInfoCircle className='text-white text-2xl hover:text-green-300' />
+          <BsInfoCircle className='text-2xl text-white hover:text-green-300' />
         </Link>
         <Link to={`/companies/edit/${company._id}`}>
-          <AiOutlineEdit className='text-white text-2xl hover:text-green-300' />
+          <AiOutlineEdit className='text-2xl text-white hover:text-green-300' />
         </Link>
         <MdOutlineDelete
-          className='text-red-600 text-2xl hover:text-orange-600'
+          className='text-2xl text-red-600 hover:text-orange-600'
           data-test-id='delete-button'
           onClick={() => setShowDeleteModal(true)}
         />

@@ -73,7 +73,7 @@ const UserProfile = () => {
           </button>
         </div>
 
-        <div className='mx-auto mt-6 rounded-xl border border-purple-900 bg-violet-950/40 p-4 lg:w-9/12'>
+        <div className='bg-violet-950/40 mx-auto mt-6 rounded-xl border border-purple-900 p-4 lg:w-9/12'>
           <h1 className='my-2 text-3xl'>
             {user?.firstName} {user?.lastName}
           </h1>

@@ -77,7 +77,7 @@ const Navbar = () => {
   }, [])
 
   return (
-    <nav className='bg-gradient-to-r from-violet-950 to-purple-950 p-4 shadow-lg'>
+    <nav className='from-violet-950 to-purple-950 bg-gradient-to-r p-4 shadow-lg'>
       <div className='container mx-auto'>
         <img
           alt="Best-Pro's logo"
@@ -118,14 +118,14 @@ const Navbar = () => {
                       />
                       {user?.firstName}
                       {inviteAlert ? (
-                        <LuClipboardList className='float-right ml-1 mr-3 mt-1 w-[30px] animate-waving-button text-xl text-yellow-400' />
+                        <LuClipboardList className='animate-waving-button float-right ml-1 mr-3 mt-1 w-[30px] text-xl text-yellow-400' />
                       ) : (
                         <LuClipboardCheck className='float-right ml-1 mr-3 mt-1 w-[30px] text-xl text-green-400' />
                       )}
                     </div>
                     {isDropdownOpen ? (
                       <div
-                        className='absolute right-0 top-10 z-[100] rounded-lg bg-violet-950/90 py-4'
+                        className='bg-violet-950/90 absolute right-0 top-10 z-[100] rounded-lg py-4'
                         ref={dropdownRef}
                       >
                         {inviteAlert ? (
@@ -133,7 +133,7 @@ const Navbar = () => {
                             <Link className='text-white ' to='/invites'>
                               {inviteAlert ? (
                                 <div className='h-full w-full'>
-                                  <LuClipboardList className='float-left ml-2 mr-3 mt-[-2px] w-[30px] animate-waving-button text-xl text-yellow-400' />
+                                  <LuClipboardList className='animate-waving-button float-left ml-2 mr-3 mt-[-2px] w-[30px] text-xl text-yellow-400' />
                                   <div className='mt-2 animate-bounce'>
                                     Invites
                                   </div>

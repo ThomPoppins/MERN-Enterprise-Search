@@ -5,7 +5,7 @@ import UploadAvatar from '../UploadAvatar'
 
 const CompanyLogoModal = ({ setLogo, onClose }) => (
   <div
-    className='fixed bg-black bg-opacity-60 top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center'
+    className='fixed top-0 right-0 left-0 bottom-0 z-50 flex items-center justify-center bg-black bg-opacity-60'
     daya-testid='company-logo-modal'
     onClick={onClose}
     onKeyDown={(event) => event.key === 'Escape' && onClose()}
@@ -16,7 +16,7 @@ const CompanyLogoModal = ({ setLogo, onClose }) => (
     {/* The click event will not bubble up to the parent elements where is a click event handler */}
     {/* https://stackoverflow.com/questions/4616694/what-is-event-bubbling-and-capturing */}
     <div
-      className='w-[600px] max-w-full h-auto bg-white rounded-xl p-4 flex flex-col relative'
+      className='relative flex h-auto w-[600px] max-w-full flex-col rounded-xl bg-white p-4'
       data-testid='company-logo-modal-content'
       onClick={(event) => event.stopPropagation()}
       onKeyDown={(event) => event.key === 'Escape' && onClose()}
@@ -24,11 +24,11 @@ const CompanyLogoModal = ({ setLogo, onClose }) => (
       tabIndex='0'
     >
       <AiOutlineClose
-        className='absolute right-6 top-6 text-3xl text-red-600 cursor-pointer'
+        className='absolute right-6 top-6 cursor-pointer text-3xl text-red-600'
         data-testid='close-button'
         onClick={onClose}
       />
-      <div className='flex justify-center items-center my-4'>
+      <div className='my-4 flex items-center justify-center'>
         <UploadAvatar onClose={onClose} setLogo={setLogo} />
       </div>
     </div>

@@ -74,21 +74,21 @@ const InvitesList = () => {
 
   return (
     <Layout>
-      <div className='flex justify-center mt-4'>
-        <table className='w-3/4 border-separate border-spacing-2'>
+      <div className='mt-4 flex justify-center'>
+        <table className='border-spacing-2 w-3/4 border-separate'>
           <thead>
             <tr>
-              <th className='border-4 border-purple-900 bg-violet-950/80 rounded-md w-[400px]'>
+              <th className='bg-violet-950/80 w-[400px] rounded-md border-4 border-purple-900'>
                 From
               </th>
-              <th className='border-4 border-purple-900 bg-violet-950/80 rounded-md pl-3'>
+              <th className='bg-violet-950/80 rounded-md border-4 border-purple-900 pl-3'>
                 Kind
               </th>
-              <th className='border-4 border-purple-900 bg-violet-950/80 rounded-md w-[175px] pl-3'>
+              <th className='bg-violet-950/80 w-[175px] rounded-md border-4 border-purple-900 pl-3'>
                 Status
               </th>
               {/* max-md:hidden hides this column on mobile devices and tablets */}
-              <th className='border-4 border-purple-900 bg-violet-950/80 rounded-md w-[180px]'>
+              <th className='bg-violet-950/80 w-[180px] rounded-md border-4 border-purple-900'>
                 Operations
               </th>
             </tr>
@@ -101,10 +101,10 @@ const InvitesList = () => {
                 //
                 key={invite._id}
               >
-                <td className='border-purple-900 bg-violet-950/40'>
+                <td className='bg-violet-950/40 border-purple-900'>
                   <img
                     alt='profile'
-                    className='rounded-full mr-4 float-left'
+                    className='float-left mr-4 rounded-full'
                     height='50'
                     src={invite.sender.profilePictureURL}
                     width='50'
@@ -128,7 +128,7 @@ const InvitesList = () => {
                     </div>
                   </div>
                 </td>
-                <td className='border-purple-900 bg-violet-950/40'>
+                <td className='bg-violet-950/40 border-purple-900'>
                   <span className='mr-4'>
                     {/*  */}
                     {invite.kind === 'company_ownership' ? (
@@ -139,17 +139,17 @@ const InvitesList = () => {
                     ) : invite.kind === 'friend_request' ? (
                       <span>Friend Request</span>
                     ) : (
-                      <span className='text-red-600 font-bold'>
+                      <span className='font-bold text-red-600'>
                         ERROR: Invite kind is unknown!
                       </span>
                     )}
                   </span>
                 </td>
-                <td className='border-purple-900 bg-violet-950/40'>
+                <td className='bg-violet-950/40 border-purple-900'>
                   {/*  */}
                   <span className='mr-4'>{invite.status}</span>
                 </td>
-                <td className='border-purple-900 bg-violet-950/40'>
+                <td className='bg-violet-950/40 border-purple-900'>
                   {/* InviteOperations component is responsible for updating the invite status */}
                   <InviteOperations
                     invite={invite}

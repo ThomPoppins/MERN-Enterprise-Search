@@ -1,40 +1,40 @@
-import React, { useCallback, useState, useEffect } from 'react'
-import { BSON } from 'realm'
-import { useUser } from '@realm/react'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { Alert, FlatList, StyleSheet, Switch, Text, View } from 'react-native'
-import { Button, Overlay, ListItem, Icon } from 'react-native-elements'
-import { dataExplorerLink } from '../atlasConfig.json'
+import React, {useCallback, useState, useEffect} from 'react';
+import {BSON} from 'realm';
+import {useUser} from '@realm/react';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {Alert, FlatList, StyleSheet, Switch, Text, View} from 'react-native';
+import {Button, Overlay, ListItem, Icon} from 'react-native-elements';
+import {dataExplorerLink} from '../atlasConfig.json';
 
-import { CreateToDoPrompt } from './CreateToDoPrompt'
-import { realmContext } from './RealmContext'
+import {CreateToDoPrompt} from './CreateToDoPrompt';
+import {realmContext} from './RealmContext';
 
-import { Item } from './ItemSchema'
-import { COLORS } from './Colors'
+import {Item} from './ItemSchema';
+import {COLORS} from './Colors';
 
 // If you're getting this app code by cloning the repository at
 // https://github.com/mongodb/ template-app-react-native-todo,
 // it does not contain the data explorer link. Download the
 // app template from the Atlas UI to view a link to your data
-const dataExplorerMessage = `View your data in MongoDB Atlas: ${dataExplorerLink}.`
+const dataExplorerMessage = `View your data in MongoDB Atlas: ${dataExplorerLink}.`;
 
-const { useRealm, useQuery } = realmContext
+const {useRealm, useQuery} = realmContext;
 
-const itemSubscriptionName = 'items'
-const ownItemsSubscriptionName = 'ownItems'
+const itemSubscriptionName = 'items';
+const ownItemsSubscriptionName = 'ownItems';
 
 export function ItemListView() {
-  const realm = useRealm()
-  const items = useQuery(Item).sorted('_id')
-  const user = useUser()
+  const realm = useRealm();
+  const items = useQuery(Item).sorted('_id');
+  const user = useUser();
 
-  const [showNewItemOverlay, setShowNewItemOverlay] = useState(false)
+  const [showNewItemOverlay, setShowNewItemOverlay] = useState(false);
 
   // This state will be used to toggle between showing all items and only showing the current user's items
   // This is initialized based on which subscription is already active
   const [showAllItems, setShowAllItems] = useState(
     !!realm.subscriptions.findByName(itemSubscriptionName),
-  )
+  );
 
   // This effect will initialize the subscription to the items collection
   // By default it will filter out all items that do not belong to the current user
@@ -43,73 +43,73 @@ export function ItemListView() {
   // This allows for tracking the state of the toggle switch by the name of the subscription
   useEffect(() => {
     if (showAllItems) {
-      realm.subscriptions.update((mutableSubs) => {
-        mutableSubs.removeByName(ownItemsSubscriptionName)
-        mutableSubs.add(realm.objects(Item), { name: itemSubscriptionName })
-      })
+      realm.subscriptions.update(mutableSubs => {
+        mutableSubs.removeByName(ownItemsSubscriptionName);
+        mutableSubs.add(realm.objects(Item), {name: itemSubscriptionName});
+      });
     } else {
-      realm.subscriptions.update((mutableSubs) => {
-        mutableSubs.removeByName(itemSubscriptionName)
+      realm.subscriptions.update(mutableSubs => {
+        mutableSubs.removeByName(itemSubscriptionName);
         mutableSubs.add(
           realm.objects(Item).filtered(`owner_id == "${user?.id}"`),
-          { name: ownItemsSubscriptionName },
-        )
-      })
+          {name: ownItemsSubscriptionName},
+        );
+      });
     }
-  }, [realm, user, showAllItems])
+  }, [realm, user, showAllItems]);
 
   // createItem() takes in a summary and then creates an Item object with that summary
   const createItem = useCallback(
-    ({ summary }: { summary: string }) => {
+    ({summary}: {summary: string}) => {
       // if the realm exists, create an Item
       realm.write(() => {
-        console.log(dataExplorerMessage)
+        console.log(dataExplorerMessage);
 
         return new Item(realm, {
           summary,
           owner_id: user?.id,
-        })
-      })
+        });
+      });
     },
     [realm, user],
-  )
+  );
 
   // deleteItem() deletes an Item with a particular _id
   const deleteItem = useCallback(
     (id: BSON.ObjectId) => {
       // if the realm exists, get the Item with a particular _id and delete it
-      const item = realm.objectForPrimaryKey(Item, id) // search for a realm object with a primary key that is an objectId
+      const item = realm.objectForPrimaryKey(Item, id); // search for a realm object with a primary key that is an objectId
       if (item) {
         if (item.owner_id !== user?.id) {
-          Alert.alert("You can't delete someone else's task!")
+          Alert.alert("You can't delete someone else's task!");
         } else {
           realm.write(() => {
-            realm.delete(item)
-          })
-          console.log(dataExplorerMessage)
+            realm.delete(item);
+          });
+          console.log(dataExplorerMessage);
         }
       }
     },
     [realm, user],
-  )
+  );
   // toggleItemIsComplete() updates an Item with a particular _id to be 'completed'
   const toggleItemIsComplete = useCallback(
     (id: BSON.ObjectId) => {
       // if the realm exists, get the Item with a particular _id and update it's 'isCompleted' field
-      const item = realm.objectForPrimaryKey(Item, id) // search for a realm object with a primary key that is an objectId
+      const item = realm.objectForPrimaryKey(Item, id); // search for a realm object with a primary key that is an objectId
       if (item) {
         if (item.owner_id !== user?.id) {
-          Alert.alert("You can't modify someone else's task!")
+          Alert.alert("You can't modify someone else's task!");
         } else {
           realm.write(() => {
-            item.isComplete = !item.isComplete
-          })
-          console.log(dataExplorerMessage)
+            item.isComplete = !item.isComplete;
+          });
+          console.log(dataExplorerMessage);
         }
       }
     },
     [realm, user],
-  )
+  );
 
   return (
     <SafeAreaProvider>
@@ -117,40 +117,38 @@ export function ItemListView() {
         <View style={styles.toggleRow}>
           <Text style={styles.toggleText}>Show All Tasks</Text>
           <Switch
-            trackColor={{ true: '#00ED64' }}
+            trackColor={{true: '#00ED64'}}
             onValueChange={() => {
               if (realm.syncSession?.state !== 'active') {
                 Alert.alert(
                   'Switching subscriptions does not affect Realm data when the sync is offline.',
-                )
+                );
               }
-              setShowAllItems(!showAllItems)
+              setShowAllItems(!showAllItems);
             }}
             value={showAllItems}
           />
         </View>
         <Overlay
           isVisible={showNewItemOverlay}
-          onBackdropPress={() => setShowNewItemOverlay(false)}
-        >
+          onBackdropPress={() => setShowNewItemOverlay(false)}>
           <CreateToDoPrompt
-            onSubmit={({ summary }) => {
-              setShowNewItemOverlay(false)
-              createItem({ summary })
+            onSubmit={({summary}) => {
+              setShowNewItemOverlay(false);
+              createItem({summary});
             }}
           />
         </Overlay>
         <FlatList
-          keyExtractor={(item) => item._id.toString()}
+          keyExtractor={item => item._id.toString()}
           data={items}
-          renderItem={({ item }) => (
+          renderItem={({item}) => (
             <ListItem
               key={`${item._id}`}
               bottomDivider
               topDivider
               hasTVPreferredFocus={undefined}
-              tvParallaxProperties={undefined}
-            >
+              tvParallaxProperties={undefined}>
               <ListItem.Title style={styles.itemTitle}>
                 {item.summary}
               </ListItem.Title>
@@ -160,20 +158,20 @@ export function ItemListView() {
               <ListItem.CheckBox
                 checked={item.isComplete}
                 checkedColor={COLORS.primary}
-                iconType='material'
-                checkedIcon='check-box'
-                uncheckedIcon='check-box-outline-blank'
+                iconType="material"
+                checkedIcon="check-box"
+                uncheckedIcon="check-box-outline-blank"
                 onPress={() => toggleItemIsComplete(item._id)}
               />
               <Button
-                type='clear'
+                type="clear"
                 onPress={() => deleteItem(item._id)}
                 icon={
                   <Icon
-                    type='material'
-                    name='clear'
+                    type="material"
+                    name="clear"
                     size={12}
-                    color='#979797'
+                    color="#979797"
                     tvParallaxProperties={undefined}
                   />
                 }
@@ -182,22 +180,22 @@ export function ItemListView() {
           )}
         />
         <Button
-          title='Add To-Do'
+          title="Add To-Do"
           buttonStyle={styles.addToDoButton}
           onPress={() => setShowNewItemOverlay(true)}
           icon={
             <Icon
-              type='material'
+              type="material"
               name={'playlist-add'}
               style={styles.showCompletedIcon}
-              color='#fff'
+              color="#fff"
               tvParallaxProperties={undefined}
             />
           }
         />
       </View>
     </SafeAreaProvider>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -236,4 +234,4 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
   },
-})
+});

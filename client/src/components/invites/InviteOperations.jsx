@@ -47,7 +47,7 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
     <div id={`operations-${invite._id}`} key={invite._id}>
       <span className='text-xl'>
         <button
-          className={`bg-gradient-to-r from-green-600 to-green-700 hover:from-green-400 hover:to-green-500 rounded-lg w-[82px] float-left ml-1 ${
+          className={`float-left ml-1 w-[82px] rounded-lg bg-gradient-to-r from-green-600 to-green-700 hover:from-green-400 hover:to-green-500 ${
             acceptButtonSpinning
               ? 'animate-spin-fast'
               : 'animate-bounce hover:animate-none'
@@ -59,7 +59,7 @@ const InviteOperations = ({ invite, updateInviteStatus }) => {
         </button>
         <div className='pb-6'>
           <button
-            className={`hover:bg-gradient-to-r bg-red-900/90 rounded-lg w-[82px] float-right mr-1 ${
+            className={`float-right mr-1 w-[82px] rounded-lg bg-red-900/90 hover:bg-gradient-to-r ${
               declineButtonPing ? 'animate-ping' : ''
             }`}
             data-testid='decline-button'

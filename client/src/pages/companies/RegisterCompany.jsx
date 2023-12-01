@@ -388,7 +388,7 @@ const RegisterCompany = () => {
           Register Company
         </h1>
         {loading ? <Loader /> : ''}
-        <div className='mx-auto flex w-[600px] flex-col rounded-xl border-2 border-purple-900 bg-violet-950/40 px-8 py-4'>
+        <div className='bg-violet-950/40 mx-auto flex w-[600px] flex-col rounded-xl border-2 border-purple-900 px-8 py-4'>
           <div className='my-4'>
             <label className='mr-4 text-xl' htmlFor='company-name-input'>
               Name
@@ -587,7 +587,7 @@ const RegisterCompany = () => {
             <label className='mr-4 text-xl' htmlFor='company-professions-input'>
               Professions
             </label>
-            <p className='text-gray-300 mb-4'>
+            <p className='mb-4 text-gray-300'>
               Add multyple professions seperated by a comma.
             </p>
             <input

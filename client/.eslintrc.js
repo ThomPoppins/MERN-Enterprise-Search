@@ -2,7 +2,9 @@ export default {
   env: {
     browser: true,
     es2021: true,
+    node: true,
   },
+  type: 'module',
   extends: [
     'eslint:all',
     'plugin:react/all',
@@ -12,9 +14,13 @@ export default {
     'prettier',
     'plugin:storybook/recommended',
   ],
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
+      babelOptions: {
+        configFile: './babel.config.js',
+      },
     },
     ecmaVersion: 'latest',
     sourceType: 'module',

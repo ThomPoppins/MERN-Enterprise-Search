@@ -28,7 +28,7 @@ const MainSearch = ({
   )
 
   return (
-    <div className='mx-auto h-auto rounded-xl border border-purple-900 bg-violet-950/40 p-4 pr-8 md:w-[800px] lg:w-[1000px]'>
+    <div className='bg-violet-950/40 mx-auto h-auto rounded-xl border border-purple-900 p-4 pr-8 md:w-[800px] lg:w-[1000px]'>
       <img
         alt='profile'
         className='float-left ml-3 mr-2 mt-4 h-10 w-10 rounded-xl object-cover md:mr-8 md:mt-12 md:mt-8 md:h-32 md:w-32'
@@ -47,7 +47,7 @@ const MainSearch = ({
 
         <div className=''>
           <input
-            className='block h-[50px] w-full disabled:bg-gray-300 rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white md:mb-0 md:mr-3 md:w-[570px] lg:w-[770px]'
+            className='block h-[50px] w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white disabled:bg-gray-300 md:mb-0 md:mr-3 md:w-[570px] lg:w-[770px]'
             data-testid='find-expert-search-query-input'
             disabled={isDisabled}
             onBlur={(event) => {

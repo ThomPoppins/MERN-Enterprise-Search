@@ -1,16 +1,16 @@
-import React, { useCallback } from 'react'
-import { Pressable, Alert, View, Text, StyleSheet } from 'react-native'
-import { useUser } from '@realm/react'
-import { COLORS } from './Colors'
+import React, {useCallback} from 'react';
+import {Pressable, Alert, View, Text, StyleSheet} from 'react-native';
+import {useUser} from '@realm/react';
+import {COLORS} from './Colors';
 
 export function LogoutButton() {
-  const user = useUser()
+  const user = useUser();
 
   // The signOut function calls the logOut function on the currently
   // logged in user and then navigates to the welcome screen
   const signOut = useCallback(() => {
-    user?.logOut()
-  }, [user])
+    user?.logOut();
+  }, [user]);
 
   return (
     <Pressable
@@ -21,15 +21,14 @@ export function LogoutButton() {
             style: 'destructive',
             onPress: () => signOut(),
           },
-          { text: 'Cancel', style: 'cancel' },
-        ])
-      }}
-    >
+          {text: 'Cancel', style: 'cancel'},
+        ]);
+      }}>
       <View style={styles.buttonContainer}>
         <Text style={styles.buttonText}>Log Out</Text>
       </View>
     </Pressable>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -40,4 +39,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: COLORS.primary,
   },
-})
+});

@@ -13,4 +13,4 @@ export default {
     +__dirname, // the root directory
   ],
   // ... other options ...
-};
+}

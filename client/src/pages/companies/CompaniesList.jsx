@@ -58,26 +58,26 @@ const CompaniesList = () => {
   return (
     <Layout>
       <div className='p-4'>
-        <div className='flex justify-center items-center gap-x-4'>
+        <div className='flex items-center justify-center gap-x-4'>
           <button
-            className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-gradient-to-l px-4 py-1 rounded-lg'
+            className='rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 px-4 py-1 hover:bg-gradient-to-l'
             data-testid='show-card-button'
             onClick={() => handleShowTypeChange('card')}
           >
             Card
           </button>
           <button
-            className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l px-4 py-1 rounded-lg'
+            className='rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 px-4 py-1 hover:bg-purple-700 hover:bg-gradient-to-l'
             data-testid='show-table-button'
             onClick={() => handleShowTypeChange('table')}
           >
             Table
           </button>
         </div>
-        <div className='flex justify-between items-center'>
-          <h1 className='text-3xl my-8'>Companies</h1>
+        <div className='flex items-center justify-between'>
+          <h1 className='my-8 text-3xl'>Companies</h1>
           <Link to='/companies/register'>
-            <MdOutlineAddBox className='text-green-300 hover:text-purple-500 text-4xl' />
+            <MdOutlineAddBox className='text-4xl text-green-300 hover:text-purple-500' />
           </Link>
         </div>
         {loading ? (

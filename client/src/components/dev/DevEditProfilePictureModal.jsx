@@ -127,7 +127,7 @@ const DevEditProfilePictureModal = ({ userId, onClose }) => {
 
   return (
     <div
-      className='fixed bg-black/60 top-0 right-0 left-0 bottom-0 z-50 flex justify-center items-center'
+      className='fixed top-0 right-0 left-0 bottom-0 z-50 flex items-center justify-center bg-black/60'
       data-testid='company-modal'
       onClick={onClose}
       onKeyDown={(event) => {
@@ -140,12 +140,12 @@ const DevEditProfilePictureModal = ({ userId, onClose }) => {
     >
       {/* eslint-disable-next-line */}
       <div
-        className='w-[600px] max-w-full h-[510px] border-2 border-purple-900 bg-violet-950/40 rounded-lg px-4 py-4 m-4 flex flex-col relative'
+        className='bg-violet-950/40 relative m-4 flex h-[510px] w-[600px] max-w-full flex-col rounded-lg border-2 border-purple-900 px-4 py-4'
         data-testid='company-modal'
         onClick={(event) => event.stopPropagation()}
       >
         <AiOutlineClose
-          className='absolute right-6 top-6 text-3xl text-green-300 hover:text-red-500 cursor-pointer'
+          className='absolute right-6 top-6 cursor-pointer text-3xl text-green-300 hover:text-red-500'
           data-testid='close-button'
           onClick={onClose}
         />
@@ -161,13 +161,13 @@ const DevEditProfilePictureModal = ({ userId, onClose }) => {
           {selectedFile ? (
             <img
               alt='Profile'
-              className='mx-auto my-4 w-[350px] h-[350px] object-cover'
+              className='mx-auto my-4 h-[350px] w-[350px] object-cover'
               src={preview}
             />
           ) : null}
           {!selectedFile && (
-            <div className='mx-auto my-4  w-[350px] h-[350px] border-2 border-purple-900 rounded-lg'>
-              <p className='text-center text-white text-2xl mt-16'>
+            <div className='mx-auto my-4  h-[350px] w-[350px] rounded-lg border-2 border-purple-900'>
+              <p className='mt-16 text-center text-2xl text-white'>
                 No image selected
               </p>
             </div>
@@ -175,7 +175,7 @@ const DevEditProfilePictureModal = ({ userId, onClose }) => {
           <div className='flex justify-center'>
             {selectedFile ? (
               <input
-                className='bg-gradient-to-r from-violet-600 to-purple-600 hover:bg-purple-700 hover:bg-gradient-to-l rounded-lg p-2'
+                className='rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 p-2 hover:bg-purple-700 hover:bg-gradient-to-l'
                 type='submit'
                 value='Upload'
               />

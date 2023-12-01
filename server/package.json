@@ -13,11 +13,11 @@
     "changeset:patch": "changeset version patch",
     "dev": "nodemon index.js",
     "copilot": "nodemon test.js",
-    "install-packages": "yarn",
+    "install-packages": "yarn install",
     "postinstall": "prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json,scss} --config ./.prettierrc",
     "lint": "eslint -c ./.eslintrc.cjs --ignore-pattern 'node_modules/' ./**/*.{js,jsx,ts,tsx,json}",
     "lint:fix": "eslint --fix -c ./.eslintrc.cjs --ignore-pattern 'node_modules/' ./**/*.{js,jsx,ts,tsx,json}",
-    "format": "prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json,scss} --config ./.prettierrc",
+    "format": "prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json,scss}",
     "test": "mocha"
   },
   "keywords": [],

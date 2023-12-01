@@ -17,7 +17,7 @@ const CompanyModal = ({ company, onClose, owners }) => (
     {/* stopPropagation() prevents the modal to close when user clicks inside the Modal but it closes when user clicks outside of the modal. */}
     {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
     <div
-      className='relative m-4 flex w-[600px] max-w-full flex-col rounded-lg border-2 border-purple-900 bg-violet-950/40 px-4 py-2'
+      className='bg-violet-950/40 relative m-4 flex w-[600px] max-w-full flex-col rounded-lg border-2 border-purple-900 px-4 py-2'
       data-testid='company-modal'
       onClick={(event) => event.stopPropagation()}
       role='button'

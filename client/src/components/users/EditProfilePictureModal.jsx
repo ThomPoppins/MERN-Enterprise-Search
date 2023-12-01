@@ -199,7 +199,7 @@ const EditProfilePictureModal = ({ onClose }) => {
     >
       {/* eslint-disable-next-line */}
       <div
-        className='relative m-4 flex h-[510px] w-[600px] max-w-full flex-col rounded-lg border-2 border-purple-900 bg-violet-950/40 px-4 py-4'
+        className='bg-violet-950/40 relative m-4 flex h-[510px] w-[600px] max-w-full flex-col rounded-lg border-2 border-purple-900 px-4 py-4'
         data-testid='company-modal'
         onClick={(event) => event.stopPropagation()}
       >

@@ -261,7 +261,7 @@ const SignUpUser = () => {
       <div className='p-4'>
         <h1 className='my-4 mb-6 flex justify-center text-3xl'>Sign Up</h1>
         {loading ? <Loader /> : ''}
-        <div className='mx-auto flex w-[600px] flex-col rounded-xl border-2 border-purple-900 bg-violet-950/40 px-8 py-4'>
+        <div className='bg-violet-950/40 mx-auto flex w-[600px] flex-col rounded-xl border-2 border-purple-900 px-8 py-4'>
           {registerErrorMessage ? (
             <p className='text-sm text-red-500'>{registerErrorMessage}</p>
           ) : (

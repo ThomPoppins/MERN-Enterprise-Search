@@ -621,7 +621,7 @@ const EditCompany = () => {
         </h1>
         {loading ? <Loader /> : ''}
 
-        <div className='mx-auto mb-4 flex w-[600px] flex-col rounded-xl border-2 border-purple-900 bg-violet-950/40 px-8 py-4'>
+        <div className='bg-violet-950/40 mx-auto mb-4 flex w-[600px] flex-col rounded-xl border-2 border-purple-900 px-8 py-4'>
           <div className='my-4'>
             <div className='mb-4'>
               <label className='mr-4 text-xl' htmlFor='owners-list'>
@@ -639,8 +639,8 @@ const EditCompany = () => {
                         owner.profilePictureURL
                           ? owner.profilePictureURL
                           : owner.gender === 'Man'
-                          ? `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
-                          : `${BACKEND_URL}/placeholders/profile-picture-placeholder-woman.jpeg`
+                            ? `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
+                            : `${BACKEND_URL}/placeholders/profile-picture-placeholder-woman.jpeg`
                       }
                     />
                   </div>
@@ -712,7 +712,7 @@ const EditCompany = () => {
           />
         </div>
         {pendingOwnershipInvites.length > 0 ? (
-          <div className='mx-auto mb-4 flex w-[600px] flex-col rounded-xl border-2 border-purple-900 bg-violet-950/40 px-8 py-4 pl-9'>
+          <div className='bg-violet-950/40 mx-auto mb-4 flex w-[600px] flex-col rounded-xl border-2 border-purple-900 px-8 py-4 pl-9'>
             <div className='my-4'>
               <div className='mb-8'>
                 <div className='mb-8'>
@@ -734,8 +734,8 @@ const EditCompany = () => {
                             invite.receiver.profilePictureURL
                               ? invite.receiver.profilePictureURL
                               : invite.receiver.gender === 'Man'
-                              ? `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
-                              : `${BACKEND_URL}/placeholders/profile-picture-placeholder-woman.jpeg`
+                                ? `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
+                                : `${BACKEND_URL}/placeholders/profile-picture-placeholder-woman.jpeg`
                           }
                         />
                       </div>
@@ -802,7 +802,7 @@ const EditCompany = () => {
           ''
         )}
         {/* TODO: [MERNSTACK-194] Make <CompanyRegisterEditForm company={company} /> component and use it in EditCompany.jsx and RegisterCompany.jsx */}
-        <div className='mx-auto flex w-[600px] flex-col rounded-xl border-2 border-purple-900 bg-violet-950/40 px-8 py-4'>
+        <div className='bg-violet-950/40 mx-auto flex w-[600px] flex-col rounded-xl border-2 border-purple-900 px-8 py-4'>
           {/* TODO: [MERNSTACK-130] Add input fields for all editable company details. To achieve this, copy the outer div with class ".my-4". */}
           {/* Comany Name input field */}
           <div className='my-4'>

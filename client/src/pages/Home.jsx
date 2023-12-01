@@ -58,7 +58,7 @@ const Home = () => {
   if (userId) {
     return (
       <Layout>
-        <div className='mt-32 mx-auto'>
+        <div className='mx-auto mt-32'>
           <MainSearch
             findButtonPing={findButtonPing}
             handleFind={handleFind}
@@ -74,7 +74,7 @@ const Home = () => {
   // If no user is logged in
   return (
     <Layout>
-      <div className='mt-32 mx-auto'>
+      <div className='mx-auto mt-32'>
         <MainSearch
           findButtonPing={findButtonPing}
           handleFind={handleFind}

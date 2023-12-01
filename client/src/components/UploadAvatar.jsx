@@ -26,7 +26,7 @@ const UploadAvatar = ({ setLogo, onClose }) => {
       <div className='flex justify-center'>
         <button
           role='button'
-          className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'
+          className='rounded-lg bg-sky-300 px-4 py-1 hover:bg-sky-600'
           data-testid='upload-button'
           onClick={onClickUpload}
           type='button'

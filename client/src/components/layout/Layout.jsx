@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
   return (
     <div className='outer-div min-h-screen'>
       <Navbar />
-      <div className='md:w-10/12 mx-auto'>
+      <div className='mx-auto md:w-10/12'>
         <main>{children}</main>
       </div>
     </div>

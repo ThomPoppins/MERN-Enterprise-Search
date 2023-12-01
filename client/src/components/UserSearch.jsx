@@ -77,7 +77,7 @@ const UserSearch = ({
   return (
     <div>
       <div className='my-4'>
-        <label className='text-xl mr-4' htmlFor='searchInput'>
+        <label className='mr-4 text-xl' htmlFor='searchInput'>
           Search user to add as company owner:
         </label>
         <div className='my-4'>
@@ -89,7 +89,7 @@ const UserSearch = ({
         </div>
 
         <input
-          className='border-2 border-purple-900 bg-cyan-100 focus:bg-white rounded-xl text-gray-800 px-4 py-2 w-full'
+          className='w-full rounded-xl border-2 border-purple-900 bg-cyan-100 px-4 py-2 text-gray-800 focus:bg-white'
           data-testid='search-input'
           id='searchInput'
           onChange={handleSearch}
@@ -103,18 +103,18 @@ const UserSearch = ({
             <div className='float-left mt-3 mr-2'>
               <img
                 alt='Profile'
-                className='rounded-full h-16 w-16 mr-4'
+                className='mr-4 h-16 w-16 rounded-full'
                 src={
                   userResult.profilePictureURL
                     ? userResult.profilePictureURL
                     : userResult.gender === 'Man'
-                    ? `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
-                    : `${BACKEND_URL}/placeholders/profile-picture-placeholder-woman.jpeg`
+                      ? `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
+                      : `${BACKEND_URL}/placeholders/profile-picture-placeholder-woman.jpeg`
                 }
               />
             </div>
             <div
-              className='search-result flex border-sky-400 rounded-xl mx-auto justify-between items-center'
+              className='search-result mx-auto flex items-center justify-between rounded-xl border-sky-400'
               key={userResult._id}
             >
               <div className='mb-4'>
@@ -157,7 +157,7 @@ const UserSearch = ({
               </div>
               <div>
                 <button
-                  className='bg-gradient-to-r from-violet-600 to-purple-600 hover:from-green-600 hover:to-green-500 hover:bg-gradient-to-l px-4 py-1 rounded-lg mx-auto mb-4'
+                  className='mx-auto mb-4 rounded-lg bg-gradient-to-r from-violet-600 to-purple-600 px-4 py-1 hover:bg-gradient-to-l hover:from-green-600 hover:to-green-500'
                   data-testid='invite-owner-button'
                   onClick={addPendingOwnershipInvite}
                   type='button'
