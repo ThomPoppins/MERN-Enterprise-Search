@@ -1,6 +1,6 @@
 # MERN Enterprise Search
 
-## :zap: Description
+## Description :zap:
 
 🚀 Hey there! 🌟
 
