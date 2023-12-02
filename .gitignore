@@ -1,20 +1,20 @@
 node_modules
 
 # Config file with database credentials
-backend/config.js
-frontend/config.js
+server/config.js
+client/config.js
 
 # Uploaded media files
-backend/public/uploads/*
+server/public/uploads/*
 
 # Environment variables
-backend/.env
-backend/config.js.BACKUP
-frontend/.env
-frontend/config.js.BACKUP
+server/.env
+server/config.js.BACKUP
+client/.env
+client/config.js.BACKUP
 
 # KVK Api certificate chain
-/backend/certs/*
+/server/certs/*
 
 /software/
 

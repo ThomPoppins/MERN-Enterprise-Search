@@ -1,9 +1,9 @@
 {
-    "appId": "devicesync-cgxtv",
-    "appUrl": "https://realm.mongodb.com/groups/64b7caab5a4de3558b5b206e/apps/6563627cdf44477a9478e29a",
-    "baseUrl": "https://realm.mongodb.com",
-    "clientApiBaseUrl": "https://eu-central-1.aws.realm.mongodb.com",
-    "dataApiBaseUrl": "https://eu-central-1.aws.data.mongodb-api.com",
-    "dataExplorerLink": "https://cloud.mongodb.com/links/64b7caab5a4de3558b5b206e/explorer/MERN-stack-project/database/collection/find",
-    "dataSourceName": "mongodb-atlas"
+  "appId": "devicesync-cgxtv",
+  "appUrl": "https://realm.mongodb.com/groups/64b7caab5a4de3558b5b206e/apps/6563627cdf44477a9478e29a",
+  "baseUrl": "https://realm.mongodb.com",
+  "clientApiBaseUrl": "https://eu-central-1.aws.realm.mongodb.com",
+  "dataApiBaseUrl": "https://eu-central-1.aws.data.mongodb-api.com",
+  "dataExplorerLink": "https://cloud.mongodb.com/links/64b7caab5a4de3558b5b206e/explorer/MERN-stack-project/database/collection/find",
+  "dataSourceName": "mongodb-atlas"
 }

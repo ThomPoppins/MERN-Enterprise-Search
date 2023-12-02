@@ -1,29 +1,41 @@
 {
-  "name": "MERN-STACK-PROJ",
+  "name": "MERN-Enterprise-Search",
+  "version": "v0.0.2",
+  "description": "Search website with social and business aspect",
+  "main": "index.js",
+  "repository": "git@github.com:ThomPoppins/MERN-Enterprise-Search.git",
+  "author": "Thom Veldpaus <thompoppins@gmail.com>",
+  "license": "MIT",
   "env": {
-    "browser": true,
     "es6": true,
-    "node": true,
-    "jest": true
+    "node": true
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node server/server.js",
+    "changesets": "changesets version",
+    "dev": "nodemon server/server.js",
+    "client": "npm run start --prefix client",
+    "install-packages": "yarn install'",
+    "server": "npm run start --prefix server",
+    "build": "npm run build --prefix client",
+    "heroku-postbuild": "npm run build --prefix client",
+    "postinstall": "eslint --fix . && prettier --write ./**/*.{js,jsx,ts,tsx,css,md,json,scss} && eslint --fix ./**/*.{js,jsx,ts,tsx} && npm run changesets"
   },
   "private": false,
-  "type": "module",
-  "version": "v0.0.2",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "changeset:patch:all": "cd frontend && npm run changeset:patch && cd ../backend && npm run changeset:patch && cd .. && npm run changeset:root",
-    "changeset:root": "changeset version patch"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@changesets/cli": "^2.27.1",
-    "changeset": "^0.2.6",
-    "chromatic": "^9.1.0"
+  "bolt": {
+    "workspaces": [
+      "client",
+      "server"
+    ]
   },
   "dependencies": {
-    "dotenv": "^16.3.1"
+    "@changesets/cli": "^2.27.1",
+    "changeset": "^0.2.6",
+    "changesets": "^1.0.2",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.54.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.1.0"
   }
 }
