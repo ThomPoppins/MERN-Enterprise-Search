@@ -1,4 +1,4 @@
-# :zap: MERN Enterprise Search :rocket:
+# MERN Enterprise Search
 
 ## :zap: Description
 
