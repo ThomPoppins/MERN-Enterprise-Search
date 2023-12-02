@@ -1,8 +1,8 @@
-# :zap: MERN Enterprise Search :zap:
+# :zap: MERN Enterprise Search :rocket:
 
-**Introduction:**
+## :zap: Description
 
-🚀 Hey there, nice to meet you! 🌟
+🚀 Hey there! 🌟
 
 Guess what? I'm currently cooking up a **super cool FullStack JavaScript application**, and I'm on the lookout for fellow tech enthusiasts who share my passion for learning and building awesome stuff!
 
@@ -28,16 +28,24 @@ Cheers to the adventure ahead! 🚀✨
 
 ## :zap: Table of Contents
 
-- [:zap: MERN Enterprise Search :zap:](#zap-mern-enterprise-search-zap)
+- [:zap: MERN Enterprise Search :rocket:](#zap-mern-enterprise-search-rocket)
+  - [:zap: Description](#zap-description)
   - [:zap: Table of Contents](#zap-table-of-contents)
-  - [:zap: **Demo recording:**](#zap-demo-recording)
-    - [:zap: Homepage](#zap-homepage)
-    - [Profile page (with gender specific placeholder profile picture)](#profile-page-with-gender-specific-placeholder-profile-picture)
-    - [Profile picture upload modal](#profile-picture-upload-modal)
-    - [Profile picture preview before upload](#profile-picture-preview-before-upload)
-      - [BLOB image](#blob-image)
-      - [Save image to the backend server](#save-image-to-the-backend-server)
-      - [Express.static() as CDN](#expressstatic-as-cdn)
+  - [:zap: **Screen Recording:**](#zap-screen-recording)
+  - [📹 **Simple Guide to Screen Recording:**](#-simple-guide-to-screen-recording)
+    - [🏠 **Homepage Exploration:**](#-homepage-exploration)
+    - [🧑‍💼 **Profile Page Magic:**](#-profile-page-magic)
+    - [🌐 **Uploading Your Profile Pic:**](#-uploading-your-profile-pic)
+    - [🖼️ **Preview Before You Commit:**](#️-preview-before-you-commit)
+    - [🎨 **Decoding BLOB: What's the Binary Large Object?**](#-decoding-blob-whats-the-binary-large-object)
+  - [Quick Overview](#quick-overview)
+    - [1. Search Functionality](#1-search-functionality)
+  - [Simplified Explanation:](#simplified-explanation)
+    - [Professions in Company Schema](#professions-in-company-schema)
+    - [Storybook Integration](#storybook-integration)
+    - [Testing](#testing)
+    - [Animations](#animations)
+    - [Co-Ownership Invites](#co-ownership-invites)
     - [User profile page and data structure](#user-profile-page-and-data-structure)
       - [`User` schema](#user-schema)
     - [Companies](#companies)
@@ -57,10 +65,10 @@ Cheers to the adventure ahead! 🚀✨
       - [Image Crop](#image-crop)
       - [Company Logo Cropping](#company-logo-cropping)
       - [Professions in Company Profile](#professions-in-company-profile)
-      - [Storybook Integration](#storybook-integration)
-      - [Testing](#testing)
-      - [Animations](#animations)
-      - [Co-Ownership Invites](#co-ownership-invites)
+      - [Storybook Integration](#storybook-integration-1)
+      - [Testing](#testing-1)
+      - [Animations](#animations-1)
+      - [Co-Ownership Invites](#co-ownership-invites-1)
       - [ES Lint and Prettier configuration](#es-lint-and-prettier-configuration)
       - [Upcoming features](#upcoming-features)
     - [Version v0.0.2 Release Notes](#version-v002-release-notes)
@@ -100,202 +108,280 @@ Cheers to the adventure ahead! 🚀✨
       - [Step 7: Upload to GitHub](#step-7-upload-to-github)
 - [DocsGPT](#docsgpt)
 
-## :zap: **Demo recording:**
+## :zap: **Screen Recording:**
 
-> If below this text no image is displaying, wait a couple of seconds, it's demontration in form of a moving GIF image, the file has a size of almost 100MB.
+I recorded the application functional as it is now, but I was limited to a very short recording because otherwise the GIF file would be too big to be allowed into the repository.
+
+**NOTE!:** If below this text no image is displaying, wait a couple of seconds, it's demontration in form of a moving GIF image, the file has a size of almost 100MB.
 
 ![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
 
-### :zap: Homepage
+## 📹 **Simple Guide to Screen Recording:**
 
-**Homepage when user is logged in, will be a working search engine for finding professional people with an expertise.**
+I made a video of how our app works right now, but it's short. Why? Well, the file would be too big for our storage if it were any longer. If you don't see a moving picture below this text, don't fret! It's just a cool GIF showing off our app, but it might take a couple of seconds to load because it's almost 100MB.
 
-![Homepage Search Engine](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/001.png?raw=true)
+![See the Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
 
-### Profile page (with gender specific placeholder profile picture)
+### 🏠 **Homepage Exploration:**
 
-**When you register an account your profile is very empty and your profile picture is a placeholder, a male for men and for women a female picture placeholder.**
+When you're logged in, the homepage transforms into a powerful search engine for finding professionals with expertise. It's like a search superpower for users seeking skilled individuals.
 
-![Profile Page Placeholder Profile Picture](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/002.png?raw=true)
+![Search Engine in Action](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/001.png?raw=true)
 
-### Profile picture upload modal
+### 🧑‍💼 **Profile Page Magic:**
 
-**After logging in for the first time, users can click on the`upload` button on the placeholder profile picture for uploading their first profile picture. After clicking the button, a modal will pop up where you can upload a image file by clicking on the `browse...` button and select an image locally from their device.**
+Right after you sign up, your profile is pretty empty, and your profile picture is a stand-in - a male image for guys and a female image for gals.
 
-![Image Upload Modal Pop-Up](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/003.png?raw=true)
+![Profile Placeholder](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/002.png?raw=true)
 
-### Profile picture preview before upload
+### 🌐 **Uploading Your Profile Pic:**
 
-**After selecting a image local from their device, a preview will be shown of what image it would be.**
+Once you log in for the first time, just hit the `upload` button on the placeholder profile picture. A window will pop up, letting you pick an image from your device. Click on `browse...`, and voila! Your picture is ready to roll.
 
-![Profile Picture Modal Preview](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/004.png?raw=true)
+![Upload Modal](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/003.png?raw=true)
 
-If the user wants can he/she still change their mind and choose a different one or cancel the upload because the image is not yet uploaded. The image preview is a Base64 URL encoded image.
+### 🖼️ **Preview Before You Commit:**
 
-#### BLOB image
+After you choose an image from your device, you get a sneak peek. You can change your mind or cancel the upload if the image isn't quite what you had in mind.
 
-> **Definition:** A binary large object (BLOB or blob) is a collection of binary data stored as a single entity. Blobs are typically images, audio or other multimedia objects, though sometimes binary executable code is stored as a blob.
+![Picture Preview](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/004.png?raw=true)
+
+And hey, if you want, you can still swap it out or hit the cancel button before the image is uploaded. Oh, and that preview? It's like a secret code, but for images.
+
+### 🎨 **Decoding BLOB: What's the Binary Large Object?**
+
+Here's the lowdown: a BLOB is a fancy term for a collection of binary data stored as one unit. Usually, it's images, audio, or other cool stuff. Sometimes, even secret binary codes chill out in a BLOB.
 
 ```javascript
 <img src={blobValueString} />
 ```
 
-**Source:** _[/frontend/src/components/users/EditProfilePicture.jsx](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/frontend/src/components/users/EditProfilePictureModal.jsx)_
+**Source:** [_/client/src/components/users/EditProfilePicture.jsx_](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/client/src/components/users/EditProfilePictureModal.jsx)
+
+In case you're curious about the code behind the scenes, there's a script called `EditProfilePictureModal` that handles all the picture-editing magic. It's like the conductor of the image orchestra.
+
+## Quick Overview
+
+**Check Out a Sneak Peek**
+
+Look below this text for a GIF (a kind of moving image) that's loading. After a short wait, you'll see a quick demo of the application in action.
+
+![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
+
+**Explore New Features**
+
+### 1. Search Functionality
+
+- **Find Companies:** Users can search for companies by their names.
+- **Organized Results:** Search results are neatly displayed in a grid format with company images.
+- **Easy Navigation:** Clicking on a company takes you to a detailed page about that company (Company Profile).
+- **Privacy Control:** If you're a member of the company (owner, employee, admin), you'll see private details on the company profile page.
+
+> **Note:** The search button is only clickable when there's a search input value. Check out the image below for reference:
+
+![Search Field](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/search-001-empty-input.png?raw=true)
+
+> **Ready to Find Pros!**
+
+![Search Query Ready To Find](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/search-002-search-machine-ready.png?raw=true)
+
+> **CSS Grid for Structure**
+
+![Search Results Grid](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/search-003-results.png?raw=true)
+
+![Click Company Result](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/search-004-click-result.png?raw=true)
+
+> **Member Access:**
+
+- **Private Details Revealed:** If you're a member (owner), you'll see private details.
+
+![Company Profile/Details Page](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/search-005-company-profile.png?raw=true)
+
+> **Non-Member Access:**
+
+- **Private Details Hidden:** If you're not a member of the company, private details are hidden.
+
+![Company Private Details Hidden](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/lifeguard003-company-profile-details-with-private-details-hidden-for-general-user-who-is-not-member-of-company.png?raw=true)
+
+**Image Cropping Made Easy**
+
+- **Upload and Crop:**
+  - Users can upload an image and easily crop it by dragging or selecting a file.
+  - The preview shows how the crop will look in a circular shape.
+- **Set as Profile Picture:**
+  - The cropped image becomes the default profile picture.
+- **Download Option:**
+  - After cropping, users can download the cropped image file.
+- **Technical Details:**
+  - Cropped images are transformed into a special format (BLOB) and sent to the server (Express.js).
+  - The server then serves these images as static files for the frontend.
+
+> **Example Scenario:**
+>
+> ![New User Profile Page](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-001-new-user.png?raw=true)
+>
+> - A new user's profile page without a picture.
+>
+> ![Click Upload Button](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-002-edit-button.png?raw=true)
+>
+> - Clicking the 'Upload' button to add a picture.
+>
+> ![Drop Image File In Dropzone](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-003-drag-n-drop-image-file-.png?raw=true)
+>
+> - Dragging and dropping an image into the provided area.
+>
+> ![Crop Profile Picture](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-005-Custom-cropping-and-preview-.png?raw=true)
+>
+> - The cropped image is previewed, and the user can adjust the crop.
+>
+> ![Set Crop To Download](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-006-Generate-Downloadable-File-From-Blob.png?raw=true)
+>
+> - Choosing the desired crop and generating a downloadable PNG file.
+
+**Creating and Downloading a Cropped Image:**
+
+1. **After clicking 'Download Cropped Image':**
+   - A special file (Blob) is created from the previewed canvas using the canvas API.
+   - This Blob file is a raw data representation of the cropped image.
 
 ```javascript
-// Modal to edit user profile picture
-const EditProfilePictureModal = ({ userId, onClose }) => {
-  const [selectedFile, setSelectedFile] = useState()
-  const [preview, setPreview] = useState('')
-
-  // Handle file select
-  const onSelectFile = (e) => {
-    if (!e.target.files || e.target.files.length === 0) {
-      setSelectedFile(undefined)
-      return
-    }
-
-    setSelectedFile(e.target.files[0])
+// JavaScript function to create a blob from the canvas and download it as a PNG file
+function generateDownload(canvas, crop) {
+  if (!crop || !canvas) {
+    return
   }
 
-  // Set the preview image
-  useEffect(() => {
-    if (!selectedFile) {
-      setPreview('')
-      return
-    }
-    // Convert the selected image to a Base64 string and save it to the preview state
-    const objectUrl = URL.createObjectURL(selectedFile)
-    setPreview(objectUrl)
+  canvas.toBlob(
+    (blob) => {
+      const previewUrl = window.URL.createObjectURL(blob)
+      const anchor = document.createElement('a')
 
-    // Free memory when the preview is closed
-    return () => URL.revokeObjectURL(objectUrl)
-  }, [selectedFile])
+      anchor.download = 'cropPreview.png'
+      anchor.href = URL.createObjectURL(blob)
+      anchor.click()
 
-  // ... (rest of the component before it's return statement)
-
-  return (
-
-  // ... (start return JSX)
-
-  {selectedFile ? <img
-    alt="Profile Picture"
-    className="mx-auto my-4 w-[350px] h-[350px] object-cover"
-    src={preview} // BLOB image string is set as img src as is.
-  /> : null}
-
-  // ... (end return JSX)
-
+      window.URL.revokeObjectURL(previewUrl)
+    },
+    'image/png',
+    1,
   )
 }
-
-export default EditProfilePictureModal
 ```
 
-#### Save image to the backend server
+2. **Result after Download:**
+   - A PNG file is downloaded with the cropped image.
 
-If the user is sure about it, he/she will click the upload button and now the image will be sent through a form-data object to the backend REST (ExpressJS hosted) POST image upload API end-point, where the image will be recieved by _ExpressJS_, using _Multer_ middleware for disk storage configuration and file handling and saved in a special public static file directory, local on the server storage.
+![Download PNG Cropped Image Result](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-007-result-downloaded-cropped-image-png.png?raw=true)
 
-After the image is uploaded and saved, a corresponding Image "document" (entry) with a filepath will be saved to the MongoDB database in the "images" collection. (A collection is like a database table.)
+3. **Uploading the Cropped Image:**
+   - When the user clicks 'Upload' after cropping, a Blob binary object is generated.
+   - This Blob object is then written to an image file in PNG format.
+   - The image file is uploaded to the Express.js server.
 
-**Source:** _[/backend/routes/uploadRoute.js](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/backend/routes/uploadRoute.js)_
-
-```javascript
-import { Image } from '../models/imageModel.js'
-import express from 'express'
-import mongoose from 'mongoose'
-import multer from 'multer'
-
-const router = express.Router()
-
-// Create Multer storage configuration
-const storage = multer.diskStorage({
-  // `destination` is the folder where the uploaded file will be stored.
-  destination(request, file, callback) {
-    callback(null, './public/uploads/images')
-  },
-
-  fileFilter(request, file, callback) {
-    // Accept images only.
-    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
-      // Send status 400 response if the file is not an image and a (error) message to inform the client.
-      return callback(new Error('Only images allowed!'))
-    }
-    // Image file is accepted. Pass `true` to the callback.
-    callback(null, true)
-  },
-
-  // Filename is the name of the uploaded file.
-  filename(request, file, callback) {
-    // The file name will be the original name of the uploaded file with a timestamp.
-    const fileName = file.originalname.split('.')[0]
-    const fileExtension = file.originalname.split('.')[1]
-    const timestamp = Date.now()
-    // `callback` is used to pass the file name to multer.
-    callback(null, `${fileName}-${timestamp}.${fileExtension}`)
-  },
-})
-
-// Create multer instance with the storage configuration.
-const upload = multer({ storage })
-
-// The POST image upload route uses Multer middleware as you can see, the Multer object is provided as second argument.
-// Multer will first process the request and pass on the result to the 3rd argument function of the route
-router.post('/image', upload.single('image'), async (request, response) => {
-  if (!request.file) {
-    console.log('No image file. `request`: ', request)
-
-    return response.status(400).send({
-      message: 'No image uploaded.',
-    })
+```jsx
+// JavaScript function to save the cropped image to the server
+const saveProfileImage = (canvas, completedCrop) => {
+  if (!completedCrop || !canvas) {
+    return
   }
 
-  // Prepare response object to send to client with image path and database Image._id.
-  const responseObj = {
-    message: 'Image uploaded successfully!',
-    imagePath: request.file.path,
-    imageId: new mongoose.Types.ObjectId(),
-  }
+  canvas.toBlob(
+    (blob) => {
+      const formData = new FormData()
+      const file = new File([blob], 'profile-picture.png')
+      formData.append('image', file)
 
-  // Create Instance of Image model with the image path to safe as document in the MongoDB Image collection
-  const image = new Image({
-    path: request.file.path,
-  })
-
-  // Save new Image document to database
-  await image
-    .save()
-    .then((result) => {
-      responseObj.imageId = result._id
-    })
-    .catch((error) =>
-      response.status(500).send({
-        message: `Error saving image to database! ${error.message}`,
-      }),
-    )
-
-  return response.status(200).send(responseObj)
-})
-
-export default router
+      axios
+        .post(`${BACKEND_URL}/upload/image`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((response) => {
+          // Update user profile picture information in the database
+          // and refresh the user's data on the frontend.
+        })
+        .catch((error) => {
+          // Handle any errors that may occur during the upload process.
+        })
+    },
+    'image/png',
+    1,
+  )
+}
 ```
 
-After successfully saving the new Image entry (document) to the database, MongoDB responds with the Image document ID, which will immediately be saved to the User document(of the currently logged in user of course) so it will be always be certain where the image is. Securely saved on the backend server with the file location saved to the database with it's Image ID saved in the corresponding User document.
+4. **Backend Processing:**
+   - On the server side (Express.js), the uploaded image is handled using Multer.
+   - The file is named, given a destination, and stored in the "/public/uploads/images" folder.
+   - The server responds with details about the uploaded image.
 
-#### Express.static() as CDN
-
-The image is served by ExpressJS which means this backend is also the CDN. Because of this intentional set up,the client server will always be clean of accumulating images and any other kind of files and trash and will the heavy duty of handling large file with a lot of data rest on the backend where a performance impact would have a lot less impact on the U(ser)X(perience).
-
-Express.js can serve static files using **Express.static("public_directory")**.
-
-**Source:** _[/backend/index.js](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/backend/index.js)_
-
-```javascript
-// Use .static() and configure the /public folder for hosting static resources as CDN for images and other files.
-app.use(express.static('public'))
+```jsx
+// Express.js route for handling image uploads
+router.post(
+  '/image',
+  apiLimiter,
+  upload.single('image'),
+  async (request, response) => {
+    // If the file upload was successful, the file will be stored in the "uploads/images" folder.
+    // A response is sent back to the client with image path, URL, and database Image._id.
+  },
+)
 ```
 
-> **Note:** All URL's to the files in the public directory have a similar URL structure. An image within the public static files directory with path **public_static_files_dir/uploads/images/137917151-1699497672476.jpg** can be accessed on URL _backend-server-domain.com/uploads/images/137917151-1699497672476.jpg_.
+5. **Result after Uploading:**
+   - The user's profile picture is updated and utilized.
+
+![Upload Cropped Image Button Click](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/image-crop-009-profile-image-set.png?raw=true)
+
+## Simplified Explanation:
+
+**Improvements in the System:**
+
+### Professions in Company Schema
+
+- **New Company Information:**
+  - Added a spot for "professions" in the company details.
+  - Companies can now list their professions during sign-up.
+  - This enhances search results, making them more relevant and dynamic.
+
+### Storybook Integration
+
+- **Developer-Friendly Environment:**
+  - Set up Storybook for creating and testing components.
+  - Introduced initial components to Storybook for development and testing.
+
+### Testing
+
+- **Ensuring Quality:**
+  - Installed Jest and React-Testing-Library for thorough component testing.
+  - Work is ongoing to create tests for almost every component.
+
+### Animations
+
+- **Enhanced User Experience:**
+  - Introduced subtle animations for a more engaging interface.
+  - Notifications now have attention-grabbing animations:
+    - When an invite is pending, the user's name in the navigation bar wiggles.
+    - Dropdown menu has a lively "Invites" item that jumps, directing the user to pending invites.
+
+**Tailwind CSS Animation Tweaks:**
+
+- **More Joyful Animations:**
+  - Tweaked preinstalled Tailwind animations for a livelier and more joyful feel.
+  - Examples include waving, bouncing, spinning, and ping animations.
+
+### Co-Ownership Invites
+
+- **Interactive Invitations:**
+  - Notification icon wiggles for co-ownership invites.
+  - Dynamically added "Invites" to the dropdown menu.
+  - Attention-grabbing jump animation for pending co-ownership invites.
+  - Users can accept or decline invites.
+  - After responding to all invites, users are redirected to a page listing the companies they now co-own.
+  - Implemented safety measures to avoid duplicate invitations and ensure unique co-ownership status.
+
+![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/Invites-animation.gif?raw=true)
 
 ### User profile page and data structure
 
@@ -460,7 +546,7 @@ All form input fields in my application have to be validated. I've written my ow
 
 **Example validator:**
 
-**Source:** _[/frontend/utils/validation/emailValidator.js](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/frontend/src/utils/validation/emailValidator.jsx)_
+**Source:** _[/client/utils/validation/emailValidator.js](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/client/src/utils/validation/emailValidator.jsx)_
 
 ```javascript
 const emailValidator = (email) => {
@@ -477,7 +563,7 @@ export default emailValidator
 
 **Code example communicating invalid values in the UI of company registration page:**
 
-**Source:** _[/frontend/src/pages/companies/RegisterCompany.jsx](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/frontend/src/pages/companies/RegisterCompany.jsx)_
+**Source:** _[/client/src/pages/companies/RegisterCompany.jsx](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/client/src/pages/companies/RegisterCompany.jsx)_
 
 ```javascript
 import React, { useEffect, useState } from 'react'
@@ -1323,7 +1409,7 @@ To run this application locally, follow these steps:
    - Add the following constant and export it:
 
      ```javascript
-     // frontend/config.js
+     // frotend/config.js
      export const BACKEND_URL = 'http://localhost:5555'
      // Disable company validation by KVK API (If you want to test the KVK company validation, mail me at thompoppins@gmail.com for
      // instructions how to set this up.)
