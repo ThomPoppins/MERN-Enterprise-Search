@@ -1,21 +1,37 @@
-# :rocket: MERN-Enterprise-Search
+# :zap: MERN Enterprise Search :zap:
 
-## Application Description
+**Introduction:**
 
-A commercial _FullStack JavaScript_ application in early development, building upon the _MERN stack_ mainly with _React_ (+ _Redux_ state management) on the client side and _ExpressJS_ backend server providing API end points on Node.js for data management between the client and _MongoDB_ database with the NPM _Mongoose_ package (a popular Object Data Modeling (ODM) library) for authenticated data transfer between the backend server and MongoDB database.
+🚀 Hey there, nice to meet you! 🌟
 
-Also I make use of a lot of different packages but only if they are complementary and necessary, I feel like less is more using external packages in my application because I plan on making the application as stable and independent possible from external packages and sources (with updates).
+Guess what? I'm currently cooking up a **super cool FullStack JavaScript application**, and I'm on the lookout for fellow tech enthusiasts who share my passion for learning and building awesome stuff!
 
-> **Note:** The exact business plan I have in mind for this application will remain secret, but if you read trough the [Visual Demo](#visual-demo) section then you will have a general idea about the size of this project where this application is all about. I hope my idea will eventually start to snowball and turn in to something real, I dare to dream about that and to pursue a goal still far away, but it's a guarantee that I will grow in the process and that makes it worth to work on it either way.
+This project started as a fun educational journey for me, but now I'm throwing the doors wide open. Whether you're a self-taught wizard or just getting started, I'm all ears and totally cool if you don't have a treasure trove of certificates. 🧙‍♂️✨
 
-## Table of Contents
+**Picture this:** we're diving deep into the **MERN stack**, dancing with React (yup, we've got Redux for the ultimate state management party) on the client side. Our ExpressJS backend is the backstage maestro, serving up API endpoints on Node.js and making sure our data waltzes seamlessly between the client and MongoDB database. And hey, we've got the NPM Mongoose package – our secret sauce for authenticated data transfer magic! 🎩🐍
 
-- [:rocket: MERN-Enterprise-Search](#rocket-mern-enterprise-search)
-  - [Application Description](#application-description)
-  - [Table of Contents](#table-of-contents)
-  - [Visual Tour Trought The Application](#visual-tour-trought-the-application)
-    - [Demo: Functional Application Screen Recording](#demo-functional-application-screen-recording)
-    - [Homepage](#homepage)
+This project? Oh, it's not just a project; it's a vision. We're dreaming big – a globally recognized platform that not only elevates lives with killer functionalities but also delivers an experience that's as social and enjoyable as your favorite Friday night plans. 🌎🚀
+
+Sure, the road ahead might be a bit of a rollercoaster, but guess what? I'm psyched about every twist and turn. And I want you to be a part of it!
+
+If you're itching to dive headfirst into this tech wonderland, explore, and make your mark on a project tailor-made for budding developers, I'm sending you a VIP invite. Drop a pull request, toss in your thoughts in the designated tab – heck, even just shoot me a message with your wildest ideas. Your genius is not only welcomed but cherished! 🌈💡
+
+This project is more than just a learning pathway; it's an adventure where we collectively sculpt the path, giving you the freedom to bring your ideas to life with all the support and none of the stress. Oh, and did I mention? **No deadlines!** We're in this for skill development, not racing against the clock.
+
+So, if you're a tech wizard with big dreams, looking to ride this rollercoaster of growth and collaboration, consider this your golden ticket.
+
+**Jump on board now and become a star player in our tech-tastic team!** 🚀✨
+
+Shoot me an email at thompoppins@gmail.com.
+
+Cheers to the adventure ahead! 🚀✨
+
+## :zap: Table of Contents
+
+- [:zap: MERN Enterprise Search :zap:](#zap-mern-enterprise-search-zap)
+  - [:zap: Table of Contents](#zap-table-of-contents)
+  - [:zap: **Demo recording:**](#zap-demo-recording)
+    - [:zap: Homepage](#zap-homepage)
     - [Profile page (with gender specific placeholder profile picture)](#profile-page-with-gender-specific-placeholder-profile-picture)
     - [Profile picture upload modal](#profile-picture-upload-modal)
     - [Profile picture preview before upload](#profile-picture-preview-before-upload)
@@ -84,21 +100,13 @@ Also I make use of a lot of different packages but only if they are complementar
       - [Step 7: Upload to GitHub](#step-7-upload-to-github)
 - [DocsGPT](#docsgpt)
 
-## Visual Tour Trought The Application
-
-> **Note:** A video demonstration is in the making showing the application function in moving image. Also I will explain about the application more deeply like functionalities I build, strategy, choices, coding practices and about technologies I've been using. So come back later to check it out!
-
-Get a general impression of my application.
-
-> **Note:** This demo is interesting, but incomplete and not final. Also it is impossible to keep this demo completely up to date with the development progress. The main purpose is to give a general impression of the application. For complete understanding of the technical workings of each component of the application you're free to look into the source code and for any remaining questions you can ask me anything in a mail to [thompoppins@gmail.com](mailto:thompoppins@gmail.com).
-
-### Demo: Functional Application Screen Recording
+## :zap: **Demo recording:**
 
 > If below this text no image is displaying, wait a couple of seconds, it's demontration in form of a moving GIF image, the file has a size of almost 100MB.
 
 ![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
 
-### Homepage
+### :zap: Homepage
 
 **Homepage when user is logged in, will be a working search engine for finding professional people with an expertise.**
 

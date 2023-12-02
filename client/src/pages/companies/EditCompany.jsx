@@ -639,8 +639,8 @@ const EditCompany = () => {
                         owner.profilePictureURL
                           ? owner.profilePictureURL
                           : owner.gender === 'Man'
-                          ? `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
-                          : `${BACKEND_URL}/placeholders/profile-picture-placeholder-woman.jpeg`
+                            ? `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
+                            : `${BACKEND_URL}/placeholders/profile-picture-placeholder-woman.jpeg`
                       }
                     />
                   </div>
@@ -734,8 +734,8 @@ const EditCompany = () => {
                             invite.receiver.profilePictureURL
                               ? invite.receiver.profilePictureURL
                               : invite.receiver.gender === 'Man'
-                              ? `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
-                              : `${BACKEND_URL}/placeholders/profile-picture-placeholder-woman.jpeg`
+                                ? `${BACKEND_URL}/placeholders/profile-picture-placeholder-man.jpeg`
+                                : `${BACKEND_URL}/placeholders/profile-picture-placeholder-woman.jpeg`
                           }
                         />
                       </div>

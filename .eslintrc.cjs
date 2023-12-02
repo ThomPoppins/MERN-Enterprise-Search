@@ -1,7 +1,4 @@
-/* eslint-disable sort-keys */
-'use strict';
-
-module.exports = {
+export default {
   env: {
     browser: true,
     es2021: true,
@@ -32,4 +29,4 @@ module.exports = {
     'one-var': ['error', 'never'],
   },
   settings: {},
-};
+}

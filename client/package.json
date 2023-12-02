@@ -1,5 +1,5 @@
 {
-  "name": "MERN-Enterprise-Search-Client",
+  "name": "MERN-Enterprise-Search",
   "env": {
     "browser": true,
     "es6": true,
@@ -12,19 +12,14 @@
   "type": "module",
   "version": "v0.0.2",
   "description": "Frontend application is a Vite app with React, Redux and TailwindCSS",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/MERN-STACK-PROJ/MERN-STACK-PROJ"
-  },
+  "repository": "git@github.com:ThomPoppins/MERN-Enterprise-Search.git",
   "keywords": [
     "vite",
-    "react",
-    "starter",
-    "template"
+    "react"
   ],
   "scripts": {
     "dev": "vite",
-    "changeset:patch": "changeset version patch",
+    "changesets": "changeset version patch",
     "build": "vite build",
     "serve": "vite preview",
     "start": "vite preview",
@@ -70,7 +65,7 @@
   "devDependencies": {
     "@babel/core": "^7.18.13",
     "@babel/preset-react": "latest",
-    "@changesets/cli": "^2.26.2",
+    "@changesets/cli": "^2.27.1",
     "@emotion/babel-plugin": "^11.10.2",
     "@emotion/babel-preset-css-prop": "^11.10.0",
     "@namics/stylelint-bem": "^7.0.0",
@@ -107,7 +102,7 @@
     "postcss": "^8.4.31",
     "postcss-scss": "^4.0.4",
     "postcss-syntax": "^0.36.2",
-    "prettier": "^2.7.1",
+    "prettier": "^3.1.0",
     "prettier-plugin-style-order": "^0.2.2",
     "prettier-plugin-tailwindcss": "^0.1.13",
     "react-test-renderer": "^18.2.0",
