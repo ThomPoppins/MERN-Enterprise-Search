@@ -108,20 +108,6 @@ Cheers to the adventure ahead! 🚀✨
       - [Step 7: Upload to GitHub](#step-7-upload-to-github)
 - [DocsGPT](#docsgpt)
 
-## :zap: **Screen Recording:**
-
-I recorded the application functional as it is now, but I was limited to a very short recording because otherwise the GIF file would be too big to be allowed into the repository.
-
-**NOTE!:** If below this text no image is displaying, wait a couple of seconds, it's demontration in form of a moving GIF image, the file has a size of almost 100MB.
-
-![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
-
-## 📹 **Simple Guide to Screen Recording:**
-
-I made a video of how our app works right now, but it's short. Why? Well, the file would be too big for our storage if it were any longer. If you don't see a moving picture below this text, don't fret! It's just a cool GIF showing off our app, but it might take a couple of seconds to load because it's almost 100MB.
-
-![See the Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
-
 ### 🏠 **Homepage Exploration:**
 
 When you're logged in, the homepage transforms into a powerful search engine for finding professionals with expertise. It's like a search superpower for users seeking skilled individuals.
