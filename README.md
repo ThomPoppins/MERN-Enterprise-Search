@@ -374,6 +374,8 @@ router.post(
 
 ![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/Invites-animation.gif?raw=true)
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3Td4aNwt7io?si=4JkTLiDY7d10jnaa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 ### User profile page and data structure
 
 _Profile page:_
