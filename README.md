@@ -107,6 +107,16 @@ Cheers to the adventure ahead! 🌟🚀
       - [Step 7: Upload to GitHub](#step-7-upload-to-github)
 - [DocsGPT](#docsgpt)
 
+
+## Quick Overview
+
+**Check Out a Sneak Peek**
+
+Look below this text for a GIF (a kind of moving image) that's loading. After a short wait, you'll see a quick demo of the application in action.
+
+![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
+
+
 ### 🏠 **Homepage Exploration:**
 
 When you're logged in, the homepage transforms into a powerful search engine for finding professionals with expertise. It's like a search superpower for users seeking skilled individuals.
@@ -145,13 +155,6 @@ Here's the lowdown: a BLOB is a fancy term for a collection of binary data store
 
 In case you're curious about the code behind the scenes, there's a script called `EditProfilePictureModal` that handles all the picture-editing magic. It's like the conductor of the image orchestra.
 
-## Quick Overview
-
-**Check Out a Sneak Peek**
-
-Look below this text for a GIF (a kind of moving image) that's loading. After a short wait, you'll see a quick demo of the application in action.
-
-![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
 
 **Explore New Features**
 
