@@ -5,7 +5,7 @@
 
 **Check Out a Sneak Peek**
 
-Look below this text for a GIF (a kind of moving image) that's loading. After a short wait, you'll see a quick demo of the application in action.
+Look below this text for a GIF (a kind of moving image) that's loading. After a short wait, you'll see a quick demo of the application in action. (there will be a new version soon, this one cuts of at a certain point, I'm sorry about that)
 
 ![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
 
