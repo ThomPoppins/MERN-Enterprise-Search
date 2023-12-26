@@ -1,4 +1,15 @@
 # MERN Enterprise Search ⚡
+
+
+## Quick Overview
+
+**Check Out a Sneak Peek**
+
+Look below this text for a GIF (a kind of moving image) that's loading. After a short wait, you'll see a quick demo of the application in action.
+
+![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
+
+
 🚀 Hey there! 🌟
 
 Guess what? I'm currently working on a super cool FullStack JavaScript application, and I'm on the lookout for fellow tech enthusiasts who share my passion for learning and building awesome stuff!
@@ -107,14 +118,6 @@ Cheers to the adventure ahead! 🌟🚀
       - [Step 7: Upload to GitHub](#step-7-upload-to-github)
 - [DocsGPT](#docsgpt)
 
-
-## Quick Overview
-
-**Check Out a Sneak Peek**
-
-Look below this text for a GIF (a kind of moving image) that's loading. After a short wait, you'll see a quick demo of the application in action.
-
-![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
 
 
 ### 🏠 **Homepage Exploration:**
