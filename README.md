@@ -5,15 +5,15 @@ Guess what? I'm currently working on a super cool FullStack JavaScript applicati
 
 This project started as a fun educational journey for me, but now I'm throwing the doors wide open. Whether you're a self-taught wizard or just getting started, I'm all ears and totally cool if you don't have a treasure trove of certificates. 🧙‍♂️✨
 
-Picture this: we're delving deep into the MERN stack, using React (yup, we've got Redux for the ultimate state management party) on the client side. Our ExpressJS backend is the backstage maestro, serving up API endpoints on Node.js and ensuring our data seamlessly moves between the client and MongoDB database. And hey, we've got the NPM Mongoose package – our secret sauce for authenticated data transfer magic! 🎩🐍
+Picture this: we're delving deep into the MERN stack, leveraging React (yup, we've got Redux for the ultimate state management party) on the client side. Our ExpressJS backend is the backstage maestro, serving up API endpoints on Node.js and ensuring our data seamlessly moves between the client and MongoDB database. And hey, we've got the NPM Mongoose package – our secret sauce for authenticated data transfer magic! 🎩🐍
 
-But here's the exciting part! This application isn't just any project; it's a vision. We're dreaming big – envisioning a globally recognized platform that not only elevates lives with killer functionalities but also delivers an experience that's as social and enjoyable as your favorite Friday night plans. 🌎🚀
+But here's the exciting part! This application isn't just any project; it's a vision. We're dreaming big – envisioning a globally recognized platform that not only elevates lives with killer functionalities but also delivers an experience that's as social and enjoyable as your favorite Friday night plans. 🌍🚀
 
 Let me spill the beans on a game-changer feature: our app is a search engine for registered companies. Companies can register for free! The search results are revolutionary; we sort companies by their ratings and relevance. It's way better than sifting through Google to find services or products—our approach ensures you always discover the best-rated, most relevant companies.
 
 Sure, the road ahead might be a bit of a rollercoaster, but guess what? I'm psyched about every twist and turn. And I want you to be a part of it!
 
-If you're itching to dive headfirst into this tech wonderland, explore, and make your mark on a project tailor-made for budding developers, I'm sending you a VIP invite. Drop a pull request, toss in your thoughts in the designated tab – heck, even just shoot me a message with your wildest ideas. Your genius is not only welcomed but cherished! 🌈💡
+If you're itching to dive headfirst into this tech wonderland, explore, and make your mark on a project tailor-made for budding developers, I'm sending you a VIP invite. Drop a pull request, toss in your thoughts in the designated tab – heck, even just shoot me a message with your wildest ideas. Your genius is not only welcomed but cherished! 💡
 
 This project is more than just a learning pathway; it's an adventure where we collectively sculpt the path, giving you the freedom to bring your ideas to life with all the support and none of the stress. Oh, and did I mention? No deadlines! We're in this for skill development, not racing against the clock.
 
@@ -23,7 +23,7 @@ Jump on board now and become a star player in our tech-tastic team! 🚀✨
 
 Shoot me an email at thompoppins@gmail.com.
 
-Cheers to the adventure ahead! 🚀✨
+Cheers to the adventure ahead! 🌟🚀
 
 ## :zap: Table of Contents
 
