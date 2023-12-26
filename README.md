@@ -4,11 +4,11 @@
 
 🚀 Hey there! 🌟
 
-Guess what? I'm currently cooking up a **super cool FullStack JavaScript application**, and I'm on the lookout for fellow tech enthusiasts who share my passion for learning and building awesome stuff!
+Guess what? I'm currently working on a super cool FullStack JavaScript application, and I'm on the lookout for fellow tech enthusiasts who share my passion for learning and building awesome stuff!
 
 This project started as a fun educational journey for me, but now I'm throwing the doors wide open. Whether you're a self-taught wizard or just getting started, I'm all ears and totally cool if you don't have a treasure trove of certificates. 🧙‍♂️✨
 
-**Picture this:** we're diving deep into the **MERN stack**, dancing with React (yup, we've got Redux for the ultimate state management party) on the client side. Our ExpressJS backend is the backstage maestro, serving up API endpoints on Node.js and making sure our data waltzes seamlessly between the client and MongoDB database. And hey, we've got the NPM Mongoose package – our secret sauce for authenticated data transfer magic! 🎩🐍
+Picture this: we're delving deep into the MERN stack, using React (yup, we've got Redux for the ultimate state management party) on the client side. Our ExpressJS backend is the backstage maestro, serving up API endpoints on Node.js and ensuring our data seamlessly moves between the client and MongoDB database. And hey, we've got the NPM Mongoose package – our secret sauce for authenticated data transfer magic! 🎩🐍
 
 This project? Oh, it's not just a project; it's a vision. We're dreaming big – a globally recognized platform that not only elevates lives with killer functionalities but also delivers an experience that's as social and enjoyable as your favorite Friday night plans. 🌎🚀
 
@@ -16,11 +16,11 @@ Sure, the road ahead might be a bit of a rollercoaster, but guess what? I'm psyc
 
 If you're itching to dive headfirst into this tech wonderland, explore, and make your mark on a project tailor-made for budding developers, I'm sending you a VIP invite. Drop a pull request, toss in your thoughts in the designated tab – heck, even just shoot me a message with your wildest ideas. Your genius is not only welcomed but cherished! 🌈💡
 
-This project is more than just a learning pathway; it's an adventure where we collectively sculpt the path, giving you the freedom to bring your ideas to life with all the support and none of the stress. Oh, and did I mention? **No deadlines!** We're in this for skill development, not racing against the clock.
+This project is more than just a learning pathway; it's an adventure where we collectively sculpt the path, giving you the freedom to bring your ideas to life with all the support and none of the stress. Oh, and did I mention? No deadlines! We're in this for skill development, not racing against the clock.
 
 So, if you're a tech wizard with big dreams, looking to ride this rollercoaster of growth and collaboration, consider this your golden ticket.
 
-**Jump on board now and become a star player in our tech-tastic team!** 🚀✨
+Jump on board now and become a star player in our tech-tastic team! 🚀✨
 
 Shoot me an email at thompoppins@gmail.com.
 
