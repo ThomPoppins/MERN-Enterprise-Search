@@ -9,8 +9,6 @@ Look below this text for a GIF (a kind of moving image) that's loading. After a 
 
 ![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/2023-11-26-Demo-Login-Searh-Invite.gif?raw=true)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3Td4aNwt7io?si=4JkTLiDY7d10jnaa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
 🚀 Hey there! 🌟
 
 Guess what? I'm currently working on a super cool FullStack JavaScript application, and I'm on the lookout for fellow tech enthusiasts who share my passion for learning and building awesome stuff!
@@ -374,8 +372,6 @@ router.post(
   - Implemented safety measures to avoid duplicate invitations and ensure unique co-ownership status.
 
 ![Demo](https://github.com/ThomPoppins/MERN-Enterprise-Search/blob/main/screenshots/GIF/Invites-animation.gif?raw=true)
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3Td4aNwt7io?si=4JkTLiDY7d10jnaa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### User profile page and data structure
 
